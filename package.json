@@ -1,0 +1,71 @@
+{
+  "name": "frontend-avatar",
+  "version": "1.0.0",
+  "homepage": ".",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jeff-Aporta/frontend-avatar"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@jeff-aporta/fluidcss": "^1.1.28",
+    "@jeff-aporta/js2css": "^1.0.6",
+    "@jeff-aporta/router": "^1.0.46",
+    "@jeff-aporta/theme-manager": "^1.0.32",
+    "@mui/icons-material": "^6.4.8",
+    "@mui/material": "^6.4.8",
+    "@mui/x-charts": "^7.28.0",
+    "@mui/x-data-grid": "^7.28.1",
+    "@mui/x-date-pickers": "^7.28.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@use-gesture/react": "^10.3.1",
+    "axios": "^1.8.4",
+    "color": "^5.0.0",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
+    "react-router-dom": "^7.4.0",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.30.3",
+    "sass": "^1.86.0",
+    "slick-carousel": "^1.8.1"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "npm run build && serve -s build",
+    "eject": "react-scripts eject",
+    "deploy": "cross-env PUBLIC_URL=/ npm run test",
+    "deploy-gh": "cross-env PUBLIC_URL=. npm run build && npm run publish-gh",
+    "publish-gh": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "customize-cra": "^1.0.0",
+    "gh-pages": "^6.3.0",
+    "react-app-rewired": "^2.2.1"
+  }
+}

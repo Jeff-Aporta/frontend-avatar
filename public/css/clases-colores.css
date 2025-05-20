@@ -1,0 +1,19 @@
+/* Clases de colores */
+.verde-lima {
+  color: var(--verde-lima);
+}
+.verde-cielo {
+  color: var(--verde-cielo);
+}
+.azul-agua {
+  color: var(--azul-agua);
+}
+.morado {
+  color: var(--morado);
+}
+.morado-enfasis {
+  color: var(--morado-enfasis);
+}
+.morado-enfasis-brillante {
+  color: var(--morado-enfasis-brillante);
+}

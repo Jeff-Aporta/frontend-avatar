@@ -1,0 +1,8 @@
+.menu-top {
+  border-bottom: 3px solid var(--border-section);
+  backdrop-filter: blur(5px);
+}
+
+.footer {
+  border-top: 3px solid var(--border-section);
+}

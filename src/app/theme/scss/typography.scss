@@ -1,0 +1,20 @@
+// ---------------------------------------------
+// 4. Typography Utilities
+// ---------------------------------------------
+@for $i from 1 through 10 {
+  $fontSizePx: ($i * 2) + 8; // Genera: 10px, 12px, 14px, ... 26px
+  $fontSizePct1: $i * 10; // Genera: 10, 20, 30, ... 100 (porcentaje)
+  $fontSizePct2: ($i * 10) + 100; // Genera: 110, 120, 130, ... 200 (porcentaje)
+
+  .fs-#{$fontSizePx}-px {
+    font-size: $fontSizePx * 1px;
+  }
+
+  .fs-#{$fontSizePct1}p {
+    font-size: $fontSizePct1 * 1%;
+  }
+
+  .fs-#{$fontSizePct2}p {
+    font-size: $fontSizePct2 * 1%;
+  }
+}

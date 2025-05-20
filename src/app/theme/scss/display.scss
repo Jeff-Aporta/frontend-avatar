@@ -1,0 +1,96 @@
+// ---------------------------------------------
+// 1. Display Utilities
+// ---------------------------------------------
+@each $value in (flex, inline-flex, none, block, inline-block) {
+  .d-#{$value} {
+    display: $value;
+  }
+}
+
+@each $value in (row, column) {
+  .flex-#{$value} {
+    flex-direction: $value;
+  }
+}
+
+.d-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d-end-center {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.d-end {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.d-end-wrap {
+  @extend .d-end;
+  flex-wrap: wrap;
+}
+
+.d-space-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fd-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-wrap,
+.wrap,
+.f-wrap {
+  flex-wrap: wrap;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.d-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.d-inline-flex {
+  display: inline-flex;
+}
+
+.d-inline-flex-col {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.d-flex-col-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@each $value in (center, space-between, space-evenly, space-around, end, start)
+{
+  .jc-#{$value} {
+    justify-content: $value;
+  }
+}
+
+@each $value in (center, end, start, stretch) {
+  .ai-#{$value} {
+    align-items: $value;
+  }
+}

@@ -1,0 +1,60 @@
+// ---------------------------------------------
+// 5. Sizing Utilities
+// ---------------------------------------------
+@for $i from 1 through 12 {
+  $vhVal: $i * 10; // 10, 20, 30, ..., 120
+  $pxVal: $i * 50; // 50, 100, 150, ..., 600
+
+  // Clases que usan vh y vw
+  .h-#{$vhVal}vh {
+    height: #{$vhVal}dvh;
+  }
+  .min-h-#{$vhVal}vh {
+    min-height: #{$vhVal}dvh;
+  }
+  .w-#{$vhVal}vw {
+    width: #{$vhVal}dvw;
+  }
+  .min-w-#{$vhVal}vw {
+    min-width: #{$vhVal}dvw;
+  }
+
+  // Clases que usan px
+  .min-h-#{$pxVal}px {
+    min-height: #{$pxVal}px;
+  }
+  .max-h-#{$pxVal}px {
+    max-height: #{$pxVal}px;
+  }
+  .min-w-#{$pxVal}px {
+    min-width: #{$pxVal}px;
+  }
+  .max-w-#{$pxVal}px {
+    max-width: #{$pxVal}px;
+  }
+}
+
+@for $i from 1 through 10 {
+  .w-#{$i * 10}p {
+    width: $i * 10%;
+  }
+
+  .w-#{$i * 10}vw {
+    width: $i * 10dvw;
+  }
+
+  .z-index#{$i} {
+    z-index: $i;
+  }
+
+  .op-#{$i * 10} {
+    opacity: $i / 10;
+  }
+
+  .br-#{$i * 5}px {
+    border-radius: #{$i * 5}px !important;
+  }
+  .br-1100-#{$i * 5}px {
+    border-radius: #{$i * 5}px #{$i * 5}px 0 0;
+  }
+}

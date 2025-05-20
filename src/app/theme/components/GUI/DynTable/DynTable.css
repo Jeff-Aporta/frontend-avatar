@@ -1,0 +1,66 @@
+.MuiDataGrid-root {
+  border-color: transparent !important;
+
+  * {
+    border-color: transparent !important;
+  }
+
+  .MuiDataGrid-selectedRowCount {
+    display: none;
+  }
+}
+
+/* Anidar estilos de DynTable-container */
+.DynTable-container {
+  --DataGrid-rowWidth: fit-content !important;
+
+  & .MuiDataGrid-row:hover {
+    background-color: hsla(
+      var(--morado-enfasis-h),
+      var(--morado-enfasis-s),
+      var(--morado-enfasis-l),
+      0.2
+    );
+  }
+
+  & .MuiDataGrid-cell {
+    border: none;
+    white-space: normal;
+    word-wrap: break-word;
+    position: relative;
+  }
+
+  & .MuiDataGrid-columnHeaders {
+    border-bottom: none;
+  }
+
+  & .MuiDataGrid-row {
+    border-bottom: none;
+  }
+
+  & .MuiDataGrid-root {
+    border: none;
+    width: 100%;
+  }
+
+  & .MuiDataGrid-virtualScroller {
+    /* estilos personalizados */
+  }
+
+  & .MuiDataGrid-scrollbar--horizontal {
+    position: sticky !important;
+    bottom: 0 !important;
+  }
+
+  & .MuiDataGrid-main {
+    position: relative !important;
+    overflow: auto !important;
+    display: block !important;
+    max-height: 80vh;
+  }
+
+  & .MuiDataGrid-virtualScrollerContent {
+    width: fit-content !important;
+    overflow: auto !important;
+  }
+}
