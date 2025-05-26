@@ -8,12 +8,12 @@
 .azul-agua {
   color: var(--azul-agua);
 }
-.morado {
-  color: var(--morado);
+.purple {
+  color: var(--purple);
 }
-.morado-enfasis {
-  color: var(--morado-enfasis);
+.purple-accent {
+  color: var(--purple-accent);
 }
-.morado-enfasis-brillante {
-  color: var(--morado-enfasis-brillante);
+.purple-accent-light {
+  color: var(--purple-accent-light);
 }

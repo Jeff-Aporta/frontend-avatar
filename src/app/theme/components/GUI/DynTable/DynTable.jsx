@@ -99,7 +99,7 @@ class DynTable extends Component {
       <Paper
         elevation={(() => {
           if (getThemeLuminance() == "dark") {
-            if (getThemeName() != "blacknwhite") {
+            if (getThemeName() != "blackNwhite") {
               return 0;
             }
           }

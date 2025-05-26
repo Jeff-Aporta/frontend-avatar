@@ -2,7 +2,9 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 
 import "@theme/scss/main.scss";
 
-import JS2CSS from "@jeff-aporta/js2css";
+import {} from "@identity/loader";
+import {} from "@theme/constants";
+
 import fluidCSS from "@jeff-aporta/fluidcss";
 
 import { assignedPath } from "@jeff-aporta/router";
@@ -10,13 +12,12 @@ import { routeCheck } from "@app/routeCheck";
 import { Toaster } from "react-hot-toast";
 import Alert from "@mui/material/Alert";
 
-import {} from "@identity/loader";
 import { bgdefault, portal } from "./back-texture";
 
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
-import CursorLight from "@components/Fx/cursor-light";
+import { CursorLight } from "@jeff-aporta/fast-fx";
 import Footer from "@components/templates/menu/footer";
 import MenuTopUnlog from "@components/templates/menu/head-main";
 
@@ -26,16 +27,16 @@ import {
   getThemeName,
   getThemeLuminance,
   setThemeLuminance,
+  MUIDefaultValues,
   isDark,
 } from "@jeff-aporta/theme-manager";
-
-import { ThreeBackground } from "@components/templates/mesh";
 
 const minH = "min-h-80vh";
 
 const themeSwitch_listener = [];
 
 function Notifier({ children }) {
+  console.log(MUIDefaultValues)
   return (
     <Themized>
       {children}
@@ -73,12 +74,12 @@ function ThemeSwitcher({
 
   if (theme_name != getThemeName()) {
     setThemeName(theme_name);
-    window.localStorage.setItem("theme-name", theme_name);
+    localStorage.setItem("theme-name", theme_name);
   }
 
   if (theme_luminance != getThemeLuminance()) {
     setThemeLuminance(theme_luminance);
-    window.localStorage.setItem("theme-luminance", theme_luminance);
+    localStorage.setItem("theme-luminance", theme_luminance);
   }
 
   useLayoutEffect(() => {

@@ -4,7 +4,7 @@ import JS2CSS from "@jeff-aporta/js2css";
 
 import {
   isDark,
-  themized,
+  isThemed,
   controlComponents,
   colorsTheme,
   typographyTheme,
@@ -178,7 +178,7 @@ function Captionize({ children, style = {}, className = "", label, ...rest }) {
 }
 
 function generate_inputs(array) {
-  const { Input } = themized();
+  const { Input } = isThemed();
 
   return array.map((structure, i) => {
     structure.placeholder ??=
@@ -205,7 +205,7 @@ function AnInput(props) {
       placeholder={placeholder}
       required={required}
       variant="filled"
-      color="morado_enfasis"
+      color="purpleAccent"
       inputProps={{ min: 1 }}
       value={value}
       style={{

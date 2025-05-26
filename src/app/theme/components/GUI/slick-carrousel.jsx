@@ -86,7 +86,7 @@ function FyxCarrusel(props) {
       margin: "0 auto",
       backgroundColor: isDark()
         ? getTheme().palette.background.paper
-        : lighten(getTheme().palette.verde_cielo.main, 0.9),
+        : lighten(getTheme().palette.skyGreen.main, 0.9),
       padding: "20px 32px",
       borderRadius: "8px",
     },

@@ -16,9 +16,9 @@
 
   & .MuiDataGrid-row:hover {
     background-color: hsla(
-      var(--morado-enfasis-h),
-      var(--morado-enfasis-s),
-      var(--morado-enfasis-l),
+      var(--purple-accent-h),
+      var(--purple-accent-s),
+      var(--purple-accent-l),
       0.2
     );
   }

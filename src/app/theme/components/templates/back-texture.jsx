@@ -1,26 +1,13 @@
-import JS2CSS from "@jeff-aporta/js2css";
-import { getThemeName, isDark } from "@jeff-aporta/theme-manager";
+import { getThemeName, isDark, JS2CSS } from "@jeff-aporta/theme-manager";
 
-import { discriminadorColor } from "@components/Fx/tools";
+import { colorFilterDiscriminator } from "@jeff-aporta/fast-fx";
 
-const {
-  verde_cielo,
-  verde_lima,
-  azul_agua,
-  blanco,
-  negro,
-  morado,
-  morado_enfasis,
-  morado_brillante,
-  verde_cielo_brillante,
-} = global.identity.colors;
-
-function lightEffect(){
-  if(isDark()){
+function lightEffect() {
+  if (!isDark()) {
     return {};
   }
   return {
-    "*": "invert() hue-rotate(180deg)"
+    "*": "invert() hue-rotate(180deg)",
   };
 }
 
@@ -42,8 +29,8 @@ function bgdefault() {
     id: "back-texture",
     objJs: {
       ".back-texture": {
-        ...discriminadorColor(lightEffect()),
-        
+        ...colorFilterDiscriminator(lightEffect()),
+
         background: [
           linear({
             angle: "to bottom",
@@ -118,7 +105,7 @@ function portal() {
     id: "back-texture",
     objJs: {
       ".back-texture": {
-        ...discriminadorColor(lightEffect()),
+        ...colorFilterDiscriminator(lightEffect()),
         background: [
           ...[
             { a: 30, r: 30, ri: 4 },

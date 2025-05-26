@@ -58,7 +58,7 @@ function HeadMain({ updateTheme = () => 0 }) {
         "--border-section": (() => {
           const themename = getThemeName();
           switch (themename) {
-            case "blacknwhite":
+            case "blackNwhite":
               return "hsl(var(--gray-h), var(--gray-s), 40%, 0.2)";
             default:
               return "hsl(var(--verde-cielo-h), var(--verde-cielo-s), 40%, 0.2)";
@@ -141,7 +141,7 @@ function BotonInicio() {
       className="d-center bright-hover-1-5 gap-10px c-pointer"
     >
       <ImageLocal
-        src={`img/logo-main.svg`}
+        src={`img/logo.svg`}
         width="40"
         className={fluidCSS()
           .lerpX([450, 1000], { width: [30, 40] })
@@ -151,7 +151,7 @@ function BotonInicio() {
             const themename = getThemeName();
             const themeluminance = getThemeLuminance();
             switch (themename) {
-              case "blacknwhite":
+              case "blackNwhite":
                 return themeluminance != "dark" ? "invert()" : "";
             }
           })(),
@@ -174,7 +174,7 @@ function BotonInicio() {
               return "white";
             } else {
               if (themeName == "main") {
-                return "var(--morado)";
+                return "var(--purple)";
               }
               return "black";
             }
@@ -197,7 +197,7 @@ function BotonInicio() {
               }
             } else {
               if (themeName == "main") {
-                return "var(--morado)";
+                return "var(--purple)";
               }
             }
             return themeName;

@@ -43,10 +43,23 @@ function SelectThemeName({ getThemeName, updateThemeName }) {
         onChange={(e) => updateThemeName(e.target.value)}
       >
         <MenuItem value="main">Main</MenuItem>
-        <MenuItem value="skygreen">Verde cielo</MenuItem>
-        <MenuItem value="lemongreen">Verde lima</MenuItem>
-        <MenuItem value="springgreen">Verde primavera</MenuItem>
-        <MenuItem value="blacknwhite">Blanco y negro</MenuItem>
+        <MenuItem value="purple">Morado</MenuItem>
+        <MenuItem value="skyGreen">Verde cielo</MenuItem>
+        <MenuItem value="lemonGreen">Verde lima</MenuItem>
+        <MenuItem value="springGreen">Verde primavera</MenuItem>
+        <MenuItem value="blackNwhite">Blanco y negro</MenuItem>
+        <MenuItem value="red">Rojo</MenuItem>
+        <MenuItem value="orange">Naranja</MenuItem>
+        <MenuItem value="yellow">Amarillo</MenuItem>
+        <MenuItem value="pink">Pink</MenuItem>
+        <MenuItem value="teal">Teal</MenuItem>
+        <MenuItem value="navy">Navy</MenuItem>
+        <MenuItem value="magenta">Magenta</MenuItem>
+        <MenuItem value="cyan">Cyan</MenuItem>
+        <MenuItem value="brown">Brown</MenuItem>
+        <MenuItem value="violet">Violet</MenuItem>
+        <MenuItem value="olive">Olive</MenuItem>
+        <MenuItem value="amber">Amber</MenuItem>
       </Select>
     </FormControl>
   );
@@ -65,7 +78,7 @@ function FooterNavSection() {
           <Grid item xs={12} md={12}>
             <Box sx={{ textAlign: "right" }}>
               <ImageLocal
-                src="img/logo-main.svg"
+                src="img/logo.svg"
                 alt="Logo"
                 style={{
                   width: "120px",

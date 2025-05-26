@@ -40,7 +40,7 @@ function MovementsGraph({typeDataInput="ranges"}) {
     {
       data: investmentData,
       label: "Compra",
-      color: isDark() ? "lime" : "SpringGreen",
+      color: isDark() ? "lime" : "springGreen",
       fillcolor: isDark() ? "#0F5733" : "lightgreen",
     },
     {
