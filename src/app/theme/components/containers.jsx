@@ -1,13 +1,9 @@
 import { Paper } from "@mui/material";
 import fluidCSS from "@jeff-aporta/fluidcss";
 
-export {
-    DivM,
-    PaperP
-}
+export { DivM, PaperP };
 
-function DivM(props) {
-  const { m_min = 5, m_max = 20 } = props;
+function DivM({ m_min = 5, m_max = 20, className="", ...props } = {}) {
   return (
     <div
       {...props}
@@ -15,13 +11,12 @@ function DivM(props) {
         .lerpX(400, 1000, {
           margin: [m_min, m_max],
         })
-        .end(`DivM m-30px tw-balance ${props.className??""}`)}
+        .end(`DivM tw-balance ${className}`)}
     />
   );
 }
 
-function PaperP(props) {
-  const { p_min = 3, p_max = 10 } = props;
+function PaperP({ p_min = 3, p_max = 10, className="", ...props } = {}) {
   return (
     <Paper
       {...props}
@@ -29,7 +24,7 @@ function PaperP(props) {
         .lerpX(400, 1000, {
           Padding: [p_min, p_max],
         })
-        .end(`PaperP pad-20px tw-balance ${props.className??""}`)}
+        .end(`PaperP tw-balance ${className}`)}
     />
   );
 }

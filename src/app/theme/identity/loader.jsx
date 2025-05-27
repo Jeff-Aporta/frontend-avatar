@@ -7,8 +7,8 @@ import {
 
 initializeThemeColors();
 
-paletteLoader.MUIDefaultValues["main"] =
-  paletteLoader.MUIDefaultValues["purple"];
+const { MUIDefaultValues } = paletteLoader;
+MUIDefaultValues["main"] = MUIDefaultValues["purple"];
 
 readyThemeManager();
 

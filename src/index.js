@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { href } from "@jeff-aporta/theme-manager";
+
 import { init } from "@src/polyfill";
+import { href } from "@jeff-aporta/theme-manager";
 import { createRoot } from "react-dom/client";
 import { RoutingManagement } from "@jeff-aporta/router";
 import package_json from "@root/package.json";
@@ -12,15 +13,6 @@ import { Box, CircularProgress, Typography, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { PaperP } from "@containers";
 
-(() => {
-  try {
-    if (!localStorage.getItem("theme-name")) {
-      localStorage.setItem("theme-name", "main");
-    }
-  } catch (error) {
-    console.error("Error al iniciar el tema", error);
-  }
-})()
 
 const componentsContext = require.context("./views", true, /\.jsx$/);
 

@@ -31,14 +31,28 @@ import ShowChartIcon from "@mui/icons-material/ShowChart";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 
+import Hero from './components/Hero';
+import Features from './components/Features';
+import Productivity from './components/Productivity';
+import Pricing from './components/Pricing';
+import Technology from './components/Technology';
+import Community from './components/Community';
+import OpenSoftware from './components/OpenSoftware';
+
 export default WelcomePage;
 
 function WelcomePage() {
   return (
     <ThemeSwitcher bgtype="default">
-      <div className="welcome-page">
-        <DivM>Bienvenido a Avatar frontend</DivM>
-      </div>
+      <DivM className="welcome-page d-flex-col gap-10px">
+        <Hero />
+        <Features />
+        <Productivity />
+        <Pricing />
+        <Technology />
+        <OpenSoftware />
+        <Community />
+      </DivM>
     </ThemeSwitcher>
   );
 }

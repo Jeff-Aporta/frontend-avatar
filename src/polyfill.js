@@ -1,8 +1,9 @@
 // Polyfills and environment adjustments
+import utilities from "./utilities";
+
 import { postRequest } from "@api/requestTable";
 import { href as routerHref } from "@jeff-aporta/theme-manager";
 
-import utilities from "./utilities";
 
 export function init() {
   // --- Sección 1: Entorno ---

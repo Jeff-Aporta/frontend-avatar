@@ -1,7 +1,7 @@
 // ---------------------------------------------
 // Miscellaneous Utilities
 // ---------------------------------------------
-.no-select{
+.no-select {
   user-select: none;
   pointer-events: none;
 }
@@ -27,7 +27,7 @@
   text-wrap: balance;
 }
 
-.ta-center{
+.ta-center {
   text-align: center;
 }
 
@@ -39,11 +39,12 @@
   }
 }
 
-.fit-content,.w-fit {
+.fit-content,
+.w-fit {
   width: fit-content;
 }
 
-.visibility-hidden {
+.v-hidden {
   visibility: hidden;
 }
 
@@ -73,7 +74,71 @@
 }
 
 .p-absolute {
+  --tx: 0;
+  --ty: 0;
   position: absolute !important;
+  transform: translate(var(--tx), var(--ty));
+
+  
+  &.p-centralizew {
+    --tx: 50%;
+  }
+  
+  &.p-centralizeh {
+    --ty: 50%;
+  }
+  
+  &.p-centralize {
+    --tx: 50%;
+    --ty: 50%;
+  }
+
+  &.p-centralize-center{
+    --tx: -50%;
+    --ty: -50%;
+    left: 50%;
+    top: 50%;
+  }
+
+  &.p-center{
+    left: 50%;
+    top: 50%;
+  }
+  
+  &.p-centerw {
+    left: 50%;
+  }
+  
+  &.p-centerh {
+    top: 50%;
+  }
+  
+  &.p-fill {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &.p-max-w{
+    width: 100%;
+  }
+  
+  &.p-top {
+    top: 0;
+  }
+
+  &.p-bottom {
+    bottom: 0;
+  }
+
+  &.p-left {
+    left: 0;
+  }
+
+  &.p-right {
+    right: 0;
+  }
 }
 
 .p-relative {
@@ -141,25 +206,6 @@
   filter: sepia(1) saturate(4) hue-rotate(-38deg) hue-rotate(328deg);
 }
 
-.top-0 {
-  top: 0;
-}
-.top-50p {
-  top: 50%;
-}
-.right-0 {
-  right: 0;
-}
-.bottom-0 {
-  bottom: 0;
-}
-.left-0 {
-  left: 0;
-}
-.left-50p {
-  left: 50%;
-}
-
 .h-max-side-window {
   height: max(100vw, 100vh);
 }
@@ -189,7 +235,7 @@
   width: 50% !important;
 }
 
-.threeQuartersWidth{
+.threeQuartersWidth {
   width: 75% !important;
 }
 
@@ -209,16 +255,15 @@
     skyblue,
     deepskyblue,
     dodgerblue,
-    purple
-    pink,
+    purple pink,
     deeppink,
     red,
     crimson,
     darkred,
-    orange,
+    orange
   )
 {
-  .b-#{$color}{
+  .b-#{$color} {
     border: 1px solid $color;
   }
   .bg-#{$color} {
@@ -243,33 +288,33 @@
   }
 }
 
-.bright-10{
+.bright-10 {
   filter: brightness(10);
 }
 
-.dyn-filter{
+.dyn-filter {
   --invert: 0;
   --hue-rotate: 0;
   filter: invert(var(--invert)) hue-rotate(var(--hue-rotate));
 }
 
-.hue-rotate180deg{
+.hue-rotate180deg {
   --hue-rotate: 180deg;
 }
 
-.invert{
+.invert {
   --invert: 1;
 }
 
-.rotate-left{
+.rotate-left {
   animation: rotate-left 12s infinite linear;
 }
 
 @keyframes rotate-left {
-  from{
+  from {
     transform: rotate(0);
   }
-  to{
+  to {
     transform: rotate(-360deg);
   }
 }

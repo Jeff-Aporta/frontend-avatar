@@ -1,3 +1,8 @@
+localStorage.setItem(
+  "theme-name",
+  localStorage.getItem("theme-name") ?? "skyGreen"
+);
+
 function isTouchDevice() {
   return (
     "ontouchstart" in window ||

@@ -1,0 +1,17 @@
+.animationAvatars {
+  --delay: 0s;
+  opacity: 0;
+  animation: animationAvatars 20s infinite alternate var(--delay);
+}
+
+@keyframes animationAvatars {
+  0% {
+    opacity: 0;
+  }
+  10%, 20% {
+    opacity: 1;
+  }
+  40%, 100% {
+    opacity: 0;
+  }
+}

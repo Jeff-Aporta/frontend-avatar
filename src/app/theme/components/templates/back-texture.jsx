@@ -3,7 +3,7 @@ import { getThemeName, isDark, JS2CSS } from "@jeff-aporta/theme-manager";
 import { colorFilterDiscriminator } from "@jeff-aporta/fast-fx";
 
 function lightEffect() {
-  if (!isDark()) {
+  if (isDark()) {
     return {};
   }
   return {
