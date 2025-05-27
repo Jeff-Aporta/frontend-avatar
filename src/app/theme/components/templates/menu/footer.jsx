@@ -1,5 +1,9 @@
 import { PaperP } from "@containers";
-import { href } from "@jeff-aporta/theme-manager";
+import {
+  href,
+  getAllThemesRegistered,
+  getThemeName,
+} from "@jeff-aporta/theme-manager";
 import {
   Box,
   Container,
@@ -21,45 +25,33 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 
 export default Footer;
 
-function Footer({ updateThemeName, getThemeName }) {
+function Footer({ updateThemeName }) {
+  const themeName = getThemeName();
   return (
     <>
       <FooterNavSection />
       <PaperP elevation={0} className="content-container footer">
-        <SelectThemeName {...{ getThemeName, updateThemeName }} />
+        <SelectThemeName {...{ themeName, updateThemeName }} />
       </PaperP>
     </>
   );
 }
 
-function SelectThemeName({ getThemeName, updateThemeName }) {
+function SelectThemeName({ themeName, updateThemeName }) {
   return (
     <FormControl style={{ width: "150px" }}>
       <InputLabel id="label-select-theme-name">Nombre tema</InputLabel>
       <Select
         labelId="label-select-theme-name"
         id="select-theme-name"
-        value={getThemeName()}
+        value={themeName}
         onChange={(e) => updateThemeName(e.target.value)}
       >
-        <MenuItem value="main">Main</MenuItem>
-        <MenuItem value="purple">Morado</MenuItem>
-        <MenuItem value="skyGreen">Verde cielo</MenuItem>
-        <MenuItem value="lemonGreen">Verde lima</MenuItem>
-        <MenuItem value="springGreen">Verde primavera</MenuItem>
-        <MenuItem value="blackNwhite">Blanco y negro</MenuItem>
-        <MenuItem value="red">Rojo</MenuItem>
-        <MenuItem value="orange">Naranja</MenuItem>
-        <MenuItem value="yellow">Amarillo</MenuItem>
-        <MenuItem value="pink">Pink</MenuItem>
-        <MenuItem value="teal">Teal</MenuItem>
-        <MenuItem value="navy">Navy</MenuItem>
-        <MenuItem value="magenta">Magenta</MenuItem>
-        <MenuItem value="cyan">Cyan</MenuItem>
-        <MenuItem value="brown">Brown</MenuItem>
-        <MenuItem value="violet">Violet</MenuItem>
-        <MenuItem value="olive">Olive</MenuItem>
-        <MenuItem value="amber">Amber</MenuItem>
+        {getAllThemesRegistered().map((themeRegister, i) => (
+          <MenuItem key={i} value={themeRegister.name[0]}>
+            {themeRegister.label}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
@@ -68,8 +60,8 @@ function SelectThemeName({ getThemeName, updateThemeName }) {
 function FooterNavSection() {
   const year = new Date().getFullYear();
   return (
-    <Paper
-      sx={{
+    <PaperP
+      style={{
         padding: "60px 0 20px",
       }}
     >
@@ -87,10 +79,12 @@ function FooterNavSection() {
                 }}
               />
               <Typography variant="body2" sx={{ mb: 1 }}>
-                Plataforma integral de automatización y gestión digital de procesos empresariales.
+                Plataforma integral de automatización y gestión digital de
+                procesos empresariales.
               </Typography>
               <Typography variant="body2" sx={{ mb: 1 }}>
-                Automatización de servicio al cliente, gestión de proyectos y Guía Matic.
+                Automatización de servicio al cliente, gestión de proyectos y
+                Guía Matic.
               </Typography>
               <Typography variant="body2" sx={{ mb: 2 }}>
                 {`© ${year} Avatar. Todos los derechos reservados.`}
@@ -192,6 +186,6 @@ function FooterNavSection() {
           {`© ${year} Avatar. Todos los derechos reservados.`}
         </Typography>
       </Container>
-    </Paper>
+    </PaperP>
   );
 }

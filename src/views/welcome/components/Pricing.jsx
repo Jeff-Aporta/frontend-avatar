@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Grid, Card, CardContent, Box, Button } from '@mui/material';
-import { DivM, PaperP } from '@containers';
+import { PaperP } from '@containers';
 
 export default function Pricing() {
   const plans = [
@@ -10,7 +10,6 @@ export default function Pricing() {
   ];
   return (
     <PaperP sx={{ py: 8 }}>
-      <DivM>
         <Typography variant="h4" align="center" gutterBottom>
           Planes y precios
         </Typography>
@@ -31,7 +30,6 @@ export default function Pricing() {
             </Grid>
           ))}
         </Grid>
-      </DivM>
     </PaperP>
   );
 }

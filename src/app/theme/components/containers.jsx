@@ -16,7 +16,7 @@ function DivM({ m_min = 5, m_max = 20, className="", ...props } = {}) {
   );
 }
 
-function PaperP({ p_min = 3, p_max = 10, className="", ...props } = {}) {
+function PaperP({ p_min = 3, p_max = 20, className="", ...props } = {}) {
   return (
     <Paper
       {...props}

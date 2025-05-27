@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeSwitcher } from "@templates";
+import { AppThemeProvider } from "@templates";
 import { DivM, PaperP } from "@containers";
 import { isDark, controlComponents, href } from "@jeff-aporta/theme-manager";
 import fluidCSS from "@jeff-aporta/fluidcss";
@@ -43,16 +43,16 @@ export default WelcomePage;
 
 function WelcomePage() {
   return (
-    <ThemeSwitcher bgtype="default">
+    <AppThemeProvider bgtype="default">
       <DivM className="welcome-page d-flex-col gap-10px">
         <Hero />
+        <Community />
         <Features />
         <Productivity />
         <Pricing />
         <Technology />
         <OpenSoftware />
-        <Community />
       </DivM>
-    </ThemeSwitcher>
+    </AppThemeProvider>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Typography, Grid, Box } from '@mui/material';
-import { DivM, PaperP } from '@containers';
+import { Typography, Grid } from '@mui/material';
+import { PaperP } from '@containers';
 import {
   Speed as SpeedIcon,
   Visibility as VisibilityIcon,
@@ -15,7 +15,6 @@ export default function Productivity() {
   ];
   return (
     <PaperP sx={{ py: 8, bgcolor: 'background.default' }}>
-      <DivM>
         <Typography variant="h4" align="center" gutterBottom>
           Productividad y eficiencia
         </Typography>
@@ -29,7 +28,6 @@ export default function Productivity() {
             </Grid>
           ))}
         </Grid>
-      </DivM>
     </PaperP>
   );
 }

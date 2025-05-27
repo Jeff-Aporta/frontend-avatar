@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Grid } from '@mui/material';
-import { DivM, PaperP } from '@containers';
+import { PaperP } from '@containers';
 import {
   CloudQueue as CloudIcon,
   Memory as AiIcon,
@@ -15,7 +15,6 @@ export default function Technology() {
   ];
   return (
     <PaperP sx={{ py: 8, bgcolor: 'background.paper' }}>
-      <DivM>
         <Typography variant="h4" align="center" gutterBottom>
           Tecnología
         </Typography>
@@ -29,7 +28,6 @@ export default function Technology() {
             </Grid>
           ))}
         </Grid>
-      </DivM>
     </PaperP>
   );
 }

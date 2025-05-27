@@ -6,7 +6,7 @@ import {
   isDark,
   isThemed,
   controlComponents,
-  colorsTheme,
+  getColorsTheme,
   typographyTheme,
 } from "@jeff-aporta/theme-manager";
 
@@ -193,7 +193,7 @@ function generate_inputs(array) {
 
 function AnInput(props) {
   const {
-    color = colorsTheme().primary.color,
+    color = getColorsTheme().primary.color,
     required = true,
     placeholder,
     value,
@@ -257,12 +257,10 @@ function AnSelect(props) {
 
   JS2CSS.insertStyle({
     id: `js2css-${captionizeID}`,
-    objJs: {
-      [`#${lblID}`]: {
-        transition: "opacity 0.4s",
-        [`&[data-shrink="true"]`]: {
-          opacity: 0,
-        },
+    [`#${lblID}`]: {
+      transition: "opacity 0.4s",
+      [`&[data-shrink="true"]`]: {
+        opacity: 0,
       },
     },
   });

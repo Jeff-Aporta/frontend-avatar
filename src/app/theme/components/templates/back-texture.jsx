@@ -1,19 +1,57 @@
 import { getThemeName, isDark, JS2CSS } from "@jeff-aporta/theme-manager";
 
-import { colorFilterDiscriminator } from "@jeff-aporta/fast-fx";
+import {
+  colorFilterDiscriminator,
+  fluidCSS,
+  getPaletteConfig,
+} from "@jeff-aporta/theme-manager";
+
+export function burnBGFluid({ bgtype = "1", theme_name, theme_luminance }) {
+  const fluid = fluidCSS();
+  switch (bgtype) {
+    default:
+    case "1":
+    case "default":
+      bgdefault();
+      fluid.ltX(800, {
+        opacity: ["0.5", "1"],
+      });
+      break;
+    case "2":
+    case "portal":
+      fluid
+        .btwX(550, 800, {
+          opacity: ["0", "0.5", "1"],
+        })
+        .ltX(550, {
+          display: "none",
+        });
+      portal();
+      break;
+  }
+  return fluid;
+}
 
 function lightEffect() {
-  if (isDark()) {
-    return {};
-  }
-  return {
+  const rl = {
     "*": "invert() hue-rotate(180deg)",
   };
+  const rb = {};
+  const { panda } = getPaletteConfig();
+  const a = [rb, rl];
+  if (isDark()) {
+    return a[+panda];
+  }
+  return a[1 - +panda];
 }
 
 function bgdefault() {
   const themeName = getThemeName();
   let color_anillo, color_circulo;
+
+  const palette = getPaletteConfig();
+
+  console.log(palette);
 
   color_anillo = "rgba(255,255,255, 0.03)";
   color_circulo = "rgba(186, 85, 211, 0.1)";
@@ -94,6 +132,7 @@ function bgdefault() {
             x: "70%",
             y: "600px",
           }),
+          palette.bg_dark,
         ].join(","),
       },
     },

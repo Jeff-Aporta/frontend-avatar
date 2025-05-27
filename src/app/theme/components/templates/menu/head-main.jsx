@@ -168,14 +168,8 @@ function BotonInicio() {
           }}
           color={(() => {
             if (isDark()) {
-              if (themeName == "main") {
-                return "#C6E50E";
-              }
               return "white";
             } else {
-              if (themeName == "main") {
-                return "var(--purple)";
-              }
               return "black";
             }
           })()}
@@ -190,18 +184,8 @@ function BotonInicio() {
             fontFamily: "lemonmilk-rg",
             fontSize: "45%",
           }}
-          color={(() => {
-            if (isDark()) {
-              if (themeName == "main") {
-                return "#21EBEF";
-              }
-            } else {
-              if (themeName == "main") {
-                return "var(--purple)";
-              }
-            }
-            return themeName;
-          })()}
+          className="color-accent-filter"
+          color="primary"
         >
           Gestión Digital y Automatización
         </Typography>

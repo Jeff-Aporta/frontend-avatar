@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Grid } from '@mui/material';
-import { DivM, PaperP } from '@containers';
+import { PaperP } from '@containers';
 import {
   Speed as SpeedIcon,
   People as PeopleIcon,
@@ -17,7 +17,6 @@ export default function Features() {
   ];
   return (
     <PaperP sx={{ py: 8 }}>
-      <DivM>
         <Typography variant="h4" align="center" gutterBottom>
           Características Principales
         </Typography>
@@ -31,7 +30,6 @@ export default function Features() {
             </Grid>
           ))}
         </Grid>
-      </DivM>
     </PaperP>
   );
 }
