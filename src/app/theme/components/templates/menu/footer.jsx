@@ -1,4 +1,4 @@
-import { PaperP } from "@containers";
+import { PaperF } from "@containers";
 import {
   href,
   getAllThemesRegistered,
@@ -23,16 +23,14 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
-export default Footer;
-
-function Footer({ updateThemeName }) {
+export function Footer({ updateThemeName }) {
   const themeName = getThemeName();
   return (
     <>
       <FooterNavSection />
-      <PaperP elevation={0} className="content-container footer">
+      <PaperF elevation={0} className="content-container footer pad-10px">
         <SelectThemeName {...{ themeName, updateThemeName }} />
-      </PaperP>
+      </PaperF>
     </>
   );
 }
@@ -60,11 +58,7 @@ function SelectThemeName({ themeName, updateThemeName }) {
 function FooterNavSection() {
   const year = new Date().getFullYear();
   return (
-    <PaperP
-      style={{
-        padding: "60px 0 20px",
-      }}
-    >
+    <PaperF>
       <Container>
         <Grid container spacing={4}>
           <Grid item xs={12} md={12}>
@@ -186,6 +180,6 @@ function FooterNavSection() {
           {`© ${year} Avatar. Todos los derechos reservados.`}
         </Typography>
       </Container>
-    </PaperP>
+    </PaperF>
   );
 }

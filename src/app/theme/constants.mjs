@@ -1,3 +1,5 @@
+import { getAllThemesRegistered } from "@jeff-aporta/theme-manager";
+
 export const zIndex = (() => {
   const mouseFxBackall = "-1";
   const mouseFxOverall = "8";
@@ -11,8 +13,11 @@ export const zIndex = (() => {
 })();
 
 export const mapFilterTheme = {
-  ...Object.entries(window.themeColors).reduce((acc, [key, value]) => {
-    acc[key] = (rotation) => rotation(value);
+  ...getAllThemesRegistered().reduce((acc, themeRegister) => {
+    acc[themeRegister.name[0]] = (rotation) => {
+      const colors = window.themeColors[themeRegister.name_color];
+      return rotation(colors);
+    };
     return acc;
   }, {}),
   blackNwhite: () => "grayscale(1)",

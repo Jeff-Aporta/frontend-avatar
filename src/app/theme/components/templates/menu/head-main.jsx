@@ -30,17 +30,12 @@ import {
   getThemeLuminance,
 } from "@jeff-aporta/theme-manager";
 import { queryPath } from "@jeff-aporta/router";
+import { PaperF } from "@containers";
 
 const hideIcon = 500;
 const wbrk = 600;
 
-//-------------------------------------
-
-export default HeadMain;
-
-//------------ definitions ------------
-
-function HeadMain({ updateTheme = () => 0 }) {
+export function HeadMain({ updateTheme = () => 0 }) {
   const isLoginPage = queryPath().includes("/users/login");
   const [anchorEl, setAnchorEl] = useState(null);
   const handleOpen = (e) => setAnchorEl(e.currentTarget);
@@ -69,13 +64,8 @@ function HeadMain({ updateTheme = () => 0 }) {
   });
 
   return (
-    <div
-      className={fluidCSS()
-        .lerpX([400, 1000], { padding: [10, 20] })
-        .end("menu-top d-space-between-center")}
-      style={{
-        background: ["rgba(255,255,255,0.25)", "rgba(0,0,0,0.25)"][+isDark()],
-      }}
+    <PaperF
+      className="menu-top d-space-between-center"
     >
       <BotonInicio />
       <div className="d-center gap-10px">
@@ -128,7 +118,7 @@ function HeadMain({ updateTheme = () => 0 }) {
           />
         </Tooltip>
       </div>
-    </div>
+    </PaperF>
   );
 }
 function BotonInicio() {
@@ -184,7 +174,6 @@ function BotonInicio() {
             fontFamily: "lemonmilk-rg",
             fontSize: "45%",
           }}
-          className="color-accent-filter"
           color="primary"
         >
           Gestión Digital y Automatización

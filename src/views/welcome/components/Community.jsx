@@ -10,7 +10,6 @@ import { fluidCSS } from "@jeff-aporta/theme-manager";
 const users = Array.from({ length: 42 }, (_, i) => ({
   alt: `User ${i + 1}`,
   src: `/img/test/persons/persona_${i + 1}.jpg`,
-  delay: `${i}s`,
 })).sort(() => Math.random() - 0.5);
 
 export default function Community() {
@@ -28,16 +27,20 @@ export default function Community() {
     <PaperP p_max={50} className="p-relative d-center">
       <AnimationAvatars />
       <div className="p-relative">
+        <br />
+        <br />
         <PaperP
           p_min={20}
           elevation={5}
           className={fluidCSS()
             .btwX([600, 800], { opacity: [0.7, 0.87, 1] })
-            .end()}
+            .end("br-40px")}
         >
           <div className="v-hidden">{content_text}</div>
         </PaperP>
         <div className="p-absolute p-fill d-center-col">{content_text}</div>
+        <br />
+        <br />
       </div>
     </PaperP>
   );
@@ -58,12 +61,14 @@ class AnimationAvatars extends Component {
   }
 
   render() {
-    const max = 42;
+    const max = 150;
     const { index } = this.state;
     const displayed = Array.from(
       { length: max },
       (_, j) => users[(index + j) % users.length]
     );
+    const indexes = displayed.map((_, i) => i);
+    indexes.sort(() => Math.random() - 0.5);
     return (
       <div className={["p-absolute", "p-fill", "overflow-hidden"].join(" ")}>
         <div
@@ -91,7 +96,7 @@ class AnimationAvatars extends Component {
                   height: [30, 50],
                 })
                 .end("animationAvatars")}
-              style={{ "--delay": user.delay }}
+              style={{ "--delay": `${indexes[i]}s` }}
             />
           ))}
         </div>

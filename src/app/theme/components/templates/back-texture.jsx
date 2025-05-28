@@ -1,9 +1,10 @@
-import { getThemeName, isDark, JS2CSS } from "@jeff-aporta/theme-manager";
-
 import {
   colorFilterDiscriminator,
   fluidCSS,
   getPaletteConfig,
+  getThemeName,
+  isDark,
+  JS2CSS,
 } from "@jeff-aporta/theme-manager";
 
 export function burnBGFluid({ bgtype = "1", theme_name, theme_luminance }) {
@@ -50,8 +51,6 @@ function bgdefault() {
   let color_anillo, color_circulo;
 
   const palette = getPaletteConfig();
-
-  console.log(palette);
 
   color_anillo = "rgba(255,255,255, 0.03)";
   color_circulo = "rgba(186, 85, 211, 0.1)";

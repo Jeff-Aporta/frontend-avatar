@@ -17,8 +17,8 @@ import { burnBGFluid } from "./back-texture";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
-import Footer from "@components/templates/menu/footer";
-import MenuTopUnlog from "@components/templates/menu/head-main";
+import { HeadMain } from "@components/templates/menu/head-main";
+import { Footer } from "@components/templates/menu/footer";
 
 import {
   setThemeName,
@@ -64,13 +64,6 @@ class Notifier extends React.Component {
     const { children } = this.props;
     const { theme = {} } = this.state;
     const { palette } = theme;
-
-    JS2CSS.insertStyle({
-      id: `theme-helpers`,
-      [`.color-accent-filter`]: {
-        filter: `brightness(${isDark() ? 1.2 : 0.8}) saturate(2)`,
-      },
-    });
 
     return (
       <ThemeProvider theme={getTheme()}>
@@ -118,6 +111,24 @@ function AppThemeProvider({
     themeSwitch_listener.forEach((fn) => fn(theme_name, theme_luminance));
   }, [theme_name, theme_luminance]);
 
+  JS2CSS.insertStyle({
+    id: "app-theme",
+    ...(() => {
+      const retorno = {};
+      const rule = [];
+      for (let i = 0; i < 6; i++) {
+        rule.push(`h${i + 1}`);
+      }
+      ["SvgIcon", "Typography"].forEach((item) => {
+        rule.push(".Mui" + item + "-root");
+      });
+      retorno[rule.join(", ")] = {
+        filter: `brightness(${isDark() ? 1.2 : 0.8}) saturate(1.8)`,
+      };
+      return retorno;
+    })(),
+  });
+
   return (
     <Notifier>
       <FirstPart />
@@ -137,7 +148,7 @@ function AppThemeProvider({
           }).end(`expand back-texture dyn-filter z-index-1`)}
         />
         <div className="min-h-80vh">
-          <MenuTopUnlog updateTheme={updateThemeLuminance} />
+          <HeadMain updateTheme={updateThemeLuminance} />
           <div style={{ minHeight: h_init }} />
           {children}
           <div style={{ minHeight: h_fin }} />
