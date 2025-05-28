@@ -34,7 +34,7 @@ function transition({
   const screenX = window.screenX + left;
   const screenY = window.screenY + top;
 
-  const a = 20;
+  const a = 30;
 
   const nrotateX = clamp(
     -(a * (e.screenY - screenY)) / window.innerHeight,
@@ -46,15 +46,17 @@ function transition({
     -a,
     a
   );
+  const tx_ = 40;
   const ntx = clamp(
-    (20 * (e.screenX - window.innerWidth / 2)) / window.innerWidth,
-    -20,
-    20
+    (tx_ * (e.screenX - window.innerWidth / 2)) / window.innerWidth,
+    -tx_,
+    tx_
   );
+  const ty_ = 20;
   const nty = clamp(
-    (10 * (e.screenY - window.innerHeight / 2)) / window.innerHeight,
-    -10,
-    10
+    (ty_ * (e.screenY - window.innerHeight / 2)) / window.innerHeight,
+    -ty_,
+    ty_
   );
   const tx = lerp(+element.dataset.tx, ntx, t);
   const ty = lerp(+element.dataset.ty, nty, t);
