@@ -14,6 +14,7 @@ import {
   solid,
   isDark,
   fluidCSS,
+  url,
 } from "@jeff-aporta/theme-manager";
 
 export default function Hero() {
@@ -39,7 +40,7 @@ export default function Hero() {
               ],
             }),
             solid(bgop),
-            `url(/img/ilustrations/bgbanner.svg)`,
+            url("img/ilustrations/bgbanner.svg"),
           ].join(", "),
         }}
       />
