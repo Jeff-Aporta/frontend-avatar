@@ -28,8 +28,6 @@ import {
 } from "@mui/material";
 import fluidCSS from "@jeff-aporta/fluidcss";
 
-const PUBLIC_URL = process.env.PUBLIC_URL;
-
 function TooltipIconButton({ title, disabled, onClick, icon, ...rest_props }) {
   return (
     <div {...rest_props} className={rest_props.className ?? ""}>
@@ -60,7 +58,16 @@ function TooltipIconButton({ title, disabled, onClick, icon, ...rest_props }) {
 
 function ImageLocal(props) {
   const { src, ...rest } = props;
-  return <Box component="img" {...{ alt: "", ...rest }} src={`${PUBLIC_URL}/${src}`} />;
+  const base = process.env.PUBLIC_URL || '';
+  const path = src.startsWith('/') ? src : `/${src}`;
+  return (
+    <Box
+      component="img"
+      {...rest}
+      alt=""
+      src={`${base}${path}`}  
+    />
+  );
 }
 
 function BoxForm(props) {

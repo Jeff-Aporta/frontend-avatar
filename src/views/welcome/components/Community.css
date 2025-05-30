@@ -1,7 +1,7 @@
 .animationAvatars {
   --delay: 0s;
   opacity: 0;
-  animation: animationAvatars 20s infinite alternate var(--delay);
+  animation: animationAvatars 20s infinite alternate calc(var(--delay) - 60s);
 }
 
 @keyframes animationAvatars {

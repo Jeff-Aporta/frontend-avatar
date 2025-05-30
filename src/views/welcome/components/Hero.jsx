@@ -13,13 +13,18 @@ import {
   lerp,
   solid,
   isDark,
+  fluidCSS,
 } from "@jeff-aporta/theme-manager";
 
 export default function Hero() {
   let bg = Color(getSelectedPalette().palette.background.paper);
   let bgop = `rgba(${[...bg.rgb().array(), 0.75].join(", ")})`;
   return (
-    <PaperP elevation={0} sx={{ py: 8 }} className="br-0 p-relative min-h-80vh">
+    <PaperP
+      elevation={0}
+      sx={{ py: 8 }}
+      className="br-0 p-relative min-h-80vh d-center-col"
+    >
       <Hm />
       <div
         className="p-absolute p-fill bg-paperP"
@@ -50,7 +55,7 @@ export default function Hero() {
             justifyContent: { xs: "center", md: "flex-start" },
           }}
         >
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h2" gutterBottom>
             Todo tu negocio en una sola plataforma
           </Typography>
           <Typography variant="h6" color="text.secondary" mb={4}>
@@ -77,9 +82,15 @@ export default function Hero() {
           <ImageLocal
             src="img/ilustrations/ilustration.svg"
             alt="Illustration"
-            className="mouse-3d-effect-tr h-positive all-3s"
+            className={fluidCSS()
+              .ltX("small", {
+                display: "none",
+              })
+              .ltX("medium", {
+                width: ["70%", "100%"],
+              })
+              .end("mouse-3d-effect-tr h-positive all-3s")}
             sx={{
-              width: { xs: "70%", md: "100%" },
               objectFit: "contain",
             }}
           />

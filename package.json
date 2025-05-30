@@ -1,7 +1,6 @@
 {
   "name": "frontend-avatar",
   "version": "1.0.0",
-  "homepage": ".",
   "repository": {
     "type": "git",
     "url": "https://github.com/Jeff-Aporta/frontend-avatar"
@@ -39,11 +38,12 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "npm run build && serve -s build",
+    "serve": "serve -s build",
     "eject": "react-scripts eject",
-    "deploy": "cross-env PUBLIC_URL=/ npm run test",
-    "deploy-gh": "cross-env PUBLIC_URL=. npm run build && npm run publish-gh",
-    "publish-gh": "gh-pages -d build"
+    "deploys": "npm run build-prod && npm run deploy-gh",
+    "build-prod": "npm run deploy-server --branch=build-prod",
+    "deploy-gh": "cross-env PUBLIC_URL=. npm run build && gh-pages -d build",
+    "deploy-server": "cross-env PUBLIC_URL=/ npm run build && gh-pages -d build -b %npm_config_branch%"
   },
   "eslintConfig": {
     "extends": [

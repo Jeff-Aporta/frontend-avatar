@@ -18,9 +18,6 @@ export function init() {
 
   // --- Sección 2: Configuración global y flags ---
   global.configApp ??= { context: "dev" };
-  const locationHref = window.location.href;
-  global.IS_LOCAL = locationHref.includes("localhost");
-  global.IS_GITHUB_IO = locationHref.includes(".github.io");
 
   // --- Sección 3: URL params helper ---
   global.driverParams = {

@@ -17,7 +17,7 @@ const urlapi = {
 function resolveUrl(buildEndpoint, service = "robot_backend") {
   const { context } = global.configApp;
   const env =
-    global.IS_LOCAL && global.configApp.context === "dev" ? "local" : "web";
+    window.IS_LOCAL && global.configApp.context === "dev" ? "local" : "web";
   const base = urlapi[env][service];
   return buildEndpoint({ baseUrl: base }).replace(/\s+/g, "");
 }

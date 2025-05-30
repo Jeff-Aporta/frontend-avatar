@@ -3,21 +3,44 @@ import React, { Component } from "react";
 import "./Community.css";
 
 import { Typography, AvatarGroup, Avatar, Box } from "@mui/material";
+import GroupIcon from "@mui/icons-material/Group";
 import { DivM, PaperP } from "@containers";
 import { fluidCSS } from "@jeff-aporta/theme-manager";
 
 // Usuarios para animación
 const users = Array.from({ length: 42 }, (_, i) => ({
   alt: `User ${i + 1}`,
-  src: `/img/test/persons/persona_${i + 1}.jpg`,
+  src: `img/test/persons/persona_${i + 1}.jpg`,
 })).sort(() => Math.random() - 0.5);
 
 export default function Community() {
   const content_text = (
     <>
-      <Typography variant="h3" align="center" gutterBottom>
-        Nuestra comunidad
-      </Typography>
+      <div className="d-center-col gap-10px">
+        <Typography variant="h3" align="center" gutterBottom>
+          Nuestra comunidad
+        </Typography>
+        <div
+          className={fluidCSS()
+            .ltX("small", {
+              display: "none",
+            })
+            .end()}
+        >
+          <div
+            className="d-center-col"
+            style={{
+              padding: "10px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(128, 128, 128, 0.1)",
+              border: "4px solid rgba(128, 128, 128, 0.5)",
+            }}
+          >
+            <GroupIcon fontSize="large" color="primary" />
+          </div>
+          <br />
+        </div>
+      </div>
       <Typography variant="h6" align="center">
         Únete a más de 12 mil usuarios que ya confían en Avatar
       </Typography>
@@ -34,7 +57,10 @@ export default function Community() {
           elevation={5}
           className={fluidCSS()
             .btwX("responsive", { opacity: [0.7, 0.87, 1] })
-            .end("br-40px")}
+            .lerpX("responsive-min", {
+              borderRadius: [0, 50],
+            })
+            .end()}
         >
           <div className="v-hidden">{content_text}</div>
         </PaperP>

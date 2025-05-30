@@ -55,7 +55,7 @@ export default function OpenSoftware() {
     <>
       <Hm />
       <Complement>
-        <Typography variant="h4" color="primary" align="center" gutterBottom>
+        <Typography variant="h4" align="center" gutterBottom>
           <b>Un software empresarial moderno, flexible y abierto</b>
         </Typography>
       </Complement>
