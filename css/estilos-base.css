@@ -1,0 +1,21 @@
+/* Estilos base */
+body {
+  /* La barra de scroll siempre se mostrará (aunque inactiva) */
+  overflow-y: scroll;
+}
+
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif, Arial, Helvetica !important;
+  font-style: normal;
+}
+
+hr {
+  width: 100%;
+  opacity: 0.3;
+}
