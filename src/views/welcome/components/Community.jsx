@@ -24,7 +24,7 @@ export default function Community() {
     </>
   );
   return (
-    <PaperP p_max={50} className="p-relative d-center">
+    <PaperP p_max={50} className="p-relative d-center br-0">
       <AnimationAvatars />
       <div className="p-relative">
         <br />
@@ -33,7 +33,7 @@ export default function Community() {
           p_min={20}
           elevation={5}
           className={fluidCSS()
-            .btwX([600, 800], { opacity: [0.7, 0.87, 1] })
+            .btwX("responsive", { opacity: [0.7, 0.87, 1] })
             .end("br-40px")}
         >
           <div className="v-hidden">{content_text}</div>
@@ -91,7 +91,7 @@ class AnimationAvatars extends Component {
               src={user.src}
               variant="rounded"
               className={fluidCSS()
-                .lerpX([400, 1000], {
+                .lerpX("responsive-min", {
                   width: [30, 50],
                   height: [30, 50],
                 })

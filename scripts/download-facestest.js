@@ -17,7 +17,7 @@ async function descargar() {
 
       // Resize to 200x200 and save
       const file = path.join(OUTPUT_DIR, `persona_${i + 1}.jpg`);
-      await sharp(buffer).resize(200, 200).toFile(file);
+      await sharp(buffer).resize(100, 100).toFile(file);
 
       console.log(`✅ Imagen ${i + 1} redimensionada y guardada`);
     } catch (err) {

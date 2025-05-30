@@ -1,7 +1,7 @@
 // ---------------------------------------------
 // Miscellaneous Utilities
 // ---------------------------------------------
-.no-select {
+.ghost {
   user-select: none;
   pointer-events: none;
 }
@@ -331,3 +331,63 @@
 .tt-uppercase {
   text-transform: uppercase;
 }
+
+// all 0.5s
+
+.all-01s {
+  transition: all 0.1s;
+}
+
+.all-025s {
+  transition: all 0.25s;
+}
+
+.all-05s {
+  transition: all 0.5s;
+}
+
+.all-075s {
+  transition: all 0.75s;
+}
+
+.all-1s {
+  transition: all 1s;
+}
+
+.all-2s{
+  transition: all 2s;
+}
+
+.all-3s{
+  transition: all 3s;
+}
+
+.all-4s{
+  transition: all 4s;
+}
+
+.all-5s{
+  transition: all 5s;
+}
+
+.all-6s{
+  transition: all 6s;
+}
+
+.all-7s{
+  transition: all 7s;
+}
+
+.all-8s{
+  transition: all 8s;
+}
+
+.all-9s{
+  transition: all 9s;
+}
+
+.all-10s{
+  transition: all 10s;
+}
+  
+

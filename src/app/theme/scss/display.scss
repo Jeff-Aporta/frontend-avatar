@@ -3,32 +3,32 @@
 // ---------------------------------------------
 @each $value in (flex, inline-flex, none, block, inline-block) {
   .d-#{$value} {
-    display: $value;
+    display: $value !important;
   }
 }
 
 @each $value in (row, column) {
   .flex-#{$value} {
-    flex-direction: $value;
+    flex-direction: $value !important;
   }
 }
 
 .d-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .d-end-center {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
 }
 
 .d-end {
-  display: flex;
-  justify-content: end;
-  align-items: end;
+  display: flex !important;
+  justify-content: end !important;
+  align-items: end !important;
 }
 
 .d-end-wrap {
@@ -37,60 +37,58 @@
 }
 
 .d-space-between-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
 .fd-row-reverse {
-  flex-direction: row-reverse;
+  flex-direction: row-reverse !important;
 }
 
-.flex-wrap,
-.wrap,
-.f-wrap {
-  flex-wrap: wrap;
+.wrap {
+  flex-wrap: wrap !important;
 }
 
 .d-inline-block {
-  display: inline-block;
+  display: inline-block !important;
 }
 
 .d-flex-wrap {
-  display: flex;
-  flex-wrap: wrap;
+  display: flex !important;
+  flex-wrap: wrap !important;
 }
 
 .d-inline-flex {
-  display: inline-flex;
+  display: inline-flex !important;
 }
 
 .d-inline-flex-col {
-  display: inline-flex;
-  flex-direction: column;
+  display: inline-flex !important;
+  flex-direction: column !important;
 }
 
 .d-flex-col {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .d-center-col {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
 }
 
 @each $value in (center, space-between, space-evenly, space-around, end, start)
 {
   .jc-#{$value} {
-    justify-content: $value;
+    justify-content: $value !important;
   }
 }
 
 @each $value in (center, end, start, stretch) {
   .ai-#{$value} {
-    align-items: $value;
+    align-items: $value !important;
   }
 }

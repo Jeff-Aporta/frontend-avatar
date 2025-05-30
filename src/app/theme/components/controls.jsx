@@ -295,7 +295,7 @@ function DateRangeControls({
   if (type === "custom") {
     return (
       <div className="d-flex ai-stretch flex-wrap gap-20px">
-        <div className={fluidCSS().ltX(700, { width: "100%" }).end()}>
+        <div className={fluidCSS().ltX("small", { width: "100%" }).end()}>
           <AutoSkeleton h="10vh" w="250px" loading={loading}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
@@ -308,7 +308,7 @@ function DateRangeControls({
             </LocalizationProvider>
           </AutoSkeleton>
         </div>
-        <div className={fluidCSS().ltX(700, { width: "100%" }).end()}>
+        <div className={fluidCSS().ltX("small", { width: "100%" }).end()}>
           <AutoSkeleton h="10vh" w="250px" loading={loading}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
@@ -376,7 +376,7 @@ function DateRangeControls({
       {periodValue === "week" && (
         <div
           className={`d-flex ai-center flex-wrap gap-10px ${fluidCSS()
-            .ltX(700, { width: "100%" })
+            .ltX("small", { width: "100%" })
             .end()}`}
         >
           <AutoSkeleton h="10vh" w="150px" loading={loading}>
@@ -442,7 +442,7 @@ function DateRangeControls({
       )}
 
       {periodValue === "month" && (
-        <div className={fluidCSS().ltX(700, { width: "100%" }).end()}>
+        <div className={fluidCSS().ltX("small", { width: "100%" }).end()}>
           <AutoSkeleton h="10vh" w="250px" loading={loading}>
             <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
               <InputLabel id="month-select-label">Mes</InputLabel>

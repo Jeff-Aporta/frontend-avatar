@@ -60,7 +60,7 @@ function TooltipIconButton({ title, disabled, onClick, icon, ...rest_props }) {
 
 function ImageLocal(props) {
   const { src, ...rest } = props;
-  return <img {...{ alt: "", ...rest }} src={`${PUBLIC_URL}/${src}`} />;
+  return <Box component="img" {...{ alt: "", ...rest }} src={`${PUBLIC_URL}/${src}`} />;
 }
 
 function BoxForm(props) {
@@ -357,7 +357,7 @@ function Title({ txt }) {
     <>
       <Typography
         variant="h2" // Usar h2 como en panel-robot
-        className={fluidCSS().ltX(600, { fontWeight: "500" }).end()}
+        className={fluidCSS().ltX("small", { fontWeight: "500" }).end()}
       >
         {txt}
       </Typography>

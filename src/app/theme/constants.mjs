@@ -29,12 +29,10 @@ Object.assign(window, { mapFilterTheme, zIndex, baseColor });
 
 window.JS2CSS.insertStyle({
   id: "theme-constants",
-  objJs: {
-    ":root": {
-      "--z-index-mouse-fx-backall": zIndex.mouseFxBackall,
-      "--z-index-mouse-fx-overall": zIndex.mouseFxOverall,
-      "--z-index-mouse-fx-minover": zIndex.MinOverMouseFx,
-      "--z-index-minover-scroll": zIndex.MinOverscroll,
-    },
+  ":root": {
+    "--z-index-mouse-fx-backall": zIndex.mouseFxBackall,
+    "--z-index-mouse-fx-overall": zIndex.mouseFxOverall,
+    "--z-index-mouse-fx-minover": zIndex.MinOverMouseFx,
+    "--z-index-minover-scroll": zIndex.MinOverscroll,
   },
 });

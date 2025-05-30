@@ -46,12 +46,10 @@ function FyxCarrusel(props) {
 
   JS2CSS.insertStyle({
     id: "fyx-carrusel",
-    objJs: {
-      ".slick-dots li.slick-active div": {
-        background: `${
-          isDark() ? "white" : "var(--verde-cielo)"
-        } !important` /* Cambia este color según tu tema */,
-      },
+    ".slick-dots li.slick-active div": {
+      background: `${
+        isDark() ? "white" : "var(--verde-cielo)"
+      } !important` /* Cambia este color según tu tema */,
     },
   });
   const settings = {
@@ -95,7 +93,9 @@ function FyxCarrusel(props) {
       backgroundColor: getTheme().palette.primary.main,
       border: "none",
       padding: "8px 16px",
-      color: getTheme().palette.getContrastText(getTheme().palette.primary.main),
+      color: getTheme().palette.getContrastText(
+        getTheme().palette.primary.main
+      ),
       cursor: "pointer",
       borderRadius: "4px",
     },

@@ -6,7 +6,6 @@
   $valpx: #{$val}px !important;
 
   .gap-#{$val}px {
-    @extend .d-flex;
     gap: $valpx;
   }
 

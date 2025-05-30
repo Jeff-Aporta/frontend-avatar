@@ -16,10 +16,11 @@ export default function Features() {
     { icon: <SupportAgentIcon fontSize="large" color="primary" />, label: 'Chatbot 24/7' },
   ];
   return (
-    <PaperP sx={{ py: 8 }}>
+    <PaperP elevation={0} sx={{ py: 8 }} className="br-0">
         <Typography variant="h4" align="center" gutterBottom>
           Características Principales
         </Typography>
+        <br />
         <Grid container spacing={4} justifyContent="center">
           {items.map((item, i) => (
             <Grid item xs={12} sm={6} md={3} key={i} textAlign="center">

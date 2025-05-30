@@ -155,7 +155,7 @@ function MovementsGraph({typeDataInput="ranges"}) {
       <br />
       <div className="d-flex jc-space-between flex-wrap gap-10px padb-20px">
         <ZoomControls />
-        <div className={fluidCSS().ltX(850, { width: "100%" }).end()} />
+        <div className={fluidCSS().ltX("small", { width: "100%" }).end()} />
         <DateRangeControls
           type={typeDataInput}
           dateRangeInit={dateRangeInit}

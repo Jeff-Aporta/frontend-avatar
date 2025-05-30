@@ -12,7 +12,7 @@ export function Hm({
     <div
       {...props}
       className={fluidCSS()
-        .lerpX(400, 1000, {
+        .lerpX("responsive", {
           height: [h_min * r, h_max * r],
         })
         .end(`Hm tw-balance ${className}`)}
@@ -25,7 +25,7 @@ export function DivM({ m_min = 5, m_max = 20, className = "", ...props } = {}) {
     <div
       {...props}
       className={fluidCSS()
-        .lerpX(400, 1000, {
+        .lerpX("responsive", {
           margin: [m_min, m_max],
         })
         .end(`DivM tw-balance ${className}`)}
@@ -33,12 +33,12 @@ export function DivM({ m_min = 5, m_max = 20, className = "", ...props } = {}) {
   );
 }
 
-export function PaperF({ children, className = "", ...props }) {
+export function PaperF({ children, className = "", hm = true, ...props }) {
   return (
     <Paper {...props} className="PaperF tw-balance br-0">
-      <Hm />
+      {hm && <Hm />}
       <div className={className}>{children}</div>
-      <Hm />
+      {hm && <Hm />}
     </Paper>
   );
 }
@@ -54,7 +54,7 @@ export function PaperP({
     <Paper
       {...props}
       className={fluidCSS()
-        .lerpX(400, 1000, {
+        .lerpX("responsive", {
           Padding: [p_min, p_max],
         })
         .end(`PaperP tw-balance ${className}`)}

@@ -30,6 +30,7 @@ import {
   getSelectedPalette,
   isDark,
   CursorLight,
+  getThemePandaComplement,
   JS2CSS,
 } from "@jeff-aporta/theme-manager";
 
@@ -48,7 +49,16 @@ export function removeThemeSwitchListener(fn, index) {
   }
 }
 
-class Notifier extends React.Component {
+export function Complement({children}){
+  return (
+    <ThemeProvider theme={getThemePandaComplement()}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  );
+}
+
+export class Notifier extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -68,26 +78,28 @@ class Notifier extends React.Component {
     return (
       <ThemeProvider theme={getTheme()}>
         <CssBaseline />
-        {children}
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              borderRadius: "5px",
-              background: palette?.background?.default,
-              color: palette?.text?.primary,
-              border: "1px solid " + (palette?.divider ?? "gray"),
-              boxShadow: "5px 5px 5px 0px rgba(0, 0, 0, 0.1)",
-              animation: "fadeIn 1s ease, fadeOut 0.3s ease 9.7s forwards",
-            },
-          }}
-        />
+        <div className="theme-provider-notifier">
+          {children}
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                borderRadius: "5px",
+                background: palette?.background?.default,
+                color: palette?.text?.primary,
+                border: "1px solid " + (palette?.divider ?? "gray"),
+                boxShadow: "5px 5px 5px 0px rgba(0, 0, 0, 0.1)",
+                animation: "fadeIn 1s ease, fadeOut 0.3s ease 9.7s forwards",
+              },
+            }}
+          />
+        </div>
       </ThemeProvider>
     );
   }
 }
 
-function AppThemeProvider({
+export function AppThemeProvider({
   children,
   urlShader,
   bgtype = "1",
@@ -113,6 +125,9 @@ function AppThemeProvider({
 
   JS2CSS.insertStyle({
     id: "app-theme",
+    body: {
+      background: getSelectedPalette().palette.background.default.hex(),
+    },
     ...(() => {
       const retorno = {};
       const rule = [];
@@ -149,13 +164,13 @@ function AppThemeProvider({
         />
         <div className="min-h-80vh">
           <HeadMain updateTheme={updateThemeLuminance} />
-          <div style={{ minHeight: h_init }} />
+          {h_init && <div style={{ minHeight: h_init }} />}
           {children}
-          <div style={{ minHeight: h_fin }} />
+          {h_fin && <div style={{ minHeight: h_fin }} />}
         </div>
       </div>
     );
   }
 }
 
-export { AppThemeProvider, Notifier, themeSwitch_listener };
+export { themeSwitch_listener };
