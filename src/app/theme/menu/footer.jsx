@@ -1,9 +1,10 @@
-import { PaperF } from "@containers";
+import { PaperF } from "@jeff-aporta/camaleon";
 import {
   href,
   getAllThemesRegistered,
   getThemeName,
-} from "@jeff-aporta/theme-manager";
+  isRegistered,
+} from "@jeff-aporta/camaleon";
 import {
   Box,
   Container,
@@ -42,14 +43,16 @@ function SelectThemeName({ themeName, updateThemeName }) {
       <Select
         labelId="label-select-theme-name"
         id="select-theme-name"
-        value={themeName}
+        value={isRegistered(themeName) ?? ""}
         onChange={(e) => updateThemeName(e.target.value)}
       >
-        {getAllThemesRegistered().map((themeRegister, i) => (
-          <MenuItem key={i} value={themeRegister.name[0]}>
-            {themeRegister.label}
-          </MenuItem>
-        ))}
+        {getAllThemesRegistered()
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map((themeRegister, i) => (
+            <MenuItem key={i} value={themeRegister.name[0]}>
+              {themeRegister.label}
+            </MenuItem>
+          ))}
       </Select>
     </FormControl>
   );

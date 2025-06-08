@@ -1,6 +1,3 @@
-import { assignedPath } from "@jeff-aporta/router";
-
-// Función auxiliar para errores de autenticación y acceso según ruta
 function authError([first, second]) {
   const thereIsUser = window["currentUser"];
   if (!thereIsUser) {

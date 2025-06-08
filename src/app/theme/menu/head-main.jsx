@@ -31,8 +31,8 @@ import {
 } from "@mui/material";
 
 import { ImageLocal } from "@recurrent";
-import fluidCSS from "@jeff-aporta/fluidcss";
-import { LuminanceThemeSwitch } from "@components/templates/menu/switch";
+import { fluidCSS } from "@jeff-aporta/camaleon";
+import { LuminanceThemeSwitch } from "@jeff-aporta/camaleon";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -43,15 +43,15 @@ import {
   href,
   JS2CSS,
   getThemeLuminance,
-} from "@jeff-aporta/theme-manager";
-import { queryPath } from "@jeff-aporta/router";
-import { PaperF, Hm } from "@containers";
+} from "@jeff-aporta/camaleon";
+import { getQueryPath } from "@jeff-aporta/camaleon";
+import { PaperF, Hm } from "@jeff-aporta/camaleon";
 
 const hideIcon = 500;
 const wbrk = 600;
 
 export function HeadMain({ updateTheme = () => 0 }) {
-  const isLoginPage = queryPath().includes("/users/login");
+  const isLoginPage = getQueryPath().includes("/users/login");
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleOpen = (e) => setAnchorEl(e.currentTarget);
@@ -79,8 +79,11 @@ export function HeadMain({ updateTheme = () => 0 }) {
   });
 
   return (
-    <PaperF className="menu-top d-space-between-center pad-10px" hm={false}>
-      <div className="d-flex">
+    <PaperF
+      className="menu-top flex space-between ai-center pad-10px"
+      hm={false}
+    >
+      <div className="flex">
         <MenuDrawer />
         <LogoHome />
       </div>
@@ -329,7 +332,7 @@ function LogoHome() {
             fontFamily: "lemonmilk-rg",
             fontSize: "45%",
           }}
-          color="primary"
+          color="primaryl3"
           sx={{ display: { xs: "none", sm: "block" } }}
         >
           Gestión Digital y Automatización

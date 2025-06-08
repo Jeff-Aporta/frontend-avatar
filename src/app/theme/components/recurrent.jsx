@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import JS2CSS from "@jeff-aporta/js2css";
-
 import {
   isDark,
   isThemed,
   controlComponents,
   getColorsTheme,
   typographyTheme,
-} from "@jeff-aporta/theme-manager";
+  JS2CSS,
+  fluidCSS,
+} from "@jeff-aporta/camaleon";
 
-import FyxDialog from "@components/GUI/dialog";
+import { DialogSimple } from "@components/dialog";
 
 import {
   Alert,
@@ -26,7 +26,6 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import fluidCSS from "@jeff-aporta/fluidcss";
 
 function TooltipIconButton({ title, disabled, onClick, icon, ...rest_props }) {
   return (
@@ -157,7 +156,7 @@ function Info(props) {
   const { title, title_text, ...rest_props } = props;
 
   return (
-    <FyxDialog
+    <DialogSimple
       {...rest_props}
       text={title}
       title_text={title_text ?? "Información"}
@@ -167,7 +166,7 @@ function Info(props) {
           <i className="fa-solid fa-info-circle" />
         </Typography>
       </TooltipNoPointerEvents>
-    </FyxDialog>
+    </DialogSimple>
   );
 }
 

@@ -1,31 +1,31 @@
 import React from "react";
 import { Typography, Grid } from "@mui/material";
-import { PaperP } from "@containers";
+import { PaperP } from "@jeff-aporta/camaleon";
 import {
   Speed as SpeedIcon,
   Visibility as VisibilityIcon,
   BarChart as BarChartIcon,
 } from "@mui/icons-material";
-import fluidCSS from "@jeff-aporta/fluidcss";
-import { ItemPromo } from "./$refactor";
+import { fluidCSS } from "@jeff-aporta/camaleon";
+import { ItemPromo } from "./$comun";
 
 export default function Productivity() {
   const items = [
     {
-      icon: (sz) => <SpeedIcon fontSize={sz} color="primary" />,
+      icon: (sz) => <SpeedIcon fontSize={sz} color={window.view.icon} />,
       label: "Optimización de procesos",
     },
     {
-      icon: (sz) => <VisibilityIcon fontSize={sz} color="primary" />,
+      icon: (sz) => <VisibilityIcon fontSize={sz} color={window.view.icon} />,
       label: "Visión en tiempo real",
     },
     {
-      icon: (sz) => <BarChartIcon fontSize={sz} color="primary" />,
+      icon: (sz) => <BarChartIcon fontSize={sz} color={window.view.icon} />,
       label: "Reportes personalizados",
     },
   ];
   return (
-    <PaperP sx={{ py: 8, bgcolor: "background.default" }}>
+    <PaperP sx={{ py: 8 }}>
       <Typography variant="h4" align="center" gutterBottom>
         Productividad y eficiencia
       </Typography>

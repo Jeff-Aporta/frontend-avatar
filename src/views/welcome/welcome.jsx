@@ -1,9 +1,13 @@
 import React from "react";
-import { AppThemeProvider } from "@templates";
-import { DivM, PaperP } from "@containers";
-import { isDark, controlComponents, href } from "@jeff-aporta/theme-manager";
-import fluidCSS from "@jeff-aporta/fluidcss";
-import { ImageLocal } from "@recurrent";
+import { Main } from "@theme/main.jsx";
+import {
+  isDark,
+  controlComponents,
+  href,
+  DivM,
+  PaperP,
+  fluidCSS,
+} from "@jeff-aporta/camaleon";
 
 import {
   Box,
@@ -39,11 +43,14 @@ import Technology from "./components/Technology";
 import Community from "./components/Community";
 import OpenSoftware from "./components/OpenSoftware";
 
-export default WelcomePage;
+window.view = {
+  icon: "primaryl4",
+  textaccent: "primaryl3",
+};
 
-function WelcomePage() {
+export default function () {
   return (
-    <AppThemeProvider bgtype="default" h_init={"0px"}>
+    <Main bgtype="default" h_init={"0px"}>
       <Hero />
       <Community />
       <Features />
@@ -53,6 +60,6 @@ function WelcomePage() {
         <Technology />
         <OpenSoftware />
       </DivM>
-    </AppThemeProvider>
+    </Main>
   );
 }

@@ -1,4 +1,4 @@
-export function hrefManagement(props) {
+function hrefManagement(props) {
   if (typeof props == "string") {
     props = { view: props };
   }
@@ -23,3 +23,5 @@ function decorators(props) {
   }
   return props;
 }
+
+Object.assign(window, { hrefManagement });

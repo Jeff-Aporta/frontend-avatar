@@ -4,8 +4,15 @@ import "./Community.css";
 
 import { Typography, AvatarGroup, Avatar, Box } from "@mui/material";
 import GroupIcon from "@mui/icons-material/Group";
-import { DivM, PaperP } from "@containers";
-import { fluidCSS } from "@jeff-aporta/theme-manager";
+import {
+  fluidCSS,
+  PaperDesign,
+  PaperLayer,
+  DivM,
+  PaperP,
+  Design,
+  Layer,
+} from "@jeff-aporta/camaleon";
 
 // Usuarios para animación
 const users = Array.from({ length: 42 }, (_, i) => ({
@@ -14,61 +21,62 @@ const users = Array.from({ length: 42 }, (_, i) => ({
 })).sort(() => Math.random() - 0.5);
 
 export default function Community() {
-  const content_text = (
-    <>
-      <div className="d-center-col gap-10px">
-        <Typography variant="h3" align="center" gutterBottom>
-          Nuestra comunidad
-        </Typography>
-        <div
-          className={fluidCSS()
-            .ltX("small", {
-              display: "none",
-            })
-            .end()}
-        >
-          <div
-            className="d-center-col"
-            style={{
-              padding: "10px",
-              borderRadius: "50%",
-              backgroundColor: "rgba(128, 128, 128, 0.1)",
-              border: "4px solid rgba(128, 128, 128, 0.5)",
-            }}
-          >
-            <GroupIcon fontSize="large" color="primary" />
-          </div>
-          <br />
-        </div>
-      </div>
-      <Typography variant="h6" align="center">
-        Únete a más de 12 mil usuarios que ya confían en Avatar
-      </Typography>
-    </>
-  );
+  const { view } = window;
+  const margen = Array.from({ length: 2 }, (_, i) => <br key={i} />);
   return (
-    <PaperP p_max={50} className="p-relative d-center br-0">
+    <PaperDesign
+      nobr
+      layerProps={{
+        className: "d-center col-direction",
+      }}
+    >
       <AnimationAvatars />
-      <div className="p-relative">
-        <br />
-        <br />
-        <PaperP
-          p_min={20}
-          elevation={5}
-          className={fluidCSS()
-            .btwX("responsive", { opacity: [0.7, 0.87, 1] })
-            .lerpX("responsive-min", {
-              borderRadius: [0, 50],
-            })
-            .end()}
-        >
-          <div className="v-hidden">{content_text}</div>
-        </PaperP>
-        <div className="p-absolute p-fill d-center-col">{content_text}</div>
-        <br />
-        <br />
-      </div>
-    </PaperP>
+      {margen}
+      <PaperDesign
+        p_min={10}
+        p_max={20}
+        elevation={5}
+        className={fluidCSS()
+          .btwX("responsive", { opacity: [0.7, 0.87, 1] })
+          .lerpX("responsive-min", {
+            borderRadius: [0, 50],
+          })
+          .end("fit-w")}
+        layerProps={{
+          className: "d-center col-direction",
+        }}
+      >
+        <div className="d-center col-direction gap-10px">
+          <Typography variant="h3" align="center" gutterBottom>
+            Nuestra comunidad
+          </Typography>
+          <div
+            className={fluidCSS()
+              .ltX("small", {
+                display: "none",
+              })
+              .end()}
+          >
+            <div
+              className="d-center col-direction"
+              style={{
+                padding: "10px",
+                borderRadius: "50%",
+                backgroundColor: "rgba(128, 128, 128, 0.1)",
+                border: "4px solid rgba(128, 128, 128, 0.5)",
+              }}
+            >
+              <GroupIcon fontSize="large" color={view.icon} />
+            </div>
+            <br />
+          </div>
+        </div>
+        <Typography variant="h6" align="center">
+          Únete a más de 12 mil usuarios que ya confían en Avatar
+        </Typography>
+      </PaperDesign>
+      {margen}
+    </PaperDesign>
   );
 }
 
@@ -96,18 +104,17 @@ class AnimationAvatars extends Component {
     const indexes = displayed.map((_, i) => i);
     indexes.sort(() => Math.random() - 0.5);
     return (
-      <div className={["p-absolute", "p-fill", "overflow-hidden"].join(" ")}>
-        <div
+      <Layer fill className="overflow-hidden">
+        <Layer
+          fullw
+          center
+          centralized
           className={[
-            "p-absolute",
-            "p-max-w",
-            "p-centralize-center",
             "d-flex",
+            "wrap",
             "jc-space-evenly",
             "ai-center",
-            "wrap",
             "gap-20px",
-            "pad-20px",
           ].join(" ")}
         >
           {displayed.map((user, i) => (
@@ -125,8 +132,8 @@ class AnimationAvatars extends Component {
               style={{ "--delay": `${indexes[i]}s` }}
             />
           ))}
-        </div>
-      </div>
+        </Layer>
+      </Layer>
     );
   }
 }

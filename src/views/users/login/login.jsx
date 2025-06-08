@@ -1,6 +1,5 @@
 import React from "react";
-import { AppThemeProvider, Complement } from "@templates";
-import { DivM } from "@containers";
+import { DivM, Complement } from "@jeff-aporta/camaleon";
 import {
   Box,
   Card,
@@ -15,16 +14,18 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import { ImageLocal } from "@recurrent";
-import fluidCSS from "@jeff-aporta/fluidcss";
-import { fdhue, Color, getSelectedPalette } from "@jeff-aporta/theme-manager";
+import { fluidCSS } from "@jeff-aporta/camaleon";
+import { fdhue, Color, getSelectedPalette } from "@jeff-aporta/camaleon";
+
+import { Main } from "@theme/main.jsx";
 
 export default function login() {
   return (
-    <AppThemeProvider bgtype="portal">
+    <Main bgtype="portal">
       <DivM m_max={40} className="d-center min-h-80vh">
         <LoginSignupPage />
       </DivM>
-    </AppThemeProvider>
+    </Main>
   );
 }
 

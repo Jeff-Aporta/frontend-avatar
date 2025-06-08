@@ -1,7 +1,7 @@
 import React from "react";
 
-import { AppThemeProvider } from "@templates";
-import { DivM, PaperP } from "@containers";
+import { AppThemeProvider } from "@jeff-aporta/camaleon";
+import { DivM, PaperP } from "@jeff-aporta/camaleon";
 import { Typography } from "@mui/material";
 
 export default State404;

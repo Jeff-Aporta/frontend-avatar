@@ -1,9 +1,7 @@
 // Polyfills and environment adjustments
 import utilities from "./utilities";
 
-import { postRequest } from "@api/requestTable";
-import { href as routerHref } from "@jeff-aporta/theme-manager";
-
+import { href as routerHref } from "@jeff-aporta/camaleon";
 
 export function init() {
   // --- Sección 1: Entorno ---
@@ -19,31 +17,6 @@ export function init() {
   // --- Sección 2: Configuración global y flags ---
   global.configApp ??= { context: "dev" };
 
-  // --- Sección 3: URL params helper ---
-  global.driverParams = {
-    get: (key) => new URLSearchParams(window.location.search).get(key),
-    gets: (...keys) =>
-      keys.map((k) => new URLSearchParams(window.location.search).get(k)),
-    set: (key, value) => {
-      const params = new URLSearchParams(window.location.search);
-      params.set(key, value);
-      window.history.replaceState(
-        null,
-        "",
-        `${window.location.pathname}?${params.toString()}`
-      );
-    },
-    sets: (entries) => {
-      const params = new URLSearchParams(window.location.search);
-      Object.entries(entries).forEach(([k, v]) => params.set(k, v));
-      window.history.replaceState(
-        null,
-        "",
-        `${window.location.pathname}?${params.toString()}`
-      );
-    },
-  };
-
   // --- Sección 4: Helpers globales ---
   // Clave de moneda
   global.getCoinKey = (coin) => coin.symbol || coin.name || coin.id || "";
@@ -52,15 +25,13 @@ export function init() {
   // Carga de usuario
   window["loadUser"] = async (username, password) => {
     try {
-      let user = await postRequest({
-
-        buildEndpoint: ({ baseUrl }) =>
-          `${baseUrl}/login/?username=${encodeURIComponent(
-            username
-          )}&password=${encodeURIComponent(password)}`,
-        setError: (err) => err && console.error(err),
-        isTable: true,
-      });
+      let user = [
+        {
+          name: "Jeffrey",
+          lastName: "Agudelo",
+          email: "jeffrey.agudelo@recurrent.com",
+        },
+      ];
       if (Array.isArray(user)) {
         user = user[0];
       }
@@ -92,13 +63,13 @@ export function init() {
       },
     },
     props: {
-      "ChipSmall": {
+      ChipSmall: {
         size: "small",
         variant: "filled",
       },
     },
     style: {
-      "ChipSmall": {
+      ChipSmall: {
         transform: "scale(0.8)",
         fontSize: "smaller",
       },
@@ -129,7 +100,7 @@ function dynamicNumberFormat({ value }) {
   }
   const decimals = Math.min(
     8,
-    Math.max(2, Math.floor(1 - Math.log10(absValue))+4)
+    Math.max(2, Math.floor(1 - Math.log10(absValue)) + 4)
   );
   return { maximumFractionDigits: decimals };
 }

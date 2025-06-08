@@ -8,10 +8,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@jeff-aporta/fluidcss": "^1.1.32",
-    "@jeff-aporta/js2css": "^1.0.9",
-    "@jeff-aporta/router": "^1.0.46",
-    "@jeff-aporta/theme-manager": "^1.0.122",
+    "@jeff-aporta/camaleon": "^0.0.8",
     "@mui/icons-material": "^6.4.8",
     "@mui/material": "^6.4.8",
     "@mui/x-charts": "^7.28.0",
@@ -27,7 +24,7 @@
     "dayjs": "^1.11.13",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-hot-toast": "^2.5.2",
+    "react-hot-toast": "^1.0.2",
     "react-router-dom": "^7.4.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.30.3",
@@ -42,8 +39,8 @@
     "eject": "react-scripts eject",
     "deploys": "npm run build-prod && npm run deploy-gh",
     "build-prod": "npm run deploy-server --branch=build-prod",
-    "deploy-gh": "cross-env PUBLIC_URL=. npm run build && gh-pages -d build",
-    "deploy-server": "cross-env PUBLIC_URL=/ npm run build && gh-pages -d build -b %npm_config_branch%"
+    "deploy-server": "cross-env PUBLIC_URL=/ npm run build && gh-pages -d build -b %npm_config_branch%",
+    "deploy-gh": "cross-env PUBLIC_URL=. npm run build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

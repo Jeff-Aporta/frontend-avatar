@@ -7,7 +7,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { PaperP } from "@containers";
+import { PaperP, Hm } from "@jeff-aporta/camaleon";
 
 export default function Pricing() {
   const plans = [
@@ -29,16 +29,19 @@ export default function Pricing() {
       >
         {plans.map((plan) => (
           <Grid item xs={12} sm={5} md={4} key={plan.title}>
-            <Card variant="outlined">
+            <Card elevation={0} variant="outlined" className="rz-overfx">
               <CardContent>
                 <Typography variant="h6">{plan.title}</Typography>
                 <hr />
-                <Typography variant="h6" color="primary">
+                <Typography variant="h6" color={window.view.textaccent}>
                   {plan.price}
                 </Typography>
               </CardContent>
+              <br />
               <Box textAlign="center" pb={2}>
-                <Button variant="contained">Suscribirse</Button>
+                <Button variant="contained" color="primaryl1">
+                  Suscribirse
+                </Button>
               </Box>
             </Card>
           </Grid>

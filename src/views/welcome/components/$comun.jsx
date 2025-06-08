@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import { fluidCSS } from "@jeff-aporta/theme-manager";
+import { fluidCSS } from "@jeff-aporta/camaleon";
 
 export function ItemPromo({ item, xs, sm }) {
   return (

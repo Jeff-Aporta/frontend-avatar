@@ -1,6 +1,6 @@
 localStorage.setItem(
   "theme-name",
-  localStorage.getItem("theme-name") ?? "skyGreen"
+  localStorage.getItem("theme-name") ?? "cyan"
 );
 
 function isTouchDevice() {
