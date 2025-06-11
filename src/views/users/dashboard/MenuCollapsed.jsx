@@ -11,7 +11,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import { PaperLayer } from "@jeff-aporta/camaleon";
-import { Button, Divider, Typography } from "@mui/material";
+import { Button, Divider, Tooltip, Typography } from "@mui/material";
 import { setDashView } from "./dashboard";
 
 
@@ -135,15 +135,17 @@ export function MenuCollapsed() {
      element = <div className="flex align-center">{element}</div>;
    }
    return (
-     <Button
-       {...props}
-       color="inherit"
-       size="small"
-       className="center-when-collapsed"
-       onClick={() => setDashView(view)}
-     >
-       {element}
-     </Button>
+     <Tooltip title={label} placement="right">
+       <Button
+         {...props}
+         color="inherit"
+         size="small"
+         className="center-when-collapsed"
+         onClick={() => view && setDashView(view)}
+       >
+         {element}
+       </Button>
+     </Tooltip>
    );
  }
 }
