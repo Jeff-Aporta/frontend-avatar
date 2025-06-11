@@ -1,0 +1,63 @@
+.template-dashboard {
+  --state-bool: 1;
+  --state-width: 100%;
+  --state-display: block;
+  --state-display2: none;
+  --state-justify: flex-start;
+  --state-mr: 10px;
+  --state-pointer-events: auto;
+  --padding-left: 65px;
+}
+
+.template-dashboard .is-padding-menu {
+  padding-left: var(--padding-left);
+}
+
+.template-dashboard:not(:has(#check-menu-collapsed:checked)) {
+  --state-bool: 0;
+  --state-width: 0;
+  --state-display: none;
+  --state-display2: block;
+  --state-justify: center;
+  --state-mr: 0;
+  --state-pointer-events: none;
+}
+
+.template-dashboard .menu-collapsed {
+  user-select: none;
+}
+
+.template-dashboard .menu-collapsed .show-when-collapsed {
+  display: var(--state-display2);
+}
+
+.template-dashboard .menu-collapsed .mr-when-collapsed {
+  margin-right: var(--state-mr);
+}
+
+.template-dashboard .menu-collapsed .hide-when-collapsed {
+  display: var(--state-display);
+}
+
+.template-dashboard .menu-collapsed .center-when-collapsed {
+  justify-content: var(--state-justify);
+}
+
+.template-dashboard .menu-collapsed .visible-uncollapsed {
+  transition: all 0.05s, display 0.1s allow-discrete, justify-content 0.1s allow-discrete;
+  transform: scaleX(var(--state-bool));
+  opacity: var(--state-bool);
+  overflow: hidden;
+  transform-origin: 0 50%;
+  width: var(--state-width);
+  white-space: nowrap;
+  /* interpolateSize: allow-keywords; */
+}
+
+.template-dashboard .backdrop-menu-collapsed {
+  transition: all 0.2s;
+  pointer-events: var(--state-pointer-events);
+  opacity: var(--state-bool);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}

@@ -1,140 +1,82 @@
-import React from "react";
+import React, { Component } from "react";
+import "./dashboard.css";
 import { Main } from "@theme/main.jsx";
-import { href, DivM, Design, PaperLayer } from "@jeff-aporta/camaleon";
+import { Design, driverParams } from "@jeff-aporta/camaleon";
 import { Typography } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import BusinessIcon from "@mui/icons-material/Business";
-import EmailIcon from "@mui/icons-material/Email";
-import PeopleIcon from "@mui/icons-material/People";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import GroupsIcon from "@mui/icons-material/Groups";
-import SettingsIcon from "@mui/icons-material/Settings";
-import SmartToyIcon from "@mui/icons-material/SmartToy";
 import { ImageLocal } from "@recurrent";
 import { JS2CSS } from "@jeff-aporta/camaleon";
+import { MenuCollapsed } from "./MenuCollapsed";
+import DashboardView from "./tabs/Main";
+import EmpresasView from "./tabs/Empresas";
+import CorreosView from "./tabs/Correos";
+import CRMView from "./tabs/CRM";
+import FinanzasView from "./tabs/Finanzas";
+import InventarioView from "./tabs/Inventario";
+import RecursosHumanosView from "./tabs/RecursosHumanos";
+import ConfiguracionView from "./tabs/Configuracion";
+import AsistenteIAView from "./tabs/AsistenteIA";
 
-export default function () {
-  const variant = "subtitle1";
+let singletonDash;
 
-  const body = [
-    {
-      labelfor: true,
-      icon: <ImageLocal src="img/logo.svg" width="40px" />,
-      label: "Avatar",
-    },
-    {
-      hr: true,
-    },
-    {
-      icon: <DashboardIcon fontSize="small" />,
-      label: "Dashboard",
-    },
-    {
-      icon: <BusinessIcon fontSize="small" />,
-      label: "Empresas",
-    },
-    {
-      icon: <EmailIcon fontSize="small" />,
-      label: "Correos",
-    },
-    {
-      icon: <PeopleIcon fontSize="small" />,
-      label: "CRM",
-    },
-    {
-      icon: <AttachMoneyIcon fontSize="small" />,
-      label: "Finanzas",
-    },
-    {
-      icon: <InventoryIcon fontSize="small" />,
-      label: "Inventario",
-    },
-    {
-      icon: <GroupsIcon fontSize="small" />,
-      label: "Recursos Humanos",
-    },
-    {
-      icon: <SettingsIcon fontSize="small" />,
-      label: "Configuración",
-    },
-    {
-      icon: <SmartToyIcon fontSize="small" />,
-      label: "Asistente IA",
-    },
-  ];
+export default function(){
+  return <Dashboard />
+}
 
-  function Item({ icon, label, labelfor, hr, ...props }) {
-    if (hr) {
-      return <hr />;
-    }
-    const element = (
-      <>
-        {icon}
-        <Typography variant={variant} className="visible-uncollapsed">
-          {label}
-        </Typography>
-      </>
-    );
-
-    if (labelfor) {
-      return (
-        <label
-          htmlFor="check-menu-collapsed"
-          style={{ cursor: "pointer", userSelect: "none" }}
-        >
-          {element}
-        </label>
-      );
-    }
-    return (
-      <div {...props} className="flex align-center gap-10px">
-        {element}
-      </div>
-    );
+class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    singletonDash = this;
   }
 
-  JS2CSS.insertStyle({
-    id: "menu-collapsed",
-    ".menu-collapsed": {
-      "--state-uncollapse": "scaleX(1)",
-      "--state-width": "180px",
-      "&:has(input[type=checkbox]:checked)": {
-        "--state-uncollapse": "scaleX(0)",
-        "--state-width": "0px",
-      },
-      "& .visible-uncollapsed": {
-        transition: "transform 0.15s, width 0.3s",
-        transform: "var(--state-uncollapse)",
-        overflow: "hidden",
-        transitionOrigin: "0 50%",
-        width: "var(--state-width)",
-        whiteSpace: "nowrap",
-      },
-    },
-  });
+  render() {
+    const dashview = getDashView();
+    return (
+      <Main bgtype="default" h_init={"0"} h_fin={"0"}>
+        <Design className="min-h-80vh template-dashboard">
+          <MenuCollapsed />
+          <Design style={{ zIndex: "1" }} className="is-padding-menu">
+            {(() => {
+              switch (dashview) {
+                case "dashboard":
+                case "main":
+                  return <DashboardView />;
+                case "empresas":
+                  return <EmpresasView />;
+                case "correos":
+                  return <CorreosView />;
+                case "crm":
+                  return <CRMView />;
+                case "finanzas":
+                  return <FinanzasView />;
+                case "inventario":
+                  return <InventarioView />;
+                case "recursos-humanos":
+                  return <RecursosHumanosView />;
+                case "configuracion":
+                  return <ConfiguracionView />;
+                case "asistente-ia":
+                  return <AsistenteIAView />;
+                default:
+                  return "No se conoce la vista " + dashview;
+              }
+            })()}
+          </Design>
+        </Design>
+      </Main>
+    );
+  }
+}
 
-  return (
-    <Main bgtype="default" h_init={"0px"}>
-      <Design>
-        <div style={{ paddingLeft: "30px" }}>
-          <h1>Hola mundo</h1>
-        </div>
-      </Design>
-      <Design className="menu-collapsed">
-        <input
-          type="checkbox"
-          id="check-menu-collapsed"
-          style={{ display: "none" }}
-        />
-        <PaperLayer>
-          <div className="flex col-direction gap-10px pad-10px">
-            {body.map((item, i) => (
-              <Item key={i} {...item} />
-            ))}
-          </div>
-        </PaperLayer>
-      </Design>
-    </Main>
-  );
+function setDashView(id){
+  driverParams.set("dash-view", "main");
+  singletonDash.forceUpdate();
+}
+
+function getDashView() {
+  let dashview = driverParams.get("dash-view");
+  if (!dashview) {
+    dashview = "main";
+    driverParams.set("dash-view", "main");
+  }
+  return dashview;
 }

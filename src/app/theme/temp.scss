@@ -1,3 +1,20 @@
 .align-center {
   align-items: center;
 }
+
+.justify-center {
+  justify-content: center;
+}
+.justify-start {
+  justify-content: start;
+}
+.layer {
+  &.fill {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
