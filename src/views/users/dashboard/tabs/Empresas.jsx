@@ -15,6 +15,7 @@ const companies = [
 export default function Empresas() {
   return (
     <Box sx={{ p: 2 }}>
+      <Typography variant="h4" gutterBottom>Gestión de Empresas</Typography>
       <Grid container spacing={3}>
         {companies.map((company) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={company.id}>

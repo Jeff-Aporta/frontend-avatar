@@ -43,6 +43,7 @@ const pipeline = [
 export default function CRM() {
   return (
     <Box sx={{ p: 2 }}>
+      <Typography variant="h4" gutterBottom>Gestión de CRM</Typography>
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {features.map((f) => (
           <Grid item xs={12} sm={6} md={3} key={f.id}>
