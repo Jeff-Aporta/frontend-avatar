@@ -67,12 +67,12 @@ class Dashboard extends Component {
   }
 }
 
-function setDashView(id){
-  driverParams.set("dash-view", "main");
+export function setDashView(id){
+  driverParams.set("dash-view", id);
   singletonDash.forceUpdate();
 }
 
-function getDashView() {
+export function getDashView() {
   let dashview = driverParams.get("dash-view");
   if (!dashview) {
     dashview = "main";

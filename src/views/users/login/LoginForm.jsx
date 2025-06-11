@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
-import { Box, TextField, Button, Checkbox, FormControlLabel, Link, Typography } from '@mui/material';
-import LoginIcon from '@mui/icons-material/Login';
+import React, { useState } from "react";
+import {
+  Box,
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Link,
+  Typography,
+} from "@mui/material";
+import LoginIcon from "@mui/icons-material/Login";
+import { href } from "@jeff-aporta/camaleon";
 
 export default function LoginForm({ onSubmit }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
   const handleSubmit = (e) => {
@@ -13,7 +22,12 @@ export default function LoginForm({ onSubmit }) {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      noValidate
+      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+    >
       <Typography variant="h6">Iniciar sesión</Typography>
       <TextField
         label="Email"
@@ -30,13 +44,26 @@ export default function LoginForm({ onSubmit }) {
         fullWidth
       />
       <FormControlLabel
-        control={<Checkbox checked={remember} onChange={(e) => setRemember(e.target.checked)} />}
+        control={
+          <Checkbox
+            checked={remember}
+            onChange={(e) => setRemember(e.target.checked)}
+          />
+        }
         label="Mantener sesión iniciada"
       />
       <Link href="#" variant="body2" underline="hover">
         ¿Olvidaste tu contraseña?
       </Link>
-      <Button type="submit" variant="contained" color="primary" startIcon={<LoginIcon />} fullWidth>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        startIcon={<LoginIcon />}
+        onClick={window.loadUser}
+        href={href("/users/dashboard")}
+        fullWidth
+      >
         Entrar
       </Button>
       <Typography variant="body2" align="center">

@@ -74,7 +74,7 @@ class LoginSignupPage extends React.Component {
                     let bg = Color(
                       getSelectedPalette().palette.background.paper
                     );
-                    return fdhue(bg, window.themeColors.teal);
+                    return fdhue(bg, window.themeColors.cyan);
                   })(),
                 }}
               />
@@ -82,7 +82,7 @@ class LoginSignupPage extends React.Component {
           </Complement>
         </Grid>
         <Grid item xs={12} md={5} className="d-center">
-          <Card sx={{ display: "inline-flex" }} className="flex-column">
+          <Card sx={{ display: "inline-flex" }} className="flex col-direction">
             <Tabs
               className={fluidCSS()
                 .lerpX("responsive-min", {
