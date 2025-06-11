@@ -31,10 +31,10 @@ import {
 } from "@mui/material";
 
 import { ImageLocal } from "@recurrent";
-import { fluidCSS } from "@jeff-aporta/camaleon";
-import { LuminanceThemeSwitch } from "@jeff-aporta/camaleon";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import {
   isDark,
@@ -43,9 +43,12 @@ import {
   href,
   JS2CSS,
   getThemeLuminance,
+  PaperF,
+  Hm,
+  getQueryPath,
+  fluidCSS,
+  LuminanceThemeSwitch,
 } from "@jeff-aporta/camaleon";
-import { getQueryPath } from "@jeff-aporta/camaleon";
-import { PaperF, Hm } from "@jeff-aporta/camaleon";
 
 const hideIcon = 500;
 const wbrk = 600;
@@ -180,18 +183,32 @@ export function HeadMain({ updateTheme = () => 0 }) {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <MenuItem onClick={handleClose}>
-            <Avatar sx={{ width: 32, height: 32 }} /> Profile
+          <MenuItem
+            onClick={handleClose}
+            component="a"
+            href={href("/users/dashboard")}
+          >
+            <ListItemIcon>
+              <DashboardIcon fontSize="small" />
+            </ListItemIcon>
+            Dashboard
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <Avatar sx={{ width: 32, height: 32 }} /> My account
+          <MenuItem
+            onClick={handleClose}
+            component="a"
+            href={href("/users/profile")}
+          >
+            <ListItemIcon>
+              <AccountCircleIcon fontSize="small" />
+            </ListItemIcon>
+            Mi cuenta
           </MenuItem>
           <Divider />
           <MenuItem onClick={handleLogoutAndClose}>
             <ListItemIcon>
               <LogoutIcon fontSize="small" />
             </ListItemIcon>
-            Logout
+            Cerrar sesión
           </MenuItem>
         </Menu>
       </>

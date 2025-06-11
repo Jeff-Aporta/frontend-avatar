@@ -1,3 +1,5 @@
+import "./temp.scss";
+
 import { AppThemeProvider, initThemeCamaleon } from "@jeff-aporta/camaleon";
 
 import { Footer, HeadMain } from "./menu/index.js";
