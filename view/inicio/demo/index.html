@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="../../../dist/cdn/styles/app.css">
 <script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@a1df39adb9e421de874dd624901b72daa9e25e5c/dist/cdn/core/loader.min.js"></script>
 <script type="module" src="../../../dist/cdn/avLoader.min.js"></script>
-<style>body { padding: 1rem; } section { margin-block: 1rem; }</style>
 <script type="module">
   // Demo de la vista: cada sub-pieza aislada con datos de muestra (la galería completa está en /view/demo/).
   const L = globalThis.iswcLoader;
@@ -27,7 +26,7 @@
 </script>
 </head>
 <body>
-  <p>Demo de la vista <code>inicio</code>: usa la <a href="../../demo/#av-inicio">galería</a> para cada pieza con su playground.</p>
-  <section><av-inicio></av-inicio></section>
+  <iswc-toast placement="bottom-end"></iswc-toast>
+  <av-inicio></av-inicio>
 </body>
 </html>
