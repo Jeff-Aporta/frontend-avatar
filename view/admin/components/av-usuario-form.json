@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-usuario-form",
+  "category": "admin",
+  "navTitle": "Usuario form",
+  "title": "&lt;av-usuario-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-usuario-form",
+  "styles": ".stage{min-height:4rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-usuario-form&gt;",
+      "lede": "Diálogo de usuario.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-usuario-form id=\"f\"></av-usuario-form></div>", "target": "#f", "props": { "abierto": true, "datos": { "nuevo": true, "iusuario": "", "nombre": "", "email": "", "password": "", "bactivo": true } }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": true }, { "prop": "props:error", "type": "text", "label": "error", "default": "" } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-admin, pestaña Usuarios.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para cambiar la contraseña propia: eso es Mi cuenta.</iswc-callout>" }
+      ]
+    }
+  ]
+}

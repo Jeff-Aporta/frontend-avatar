@@ -19,7 +19,7 @@
 <script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@a1df39adb9e421de874dd624901b72daa9e25e5c/dist/cdn/core/loader.min.js"></script>
 <!-- 2) Registrador de la app: tag → URL ?v=<hash> (lo genera el build). Sin ?v= aquí: el loader lo pone. -->
 <script type="module" src="./dist/cdn/avLoader.min.js"></script>
-<!-- 3) Arranque: estilos del kit, tags del kit y de la app, marca de lista con watchdog. -->
+<!-- 3) Arranque: estilos del kit, shell + vista activa (los iswc-* los carga cada componente al usarlos), marca de lista con watchdog. -->
 <script type="module">
   const L = globalThis.iswcLoader;
   const listo = () => document.documentElement.setAttribute('data-app-ready', '');
@@ -27,8 +27,11 @@
   try {
     if (!L) throw new Error('falta iswcLoader');
     await L.loadPageStyles(['iswc-palettes-default']);
-    const { KIT_TAGS, tagsArranque } = await import('./dist/cdn/js/kit-tags.js');
-    await L.load(...KIT_TAGS, ...tagsArranque());
+    // Carga perezosa por vista: el shell, los transversales y la vista de la ruta actual; el resto lo pide <av-app> al navegar.
+    const { APP_TAGS, VIEW_TAGS } = await import('./dist/cdn/js/kit-tags.js');
+    const { rutaActual } = await import('./dist/cdn/js/core/router.js');
+    const vista = VIEW_TAGS[rutaActual().vista] ?? VIEW_TAGS.inicio;
+    await L.load(...APP_TAGS, ...vista);
   } catch (e) {
     console.warn('[av] arranque', e);
   } finally {

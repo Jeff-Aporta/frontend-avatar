@@ -1,0 +1,19 @@
+import{crearComponente as A,define as b,html as t}from"../../../js/base/componente.js?v=hjriku";import{z as S}from"../../../js/base/zod.js?v=zn6b7f";import{RespuestaAsistenteSchema as h}from"../../../js/consts/schemas/api.schemas.js?v=c8lmgg";import{ConsultaSchema as P}from"../../../js/consts/schemas/asistente.schemas.js?v=id9dk4";import{controller as $,dominio as E,mensajeDe as O}from"../../../js/core/api.js?v=v1qv0g";import{empresaActiva as C,estado as g}from"../../../js/core/estado.js?v=w7n12d";import{idLocal as q,preguntaValida as k,SUGERENCIAS_INICIALES as x,turnosDe as H}from"../utils/avo.js?v=5adnv5";import"./av-avo-mensaje.js?v=hltaxi";const V=A(import.meta.url,"av-asistente",{id:null,version:0,turnos:[],sugerencias:[],pensando:!1,cargando:!0,error:""},(s,n,f)=>{const o=f,u=g.yo?.nombre??g.yo?.iusuario??"",d=async a=>{const e=k(a);if(!e||o.props.pensando)return;const r=new Date().toISOString();o.props={turnos:[...o.props.turnos,{id:q("p"),quien:"yo",texto:e,creado:r}],pensando:!0,error:""};try{const i=C(),c=h.safeParse(await E().preguntar(i?{pregunta:e,iempresa:i}:{pregunta:e}));if(!c.success)throw new Error("Respuesta de AVO con forma inesperada");o.props={turnos:[...o.props.turnos,{id:`r-${c.data.iconsulta}`,quien:"avo",texto:c.data.respuesta,creado:new Date().toISOString()}],sugerencias:c.data.sugerencias,pensando:!1}}catch(i){o.props={pensando:!1,error:O(i)}}},p=()=>{const a=s.querySelector("#pregunta");if(!a)return;const e=a.value;a.value="",d(e)},y=a=>{const e=a;e.key==="Enter"&&!e.shiftKey&&!e.isComposing&&(e.preventDefault(),p())},w=n.sugerencias.length?n.sugerencias:x;s.append(t`
+      <div class="pagina" part="pagina">
+        <av-cabecera id="cabecera"></av-cabecera>
+        ${n.error?t`<iswc-callout tone="danger"><strong slot="title">AVO no pudo responder</strong>${n.error}</iswc-callout>`:null}
+        <section class="chat" part="chat">
+          <div class="turnos" id="turnos" part="turnos">
+            ${n.cargando?t`<av-vacio id="cargando"></av-vacio>`:n.turnos.length===0?t`<av-vacio id="bienvenida"></av-vacio>`:n.turnos.map(a=>{const e=document.createElement("av-avo-mensaje");return e.props={turno:a,nombre:u},e})}
+            ${n.pensando?t`<div class="pensando"><iswc-spinner></iswc-spinner><span>AVO está pensando…</span></div>`:null}
+          </div>
+          <div class="sugerencias" part="sugerencias">
+            ${w.map(a=>t`<iswc-button class="sugerencia" variant="outlined" color="neutral" pill ?disabled=${n.pensando} oniswc-click=${()=>{d(a)}}>${a}</iswc-button>`)}
+          </div>
+          <div class="redactor" part="redactor">
+            <iswc-textarea id="pregunta" class="area" autosize min-rows="1" max-rows="5" placeholder="Pregúntale a AVO… (Enter envía)" ?disabled=${n.pensando} onkeydown=${y}></iswc-textarea>
+            <iswc-button id="enviar" color="brand" ?loading=${n.pensando} oniswc-click=${p} title="Preguntar"><iswc-icon icon="mdi:send"></iswc-icon></iswc-button>
+          </div>
+        </section>
+      </div>
+    `),s.querySelector("#cabecera").props={titulo:"Asistente AVO",subtitulo:"Responde con los datos reales de tu empresa y te gu\xEDa por Avatar",icono:"mdi:robot-outline"};const v=s.querySelector("#cargando");v&&(v.props={estado:"cargando"});const m=s.querySelector("#bienvenida");m&&(m.props={icono:"mdi:robot-happy-outline",titulo:`Hola${u?`, ${u}`:""}. Soy AVO`,texto:"Preg\xFAntame por tareas, clientes, canales o miembros de tu empresa, o elige una sugerencia."});const l=s.querySelector("#turnos");l&&requestAnimationFrame(()=>l.scrollTo({top:l.scrollHeight})),n.cargando&&(async()=>{try{const a=await $("consultas").query({orderBy:"-creado",pageSize:20},{include:{}}),e=S.array(P).safeParse(a.map(r=>typeof r.toJSON=="function"?r.toJSON():r));o.props={turnos:e.success?H(e.data):[],cargando:!1}}catch{o.props={turnos:[],cargando:!1}}})()});b("av-asistente",V);

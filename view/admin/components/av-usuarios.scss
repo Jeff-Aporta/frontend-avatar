@@ -1,0 +1,44 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-usuarios — barra, acciones de la fila elegida y la tabla. */
+:host {
+  @include m.host-bloque;
+}
+
+.usuarios {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.esp(3);
+
+  .titulo {
+    display: inline-flex;
+    align-items: center;
+    gap: t.esp(2);
+  }
+}
+
+.seleccion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(3);
+  padding: t.esp(3);
+  border: 1px solid var(--iswc-border-soft);
+  border-radius: t.radio(md);
+  background: var(--iswc-bg-soft);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.grid {
+  display: block;
+}

@@ -1,0 +1,1 @@
+@charset "UTF-8";:host{display:block;min-width:0;font-family:var(--iswc-font-sans)}.redactor{display:flex;align-items:flex-end;gap:.5rem;padding:.75rem;border-top:1px solid var(--iswc-border-soft);background:var(--iswc-bg)}.redactor .area{flex:1;--iswc-field-width: 100%}.redactor .enviar{flex:none}.aviso{margin:0;padding:0 .75rem .5rem;color:var(--iswc-text-dim);font-size:.8rem}

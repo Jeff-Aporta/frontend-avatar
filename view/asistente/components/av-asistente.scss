@@ -1,0 +1,76 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-asistente — chat centrado: turnos con scroll, sugerencias y redactor al pie. */
+:host {
+  @include m.host-bloque;
+  height: 100%;
+}
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: t.esp(5) t.esp(5) 0;
+  gap: t.esp(3);
+}
+
+.chat {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--iswc-border-soft);
+  border-radius: t.radio(lg) t.radio(lg) 0 0;
+  background: var(--iswc-bg-elev);
+  overflow: hidden;
+}
+
+.turnos {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: t.esp(3);
+  padding: t.esp(4);
+  background: var(--iswc-bg-soft);
+}
+
+.pensando {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  color: var(--iswc-text-dim);
+  font-size: 0.9rem;
+}
+
+.sugerencias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.esp(2);
+  padding: t.esp(2) t.esp(3);
+  border-top: 1px solid var(--iswc-border-soft);
+  font-size: 0.85rem;
+}
+
+.redactor {
+  display: flex;
+  align-items: flex-end;
+  gap: t.esp(2);
+  padding: t.esp(3);
+  border-top: 1px solid var(--iswc-border-soft);
+
+  .area {
+    flex: 1;
+    --iswc-field-width: 100%;
+  }
+}
+
+@media (max-width: 48rem) {
+  .pagina {
+    padding: t.esp(3) t.esp(3) 0;
+  }
+}

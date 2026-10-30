@@ -1,0 +1,1 @@
+@charset "UTF-8";:host{display:block;min-width:0;font-family:var(--iswc-font-sans)}.grid{display:block;min-height:22rem;border-radius:var(--iswc-radius)}.grid::part(row){cursor:pointer}

@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-empresa-form",
+  "category": "organizacion",
+  "navTitle": "Empresa form",
+  "title": "&lt;av-empresa-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-empresa-form",
+  "styles": ".stage{min-height:4rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-empresa-form&gt;",
+      "lede": "Diálogo de empresa.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-empresa-form id=\"f\"></av-empresa-form></div>", "target": "#f", "props": { "abierto": true, "datos": { "iempresa": null, "nombre": "Avatar Demo", "nit": "900123456-7", "sector": "Tecnología", "descripcion": "" } }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": true }, { "prop": "props:error", "type": "text", "label": "error", "default": "" } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-organizacion al crear o editar.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No llama al API: solo emite.</iswc-callout>" }
+      ]
+    }
+  ]
+}

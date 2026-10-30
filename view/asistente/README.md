@@ -1,17 +1,24 @@
 # Vista `asistente` — Asistente AVO
 
 Shell: `<av-asistente>`. Ruta: `#/asistente`. Página aislada: `/view/asistente/`. Demo: `/view/asistente/demo/`.
+Spec: [`specs/foundation/45-asistente.md`](../../specs/foundation/45-asistente.md).
 
 ## Alcance
 
-- Dentro: lo que describe la spec `specs/foundation/` de esta vista.
-- Fuera: lo que pertenece a otras vistas (una vista no importa componentes de otra; lo compartido sube a `src/js/`).
+- Dentro: historial reciente, preguntas libres (Enter), sugerencias como chips, respuesta sobre la empresa activa.
+- Fuera: cómo AVO arma la respuesta (API `consultas/preguntar`), borrar el historial.
+
+## Piezas
+
+| Tag | Qué hace |
+| --- | --- |
+| `av-avo-mensaje` | Burbuja del usuario o de AVO. |
+| `av-asistente` | Shell: historial, envío y sugerencias. |
 
 ## Contrato
 
-- El shell recibe `props = { id }` del router (`#/asistente/<id>`) y reparte `props` a sus hijos.
-- Los hijos no hablan con el API ni con el estado: pintan y emiten eventos `av-…`; el shell los escucha una vez.
-- Datos: `src/js/core/api.ts` (controllers de cliente de DER y `ops` del plugin `avatar`); permisos con `puede()`.
+- Datos: `dominio()['preguntar']({ pregunta, iempresa })` y `controller('consultas').query(...)` de `src/js/core/api.ts`.
+- Lógica sin DOM: `utils/avo.ts` (probada en `tests/vistas/asistente.test.ts`).
 
 ## Qué no hacer
 

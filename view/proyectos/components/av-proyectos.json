@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-proyectos",
+  "category": "proyectos",
+  "navTitle": "Proyectos (shell)",
+  "title": "&lt;av-proyectos&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-proyectos",
+  "styles": ".stage{min-height:20rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-proyectos&gt;",
+      "lede": "La vista de proyectos completa (necesita sesión y empresa activa).",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-proyectos id=\"p\"></av-proyectos></div>", "target": "#p", "props": { "id": null, "version": 0 }, "controls": [ { "prop": "props:id", "type": "text", "label": "id (iproyecto)", "default": "" } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/proyectos (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>" }
+      ]
+    }
+  ]
+}

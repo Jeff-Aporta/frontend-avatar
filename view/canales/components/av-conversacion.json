@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-conversacion",
+  "category": "canales",
+  "navTitle": "Conversación",
+  "title": "&lt;av-conversacion&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-conversacion",
+  "styles": ".stage{height:28rem;border:1px solid var(--iswc-border-soft)}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-conversacion&gt;",
+      "lede": "Mensajes de un canal con redactor.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-conversacion id=\"c\"></av-conversacion></div>", "target": "#c", "props": { "canal": { "icanal": 1, "iempresa": 1, "iequipo": null, "nombre": "general", "tipo": "publico", "descripcion": "Toda la empresa", "sin_leer": 0, "ultimo": null }, "yo": "beto", "puedeEscribir": true, "mensajes": [ { "imensaje": 1, "icanal": 1, "iusuario": "admin", "contenido": "¡Bienvenidos a Avatar!", "creado": "2026-10-29T12:00:00Z", "autor": { "iusuario": "admin", "nombre": "Administrador" } }, { "imensaje": 2, "icanal": 1, "iusuario": "beto", "contenido": "Listo, ya revisé las tareas 👍", "creado": "2026-10-30T12:05:00Z", "autor": { "iusuario": "beto", "nombre": "Beto" } } ] }, "controls": [ { "prop": "props:puedeEscribir", "type": "boolean", "label": "puedeEscribir", "default": true }, { "prop": "props:cargando", "type": "boolean", "label": "cargando", "default": false } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de av-canales.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para el chat con AVO: eso es av-asistente.</iswc-callout>" }
+      ]
+    }
+  ]
+}

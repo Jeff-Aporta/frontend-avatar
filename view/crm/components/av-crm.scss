@@ -1,0 +1,15 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-crm — cabecera, embudo y tabla. */
+:host {
+  @include m.host-bloque;
+}
+
+.pagina {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: t.esp(5);
+  display: grid;
+  gap: t.esp(4);
+}

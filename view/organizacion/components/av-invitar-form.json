@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-invitar-form",
+  "category": "organizacion",
+  "navTitle": "Invitar form",
+  "title": "&lt;av-invitar-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-invitar-form",
+  "styles": ".stage{min-height:4rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-invitar-form&gt;",
+      "lede": "Diálogo de invitación.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-invitar-form id=\"f\"></av-invitar-form></div>", "target": "#f", "props": { "abierto": true, "usuarios": [ { "iusuario": "dani", "nombre": "Dani Nuevo" }, { "iusuario": "eva", "nombre": "Eva Soporte" } ] }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": true }, { "prop": "props:usuarios", "type": "json", "label": "usuarios", "default": [] } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde la pestaña Miembros de av-organizacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No crea usuarios: eso es av-usuario-form (admin).</iswc-callout>" }
+      ]
+    }
+  ]
+}

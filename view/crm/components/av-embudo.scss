@@ -1,0 +1,43 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-embudo — cinco tarjetas-botón en fila (rejilla responsive). */
+:host {
+  @include m.host-bloque;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: t.esp(3);
+}
+
+.etapa {
+  width: 100%;
+
+  &::part(base) {
+    height: auto;
+    padding: t.esp(3);
+  }
+}
+
+.contenido {
+  display: grid;
+  justify-items: start;
+  gap: t.esp(1);
+  width: 100%;
+
+  .label {
+    @include m.rotulo;
+    font-size: 0.75rem;
+  }
+
+  .cantidad {
+    font-size: 1.5rem;
+  }
+
+  .valor {
+    font-size: 0.85rem;
+    color: var(--iswc-text-dim);
+  }
+}

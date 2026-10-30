@@ -1,0 +1,104 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-tarea-detalle — cajón lateral con la tarea y sus comentarios. */
+:host {
+  display: contents;
+}
+
+iswc-drawer {
+  --size: 30rem;
+}
+
+.tarea {
+  display: grid;
+  gap: t.esp(3);
+
+  .titulo {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: t.esp(1);
+  }
+
+  .datos {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: t.esp(1) t.esp(3);
+    margin: 0;
+    font-size: 0.9rem;
+
+    dt {
+      color: var(--iswc-text-dim);
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+
+  .descripcion {
+    margin: 0;
+    white-space: pre-wrap;
+    color: var(--iswc-text-soft);
+  }
+
+  .subtitulo {
+    display: flex;
+    align-items: center;
+    gap: t.esp(2);
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .vacio {
+    margin: 0;
+    color: var(--iswc-text-dim);
+    font-size: 0.9rem;
+  }
+}
+
+.comentarios {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: t.esp(3);
+}
+
+.comentario {
+  display: grid;
+  gap: t.esp(1);
+  padding: t.esp(2) t.esp(3);
+  border-radius: t.radio(md);
+  background: var(--iswc-bg-soft);
+
+  .autor {
+    font-size: 0.85rem;
+  }
+
+  .texto {
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  .cuando {
+    color: var(--iswc-text-dim);
+    font-size: 0.78rem;
+  }
+}
+
+.redactar {
+  display: grid;
+  gap: t.esp(2);
+  justify-items: end;
+
+  iswc-textarea {
+    width: 100%;
+  }
+}

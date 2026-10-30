@@ -12,6 +12,7 @@ import { cargarPerfil, cerrarSesion, conectar, iniciarSesion, mensajeDe } from '
 import { alCambiar, empresaActiva, estado, fijar, haySesion } from '../../core/estado.js';
 import { ACCION, puede, rolDe } from '../../core/permisos.js';
 import { escuchar, ir, resolver, rutaActual, VISTA_SESION } from '../../core/router.js';
+import { KIT_TAGS, VIEW_TAGS } from '../../kit-tags.js';
 import './av-empresa-selector.js';
 
 /** Vista → tag del shell de esa vista (cada vista tiene UN shell). */
@@ -30,8 +31,25 @@ const SHELLS: Record<string, string> = {
 type Tab = { id: string; label: string; icon: string; hidden?: boolean };
 type NavEl = HTMLElement & { rows: { id: string; value: string; tabs: Tab[] }[] };
 type SesionEl = HTMLElement & { logged: boolean; loading: boolean; error: string; reset(): void };
-type ShellEl = HTMLElement & { toast?(m: string, o?: Record<string, unknown>): unknown };
 type ConProps = HTMLElement & { props: Record<string, unknown> };
+
+type Loader = { load(...tags: string[]): Promise<unknown> };
+
+/** Pide al loader del kit los tags de una vista (idempotente: lo ya cargado no se repite). Sin loader (pruebas), nada. */
+export function cargarVista(vista: string): Promise<unknown> {
+  const L = (globalThis as { iswcLoader?: Loader }).iswcLoader;
+  const tags = (VIEW_TAGS as Record<string, readonly string[]>)[vista] ?? [];
+  return L && tags.length ? L.load(...tags).catch((e: unknown) => console.warn(`[av-app] vista ${vista}:`, e)) : Promise.resolve();
+}
+
+let kitPedido = false;
+/** Una vez por documento y sin bloquear el pintado: el resto de los `iswc-*` de la app quedan registrados en segundo plano. */
+function precargarKit(): void {
+  const L = (globalThis as { iswcLoader?: Loader }).iswcLoader;
+  if (kitPedido || !L) return;
+  kitPedido = true;
+  void L.load(...KIT_TAGS).catch((e: unknown) => console.warn('[av-app] kit:', e));
+}
 
 /** Pestañas de la barra: públicas sin sesión; con sesión, las del trabajo (admin solo con `avatar.seguridad`). */
 export function pestanas(conSesion: boolean, admin: boolean): Tab[] {
@@ -50,13 +68,6 @@ export function pestanas(conSesion: boolean, admin: boolean): Tab[] {
     { id: 'asistente', label: 'AVO', icon: 'mdi:robot-outline' },
     { id: 'admin', label: 'Admin', icon: 'mdi:shield-account-outline', hidden: !admin },
   ];
-}
-
-/** Aviso con el toast del shell (si está montado) o consola. */
-export function avisar(mensaje: string, color: 'brand' | 'success' | 'warning' | 'danger' | 'neutral' = 'brand'): void {
-  const shell = document.querySelector('av-app')?.shadowRoot?.querySelector('iswc-app-shell') as ShellEl | null;
-  if (shell?.toast) void shell.toast(mensaje, { color, duration: color === 'danger' ? 8000 : 4000 });
-  else console.info(`[av] ${color}: ${mensaje}`);
 }
 
 const AvApp = crearComponente<AvAppProps>(
@@ -83,6 +94,8 @@ const AvApp = crearComponente<AvAppProps>(
     }
     const conSesion = haySesion();
     const admin = puede(estado.perfil, ACCION.seguridad, 'PUT');
+    void cargarVista(props.vista);
+    precargarKit();
     const shellVista = document.createElement(SHELLS[props.vista] ?? SHELLS['inicio']!) as ConProps;
     shellVista.props = { id: props.id, sesion: conSesion };
     const logo = new URL('assets/img/logo.svg', document.baseURI).href;

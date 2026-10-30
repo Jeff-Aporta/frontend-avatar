@@ -1,0 +1,28 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-proyecto-form — diálogo de proyecto nuevo. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 34rem;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+}
+
+@media (max-width: 36rem) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}

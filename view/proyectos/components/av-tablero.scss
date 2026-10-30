@@ -1,0 +1,69 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-tablero — kanban con scroll horizontal; tarjetas con pie (vencimiento + asignado). */
+:host {
+  @include m.host-bloque;
+}
+
+.tablero {
+  display: block;
+  min-height: 24rem;
+  overflow-x: auto;
+  padding-bottom: t.esp(2);
+}
+
+.tarjeta {
+  cursor: grab;
+
+  .descripcion {
+    display: block;
+    color: var(--iswc-text-dim);
+    font-size: 0.85rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: t.esp(1);
+    margin-top: t.esp(2);
+    font-size: 0.75rem;
+  }
+
+  &[data-vencida="1"] {
+    box-shadow: inset 3px 0 0 var(--iswc-danger-text);
+  }
+}
+
+.pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.esp(2);
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--iswc-text-dim);
+
+  .vence {
+    display: inline-flex;
+    align-items: center;
+    gap: t.esp(1);
+
+    &[data-vencida="1"] {
+      color: var(--iswc-danger-text);
+      font-weight: 600;
+    }
+  }
+
+  .asignado {
+    font-size: 0.75rem;
+  }
+}
+
+.nueva {
+  font-size: 0.9rem;
+}

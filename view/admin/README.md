@@ -1,18 +1,18 @@
-# Vista `admin` — Usuarios, roles y permisos
+# Vista `admin` — Usuarios, roles y mi cuenta
 
-Shell: `<av-admin>`. Ruta: `#/admin`. Página aislada: `/view/admin/`. Demo: `/view/admin/demo/`.
+Shell: `<av-admin>`. Ruta: `#/admin`. Página aislada: `/view/admin/`. Demo: `/view/admin/demo/`. Spec: `specs/foundation/65-admin.md`.
 
 ## Alcance
 
-- Dentro: lo que describe la spec `specs/foundation/` de esta vista.
-- Fuera: lo que pertenece a otras vistas (una vista no importa componentes de otra; lo compartido sube a `src/js/`).
+- Dentro: usuarios del plugin de identidad (crear, editar, eliminar, rol principal), roles del grupo AVATAR y sus acciones, cambio de contraseña y sesiones propias.
+- Fuera: miembros de empresas (vista `organizacion`).
 
 ## Contrato
 
-- El shell recibe `props = { id }` del router (`#/admin/<id>`) y reparte `props` a sus hijos.
-- Los hijos no hablan con el API ni con el estado: pintan y emiten eventos `av-…`; el shell los escucha una vez.
-- Datos: `src/js/core/api.ts` (controllers de cliente de DER y `ops` del plugin `avatar`); permisos con `puede()`.
+- Usuarios y roles solo con `avatar.seguridad`; «Mi cuenta» para todos.
+- Hijos: `av-usuario-form`, `av-usuarios`, `av-roles`; el shell habla con `auth()` y `permisos()` y refresca los permisos tras cada cambio de rol.
+- Dominio sin DOM en `utils/admin.ts`.
 
 ## Qué no hacer
 
-- HTML suelto fuera de un componente; colores fuera de los tokens `--iswc-*`; `fetch` directo al API.
+- Decidir permisos en el front más allá de ocultar botones; HTML suelto; `fetch` directo.

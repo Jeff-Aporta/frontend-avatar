@@ -1,17 +1,20 @@
 # Vista `proyectos` — Proyectos kanban y tickets
 
-Shell: `<av-proyectos>`. Ruta: `#/proyectos`. Página aislada: `/view/proyectos/`. Demo: `/view/proyectos/demo/`.
+Shell: `<av-proyectos>`. Ruta: `#/proyectos/<iproyecto>`. Página aislada: `/view/proyectos/`. Demo: `/view/proyectos/demo/`.
+Spec: [`specs/foundation/50-proyectos.md`](../../specs/foundation/50-proyectos.md).
 
 ## Alcance
 
-- Dentro: lo que describe la spec `specs/foundation/` de esta vista.
-- Fuera: lo que pertenece a otras vistas (una vista no importa componentes de otra; lo compartido sube a `src/js/`).
+- Dentro: selector de proyecto, tablero kanban (`av-tablero` sobre `iswc-kanban`), crear/editar tareas (`av-tarea-form`),
+  detalle con comentarios y eliminar (`av-tarea-detalle`), crear proyecto con sus 4 columnas (`av-proyecto-form`).
+- Fuera: equipos y miembros (vista `organizacion`), KPIs (vista `panel`).
 
 ## Contrato
 
-- El shell recibe `props = { id }` del router (`#/proyectos/<id>`) y reparte `props` a sus hijos.
-- Los hijos no hablan con el API ni con el estado: pintan y emiten eventos `av-…`; el shell los escucha una vez.
-- Datos: `src/js/core/api.ts` (controllers de cliente de DER y `ops` del plugin `avatar`); permisos con `puede()`.
+- El shell recibe `props = { id }` del router y reparte `props` a sus hijos; solo él usa `src/js/core/api.ts`.
+- Los hijos pintan y emiten `av-tarea-*` / `av-proyecto-*` (ver la spec).
+- Permisos: `avatar.tareas` crea, edita, mueve y comenta; `avatar.gestionar` crea proyectos y elimina tareas.
+- Lógica sin DOM en `utils/tareas.ts` y `utils/formulario.ts`.
 
 ## Qué no hacer
 

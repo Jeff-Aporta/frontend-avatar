@@ -1,0 +1,44 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-miembros — filas persona | rol | cargo | quitar. */
+:host {
+  @include m.host-bloque;
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: t.esp(1);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: t.esp(3);
+  padding: t.esp(2) 0;
+  border-bottom: 1px solid var(--iswc-border-soft);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  .cargo {
+    @include m.una-linea;
+    color: var(--iswc-text-dim);
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .fila {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+
+    .cargo {
+      display: none;
+    }
+  }
+}

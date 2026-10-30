@@ -118,10 +118,16 @@ export const html = (strings: TemplateStringsArray, ...values: unknown[]): Docum
       acc = acc.slice(0, acc.length - booleano[0].length) + (v === true ? ` ${booleano[1]}` : '');
       continue;
     }
+    // `attr=${valor}` sin comillas: el valor se cita y escapa completo (espacios incluidos); null/false → "".
+    const atributo = typeof v !== 'function' && acc.match(/\s[\w-]+=$/);
+    if (atributo && !(v instanceof Node) && !Array.isArray(v) && !esCrudo(v)) {
+      acc += `"${v == null || v === false ? '' : esc(v)}"`;
+      continue;
+    }
     if (v == null || v === false || v === true) continue;
     const evento = typeof v === 'function' ? acc.match(/\s+on([a-zA-Z][\w-]*)=\s*$/) : null;
     if (evento) {
-      acc = `${acc.slice(0, acc.length - evento[0].length)} data-ev="${handlers.length}"`;
+      acc = `${acc.slice(0, acc.length - evento[0].length)} data-ev-${handlers.length}=""`;
       handlers.push({ evento: evento[1]!.toLowerCase(), fn: v as EventListener });
       continue;
     }
@@ -138,11 +144,14 @@ export const html = (strings: TemplateStringsArray, ...values: unknown[]): Docum
   for (const m of [...t.content.querySelectorAll<HTMLElement>('template[data-nodo]')]) {
     m.replaceWith(nodos[Number(m.dataset.nodo)] ?? document.createComment('nodo'));
   }
-  for (const n of [...t.content.querySelectorAll<HTMLElement>('[data-ev]')]) {
-    const h = handlers[Number(n.dataset.ev)];
-    if (h) n.addEventListener(h.evento, h.fn);
-    n.removeAttribute('data-ev');
-  }
+  // Un atributo por manejador (`data-ev-<n>`): un elemento puede llevar varios `on<evento>=` sin que se pisen.
+  handlers.forEach((h, i) => {
+    const marca = `data-ev-${i}`;
+    for (const n of t.content.querySelectorAll<HTMLElement>(`[${marca}]`)) {
+      n.addEventListener(h.evento, h.fn);
+      n.removeAttribute(marca);
+    }
+  });
   return t.content;
 };
 
@@ -224,10 +233,21 @@ export function crearComponente<P extends object>(
   };
 }
 
-/** Notificación con el toaster del kit (`<iswc-toast>`); si no está montado, no hace nada. */
-export function avisar(mensaje: string, color: 'brand' | 'success' | 'warning' | 'danger' = 'brand'): void {
+/**
+ * Notificación con el toast del kit: el de `<iswc-app-shell toast>` (dentro del shell de la app) o, si no hay shell
+ * (vista aislada, demo), el primer `<iswc-toast>` del documento; sin ninguno, a consola. Los errores duran más.
+ */
+export function avisar(mensaje: string, color: 'brand' | 'success' | 'warning' | 'danger' | 'neutral' = 'brand'): void {
+  const opciones = { color, duration: color === 'danger' ? 8000 : 4000 };
+  const app = document.querySelector('[data-app-shell]') ?? document.querySelector('av-app');
+  const shell = app?.shadowRoot?.querySelector('iswc-app-shell') as (HTMLElement & { toast?(m: string, o?: object): unknown }) | null;
+  if (shell?.toast) {
+    void shell.toast(mensaje, opciones);
+    return;
+  }
   const t = document.querySelector('iswc-toast') as (HTMLElement & { create?(m: string, o?: object): unknown }) | null;
-  void t?.create?.(mensaje, { color });
+  if (t?.create) void t.create(mensaje, opciones);
+  else console.info(`[av] ${color}: ${mensaje}`);
 }
 
 // Aquí NO van formateadores de fecha/número/bytes: el kit trae iswc-format-date/-number/-bytes.

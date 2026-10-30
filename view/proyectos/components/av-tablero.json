@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-tablero",
+  "category": "proyectos",
+  "navTitle": "Tablero",
+  "title": "&lt;av-tablero&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-tablero",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-tablero&gt;",
+      "lede": "Kanban de un proyecto.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-tablero id=\"t\"></av-tablero></div>", "target": "#t", "props": { "puedeMover": true, "tablero": { "iproyecto": 1, "nombre": "Plataforma Odys", "columnas": [ { "icolumna": 1, "nombre": "Por hacer", "orden": 0, "color": "#64748b", "limite": null, "tareas": [ { "itarea": 1, "codigo": "TK-000001", "iproyecto": 1, "icolumna": 1, "titulo": "Definir modelo de canales", "descripcion": "Entidades canal y mensaje.", "prioridad": "alta", "estado": "abierta", "asignado_a": "ana", "fvence": "2026-11-05", "orden": 0, "etiquetas": ["odys"], "asignado": { "iusuario": "ana", "nombre": "Ana Gestora" } } ] }, { "icolumna": 2, "nombre": "En progreso", "orden": 1, "color": "#2563eb", "limite": 3, "tareas": [ { "itarea": 2, "codigo": "TK-000002", "iproyecto": 1, "icolumna": 2, "titulo": "Login JWT", "prioridad": "urgente", "estado": "en_progreso", "asignado_a": "beto", "fvence": "2026-01-02", "orden": 0 } ] }, { "icolumna": 4, "nombre": "Hecho", "orden": 3, "color": "#16a34a", "limite": null, "tareas": [] } ] } }, "controls": [ { "prop": "props:puedeMover", "type": "boolean", "label": "puedeMover", "default": true }, { "prop": "props:cargando", "type": "boolean", "label": "cargando", "default": false } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de av-proyectos con el tablero del proyecto elegido.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para listar tareas de varios proyectos.</iswc-callout>" }
+      ]
+    }
+  ]
+}

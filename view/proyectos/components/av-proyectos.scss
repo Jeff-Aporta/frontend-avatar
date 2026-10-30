@@ -1,0 +1,19 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-proyectos — página con cabecera (selector + acciones) y el tablero a lo ancho. */
+:host {
+  @include m.host-bloque;
+}
+
+.pagina {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: t.esp(5);
+  display: grid;
+  gap: t.esp(4);
+}
+
+.selector {
+  min-width: 14rem;
+}

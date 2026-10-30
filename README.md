@@ -1,14 +1,22 @@
-# Avatar
+# Avatar — front
 
-App de web components (vanilla, sin framework) sobre el kit
-[iswc-root](https://github.com/Jeff-Aporta/is-webcomponents), creada con `create-iswc-app`.
+Plataforma de comunicación y gestión para equipos empresariales (tipo Teams / Odoo): empresas, equipos, canales de chat,
+proyectos kanban con tickets, CRM, notificaciones y el asistente AVO. **Sin React**: web components vanilla sobre el kit
+[iswc](https://github.com/Jeff-Aporta/is-webcomponents) (estándar `iswc-foundation`, prefijo `av-`), en Deno.
+
+Los datos vienen de **[api-avatar](https://api-avatar.jeffaporta.workers.dev/api/doc?v=1)** (Deno + DER en Cloudflare
+Workers + D1). El front no hace `fetch` a mano: importa por CDN el vendor de la API (`@avatar/vendor`: DER cliente + zod +
+el dominio) y usa sus controllers y plugins (`createClient(avatar)`, `identity`, `permissions`).
 
 ```bash
 deno install
 deno task build
 deno task serve        # http://127.0.0.1:4300/
+deno task test:all     # build + check + pin + pruebas de dominio + e2e
 ```
 
-- Galería de componentes: `/view/demo/`.
-- Vista de ejemplo aislada: `/view/hola/`.
+- Rutas por hash: `#/` landing, `#/acceso`, `#/panel`, `#/canales/<id>`, `#/proyectos/<id>`, `#/crm`, `#/organizacion`, `#/asistente`, `#/admin`.
+- Cuentas de prueba: `ana` (gestora), `beto`, `carla`, con la contraseña `avatar-demo-2026`.
+- API local: `?api=http://localhost:8788/api` (queda en localStorage; `?api=` vuelve a la publicada).
+- Galería de componentes: `/view/demo/`. Cada vista aislada: `/view/<vista>/`.
 - Agentes: [`AGENTS.md`](AGENTS.md). Specs: [`specs/`](specs/README.md).

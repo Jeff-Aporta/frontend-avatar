@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-redactor",
+  "category": "canales",
+  "navTitle": "Redactor",
+  "title": "&lt;av-redactor&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-redactor",
+  "styles": ".stage{padding:1rem;max-width:40rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-redactor&gt;",
+      "lede": "Escribir y enviar un mensaje.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-redactor id=\"r\"></av-redactor></div>", "target": "#r", "props": { "deshabilitado": false, "enviando": false }, "controls": [ { "prop": "props:deshabilitado", "type": "boolean", "label": "deshabilitado", "default": false }, { "prop": "props:enviando", "type": "boolean", "label": "enviando", "default": false } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al pie de av-conversacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para formularios: usa iswc-form/iswc-input.</iswc-callout>" }
+      ]
+    }
+  ]
+}

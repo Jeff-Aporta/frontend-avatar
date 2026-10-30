@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-embudo",
+  "category": "crm",
+  "navTitle": "Embudo",
+  "title": "&lt;av-embudo&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-embudo",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-embudo&gt;",
+      "lede": "Tarjetas por etapa del CRM.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-embudo id=\"e\"></av-embudo></div>", "target": "#e", "props": { "activa": null, "etapas": [ { "etapa": "contacto", "label": "Contacto", "cantidad": 1, "valor": 5200 }, { "etapa": "propuesta", "label": "Propuesta", "cantidad": 1, "valor": 7500 }, { "etapa": "negociacion", "label": "Negociación", "cantidad": 1, "valor": 4200 }, { "etapa": "cerrado", "label": "Cerrado", "cantidad": 1, "valor": 3200 }, { "etapa": "perdido", "label": "Perdido", "cantidad": 0, "valor": 0 } ] }, "controls": [ { "prop": "props:activa", "type": "select", "label": "activa", "options": ["", "contacto", "propuesta", "negociacion", "cerrado", "perdido"], "default": "" } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Encima de la tabla de clientes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como gráfica: para eso está av-embudo-grafica del panel.</iswc-callout>" }
+      ]
+    }
+  ]
+}

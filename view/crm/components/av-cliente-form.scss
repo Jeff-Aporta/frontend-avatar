@@ -1,0 +1,28 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-cliente-form — diálogo de cliente con pares de campos en fila. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 38rem;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+}
+
+@media (max-width: 36rem) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}

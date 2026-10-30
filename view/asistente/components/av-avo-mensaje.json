@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-avo-mensaje",
+  "category": "asistente",
+  "navTitle": "AVO mensaje",
+  "title": "&lt;av-avo-mensaje&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-avo-mensaje",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-avo-mensaje&gt;",
+      "lede": "Burbuja del chat con AVO.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-avo-mensaje id=\"t\"></av-avo-mensaje></div>", "target": "#t", "props": { "turno": { "id": "r-1", "quien": "avo", "texto": "En Avatar Demo hay 6 tareas: 2 abiertas y 2 en progreso.", "creado": "2026-10-30T12:00:00Z" }, "nombre": "Beto" }, "controls": [ { "prop": "props:turno", "type": "json", "label": "turno", "default": { "id": "p-1", "quien": "yo", "texto": "¿Cuántas tareas tengo?", "creado": null } } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de av-asistente.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para el chat entre personas: eso es av-mensaje.</iswc-callout>" }
+      ]
+    }
+  ]
+}

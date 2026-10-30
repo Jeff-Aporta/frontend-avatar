@@ -1,0 +1,1 @@
+function u(n){const e={};for(const t of n.querySelectorAll("[name]")){const r=t.getAttribute("name");r&&(e[r]=t.value==null?"":String(t.value))}return e}const o=n=>n&&n.trim()?n.trim():null;function i(n){if(!n||!n.trim())return null;const e=Number(n);return Number.isFinite(e)?e:null}export{u as leerCampos,o as oNulo,i as oNumero};

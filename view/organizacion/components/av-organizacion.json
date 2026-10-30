@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-organizacion",
+  "category": "organizacion",
+  "navTitle": "Organización (shell)",
+  "title": "&lt;av-organizacion&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-organizacion",
+  "styles": ".stage{min-height:20rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-organizacion&gt;",
+      "lede": "Empresa, miembros y equipos (necesita sesión para cargar datos reales).",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-organizacion id=\"o\"></av-organizacion></div>", "target": "#o", "props": { "pestana": "empresa" }, "controls": [ { "prop": "props:pestana", "type": "select", "label": "pestana", "options": ["empresa", "miembros", "equipos"], "default": "empresa" } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/organizacion (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>" }
+      ]
+    }
+  ]
+}

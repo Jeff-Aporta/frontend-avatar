@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-asistente",
+  "category": "asistente",
+  "navTitle": "Asistente (shell)",
+  "title": "&lt;av-asistente&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-asistente",
+  "styles": ".stage{height:30rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-asistente&gt;",
+      "lede": "Chat con AVO (necesita sesión para preguntar de verdad).",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-asistente id=\"a\"></av-asistente></div>", "target": "#a", "props": { "cargando": false, "turnos": [ { "id": "p-1", "quien": "yo", "texto": "¿Cuántas tareas hay?", "creado": null }, { "id": "r-1", "quien": "avo", "texto": "En Avatar Demo hay 6 tareas: 2 abiertas, 2 en progreso, 1 en revisión y 1 cerrada.", "creado": null } ] }, "controls": [ { "prop": "props:pensando", "type": "boolean", "label": "pensando", "default": false } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/asistente (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>" }
+      ]
+    }
+  ]
+}

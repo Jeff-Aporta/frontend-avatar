@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-mensaje",
+  "category": "canales",
+  "navTitle": "Mensaje",
+  "title": "&lt;av-mensaje&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-mensaje",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-mensaje&gt;",
+      "lede": "Burbuja de un mensaje.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-mensaje id=\"m\"></av-mensaje></div>", "target": "#m", "props": { "mensaje": { "imensaje": 1, "icanal": 1, "iusuario": "ana", "contenido": "Hola a todos. Esta semana arrancamos el tablero del proyecto Odys.", "tipo": "texto", "creado": "2026-10-30T12:00:00Z", "autor": { "iusuario": "ana", "nombre": "Ana Gestora" } }, "propio": false }, "controls": [ { "prop": "props:propio", "type": "boolean", "label": "propio", "default": false } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de av-conversacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para notificaciones: eso es av-notificaciones.</iswc-callout>" }
+      ]
+    }
+  ]
+}

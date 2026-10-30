@@ -20,10 +20,10 @@ export default definirPruebas([
     correr({ eq }) {
       const k = kpis(resumen);
       eq('ids', k.map((x: { id: string }) => x.id), ['miembros', 'canales', 'proyectos', 'pendientes', 'vencidas', 'pipeline']);
-      eq('pendientes = total − cerradas', k[3].value, '5');
-      eq('sin vencidas → success', k[4].color, 'success');
-      eq('con vencidas → danger', kpis({ ...resumen, tareas: { ...resumen.tareas, vencidas: 2 } })[4].color, 'danger');
-      eq('pipeline en COP', k[5].value, moneda(20100));
+      eq('pendientes = total − cerradas', k[3]!.value, '5');
+      eq('sin vencidas → success', k[4]!.color, 'success');
+      eq('con vencidas → danger', kpis({ ...resumen, tareas: { ...resumen.tareas, vencidas: 2 } })[4]!.color, 'danger');
+      eq('pipeline en COP', k[5]!.value, moneda(20100));
     },
   },
   {

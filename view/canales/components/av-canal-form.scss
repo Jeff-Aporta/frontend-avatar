@@ -1,0 +1,19 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-canal-form — campos apilados dentro del diálogo. */
+:host {
+  display: contents;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+  min-width: min(26rem, 80vw);
+
+  iswc-input,
+  iswc-select,
+  iswc-textarea {
+    --iswc-field-width: 100%;
+  }
+}

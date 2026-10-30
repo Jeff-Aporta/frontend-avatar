@@ -1,0 +1,75 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-roles — formularios arriba, tarjetas de roles con sus acciones abajo. */
+:host {
+  @include m.host-bloque;
+}
+
+.roles {
+  display: grid;
+  gap: t.esp(4);
+}
+
+.formularios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: t.esp(4);
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: t.esp(2);
+
+  iswc-input,
+  iswc-select {
+    flex: 1 1 9rem;
+  }
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: t.esp(4);
+  align-items: start;
+}
+
+.rol {
+  .descripcion {
+    margin: 0 0 t.esp(2);
+    color: var(--iswc-text-dim);
+    font-size: 0.9rem;
+  }
+
+  .acciones {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: t.esp(1);
+  }
+
+  .accion {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: t.esp(2);
+
+    .id {
+      @include m.una-linea;
+      font-family: var(--iswc-mono);
+      font-size: 0.82rem;
+    }
+  }
+
+  .nada {
+    color: var(--iswc-text-dim);
+    font-size: 0.9rem;
+  }
+}
+
+.esqueleto {
+  height: 10rem;
+}

@@ -1,0 +1,13 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-empresa-form — campos apilados dentro del diálogo. */
+:host {
+  display: contents;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+  min-width: min(28rem, 80vw);
+}

@@ -1,0 +1,53 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-canales — dos columnas (lista fija | conversación), una sola en móvil según haya canal abierto. */
+:host {
+  @include m.host-bloque;
+  height: 100%;
+}
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: t.esp(5) t.esp(5) 0;
+  gap: t.esp(3);
+}
+
+.columnas {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 18rem minmax(0, 1fr);
+  border: 1px solid var(--iswc-border-soft);
+  border-radius: t.radio(lg) t.radio(lg) 0 0;
+  overflow: hidden;
+  background: var(--iswc-bg-elev);
+
+  .lista {
+    border-right: 1px solid var(--iswc-border-soft);
+    min-height: 0;
+  }
+
+  .conversacion {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 48rem) {
+  .pagina {
+    padding: t.esp(3) t.esp(3) 0;
+  }
+
+  .columnas {
+    grid-template-columns: 1fr;
+  }
+
+  .pagina[data-abierto="1"] .lista,
+  .pagina[data-abierto="0"] .conversacion {
+    display: none;
+  }
+}

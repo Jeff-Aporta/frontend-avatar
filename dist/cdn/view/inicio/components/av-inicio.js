@@ -1,4 +1,4 @@
-import{crearComponente as e,define as t,html as p}from"../../../js/base/componente.js?v=y3pj6c";import{ir as n}from"../../../js/core/router.js?v=p69ssf";import{caracteristicas as c,planes as m}from"../utils/landing.js?v=7z2r8t";import"./av-hero.js?v=v1cfta";import"./av-caracteristicas.js?v=fv0hoo";import"./av-precios.js?v=ljuqe3";const v=e(import.meta.url,"av-inicio",{sesion:!1},(s,i)=>{const r=a=>{const{vista:o}=a.detail;n(o)};s.append(p`
+import{crearComponente as e,define as t,html as p}from"../../../js/base/componente.js?v=hjriku";import{ir as n}from"../../../js/core/router.js?v=jrn1bm";import{caracteristicas as c,planes as m}from"../utils/landing.js?v=7z2r8t";import"./av-hero.js?v=aazko8";import"./av-caracteristicas.js?v=gdn0d2";import"./av-precios.js?v=mv2kz4";const v=e(import.meta.url,"av-inicio",{sesion:!1},(s,i)=>{const r=a=>{const{vista:o}=a.detail;n(o)};s.append(p`
     <div class="pagina" part="pagina" onav-inicio-ir=${r}>
       <av-hero id="hero"></av-hero>
       <av-caracteristicas id="caracteristicas"></av-caracteristicas>

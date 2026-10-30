@@ -1,0 +1,65 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-avo-mensaje — AVO a la izquierda con ícono, usuario a la derecha. */
+:host {
+  @include m.host-bloque;
+}
+
+.turno {
+  display: flex;
+  align-items: flex-end;
+  gap: t.esp(2);
+
+  .avo {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--iswc-brand-soft);
+    color: var(--iswc-accent);
+    font-size: 1.15rem;
+  }
+
+  .burbuja {
+    max-width: min(75%, 42rem);
+    padding: t.esp(2) t.esp(3);
+    border-radius: t.radio(lg);
+    border-bottom-left-radius: t.radio(sm);
+    background: var(--iswc-bg-elev);
+    border: 1px solid var(--iswc-border-soft);
+  }
+
+  .quien {
+    display: block;
+    color: var(--iswc-accent);
+    font-size: 0.8rem;
+  }
+
+  .texto {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .cuando {
+    display: block;
+    margin-top: t.esp(1);
+    color: var(--iswc-text-dim);
+    font-size: 0.75rem;
+    text-align: right;
+  }
+
+  &[data-quien="yo"] {
+    flex-direction: row-reverse;
+
+    .burbuja {
+      background: var(--iswc-brand-soft);
+      border-color: transparent;
+      border-bottom-left-radius: t.radio(lg);
+      border-bottom-right-radius: t.radio(sm);
+    }
+  }
+}

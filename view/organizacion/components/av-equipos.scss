@@ -1,0 +1,93 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-equipos — rejilla de tarjetas; el color del equipo en un punto y el borde superior. */
+:host {
+  @include m.host-bloque;
+}
+
+.equipos {
+  display: grid;
+  gap: t.esp(4);
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.esp(3);
+
+  .titulo {
+    display: inline-flex;
+    align-items: center;
+    gap: t.esp(2);
+    font-size: 1.05rem;
+  }
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: t.esp(4);
+  align-items: start;
+}
+
+.equipo {
+  border-top: 3px solid var(--equipo, var(--iswc-accent));
+
+  .cabeza {
+    display: inline-flex;
+    align-items: center;
+    gap: t.esp(2);
+  }
+
+  .punto {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--equipo, var(--iswc-accent));
+  }
+
+  .acciones {
+    display: inline-flex;
+  }
+
+  .descripcion {
+    margin: 0 0 t.esp(3);
+    color: var(--iswc-text-dim);
+    font-size: 0.9rem;
+  }
+
+  .integrantes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: t.esp(2);
+  }
+
+  .integrante {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: t.esp(2);
+  }
+
+  .nadie {
+    color: var(--iswc-text-dim);
+    font-size: 0.9rem;
+  }
+
+  .agregar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: t.esp(2);
+    align-items: end;
+  }
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+  min-width: min(26rem, 80vw);
+}

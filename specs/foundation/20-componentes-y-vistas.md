@@ -25,13 +25,23 @@ ejemplo vivo en la galería.
 
 ### Catálogo
 
-**`<av-app>` — shell** `[W-CAT-01]`: barra con la marca y el conmutador de tema; debajo, el shell de la vista activa. `props = { vista }` (`"hola"` por defecto; una vista sin shell cae en `hola`).
+**`<av-app>` — shell** `[W-CAT-01]`: `<iswc-app-shell>` con marca, pestañas (`<iswc-app-nav>`) según sesión y permisos, selector de empresa, sesión (`<iswc-session-menu>`) y la vista activa del hash `#/<vista>/<id>`. Restaura la sesión al arrancar; una vista privada sin sesión cae en `acceso`. Carga cada vista al navegar (carga perezosa).
 
-**`<av-hola-mundo>` — título** `[W-CAT-04]`: un título «Hola mundo». Sin props, atributos ni eventos. Es el molde mínimo de un componente.
+**Transversales** `[W-CAT-02]`: `<av-cabecera>` (título, subtítulo, ícono y acciones de una vista), `<av-vacio>` (vacío / cargando / error), `<av-persona>` (avatar con iniciales + nombre + detalle), `<av-empresa-selector>` (empresa activa; emite `av-empresa-cambio`).
 
-**`<av-hola>` — bienvenida (shell de `hola`)** `[W-CAT-02]`: portada con cejilla «Avatar · iswc», el título `<av-hola-mundo>`, un lema, el botón «Ver cómo está hecha», cuatro chips (Vanilla, Deno, Zod, SCSS) y cuatro tarjetas: Componentes, Vistas, Tipos, Pruebas (icono, título y texto cada una).
+**Vistas** `[W-CAT-03]` (cada una con su spec):
 
-**Modal de la bienvenida** `[W-CAT-03]`: «Ver cómo está hecha» abre un modal «Cómo está hecha» con la regla de los cuatro archivos y los comandos para empezar (`deno install`, `deno task build`, `deno task serve`, `deno task test:all`, uno por línea con su propósito alineado). «Entendido», Esc o un clic fuera lo cierran. Abrir y cerrar se avisan con `av-hola-modal { abierto }`. `props = { modal = false }` lo abre o cierra desde fuera sin repintar el resto.
+| Vista | Ruta | Shell | Spec |
+| --- | --- | --- | --- |
+| inicio | `#/` | `av-inicio` | `30-publico.md` |
+| acceso | `#/acceso` | `av-acceso` | `30-publico.md` |
+| panel | `#/panel` | `av-panel` | `35-panel.md` |
+| canales | `#/canales/<icanal>` | `av-canales` | `40-canales.md` |
+| asistente | `#/asistente` | `av-asistente` | `45-asistente.md` |
+| proyectos | `#/proyectos/<iproyecto>` | `av-proyectos` | `50-proyectos.md` |
+| crm | `#/crm/<icliente>` | `av-crm` | `55-crm.md` |
+| organizacion | `#/organizacion` | `av-organizacion` | `60-organizacion.md` |
+| admin | `#/admin` | `av-admin` | `65-admin.md` |
 
 ## 3. Guía HOW WEAK
 
@@ -55,9 +65,9 @@ ejemplo vivo en la galería.
 ## 6. Pruebas (WHAT / HOW WEAK)
 
 - [W-COMP-08] Cada componente registrado tiene sus 4 archivos, su `.md` declara las 6 secciones y su `.json` valida contra `iswc-preview/v1`.
-- [W-COMP-09] El dominio de la bienvenida cumple [W-CAT-02] y [W-CAT-03] sin navegador (`tests/vistas/bienvenida`).
-- [W-ICO-04] Los íconos de la app están en `assets/iconify/` [W-ICO-01], `deno.json` declara `iswc.host` [W-ICO-02] y el registrador declara `<html data-icons>` (`tests/iconos`); en e2e, la bienvenida tiene `data-icons` absoluto, pinta sus íconos y los deja en localStorage `iswc:icon:*` (`tests/e2e/00.bienvenida`).
-- [W-COMP-10] E2E: la bienvenida arranca, muestra el título y las tarjetas, y el modal se abre y se cierra como lo haría un usuario (`tests/e2e/00.bienvenida`).
+- [W-COMP-09] El dominio de cada vista se prueba sin navegador sobre `dist/cdn` (`tests/vistas/<vista>`).
+- [W-ICO-04] Los íconos de la app están en `assets/iconify/` [W-ICO-01], `deno.json` declara `iswc.host` [W-ICO-02] y el registrador declara `<html data-icons>` (`tests/iconos`).
+- [W-COMP-10] E2E: la app arranca en la landing (lema, 4 características, 3 planes) y una vista privada sin sesión muestra el login del kit (`tests/e2e/00.inicio`).
 
 ## 7. Notas
 

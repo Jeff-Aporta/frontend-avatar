@@ -1,0 +1,65 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-admin — página con pestañas; Mi cuenta en dos tarjetas. */
+:host {
+  @include m.host-bloque;
+}
+
+.pagina {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: t.esp(5);
+  display: grid;
+  gap: t.esp(5);
+}
+
+iswc-tab-panel {
+  padding-top: t.esp(4);
+}
+
+.cuenta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: t.esp(4);
+  align-items: start;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.sesiones {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: t.esp(2);
+}
+
+.sesion {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: t.esp(3);
+
+  iswc-icon {
+    color: var(--iswc-accent);
+    font-size: 1.3rem;
+  }
+
+  .texto {
+    display: grid;
+    min-width: 0;
+
+    span {
+      color: var(--iswc-text-dim);
+      font-size: 0.85rem;
+    }
+  }
+
+  &[data-actual="1"] strong {
+    color: var(--iswc-accent);
+  }
+}

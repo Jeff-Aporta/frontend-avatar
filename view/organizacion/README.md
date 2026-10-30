@@ -1,18 +1,18 @@
-# Vista `organizacion` — Empresas, equipos y miembros
+# Vista `organizacion` — Empresa, miembros y equipos
 
-Shell: `<av-organizacion>`. Ruta: `#/organizacion`. Página aislada: `/view/organizacion/`. Demo: `/view/organizacion/demo/`.
+Shell: `<av-organizacion>`. Ruta: `#/organizacion`. Página aislada: `/view/organizacion/`. Demo: `/view/organizacion/demo/`. Spec: `specs/foundation/60-organizacion.md`.
 
 ## Alcance
 
-- Dentro: lo que describe la spec `specs/foundation/` de esta vista.
-- Fuera: lo que pertenece a otras vistas (una vista no importa componentes de otra; lo compartido sube a `src/js/`).
+- Dentro: ficha de la empresa activa (crear/editar), miembros (invitar con rol y cargo, quitar), equipos (crear, editar, eliminar, integrantes líder/integrante).
+- Fuera: usuarios y roles de seguridad (vista `admin`), canales y proyectos.
 
 ## Contrato
 
-- El shell recibe `props = { id }` del router (`#/organizacion/<id>`) y reparte `props` a sus hijos.
-- Los hijos no hablan con el API ni con el estado: pintan y emiten eventos `av-…`; el shell los escucha una vez.
-- Datos: `src/js/core/api.ts` (controllers de cliente de DER y `ops` del plugin `avatar`); permisos con `puede()`.
+- Hijos: `av-empresa-form`, `av-invitar-form`, `av-miembros`, `av-equipos`; solo pintan y emiten `av-*`. El shell escucha y llama al API.
+- Escrituras solo con `avatar.gestionar` (`puede()`); el server decide.
+- Dominio sin DOM en `utils/organizacion.ts`.
 
 ## Qué no hacer
 
-- HTML suelto fuera de un componente; colores fuera de los tokens `--iswc-*`; `fetch` directo al API.
+- HTML suelto fuera de un componente; colores fuera de `--iswc-*`; `fetch` directo al API.

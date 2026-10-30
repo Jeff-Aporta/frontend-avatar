@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-admin",
+  "category": "admin",
+  "navTitle": "Admin (shell)",
+  "title": "&lt;av-admin&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-admin",
+  "styles": ".stage{min-height:20rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-admin&gt;",
+      "lede": "Usuarios, roles y Mi cuenta (necesita sesión de administrador para cargar datos).",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-admin id=\"a\"></av-admin></div>", "target": "#a", "props": { "pestana": "cuenta" }, "controls": [ { "prop": "props:pestana", "type": "select", "label": "pestana", "options": ["usuarios", "roles", "cuenta"], "default": "cuenta" } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/admin (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>" }
+      ]
+    }
+  ]
+}
