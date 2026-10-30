@@ -7,7 +7,7 @@
 }
 
 .pagina {
-  max-width: 80rem;
+  max-width: 80em;
   margin: 0 auto;
   padding: t.esp(5);
   display: grid;
@@ -26,7 +26,7 @@ iswc-tab-panel {
 
   dt {
     @include m.rotulo;
-    font-size: 0.75rem;
+    font-size: 0.75em;
   }
 
   dd {

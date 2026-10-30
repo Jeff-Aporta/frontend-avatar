@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-theme="light" data-palette="avatar">
+<html lang="es" data-theme="light" data-palette="turquesa">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -9,6 +9,9 @@
 <link rel="icon" href="./assets/img/tabicon_256x256.png">
 
 <!-- 0) Import map: DER cliente + zod + dominio Avatar en UN vendor servido por la propia API (CDN de la api; `?v=` = hash del bundle). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
 <script type="importmap">{ "imports": { "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=242cb962" } }</script>
 
 <!-- Tema antes del primer pintado: ?s= (theme/palette) > localStorage del kit > light / avatar. Script plano. -->
@@ -19,7 +22,7 @@
 <script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@a1df39adb9e421de874dd624901b72daa9e25e5c/dist/cdn/core/loader.min.js"></script>
 <!-- 2) Registrador de la app: tag → URL ?v=<hash> (lo genera el build). Sin ?v= aquí: el loader lo pone. -->
 <script type="module" src="./dist/cdn/avLoader.min.js"></script>
-<!-- 3) Arranque: estilos del kit, shell + vista activa (los iswc-* los carga cada componente al usarlos), marca de lista con watchdog. -->
+<!-- 3) Arranque: estilos del kit, kit + shell + vista activa (las otras vistas se cargan al navegar), marca de lista con watchdog. -->
 <script type="module">
   const L = globalThis.iswcLoader;
   const listo = () => document.documentElement.setAttribute('data-app-ready', '');
@@ -27,11 +30,12 @@
   try {
     if (!L) throw new Error('falta iswcLoader');
     await L.loadPageStyles(['iswc-palettes-default']);
-    // Carga perezosa por vista: el shell, los transversales y la vista de la ruta actual; el resto lo pide <av-app> al navegar.
-    const { APP_TAGS, VIEW_TAGS } = await import('./dist/cdn/js/kit-tags.js');
+    // Carga perezosa: el kit del armazón, los transversales y la vista de la ruta actual. <av-app> pide las demás al
+    // navegar y precarga las probables en reposo (ver src/js/kit-tags.ts).
+    const { SHELL_KIT_TAGS, APP_TAGS, VIEW_TAGS, tagsDeVista } = await import('./dist/cdn/js/kit-tags.js');
     const { rutaActual } = await import('./dist/cdn/js/core/router.js');
-    const vista = VIEW_TAGS[rutaActual().vista] ?? VIEW_TAGS.inicio;
-    await L.load(...APP_TAGS, ...vista);
+    const vista = VIEW_TAGS[rutaActual().vista] ? rutaActual().vista : 'inicio';
+    await L.load(...SHELL_KIT_TAGS, ...APP_TAGS, ...tagsDeVista(vista));
   } catch (e) {
     console.warn('[av] arranque', e);
   } finally {

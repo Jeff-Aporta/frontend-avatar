@@ -8,11 +8,11 @@
 
 .rejilla {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
   gap: t.esp(3);
 }
 
 .esqueleto {
-  height: 6.5rem;
+  height: 6.5em;
   border-radius: t.radio(md);
 }

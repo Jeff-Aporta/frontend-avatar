@@ -1,4 +1,4 @@
-import{crearComponente as l,define as r,emitir as t,html as c}from"../../../js/base/componente.js?v=hjriku";const n=l(import.meta.url,"av-precios",{planes:[]},(a,i,o)=>{a.append(c`
+import{crearComponente as l,define as r,emitir as t,html as c}from"../../../js/base/componente.js?v=3c3042";const n=l(import.meta.url,"av-precios",{planes:[]},(a,i,o)=>{a.append(c`
     <section class="seccion" part="seccion" aria-labelledby="t">
       <h2 id="t" class="titulo">Planes y precios</h2>
       <div class="rejilla" part="rejilla">

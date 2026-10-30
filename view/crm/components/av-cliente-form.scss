@@ -7,7 +7,7 @@
 }
 
 iswc-dialog {
-  --width: 38rem;
+  --width: 38em;
 }
 
 .campos {
@@ -21,7 +21,7 @@ iswc-dialog {
   gap: t.esp(3);
 }
 
-@media (max-width: 36rem) {
+@media (max-width: 36em) {
   .fila {
     grid-template-columns: 1fr;
   }

@@ -73,7 +73,7 @@ async function compilar(): Promise<number> {
     writeFileSync(destino, reescribir(f, r.outputFiles![0]!.text));
   }
   for (const css of listar(STAGING, '.css')) {
-    const r = await esbuild.build({ entryPoints: [css], bundle: true, write: false, minify: true, loader: { '.css': 'css' } });
+    const r = await esbuild.build({ entryPoints: [css], bundle: true, write: false, minify: true, loader: { '.css': 'css' }, external: ['*.otf', '*.woff', '*.woff2', '*.ttf', '*.svg', '*.png', '*.jpg', '*.webp'] });
     writeFileSync(publicada(css, '.css'), r.outputFiles![0]!.text);
   }
   return fuentes.length;

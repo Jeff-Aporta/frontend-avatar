@@ -20,6 +20,10 @@
     "file": "../../src/js/components/av/av-empresa-selector.json"
   },
   {
+    "tag": "av-menu",
+    "file": "../../src/js/components/av/av-menu.json"
+  },
+  {
     "tag": "av-hero",
     "file": "../inicio/components/av-hero.json"
   },
@@ -30,6 +34,14 @@
   {
     "tag": "av-precios",
     "file": "../inicio/components/av-precios.json"
+  },
+  {
+    "tag": "av-comunidad",
+    "file": "../inicio/components/av-comunidad.json"
+  },
+  {
+    "tag": "av-abierto",
+    "file": "../inicio/components/av-abierto.json"
   },
   {
     "tag": "av-inicio",

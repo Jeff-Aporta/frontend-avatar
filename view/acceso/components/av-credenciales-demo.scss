@@ -22,14 +22,14 @@
 
   .descripcion {
     color: var(--iswc-text-dim);
-    font-size: 0.88rem;
+    font-size: 0.88em;
   }
 }
 
 .nota {
   margin: t.esp(4) 0 0;
   color: var(--iswc-text-dim);
-  font-size: 0.85rem;
+  font-size: 0.85em;
 
   code {
     font-family: var(--iswc-mono);
@@ -39,7 +39,7 @@
   }
 }
 
-@media (max-width: 36rem) {
+@media (max-width: 36em) {
   .fila {
     grid-template-columns: 1fr auto;
 

@@ -1,4 +1,4 @@
-import{crearComponente as c,define as r,emitir as t,html as i}from"../../../js/base/componente.js?v=hjriku";import{ICONO_CANAL as u,ordenarCanales as d}from"../utils/chat.js?v=zzzoma";const v=c(import.meta.url,"av-canal-lista",{canales:[],activo:null,cargando:!1,puedeCrear:!1},(s,n,e)=>{const l=d(n.canales);s.append(i`
+import{crearComponente as c,define as r,emitir as t,html as i}from"../../../js/base/componente.js?v=3c3042";import{ICONO_CANAL as u,ordenarCanales as d}from"../utils/chat.js?v=zzzoma";const v=c(import.meta.url,"av-canal-lista",{canales:[],activo:null,cargando:!1,puedeCrear:!1},(s,n,e)=>{const l=d(n.canales);s.append(i`
     <nav class="lista" part="lista" aria-label="Canales">
       <header class="cabeza">
         <strong>Canales</strong>

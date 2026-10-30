@@ -1,13 +1,15 @@
-import{crearComponente as t,define as r,html as a}from"../../../js/base/componente.js?v=hjriku";const e=t(import.meta.url,"av-caracteristicas",{items:[]},(i,c)=>{i.append(a`
-    <section class="seccion" part="seccion" aria-labelledby="t">
-      <h2 id="t" class="titulo">Características principales</h2>
-      <div class="rejilla" part="rejilla">
-        ${c.items.map(s=>a`
-          <iswc-card variant="outlined" class="tarjeta">
-            <strong slot="header" class="cabeza"><span class="icono"><iswc-icon icon=${s.icono}></iswc-icon></span>${s.titulo}</strong>
-            <p>${s.texto}</p>
-          </iswc-card>
-        `)}
-      </div>
-    </section>
-  `)});r("av-caracteristicas",e);
+import{crearComponente as e,define as r,html as i}from"../../../js/base/componente.js?v=3c3042";const l=e(import.meta.url,"av-caracteristicas",{titulo:"Caracter\xEDsticas principales",subtitulo:"",items:[],variante:"tarjetas"},(s,t)=>{s.append(i`
+      <section class="seccion" part="seccion" data-variante=${t.variante} aria-labelledby="t">
+        <h2 id="t" class="titulo">${t.titulo}</h2>
+        ${t.subtitulo?i`<p class="subtitulo">${t.subtitulo}</p>`:null}
+        <div class="rejilla" part="rejilla">
+          ${t.items.map((a,c)=>i`
+            <article class="item" style=${`--i:${c}`}>
+              <span class="icono" aria-hidden="true"><iswc-icon icon=${a.icono}></iswc-icon></span>
+              <h3 class="nombre">${a.titulo}</h3>
+              <p class="texto">${a.texto}</p>
+            </article>
+          `)}
+        </div>
+      </section>
+    `)});r("av-caracteristicas",l);

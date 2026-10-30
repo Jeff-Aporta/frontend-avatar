@@ -9,7 +9,7 @@
 .campos {
   display: grid;
   gap: t.esp(3);
-  min-width: min(26rem, 80vw);
+  min-width: min(26em, 80vw);
 
   iswc-input,
   iswc-select,

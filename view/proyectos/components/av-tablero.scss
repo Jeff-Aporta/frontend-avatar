@@ -8,7 +8,7 @@
 
 .tablero {
   display: block;
-  min-height: 24rem;
+  min-height: 24em;
   overflow-x: auto;
   padding-bottom: t.esp(2);
 }
@@ -19,7 +19,7 @@
   .descripcion {
     display: block;
     color: var(--iswc-text-dim);
-    font-size: 0.85rem;
+    font-size: 0.85em;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -31,11 +31,11 @@
     flex-wrap: wrap;
     gap: t.esp(1);
     margin-top: t.esp(2);
-    font-size: 0.75rem;
+    font-size: 0.75em;
   }
 
   &[data-vencida="1"] {
-    box-shadow: inset 3px 0 0 var(--iswc-danger-text);
+    box-shadow: inset 0.19em 0 0 var(--iswc-danger-text);
   }
 }
 
@@ -45,7 +45,7 @@
   justify-content: space-between;
   gap: t.esp(2);
   width: 100%;
-  font-size: 0.8rem;
+  font-size: 0.8em;
   color: var(--iswc-text-dim);
 
   .vence {
@@ -60,10 +60,10 @@
   }
 
   .asignado {
-    font-size: 0.75rem;
+    font-size: 0.75em;
   }
 }
 
 .nueva {
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }

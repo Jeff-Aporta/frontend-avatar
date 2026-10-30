@@ -1,4 +1,37 @@
-/* app.scss — SOLO lo que vive en light DOM (la página). Los componentes llevan su .scss hermano. */
+/* app.scss — SOLO lo que vive en light DOM (la página). Los componentes llevan su .scss hermano.
+ *
+ * Identidad de Avatar (heredada del React original):
+ *   - Poppins para todo el texto (la fuente se hereda dentro de cada shadow root).
+ *   - Lemon Milk para la marca y los títulos grandes; Good Times para cifras y rótulos de impacto.
+ *   - Los colores salen SIEMPRE de la paleta activa del kit (`data-palette`, `data-panda`): aquí solo se
+ *     declaran tokens de la app que derivan de los del kit (`--av-*`).
+ */
+@font-face {
+  font-family: "Lemon Milk";
+  src: url("../../../assets/fonts/lemonmilk-rg.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Good Times";
+  src: url("../../../assets/fonts/goodtimes-rg.otf") format("opentype");
+  font-display: swap;
+}
+
+:root {
+  --iswc-font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --iswc-sans: var(--iswc-font-sans);
+  --av-font-marca: "Lemon Milk", "Poppins", sans-serif;
+  --av-font-impacto: "Good Times", "Poppins", sans-serif;
+  /* Superficies con carácter: un velo del color de la paleta sobre el fondo del kit. */
+  --av-velo: color-mix(in srgb, var(--iswc-accent) 7%, transparent);
+  --av-velo-fuerte: color-mix(in srgb, var(--iswc-accent) 16%, transparent);
+  --av-borde-seccion: color-mix(in srgb, var(--iswc-accent) 22%, transparent);
+  --av-degradado-marca: linear-gradient(120deg, var(--iswc-color-brand-stronger), var(--iswc-accent) 55%, var(--iswc-color-contrast, var(--iswc-color-brand-pale)));
+  --av-sombra-tarjeta: 0 1px 0 rgb(255 255 255 / 4%), 0 0.625em 1.875em color-mix(in srgb, var(--iswc-accent) 12%, rgb(0 0 0 / 10%));
+  --av-radio: 0.9em;
+}
+
 html,
 body {
   margin: 0;
@@ -8,14 +41,12 @@ body {
   font-family: var(--iswc-font-sans);
 }
 
+body {
+  /* Como en el React: la barra de scroll siempre presente, sin saltos de layout al cambiar de vista. */
+  overflow-y: scroll;
+}
+
 /* La app se revela cuando el arranque marca `data-app-ready` (o el watchdog de 6 s). */
 html:not([data-app-ready]) body {
   visibility: hidden;
-}
-
-/* Paleta propia «avatar»: cian de la marca; el resto de tokens los deriva el kit de brand-h/s/b. */
-html[data-palette="avatar"] {
-  --iswc-brand-h: 192;
-  --iswc-brand-s: 88%;
-  --iswc-brand-b: 40%;
 }

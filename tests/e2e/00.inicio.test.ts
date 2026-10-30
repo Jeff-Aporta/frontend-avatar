@@ -18,6 +18,10 @@ export default definirPruebas([
       await esperar(s.page, () => !!document.querySelector('av-app')?.shadowRoot?.querySelector('iswc-app-shell'), 30_000).catch(() => undefined);
       expect('marcada como lista', await s.page.evaluate(() => document.documentElement.hasAttribute('data-app-ready'), undefined));
       expect('shell montado', await s.page.evaluate(() => !!document.querySelector('av-app')?.shadowRoot?.querySelector('iswc-app-shell'), undefined));
+      // Que el tag exista no basta: el kit debe haberlo DEFINIDO (si el loader falla, todo se ve sin estilos).
+      await esperar(s.page, () => ['iswc-app-shell', 'iswc-session-menu', 'iswc-button', 'iswc-card', 'iswc-icon'].every((t) => !!customElements.get(t)), 20_000).catch(() => undefined);
+      const sinDefinir = await s.page.evaluate(() => ['iswc-app-shell', 'iswc-session-menu', 'iswc-button', 'iswc-card', 'iswc-icon'].filter((t) => !customElements.get(t)), undefined);
+      expect('kit definido', sinDefinir.length === 0, sinDefinir.join(', '));
       expect('sin errores de consola', s.errores().length === 0, s.errores().join(' | '));
     },
   },

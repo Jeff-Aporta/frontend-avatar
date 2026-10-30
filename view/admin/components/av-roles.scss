@@ -13,7 +13,7 @@
 
 .formularios {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(22em, 1fr));
   gap: t.esp(4);
 }
 
@@ -25,13 +25,13 @@
 
   iswc-input,
   iswc-select {
-    flex: 1 1 9rem;
+    flex: 1 1 9em;
   }
 }
 
 .rejilla {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
   gap: t.esp(4);
   align-items: start;
 }
@@ -40,7 +40,7 @@
   .descripcion {
     margin: 0 0 t.esp(2);
     color: var(--iswc-text-dim);
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 
   .acciones {
@@ -60,16 +60,16 @@
     .id {
       @include m.una-linea;
       font-family: var(--iswc-mono);
-      font-size: 0.82rem;
+      font-size: 0.82em;
     }
   }
 
   .nada {
     color: var(--iswc-text-dim);
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 }
 
 .esqueleto {
-  height: 10rem;
+  height: 10em;
 }

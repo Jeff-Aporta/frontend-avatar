@@ -11,6 +11,7 @@ await import('./av-cabecera.js');
 await import('./av-vacio.js');
 await import('./av-persona.js');
 await import('./av-empresa-selector.js');
+await import('./av-menu.js');
 await import('../../../../view/inicio/components/all.js');
 await import('../../../../view/acceso/components/all.js');
 await import('../../../../view/panel/components/all.js');

@@ -1,46 +1,99 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
-/* av-caracteristicas — rejilla responsive de tarjetas. */
+/* av-caracteristicas — título centrado y rejilla; dos variantes: tarjetas con velo o íconos grandes. */
 :host {
   @include m.host-bloque;
 }
 
 .seccion {
-  padding: t.esp(8) 0;
+  padding: t.esp(10) t.esp(5);
+  max-width: 76em;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
-  .titulo {
-    margin: 0 0 t.esp(5);
-    font-size: 1.6rem;
-    text-align: center;
-    letter-spacing: -0.01em;
-  }
+.titulo {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.5em, 3vw, 2.1em);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.subtitulo {
+  margin: t.esp(2) auto 0;
+  max-width: 40em;
+  text-align: center;
+  color: var(--iswc-text-dim);
 }
 
 .rejilla {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: t.esp(4);
+  grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+  gap: t.esp(5);
+  margin-top: t.esp(8);
+}
 
-  p {
+.item {
+  display: grid;
+  gap: t.esp(2);
+  align-content: start;
+
+  .nombre {
+    margin: 0;
+    font-size: 1.12em;
+    font-weight: 600;
+  }
+
+  .texto {
     margin: 0;
     color: var(--iswc-text-soft);
+    line-height: 1.55;
   }
 }
 
-.cabeza {
-  display: flex;
-  align-items: center;
-  gap: t.esp(2);
+/* Tarjetas: superficie elevada con el velo de la paleta y el ícono en una placa del color de marca. */
+[data-variante="tarjetas"] .item {
+  padding: t.esp(6) t.esp(5);
+  border-radius: var(--av-radio);
+  background: linear-gradient(160deg, var(--av-velo), transparent 60%), var(--iswc-bg-elev);
+  border: 1px solid var(--iswc-border-soft);
+  box-shadow: var(--av-sombra-tarjeta);
 
   .icono {
     display: inline-grid;
     place-items: center;
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: t.radio(md);
-    background: var(--iswc-brand-soft);
+    /* Medidas relativas a su propio font-size (1.5em del contexto): placa de 2 × 2 de su ícono. */
+    font-size: 1.5em;
+    width: 2em;
+    height: 2em;
+    border-radius: 0.55em;
+    background: var(--av-degradado-marca);
+    color: var(--iswc-on-brand, #fff);
+    margin-bottom: t.esp(2);
+  }
+}
+
+/* Íconos: como en el React, ícono grande del color de marca centrado sobre el texto. */
+[data-variante="iconos"] .item {
+  justify-items: center;
+  text-align: center;
+
+  .icono {
+    font-size: 3.2em;
     color: var(--iswc-accent);
-    font-size: 1.2rem;
+    filter: drop-shadow(0 0.5em 1em var(--av-velo-fuerte));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-variante="tarjetas"] .item {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+      transform: translateY(-0.3em);
+      box-shadow: 0 0.875em 2.5em color-mix(in srgb, var(--iswc-accent) 22%, rgb(0 0 0 / 12%));
+    }
   }
 }

@@ -1,10 +1,13 @@
 <!doctype html>
-<html lang="es" data-theme="light" data-palette="avatar">
+<html lang="es" data-theme="light" data-palette="turquesa">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Avatar · canales</title>
 <meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
 <script type="importmap">{ "imports": { "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=242cb962" } }</script>
 <script src="../../dist/cdn/boot.js"></script>
 <link rel="stylesheet" href="../../dist/cdn/styles/app.css">
@@ -18,8 +21,8 @@
   const watchdog = setTimeout(listo, 6000);
   try {
     await L.loadPageStyles(['iswc-palettes-default']);
-    const { KIT_TAGS, APP_TAGS, VIEW_TAGS } = await import('../../dist/cdn/js/kit-tags.js');
-    await L.load(...KIT_TAGS, ...APP_TAGS, ...VIEW_TAGS.canales);
+    const { SHELL_KIT_TAGS, APP_TAGS, tagsDeVista } = await import('../../dist/cdn/js/kit-tags.js');
+    await L.load(...SHELL_KIT_TAGS, ...APP_TAGS, ...tagsDeVista('canales'));
     const { conectar, cargarPerfil } = await import('../../dist/cdn/js/core/api.js');
     conectar();
     await cargarPerfil().catch(() => undefined);

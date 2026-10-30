@@ -52,6 +52,14 @@ export const AvEmpresaSelectorPropsSchema = z.object({
 });
 export type AvEmpresaSelectorProps = z.infer<typeof AvEmpresaSelectorPropsSchema>;
 
+/** Módulo del menú lateral. */
+export const ItemMenuSchema = z.object({ id: z.string(), label: z.string(), icon: z.string(), grupo: z.string(), contador: z.number().default(0) });
+export type ItemMenu = z.infer<typeof ItemMenuSchema>;
+
+/** `<av-menu>`: menú lateral colapsable del área privada. */
+export const AvMenuPropsSchema = z.object({ items: z.array(ItemMenuSchema).default([]), activo: z.string().default(''), plegado: z.boolean().default(false) });
+export type AvMenuProps = z.infer<typeof AvMenuPropsSchema>;
+
 /** Props de los transversales, por tag (lo lee `props-registro.ts`). */
 export const APP_PROPS = {
   'av-app': AvAppPropsSchema,
@@ -59,6 +67,7 @@ export const APP_PROPS = {
   'av-vacio': AvVacioPropsSchema,
   'av-persona': AvPersonaPropsSchema,
   'av-empresa-selector': AvEmpresaSelectorPropsSchema,
+  'av-menu': AvMenuPropsSchema,
 } as const;
 
 /** Base (`componente.ts`): atributos e hijos del helper `el()`. */

@@ -21,19 +21,19 @@
     display: inline-flex;
     align-items: center;
     gap: t.esp(2);
-    font-size: 1.05rem;
+    font-size: 1.05em;
   }
 }
 
 .rejilla {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
   gap: t.esp(4);
   align-items: start;
 }
 
 .equipo {
-  border-top: 3px solid var(--equipo, var(--iswc-accent));
+  border-top: 0.19em solid var(--equipo, var(--iswc-accent));
 
   .cabeza {
     display: inline-flex;
@@ -42,8 +42,8 @@
   }
 
   .punto {
-    width: 0.7rem;
-    height: 0.7rem;
+    width: 0.7em;
+    height: 0.7em;
     border-radius: 50%;
     background: var(--equipo, var(--iswc-accent));
   }
@@ -55,7 +55,7 @@
   .descripcion {
     margin: 0 0 t.esp(3);
     color: var(--iswc-text-dim);
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 
   .integrantes {
@@ -75,7 +75,7 @@
 
   .nadie {
     color: var(--iswc-text-dim);
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 
   .agregar {
@@ -89,5 +89,5 @@
 .campos {
   display: grid;
   gap: t.esp(3);
-  min-width: min(26rem, 80vw);
+  min-width: min(26em, 80vw);
 }

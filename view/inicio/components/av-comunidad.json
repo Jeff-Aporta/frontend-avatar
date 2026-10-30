@@ -1,0 +1,52 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-comunidad",
+  "category": "inicio",
+  "navTitle": "Comunidad",
+  "title": "&lt;av-comunidad&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-comunidad",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-comunidad&gt;",
+      "lede": "«Únete a nuestra comunidad»: constelación de personas que aparecen por turnos, título, texto y cifras.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-comunidad id=\"x\"></av-comunidad></div>",
+          "target": "#x",
+          "props": {
+            "titulo": "Únete a nuestra comunidad",
+            "texto": "Equipos que ya trabajan conectados.",
+            "personas": [
+              "assets/img/personas/persona_1.jpg",
+              "assets/img/personas/persona_2.jpg",
+              "assets/img/personas/persona_3.jpg",
+              "assets/img/personas/persona_4.jpg"
+            ],
+            "cifras": [
+              {
+                "valor": "24/7",
+                "etiqueta": "asistente AVO"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:titulo",
+              "type": "text",
+              "label": "titulo",
+              "default": "Únete a nuestra comunidad"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la landing pública.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de la app privada.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

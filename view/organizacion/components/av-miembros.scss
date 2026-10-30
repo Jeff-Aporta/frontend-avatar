@@ -29,11 +29,11 @@
   .cargo {
     @include m.una-linea;
     color: var(--iswc-text-dim);
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 40em) {
   .fila {
     grid-template-columns: minmax(0, 1fr) auto auto;
 

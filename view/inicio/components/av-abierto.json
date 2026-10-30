@@ -1,0 +1,46 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-abierto",
+  "category": "inicio",
+  "navTitle": "Abierto",
+  "title": "&lt;av-abierto&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-abierto",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-abierto&gt;",
+      "lede": "«Un software empresarial moderno, flexible y abierto»: banda con el degradado de la paleta y seis pilares.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-abierto id=\"x\"></av-abierto></div>",
+          "target": "#x",
+          "props": {
+            "titulo": "Un software empresarial moderno, flexible y abierto",
+            "pilares": [
+              {
+                "icono": "mdi:puzzle-outline",
+                "titulo": "Ecosistema colaborativo",
+                "texto": "Integra tus sistemas."
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:titulo",
+              "type": "text",
+              "label": "titulo",
+              "default": "Un software empresarial moderno, flexible y abierto"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la landing pública.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de la app privada.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

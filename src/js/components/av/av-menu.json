@@ -1,0 +1,74 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-menu",
+  "category": "transversal",
+  "navTitle": "Menú",
+  "title": "&lt;av-menu&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-menu",
+  "styles": ".stage{height:30em;width:16em}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-menu&gt;",
+      "lede": "Menú lateral colapsable del área privada.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-menu id=\"m\"></av-menu></div>",
+          "target": "#m",
+          "props": {
+            "items": [
+              {
+                "id": "panel",
+                "label": "Panel",
+                "icon": "mdi:view-dashboard-outline",
+                "grupo": "Trabajo",
+                "contador": 0
+              },
+              {
+                "id": "canales",
+                "label": "Canales",
+                "icon": "mdi:forum-outline",
+                "grupo": "Trabajo",
+                "contador": 3
+              },
+              {
+                "id": "crm",
+                "label": "CRM",
+                "icon": "mdi:account-heart-outline",
+                "grupo": "Negocio",
+                "contador": 0
+              }
+            ],
+            "activo": "panel",
+            "plegado": false
+          },
+          "controls": [
+            {
+              "prop": "props:plegado",
+              "type": "boolean",
+              "label": "plegado",
+              "default": false
+            },
+            {
+              "prop": "props:activo",
+              "type": "select",
+              "label": "activo",
+              "options": [
+                "panel",
+                "canales",
+                "crm"
+              ],
+              "default": "panel"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En el slot sidebar del shell, con sesión.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No en la landing pública.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

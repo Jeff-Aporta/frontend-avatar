@@ -1,0 +1,72 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-abierto — banda a todo lo ancho con el degradado de la paleta y pilares en vidrio esmerilado. */
+:host {
+  @include m.host-bloque;
+}
+
+.banda {
+  position: relative;
+  isolation: isolate;
+  padding: t.esp(10) t.esp(5);
+  background: var(--av-degradado-marca);
+  color: var(--iswc-on-brand, #fff);
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(40em 20em at 10% 0%, rgb(255 255 255 / 18%), transparent 70%);
+  }
+}
+
+.interior {
+  max-width: 76em;
+  margin: 0 auto;
+}
+
+.titulo {
+  margin: 0 auto;
+  max-width: 34em;
+  text-align: center;
+  font-size: clamp(1.5em, 3vw, 2.2em);
+  font-weight: 700;
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17em, 1fr));
+  gap: t.esp(4);
+  margin-top: t.esp(8);
+}
+
+.pilar {
+  padding: t.esp(5);
+  border-radius: var(--av-radio);
+  background: rgb(255 255 255 / 12%);
+  border: 1px solid rgb(255 255 255 / 22%);
+  backdrop-filter: blur(0.4em);
+
+  .nombre {
+    display: flex;
+    align-items: center;
+    gap: t.esp(2);
+    margin: 0 0 t.esp(2);
+    font-size: 1.05em;
+    font-weight: 600;
+
+    iswc-icon {
+      font-size: 1.6em;
+    }
+  }
+
+  .texto {
+    margin: 0;
+    font-size: 0.92em;
+    opacity: 0.92;
+    line-height: 1.55;
+  }
+}

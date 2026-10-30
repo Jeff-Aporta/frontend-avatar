@@ -1,4 +1,4 @@
-import{crearComponente as l,define as r,emitir as d,html as a}from"../../../js/base/componente.js?v=hjriku";const u={invitacion:"mdi:account-plus-outline",tarea:"mdi:checkbox-marked-circle-outline",mensaje:"mdi:forum-outline"},m=l(import.meta.url,"av-notificaciones",{items:[],cargando:!1},(c,o,n)=>{const e=o.items.filter(i=>!i.leida);c.append(a`
+import{crearComponente as l,define as r,emitir as d,html as a}from"../../../js/base/componente.js?v=3c3042";const u={invitacion:"mdi:account-plus-outline",tarea:"mdi:checkbox-marked-circle-outline",mensaje:"mdi:forum-outline"},m=l(import.meta.url,"av-notificaciones",{items:[],cargando:!1},(c,o,n)=>{const e=o.items.filter(i=>!i.leida);c.append(a`
     <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
       <strong slot="header"><iswc-icon icon="mdi:bell-outline"></iswc-icon> Notificaciones ${e.length?a`<iswc-badge color="danger" pill>${e.length}</iswc-badge>`:null}</strong>
       ${e.length?a`<iswc-button slot="header-actions" variant="plain" color="neutral" class="leer" oniswc-click=${()=>d(n,"av-notificaciones-leer",{ids:[]})}>Marcar leídas</iswc-button>`:null}

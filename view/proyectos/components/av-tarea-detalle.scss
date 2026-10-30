@@ -7,7 +7,7 @@
 }
 
 iswc-drawer {
-  --size: 30rem;
+  --size: 30em;
 }
 
 .tarea {
@@ -16,7 +16,7 @@ iswc-drawer {
 
   .titulo {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.25em;
     line-height: 1.25;
   }
 
@@ -31,7 +31,7 @@ iswc-drawer {
     grid-template-columns: auto 1fr;
     gap: t.esp(1) t.esp(3);
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 0.9em;
 
     dt {
       color: var(--iswc-text-dim);
@@ -53,13 +53,13 @@ iswc-drawer {
     align-items: center;
     gap: t.esp(2);
     margin: 0;
-    font-size: 1rem;
+    font-size: 1em;
   }
 
   .vacio {
     margin: 0;
     color: var(--iswc-text-dim);
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 }
 
@@ -79,7 +79,7 @@ iswc-drawer {
   background: var(--iswc-bg-soft);
 
   .autor {
-    font-size: 0.85rem;
+    font-size: 0.85em;
   }
 
   .texto {
@@ -89,7 +89,7 @@ iswc-drawer {
 
   .cuando {
     color: var(--iswc-text-dim);
-    font-size: 0.78rem;
+    font-size: 0.78em;
   }
 }
 

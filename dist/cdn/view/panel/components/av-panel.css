@@ -1,1 +1,1 @@
-@charset "UTF-8";:host{display:block;min-width:0;font-family:var(--iswc-font-sans)}.pagina{max-width:80rem;margin:0 auto;padding:1.25rem;display:grid;gap:1.25rem}.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(20rem,1fr));gap:1rem;align-items:start}
+@charset "UTF-8";:host{display:block;min-width:0;font-family:var(--iswc-font-sans)}.pagina{max-width:80em;margin:0 auto;padding:1.25em;display:grid;gap:1.25em}.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(20em,1fr));gap:1em;align-items:start}

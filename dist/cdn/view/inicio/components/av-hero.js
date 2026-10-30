@@ -1,17 +1,21 @@
-import{crearComponente as c,define as n,emitir as l,html as p}from"../../../js/base/componente.js?v=hjriku";import{LEMA as o}from"../utils/landing.js?v=7z2r8t";const m=c(import.meta.url,"av-hero",{sesion:!1},(a,i,t)=>{const s=r=>l(t,"av-inicio-ir",{vista:r}),e=new URL("assets/img/ilustration.svg",document.baseURI).href;a.append(p`
+import{crearComponente as n,define as r,emitir as l,html as d}from"../../../js/base/componente.js?v=3c3042";import{LEMA as a}from"../utils/landing.js?v=h4f8yf";const p=n(import.meta.url,"av-hero",{sesion:!1},(c,i,e)=>{const s=o=>l(e,"av-inicio-ir",{vista:o}),t=o=>new URL(o,document.baseURI).href;c.append(d`
     <section class="hero" part="hero" aria-labelledby="titulo">
-      <div class="texto">
-        <p class="kicker"><iswc-tag color="brand" pill>Avatar · Odys</iswc-tag></p>
-        <h1 id="titulo" class="titulo" part="titulo">${o.titulo}</h1>
-        <p class="lede">${o.texto}</p>
-        <div class="acciones">
-          <iswc-button id="empezar" color="brand" oniswc-click=${()=>s(i.sesion?"panel":"acceso")}>
-            ${i.sesion?"Ir al panel":"Empieza ahora"}<iswc-icon slot="end" icon="mdi:arrow-right"></iswc-icon>
-          </iswc-button>
-          <iswc-button variant="outlined" color="neutral" oniswc-click=${()=>s("asistente")}>Conoce a AVO</iswc-button>
+      <img class="banner" part="banner" src=${t("assets/img/bgbanner.svg")} alt="" aria-hidden="true">
+      <div class="velo" aria-hidden="true"></div>
+      <div class="contenido">
+        <div class="texto">
+          <p class="kicker"><iswc-tag color="brand" pill>Avatar · Odys</iswc-tag></p>
+          <h1 id="titulo" class="titulo" part="titulo">${a.titulo}</h1>
+          <p class="lede">${a.texto}</p>
+          <div class="acciones">
+            <iswc-button id="empezar" color="brand" class="principal" oniswc-click=${()=>s(i.sesion?"panel":"acceso")}>
+              ${i.sesion?"Ir al panel":"Empieza ahora"}<iswc-icon slot="end" icon="mdi:arrow-right"></iswc-icon>
+            </iswc-button>
+            <iswc-button variant="outlined" color="brand" oniswc-click=${()=>s("asistente")}><iswc-icon slot="start" icon="mdi:robot-outline"></iswc-icon>Conoce a AVO</iswc-button>
+          </div>
+          <iswc-button variant="text" color="brand" class="enlace" oniswc-click=${()=>s(i.sesion?"panel":"acceso")}>${a.enlace} →</iswc-button>
         </div>
-        <p class="nota">Equipos, canales, kanban, CRM y permisos por rol. Sin instalar nada.</p>
+        <img class="ilustracion" part="ilustracion" src=${t("assets/img/ilustration.svg")} alt="Equipo trabajando con los tableros de Avatar" loading="eager">
       </div>
-      <img class="ilustracion" part="ilustracion" src=${e} alt="" loading="eager">
     </section>
-  `)});n("av-hero",m);
+  `)});r("av-hero",p);

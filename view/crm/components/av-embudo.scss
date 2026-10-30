@@ -8,7 +8,7 @@
 
 .fila {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(9em, 1fr));
   gap: t.esp(3);
 }
 
@@ -29,15 +29,15 @@
 
   .label {
     @include m.rotulo;
-    font-size: 0.75rem;
+    font-size: 0.75em;
   }
 
   .cantidad {
-    font-size: 1.5rem;
+    font-size: 1.5em;
   }
 
   .valor {
-    font-size: 0.85rem;
+    font-size: 0.85em;
     color: var(--iswc-text-dim);
   }
 }

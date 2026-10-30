@@ -15,16 +15,16 @@
     display: inline-grid;
     place-items: center;
     flex: none;
-    width: 2rem;
-    height: 2rem;
+    width: 2em;
+    height: 2em;
     border-radius: 50%;
     background: var(--iswc-brand-soft);
     color: var(--iswc-accent);
-    font-size: 1.15rem;
+    font-size: 1.15em;
   }
 
   .burbuja {
-    max-width: min(75%, 42rem);
+    max-width: min(75%, 42em);
     padding: t.esp(2) t.esp(3);
     border-radius: t.radio(lg);
     border-bottom-left-radius: t.radio(sm);
@@ -35,7 +35,7 @@
   .quien {
     display: block;
     color: var(--iswc-accent);
-    font-size: 0.8rem;
+    font-size: 0.8em;
   }
 
   .texto {
@@ -48,7 +48,7 @@
     display: block;
     margin-top: t.esp(1);
     color: var(--iswc-text-dim);
-    font-size: 0.75rem;
+    font-size: 0.75em;
     text-align: right;
   }
 
