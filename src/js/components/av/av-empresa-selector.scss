@@ -1,0 +1,15 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-empresa-selector — select compacto para la barra. */
+:host {
+  display: inline-block;
+  min-width: 0;
+  font-family: var(--iswc-font-sans);
+}
+
+.selector {
+  --iswc-field-width: 100%;
+  min-width: 10rem;
+  font-size: 0.9rem;
+}

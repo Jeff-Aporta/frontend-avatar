@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-embudo-grafica",
+  "category": "panel",
+  "navTitle": "Embudo gráfica",
+  "title": "&lt;av-embudo-grafica&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-embudo-grafica",
+  "styles": ".stage{padding:1rem;max-width:30rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-embudo-grafica&gt;",
+      "lede": "Barras del CRM por etapa.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-embudo-grafica id=\"e\"></av-embudo-grafica></div>", "target": "#e", "props": { "clientes": { "total": 4, "por_etapa": { "contacto": 1, "propuesta": 1, "negociacion": 1, "cerrado": 1 }, "valor_pipeline": 20100 } }, "controls": [ { "prop": "props:clientes", "type": "json", "label": "clientes", "default": { "total": 4, "por_etapa": { "contacto": 1, "propuesta": 1, "negociacion": 1, "cerrado": 1 }, "valor_pipeline": 20100 } } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En el panel.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar clientes: eso es la vista CRM.</iswc-callout>" }
+      ]
+    }
+  ]
+}

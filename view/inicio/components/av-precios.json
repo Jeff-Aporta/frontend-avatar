@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-precios",
+  "category": "inicio",
+  "navTitle": "Precios",
+  "title": "&lt;av-precios&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-precios",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-precios&gt;",
+      "lede": "Planes y precios.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-precios id=\"p\"></av-precios></div>", "target": "#p", "props": { "planes": [ { "id": "mensual", "titulo": "Mensual", "precio": "$100 USD", "periodo": "por mes", "destacado": false, "incluye": ["Usuarios ilimitados", "Canales y proyectos"] }, { "id": "anual", "titulo": "Anual", "precio": "$1,000 USD", "periodo": "por año", "destacado": true, "incluye": ["Todo lo del mensual", "2 meses gratis"] } ] }, "controls": [ { "prop": "props:planes", "type": "json", "label": "planes", "default": [ { "id": "mensual", "titulo": "Mensual", "precio": "$100 USD", "periodo": "por mes", "destacado": false, "incluye": ["Usuarios ilimitados"] } ] } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la landing.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para facturación real: no cobra.</iswc-callout>" }
+      ]
+    }
+  ]
+}

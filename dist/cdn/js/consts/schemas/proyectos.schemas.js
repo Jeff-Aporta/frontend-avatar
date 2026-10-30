@@ -1,0 +1,1 @@
+import{z as o}from"../../base/zod.js?v=zn6b7f";const e=o.object({id:o.string().nullable().default(null),version:o.number().default(0)}),r={"av-proyectos":e};export{e as AvProyectosPropsSchema,r as PROYECTOS_PROPS};

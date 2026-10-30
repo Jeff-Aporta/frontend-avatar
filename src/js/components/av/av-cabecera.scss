@@ -1,0 +1,45 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-cabecera — fila de título + acciones de una vista. */
+:host {
+  @include m.host-bloque;
+}
+
+.cabecera {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: t.esp(3) t.esp(5);
+  padding-bottom: t.esp(4);
+  margin-bottom: t.esp(5);
+  border-bottom: 1px solid var(--iswc-border-soft);
+
+  .titulo {
+    display: flex;
+    align-items: center;
+    gap: t.esp(2);
+    margin: 0;
+    font-size: 1.45rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+
+    iswc-icon {
+      color: var(--iswc-accent);
+    }
+  }
+
+  .subtitulo {
+    margin: t.esp(1) 0 0;
+    color: var(--iswc-text-dim);
+    font-size: 0.95rem;
+  }
+
+  .acciones {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: t.esp(2);
+  }
+}

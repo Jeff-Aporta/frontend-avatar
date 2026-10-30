@@ -1,0 +1,16 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-tareas-grafica — tarjeta con la dona. */
+:host {
+  @include m.host-bloque;
+}
+
+.grafica {
+  display: block;
+  height: 16rem;
+}
+
+.vacio {
+  display: block;
+}

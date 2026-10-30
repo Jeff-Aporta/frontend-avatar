@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-caracteristicas",
+  "category": "inicio",
+  "navTitle": "Características",
+  "title": "&lt;av-caracteristicas&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-caracteristicas",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-caracteristicas&gt;",
+      "lede": "Tarjetas de características.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-caracteristicas id=\"c\"></av-caracteristicas></div>", "target": "#c", "props": { "items": [ { "icono": "mdi:forum-outline", "titulo": "Comunicación por canales", "texto": "Canales por empresa y equipo." }, { "icono": "mdi:view-column-outline", "titulo": "Gestión de proyectos", "texto": "Tableros kanban con tickets." } ] }, "controls": [ { "prop": "props:items", "type": "json", "label": "items", "default": [ { "icono": "mdi:forum-outline", "titulo": "Comunicación por canales", "texto": "Canales por empresa y equipo." } ] } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la landing, bajo el hero.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para KPIs: eso es av-kpis.</iswc-callout>" }
+      ]
+    }
+  ]
+}

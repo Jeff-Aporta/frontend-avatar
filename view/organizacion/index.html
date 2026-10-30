@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-palette="avatar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avatar · organizacion</title>
+<meta name="robots" content="noindex">
+<script type="importmap">{ "imports": { "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=242cb962" } }</script>
+<script src="../../dist/cdn/boot.js"></script>
+<link rel="stylesheet" href="../../dist/cdn/styles/app.css">
+<!-- Vista aislada (QA): mismo kit y mismo pin que la app. -->
+<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@a1df39adb9e421de874dd624901b72daa9e25e5c/dist/cdn/core/loader.min.js"></script>
+<script type="module" src="../../dist/cdn/avLoader.min.js"></script>
+<script type="module">
+  // Mismo arranque que la app: marca `data-app-ready` al terminar (watchdog de 6 s).
+  const L = globalThis.iswcLoader;
+  const listo = () => document.documentElement.setAttribute('data-app-ready', '');
+  const watchdog = setTimeout(listo, 6000);
+  try {
+    await L.loadPageStyles(['iswc-palettes-default']);
+    const { KIT_TAGS, APP_TAGS, VIEW_TAGS } = await import('../../dist/cdn/js/kit-tags.js');
+    await L.load(...KIT_TAGS, ...APP_TAGS, ...VIEW_TAGS.organizacion);
+    const { conectar, cargarPerfil } = await import('../../dist/cdn/js/core/api.js');
+    conectar();
+    await cargarPerfil().catch(() => undefined);
+  } finally {
+    clearTimeout(watchdog);
+    listo();
+  }
+</script>
+</head>
+<body>
+  <iswc-toast placement="bottom-end"></iswc-toast>
+  <av-organizacion></av-organizacion>
+</body>
+</html>

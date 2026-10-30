@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-acceso",
+  "category": "acceso",
+  "navTitle": "Acceso (shell)",
+  "title": "&lt;av-acceso&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-acceso",
+  "styles": ".stage{min-height:24rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-acceso&gt;",
+      "lede": "Login con el kit y cuentas de prueba.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-acceso id=\"a\"></av-acceso></div>", "target": "#a", "props": { "ocupado": false, "error": "" }, "controls": [ { "prop": "props:ocupado", "type": "boolean", "label": "ocupado", "default": false }, { "prop": "props:error", "type": "text", "label": "error", "default": "" } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/acceso (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para entrar desde la barra ya está iswc-session-menu.</iswc-callout>" }
+      ]
+    }
+  ]
+}

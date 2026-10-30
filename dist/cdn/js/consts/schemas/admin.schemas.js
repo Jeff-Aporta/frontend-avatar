@@ -1,0 +1,1 @@
+import{z as e}from"../../base/zod.js?v=zn6b7f";const o=e.object({id:e.string().nullable().default(null),version:e.number().default(0)}),t={"av-admin":o};export{t as ADMIN_PROPS,o as AvAdminPropsSchema};

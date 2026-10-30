@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-notificaciones",
+  "category": "panel",
+  "navTitle": "Notificaciones",
+  "title": "&lt;av-notificaciones&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-notificaciones",
+  "styles": ".stage{padding:1rem;max-width:30rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-notificaciones&gt;",
+      "lede": "Notificaciones del usuario.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-notificaciones id=\"n\"></av-notificaciones></div>", "target": "#n", "props": { "items": [ { "inotificacion": 1, "iusuario": "beto", "tipo": "tarea", "titulo": "TK-000001 → Hecho", "cuerpo": "Definir modelo de datos de canales", "leida": false, "creado": "2026-10-30T12:00:00Z" }, { "inotificacion": 2, "iusuario": "beto", "tipo": "invitacion", "titulo": "Te unieron a Avatar Demo", "cuerpo": "admin te agregó como miembro.", "leida": true, "creado": "2026-10-29T12:00:00Z" } ], "cargando": false }, "controls": [ { "prop": "props:cargando", "type": "boolean", "label": "cargando", "default": false } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En el panel.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como toast: los avisos inmediatos van por iswc-toast del shell.</iswc-callout>" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-palette="avatar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Avatar</title>
+<meta name="description" content="Avatar — comunicación y gestión para equipos empresariales: canales, proyectos kanban, tickets, CRM y asistente IA. Web components sobre el kit iswc; API DER en Cloudflare.">
+<link rel="icon" href="./assets/img/tabicon_256x256.png">
+
+<!-- 0) Import map: DER cliente + zod + dominio Avatar en UN vendor servido por la propia API (CDN de la api; `?v=` = hash del bundle). -->
+<script type="importmap">{ "imports": { "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=242cb962" } }</script>
+
+<!-- Tema antes del primer pintado: ?s= (theme/palette) > localStorage del kit > light / avatar. Script plano. -->
+<script src="./dist/cdn/boot.js"></script>
+<link rel="stylesheet" href="./dist/cdn/styles/app.css">
+
+<!-- 1) Loader del kit por CDN pineado (un solo SHA en toda la app; `deno task pin` lo mantiene). -->
+<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@a1df39adb9e421de874dd624901b72daa9e25e5c/dist/cdn/core/loader.min.js"></script>
+<!-- 2) Registrador de la app: tag → URL ?v=<hash> (lo genera el build). Sin ?v= aquí: el loader lo pone. -->
+<script type="module" src="./dist/cdn/avLoader.min.js"></script>
+<!-- 3) Arranque: estilos del kit, tags del kit y de la app, marca de lista con watchdog. -->
+<script type="module">
+  const L = globalThis.iswcLoader;
+  const listo = () => document.documentElement.setAttribute('data-app-ready', '');
+  const watchdog = setTimeout(() => { console.warn('[av] el arranque excedió 6 s; se revela la página'); listo(); }, 6000);
+  try {
+    if (!L) throw new Error('falta iswcLoader');
+    await L.loadPageStyles(['iswc-palettes-default']);
+    const { KIT_TAGS, tagsArranque } = await import('./dist/cdn/js/kit-tags.js');
+    await L.load(...KIT_TAGS, ...tagsArranque());
+  } catch (e) {
+    console.warn('[av] arranque', e);
+  } finally {
+    clearTimeout(watchdog);
+    listo();
+  }
+</script>
+</head>
+<body>
+  <noscript>JavaScript requerido.</noscript>
+  <av-app></av-app>
+</body>
+</html>

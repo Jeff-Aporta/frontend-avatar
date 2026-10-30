@@ -1,0 +1,50 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-credenciales-demo — lista compacta de cuentas de prueba. */
+:host {
+  @include m.host-bloque;
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: t.esp(3);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: t.esp(3);
+
+  .descripcion {
+    color: var(--iswc-text-dim);
+    font-size: 0.88rem;
+  }
+}
+
+.nota {
+  margin: t.esp(4) 0 0;
+  color: var(--iswc-text-dim);
+  font-size: 0.85rem;
+
+  code {
+    font-family: var(--iswc-mono);
+    background: var(--iswc-code-bg);
+    padding: 0 t.esp(1);
+    border-radius: t.radio(sm);
+  }
+}
+
+@media (max-width: 36rem) {
+  .fila {
+    grid-template-columns: 1fr auto;
+
+    .descripcion {
+      grid-column: 1 / -1;
+    }
+  }
+}

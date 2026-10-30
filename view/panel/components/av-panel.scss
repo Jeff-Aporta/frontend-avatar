@@ -1,0 +1,22 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-panel — página del dashboard: cabecera, KPIs y rejilla de tarjetas. */
+:host {
+  @include m.host-bloque;
+}
+
+.pagina {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: t.esp(5);
+  display: grid;
+  gap: t.esp(5);
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: t.esp(4);
+  align-items: start;
+}

@@ -1,0 +1,1 @@
+import{z as o}from"../../base/zod.js?v=zn6b7f";const n=o.object({id:o.string().nullable().default(null),version:o.number().default(0)}),a={"av-organizacion":n};export{n as AvOrganizacionPropsSchema,a as ORGANIZACION_PROPS};

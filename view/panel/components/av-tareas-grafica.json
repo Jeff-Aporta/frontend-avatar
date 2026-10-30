@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-tareas-grafica",
+  "category": "panel",
+  "navTitle": "Tareas gráfica",
+  "title": "&lt;av-tareas-grafica&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-tareas-grafica",
+  "styles": ".stage{padding:1rem;max-width:28rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-tareas-grafica&gt;",
+      "lede": "Dona de tareas por estado.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-tareas-grafica id=\"g\"></av-tareas-grafica></div>", "target": "#g", "props": { "tareas": { "total": 6, "abiertas": 2, "en_progreso": 2, "en_revision": 1, "cerradas": 1, "vencidas": 0 } }, "controls": [ { "prop": "props:tareas", "type": "json", "label": "tareas", "default": { "total": 6, "abiertas": 2, "en_progreso": 2, "en_revision": 1, "cerradas": 1, "vencidas": 0 } } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En el panel, bajo los KPIs.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para el detalle de tareas: eso es el tablero.</iswc-callout>" }
+      ]
+    }
+  ]
+}

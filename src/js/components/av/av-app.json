@@ -1,0 +1,29 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-app",
+  "category": "shell",
+  "navTitle": "App",
+  "title": "&lt;av-app&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-app",
+  "styles": ".stage{min-height:24rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-app&gt;",
+      "lede": "Shell de la app: barra, navegación por permisos, sesión y la vista activa.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-app id=\"app\"></av-app></div>",
+          "target": "#app",
+          "props": { "vista": "inicio" },
+          "controls": [
+            { "prop": "props:vista", "type": "select", "label": "vista", "options": ["inicio", "acceso", "panel"], "default": "inicio" }
+          ]
+        },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Una sola vez, en index.html.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No lo montes dentro de otra vista.</iswc-callout>" }
+      ]
+    }
+  ]
+}

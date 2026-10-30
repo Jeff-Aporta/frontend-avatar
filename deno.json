@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable",
+      "deno.ns"
+    ],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true
+  },
+  "iswc": {
+    "host": "https://jeff-aporta.github.io/frontend-avatar/"
+  },
+  "nodeModulesDir": "auto",
+  "unstable": [
+    "sloppy-imports"
+  ],
+  "imports": {
+    "@browserbasehq/stagehand": "npm:@browserbasehq/stagehand@4.1.0",
+    "@types/node": "npm:@types/node@^22.20.5",
+    "esbuild": "npm:esbuild@0.28.1",
+    "jsdom": "npm:jsdom@29.1.1",
+    "zod": "npm:zod@4.6.7",
+    "sass": "npm:sass@^1.105.0",
+    "@std/http/file-server": "jsr:@std/http@1/file-server",
+    "@iswc/component-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/a1df39adb9e421de874dd624901b72daa9e25e5c/src/previews/_kit/schemas/component.schemas.ts",
+    "@iswc/loader-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/a1df39adb9e421de874dd624901b72daa9e25e5c/src/cdn/schemas/loader.schemas.ts",
+    "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/src/vendor.ts",
+    "@Jeff-Aporta/DER/": "https://cdn.jsdelivr.net/gh/Jeff-Aporta/DER@2c2ebdc0ed09290aca3264bbfe727477cd677d9c/",
+    "@Jeff-Aporta/wc-base/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/de72fa6916b42d91ee3e8bfecfbcbeb67c97114d/src/vendor-distributions/shared/",
+    "@Jeff-Aporta/wc-diagrams/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/de72fa6916b42d91ee3e8bfecfbcbeb67c97114d/src/components/diagrams/schemas/"
+  },
+  "tasks": {
+    "build:scss": "deno run -A scripts/build/build-scss.mjs",
+    "icons": "deno run -A --reload=https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/ assets/dl.js",
+    "build": "deno task icons ; deno task build:scss && deno run -A src/utils/build.ts",
+    "dev": "deno run -A src/utils/build.ts --watch",
+    "serve": "deno run -A jsr:@std/http@1/file-server -p 4300 --host 127.0.0.1",
+    "check": "deno check --allow-import=api-avatar.jeffaporta.workers.dev:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,jsr.io:443,deno.land:443,esm.sh:443 src/js/ view/ tests/",
+    "pin": "deno run -A src/vendor/iswc-root/tools/pin-update.mjs --repo=Jeff-Aporta/is-webcomponents --raices=index.html,assets/dl.js,src,view,deno.json",
+    "vendor:iswc": "deno run -A scripts/vendor/vendor-iswc-tools.mjs",
+    "test": "deno task build && deno run -A scripts/gate/test-health.mjs",
+    "test:health": "deno run -A scripts/gate/test-health.mjs",
+    "test:e2e": "deno run -A scripts/gate/e2e/run.ts",
+    "test:all": "deno run -A scripts/gate/run-test-all.mjs",
+    "test:all:halt": "deno run -A scripts/gate/run-test-all.mjs --halt",
+    "sync:entregable": "deno run -A scripts/gate/sync-to-entregable.mjs"
+  },
+  "avatar": {
+    "api": "https://api-avatar.jeffaporta.workers.dev/api",
+    "vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=242cb962"
+  }
+}

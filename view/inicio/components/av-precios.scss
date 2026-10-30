@@ -1,0 +1,76 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-precios — tres planes; el destacado un poco más alto. */
+:host {
+  @include m.host-bloque;
+}
+
+.seccion {
+  padding: t.esp(8) 0;
+
+  .titulo {
+    margin: 0 0 t.esp(5);
+    font-size: 1.6rem;
+    text-align: center;
+  }
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: t.esp(4);
+  align-items: stretch;
+}
+
+.plan {
+  .cabeza {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: t.esp(2);
+  }
+
+  .precio {
+    margin: 0 0 t.esp(3);
+
+    .valor {
+      font-size: 1.9rem;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+    }
+
+    .periodo {
+      color: var(--iswc-text-dim);
+    }
+  }
+
+  .incluye {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: t.esp(1);
+    color: var(--iswc-text-soft);
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: t.esp(2);
+    }
+
+    iswc-icon {
+      color: var(--iswc-success-text);
+    }
+  }
+
+  &[data-destacado="1"] {
+    transform: translateY(-0.4rem);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .plan {
+    transition: transform 160ms ease;
+  }
+}

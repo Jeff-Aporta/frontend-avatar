@@ -1,0 +1,21 @@
+/* app.scss — SOLO lo que vive en light DOM (la página). Los componentes llevan su .scss hermano. */
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--iswc-bg);
+  color: var(--iswc-text);
+  font-family: var(--iswc-font-sans);
+}
+
+/* La app se revela cuando el arranque marca `data-app-ready` (o el watchdog de 6 s). */
+html:not([data-app-ready]) body {
+  visibility: hidden;
+}
+
+/* Paleta propia «avatar»: cian de la marca; el resto de tokens los deriva el kit de brand-h/s/b. */
+html[data-palette="avatar"] {
+  --iswc-brand-h: 192;
+  --iswc-brand-s: 88%;
+  --iswc-brand-b: 40%;
+}

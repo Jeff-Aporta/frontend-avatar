@@ -1,0 +1,1 @@
+import{z as e}from"../../base/zod.js?v=zn6b7f";const t=e.object({id:e.string().nullable().default(null),version:e.number().default(0)}),o={"av-asistente":t};export{o as ASISTENTE_PROPS,t as AvAsistentePropsSchema};

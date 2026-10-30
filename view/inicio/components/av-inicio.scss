@@ -1,0 +1,24 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-inicio — página centrada con ancho máximo. */
+:host {
+  @include m.host-bloque;
+}
+
+.pagina {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 t.esp(5) t.esp(8);
+}
+
+.pie {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: t.esp(2);
+  padding-top: t.esp(5);
+  border-top: 1px solid var(--iswc-border-soft);
+  color: var(--iswc-text-dim);
+  font-size: 0.85rem;
+}

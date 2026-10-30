@@ -1,0 +1,46 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-caracteristicas — rejilla responsive de tarjetas. */
+:host {
+  @include m.host-bloque;
+}
+
+.seccion {
+  padding: t.esp(8) 0;
+
+  .titulo {
+    margin: 0 0 t.esp(5);
+    font-size: 1.6rem;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: t.esp(4);
+
+  p {
+    margin: 0;
+    color: var(--iswc-text-soft);
+  }
+}
+
+.cabeza {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+
+  .icono {
+    display: inline-grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: t.radio(md);
+    background: var(--iswc-brand-soft);
+    color: var(--iswc-accent);
+    font-size: 1.2rem;
+  }
+}

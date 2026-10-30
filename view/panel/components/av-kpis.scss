@@ -1,0 +1,18 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-kpis — rejilla responsive de iswc-stat. */
+:host {
+  @include m.host-bloque;
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: t.esp(3);
+}
+
+.esqueleto {
+  height: 6.5rem;
+  border-radius: t.radio(md);
+}

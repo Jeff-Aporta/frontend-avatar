@@ -1,0 +1,31 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-persona",
+  "category": "transversal",
+  "navTitle": "Persona",
+  "title": "&lt;av-persona&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-persona",
+  "styles": ".stage{padding:1rem;font-size:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-persona&gt;",
+      "lede": "Avatar con iniciales, nombre y detalle.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-persona id=\"p\"></av-persona></div>",
+          "target": "#p",
+          "props": { "iusuario": "ana", "nombre": "Ana Gestora", "detalle": "Gestora", "compacto": false },
+          "controls": [
+            { "prop": "props:nombre", "type": "text", "label": "nombre", "default": "Ana Gestora" },
+            { "prop": "props:detalle", "type": "text", "label": "detalle", "default": "Gestora" },
+            { "prop": "props:compacto", "type": "boolean", "label": "compacto", "default": false }
+          ]
+        },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Donde aparezca un usuario: autor de un mensaje, asignado de una tarea, miembro.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para la sesión de la barra: eso es iswc-session-menu.</iswc-callout>" }
+      ]
+    }
+  ]
+}

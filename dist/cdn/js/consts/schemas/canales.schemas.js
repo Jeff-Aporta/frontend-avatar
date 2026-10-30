@@ -1,0 +1,1 @@
+import{z as e}from"../../base/zod.js?v=zn6b7f";const a=e.object({id:e.string().nullable().default(null),version:e.number().default(0)}),n={"av-canales":a};export{a as AvCanalesPropsSchema,n as CANALES_PROPS};

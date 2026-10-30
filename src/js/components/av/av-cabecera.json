@@ -1,0 +1,31 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-cabecera",
+  "category": "transversal",
+  "navTitle": "Cabecera",
+  "title": "&lt;av-cabecera&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-cabecera",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-cabecera&gt;",
+      "lede": "Título, subtítulo, ícono y acciones de una vista.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-cabecera id=\"c\"><iswc-button slot=\"acciones\" color=\"brand\">Nuevo</iswc-button></av-cabecera></div>",
+          "target": "#c",
+          "props": { "titulo": "Proyectos", "subtitulo": "Tableros kanban de la empresa", "icono": "mdi:view-column-outline" },
+          "controls": [
+            { "prop": "props:titulo", "type": "text", "label": "titulo", "default": "Proyectos" },
+            { "prop": "props:subtitulo", "type": "text", "label": "subtitulo", "default": "Tableros kanban de la empresa" },
+            { "prop": "props:icono", "type": "text", "label": "icono", "default": "mdi:view-column-outline" }
+          ]
+        },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de toda vista privada.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como título de una tarjeta: ahí va el slot header de iswc-card.</iswc-callout>" }
+      ]
+    }
+  ]
+}

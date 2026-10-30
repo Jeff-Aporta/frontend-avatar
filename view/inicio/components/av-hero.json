@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-hero",
+  "category": "inicio",
+  "navTitle": "Hero",
+  "title": "&lt;av-hero&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-hero",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-hero&gt;",
+      "lede": "Portada de la landing.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-hero id=\"h\"></av-hero></div>", "target": "#h", "props": { "sesion": false }, "controls": [ { "prop": "props:sesion", "type": "boolean", "label": "sesion", "default": false } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de la landing.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de la app privada.</iswc-callout>" }
+      ]
+    }
+  ]
+}

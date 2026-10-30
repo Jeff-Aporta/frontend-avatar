@@ -1,0 +1,21 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-inicio",
+  "category": "inicio",
+  "navTitle": "Inicio (shell)",
+  "title": "&lt;av-inicio&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-inicio",
+  "styles": ".stage{min-height:20rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-inicio&gt;",
+      "lede": "La landing completa.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-inicio id=\"i\"></av-inicio></div>", "target": "#i", "props": { "sesion": false }, "controls": [ { "prop": "props:sesion", "type": "boolean", "label": "sesion", "default": false } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/ (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>" }
+      ]
+    }
+  ]
+}

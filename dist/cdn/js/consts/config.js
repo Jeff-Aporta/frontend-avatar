@@ -1,0 +1,1 @@
+const e="https://api-avatar.jeffaporta.workers.dev/api",a="avatar:api";function r(){if(typeof location>"u")return e;try{const t=new URLSearchParams(location.search).get("api");return t!==null&&(t?localStorage.setItem(a,t):localStorage.removeItem(a)),localStorage.getItem(a)||e}catch{return e}}export{e as API_PUBLICADA,r as apiUrl};

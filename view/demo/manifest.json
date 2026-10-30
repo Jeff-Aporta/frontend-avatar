@@ -1,0 +1,170 @@
+[
+  {
+    "tag": "av-app",
+    "file": "../../src/js/components/av/av-app.json"
+  },
+  {
+    "tag": "av-cabecera",
+    "file": "../../src/js/components/av/av-cabecera.json"
+  },
+  {
+    "tag": "av-vacio",
+    "file": "../../src/js/components/av/av-vacio.json"
+  },
+  {
+    "tag": "av-persona",
+    "file": "../../src/js/components/av/av-persona.json"
+  },
+  {
+    "tag": "av-empresa-selector",
+    "file": "../../src/js/components/av/av-empresa-selector.json"
+  },
+  {
+    "tag": "av-hero",
+    "file": "../inicio/components/av-hero.json"
+  },
+  {
+    "tag": "av-caracteristicas",
+    "file": "../inicio/components/av-caracteristicas.json"
+  },
+  {
+    "tag": "av-precios",
+    "file": "../inicio/components/av-precios.json"
+  },
+  {
+    "tag": "av-inicio",
+    "file": "../inicio/components/av-inicio.json"
+  },
+  {
+    "tag": "av-credenciales-demo",
+    "file": "../acceso/components/av-credenciales-demo.json"
+  },
+  {
+    "tag": "av-acceso",
+    "file": "../acceso/components/av-acceso.json"
+  },
+  {
+    "tag": "av-kpis",
+    "file": "../panel/components/av-kpis.json"
+  },
+  {
+    "tag": "av-tareas-grafica",
+    "file": "../panel/components/av-tareas-grafica.json"
+  },
+  {
+    "tag": "av-embudo-grafica",
+    "file": "../panel/components/av-embudo-grafica.json"
+  },
+  {
+    "tag": "av-notificaciones",
+    "file": "../panel/components/av-notificaciones.json"
+  },
+  {
+    "tag": "av-panel",
+    "file": "../panel/components/av-panel.json"
+  },
+  {
+    "tag": "av-canal-lista",
+    "file": "../canales/components/av-canal-lista.json"
+  },
+  {
+    "tag": "av-mensaje",
+    "file": "../canales/components/av-mensaje.json"
+  },
+  {
+    "tag": "av-redactor",
+    "file": "../canales/components/av-redactor.json"
+  },
+  {
+    "tag": "av-conversacion",
+    "file": "../canales/components/av-conversacion.json"
+  },
+  {
+    "tag": "av-canal-form",
+    "file": "../canales/components/av-canal-form.json"
+  },
+  {
+    "tag": "av-canales",
+    "file": "../canales/components/av-canales.json"
+  },
+  {
+    "tag": "av-tarea-form",
+    "file": "../proyectos/components/av-tarea-form.json"
+  },
+  {
+    "tag": "av-tarea-detalle",
+    "file": "../proyectos/components/av-tarea-detalle.json"
+  },
+  {
+    "tag": "av-tablero",
+    "file": "../proyectos/components/av-tablero.json"
+  },
+  {
+    "tag": "av-proyecto-form",
+    "file": "../proyectos/components/av-proyecto-form.json"
+  },
+  {
+    "tag": "av-proyectos",
+    "file": "../proyectos/components/av-proyectos.json"
+  },
+  {
+    "tag": "av-embudo",
+    "file": "../crm/components/av-embudo.json"
+  },
+  {
+    "tag": "av-clientes-grid",
+    "file": "../crm/components/av-clientes-grid.json"
+  },
+  {
+    "tag": "av-cliente-form",
+    "file": "../crm/components/av-cliente-form.json"
+  },
+  {
+    "tag": "av-crm",
+    "file": "../crm/components/av-crm.json"
+  },
+  {
+    "tag": "av-empresa-form",
+    "file": "../organizacion/components/av-empresa-form.json"
+  },
+  {
+    "tag": "av-invitar-form",
+    "file": "../organizacion/components/av-invitar-form.json"
+  },
+  {
+    "tag": "av-miembros",
+    "file": "../organizacion/components/av-miembros.json"
+  },
+  {
+    "tag": "av-equipos",
+    "file": "../organizacion/components/av-equipos.json"
+  },
+  {
+    "tag": "av-organizacion",
+    "file": "../organizacion/components/av-organizacion.json"
+  },
+  {
+    "tag": "av-avo-mensaje",
+    "file": "../asistente/components/av-avo-mensaje.json"
+  },
+  {
+    "tag": "av-asistente",
+    "file": "../asistente/components/av-asistente.json"
+  },
+  {
+    "tag": "av-usuario-form",
+    "file": "../admin/components/av-usuario-form.json"
+  },
+  {
+    "tag": "av-usuarios",
+    "file": "../admin/components/av-usuarios.json"
+  },
+  {
+    "tag": "av-roles",
+    "file": "../admin/components/av-roles.json"
+  },
+  {
+    "tag": "av-admin",
+    "file": "../admin/components/av-admin.json"
+  }
+]

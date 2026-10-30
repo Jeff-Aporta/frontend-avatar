@@ -1,0 +1,58 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-notificaciones — lista con ícono, texto y hace cuánto; las leídas atenuadas. */
+:host {
+  @include m.host-bloque;
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: t.esp(2);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: t.esp(3);
+  padding: t.esp(2) 0;
+  border-bottom: 1px solid var(--iswc-border-soft);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  .icono {
+    color: var(--iswc-accent);
+    font-size: 1.2rem;
+    margin-top: 0.1rem;
+  }
+
+  .texto {
+    display: grid;
+    min-width: 0;
+  }
+
+  .cuerpo {
+    color: var(--iswc-text-dim);
+    font-size: 0.88rem;
+  }
+
+  .cuando {
+    color: var(--iswc-text-dim);
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  &[data-leida="1"] {
+    opacity: 0.6;
+  }
+}
+
+.vacio {
+  display: block;
+}

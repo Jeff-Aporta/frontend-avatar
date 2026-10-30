@@ -1,0 +1,73 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-hero — portada: texto a la izquierda, ilustración a la derecha; apilado en móvil. */
+:host {
+  @include m.host-bloque;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: t.esp(8);
+  padding: t.esp(10) 0;
+
+  .kicker {
+    margin: 0 0 t.esp(3);
+  }
+
+  .titulo {
+    margin: 0;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 750;
+    background: linear-gradient(90deg, var(--iswc-text), var(--iswc-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .lede {
+    margin: t.esp(4) 0;
+    max-width: 40rem;
+    font-size: 1.15rem;
+    color: var(--iswc-text-soft);
+  }
+
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: t.esp(3);
+  }
+
+  .nota {
+    margin: t.esp(4) 0 0;
+    color: var(--iswc-text-dim);
+    font-size: 0.9rem;
+  }
+
+  .ilustracion {
+    width: 100%;
+    max-height: 26rem;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px color-mix(in srgb, var(--iswc-accent) 25%, transparent));
+  }
+}
+
+@media (max-width: 48rem) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: t.esp(6) 0;
+    text-align: center;
+
+    .acciones {
+      justify-content: center;
+    }
+
+    .ilustracion {
+      max-height: 16rem;
+    }
+  }
+}

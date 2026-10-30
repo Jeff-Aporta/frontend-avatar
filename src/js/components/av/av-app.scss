@@ -1,0 +1,32 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-app — shell: el armazón del kit ocupa el viewport; la vista hace su propio scroll dentro de ::part(main). */
+:host {
+  @include m.host-bloque;
+  height: 100dvh;
+  background: var(--iswc-bg);
+  color: var(--iswc-text);
+}
+
+.arranque {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: t.esp(3);
+  min-height: 100dvh;
+  color: var(--iswc-text-dim);
+}
+
+.vista {
+  display: block;
+  min-height: 100%;
+}
+
+iswc-app-shell::part(bar) {
+  --iswc-shell-bar-min-height: 3rem;
+}
+
+av-empresa-selector {
+  max-width: 14rem;
+}
