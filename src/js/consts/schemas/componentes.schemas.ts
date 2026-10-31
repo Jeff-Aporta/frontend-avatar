@@ -7,7 +7,7 @@
  */
 import { z } from '../../base/zod.js';
 
-/** Ruta de la app: vista e id opcional (`#/canales/12`). */
+/** Ruta de la app: vista (una página real por vista) e id opcional del registro abierto (viaja en el historial). */
 export const RutaSchema = z.object({ vista: z.string(), id: z.string().nullable() });
 export type Ruta = z.infer<typeof RutaSchema>;
 
@@ -16,6 +16,8 @@ export const AvAppPropsSchema = z.object({
   vista: z.string().default('inicio'),
   id: z.string().nullable().default(null),
   listo: z.boolean().default(false),
+  /** Sube al cambiar de empresa: remonta solo el contenido de la vista. */
+  version: z.number().default(0),
 });
 export type AvAppProps = z.infer<typeof AvAppPropsSchema>;
 
@@ -52,13 +54,42 @@ export const AvEmpresaSelectorPropsSchema = z.object({
 });
 export type AvEmpresaSelectorProps = z.infer<typeof AvEmpresaSelectorPropsSchema>;
 
-/** Módulo del menú lateral. */
-export const ItemMenuSchema = z.object({ id: z.string(), label: z.string(), icon: z.string(), grupo: z.string(), contador: z.number().default(0) });
-export type ItemMenu = z.infer<typeof ItemMenuSchema>;
+/** `<av-logo>`: logo de Avatar en SVG con los tokens de la paleta; `wordmark` agrega el nombre; `animado` hace orbitar el satélite. */
+export const AvLogoPropsSchema = z.object({
+  wordmark: z.boolean().default(false),
+  animado: z.boolean().default(false),
+});
+export type AvLogoProps = z.infer<typeof AvLogoPropsSchema>;
 
-/** `<av-menu>`: menú lateral colapsable del área privada. */
-export const AvMenuPropsSchema = z.object({ items: z.array(ItemMenuSchema).default([]), activo: z.string().default(''), plegado: z.boolean().default(false) });
-export type AvMenuProps = z.infer<typeof AvMenuPropsSchema>;
+/** Un indicador (KPI) de `<av-indicadores>`: lo que pinta un `iswc-stat`. */
+export const IndicadorSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  value: z.string(),
+  helper: z.string().default(''),
+  icon: z.string().default(''),
+  color: z.enum(['brand', 'neutral', 'success', 'warning', 'danger']).default('brand'),
+  trend: z.string().default(''),
+  trendDirection: z.enum(['up', 'down', 'flat', '']).default(''),
+});
+export type Indicador = z.infer<typeof IndicadorSchema>;
+
+/** `<av-indicadores>`: fila de KPIs (`null` = esqueletos mientras carga). */
+export const AvIndicadoresPropsSchema = z.object({ items: z.array(IndicadorSchema).nullable().default(null), esqueletos: z.number().default(4) });
+export type AvIndicadoresProps = z.infer<typeof AvIndicadoresPropsSchema>;
+
+/** `<av-escena>`: ilustración Memphis por capas (`core/escenas.ts`); `etiqueta` la vuelve informativa para lectores de pantalla. */
+export const AvEscenaPropsSchema = z.object({
+  escena: z.string().default('bienvenida'),
+  etiqueta: z.string().default(''),
+});
+export type AvEscenaProps = z.infer<typeof AvEscenaPropsSchema>;
+
+/** `<av-buscador>`: búsqueda global (paleta de comandos del kit con orden semántico); `permitidos` limita las vistas. */
+export const AvBuscadorPropsSchema = z.object({
+  permitidos: z.array(z.string()).default([]),
+});
+export type AvBuscadorProps = z.infer<typeof AvBuscadorPropsSchema>;
 
 /** Props de los transversales, por tag (lo lee `props-registro.ts`). */
 export const APP_PROPS = {
@@ -67,7 +98,10 @@ export const APP_PROPS = {
   'av-vacio': AvVacioPropsSchema,
   'av-persona': AvPersonaPropsSchema,
   'av-empresa-selector': AvEmpresaSelectorPropsSchema,
-  'av-menu': AvMenuPropsSchema,
+  'av-logo': AvLogoPropsSchema,
+  'av-indicadores': AvIndicadoresPropsSchema,
+  'av-escena': AvEscenaPropsSchema,
+  'av-buscador': AvBuscadorPropsSchema,
 } as const;
 
 /** Base (`componente.ts`): atributos e hijos del helper `el()`. */

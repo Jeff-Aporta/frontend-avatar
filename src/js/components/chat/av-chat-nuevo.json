@@ -1,0 +1,72 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-nuevo",
+  "category": "chat",
+  "navTitle": "Nuevo chat",
+  "title": "&lt;av-chat-nuevo&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-nuevo",
+  "styles": "",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-nuevo&gt;",
+      "lede": "Diálogo para empezar un chat.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-chat-nuevo id=\"x\"></av-chat-nuevo>",
+          "target": "#x",
+          "props": {
+            "personas": [
+              {
+                "id": "beto",
+                "nombre": "Beto Ruiz",
+                "foto": null,
+                "detalle": "Desarrollo",
+                "enLinea": true,
+                "color": 3,
+                "rol": ""
+              },
+              {
+                "id": "carla",
+                "nombre": "Carla Gómez",
+                "foto": null,
+                "detalle": "Diseño",
+                "enLinea": false,
+                "color": 5,
+                "rol": ""
+              },
+              {
+                "id": "dario",
+                "nombre": "Darío Peña",
+                "foto": null,
+                "detalle": "Ventas",
+                "enLinea": false,
+                "color": 0,
+                "rol": ""
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde «Nuevo chat» de la lista.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para elegir personas en formularios: iswc-combobox.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Selector de personas en diálogo.",
+    "propuesta": "iswc-people-picker"
+  }
+}

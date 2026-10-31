@@ -11,6 +11,7 @@ import { EmpresaSchema, EquipoSchema, IntegranteSchema, MiembroSchema, UsuarioMi
 import { auth, cargarPerfil, controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
 import { empresaActiva, estado, fijar } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
+import { tomarIntencion } from '../../../src/js/core/router.js';
 import { cuerpoEmpresa } from '../utils/organizacion.js';
 import './av-empresa-form.js';
 import './av-invitar-form.js';
@@ -252,6 +253,8 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
     await cargarEmpresa();
     await cargarMiembros();
     await cargarEquipos();
+    // Paleta global (Ctrl+K) → «Invitar a alguien a la empresa».
+    if (tomarIntencion('organizacion') === 'invitar' && gestiona) await abrirInvitar();
   })();
 });
 

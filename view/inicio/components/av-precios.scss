@@ -10,6 +10,7 @@
   padding: t.esp(8) 0;
 
   .titulo {
+    @include m.titulo;
     margin: 0 0 t.esp(5);
     font-size: 1.6em;
     text-align: center;
@@ -35,6 +36,7 @@
     margin: 0 0 t.esp(3);
 
     .valor {
+      @include m.impacto;
       font-size: 1.9em;
       font-weight: 750;
       letter-spacing: -0.02em;

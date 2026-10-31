@@ -1,0 +1,44 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-emojis",
+  "category": "chat",
+  "navTitle": "Emojis",
+  "title": "&lt;av-chat-emojis&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-emojis",
+  "styles": ".stage{max-width:22rem;border:1px solid var(--iswc-border-soft);border-radius:.75rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-emojis&gt;",
+      "lede": "Selector de emojis.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-emojis id=\"x\"></av-chat-emojis></div>",
+          "target": "#x",
+          "props": {
+            "destino": "galeria"
+          },
+          "controls": [
+            {
+              "control": "text",
+              "prop": "props:destino",
+              "label": "destino",
+              "default": "galeria"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En el redactor y en «más reacciones».</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para íconos de interfaz: iswc-icon.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Selector de emojis sin dependencias.",
+    "propuesta": "iswc-emoji-picker"
+  }
+}

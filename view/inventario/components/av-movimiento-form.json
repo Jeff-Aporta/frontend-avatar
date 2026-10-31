@@ -1,0 +1,64 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-movimiento-form",
+  "category": "inventario",
+  "navTitle": "Formulario de movimiento",
+  "title": "&lt;av-movimiento-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-movimiento-form",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-movimiento-form&gt;",
+      "lede": "Mover stock con rastro en el kardex.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-movimiento-form id=\"d\"></av-movimiento-form></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "iproducto": 1,
+            "tipo": "entrada",
+            "ocupado": false,
+            "error": "",
+            "productos": [
+              {
+                "iproducto": 1,
+                "sku": "PROD-00001",
+                "iempresa": 1,
+                "nombre": "Procesador i9-10900K",
+                "stock": 3,
+                "stock_minimo": 5
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "prop": "props:tipo",
+              "type": "select",
+              "label": "tipo",
+              "options": [
+                "entrada",
+                "salida",
+                "ajuste"
+              ],
+              "default": "entrada"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde Movimiento, Reponer o las acciones de un producto.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar datos del producto.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-empleado-form",
+  "category": "rrhh",
+  "navTitle": "Formulario de empleado",
+  "title": "&lt;av-empleado-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-empleado-form",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-empleado-form&gt;",
+      "lede": "Ficha de un empleado.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-empleado-form id=\"d\"></av-empleado-form></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "puedeEscribir": true,
+            "ocupado": false,
+            "error": "",
+            "miembros": [
+              {
+                "iusuario": "beto",
+                "usuario": {
+                  "iusuario": "beto",
+                  "nombre": "Beto Soporte"
+                }
+              }
+            ],
+            "empleado": {
+              "iempleado": 1,
+              "iempresa": 1,
+              "iusuario": null,
+              "nombre": "María Aguirre",
+              "email": "maria@avatar.test",
+              "departamento": "Diseño",
+              "cargo": "Diseñadora Senior",
+              "salario": 6500000,
+              "estado": "activo",
+              "fingreso": "2022-03-14"
+            }
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "prop": "props:puedeEscribir",
+              "type": "boolean",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al abrir un empleado o con Nuevo empleado.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para usuarios de la plataforma: eso es Administración.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

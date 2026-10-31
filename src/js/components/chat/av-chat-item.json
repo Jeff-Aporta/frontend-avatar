@@ -1,0 +1,62 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-item",
+  "category": "chat",
+  "navTitle": "Fila de chat",
+  "title": "&lt;av-chat-item&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-item",
+  "styles": ".stage{max-width:24rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-item&gt;",
+      "lede": "Fila de chat con su menú de preferencias.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-item id=\"x\"></av-chat-item></div>",
+          "target": "#x",
+          "props": {
+            "chat": {
+              "id": "d1",
+              "tipo": "directo",
+              "nombre": "Beto Ruiz",
+              "foto": null,
+              "iniciales": "BR",
+              "color": 2,
+              "ultimo": "Nos vemos el lunes",
+              "autorUltimo": "Tú",
+              "hora": "10:42",
+              "marca": "entregado",
+              "noLeidos": 2,
+              "fijado": false,
+              "silenciado": false,
+              "archivado": false,
+              "marcadoNoLeido": false,
+              "escribiendo": "",
+              "enLinea": true
+            }
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:activo",
+              "label": "activo",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de av-chat-lista.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Fuera de una lista de chats.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Fila genérica de conversación.",
+    "propuesta": "iswc-chat-list"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-transaccion-form",
+  "category": "finanzas",
+  "navTitle": "Formulario de transacción",
+  "title": "&lt;av-transaccion-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-transaccion-form",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-transaccion-form&gt;",
+      "lede": "Registrar o editar una transacción.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-transaccion-form id=\"d\"></av-transaccion-form></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "transaccion": null,
+            "categorias": [
+              "Marketing",
+              "Nómina"
+            ],
+            "puedeEscribir": true,
+            "ocupado": false,
+            "error": ""
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "prop": "props:puedeEscribir",
+              "type": "boolean",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde Nueva transacción o al abrir una fila.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para el pago de una factura: eso lo registra Pagar.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

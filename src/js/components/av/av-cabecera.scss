@@ -17,6 +17,7 @@
   border-bottom: 1px solid var(--iswc-border-soft);
 
   .titulo {
+    @include m.titulo;
     display: flex;
     align-items: center;
     gap: t.esp(2);

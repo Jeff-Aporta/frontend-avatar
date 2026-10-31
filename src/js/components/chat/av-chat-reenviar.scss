@@ -1,0 +1,61 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-reenviar — diálogo con chats a elegir. */
+:host {
+  @include m.host-bloque;
+  display: contents;
+}
+
+.dialogo {
+  --width: min(28em, 94vw);
+}
+
+.contenido {
+  display: grid;
+  gap: t.esp(2);
+
+  .q {
+    --iswc-field-width: 100%;
+  }
+}
+
+.chats {
+  display: grid;
+  gap: 0.1em;
+  max-height: 50vh;
+  @include c.scroll;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+  padding: t.esp(2) t.esp(3);
+  border-radius: t.radio(lg);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--iswc-control-bg-hover, var(--av-velo));
+  }
+
+  .nombre {
+    flex: 1;
+    min-width: 0;
+    @include m.una-linea;
+  }
+}
+
+.foto {
+  display: inline-grid;
+  font-size: 2.1em;
+  @include c.fondo-persona;
+}
+
+.cuenta {
+  margin-right: auto;
+  align-self: center;
+  font-weight: 700;
+  color: var(--iswc-accent);
+}

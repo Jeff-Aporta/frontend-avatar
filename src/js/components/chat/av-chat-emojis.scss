@@ -1,0 +1,105 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-emojis — buscador, categorías y cuadrícula. */
+:host {
+  @include m.host-bloque;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.selector {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: t.esp(2);
+  height: 18em;
+  padding: t.esp(2);
+  box-sizing: border-box;
+}
+
+.buscar {
+  --iswc-field-width: 100%;
+}
+
+.categorias {
+  display: flex;
+  gap: 0.1em;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  .cat {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.2em;
+    height: 2.2em;
+    border: 0;
+    border-radius: t.radio(md);
+    background: transparent;
+    color: var(--iswc-text-dim);
+    font-size: 1em;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--iswc-accent);
+      background: var(--iswc-brand-soft);
+      outline: none;
+    }
+  }
+}
+
+.rejilla {
+  min-height: 0;
+  @include c.scroll;
+}
+
+h3 {
+  position: sticky;
+  top: 0;
+  margin: 0;
+  padding: t.esp(1) t.esp(1);
+  font-size: 0.72em;
+  @include m.rotulo(0.7);
+  background: var(--iswc-bg-elev);
+  z-index: 1;
+}
+
+.grupo {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.1em;
+  padding-bottom: t.esp(2);
+}
+
+.emoji {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: t.radio(md);
+  background: transparent;
+  font-size: 1.45em;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--iswc-brand-soft);
+    transform: scale(1.18);
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:hover,
+    &:focus-visible {
+      transform: none;
+    }
+  }
+}

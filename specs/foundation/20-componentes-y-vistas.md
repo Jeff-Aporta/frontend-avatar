@@ -5,7 +5,7 @@
 
 ## 1. Propósito (WHAT)
 
-La app es una única página hecha de piezas con nombre propio (`<av-…>`) sobre el kit
+La app es un conjunto de páginas (una por vista, todas generadas igual) hechas de piezas con nombre propio (`<av-…>`) sobre el kit
 iswc-root. Cada pieza muestra una parte concreta, recibe datos (atributos o `props`) y avisa hacia
 arriba con eventos `av-…`; se ve igual en claro y oscuro; tiene una ficha (`.md`) y un
 ejemplo vivo en la galería.
@@ -25,28 +25,32 @@ ejemplo vivo en la galería.
 
 ### Catálogo
 
-**`<av-app>` — shell** `[W-CAT-01]`: `<iswc-app-shell>` con marca, pestañas (`<iswc-app-nav>`) según sesión y permisos, selector de empresa, sesión (`<iswc-session-menu>`) y la vista activa del hash `#/<vista>/<id>`. Restaura la sesión al arrancar; una vista privada sin sesión cae en `acceso`. Carga cada vista al navegar (carga perezosa).
+**`<av-app vista="…">` — shell** `[W-CAT-01]`: área pública en `<iswc-app-shell>` (marca, sesión, tema, pie con paleta); área privada en `<iswc-doc-layout>` (marca, buscador global, empresa, sesión, tema; lateral `<iswc-doc-index>` con los módulos; pie con paleta). Restaura la sesión al arrancar; una vista privada sin sesión va a la página de `acceso` recordando el destino. Solo carga su vista; las demás páginas se precargan en reposo.
 
-**Transversales** `[W-CAT-02]`: `<av-cabecera>` (título, subtítulo, ícono y acciones de una vista), `<av-vacio>` (vacío / cargando / error), `<av-persona>` (avatar con iniciales + nombre + detalle), `<av-empresa-selector>` (empresa activa; emite `av-empresa-cambio`).
+**Transversales** `[W-CAT-02]`: `<av-logo>` (logo SVG teñido por la paleta, con nombre y satélite en órbita), `<av-escena>` (ilustración Corporate Memphis por capas: piezas WebP + formas en colores de la paleta), `<av-buscador>` (búsqueda global Ctrl+K con orden semántico), `<av-cabecera>` (título, subtítulo, ícono y acciones de una vista), `<av-vacio>` (vacío / cargando / error), `<av-persona>` (avatar con iniciales + nombre + detalle), `<av-empresa-selector>` (empresa activa; emite `av-empresa-cambio`), `<av-indicadores>` (fila de KPIs con `iswc-stat`; esqueletos mientras carga y refresco sin repintar).
 
 **Vistas** `[W-CAT-03]` (cada una con su spec):
 
 | Vista | Ruta | Shell | Spec |
 | --- | --- | --- | --- |
-| inicio | `#/` | `av-inicio` | `30-publico.md` |
-| acceso | `#/acceso` | `av-acceso` | `30-publico.md` |
-| panel | `#/panel` | `av-panel` | `35-panel.md` |
-| canales | `#/canales/<icanal>` | `av-canales` | `40-canales.md` |
-| asistente | `#/asistente` | `av-asistente` | `45-asistente.md` |
-| proyectos | `#/proyectos/<iproyecto>` | `av-proyectos` | `50-proyectos.md` |
-| crm | `#/crm/<icliente>` | `av-crm` | `55-crm.md` |
-| organizacion | `#/organizacion` | `av-organizacion` | `60-organizacion.md` |
-| admin | `#/admin` | `av-admin` | `65-admin.md` |
+| inicio | `/` | `av-inicio` | `30-publico.md` |
+| acceso | `/acceso/` | `av-acceso` | `30-publico.md` |
+| panel | `/panel/` | `av-panel` | `35-panel.md` |
+| canales | `/canales/` | `av-canales` | `40-canales.md` |
+| asistente | `/asistente/` | `av-asistente` | `45-asistente.md` |
+| proyectos | `/proyectos/` | `av-proyectos` | `50-proyectos.md` |
+| crm | `/crm/` | `av-crm` | `55-crm.md` |
+| correos | `/correos/` (id = carpeta) | `av-correos` | `66-correos.md` |
+| finanzas | `/finanzas/` (id = pestaña) | `av-finanzas` | `67-finanzas.md` |
+| inventario | `/inventario/` (id = pestaña) | `av-inventario` | `68-inventario.md` |
+| rrhh | `/rrhh/` (id = pestaña) | `av-rrhh` | `69-rrhh.md` |
+| organizacion | `/organizacion/` | `av-organizacion` | `60-organizacion.md` |
+| admin | `/admin/` | `av-admin` | `65-admin.md` |
 
 ## 3. Guía HOW WEAK
 
 - [HW-COMP-01] El componente solo pinta y emite; la lógica vive en `utils/` (vista) o `src/js/` (compartida).
-- [HW-COMP-02] Repintar entero es aceptable; si rompe foco o scroll, repintado parcial.
+- [HW-COMP-02] Nada se repinta entero si no cambió: la base salta props iguales y los refrescos actualizan nodos por clave (sin parpadeo); el repintado parcial (`parcial` de `crearComponente`) cuida foco y scroll.
 
 ## 4. Contratos HOW STRONG
 

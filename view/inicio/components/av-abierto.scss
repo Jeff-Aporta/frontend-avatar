@@ -29,6 +29,7 @@
 }
 
 .titulo {
+  @include m.titulo;
   margin: 0 auto;
   max-width: 34em;
   text-align: center;

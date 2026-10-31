@@ -1,0 +1,54 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-chat-visor — contenido y barra del lightbox del kit. */
+:host {
+  @include m.host-bloque;
+  display: contents;
+}
+
+.medio {
+  display: grid;
+  place-items: center;
+
+  img,
+  video {
+    display: block;
+    max-width: 92vw;
+    max-height: 82vh;
+    border-radius: t.radio(md);
+    box-shadow: 0 0 2.5em color-mix(in srgb, var(--iswc-accent) 25%, transparent);
+  }
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: t.esp(1);
+  width: 100%;
+  padding: t.esp(1) t.esp(3);
+  box-sizing: border-box;
+  color: var(--iswc-text);
+}
+
+.quien {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+
+  .autor {
+    @include m.una-linea;
+  }
+
+  .fecha {
+    font-size: 0.78em;
+    color: var(--iswc-text-dim);
+  }
+}
+
+.contador {
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
+  color: var(--iswc-text-dim);
+  padding: 0 t.esp(2);
+}

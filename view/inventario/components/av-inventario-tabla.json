@@ -1,0 +1,76 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-inventario-tabla",
+  "category": "inventario",
+  "navTitle": "Tabla de inventario",
+  "title": "&lt;av-inventario-tabla&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-inventario-tabla",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-inventario-tabla&gt;",
+      "lede": "Catálogo y kardex.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-inventario-tabla id=\"d\"></av-inventario-tabla></div>",
+          "target": "#d",
+          "props": {
+            "entidad": "productos",
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": [
+              {
+                "id": 1,
+                "iproducto": 1,
+                "sku": "PROD-00001",
+                "nombre": "Procesador i9-10900K",
+                "categoria": "Electrónicos",
+                "marca": "Intel",
+                "precio": 499.99,
+                "precioTexto": "$ 499,99",
+                "stock": 3,
+                "stock_minimo": 5,
+                "nivel": "Stock bajo · mín 5",
+                "nivelClave": "bajo",
+                "ubicacion": "A1-B2",
+                "proveedor": "TecnoSuministros"
+              },
+              {
+                "id": 2,
+                "iproducto": 2,
+                "sku": "PROD-00002",
+                "nombre": "Memoria RAM 16GB DDR4",
+                "categoria": "Electrónicos",
+                "marca": "Corsair",
+                "precio": 79.99,
+                "precioTexto": "$ 79,99",
+                "stock": 25,
+                "stock_minimo": 10,
+                "nivel": "Disponible · mín 10",
+                "nivelClave": "ok",
+                "ubicacion": "A2-C1",
+                "proveedor": "ElectroParts"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:cargando",
+              "type": "boolean",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En las pestañas de inventario.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No filtra por sí misma: la búsqueda la hace el shell.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

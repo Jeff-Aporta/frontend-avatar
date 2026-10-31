@@ -1,0 +1,104 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-burbuja",
+  "category": "chat",
+  "navTitle": "Burbuja",
+  "title": "&lt;av-chat-burbuja&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-burbuja",
+  "styles": ".stage{max-width:36rem;padding:1rem 0}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-burbuja&gt;",
+      "lede": "Burbuja de mensaje (propia o ajena).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-burbuja id=\"x\"></av-chat-burbuja></div>",
+          "target": "#x",
+          "props": {
+            "mensaje": {
+              "clave": "m2",
+              "id": "m2",
+              "chat": "g1",
+              "autor": "ana",
+              "tipo": "texto",
+              "texto": "El *lunes* arrancamos la fase 2. Revisen https://avatar.odys.co",
+              "ts": "2026-10-30T14:32:00Z",
+              "editado": null,
+              "eliminado": false,
+              "reenviado": false,
+              "respuestaA": null,
+              "adjunto": null,
+              "reacciones": [
+                {
+                  "usuario": "beto",
+                  "emoji": "👍"
+                },
+                {
+                  "usuario": "carla",
+                  "emoji": "❤️"
+                }
+              ],
+              "estado": "enviado",
+              "progreso": null,
+              "destacado": false,
+              "oculto": false,
+              "meta": {}
+            },
+            "propio": true,
+            "marca": "leido",
+            "reacciones": [
+              {
+                "emoji": "👍",
+                "n": 2,
+                "nombres": [
+                  "Beto",
+                  "Carla"
+                ],
+                "mia": false
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:propio",
+              "label": "propio",
+              "default": true
+            },
+            {
+              "control": "select",
+              "prop": "props:marca",
+              "label": "marca",
+              "default": "leido",
+              "options": [
+                "pendiente",
+                "fallido",
+                "enviado",
+                "entregado",
+                "leido"
+              ]
+            },
+            {
+              "control": "boolean",
+              "prop": "props:primero",
+              "label": "primero (cola)",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de av-chat-mensajes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para avisos del sistema fuera del chat: iswc-callout.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Burbuja de chat genérica con formato ligero.",
+    "propuesta": "iswc-chat-bubble"
+  }
+}

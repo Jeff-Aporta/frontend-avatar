@@ -1,6 +1,6 @@
 # 60 — Organización: empresa, miembros y equipos
 
-> Alcance: la vista `organizacion` (`#/organizacion`). Fuera: usuarios y roles (spec `65`), canales y proyectos.
+> Alcance: la vista `organizacion` (`/organizacion/`). Fuera: usuarios y roles (spec `65`), canales y proyectos.
 
 ## 1. Propósito (WHAT)
 

@@ -3,9 +3,11 @@
 //   W-PLAT-13  todo `<iswc-*>` que pinta un componente de una vista está en SHELL_KIT_TAGS, en VIEW_KIT_TAGS de esa
 //              vista o en HIJOS_KIT (lo registra su padre); los transversales solo usan tags del shell.
 //   W-PLAT-14  ningún hijo (HIJOS_KIT) se pide al loader: el loader rechaza su nombre y tumba la carga del kit.
+//   W-COMP-11  cada familia (`src/js/components/<familia>/`, p. ej. el chat) solo usa tags del kit declarados para TODAS las
+//              vistas que la cargan (VIEW_FAMILIAS), y sus tags tienen carpeta publicada.
 import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
 
-const { SHELL_KIT_TAGS, VIEW_KIT_TAGS, HIJOS_KIT, VIEW_TAGS } = await import('../../dist/cdn/js/kit-tags.js');
+const { SHELL_KIT_TAGS, VIEW_KIT_TAGS, HIJOS_KIT, VIEW_TAGS, FAMILIA_TAGS, VIEW_FAMILIAS, rutaComponente } = await import('../../dist/cdn/js/kit-tags.js');
 
 const raiz = new URL('../../', import.meta.url);
 
@@ -33,6 +35,24 @@ export default definirPruebas([
       }
       const transversales = [...(await usados(new URL('src/js/components/av/', raiz)))].filter((t) => !shell.has(t));
       expect('transversales solo con tags del shell', transversales.length === 0, transversales.join(', '));
+    },
+  },
+  {
+    nombre: 'registro W-COMP-11 las familias declaran sus tags del kit en cada vista que las carga',
+    categoria: 'what',
+    async correr({ expect }) {
+      const shell = new Set<string>([...SHELL_KIT_TAGS, ...HIJOS_KIT]);
+      for (const [familia, tags] of Object.entries(FAMILIA_TAGS as Record<string, string[]>)) {
+        const usa = await usados(new URL(`src/js/components/${familia}/`, raiz));
+        const vistas = Object.entries(VIEW_FAMILIAS as Record<string, string[]>).filter(([, fs]) => fs.includes(familia)).map(([v]) => v);
+        expect(`familia ${familia} la carga alguna vista`, vistas.length > 0);
+        for (const v of vistas) {
+          const propios = new Set<string>((VIEW_KIT_TAGS as Record<string, string[]>)[v] ?? []);
+          const faltan = [...usa].filter((t) => !shell.has(t) && !propios.has(t));
+          expect(`familia ${familia} en vista ${v}`, faltan.length === 0, `sin declarar en VIEW_KIT_TAGS.${v}: ${faltan.join(', ')}`);
+        }
+        for (const t of tags) expect(`${t} publicado en su familia`, rutaComponente(t) === `js/components/${familia}/`);
+      }
     },
   },
   {

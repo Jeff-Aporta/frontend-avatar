@@ -1,0 +1,164 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-asistencia-dia — contadores tipo marcador y filas con una franja del color de su estado. */
+:host {
+  @include m.host-bloque;
+}
+
+.tarjeta {
+  border-radius: var(--av-radio);
+  box-shadow: var(--av-sombra-tarjeta);
+
+  &::part(base) {
+    border-color: var(--av-borde-seccion);
+  }
+}
+
+.titulo {
+  @include m.titulo;
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+
+  iswc-icon {
+    color: var(--iswc-accent);
+  }
+}
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: t.esp(4);
+  margin-bottom: t.esp(4);
+
+  .fecha {
+    width: 12em;
+  }
+}
+
+.conteo {
+  display: flex;
+  flex: 1 1 18em;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: t.esp(2);
+}
+
+.contador {
+  --c: var(--iswc-text-dim);
+  display: grid;
+  justify-items: center;
+  flex: 1 0 5em;
+  padding: t.esp(1) t.esp(3);
+  border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+  border-radius: var(--av-radio);
+  background: color-mix(in srgb, var(--c) 8%, transparent);
+  font-size: 0.8em;
+
+  strong {
+    @include m.impacto;
+    font-size: 1.5em;
+    color: var(--c);
+  }
+
+  &[data-estado="presente"] { --c: var(--iswc-color-success); }
+  &[data-estado="retardo"] { --c: var(--iswc-color-warning); }
+  &[data-estado="ausente"] { --c: var(--iswc-color-danger); }
+  &[data-estado="vacaciones"] { --c: var(--iswc-accent); }
+}
+
+.lista {
+  display: grid;
+  gap: t.esp(2);
+}
+
+.esqueleto {
+  height: 3.5em;
+  border-radius: var(--av-radio);
+}
+
+.fila {
+  --c: var(--iswc-border-soft);
+  display: grid;
+  grid-template-columns: auto minmax(10em, 1.4fr) minmax(8em, 1fr) auto;
+  align-items: center;
+  gap: t.esp(3);
+  padding: t.esp(2) t.esp(3);
+  border: 1px solid var(--iswc-border-soft);
+  border-left: 0.25em solid var(--c);
+  border-radius: var(--av-radio);
+  background: var(--iswc-bg);
+  transition: opacity 0.2s ease;
+
+  &[aria-busy="true"] {
+    opacity: 0.55;
+  }
+
+  &[data-estado="presente"] { --c: var(--iswc-color-success); }
+  &[data-estado="retardo"] { --c: var(--iswc-color-warning); }
+  &[data-estado="ausente"] { --c: var(--iswc-color-danger); }
+  &[data-estado="vacaciones"] { --c: var(--iswc-accent); }
+}
+
+.avatar {
+  font-size: 2.3em;
+}
+
+.quien {
+  display: grid;
+  min-width: 0;
+
+  .nombre {
+    @include m.titulo;
+    @include m.una-linea;
+  }
+
+  .cargo {
+    @include m.una-linea;
+    font-size: 0.8em;
+    color: var(--iswc-text-dim);
+  }
+}
+
+.marca {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(2);
+  font-size: 0.85em;
+
+  .horas {
+    display: inline-flex;
+    align-items: center;
+    gap: t.esp(1);
+    color: var(--iswc-text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: t.esp(1);
+}
+
+@media (max-width: 48em) {
+  .fila {
+    grid-template-columns: auto minmax(0, 1fr);
+
+    .marca,
+    .botones {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fila {
+    transition: none;
+  }
+}

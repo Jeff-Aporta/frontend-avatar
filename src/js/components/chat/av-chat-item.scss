@@ -1,0 +1,194 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-item — fila de la lista: foto con presencia, nombre y hora, vista previa y contador. */
+:host {
+  @include m.host-bloque;
+  outline: none;
+  border-radius: t.radio(lg);
+}
+
+:host(:focus-visible) .fila {
+  box-shadow: inset 0 0 0 1px var(--iswc-focus, var(--iswc-accent));
+}
+
+.fila {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: t.esp(3);
+  padding: t.esp(2) t.esp(3);
+  border-radius: t.radio(lg);
+  cursor: pointer;
+  transition: background 0.16s ease;
+
+  &:hover {
+    background: var(--iswc-control-bg-hover, var(--av-velo));
+
+    .menu {
+      opacity: 1;
+    }
+  }
+
+  &[data-activo="1"] {
+    background: var(--iswc-brand-soft);
+    box-shadow: inset 0.2em 0 0 var(--iswc-accent);
+  }
+}
+
+.foto {
+  position: relative;
+  display: inline-grid;
+  font-size: 2.9em;
+  @include c.fondo-persona;
+
+  .avatar {
+    font-size: 1em;
+  }
+
+  .tipo {
+    position: absolute;
+    right: -0.08em;
+    bottom: -0.08em;
+    font-size: 0.32em;
+    padding: 0.18em;
+    border-radius: 50%;
+    background: var(--iswc-bg-elev);
+    color: var(--iswc-accent);
+    box-shadow: 0 0 0 1px var(--iswc-border-soft);
+  }
+
+  .presencia {
+    position: absolute;
+    right: 0.02em;
+    bottom: 0.02em;
+    width: 0.26em;
+    height: 0.26em;
+    border-radius: 50%;
+    background: var(--iswc-color-success);
+    box-shadow: 0 0 0 0.06em var(--iswc-bg-elev), 0 0 0.3em var(--iswc-color-success);
+  }
+}
+
+.cuerpo {
+  display: grid;
+  gap: 0.15em;
+  min-width: 0;
+}
+
+.linea {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  min-width: 0;
+}
+
+.nombre {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--av-font-titulo, inherit);
+  font-weight: 600;
+  @include m.una-linea;
+}
+
+.hora {
+  flex: none;
+  font-size: 0.75em;
+  color: var(--iswc-text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+[data-sinleer="1"] .hora {
+  color: var(--iswc-accent);
+  font-weight: 600;
+}
+
+.previa {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.88em;
+  color: var(--iswc-text-dim);
+  @include m.una-linea;
+
+  &.escribiendo {
+    color: var(--iswc-accent);
+    font-style: italic;
+  }
+}
+
+.autor {
+  color: var(--iswc-text-soft, var(--iswc-text));
+}
+
+.marca {
+  font-size: 1.05em;
+  vertical-align: -0.15em;
+  margin-right: 0.15em;
+  color: var(--iswc-text-dim);
+
+  &[data-marca="leido"] {
+    color: var(--iswc-accent);
+  }
+
+  &[data-marca="fallido"] {
+    color: var(--iswc-color-danger);
+  }
+}
+
+.estado {
+  display: inline-flex;
+  align-items: center;
+  gap: t.esp(1);
+  flex: none;
+
+  .icono {
+    font-size: 1em;
+    color: var(--iswc-text-dim);
+  }
+}
+
+.contador {
+  min-width: 1.5em;
+  height: 1.5em;
+  padding: 0 0.4em;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 1em;
+  font-size: 0.72em;
+  font-weight: 700;
+  background: var(--iswc-accent);
+  color: var(--iswc-on-brand, var(--iswc-bg));
+  box-shadow: var(--av-neon, none);
+
+  &[data-silenciado="1"] {
+    background: var(--iswc-text-dim);
+    box-shadow: none;
+  }
+
+  &.punto {
+    min-width: 0.9em;
+    height: 0.9em;
+    padding: 0;
+  }
+}
+
+.menu {
+  position: absolute;
+  right: t.esp(2);
+  top: t.esp(1);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  font-size: 0.85em;
+}
+
+:host(:focus-within) .menu {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .menu {
+    opacity: 0.7;
+  }
+}

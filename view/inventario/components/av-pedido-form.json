@@ -1,0 +1,69 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-pedido-form",
+  "category": "inventario",
+  "navTitle": "Formulario de pedido",
+  "title": "&lt;av-pedido-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-pedido-form",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-pedido-form&gt;",
+      "lede": "Pedidos a proveedores y de clientes.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-pedido-form id=\"d\"></av-pedido-form></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "pedido": null,
+            "items": [],
+            "puedeEscribir": true,
+            "ocupado": false,
+            "error": "",
+            "productos": [
+              {
+                "iproducto": 1,
+                "iempresa": 1,
+                "nombre": "Procesador i9-10900K",
+                "stock": 3,
+                "stock_minimo": 5,
+                "precio": 499.99,
+                "costo": 380
+              }
+            ],
+            "proveedores": [
+              {
+                "iproveedor": 1,
+                "iempresa": 1,
+                "nombre": "TecnoSuministros"
+              }
+            ],
+            "clientes": [
+              {
+                "icliente": 1,
+                "nombre": "Juan Pérez",
+                "organizacion": "Tech Titans S.A."
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Con Pedido o al abrir un pedido.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No mueve stock: la recepción se registra como movimiento.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

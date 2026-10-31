@@ -1,0 +1,46 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-finanzas",
+  "category": "finanzas",
+  "navTitle": "Finanzas (shell)",
+  "title": "&lt;av-finanzas&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-finanzas",
+  "styles": ".stage{min-height:20rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-finanzas&gt;",
+      "lede": "La vista de finanzas completa (necesita sesión y empresa activa).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-finanzas id=\"d\"></av-finanzas></div>",
+          "target": "#d",
+          "props": {
+            "id": null,
+            "version": 0
+          },
+          "controls": [
+            {
+              "prop": "props:id",
+              "type": "select",
+              "label": "id (pestaña)",
+              "options": [
+                "",
+                "general",
+                "transacciones",
+                "facturas"
+              ],
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta finanzas (la monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

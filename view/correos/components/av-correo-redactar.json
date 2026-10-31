@@ -1,0 +1,70 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-correo-redactar",
+  "category": "correos",
+  "navTitle": "Redactar correo",
+  "title": "&lt;av-correo-redactar&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-correo-redactar",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-correo-redactar&gt;",
+      "lede": "Redacción de un correo.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-correo-redactar id=\"d\"></av-correo-redactar></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "yo": "ana",
+            "ocupado": false,
+            "error": "",
+            "miembros": [
+              {
+                "iusuario": "beto",
+                "usuario": {
+                  "iusuario": "beto",
+                  "nombre": "Beto Soporte"
+                }
+              },
+              {
+                "iusuario": "carla",
+                "usuario": {
+                  "iusuario": "carla",
+                  "nombre": "Carla Ventas"
+                }
+              }
+            ],
+            "borrador": {
+              "destinatarios": [
+                "carla"
+              ],
+              "cc": [],
+              "asunto": "Re: Propuesta Global Finance",
+              "cuerpo": "¡Aprobada!",
+              "etiquetas": [
+                "crm"
+              ],
+              "respuesta_a": 3
+            }
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde Redactar, Responder o Reenviar.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para mensajes de chat: eso son los canales.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-cabecera — barra de vidrio con foto, nombre, estado y acciones. */
+:host {
+  @include m.host-bloque;
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  padding: t.esp(2) t.esp(3);
+  min-height: 3.6em;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--av-borde-seccion, var(--iswc-border-soft));
+  @include c.vidrio;
+
+  .volver {
+    display: none;
+  }
+
+  &[data-volver="1"] .volver {
+    display: inline-flex;
+  }
+}
+
+.quien {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+  padding: t.esp(1) t.esp(2);
+  border: 0;
+  border-radius: t.radio(lg);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--iswc-control-bg-hover, var(--av-velo));
+    outline: none;
+  }
+}
+
+.foto {
+  font-size: 2.4em;
+  display: inline-grid;
+  @include c.fondo-persona;
+}
+
+.texto {
+  display: grid;
+  min-width: 0;
+}
+
+.nombre {
+  font-family: var(--av-font-titulo, inherit);
+  font-weight: 700;
+  font-size: 1.02em;
+  @include m.una-linea;
+}
+
+.estado {
+  font-size: 0.8em;
+  color: var(--iswc-text-dim);
+  min-height: 1.2em;
+  @include m.una-linea;
+
+  &[data-activo="1"] {
+    color: var(--iswc-accent);
+    text-shadow: var(--av-neon-texto, none);
+  }
+}
+
+.acciones {
+  display: inline-flex;
+  gap: 0.1em;
+  flex: none;
+}
+
+@container (max-width: 30em) {
+  .acciones iswc-button:nth-child(3) {
+    display: none;
+  }
+}

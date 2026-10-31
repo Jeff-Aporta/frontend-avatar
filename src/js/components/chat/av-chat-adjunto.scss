@@ -1,0 +1,144 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-chat-adjunto — miniatura (imagen/video) o tarjeta de documento; en previa, con «quitar». */
+:host {
+  @include m.host-bloque;
+}
+
+.adjunto {
+  position: relative;
+  display: grid;
+  gap: t.esp(1);
+}
+
+.miniatura {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 0.7em;
+  overflow: hidden;
+  background: var(--iswc-bg-soft);
+  cursor: zoom-in;
+
+  img,
+  video {
+    display: block;
+    width: 100%;
+    max-width: 20em;
+    max-height: 22em;
+    min-width: 8em;
+    object-fit: cover;
+    transition: transform 0.35s ease, filter 0.35s ease;
+  }
+
+  &:hover img,
+  &:hover video {
+    transform: scale(1.03);
+    filter: saturate(1.15);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--iswc-focus, var(--iswc-accent));
+    outline-offset: 2px;
+  }
+
+  .play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 3em;
+    height: 3em;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 1.2em;
+    color: var(--iswc-on-brand, var(--iswc-bg));
+    background: color-mix(in srgb, var(--iswc-accent) 80%, transparent);
+    box-shadow: var(--av-neon, none);
+  }
+}
+
+.documento {
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+  min-width: 14em;
+  max-width: 22em;
+  padding: t.esp(2) t.esp(3);
+  border-radius: 0.6em;
+  background: color-mix(in srgb, var(--iswc-text) 6%, transparent);
+  border: 1px solid var(--iswc-border-soft);
+
+  .icono {
+    font-size: 2em;
+    color: var(--iswc-accent);
+    filter: drop-shadow(0 0 0.3em color-mix(in srgb, var(--iswc-accent) 40%, transparent));
+  }
+
+  .datos {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+  }
+
+  .nombre {
+    font-size: 0.9em;
+    @include m.una-linea;
+  }
+
+  .detalle {
+    font-size: 0.75em;
+    color: var(--iswc-text-dim);
+  }
+}
+
+.no-disponible {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  padding: t.esp(2) t.esp(3);
+  font-size: 0.85em;
+  color: var(--iswc-text-dim);
+}
+
+[data-modo="previa"] {
+  .miniatura img,
+  .miniatura video {
+    max-width: 7em;
+    max-height: 7em;
+    min-width: 4em;
+    aspect-ratio: 1 / 1;
+  }
+
+  .documento {
+    min-width: 10em;
+    max-width: 14em;
+  }
+
+  .quitar {
+    position: absolute;
+    top: -0.5em;
+    right: -0.5em;
+    font-size: 0.7em;
+  }
+}
+
+[data-error="1"] {
+  .miniatura,
+  .documento {
+    outline: 1px solid var(--iswc-color-danger);
+    opacity: 0.75;
+  }
+}
+
+.error {
+  max-width: 14em;
+  font-size: 0.72em;
+  color: var(--iswc-color-danger);
+}
+
+.progreso {
+  font-size: 0.6em;
+}

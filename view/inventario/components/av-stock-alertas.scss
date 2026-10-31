@@ -1,0 +1,106 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-stock-alertas — franja horizontal de tarjetas de alerta con borde de señal (rojo agotado, ámbar bajo). */
+:host {
+  @include m.host-bloque;
+}
+
+.rotulo {
+  @include m.rotulo(0.85);
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  margin: 0 0 t.esp(2);
+  font-size: 0.8em;
+
+  iswc-icon {
+    color: var(--iswc-color-danger);
+  }
+}
+
+.franja {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(14em, 1fr);
+  gap: t.esp(3);
+  overflow-x: auto;
+  padding-bottom: t.esp(2);
+}
+
+.esqueleto {
+  height: 8em;
+  border-radius: var(--av-radio);
+}
+
+.alerta {
+  --senal: var(--iswc-color-warning);
+  display: grid;
+  gap: t.esp(2);
+  align-content: start;
+  padding: t.esp(3);
+  border: 1px solid color-mix(in srgb, var(--senal) 45%, transparent);
+  border-radius: var(--av-radio);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--senal) 14%, transparent), transparent 70%), var(--iswc-bg-elev);
+  box-shadow: 0 0 1em color-mix(in srgb, var(--senal) 18%, transparent);
+
+  &[data-agotado="si"] {
+    --senal: var(--iswc-color-danger);
+  }
+}
+
+.cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.esp(2);
+  font-size: 0.8em;
+
+  .sku {
+    color: var(--iswc-text-dim);
+    font-family: var(--av-font-impacto);
+    letter-spacing: 0.05em;
+  }
+}
+
+.nombre {
+  justify-self: start;
+
+  &::part(base) {
+    padding: 0;
+    height: auto;
+  }
+
+  &::part(label) {
+    @include m.titulo;
+    white-space: normal;
+    text-align: start;
+  }
+}
+
+.cifras {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: t.esp(2);
+  font-size: 0.85em;
+  color: var(--iswc-text-dim);
+
+  .stock {
+    @include m.impacto;
+    font-size: 1.6em;
+    color: var(--senal);
+    text-shadow: 0 0 0.5em color-mix(in srgb, var(--senal) 45%, transparent);
+  }
+
+  .ubicacion {
+    display: inline-flex;
+    align-items: center;
+    gap: t.esp(1);
+    margin-left: auto;
+  }
+}
+
+.reponer {
+  justify-self: start;
+}

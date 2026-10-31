@@ -1,0 +1,60 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-audio",
+  "category": "chat",
+  "navTitle": "Nota de voz",
+  "title": "&lt;av-chat-audio&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-audio",
+  "styles": "",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-audio&gt;",
+      "lede": "Reproductor de notas de voz.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-chat-audio id=\"x\"></av-chat-audio>",
+          "target": "#x",
+          "props": {
+            "url": "",
+            "duracion": 12,
+            "onda": [
+              0.2,
+              0.5,
+              0.9,
+              0.4,
+              0.7,
+              0.3,
+              0.8,
+              0.6,
+              0.2,
+              0.5
+            ]
+          },
+          "controls": [
+            {
+              "control": "number",
+              "prop": "props:duracion",
+              "label": "duración (s)",
+              "default": 12,
+              "min": 1,
+              "max": 600,
+              "step": 1
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de burbujas de audio.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para música o podcasts largos: iswc-video o audio nativo.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Reproductor de notas de voz genérico.",
+    "propuesta": "iswc-voice-note"
+  }
+}

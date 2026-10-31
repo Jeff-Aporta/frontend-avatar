@@ -1,0 +1,121 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-lista",
+  "category": "chat",
+  "navTitle": "Lista de chats",
+  "title": "&lt;av-chat-lista&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-lista",
+  "styles": ".stage{height:30rem;max-width:24rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-lista&gt;",
+      "lede": "Lista con filtros Todos, No leídos, Grupos y Directos; flechas para recorrerla.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-lista id=\"x\"></av-chat-lista></div>",
+          "target": "#x",
+          "props": {
+            "chats": [
+              {
+                "id": "g1",
+                "tipo": "grupo",
+                "nombre": "Equipo Odys",
+                "foto": null,
+                "iniciales": "EO",
+                "color": 4,
+                "ultimo": "¿Alguien tiene el presupuesto?",
+                "autorUltimo": "Ana",
+                "hora": "10:42",
+                "marca": null,
+                "noLeidos": 3,
+                "fijado": true,
+                "silenciado": false,
+                "archivado": false,
+                "marcadoNoLeido": false,
+                "escribiendo": "",
+                "enLinea": false
+              },
+              {
+                "id": "d1",
+                "tipo": "directo",
+                "nombre": "Beto Ruiz",
+                "foto": null,
+                "iniciales": "BR",
+                "color": 2,
+                "ultimo": "Nos vemos el lunes",
+                "autorUltimo": "Tú",
+                "hora": "10:42",
+                "marca": "leido",
+                "noLeidos": 0,
+                "fijado": false,
+                "silenciado": false,
+                "archivado": false,
+                "marcadoNoLeido": false,
+                "escribiendo": "escribiendo…",
+                "enLinea": true
+              },
+              {
+                "id": "d2",
+                "tipo": "directo",
+                "nombre": "Carla Gómez",
+                "foto": null,
+                "iniciales": "CG",
+                "color": 6,
+                "ultimo": "Nos vemos el lunes",
+                "autorUltimo": "",
+                "hora": "Ayer",
+                "marca": null,
+                "noLeidos": 1,
+                "fijado": false,
+                "silenciado": true,
+                "archivado": false,
+                "marcadoNoLeido": false,
+                "escribiendo": "",
+                "enLinea": false
+              }
+            ],
+            "activo": "d1",
+            "cantidadArchivados": 2
+          },
+          "controls": [
+            {
+              "control": "select",
+              "prop": "props:filtro",
+              "label": "filtro",
+              "default": "todos",
+              "options": [
+                "todos",
+                "noleidos",
+                "grupos",
+                "directos"
+              ]
+            },
+            {
+              "control": "select",
+              "prop": "props:conexion",
+              "label": "conexión",
+              "default": "conectado",
+              "options": [
+                "conectado",
+                "conectando",
+                "desconectado"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Columna izquierda de av-chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para listas genéricas sin chats: iswc-data-grid o una lista simple.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Lista de conversaciones genérica con reconciliación por clave.",
+    "propuesta": "iswc-chat-list"
+  }
+}

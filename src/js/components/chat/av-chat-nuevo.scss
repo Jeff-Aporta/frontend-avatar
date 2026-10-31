@@ -1,0 +1,108 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-nuevo — diálogo con buscador y filas de personas. */
+:host {
+  @include m.host-bloque;
+  display: contents;
+}
+
+.dialogo {
+  --width: min(30em, 94vw);
+}
+
+.contenido {
+  display: grid;
+  gap: t.esp(2);
+
+  .q {
+    --iswc-field-width: 100%;
+  }
+}
+
+.personas {
+  display: grid;
+  gap: 0.1em;
+  max-height: 55vh;
+  @include c.scroll;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+  width: 100%;
+  padding: t.esp(2) t.esp(3);
+  border: 0;
+  border-radius: t.radio(lg);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--iswc-control-bg-hover, var(--av-velo));
+    outline: none;
+  }
+
+  &.grupo .datos strong {
+    color: var(--iswc-accent);
+  }
+}
+
+.foto {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  font-size: 2.4em;
+  @include c.fondo-persona;
+
+  &.icono {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: var(--iswc-brand-soft);
+    color: var(--iswc-accent);
+
+    iswc-icon {
+      font-size: 0.5em;
+    }
+  }
+
+  .presencia {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0.26em;
+    height: 0.26em;
+    border-radius: 50%;
+    background: var(--iswc-color-success);
+    box-shadow: 0 0 0 0.06em var(--iswc-bg-elev);
+  }
+}
+
+.datos {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+
+  strong {
+    @include m.una-linea;
+  }
+
+  span {
+    font-size: 0.8em;
+    color: var(--iswc-text-dim);
+    @include m.una-linea;
+  }
+}
+
+.vacio {
+  margin: 0;
+  padding: t.esp(4);
+  text-align: center;
+  color: var(--iswc-text-dim);
+}

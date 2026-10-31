@@ -1,0 +1,178 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-compositor — barra de redacción flotante con emojis, adjuntos, cita y grabación. */
+:host {
+  @include m.host-bloque;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.compositor {
+  position: relative;
+  display: grid;
+  gap: t.esp(2);
+  padding: t.esp(2) t.esp(3) t.esp(3);
+  border-top: 1px solid var(--av-borde-seccion, var(--iswc-border-soft));
+  @include c.vidrio;
+}
+
+.panel-emojis {
+  border-radius: t.radio(lg);
+  border: 1px solid var(--iswc-border-soft);
+  background: var(--iswc-bg-elev);
+  box-shadow: var(--av-sombra-tarjeta, var(--iswc-shadow));
+  @include c.entrada(0.6em);
+}
+
+.contexto {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  padding: t.esp(2) t.esp(2) t.esp(2) t.esp(3);
+  border-radius: t.radio(md);
+  background: color-mix(in srgb, var(--iswc-text) 5%, transparent);
+  @include c.entrada(0.3em);
+
+  .contexto-icono {
+    font-size: 1.2em;
+    color: var(--iswc-accent);
+  }
+
+  .contexto-texto {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    padding-left: t.esp(2);
+    border-left: 0.2em solid currentColor;
+    @include c.color-persona;
+
+    strong {
+      font-size: 0.8em;
+    }
+
+    span {
+      font-size: 0.85em;
+      color: var(--iswc-text-dim);
+      @include m.una-linea;
+    }
+  }
+}
+
+.adjuntos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.esp(3);
+  padding: t.esp(2) t.esp(1) 0;
+}
+
+.barra {
+  display: flex;
+  align-items: flex-end;
+  gap: t.esp(1);
+}
+
+.area {
+  flex: 1;
+  min-width: 0;
+  --iswc-field-width: 100%;
+}
+
+.b-accion {
+  flex: none;
+  box-shadow: var(--av-neon, none);
+  transition: transform 0.15s ease;
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+.compositor[data-grabando="1"] .b-accion {
+  animation: latido 1s ease-in-out infinite;
+}
+
+@keyframes latido {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.grabacion {
+  position: absolute;
+  left: t.esp(3);
+  right: 4em;
+  bottom: t.esp(3);
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  min-height: 2.6em;
+  padding: 0 t.esp(2);
+  border-radius: 2em;
+  background: var(--iswc-bg-elev);
+  border: 1px solid color-mix(in srgb, var(--iswc-color-danger) 40%, transparent);
+  @include c.entrada(0.2em);
+
+  .g-punto {
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    background: var(--iswc-color-danger);
+    box-shadow: 0 0 0.5em var(--iswc-color-danger);
+    animation: parpadeo 1s steps(2) infinite;
+  }
+
+  .g-tiempo {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.9em;
+  }
+
+  .g-onda {
+    flex: 1;
+    min-width: 0;
+    height: 1.8em;
+  }
+
+  .g-enviar {
+    display: none;
+  }
+}
+
+@keyframes parpadeo {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.aviso {
+  margin: 0;
+  font-size: 0.8em;
+  color: var(--iswc-color-danger);
+}
+
+.cuenta {
+  position: absolute;
+  right: 4.5em;
+  top: 0.2em;
+  font-size: 0.7em;
+  color: var(--iswc-text-dim);
+
+  &[data-excede="1"] {
+    color: var(--iswc-color-danger);
+    font-weight: 700;
+  }
+}
+
+.compositor[data-deshabilitado="1"] .barra {
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compositor[data-grabando="1"] .b-accion,
+  .grabacion .g-punto {
+    animation: none;
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-demo",
+  "category": "chat-demo",
+  "navTitle": "Demo del chat",
+  "title": "&lt;av-chat-demo&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-demo",
+  "styles": ".stage{height:40rem;overflow:hidden}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-demo&gt;",
+      "lede": "El demo en vivo del chat (abre otra pestaña para conversar en tiempo real).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-demo id=\"x\"></av-chat-demo></div>",
+          "target": "#x",
+          "props": {
+            "como": "ana"
+          },
+          "controls": [
+            {
+              "control": "select",
+              "prop": "props:como",
+              "label": "como (al montar)",
+              "default": "ana",
+              "options": [
+                "ana",
+                "beto",
+                "carla",
+                "dario",
+                "elena"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Página /chat-demo/ (o view/chat-demo/).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Dentro de otra vista: usa av-chat.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

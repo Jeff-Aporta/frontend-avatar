@@ -1,69 +1,45 @@
-// canales.test.ts — dominio de la vista `canales` (sin navegador), sobre lo PUBLICADO en dist/cdn.
+// canales.test.ts — dominio de la vista `canales` (sin navegador), sobre lo PUBLICADO en dist/cdn. La conversación es el
+// chat de la spec 42 (probado en chat.test.ts); aquí, lo propio de la vista:
 //
-//   W-CAN-03   canales con no leídos primero, luego actividad reciente, luego nombre
-//   W-CAN-05   mensajes en orden cronológico agrupados por día con rótulo Hoy/Ayer
-//   W-CAN-06   propio/ajeno según el usuario de la sesión
-//   W-CAN-08   texto vacío o > 4000 no se envía; se recorta
-//   W-CAN-17   id de ruta desconocido abre el primer canal
+//   W-CAN-14   sin empresa activa la vista lo dice y no consulta
+//   W-CHAT-41  sin permiso `avatar.chat` lo explica y no consulta
+//   W-CAN-19   un error de «ruta inexistente» del API significa que el chat aún no está publicado (cae al demo local)
+//   W-CAN-17   el id de la ruta abre ese chat (vacío → ninguno)
 import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
 
-const { ordenarCanales, totalSinLeer, agruparPorDia, claveDia, rotuloDia, esPropio, textoParaEnviar, canalActivo } = await import('../../dist/cdn/view/canales/utils/chat.js');
+const { estadoCanales, apiChatPendiente, chatDeRuta } = await import('../../dist/cdn/view/canales/utils/canales.js');
+const { ACCION } = await import('../../dist/cdn/js/core/permisos.js');
 
-const canal = (icanal: number, nombre: string, sin_leer: number, creado: string | null) => ({ icanal, iempresa: 1, iequipo: null, nombre, tipo: 'publico', descripcion: null, sin_leer, ultimo: creado ? { contenido: 'x', iusuario: 'ana', creado } : null });
-const mensaje = (imensaje: number, iusuario: string, creado: string) => ({ imensaje, icanal: 1, iusuario, contenido: `m${imensaje}`, creado });
+const perfil = (perms: Record<string, unknown>) => ({ usuario: 'u', irol: 'USR', igrupo: 'AVATAR', roles: ['USR'], perms });
 
 export default definirPruebas([
   {
-    nombre: 'canales W-CAN-03 no leídos primero, luego reciente, luego nombre',
+    nombre: 'canales W-CAN-14 W-CHAT-41 sin empresa o sin permiso de chat no se consulta',
     categoria: 'what',
     correr({ eq }) {
-      const lista = [canal(1, 'b', 0, '2026-10-01T00:00:00Z'), canal(2, 'a', 0, '2026-10-02T00:00:00Z'), canal(3, 'c', 3, null), canal(4, 'd', 0, null), canal(5, 'aa', 0, null)];
-      eq('orden', ordenarCanales(lista).map((c: { icanal: number }) => c.icanal), [3, 2, 1, 5, 4]);
-      eq('total no leídos', totalSinLeer(lista), 3);
+      const conChat = perfil({ [ACCION.chat]: true });
+      eq('sin empresa', estadoCanales(null, conChat), 'sin-empresa');
+      eq('sin permiso', estadoCanales(3, perfil({ [ACCION.chat]: false })), 'sin-permiso');
+      eq('sin perfil', estadoCanales(3, null), 'sin-permiso');
+      eq('listo', estadoCanales(3, conChat), 'listo');
     },
   },
   {
-    nombre: 'canales W-CAN-05 agrupa por día en orden y rotula Hoy/Ayer',
-    categoria: 'what',
-    correr({ eq, expect }) {
-      const hoy = new Date();
-      const ayer = new Date(hoy);
-      ayer.setDate(hoy.getDate() - 1);
-      const grupos = agruparPorDia([mensaje(3, 'ana', hoy.toISOString()), mensaje(1, 'beto', ayer.toISOString()), mensaje(2, 'ana', ayer.toISOString())]);
-      eq('dos días', grupos.length, 2);
-      eq('ayer primero', grupos[0]!.rotulo, 'Ayer');
-      eq('hoy después', grupos[1]!.rotulo, 'Hoy');
-      eq('orden dentro del día', grupos[0]!.mensajes.map((m: { imensaje: number }) => m.imensaje), [1, 2]);
-      expect('sin fecha rotulada', rotuloDia('sin-fecha') === 'Sin fecha' && claveDia(null) === 'sin-fecha');
-    },
-  },
-  {
-    nombre: 'canales W-CAN-06 propio solo si lo escribió el usuario de la sesión',
+    nombre: 'canales W-CAN-19 API del chat pendiente → demo local',
     categoria: 'what',
     correr({ expect }) {
-      const m = mensaje(1, 'beto', '2026-10-30T00:00:00Z');
-      expect('propio', esPropio(m, 'beto'));
-      expect('ajeno', !esPropio(m, 'ana'));
-      expect('sin sesión nunca propio', !esPropio(m, ''));
+      expect('path no definido en el plugin', apiChatPendiente('El plugin "avatar" no define el path "historial"'));
+      expect('404', apiChatPendiente('404 Not Found'));
+      expect('otros errores no', !apiChatPendiente('Sesión vencida'));
     },
   },
   {
-    nombre: 'canales W-CAN-08 valida el texto a enviar',
+    nombre: 'canales W-CAN-17 el id de la ruta abre ese chat',
     categoria: 'what',
     correr({ eq }) {
-      eq('recorta', textoParaEnviar('  hola  '), 'hola');
-      eq('vacío', textoParaEnviar('   '), null);
-      eq('demasiado largo', textoParaEnviar('x'.repeat(4001)), null);
-    },
-  },
-  {
-    nombre: 'canales W-CAN-17 id desconocido abre el primero',
-    categoria: 'what',
-    correr({ eq }) {
-      const lista = [canal(7, 'a', 0, null), canal(9, 'b', 0, null)];
-      eq('por id', canalActivo(lista, '9')?.icanal, 9);
-      eq('desconocido', canalActivo(lista, '99')?.icanal, 7);
-      eq('sin canales', canalActivo([], null), null);
+      eq('id', chatDeRuta(' 12 '), '12');
+      eq('vacío', chatDeRuta(''), null);
+      eq('nulo', chatDeRuta(null), null);
     },
   },
 ]);

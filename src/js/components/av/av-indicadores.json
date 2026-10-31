@@ -1,0 +1,22 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-indicadores",
+  "category": "transversal",
+  "navTitle": "Indicadores",
+  "title": "&lt;av-indicadores&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-indicadores",
+  "styles": ".stage{padding:1rem}",
+  "reuso": { "candidato": "iswc-root", "motivo": "Fila de KPIs responsive sin dominio: solo iswc-stat en rejilla con esqueletos y refresco sin repintar.", "propuesta": "iswc-stat-group" },
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-indicadores&gt;",
+      "lede": "KPIs de cabecera de una vista.",
+      "blocks": [
+        { "kind": "demo", "html": "<div class=\"stage\"><av-indicadores id=\"k\"></av-indicadores></div>", "target": "#k", "props": { "esqueletos": 4, "items": [ { "id": "ing", "label": "Ingresos", "value": "$ 31.780.000", "helper": "vs. mes anterior", "icon": "mdi:trending-up", "color": "success", "trend": "+29,6 %", "trendDirection": "up" }, { "id": "gas", "label": "Gastos", "value": "$ 17.347.000", "helper": "vs. mes anterior", "icon": "mdi:trending-down", "color": "danger", "trend": "-44,6 %", "trendDirection": "down" }, { "id": "ben", "label": "Beneficio neto", "value": "$ 14.433.000", "helper": "este mes", "icon": "mdi:cash-check", "color": "brand", "trend": "", "trendDirection": "" } ] }, "controls": [ { "prop": "props:esqueletos", "type": "number", "label": "esqueletos", "default": 4 } ] },
+        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de una vista de negocio, bajo la cabecera.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para tablas de cifras: para eso iswc-data-grid.</iswc-callout>" }
+      ]
+    }
+  ]
+}

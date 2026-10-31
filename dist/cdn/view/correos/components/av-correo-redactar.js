@@ -1,0 +1,14 @@
+import{crearComponente as v,define as b,emitir as c,html as l}from"../../../js/base/componente.js?v=ehrr8d";import{CorreoDatosSchema as w}from"../../../js/consts/schemas/correos.schemas.js?v=x35g1a";import{etiquetasDe as g}from"../utils/correos.js?v=7271qg";const $=v(import.meta.url,"av-correo-redactar",{abierto:!1,borrador:{destinatarios:[],cc:[],asunto:"",cuerpo:"",etiquetas:[],respuesta_a:null},miembros:[],yo:"",ocupado:!1,error:""},(i,a,t)=>{const o=a.borrador,m=a.miembros.filter(e=>e.iusuario!==a.yo),r=e=>i.querySelector(`#${e}`),s=e=>r(e).values??(r(e).value?r(e).value.split(","):[]),n=()=>c(t,"av-correo-redactar-cerrar",{}),p=()=>{const e=w.safeParse({destinatarios:s("para"),cc:s("cc"),asunto:r("asunto").value??"",cuerpo:r("cuerpo").value??"",etiquetas:g(r("etiquetas").value??""),respuesta_a:o.respuesta_a});if(!e.success){const d=[!s("para").length&&"al menos un destinatario",!(r("asunto").value??"").trim()&&"el asunto",!(r("cuerpo").value??"").trim()&&"el mensaje"].filter(Boolean);c(t,"av-correo-redactar-error",{mensaje:d.length?`Falta ${d.join(", ")}`:"Revisa los campos del correo"});return}c(t,"av-correo-enviar",{datos:e.data})},u=()=>m.map(e=>l`<iswc-option value=${e.iusuario}>${e.usuario?.nombre||e.iusuario}</iswc-option>`);i.append(l`
+      <iswc-dialog id="dialogo" label=${o.respuesta_a?"Responder":o.asunto.startsWith("Rv:")?"Reenviar":"Nuevo correo"} backdrop-variant="basic" ?open=${a.abierto} oniswc-hide=${n}>
+        <div class="campos" part="campos">
+          <iswc-select id="para" label="Para" multiple clearable placeholder="Elige destinatarios" value=${o.destinatarios.join(",")}>${u()}</iswc-select>
+          <iswc-select id="cc" label="CC" multiple clearable placeholder="Con copia (opcional)" value=${o.cc.join(",")}>${u()}</iswc-select>
+          <iswc-input id="asunto" label="Asunto" required maxlength="200" value=${o.asunto}></iswc-input>
+          <iswc-input id="etiquetas" label="Etiquetas" placeholder="crm, urgente" hint="Separadas por coma" value=${o.etiquetas.join(", ")}><iswc-icon slot="start" icon="mdi:tag-outline"></iswc-icon></iswc-input>
+          <iswc-textarea id="cuerpo" label="Mensaje" rows="9" required value=${o.cuerpo}></iswc-textarea>
+          ${a.error?l`<iswc-callout color="danger">${a.error}</iswc-callout>`:null}
+        </div>
+        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${n}>Cancelar</iswc-button>
+        <iswc-button slot="footer" color="brand" id="enviar" ?loading=${a.ocupado} oniswc-click=${p}><iswc-icon slot="start" icon="mdi:send"></iswc-icon>Enviar</iswc-button>
+      </iswc-dialog>
+    `)},(i,a,t)=>{if(a.borrador!==t.borrador||a.miembros!==t.miembros||a.error!==t.error)return!1;const o=i.querySelector("#dialogo");return o?(o.open=a.abierto,i.querySelector("#enviar")?.toggleAttribute("loading",a.ocupado),!0):!1});b("av-correo-redactar",$);

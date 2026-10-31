@@ -59,6 +59,7 @@
 }
 
 .titulo {
+  @include m.titulo;
   margin: 0;
   font-size: clamp(1.6em, 3.2vw, 2.4em);
   font-weight: 700;
@@ -81,6 +82,7 @@
   display: grid;
 
   .valor {
+    @include m.impacto;
     font-family: var(--av-font-impacto);
     font-weight: 400;
     font-size: 1.9em;

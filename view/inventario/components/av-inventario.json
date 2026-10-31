@@ -1,0 +1,47 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-inventario",
+  "category": "inventario",
+  "navTitle": "Inventario (shell)",
+  "title": "&lt;av-inventario&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-inventario",
+  "styles": ".stage{min-height:20rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-inventario&gt;",
+      "lede": "La vista de inventario completa (necesita sesión y empresa activa).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-inventario id=\"d\"></av-inventario></div>",
+          "target": "#d",
+          "props": {
+            "id": null,
+            "version": 0
+          },
+          "controls": [
+            {
+              "prop": "props:id",
+              "type": "select",
+              "label": "id (pestaña)",
+              "options": [
+                "",
+                "productos",
+                "movimientos",
+                "pedidos",
+                "proveedores"
+              ],
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta inventario (la monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

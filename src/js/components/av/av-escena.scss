@@ -1,0 +1,135 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-escena — lienzo con proporción fija; las capas se ubican por su centro en % y escalan con el ancho. */
+:host {
+  display: block;
+  width: 100%;
+  max-width: 34em;
+}
+
+.lienzo {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 1 / var(--proporcion, 1);
+  isolation: isolate;
+}
+
+.halo {
+  position: absolute;
+  inset: 12% 10% 6%;
+  z-index: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--iswc-accent) 30%, transparent), transparent 75%),
+    radial-gradient(closest-side at 70% 30%, color-mix(in srgb, var(--iswc-color-contrast, var(--iswc-accent)) 22%, transparent), transparent 80%);
+  filter: blur(1.4em);
+}
+
+.capa {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--ancho);
+  z-index: var(--z);
+  translate: -50% -50%;
+  rotate: var(--giro);
+  user-select: none;
+}
+
+.pieza {
+  height: auto;
+  filter: drop-shadow(0 0.5em 0.9em color-mix(in srgb, var(--iswc-accent) 22%, rgb(0 0 0 / 18%)));
+}
+
+/* Formas Memphis en los colores de la paleta: siguen al tema y a la paleta sin tocar las piezas. */
+.forma {
+  --c: var(--iswc-accent);
+  aspect-ratio: 1;
+
+  &[data-color="contraste"] {
+    --c: var(--iswc-color-contrast, var(--iswc-accent));
+  }
+
+  &[data-color="marca"] {
+    --c: var(--iswc-color-brand-stronger, var(--iswc-accent));
+  }
+
+  &[data-color="suave"] {
+    --c: color-mix(in srgb, var(--iswc-text) 30%, transparent);
+  }
+
+  &[data-forma="circulo"] {
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow: 0 0 1.2em color-mix(in srgb, var(--c) 55%, transparent);
+  }
+
+  &[data-forma="anillo"] {
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 0.45em solid var(--c);
+    box-shadow: 0 0 0.9em color-mix(in srgb, var(--c) 45%, transparent), inset 0 0 0.6em color-mix(in srgb, var(--c) 35%, transparent);
+  }
+
+  &[data-forma="triangulo"] {
+    background: var(--c);
+    clip-path: polygon(50% 6%, 96% 92%, 4% 92%);
+  }
+
+  &[data-forma="zigzag"] {
+    aspect-ratio: 3;
+    background:
+      linear-gradient(135deg, var(--c) 25%, transparent 25%) -0.5em 0 / 1em 1em,
+      linear-gradient(225deg, var(--c) 25%, transparent 25%) -0.5em 0 / 1em 1em;
+  }
+
+  &[data-forma="puntos"] {
+    aspect-ratio: 1.6;
+    background: radial-gradient(circle, var(--c) 22%, transparent 26%) 0 0 / 1.1em 1.1em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-anim="flotar"] {
+    animation: flotar 6s ease-in-out var(--retraso) infinite;
+  }
+
+  [data-anim="mecer"] {
+    animation: mecer 7s ease-in-out var(--retraso) infinite;
+  }
+
+  [data-anim="girar"] {
+    animation: girar 18s linear var(--retraso) infinite;
+  }
+
+  [data-anim="latir"] {
+    animation: latir 4s ease-in-out var(--retraso) infinite;
+  }
+}
+
+@keyframes flotar {
+  50% {
+    translate: -50% -58%;
+  }
+}
+
+@keyframes mecer {
+  50% {
+    rotate: calc(var(--giro) + 8deg);
+    translate: -46% -52%;
+  }
+}
+
+@keyframes girar {
+  to {
+    rotate: calc(var(--giro) + 360deg);
+  }
+}
+
+@keyframes latir {
+  50% {
+    scale: 1.12;
+  }
+}

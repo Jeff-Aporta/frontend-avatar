@@ -7,6 +7,7 @@ import { avatar, type ClientController, type ClientPlugin, createClient, identit
 import { apiUrl } from '../consts/config.js';
 import { type Perfil, PerfilSchema, type Yo, YoSchema } from '../consts/schemas/api.schemas.js';
 import { estado, fijar } from './estado.js';
+import { usarVectorizador } from './semantica.js';
 
 const CLAVE_TOKEN = 'avatar:token';
 
@@ -45,6 +46,12 @@ export function conectar(baseUrl = apiUrl()): void {
     dominio: createClient(avatar, { baseUrl, headers: cabeceras }),
     permisos: createClient(permissions, { baseUrl, headers: cabeceras }),
   };
+  // Búsqueda por significado: las consultas las vectoriza el API (`ia/embeber`, bge-m3); sin sesión, búsqueda léxica.
+  usarVectorizador(async (textos) => {
+    if (!estado.token) throw new Error('sin sesión');
+    const r = (await plugins!.dominio['embeber']!(textos)) as { vectores: number[][] };
+    return r.vectores;
+  });
 }
 
 function armados() {

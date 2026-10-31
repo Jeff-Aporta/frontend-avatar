@@ -1,0 +1,35 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-solicitud-form — diálogo de solicitud con conteo de días. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 34em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+}
+
+.dias {
+  @include m.rotulo(0.8);
+  margin: 0;
+  font-size: 0.75em;
+  color: var(--iswc-accent);
+}
+
+@media (max-width: 36em) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}

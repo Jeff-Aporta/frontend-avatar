@@ -195,6 +195,23 @@ export function adoptarPropsTardias(host: HTMLElement & { props?: unknown }): vo
  * repinta. `nombre` = tag = nombre de la hoja (obligatorio: en un bundle `import.meta.url` es el
  * del bundle). `parcial` evita el repintado completo cuando devuelve `true` (foco, scroll).
  */
+/** Igualdad superficial de props; arrays y objetos se comparan por contenido (JSON) para que un refresco idéntico no repinte. */
+function mismasProps(a: object, b: object): boolean {
+  const ka = Object.keys(a);
+  if (ka.length !== Object.keys(b).length) return false;
+  return ka.every((k) => {
+    const x = (a as Record<string, unknown>)[k];
+    const y = (b as Record<string, unknown>)[k];
+    if (Object.is(x, y)) return true;
+    if (typeof x !== 'object' || typeof y !== 'object' || x === null || y === null) return false;
+    try {
+      return JSON.stringify(x) === JSON.stringify(y);
+    } catch {
+      return false;
+    }
+  });
+}
+
 export function crearComponente<P extends object>(
   moduleUrl: string,
   nombre: string,
@@ -219,7 +236,10 @@ export function crearComponente<P extends object>(
     set props(v: Partial<P> | null | undefined) {
       revisarProps(nombre, v);
       const previos = this.#props;
-      this.#props = { ...previos, ...(v ?? {}) };
+      const siguientes = { ...previos, ...(v ?? {}) } as P;
+      // Sin cambios reales no se repinta: repintar borra el shadow y es lo que producía el parpadeo al refrescar.
+      if (this.isConnected && mismasProps(previos, siguientes)) return;
+      this.#props = siguientes;
       if (!this.isConnected) return;
       if (parcial?.(this.#root, this.#props, previos, this)) return;
       this.#pintar();
@@ -234,8 +254,8 @@ export function crearComponente<P extends object>(
 }
 
 /**
- * Notificación con el toast del kit: el de `<iswc-app-shell toast>` (dentro del shell de la app) o, si no hay shell
- * (vista aislada, demo), el primer `<iswc-toast>` del documento; sin ninguno, a consola. Los errores duran más.
+ * Notificación con el toast del kit: el de `<iswc-app-shell toast>` (área pública), el `<iswc-toast>` del shell privado
+ * (`iswc-doc-layout`) o, en una vista aislada o demo, el primer `<iswc-toast>` del documento; sin ninguno, a consola. Los errores duran más.
  */
 export function avisar(mensaje: string, color: 'brand' | 'success' | 'warning' | 'danger' | 'neutral' = 'brand'): void {
   const opciones = { color, duration: color === 'danger' ? 8000 : 4000 };
@@ -245,7 +265,7 @@ export function avisar(mensaje: string, color: 'brand' | 'success' | 'warning' |
     void shell.toast(mensaje, opciones);
     return;
   }
-  const t = document.querySelector('iswc-toast') as (HTMLElement & { create?(m: string, o?: object): unknown }) | null;
+  const t = (app?.shadowRoot?.querySelector('iswc-toast') ?? document.querySelector('iswc-toast')) as (HTMLElement & { create?(m: string, o?: object): unknown }) | null;
   if (t?.create) void t.create(mensaje, opciones);
   else console.info(`[av] ${color}: ${mensaje}`);
 }

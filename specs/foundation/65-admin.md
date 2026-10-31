@@ -1,6 +1,6 @@
 # 65 — Administración: usuarios, roles y mi cuenta
 
-> Alcance: la vista `admin` (`#/admin`). Fuera: miembros de empresas (spec `60`).
+> Alcance: la vista `admin` (`/admin/`). Fuera: miembros de empresas (spec `60`).
 
 ## 1. Propósito (WHAT)
 

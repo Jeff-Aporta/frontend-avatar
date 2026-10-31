@@ -1,0 +1,57 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-compositor",
+  "category": "chat",
+  "navTitle": "Redactor",
+  "title": "&lt;av-chat-compositor&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-compositor",
+  "styles": ".stage{max-width:40rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-compositor&gt;",
+      "lede": "Escribe, adjunta o graba una nota de voz.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-compositor id=\"x\"></av-chat-compositor></div>",
+          "target": "#x",
+          "props": {
+            "chat": "g1",
+            "respuesta": {
+              "ref": "m2",
+              "autor": "Ana Torres",
+              "color": 1,
+              "texto": "El lunes arrancamos la fase 2",
+              "miniatura": null
+            }
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:deshabilitado",
+              "label": "deshabilitado",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:motivo",
+              "label": "motivo",
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al pie de la conversación.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para formularios largos: iswc-textarea o iswc-rte.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Redactor de chat genérico con adjuntos y voz.",
+    "propuesta": "iswc-chat-composer"
+  }
+}

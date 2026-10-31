@@ -1,0 +1,126 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-grupo-form — pasos del grupo: integrantes con fichas y datos con foto. */
+:host {
+  @include m.host-bloque;
+  display: contents;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.dialogo {
+  --width: min(32em, 94vw);
+}
+
+.paso {
+  display: grid;
+  gap: t.esp(3);
+
+  .q,
+  .nombre,
+  .descripcion {
+    --iswc-field-width: 100%;
+  }
+}
+
+.fichas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.esp(1);
+  max-height: 6em;
+  overflow: auto;
+}
+
+.ficha {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.2em 0.35em 0.2em 0.7em;
+  border: 1px solid currentColor;
+  border-radius: 1em;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  font: inherit;
+  font-size: 0.82em;
+  cursor: pointer;
+  @include c.color-persona;
+  @include c.entrada(0.15em);
+}
+
+.personas {
+  display: grid;
+  gap: 0.1em;
+  max-height: 45vh;
+  @include c.scroll;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+  padding: t.esp(2) t.esp(3);
+  border-radius: t.radio(lg);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--iswc-control-bg-hover, var(--av-velo));
+  }
+}
+
+.foto {
+  position: relative;
+  display: inline-grid;
+  font-size: 2.2em;
+  @include c.fondo-persona;
+
+  .presencia {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0.26em;
+    height: 0.26em;
+    border-radius: 50%;
+    background: var(--iswc-color-success);
+  }
+}
+
+.datos {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+
+  span {
+    font-size: 0.8em;
+    color: var(--iswc-text-dim);
+    @include m.una-linea;
+  }
+}
+
+.foto-campo {
+  display: grid;
+  justify-items: center;
+  gap: t.esp(1);
+  cursor: pointer;
+
+  .foto-vista {
+    font-size: 5em;
+    border-radius: 50%;
+    @include c.neon;
+    --iswc-control-bg: var(--iswc-brand-soft);
+    color: var(--iswc-accent);
+  }
+
+  .foto-rotulo {
+    font-size: 0.82em;
+    color: var(--iswc-accent);
+  }
+}
+
+.error {
+  margin: t.esp(2) 0 0;
+  font-size: 0.85em;
+  color: var(--iswc-color-danger);
+}

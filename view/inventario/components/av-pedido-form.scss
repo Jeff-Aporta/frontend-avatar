@@ -1,0 +1,79 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-pedido-form — ítems en un panel con velo y total en Orbitron. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 46em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+
+  &.tres {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.items {
+  display: grid;
+  gap: t.esp(2);
+  padding: t.esp(3);
+  border: 1px solid var(--av-borde-seccion);
+  border-radius: var(--av-radio);
+  background: var(--av-velo);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(4em, 1fr) minmax(6em, 1.3fr) 2.2em;
+  align-items: end;
+  gap: t.esp(2);
+}
+
+.pie {
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+
+  .etiqueta-total {
+    @include m.rotulo;
+    margin-left: auto;
+    font-size: 0.75em;
+  }
+
+  .total {
+    @include m.impacto;
+    font-size: 1.3em;
+    color: var(--iswc-accent);
+  }
+}
+
+@media (max-width: 36em) {
+  .fila,
+  .fila.tres {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .item {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 2.2em;
+
+    .i-prod {
+      grid-column: 1 / -1;
+    }
+  }
+}

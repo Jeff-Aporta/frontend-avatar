@@ -1,0 +1,64 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-reacciones",
+  "category": "chat",
+  "navTitle": "Reacciones",
+  "title": "&lt;av-chat-reacciones&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-reacciones",
+  "styles": "",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-reacciones&gt;",
+      "lede": "Píldoras de reacciones.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-chat-reacciones id=\"x\"></av-chat-reacciones>",
+          "target": "#x",
+          "props": {
+            "ref": "m1",
+            "reacciones": [
+              {
+                "emoji": "👍",
+                "n": 3,
+                "nombres": [
+                  "Ana",
+                  "Beto",
+                  "Carla"
+                ],
+                "mia": true
+              },
+              {
+                "emoji": "😂",
+                "n": 1,
+                "nombres": [
+                  "Darío"
+                ],
+                "mia": false
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:propio",
+              "label": "propio",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Bajo una burbuja.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para votaciones o encuestas: iswc-rating.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Reacciones con emoji genéricas.",
+    "propuesta": "iswc-reactions"
+  }
+}

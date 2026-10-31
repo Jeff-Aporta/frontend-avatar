@@ -1,0 +1,59 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-stock-alertas",
+  "category": "inventario",
+  "navTitle": "Alertas de stock",
+  "title": "&lt;av-stock-alertas&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-stock-alertas",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-stock-alertas&gt;",
+      "lede": "Productos en o bajo su mínimo.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-stock-alertas id=\"d\"></av-stock-alertas></div>",
+          "target": "#d",
+          "props": {
+            "puedeMover": true,
+            "alertas": [
+              {
+                "iproducto": 5,
+                "sku": "PROD-00005",
+                "nombre": "Tarjeta Gráfica RTX 3080",
+                "stock": 0,
+                "stock_minimo": 2,
+                "ubicacion": "A3-B1",
+                "agotado": true
+              },
+              {
+                "iproducto": 1,
+                "sku": "PROD-00001",
+                "nombre": "Procesador i9-10900K",
+                "stock": 3,
+                "stock_minimo": 5,
+                "ubicacion": "A1-B2",
+                "agotado": false
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:puedeMover",
+              "type": "boolean",
+              "label": "puedeMover",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Bajo los KPIs de inventario.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como lista de productos: para eso la tabla.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

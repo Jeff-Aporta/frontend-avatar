@@ -37,7 +37,7 @@ export default definirPruebas([
         const v = document.querySelector('av-app')!.shadowRoot!.querySelector('.vista')!.firstElementChild!.shadowRoot!;
         return {
           titulo: v.querySelector('av-hero')!.shadowRoot!.querySelector('h1')!.textContent!.trim(),
-          caracteristicas: v.querySelector('av-caracteristicas')!.shadowRoot!.querySelectorAll('iswc-card').length,
+          caracteristicas: v.querySelector('#caracteristicas')!.shadowRoot!.querySelectorAll('.item').length,
           planes: v.querySelector('av-precios')!.shadowRoot!.querySelectorAll('iswc-card').length,
         };
       }, undefined);
@@ -50,12 +50,11 @@ export default definirPruebas([
     nombre: 'inicio W-PLAT-10 una vista privada sin sesión muestra el acceso',
     categoria: 'what',
     async correr({ eq, expect }) {
-      await s.page.evaluate(() => {
-        location.hash = '#/panel';
-      }, undefined);
-      // La vista se carga al navegar (carga perezosa): se espera a que el login del kit esté pintado.
+      const raiz = await s.page.evaluate(() => document.baseURI, undefined);
+      await s.page.goto(new URL('panel/', raiz).href, { waitUntil: 'load' });
+      // Rutas reales: la página privada sin sesión pasa a la de acceso, y ahí se espera el login del kit ya pintado.
       await esperar(s.page, () => !!document.querySelector('av-app')?.shadowRoot?.querySelector('.vista')?.firstElementChild?.shadowRoot?.querySelector('iswc-login'), 20_000);
-      eq('ruta corregida', await s.page.evaluate(() => location.hash, undefined), '#/acceso');
+      eq('ruta corregida', await s.page.evaluate(() => new URL(location.href).pathname.endsWith('/acceso/'), undefined), true);
       expect('login del kit', await s.page.evaluate(() => !!document.querySelector('av-app')?.shadowRoot?.querySelector('.vista')?.firstElementChild?.shadowRoot?.querySelector('iswc-login'), undefined));
     },
   },

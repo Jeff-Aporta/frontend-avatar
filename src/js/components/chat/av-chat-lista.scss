@@ -1,0 +1,181 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-lista — cabecera, buscador, filtros y filas reconciliadas. */
+:host {
+  @include m.host-bloque;
+  height: 100%;
+  min-height: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--iswc-bg-elev);
+}
+
+.cabeza {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  padding: t.esp(3) t.esp(3) t.esp(2) t.esp(4);
+
+  .atras {
+    display: none;
+  }
+
+  &[data-archivados="1"] {
+    .atras {
+      display: inline-flex;
+    }
+
+    .acciones {
+      display: none;
+    }
+  }
+}
+
+.titulo {
+  flex: 1;
+  margin: 0;
+  font-family: var(--av-font-marca, inherit);
+  font-size: 1.15em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--av-degradado-marca, var(--iswc-accent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  @include m.una-linea;
+}
+
+.acciones {
+  display: inline-flex;
+  gap: t.esp(1);
+}
+
+.conexion {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  margin: 0 t.esp(3) t.esp(2);
+  padding: t.esp(2) t.esp(3);
+  border-radius: t.radio(md);
+  font-size: 0.85em;
+  background: var(--iswc-warning-soft);
+  color: var(--iswc-warning-text, var(--iswc-text));
+
+  &[data-estado="desconectado"] {
+    background: var(--iswc-danger-soft);
+    color: var(--iswc-danger-text, var(--iswc-text));
+  }
+}
+
+.herramientas {
+  display: grid;
+  gap: t.esp(2);
+  padding: 0 t.esp(3) t.esp(2);
+}
+
+.buscador {
+  --iswc-field-width: 100%;
+  width: 100%;
+}
+
+.filtros {
+  display: flex;
+  gap: t.esp(1);
+  overflow-x: auto;
+  scrollbar-width: none;
+  font-size: 0.85em;
+}
+
+.archivados {
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+  margin: 0 t.esp(2);
+  padding: t.esp(2) t.esp(4);
+  border: 0;
+  border-radius: t.radio(lg);
+  background: transparent;
+  color: var(--iswc-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--iswc-control-bg-hover, var(--av-velo));
+    outline: none;
+  }
+
+  iswc-icon {
+    font-size: 1.3em;
+    color: var(--iswc-accent);
+  }
+
+  .archivados-t {
+    flex: 1;
+  }
+
+  .archivados-n {
+    font-size: 0.8em;
+    color: var(--iswc-accent);
+  }
+}
+
+.filas:empty {
+  display: none;
+}
+
+.filas {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  padding: t.esp(1) t.esp(2) t.esp(4);
+  @include c.scroll;
+
+  > av-chat-item {
+    @include c.entrada(0.25em);
+  }
+}
+
+.esqueletos {
+  display: grid;
+  gap: t.esp(3);
+  padding: t.esp(3) t.esp(4);
+
+  .esqueleto {
+    height: 3em;
+  }
+}
+
+.vacio {
+  display: grid;
+  justify-items: center;
+  gap: t.esp(2);
+  padding: t.esp(10) t.esp(6);
+  text-align: center;
+  color: var(--iswc-text-dim);
+
+  iswc-icon {
+    font-size: 2.6em;
+    color: var(--iswc-accent);
+    filter: drop-shadow(0 0 0.4em color-mix(in srgb, var(--iswc-accent) 50%, transparent));
+  }
+
+  strong {
+    color: var(--iswc-text);
+  }
+}

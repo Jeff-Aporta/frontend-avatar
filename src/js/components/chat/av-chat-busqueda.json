@@ -1,0 +1,58 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-busqueda",
+  "category": "chat",
+  "navTitle": "Búsqueda",
+  "title": "&lt;av-chat-busqueda&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-busqueda",
+  "styles": ".stage{height:26rem;max-width:24rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-busqueda&gt;",
+      "lede": "Panel de búsqueda de mensajes.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-busqueda id=\"x\"></av-chat-busqueda></div>",
+          "target": "#x",
+          "props": {
+            "abierto": true,
+            "chat": "g1",
+            "chatNombre": "Equipo Odys",
+            "buscado": "lunes",
+            "resultados": [
+              {
+                "chat": "g1",
+                "chatNombre": "Equipo Odys",
+                "ref": "m2",
+                "autor": "Ana Torres",
+                "color": 1,
+                "ts": "2026-10-30T15:00:00.000Z",
+                "fragmento": "Nos vemos el <mark>lunes</mark> a las 9"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Panel lateral del chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para buscar en toda la app: iswc-command-palette.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Búsqueda de mensajes por texto o significado.",
+    "propuesta": "iswc-chat-search"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-visor",
+  "category": "chat",
+  "navTitle": "Visor",
+  "title": "&lt;av-chat-visor&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-visor",
+  "styles": "",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-visor&gt;",
+      "lede": "Visor de medios del chat.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-chat-visor id=\"x\"></av-chat-visor>",
+          "target": "#x",
+          "props": {
+            "abierto": false,
+            "items": []
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al tocar una imagen o video del chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para diagramas: iswc-diagram-lightbox.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Visor de galería sobre iswc-lightbox.",
+    "propuesta": "iswc-media-viewer"
+  }
+}

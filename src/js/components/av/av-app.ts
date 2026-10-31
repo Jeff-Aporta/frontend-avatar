@@ -1,39 +1,42 @@
 /**
- * <av-app> — shell de la app sobre `<iswc-app-shell>`: barra con marca, menú lateral (`<av-menu>`) con sesión y
- * los permisos, selector de empresa, sesión (`<iswc-session-menu>`: entrar desde la barra o cerrar sesión) y la vista
- * activa debajo. Enruta por hash (`core/router.ts`): la app solo conoce el shell de cada vista (SHELLS).
+ * <av-app> — shell de Avatar. No dibuja estructura propia: compone los armazones del kit.
  *
- * Arranque: restaura la sesión (token en localStorage → `empresas/yo` + `GET /permisos`), resuelve la ruta (una vista
- * privada sin sesión cae en `acceso`) y monta el shell de la vista con `props = { id }`.
+ *   - Área pública (landing, acceso): `<iswc-app-shell>` (barra superior con marca, sesión y tema).
+ *   - Área privada (con sesión): `<iswc-doc-layout>` (el mismo layout documental del kit): barra con marca, empresa,
+ *     sesión y tema; lateral `start` redimensionable (`iswc-split-panel` del kit, recordado por tamaño de pantalla y
+ *     cajón en celular) con los módulos en `<iswc-doc-index>` (agrupados, con ícono y búsqueda); la vista al centro.
+ *
+ * Cada ruta es una página HTML real (`consts/paginas.ts`) cuyo cuerpo es solo `<av-app vista="…">`. Arranque: restaura
+ * la sesión (token en localStorage → `empresas/yo` + `GET /permisos`), resuelve la ruta (una vista privada sin sesión va
+ * a la página de `acceso` recordando el destino) y monta el shell de la vista con `props = { id }`. Carga perezosa: cada vista se
+ * pide al navegar (`cargarVista`), se precargan en reposo las probables y, mientras se define, se ve un esqueleto.
  */
 import { crearComponente, define, html } from '../../base/componente.js';
-import type { AvAppProps, ItemMenu, Ruta } from '../../consts/schemas/componentes.schemas.js';
+import type { AvAppProps, Ruta } from '../../consts/schemas/componentes.schemas.js';
 import { cargarPerfil, cerrarSesion, conectar, iniciarSesion, mensajeDe } from '../../core/api.js';
-import { alCambiar, empresaActiva, estado, fijar, haySesion } from '../../core/estado.js';
+import { alCambiar, empresaActiva, estado, haySesion } from '../../core/estado.js';
 import { ACCION, puede, rolDe } from '../../core/permisos.js';
-import { escuchar, ir, resolver, rutaActual, VISTA_SESION } from '../../core/router.js';
+import { destinoTrasAcceso, escuchar, ir, recordarDestino, resolver, rutaActual, VISTA_SESION, VISTAS_PRIVADAS } from '../../core/router.js';
+import { MODULOS, type Modulo } from '../../consts/comandos.js';
+import { PAGINAS } from '../../consts/paginas.js';
 import { tagsDeVista, VIEW_TAGS } from '../../kit-tags.js';
 import './av-empresa-selector.js';
-import './av-menu.js';
 
-/** Vista → tag del shell de esa vista (cada vista tiene UN shell). */
-const SHELLS: Record<string, string> = {
-  inicio: 'av-inicio',
-  acceso: 'av-acceso',
-  panel: 'av-panel',
-  canales: 'av-canales',
-  proyectos: 'av-proyectos',
-  crm: 'av-crm',
-  organizacion: 'av-organizacion',
-  asistente: 'av-asistente',
-  admin: 'av-admin',
-};
+/** Vista → tag del shell de esa vista (cada vista tiene UN shell; la tabla de páginas es la fuente). */
+const SHELLS: Record<string, string> = Object.fromEntries(PAGINAS.map((p) => [p.vista, p.shell]));
 
 type SesionEl = HTMLElement & { logged: boolean; loading: boolean; error: string; reset(): void };
 type ConProps = HTMLElement & { props: Record<string, unknown> };
-
+type IndiceEl = HTMLElement & { items: unknown[]; current: string };
+type LayoutEl = HTMLElement & { scrollContentTo?(top: number): void };
 type Loader = { load(...tags: string[]): Promise<unknown> };
 type ConIdle = { requestIdleCallback?(fn: () => void, o?: { timeout: number }): number };
+
+/** Módulos visibles: solo los que tienen vista registrada; Administración solo con `avatar.seguridad`. */
+export function modulos(admin: boolean): Modulo[] {
+  const vistas = new Set(Object.keys(VIEW_TAGS));
+  return MODULOS.filter((m) => vistas.has(m.id) && (m.id !== 'admin' || admin));
+}
 
 const pedidas = new Map<string, Promise<unknown>>();
 /**
@@ -44,64 +47,124 @@ export function cargarVista(vista: string): Promise<unknown> {
   const L = (globalThis as { iswcLoader?: Loader }).iswcLoader;
   const tags = tagsDeVista(vista);
   if (!L || !tags.length) return Promise.resolve();
-  if (!pedidas.has(vista)) pedidas.set(vista, L.load(...tags).catch((e: unknown) => {
-    pedidas.delete(vista);
-    console.warn(`[av-app] vista ${vista}:`, e);
-  }));
+  if (!pedidas.has(vista)) {
+    pedidas.set(vista, L.load(...tags).catch((e: unknown) => {
+      pedidas.delete(vista);
+      console.warn(`[av-app] vista ${vista}:`, e);
+    }));
+  }
   return pedidas.get(vista)!;
 }
 
 /** Vistas que conviene tener listas: con sesión, las del trabajo (las más usadas primero); sin sesión, el acceso. */
 export function vistasProbables(conSesion: boolean): string[] {
-  return conSesion ? ['panel', 'canales', 'proyectos', 'crm', 'asistente', 'organizacion', 'admin'] : ['acceso'];
+  return conSesion ? ['panel', 'canales', 'correos', 'proyectos', 'crm', 'finanzas', 'inventario', 'rrhh', 'asistente', 'organizacion', 'admin'] : ['acceso'];
 }
 
 /** En reposo, una vista por vez (sin competir con lo que el usuario está mirando). */
 function precargarEnReposo(vistas: string[]): void {
   const g = globalThis as ConIdle;
+  const esperarReposo = (fn: () => void) => (g.requestIdleCallback ? g.requestIdleCallback(fn, { timeout: 4000 }) : setTimeout(fn, 600));
   const siguiente = () => {
     const v = vistas.shift();
     if (!v) return;
     void cargarVista(v).then(() => esperarReposo(siguiente));
   };
-  const esperarReposo = (fn: () => void) => (g.requestIdleCallback ? g.requestIdleCallback(fn, { timeout: 4000 }) : setTimeout(fn, 600));
   esperarReposo(siguiente);
 }
 
-/** Todos los módulos del área privada, en el orden y los grupos del menú (como el menú del React original). */
-const MODULOS: ItemMenu[] = [
-  { id: 'panel', label: 'Panel', icon: 'mdi:view-dashboard-outline', grupo: 'Trabajo', contador: 0 },
-  { id: 'canales', label: 'Canales', icon: 'mdi:forum-outline', grupo: 'Trabajo', contador: 0 },
-  { id: 'correos', label: 'Correos', icon: 'mdi:email-outline', grupo: 'Trabajo', contador: 0 },
-  { id: 'proyectos', label: 'Proyectos', icon: 'mdi:view-column-outline', grupo: 'Trabajo', contador: 0 },
-  { id: 'crm', label: 'CRM', icon: 'mdi:account-heart-outline', grupo: 'Negocio', contador: 0 },
-  { id: 'finanzas', label: 'Finanzas', icon: 'mdi:cash-multiple', grupo: 'Negocio', contador: 0 },
-  { id: 'inventario', label: 'Inventario', icon: 'mdi:package-variant-closed', grupo: 'Negocio', contador: 0 },
-  { id: 'rrhh', label: 'Recursos Humanos', icon: 'mdi:account-tie-outline', grupo: 'Empresa', contador: 0 },
-  { id: 'organizacion', label: 'Organización', icon: 'mdi:domain', grupo: 'Empresa', contador: 0 },
-  { id: 'asistente', label: 'Asistente AVO', icon: 'mdi:robot-outline', grupo: 'Empresa', contador: 0 },
-  { id: 'admin', label: 'Administración', icon: 'mdi:shield-account-outline', grupo: 'Empresa', contador: 0 },
-];
-
-/** Módulos visibles: solo los que tienen vista registrada; Administración solo con `avatar.seguridad`. */
-export function modulos(admin: boolean, contadores: Record<string, number> = {}): ItemMenu[] {
-  const vistas = new Set(Object.keys(VIEW_TAGS));
-  return MODULOS.filter((m) => vistas.has(m.id) && (m.id !== 'admin' || admin)).map((m) => ({ ...m, contador: contadores[m.id] ?? 0 }));
+/** El shell de una vista, con esqueleto mientras su tag no está definido (carga perezosa). */
+function montarVista(vista: string, id: string | null, conSesion: boolean): DocumentFragment {
+  const tag = SHELLS[vista] ?? SHELLS['inicio']!;
+  void cargarVista(vista);
+  const shell = document.createElement(tag) as ConProps;
+  // Solo las vistas con registro abierto reciben `id` (las demás no lo declaran).
+  if (vista === 'inicio' || !SHELLS[vista]) shell.props = { sesion: conSesion };
+  else if (id != null) shell.props = { id };
+  const frag = document.createDocumentFragment();
+  frag.append(shell);
+  if (!customElements.get(tag)) {
+    const esqueleto = document.createElement('av-vacio') as ConProps;
+    esqueleto.props = { estado: 'cargando' };
+    esqueleto.classList.add('esqueleto');
+    frag.append(esqueleto);
+    void customElements.whenDefined(tag).then(() => esqueleto.remove());
+  }
+  return frag;
 }
 
-const CLAVE_PLEGADO = 'avatar:menu-plegado';
-function menuPlegado(): boolean {
-  try {
-    return localStorage.getItem(CLAVE_PLEGADO) === '1';
-  } catch {
-    return false;
+/**
+ * Pie de la app (como el footer del React, que tenía el selector de tema): marca, lema y el selector de paleta del kit
+ * (`iswc-palette-selector`, alimentado con las paletas publicadas por el kit) junto al de claro/oscuro. Cambiar la
+ * paleta reescribe `data-palette` de `<html>` y TODA la interfaz se re-tiñe: los colores salen solo de tokens.
+ */
+function pie(slot: string | null) {
+  return html`
+    <footer class="pie" part="pie" slot=${slot}>
+      <span class="pie-marca"><av-logo wordmark></av-logo></span>
+      <span class="pie-lema">Gestión digital y automatización · Odys</span>
+      <span class="pie-tema">
+        <span class="pie-rotulo">Paleta</span>
+        <iswc-palette-selector aria-label="Elegir la paleta de colores"></iswc-palette-selector>
+        <iswc-theme-toggle scope="root"></iswc-theme-toggle>
+      </span>
+    </footer>
+  `;
+}
+
+/** Acciones globales de la paleta de comandos: tema, paleta (lleva al selector del pie) y salir. */
+async function accionGlobal(accion: string, root: ShadowRoot): Promise<void> {
+  if (accion === 'tema') {
+    (root.querySelector('iswc-theme-toggle') as HTMLElement | null)?.click();
+    return;
   }
+  if (accion === 'paleta') {
+    const selector = root.querySelector('iswc-palette-selector') as HTMLElement | null;
+    selector?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    selector?.focus();
+    return;
+  }
+  if (accion === 'salir') {
+    await cerrarSesion();
+    ir('inicio');
+  }
+}
+
+/** Raíz del sitio (portada): todas las páginas traen `<base href>` a la raíz. */
+const raizSitio = (): string => new URL('./', document.baseURI).href;
+
+/** Acceso desde la barra: el kit pinta el login; la app autentica con DER. */
+function sesionMenu(conSesion: boolean) {
+  return html`
+    <iswc-session-menu slot="actions" ?logged=${conSesion} name=${estado.yo?.nombre ?? estado.yo?.iusuario ?? ''} subtitle=${rolDe(estado.perfil)} label="Entrar" heading="Entrar a Avatar"
+      oniswc-login-submit=${async (e: Event) => {
+        const sesion = e.currentTarget as SesionEl;
+        const { username, password } = (e as CustomEvent<{ username: string; password: string }>).detail;
+        sesion.loading = true;
+        try {
+          await iniciarSesion(username, password);
+          sesion.reset();
+          const destino = destinoTrasAcceso();
+          ir(destino.vista, destino.id);
+        } catch (err) {
+          sesion.error = mensajeDe(err);
+        } finally {
+          sesion.loading = false;
+        }
+      }}
+      oniswc-logout=${async () => {
+        await cerrarSesion();
+        ir('inicio');
+      }}>
+      <iswc-dropdown-item value="asistente" oniswc-click=${() => ir('asistente')}>Preguntar a AVO</iswc-dropdown-item>
+    </iswc-session-menu>
+  `;
 }
 
 const AvApp = crearComponente<AvAppProps>(
   import.meta.url,
   'av-app',
-  { vista: 'inicio', id: null, listo: false },
+  { vista: 'inicio', id: null, listo: false, version: 0 },
   (root, props, host) => {
     const h = host as unknown as ConProps;
     if (!props.listo) {
@@ -113,106 +176,94 @@ const AvApp = crearComponente<AvAppProps>(
         } catch (err) {
           console.warn('[av-app] sesión no restaurada:', mensajeDe(err));
         }
-        const ruta = resolver(rutaActual(), haySesion());
-        if (ruta.vista !== rutaActual().vista) ir(ruta.vista, ruta.id);
+        const actual = rutaActual();
+        const ruta = resolver(actual, haySesion());
+        if (ruta.vista !== actual.vista) {
+          recordarDestino(actual);
+          ir(ruta.vista, ruta.id);
+          return;
+        }
         h.props = { listo: true, vista: ruta.vista, id: ruta.id };
         document.documentElement.setAttribute('data-app-ready', '');
       })();
       return;
     }
     const conSesion = haySesion();
-    const admin = puede(estado.perfil, ACCION.seguridad, 'PUT');
-    const plegado = menuPlegado();
-    const tagVista = SHELLS[props.vista] ?? SHELLS['inicio']!;
-    void cargarVista(props.vista);
     precargarEnReposo(vistasProbables(conSesion).filter((v) => v !== props.vista));
-    const shellVista = document.createElement(tagVista) as ConProps;
-    shellVista.props = props.vista === 'inicio' || !SHELLS[props.vista] ? { sesion: conSesion } : { id: props.id };
-    // Mientras la vista se define (carga perezosa) se ve un esqueleto en su lugar, nunca un hueco.
-    const esqueleto = customElements.get(tagVista) ? null : document.createElement('av-vacio') as ConProps;
-    if (esqueleto) {
-      esqueleto.props = { estado: 'cargando' };
-      esqueleto.classList.add('esqueleto');
-      void customElements.whenDefined(tagVista).then(() => esqueleto.remove());
+    const privada = conSesion && VISTAS_PRIVADAS.includes(props.vista);
+    if (!privada) {
+      root.append(html`
+        <iswc-app-shell class="publica" brand="Avatar" brand-href=${raizSitio()} home-label="Ir al inicio" toast="top-end">
+          <av-logo slot="brand" class="marca" wordmark animado></av-logo>
+          ${conSesion ? html`<iswc-button slot="actions" variant="outlined" color="brand" oniswc-click=${() => ir(VISTA_SESION)}><iswc-icon slot="start" icon="mdi:view-dashboard-outline"></iswc-icon>Ir al panel</iswc-button>` : null}
+          ${sesionMenu(conSesion)}
+          <iswc-theme-toggle slot="actions" scope="root"></iswc-theme-toggle>
+          <main class="vista" part="vista">${montarVista(props.vista, props.id, conSesion)}</main>
+          ${pie('footer')}
+        </iswc-app-shell>
+      `);
+      return;
     }
-    const logo = new URL('assets/img/logo.svg', document.baseURI).href;
+    const admin = puede(estado.perfil, ACCION.seguridad, 'PUT');
     root.append(html`
-      <iswc-app-shell brand="Avatar" logo=${logo} brand-href="#/" home-label="Ir al inicio" sidebar-label="Módulos" toast="top-end"
-        style=${conSesion ? `--iswc-shell-sidebar-width:${plegado ? '4.4em' : '15em'}` : ''}>
-        ${conSesion ? html`<av-menu slot="sidebar" id="menu"
-          onav-menu-ir=${(e: Event) => ir((e as CustomEvent<{ id: string }>).detail.id)}
-          onav-menu-plegar=${(e: Event) => {
-            const p = (e as CustomEvent<{ plegado: boolean }>).detail.plegado;
-            try {
-              localStorage.setItem(CLAVE_PLEGADO, p ? '1' : '0');
-            } catch {
-              /* sin almacenamiento */
-            }
-            (root.querySelector('#menu') as ConProps).props = { plegado: p };
-            (root.querySelector('iswc-app-shell') as HTMLElement).style.setProperty('--iswc-shell-sidebar-width', p ? '4.4em' : '15em');
-          }}></av-menu>` : null}
-        ${conSesion ? html`<av-empresa-selector slot="actions"></av-empresa-selector>` : null}
-        <iswc-session-menu slot="actions" ?logged=${conSesion} name=${estado.yo?.nombre ?? estado.yo?.iusuario ?? ''} subtitle=${rolDe(estado.perfil)} label="Entrar" heading="Entrar a Avatar"
-          oniswc-login-submit=${async (e: Event) => {
-            const sesion = e.currentTarget as SesionEl;
-            const { username, password } = (e as CustomEvent<{ username: string; password: string }>).detail;
-            sesion.loading = true;
-            try {
-              await iniciarSesion(username, password);
-              sesion.reset();
-              ir(VISTA_SESION);
-            } catch (err) {
-              sesion.error = mensajeDe(err);
-            } finally {
-              sesion.loading = false;
-            }
-          }}
-          oniswc-logout=${async () => {
-            await cerrarSesion();
-            ir('inicio');
-          }}>
-          <iswc-dropdown-item value="asistente" oniswc-click=${() => ir('asistente')}>Preguntar a AVO</iswc-dropdown-item>
-        </iswc-session-menu>
+      <iswc-doc-layout class="privada" storage-key="avatar-app" toc="off" hide-end start-width="260">
+        <a slot="brand" class="marca" href=${raizSitio()} aria-label="Avatar, ir al inicio"><av-logo wordmark animado></av-logo></a>
+        <av-buscador slot="actions"></av-buscador>
+        <av-empresa-selector slot="actions"></av-empresa-selector>
+        ${sesionMenu(true)}
         <iswc-theme-toggle slot="actions" scope="root"></iswc-theme-toggle>
-        <main class="vista" part="vista">${shellVista}${esqueleto}</main>
-      </iswc-app-shell>
+        <iswc-doc-index slot="start" id="indice" placeholder="Buscar módulo…"
+          oniswc-doc-index-select=${(e: Event) => ir((e as CustomEvent<{ id: string }>).detail.id)}></iswc-doc-index>
+        <main class="vista" part="vista">${montarVista(props.vista, props.id, true)}</main>
+        ${pie(null)}
+      </iswc-doc-layout>
+      <iswc-toast placement="top-end"></iswc-toast>
     `);
-    const menu = root.querySelector('#menu') as ConProps | null;
-    if (menu) menu.props = { items: modulos(admin, { canales: 0 }), activo: props.vista, plegado };
-    const selector = root.querySelector('av-empresa-selector') as ConProps | null;
-    if (selector) selector.props = { empresas: estado.yo?.empresas ?? [], activa: empresaActiva() };
+    const indice = root.querySelector('#indice') as IndiceEl & { textos: Record<string, string> };
+    indice.textos = { placeholder: 'Buscar módulo…', sinResultados: 'Ningún módulo coincide.', resumen: '' };
+    indice.items = modulos(admin);
+    const buscador = root.querySelector('av-buscador') as ConProps;
+    buscador.props = { permitidos: modulos(admin).map((m) => m.id) };
+    buscador.addEventListener('av-buscador-global', (e) => void accionGlobal((e as CustomEvent<{ accion: string }>).detail.accion, root));
+    indice.current = props.vista;
+    (root.querySelector('av-empresa-selector') as ConProps).props = { empresas: estado.yo?.empresas ?? [], activa: empresaActiva() };
   },
-  // Repintado parcial: si solo cambió el id de la misma vista, se reasignan las props del shell de la vista.
+  // Repintado parcial dentro de la página: otro id solo pasa el id al shell de la vista; otra empresa (`version`)
+  // remonta solo el contenido y el selector. El layout (anchos, cajón, índice) nunca se repinta: sin parpadeo.
   (root, props, previos) => {
-    if (!props.listo || !previos.listo || props.vista !== previos.vista) return false;
-    const menu = root.querySelector('#menu') as ConProps | null;
-    if (menu) menu.props = { activo: props.vista };
-    const shellVista = root.querySelector('.vista')?.firstElementChild as ConProps | null;
-    if (!shellVista) return false;
-    shellVista.props = { id: props.id };
+    if (!props.listo || !previos.listo || props.vista !== previos.vista || !haySesion()) return false;
+    const vista = root.querySelector('.vista');
+    if (!vista) return false;
+    if (props.version !== previos.version) {
+      vista.replaceChildren(montarVista(props.vista, props.id, true));
+      const selector = root.querySelector('av-empresa-selector') as ConProps | null;
+      if (selector) selector.props = { empresas: estado.yo?.empresas ?? [], activa: empresaActiva() };
+      (root.querySelector('iswc-doc-layout') as LayoutEl | null)?.scrollContentTo?.(0);
+      return true;
+    }
+    const shell = vista.firstElementChild as ConProps | null;
+    if (!shell) return false;
+    shell.props = { id: props.id };
     return true;
   },
 );
 
 define('av-app', AvApp);
 
-// La ruta vive en el hash; la sesión y la empresa, en el estado. Cualquiera de los dos repinta el shell.
+// El id viaja en el historial de la página; la empresa activa, en el estado. Un cambio de empresa sube `version`.
 if (typeof document !== 'undefined') {
   const app = () => document.querySelector('av-app') as ConProps | null;
-  const aplicar = (r: Ruta) => {
-    const ruta = resolver(r, haySesion());
-    if (ruta.vista !== r.vista) return ir(ruta.vista, ruta.id);
-    fijar({ ruta });
+  escuchar((r) => {
     const a = app();
-    if (a) a.props = { vista: ruta.vista, id: ruta.id };
-  };
-  escuchar(aplicar);
-  alCambiar('yo', () => {
+    if (a && r.vista === a.props['vista']) a.props = { id: r.id };
+  });
+  // Una intención en la misma vista (p. ej. «Nuevo grupo» estando en Canales) remonta el contenido para que la tome.
+  addEventListener('av-ruta', (e) => {
     const a = app();
-    if (a) a.props = { ...rutaActual(), listo: true };
+    if ((e as CustomEvent<{ intencion: string | null }>).detail.intencion && a?.props['listo']) a.props = { version: Number(a.props['version'] ?? 0) + 1 };
   });
   alCambiar('empresa', () => {
     const a = app();
-    if (a) a.props = { ...rutaActual(), listo: true };
+    if (a?.props['listo']) a.props = { version: Number(a.props['version'] ?? 0) + 1 };
   });
 }

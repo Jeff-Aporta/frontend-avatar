@@ -1,0 +1,79 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-logo — hexágono de neón con los colores de la paleta. Todo en em: escala con el font-size del contexto. */
+:host {
+  display: inline-block;
+  line-height: 1;
+}
+
+.logo {
+  --_c1: var(--iswc-color-brand-stronger, var(--iswc-accent));
+  --_c2: var(--iswc-color-contrast, var(--iswc-accent));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
+.marca {
+  width: 1.9em;
+  height: 1.9em;
+  overflow: visible;
+  filter: drop-shadow(0 0 0.18em color-mix(in srgb, var(--iswc-accent) 65%, transparent));
+}
+
+.hex-borde {
+  stroke: rgb(255 255 255 / 35%);
+  stroke-width: 1.2;
+}
+
+.monograma,
+.barra {
+  stroke: #fff;
+  stroke-width: 4.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nodo {
+  fill: var(--_c2);
+  stroke: #fff;
+  stroke-width: 1.6;
+}
+
+.orbita {
+  stroke: color-mix(in srgb, var(--_c2) 80%, #fff);
+  stroke-width: 1.6;
+  stroke-dasharray: 3 3.5;
+  opacity: 0.9;
+}
+
+.satelite {
+  fill: #fff;
+  filter: drop-shadow(0 0 1.6px var(--_c2));
+}
+
+.nombre {
+  @include m.impacto;
+  font-size: 1.05em;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: linear-gradient(90deg, var(--iswc-text), var(--iswc-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-animado="1"] .satelite {
+    transform-origin: 32px 32px;
+    animation: orbitar 9s linear infinite;
+  }
+}
+
+@keyframes orbitar {
+  to {
+    transform: rotate(360deg);
+  }
+}

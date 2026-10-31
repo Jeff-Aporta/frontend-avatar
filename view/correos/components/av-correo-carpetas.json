@@ -1,0 +1,75 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-correo-carpetas",
+  "category": "correos",
+  "navTitle": "Carpetas de correo",
+  "title": "&lt;av-correo-carpetas&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-correo-carpetas",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-correo-carpetas&gt;",
+      "lede": "Carpetas del buzón con conteo.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-correo-carpetas id=\"d\"></av-correo-carpetas></div>",
+          "target": "#d",
+          "props": {
+            "activa": "entrada",
+            "carpetas": [
+              {
+                "carpeta": "entrada",
+                "label": "Entrada",
+                "icono": "mdi:inbox-arrow-down",
+                "total": 12,
+                "noLeidos": 3
+              },
+              {
+                "carpeta": "enviados",
+                "label": "Enviados",
+                "icono": "mdi:send-outline",
+                "total": 8,
+                "noLeidos": 0
+              },
+              {
+                "carpeta": "archivados",
+                "label": "Archivados",
+                "icono": "mdi:archive-outline",
+                "total": 4,
+                "noLeidos": 0
+              },
+              {
+                "carpeta": "papelera",
+                "label": "Papelera",
+                "icono": "mdi:trash-can-outline",
+                "total": 0,
+                "noLeidos": 0
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:activa",
+              "type": "select",
+              "label": "activa",
+              "options": [
+                "entrada",
+                "enviados",
+                "archivados",
+                "papelera"
+              ],
+              "default": "entrada"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>A la izquierda del buzón de DUO eMail.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como menú general de la app: eso es el menú lateral.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

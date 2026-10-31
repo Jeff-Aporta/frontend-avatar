@@ -1,0 +1,43 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-buscador — botón de la barra que abre la paleta de comandos del kit. */
+:host {
+  display: inline-block;
+}
+
+.abrir {
+  min-width: 13em;
+
+  &::part(label) {
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+    gap: 0.6em;
+  }
+
+  kbd {
+    margin-left: auto;
+    white-space: nowrap;
+    padding: 0.1em 0.45em;
+    border: 1px solid var(--iswc-border-soft);
+    border-radius: 0.35em;
+    font: 600 0.75em/1.4 var(--iswc-font-mono, monospace);
+    opacity: 0.75;
+  }
+}
+
+.texto {
+  opacity: 0.8;
+}
+
+@media (max-width: 48em) {
+  .abrir {
+    min-width: 0;
+  }
+
+  .texto,
+  kbd {
+    display: none;
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat",
+  "category": "chat",
+  "navTitle": "Chat (shell)",
+  "title": "&lt;av-chat&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat",
+  "styles": ".stage{height:36rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat&gt;",
+      "lede": "Shell del chat: con `demo` usa el backend de memoria (abre otra pestaña de la galería y habla como otra persona).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat id=\"x\"></av-chat></div>",
+          "target": "#x",
+          "props": {
+            "demo": "ana",
+            "titulo": "Chats",
+            "clave": "galeria-av-chat"
+          },
+          "controls": [
+            {
+              "control": "select",
+              "prop": "props:demo",
+              "label": "hablar como",
+              "default": "ana",
+              "options": [
+                "ana",
+                "beto",
+                "carla",
+                "dario",
+                "elena"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Cualquier app que necesite chat en tiempo real: se le asigna un `backend` (API real o demo).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para un único hilo de comentarios sin tiempo real: basta una lista simple.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Chat genérico: textos en diccionario y backend por interfaz, sin dominio de Avatar.",
+    "propuesta": "iswc-chat"
+  }
+}

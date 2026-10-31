@@ -93,9 +93,8 @@
 
 .ilustracion {
   width: 100%;
-  max-height: 28em;
-  object-fit: contain;
-  filter: drop-shadow(0 1.5em 2.5em var(--av-velo-fuerte));
+  max-width: 30em;
+  justify-self: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {

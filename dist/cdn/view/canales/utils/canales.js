@@ -1,0 +1,1 @@
+import{ACCION as n,puede as s}from"../../../js/core/permisos.js?v=h0y97j";function i(e,t){return e?s(t,n.chat)?"listo":"sin-permiso":"sin-empresa"}const o=e=>/no define el path|not found|404|no existe la ruta/i.test(e),a=e=>e&&e.trim()?e.trim():null;export{o as apiChatPendiente,a as chatDeRuta,i as estadoCanales};

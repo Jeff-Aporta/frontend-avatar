@@ -1,5 +1,5 @@
 /**
- * <av-asistente> — shell del chat con AVO (`#/asistente`): carga el historial (`controller('consultas').query`), pinta los
+ * <av-asistente> — shell del chat con AVO (`/asistente/`): carga el historial (`controller('consultas').query`), pinta los
  * turnos con `av-avo-mensaje`, envía la pregunta con `dominio()['preguntar']({ pregunta, iempresa })` y ofrece las
  * sugerencias de la última respuesta como chips que envían esa pregunta.
  */

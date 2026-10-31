@@ -1,0 +1,63 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-rrhh-grafica",
+  "category": "rrhh",
+  "navTitle": "Gráficas de RRHH",
+  "title": "&lt;av-rrhh-grafica&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-rrhh-grafica",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-rrhh-grafica&gt;",
+      "lede": "Asistencia de hoy y plantilla.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-rrhh-grafica id=\"d\"></av-rrhh-grafica></div>",
+          "target": "#d",
+          "props": {
+            "departamentos": [
+              {
+                "nombre": "Desarrollo",
+                "cantidad": 2
+              },
+              {
+                "nombre": "Diseño",
+                "cantidad": 1
+              },
+              {
+                "nombre": "Marketing",
+                "cantidad": 1
+              }
+            ],
+            "resumen": {
+              "iempresa": 1,
+              "empleados": 6,
+              "por_estado": {
+                "activo": 5,
+                "vacaciones": 1
+              },
+              "asistencia_hoy": {
+                "presente": 3,
+                "ausente": 0,
+                "retardo": 1,
+                "vacaciones": 1,
+                "sin_marcar": 1,
+                "porcentaje": 67
+              },
+              "solicitudes_pendientes": 2,
+              "nomina_mensual": 46900000
+            }
+          },
+          "controls": []
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la pestaña General de RRHH.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para el historial de asistencia: para eso la tabla.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

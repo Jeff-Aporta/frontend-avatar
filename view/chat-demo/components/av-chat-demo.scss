@@ -1,0 +1,110 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-chat-demo — barra del demo y el chat a toda la altura. */
+:host {
+  @include m.host-bloque;
+  height: 100dvh;
+}
+
+.demo {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+  background: var(--iswc-bg);
+}
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(2) t.esp(4);
+  padding: t.esp(2) t.esp(4);
+  border-bottom: 1px solid var(--av-borde-seccion, var(--iswc-border-soft));
+  background: linear-gradient(90deg, var(--av-velo-fuerte, var(--iswc-brand-soft)), transparent 60%), var(--iswc-bg-elev);
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: t.esp(2);
+  font-size: 1.05em;
+
+  av-logo {
+    font-size: 1.6em;
+  }
+}
+
+.titulo {
+  @include m.impacto;
+  font-size: 1em;
+
+  em {
+    font-style: normal;
+    color: var(--iswc-accent);
+  }
+}
+
+.etiqueta {
+  font-size: 0.75em;
+}
+
+.ayuda {
+  flex: 1;
+  min-width: 12em;
+  font-size: 0.82em;
+  color: var(--iswc-text-dim);
+}
+
+.acciones {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(2);
+  font-size: 0.9em;
+
+  .rotulo {
+    font-size: 0.85em;
+    color: var(--iswc-text-dim);
+  }
+
+  .como {
+    min-width: 11em;
+  }
+}
+
+.chat {
+  min-height: 0;
+}
+
+@media (max-width: 40em) {
+  .ayuda,
+  .texto,
+  .rotulo,
+  .etiqueta {
+    display: none;
+  }
+
+  .barra {
+    flex-wrap: nowrap;
+    padding: t.esp(1) t.esp(2);
+    gap: t.esp(2);
+  }
+
+  .marca .titulo {
+    display: none;
+  }
+
+  .acciones {
+    flex: 1;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: t.esp(1);
+
+    .como {
+      min-width: 0;
+      flex: 1;
+      max-width: 11em;
+    }
+  }
+}

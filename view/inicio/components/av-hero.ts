@@ -1,8 +1,8 @@
 /**
  * <av-hero> — portada de la landing, como la del React original: banner de fondo (`bgbanner.svg`) teñido al tono de la
  * paleta activa (`hue-rotate` del kit) y velado con un degradado del fondo, lema grande con la tipografía de marca,
- * botón principal («Empieza ahora», o «Ir al panel» con sesión), enlace de información e ilustración con relieve al
- * pasar el mouse. Emite `av-inicio-ir { vista }`; el shell enruta.
+ * botón principal («Empieza ahora», o «Ir al panel» con sesión), enlace de información y la escena Memphis
+ * `bienvenida` (`av-escena`) con relieve al pasar el mouse. Emite `av-inicio-ir { vista }`; el shell enruta.
  */
 import { crearComponente, define, emitir, html } from '../../../src/js/base/componente.js';
 import type { AvHeroProps } from '../../../src/js/consts/schemas/inicio.schemas.js';
@@ -28,7 +28,7 @@ const AvHero = crearComponente<AvHeroProps>(import.meta.url, 'av-hero', { sesion
           </div>
           <iswc-button variant="text" color="brand" class="enlace" oniswc-click=${() => ir(props.sesion ? 'panel' : 'acceso')}>${LEMA.enlace} →</iswc-button>
         </div>
-        <img class="ilustracion" part="ilustracion" src=${recurso('assets/img/ilustration.svg')} alt="Equipo trabajando con los tableros de Avatar" loading="eager">
+        <av-escena class="ilustracion" part="ilustracion" escena="bienvenida" etiqueta="Equipo celebrando con Avatar"></av-escena>
       </div>
     </section>
   `);

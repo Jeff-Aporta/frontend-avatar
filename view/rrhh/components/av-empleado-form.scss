@@ -1,0 +1,28 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-empleado-form — diálogo de empleado con pares de campos. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 40em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+}
+
+@media (max-width: 36em) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}

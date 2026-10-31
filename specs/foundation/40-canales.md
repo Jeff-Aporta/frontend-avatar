@@ -1,6 +1,6 @@
 # 40 — Canales de comunicación
 
-> Alcance: la vista `canales` (`#/canales/<icanal>`): lista de canales visibles, conversación, envío, no leídos y creación
+> Alcance: la vista `canales` (`/canales/` (id `icanal` en el historial)): lista de canales visibles, conversación, envío, no leídos y creación
 > de canales. Fuera: permisos y roles (spec de admin), el API (repo `api-avatar`).
 
 ## 1. Propósito (WHAT)

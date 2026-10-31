@@ -1,0 +1,84 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-reenviar",
+  "category": "chat",
+  "navTitle": "Reenviar",
+  "title": "&lt;av-chat-reenviar&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-reenviar",
+  "styles": "",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-reenviar&gt;",
+      "lede": "Reenviar a varios chats.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-chat-reenviar id=\"x\"></av-chat-reenviar>",
+          "target": "#x",
+          "props": {
+            "ref": "m1",
+            "chats": [
+              {
+                "id": "d1",
+                "tipo": "directo",
+                "nombre": "Beto Ruiz",
+                "foto": null,
+                "iniciales": "BR",
+                "color": 2,
+                "ultimo": "Nos vemos el lunes",
+                "autorUltimo": "",
+                "hora": "10:42",
+                "marca": null,
+                "noLeidos": 0,
+                "fijado": false,
+                "silenciado": false,
+                "archivado": false,
+                "marcadoNoLeido": false,
+                "escribiendo": "",
+                "enLinea": false
+              },
+              {
+                "id": "g1",
+                "tipo": "grupo",
+                "nombre": "Equipo Odys",
+                "foto": null,
+                "iniciales": "EO",
+                "color": 2,
+                "ultimo": "Nos vemos el lunes",
+                "autorUltimo": "",
+                "hora": "10:42",
+                "marca": null,
+                "noLeidos": 0,
+                "fijado": false,
+                "silenciado": false,
+                "archivado": false,
+                "marcadoNoLeido": false,
+                "escribiendo": "",
+                "enLinea": false
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde el menú de un mensaje.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para compartir fuera de la app: iswc-share-button.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Diálogo de reenvío genérico.",
+    "propuesta": "iswc-forward-dialog"
+  }
+}

@@ -4,6 +4,18 @@
     "file": "../../src/js/components/av/av-app.json"
   },
   {
+    "tag": "av-logo",
+    "file": "../../src/js/components/av/av-logo.json"
+  },
+  {
+    "tag": "av-escena",
+    "file": "../../src/js/components/av/av-escena.json"
+  },
+  {
+    "tag": "av-buscador",
+    "file": "../../src/js/components/av/av-buscador.json"
+  },
+  {
     "tag": "av-cabecera",
     "file": "../../src/js/components/av/av-cabecera.json"
   },
@@ -18,10 +30,6 @@
   {
     "tag": "av-empresa-selector",
     "file": "../../src/js/components/av/av-empresa-selector.json"
-  },
-  {
-    "tag": "av-menu",
-    "file": "../../src/js/components/av/av-menu.json"
   },
   {
     "tag": "av-hero",
@@ -76,20 +84,80 @@
     "file": "../panel/components/av-panel.json"
   },
   {
-    "tag": "av-canal-lista",
-    "file": "../canales/components/av-canal-lista.json"
+    "tag": "av-chat-item",
+    "file": "../../src/js/components/chat/av-chat-item.json"
   },
   {
-    "tag": "av-mensaje",
-    "file": "../canales/components/av-mensaje.json"
+    "tag": "av-chat-reacciones",
+    "file": "../../src/js/components/chat/av-chat-reacciones.json"
   },
   {
-    "tag": "av-redactor",
-    "file": "../canales/components/av-redactor.json"
+    "tag": "av-chat-adjunto",
+    "file": "../../src/js/components/chat/av-chat-adjunto.json"
   },
   {
-    "tag": "av-conversacion",
-    "file": "../canales/components/av-conversacion.json"
+    "tag": "av-chat-audio",
+    "file": "../../src/js/components/chat/av-chat-audio.json"
+  },
+  {
+    "tag": "av-chat-burbuja",
+    "file": "../../src/js/components/chat/av-chat-burbuja.json"
+  },
+  {
+    "tag": "av-chat-emojis",
+    "file": "../../src/js/components/chat/av-chat-emojis.json"
+  },
+  {
+    "tag": "av-chat-lista",
+    "file": "../../src/js/components/chat/av-chat-lista.json"
+  },
+  {
+    "tag": "av-chat-cabecera",
+    "file": "../../src/js/components/chat/av-chat-cabecera.json"
+  },
+  {
+    "tag": "av-chat-mensajes",
+    "file": "../../src/js/components/chat/av-chat-mensajes.json"
+  },
+  {
+    "tag": "av-chat-compositor",
+    "file": "../../src/js/components/chat/av-chat-compositor.json"
+  },
+  {
+    "tag": "av-chat-visor",
+    "file": "../../src/js/components/chat/av-chat-visor.json"
+  },
+  {
+    "tag": "av-chat-busqueda",
+    "file": "../../src/js/components/chat/av-chat-busqueda.json"
+  },
+  {
+    "tag": "av-chat-nuevo",
+    "file": "../../src/js/components/chat/av-chat-nuevo.json"
+  },
+  {
+    "tag": "av-chat-grupo-form",
+    "file": "../../src/js/components/chat/av-chat-grupo-form.json"
+  },
+  {
+    "tag": "av-chat-info",
+    "file": "../../src/js/components/chat/av-chat-info.json"
+  },
+  {
+    "tag": "av-chat-reenviar",
+    "file": "../../src/js/components/chat/av-chat-reenviar.json"
+  },
+  {
+    "tag": "av-chat-llamada",
+    "file": "../../src/js/components/chat/av-chat-llamada.json"
+  },
+  {
+    "tag": "av-chat",
+    "file": "../../src/js/components/chat/av-chat.json"
+  },
+  {
+    "tag": "av-chat-demo",
+    "file": "../chat-demo/components/av-chat-demo.json"
   },
   {
     "tag": "av-canal-form",
@@ -178,5 +246,109 @@
   {
     "tag": "av-admin",
     "file": "../admin/components/av-admin.json"
+  },
+  {
+    "tag": "av-indicadores",
+    "file": "../../src/js/components/av/av-indicadores.json"
+  },
+  {
+    "tag": "av-correo-carpetas",
+    "file": "../correos/components/av-correo-carpetas.json"
+  },
+  {
+    "tag": "av-correo-lista",
+    "file": "../correos/components/av-correo-lista.json"
+  },
+  {
+    "tag": "av-correo-lector",
+    "file": "../correos/components/av-correo-lector.json"
+  },
+  {
+    "tag": "av-correo-redactar",
+    "file": "../correos/components/av-correo-redactar.json"
+  },
+  {
+    "tag": "av-correos",
+    "file": "../correos/components/av-correos.json"
+  },
+  {
+    "tag": "av-finanzas-grafica",
+    "file": "../finanzas/components/av-finanzas-grafica.json"
+  },
+  {
+    "tag": "av-conversor",
+    "file": "../finanzas/components/av-conversor.json"
+  },
+  {
+    "tag": "av-finanzas-tabla",
+    "file": "../finanzas/components/av-finanzas-tabla.json"
+  },
+  {
+    "tag": "av-transaccion-form",
+    "file": "../finanzas/components/av-transaccion-form.json"
+  },
+  {
+    "tag": "av-factura-form",
+    "file": "../finanzas/components/av-factura-form.json"
+  },
+  {
+    "tag": "av-finanzas",
+    "file": "../finanzas/components/av-finanzas.json"
+  },
+  {
+    "tag": "av-stock-alertas",
+    "file": "../inventario/components/av-stock-alertas.json"
+  },
+  {
+    "tag": "av-inventario-tabla",
+    "file": "../inventario/components/av-inventario-tabla.json"
+  },
+  {
+    "tag": "av-producto-form",
+    "file": "../inventario/components/av-producto-form.json"
+  },
+  {
+    "tag": "av-movimiento-form",
+    "file": "../inventario/components/av-movimiento-form.json"
+  },
+  {
+    "tag": "av-pedido-form",
+    "file": "../inventario/components/av-pedido-form.json"
+  },
+  {
+    "tag": "av-proveedor-form",
+    "file": "../inventario/components/av-proveedor-form.json"
+  },
+  {
+    "tag": "av-inventario",
+    "file": "../inventario/components/av-inventario.json"
+  },
+  {
+    "tag": "av-rrhh-grafica",
+    "file": "../rrhh/components/av-rrhh-grafica.json"
+  },
+  {
+    "tag": "av-asistencia-dia",
+    "file": "../rrhh/components/av-asistencia-dia.json"
+  },
+  {
+    "tag": "av-rrhh-tabla",
+    "file": "../rrhh/components/av-rrhh-tabla.json"
+  },
+  {
+    "tag": "av-solicitudes",
+    "file": "../rrhh/components/av-solicitudes.json"
+  },
+  {
+    "tag": "av-empleado-form",
+    "file": "../rrhh/components/av-empleado-form.json"
+  },
+  {
+    "tag": "av-solicitud-form",
+    "file": "../rrhh/components/av-solicitud-form.json"
+  },
+  {
+    "tag": "av-rrhh",
+    "file": "../rrhh/components/av-rrhh.json"
   }
 ]

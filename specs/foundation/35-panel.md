@@ -6,7 +6,7 @@ El tablero de la empresa activa: cómo va el equipo de un vistazo.
 
 ## 2. Requisitos WHAT
 
-- [W-PAN-01] `#/panel` carga el resumen de la empresa activa (`GET empresa/{id}/resumen`) y las notificaciones del usuario.
+- [W-PAN-01] `/panel/` carga el resumen de la empresa activa (`GET empresa/{id}/resumen`) y las notificaciones del usuario.
 - [W-PAN-02] Seis KPIs en orden: miembros, mensajes de hoy, proyectos, tareas pendientes, vencidas (rojo si hay) y pipeline CRM en pesos.
 - [W-PAN-03] Una dona de tareas por estado y barras de clientes por etapa del CRM (con ceros donde no hay).
 - [W-PAN-04] Las notificaciones muestran título, cuerpo y hace cuánto; «Marcar leídas» las marca todas.

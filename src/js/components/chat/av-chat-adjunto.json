@@ -1,0 +1,64 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-adjunto",
+  "category": "chat",
+  "navTitle": "Adjunto",
+  "title": "&lt;av-chat-adjunto&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-adjunto",
+  "styles": "",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-adjunto&gt;",
+      "lede": "Adjunto de un mensaje o en vista previa.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-chat-adjunto id=\"x\"></av-chat-adjunto>",
+          "target": "#x",
+          "props": {
+            "adjunto": {
+              "id": "a1",
+              "nombre": "propuesta-odys.pdf",
+              "mime": "application/pdf",
+              "bytes": 482133,
+              "url": "data:application/pdf;base64,JVBERi0=",
+              "ancho": null,
+              "alto": null,
+              "duracion": null,
+              "onda": []
+            }
+          },
+          "controls": [
+            {
+              "control": "select",
+              "prop": "props:modo",
+              "label": "modo",
+              "default": "burbuja",
+              "options": [
+                "burbuja",
+                "previa"
+              ]
+            },
+            {
+              "control": "text",
+              "prop": "props:error",
+              "label": "error",
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En burbujas y en la previa del redactor.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para subir archivos en formularios: iswc-file-input o iswc-dropzone.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Tarjeta de adjunto genérica.",
+    "propuesta": "iswc-attachment"
+  }
+}

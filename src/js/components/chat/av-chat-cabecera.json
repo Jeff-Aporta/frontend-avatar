@@ -1,0 +1,55 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-cabecera",
+  "category": "chat",
+  "navTitle": "Cabecera",
+  "title": "&lt;av-chat-cabecera&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-cabecera",
+  "styles": ".stage{max-width:40rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-cabecera&gt;",
+      "lede": "Estado en vivo y acciones del chat abierto.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-cabecera id=\"x\"></av-chat-cabecera></div>",
+          "target": "#x",
+          "props": {
+            "id": "d1",
+            "nombre": "Beto Ruiz",
+            "iniciales": "BR",
+            "color": 3,
+            "estado": "escribiendo…",
+            "activo": true
+          },
+          "controls": [
+            {
+              "control": "text",
+              "prop": "props:estado",
+              "label": "estado",
+              "default": "escribiendo…"
+            },
+            {
+              "control": "boolean",
+              "prop": "props:volver",
+              "label": "volver",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de av-chat-mensajes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Como cabecera de página: av-cabecera.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Cabecera genérica con presencia.",
+    "propuesta": "iswc-chat-header"
+  }
+}

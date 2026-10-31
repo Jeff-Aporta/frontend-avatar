@@ -1,0 +1,82 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-info",
+  "category": "chat",
+  "navTitle": "Info del chat",
+  "title": "&lt;av-chat-info&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-info",
+  "styles": ".stage{height:32rem;max-width:24rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-info&gt;",
+      "lede": "Panel lateral de información.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-info id=\"x\"></av-chat-info></div>",
+          "target": "#x",
+          "props": {
+            "abierto": true,
+            "id": "g1",
+            "tipo": "grupo",
+            "nombre": "Equipo Odys",
+            "descripcion": "Coordinación del proyecto",
+            "iniciales": "EO",
+            "color": 4,
+            "yo": "ana",
+            "soyAdmin": true,
+            "miembros": [
+              {
+                "id": "beto",
+                "nombre": "Beto Ruiz",
+                "foto": null,
+                "detalle": "Desarrollo",
+                "enLinea": true,
+                "color": 3,
+                "rol": "admin"
+              },
+              {
+                "id": "carla",
+                "nombre": "Carla Gómez",
+                "foto": null,
+                "detalle": "Diseño",
+                "enLinea": false,
+                "color": 5,
+                "rol": ""
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "select",
+              "prop": "props:modo",
+              "label": "modo",
+              "default": "chat",
+              "options": [
+                "chat",
+                "mensaje"
+              ]
+            },
+            {
+              "control": "boolean",
+              "prop": "props:soyAdmin",
+              "label": "soyAdmin",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Panel lateral del chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para fichas de cliente o usuario: sus vistas.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Panel de info de conversación genérico.",
+    "propuesta": "iswc-chat-info"
+  }
+}

@@ -1,0 +1,118 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-producto-form — panel de stock arriba (cifra neón + atajos), campos en filas y relacionados como chips. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 46em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.rotulo {
+  @include m.rotulo;
+  font-size: 0.75em;
+}
+
+.stock {
+  --senal: var(--iswc-color-success);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.esp(3);
+  padding: t.esp(3);
+  border: 1px solid color-mix(in srgb, var(--senal) 40%, transparent);
+  border-radius: var(--av-radio);
+  background: linear-gradient(120deg, color-mix(in srgb, var(--senal) 12%, transparent), transparent 70%);
+
+  &[data-nivel="bajo"] {
+    --senal: var(--iswc-color-warning);
+  }
+
+  &[data-nivel="agotado"] {
+    --senal: var(--iswc-color-danger);
+  }
+
+  .cifra {
+    display: flex;
+    align-items: center;
+    gap: t.esp(3);
+
+    strong {
+      @include m.impacto;
+      font-size: 2em;
+      color: var(--senal);
+      text-shadow: 0 0 0.5em color-mix(in srgb, var(--senal) 45%, transparent);
+    }
+  }
+
+  .mover {
+    display: flex;
+    flex-wrap: wrap;
+    gap: t.esp(2);
+  }
+
+  .sku {
+    font-family: var(--av-font-impacto);
+    font-size: 0.8em;
+    letter-spacing: 0.06em;
+    color: var(--iswc-text-dim);
+  }
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: t.esp(3);
+
+  &.dos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.margen {
+  margin: 0;
+  font-size: 0.85em;
+  color: var(--iswc-text-dim);
+}
+
+.relacionados {
+  display: grid;
+  gap: t.esp(2);
+  padding: t.esp(3);
+  border: 1px dashed var(--av-borde-seccion);
+  border-radius: var(--av-radio);
+  background: var(--av-velo);
+
+  .rotulo {
+    display: flex;
+    align-items: center;
+    gap: t.esp(2);
+    margin: 0;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: t.esp(2);
+  }
+
+  .r-stock {
+    font-family: var(--av-font-impacto);
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 36em) {
+  .fila,
+  .fila.dos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

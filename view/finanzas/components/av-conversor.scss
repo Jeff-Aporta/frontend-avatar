@@ -1,0 +1,97 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-conversor — campos en fila, cifra de resultado con brillo neón y equivalencias como chips. */
+:host {
+  @include m.host-bloque;
+}
+
+.tarjeta {
+  border-radius: var(--av-radio);
+  box-shadow: var(--av-sombra-tarjeta);
+
+  &::part(base) {
+    box-sizing: border-box;
+    height: 100%;
+    border-color: var(--av-borde-seccion);
+    background: linear-gradient(135deg, var(--av-velo-fuerte), transparent 65%), var(--iswc-bg-elev);
+  }
+}
+
+.titulo {
+  @include m.titulo;
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+
+  iswc-icon {
+    color: var(--iswc-accent);
+  }
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: minmax(7em, 1.4fr) minmax(5.5em, 1fr) auto minmax(5.5em, 1fr);
+  align-items: end;
+  gap: t.esp(2);
+}
+
+.resultado {
+  display: grid;
+  gap: t.esp(1);
+  margin: t.esp(5) 0 t.esp(4);
+  min-height: 4em;
+  transition: opacity 0.2s ease;
+
+  &[data-ocupado] {
+    opacity: 0.55;
+  }
+
+  .cifra {
+    @include m.impacto;
+    font-size: 2em;
+    line-height: 1.1;
+    color: var(--iswc-accent);
+    overflow-wrap: anywhere;
+  }
+
+  .tasa {
+    font-size: 0.85em;
+    color: var(--iswc-text-dim);
+  }
+
+  .error {
+    color: var(--iswc-color-danger);
+  }
+}
+
+.tasas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.esp(2) t.esp(4);
+  padding-top: t.esp(3);
+  border-top: 1px dashed var(--av-borde-seccion);
+  font-size: 0.85em;
+
+  .equivalencia {
+    display: inline-flex;
+    align-items: center;
+    gap: t.esp(2);
+  }
+}
+
+@media (max-width: 36em) {
+  .fila {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+
+    .monto {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resultado {
+    transition: none;
+  }
+}

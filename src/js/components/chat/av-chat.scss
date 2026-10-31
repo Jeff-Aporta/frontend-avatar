@@ -1,0 +1,91 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat — armazón: lista | conversación | panel lateral, con bordes de neón suaves. */
+:host {
+  @include m.host-bloque;
+  position: relative;
+  height: 100%;
+  min-height: 24em;
+  container-type: inline-size;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.chat {
+  height: 100%;
+  min-height: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background: var(--iswc-bg);
+}
+
+.exterior,
+.interior {
+  height: 100%;
+  --divider-width: 1px;
+  --divider-hit-area: 0.75em;
+
+  &::part(divider) {
+    background: var(--av-borde-seccion, var(--iswc-border-soft));
+  }
+
+  &::part(panel) {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+.exterior {
+  --min: 16em;
+}
+
+.lista {
+  contain: inline-size;
+  height: 100%;
+  border-right: 0;
+}
+
+.centro {
+  contain: inline-size;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+
+  &[data-vacio="1"] {
+    av-chat-cabecera,
+    av-chat-compositor {
+      display: none;
+    }
+
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
+
+.mensajes {
+  min-height: 0;
+}
+
+.lateral {
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  /* su contenido no ensancha la columna del split */
+  contain: inline-size;
+  @include c.entrada(0);
+
+  > * {
+    height: 100%;
+  }
+}
+
+#reaccion {
+  --width: min(24em, 94vw);
+}

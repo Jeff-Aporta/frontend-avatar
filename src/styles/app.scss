@@ -1,28 +1,20 @@
 /* app.scss — SOLO lo que vive en light DOM (la página). Los componentes llevan su .scss hermano.
  *
  * Identidad de Avatar (heredada del React original):
- *   - Poppins para todo el texto (la fuente se hereda dentro de cada shadow root).
- *   - Lemon Milk para la marca y los títulos grandes; Good Times para cifras y rótulos de impacto.
+ *   - Google Fonts, línea futurista: Orbitron (marca, cifras de impacto), Exo 2 (títulos), Poppins (texto, como en el
+ *     React original). Las fuentes se heredan dentro de cada shadow root.
  *   - Los colores salen SIEMPRE de la paleta activa del kit (`data-palette`, `data-panda`): aquí solo se
  *     declaran tokens de la app que derivan de los del kit (`--av-*`).
  */
-@font-face {
-  font-family: "Lemon Milk";
-  src: url("../../../assets/fonts/lemonmilk-rg.otf") format("opentype");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Good Times";
-  src: url("../../../assets/fonts/goodtimes-rg.otf") format("opentype");
-  font-display: swap;
-}
-
 :root {
   --iswc-font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
   --iswc-sans: var(--iswc-font-sans);
-  --av-font-marca: "Lemon Milk", "Poppins", sans-serif;
-  --av-font-impacto: "Good Times", "Poppins", sans-serif;
+  --av-font-marca: "Orbitron", "Exo 2", sans-serif;
+  --av-font-titulo: "Exo 2", "Poppins", sans-serif;
+  --av-font-impacto: "Orbitron", "Exo 2", sans-serif;
+  /* Neón: el brillo sale del acento de la paleta, así cambia con ella. */
+  --av-neon: 0 0 0.35em color-mix(in srgb, var(--iswc-accent) 70%, transparent), 0 0 1.2em color-mix(in srgb, var(--iswc-accent) 35%, transparent);
+  --av-neon-texto: 0 0 0.6em color-mix(in srgb, var(--iswc-accent) 45%, transparent);
   /* Superficies con carácter: un velo del color de la paleta sobre el fondo del kit. */
   --av-velo: color-mix(in srgb, var(--iswc-accent) 7%, transparent);
   --av-velo-fuerte: color-mix(in srgb, var(--iswc-accent) 16%, transparent);
@@ -42,8 +34,18 @@ body {
 }
 
 body {
-  /* Como en el React: la barra de scroll siempre presente, sin saltos de layout al cambiar de vista. */
-  overflow-y: scroll;
+  /* El desplazamiento vive dentro de los armazones del kit (app-shell / doc-layout): el body no se desplaza. */
+  overflow: hidden;
+}
+
+/* Rutas reales: cada vista es su página. El navegador funde una página con la siguiente (mismo origen). */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.18s;
 }
 
 /* La app se revela cuando el arranque marca `data-app-ready` (o el watchdog de 6 s). */

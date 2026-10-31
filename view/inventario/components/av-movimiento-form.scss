@@ -1,0 +1,64 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-movimiento-form — vista previa del stock como contador neón «antes → después». */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 34em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+}
+
+.ayuda {
+  margin: 0;
+  font-size: 0.85em;
+  color: var(--iswc-text-dim);
+}
+
+.previa {
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+  padding: t.esp(3) t.esp(4);
+  border: 1px solid var(--av-borde-seccion);
+  border-radius: var(--av-radio);
+  background: var(--av-velo);
+
+  .rotulo {
+    @include m.rotulo;
+    font-size: 0.75em;
+  }
+
+  strong {
+    @include m.impacto;
+    font-size: 1.5em;
+  }
+
+  .nuevo {
+    color: var(--iswc-accent);
+  }
+
+  &[data-error] .nuevo {
+    font-size: 1em;
+    color: var(--iswc-color-danger);
+    text-shadow: none;
+  }
+}
+
+@media (max-width: 36em) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}

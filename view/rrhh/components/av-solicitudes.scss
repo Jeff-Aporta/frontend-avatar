@@ -1,0 +1,137 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-solicitudes — filtros como pastillas y tarjetas con ícono del tipo en un disco neón. */
+:host {
+  @include m.host-bloque;
+}
+
+.solicitudes {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.esp(2);
+}
+
+.lista {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.esqueleto {
+  height: 6em;
+  border-radius: var(--av-radio);
+}
+
+.solicitud {
+  --c: var(--iswc-color-warning);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: t.esp(3);
+  align-items: start;
+  padding: t.esp(3) t.esp(4);
+  border: 1px solid var(--iswc-border-soft);
+  border-radius: var(--av-radio);
+  background: linear-gradient(110deg, color-mix(in srgb, var(--c) 9%, transparent), transparent 45%), var(--iswc-bg-elev);
+  transition: opacity 0.2s ease;
+
+  &[data-estado="aprobada"] { --c: var(--iswc-color-success); }
+  &[data-estado="rechazada"] { --c: var(--iswc-color-danger); }
+
+  &[aria-busy="true"] {
+    opacity: 0.55;
+  }
+}
+
+.icono {
+  display: grid;
+  place-items: center;
+  width: 2.6em;
+  height: 2.6em;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+  color: var(--c);
+  box-shadow: 0 0 0.9em color-mix(in srgb, var(--c) 30%, transparent);
+  font-size: 1.1em;
+}
+
+.cuerpo {
+  display: grid;
+  gap: t.esp(1);
+  min-width: 0;
+}
+
+.linea {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(2);
+
+  .avatar {
+    font-size: 1.9em;
+  }
+
+  .empleado {
+    @include m.titulo;
+  }
+}
+
+.detalle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(1) t.esp(4);
+  font-size: 0.85em;
+  color: var(--iswc-text-dim);
+
+  .tipo {
+    @include m.rotulo(0.9);
+    color: var(--c);
+  }
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: t.esp(1);
+  }
+}
+
+.motivo,
+.resolucion {
+  margin: 0;
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+
+.resolucion {
+  font-size: 0.8em;
+  color: var(--iswc-text-dim);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.esp(2);
+  justify-content: flex-end;
+}
+
+@media (max-width: 48em) {
+  .solicitud {
+    grid-template-columns: auto minmax(0, 1fr);
+
+    .acciones {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solicitud {
+    transition: none;
+  }
+}

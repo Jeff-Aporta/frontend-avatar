@@ -1,0 +1,101 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-factura-form — ítems como filas de tres campos y totales alineados a la derecha con el total en Orbitron. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 46em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.estado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(2) t.esp(4);
+  font-size: 0.85em;
+  color: var(--iswc-text-dim);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+}
+
+.items {
+  display: grid;
+  gap: t.esp(2);
+  padding: t.esp(3);
+  border: 1px solid var(--av-borde-seccion);
+  border-radius: var(--av-radio);
+  background: var(--av-velo);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(4em, 1fr) minmax(6em, 1.4fr) 2.2em;
+  align-items: end;
+  gap: t.esp(2);
+}
+
+.agregar {
+  justify-self: start;
+}
+
+.totales {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: t.esp(1) t.esp(4);
+  justify-self: end;
+  min-width: 16em;
+  margin: 0;
+
+  dt {
+    @include m.rotulo;
+    font-size: 0.75em;
+    align-self: center;
+  }
+
+  dd {
+    margin: 0;
+    text-align: end;
+  }
+
+  .total {
+    padding-top: t.esp(2);
+    border-top: 1px solid var(--av-borde-seccion);
+  }
+
+  dd.total {
+    @include m.impacto;
+    font-size: 1.2em;
+    color: var(--iswc-accent);
+  }
+}
+
+@media (max-width: 36em) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 2.2em;
+
+    .i-desc {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .totales {
+    justify-self: stretch;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-rrhh",
+  "category": "rrhh",
+  "navTitle": "Recursos Humanos (shell)",
+  "title": "&lt;av-rrhh&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-rrhh",
+  "styles": ".stage{min-height:20rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-rrhh&gt;",
+      "lede": "La vista de RRHH completa (necesita sesión y empresa activa).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-rrhh id=\"d\"></av-rrhh></div>",
+          "target": "#d",
+          "props": {
+            "id": null,
+            "version": 0
+          },
+          "controls": [
+            {
+              "prop": "props:id",
+              "type": "select",
+              "label": "id (pestaña)",
+              "options": [
+                "",
+                "general",
+                "empleados",
+                "asistencia",
+                "solicitudes"
+              ],
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta rrhh (la monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

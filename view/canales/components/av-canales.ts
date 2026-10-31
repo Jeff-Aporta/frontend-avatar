@@ -1,85 +1,42 @@
 /**
- * <av-canales> — shell de la vista `canales` (`#/canales/<icanal>`): dos columnas (lista | conversación), una en móvil.
- * Carga `canales/mios` de la empresa activa (plugin `avatar` de DER), los mensajes del canal abierto con el
- * `ClientController` de mensajes, marca leído al abrir, refresca cada 8 s mientras está montado y envía con
- * `enviar(icanal, { contenido })`. Crear canal: `controller('canales').post(...)` (solo con `avatar.gestionar`).
+ * <av-canales> — shell de la vista `canales` (spec 40 + 42): monta el chat en tiempo real (`<av-chat>`) contra el API
+ * (`backend-avatar`: ops del plugin `avatar` + sala WebSocket). Sin sondeo: todo llega por la sala.
+ *
+ *   - Sin empresa activa o sin permiso `avatar.chat`, lo explica y no consulta (W-CAN-14, W-CHAT-41).
+ *   - El chat abierto se refleja en la ruta (`ir('canales', icanal)`) y la ruta abre el chat (`props.id`).
+ *   - Con `avatar.gestionar`, «Nuevo canal» crea un canal público o privado (`controller('canales').post`).
+ *   - Si el API aún no publica las rutas del chat, cae al demo local y lo avisa.
+ * Cambiar de chat o abrir el formulario nunca rehace el chat (repintado parcial).
  */
-import { crearComponente, define, html } from '../../../src/js/base/componente.js';
-import { CanalMioSchema } from '../../../src/js/consts/schemas/api.schemas.js';
-import { type AvCanalesProps, EquipoOpcionSchema, MensajeSchema } from '../../../src/js/consts/schemas/canales.schemas.js';
+import { avisar, crearComponente, define, html } from '../../../src/js/base/componente.js';
+import { type AvCanalesProps, EquipoOpcionSchema } from '../../../src/js/consts/schemas/canales.schemas.js';
 import { z } from '../../../src/js/base/zod.js';
-import { controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
+import { controller, mensajeDe } from '../../../src/js/core/api.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
-import { ir } from '../../../src/js/core/router.js';
-import { canalActivo, totalSinLeer } from '../utils/chat.js';
-import './av-canal-lista.js';
-import './av-conversacion.js';
+import { ir, tomarIntencion } from '../../../src/js/core/router.js';
+import type { ChatBackend } from '../../../src/js/chat/backend.js';
+import { crearBackendAvatar } from '../../../src/js/chat/backend-avatar.js';
+import { crearBackendDemo } from '../../../src/js/chat/backend-demo.js';
+import { apiChatPendiente, chatDeRuta, estadoCanales } from '../utils/canales.js';
 import './av-canal-form.js';
 
 type ConProps = HTMLElement & { props: Record<string, unknown> };
-type Host = HTMLElement & { props: Partial<AvCanalesProps>; __temporizador?: ReturnType<typeof setInterval> | undefined };
-
-const INTERVALO_MS = 8000;
+type ChatEl = ConProps & { backend: ChatBackend | null; recargar(abrir?: string | null): Promise<void>; abrirPanel(p: 'nuevo' | 'grupo'): void };
+type Host = HTMLElement & { props: Partial<AvCanalesProps>; __backend?: ChatBackend | null; __empresa?: number | null; __ruta?: (e: Event) => void };
 
 const AvCanales = crearComponente<AvCanalesProps>(
   import.meta.url,
   'av-canales',
-  { id: null, version: 0, canales: [], cargando: true, error: '', formulario: false },
-  (root, props, host) => {
-    const h = host as Host;
+  { id: null, formulario: false, aviso: '' },
+  (root, props, hostEl) => {
+    const h = hostEl as Host;
     const iempresa = empresaActiva();
-    const yo = estado.yo?.iusuario ?? '';
+    const vista = estadoCanales(iempresa, estado.perfil);
     const puedeCrear = puede(estado.perfil, ACCION.gestionar);
-    const puedeEscribir = puede(estado.perfil, ACCION.chat);
-    const activo = canalActivo(props.canales, props.id);
-    const conversacion = () => root.querySelector('#conversacion') as ConProps | null;
     const formulario = () => root.querySelector('#formulario') as ConProps | null;
+    const chat = () => root.querySelector('#chat') as ChatEl | null;
 
-    const cargarCanales = async () => {
-      if (!iempresa) return;
-      try {
-        const r = z.array(CanalMioSchema).safeParse(await dominio()['mios'](iempresa));
-        h.props = { canales: r.success ? r.data : [], cargando: false, error: r.success ? '' : 'Canales con forma inesperada' };
-      } catch (err) {
-        h.props = { cargando: false, error: mensajeDe(err) };
-      }
-    };
-    const cargarMensajes = async (icanal: number, silencioso = false) => {
-      const c = conversacion();
-      if (!c) return;
-      if (!silencioso) c.props = { cargando: true };
-      try {
-        const filas = await controller('mensajes').query({ where: { icanal }, orderBy: 'creado', pageSize: 100, include: { autor: true } });
-        const r = z.array(MensajeSchema).safeParse(filas.map((f: { toJSON?: () => unknown }) => (typeof f.toJSON === 'function' ? f.toJSON() : f)));
-        c.props = { mensajes: r.success ? r.data : [], cargando: false };
-      } catch (err) {
-        c.props = { cargando: false };
-        if (!silencioso) h.props = { error: mensajeDe(err) };
-      }
-    };
-    const marcarLeido = async (icanal: number) => {
-      try {
-        await dominio()['leido'](icanal);
-        h.props = { canales: props.canales.map((c) => (c.icanal === icanal ? { ...c, sin_leer: 0 } : c)) };
-      } catch {
-        /* sin permiso o sin red: la lista se corrige en el próximo refresco */
-      }
-    };
-    const enviar = async (e: Event) => {
-      if (!activo) return;
-      const { contenido } = (e as CustomEvent<{ contenido: string }>).detail;
-      const c = conversacion();
-      if (c) c.props = { enviando: true };
-      try {
-        await dominio()['enviar'](activo.icanal, { contenido });
-        await cargarMensajes(activo.icanal, true);
-      } catch (err) {
-        h.props = { error: mensajeDe(err) };
-      } finally {
-        if (c) c.props = { enviando: false };
-      }
-    };
     const crear = async (e: Event) => {
       if (!iempresa) return;
       const d = (e as CustomEvent<{ nombre: string; tipo: string; descripcion: string | null; iequipo: number | null }>).detail;
@@ -87,10 +44,11 @@ const AvCanales = crearComponente<AvCanalesProps>(
       if (f) f.props = { guardando: true, error: '' };
       try {
         const canales = controller('canales');
-        const creado = await canales.post(canales.pojo({ iempresa, nombre: d.nombre, tipo: d.tipo, descripcion: d.descripcion, iequipo: d.iequipo, creado_por: yo }));
+        const creado = await canales.post(canales.pojo({ iempresa, nombre: d.nombre, tipo: d.tipo, descripcion: d.descripcion, iequipo: d.iequipo, creado_por: estado.yo?.iusuario ?? '' }));
         h.props = { formulario: false };
-        await cargarCanales();
-        ir('canales', Number(creado['icanal']));
+        const id = String(creado['icanal']);
+        await chat()?.recargar(id);
+        ir('canales', id);
       } catch (err) {
         if (f) f.props = { guardando: false, error: mensajeDe(err) };
       }
@@ -108,56 +66,76 @@ const AvCanales = crearComponente<AvCanalesProps>(
     };
 
     root.append(html`
-      <div class="pagina" part="pagina" data-abierto=${props.id ? '1' : '0'}
-        onav-canal-elegido=${(e: Event) => ir('canales', (e as CustomEvent<{ icanal: number }>).detail.icanal)}
-        onav-canal-nuevo=${() => { h.props = { formulario: true }; }}
+      <div class="pagina" part="pagina"
         onav-canal-form-cerrar=${() => { h.props = { formulario: false }; }}
         onav-canal-crear=${crear}
-        onav-conversacion-volver=${() => ir('canales')}
-        onav-conversacion-refrescar=${() => { void cargarCanales(); if (activo) void cargarMensajes(activo.icanal); }}
-        onav-mensaje-enviar=${enviar}>
-        <av-cabecera id="cabecera"></av-cabecera>
-        ${props.error ? html`<iswc-callout tone="danger"><strong slot="title">Canales</strong>${props.error}</iswc-callout>` : null}
-        ${!iempresa ? html`<av-vacio id="sin-empresa"></av-vacio>` : html`
-          <div class="columnas" part="columnas">
-            <av-canal-lista id="lista" class="lista"></av-canal-lista>
-            <av-conversacion id="conversacion" class="conversacion"></av-conversacion>
-          </div>
-          <av-canal-form id="formulario"></av-canal-form>
-        `}
+        onav-chat-abierto=${(e: Event) => ir('canales', (e as CustomEvent<{ icanal: string | null }>).detail.icanal)}>
+        <av-cabecera id="cabecera">
+          ${puedeCrear && vista === 'listo' ? html`<iswc-button slot="acciones" variant="soft" color="brand" oniswc-click=${() => { h.props = { formulario: true }; void cargarEquipos(); }}><iswc-icon slot="start" icon="mdi:pound-box-outline"></iswc-icon>Nuevo canal</iswc-button>` : null}
+        </av-cabecera>
+        <iswc-callout class="aviso" tone="warning" color="warning" ?hidden=${!props.aviso}><strong slot="title">Chat</strong><span class="aviso-texto">${props.aviso}</span></iswc-callout>
+        ${vista === 'listo' ? html`<av-chat id="chat" class="chat"></av-chat>` : html`<av-vacio id="vacio"></av-vacio>`}
+        <av-canal-form id="formulario"></av-canal-form>
       </div>
     `);
-    (root.querySelector('#cabecera') as ConProps).props = { titulo: 'Canales', subtitulo: props.canales.length ? `${props.canales.length} canales · ${totalSinLeer(props.canales)} sin leer` : 'Conversación por empresa y equipo', icono: 'mdi:forum-outline' };
-    const sinEmpresa = root.querySelector('#sin-empresa') as ConProps | null;
-    if (sinEmpresa) sinEmpresa.props = { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Únete a una empresa para ver sus canales.' };
-    if (!iempresa) return;
-    (root.querySelector('#lista') as ConProps).props = { canales: props.canales, activo: activo?.icanal ?? null, cargando: props.cargando, puedeCrear };
-    (root.querySelector('#conversacion') as ConProps).props = { canal: activo, yo, puedeEscribir, cargando: props.cargando, mensajes: [] };
+    (root.querySelector('#cabecera') as ConProps).props = { titulo: 'Canales', subtitulo: 'Chats 1:1, grupos y canales de la empresa en tiempo real', icono: 'mdi:forum-outline' };
     (root.querySelector('#formulario') as ConProps).props = { abierto: props.formulario };
-    if (props.formulario) void cargarEquipos();
-    if (props.cargando && props.canales.length === 0) void cargarCanales();
-    if (activo) {
-      void cargarMensajes(activo.icanal);
-      if (activo.sin_leer > 0) void marcarLeido(activo.icanal);
+    const vacio = root.querySelector('#vacio') as ConProps | null;
+    if (vacio) {
+      vacio.props = vista === 'sin-empresa'
+        ? { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Únete a una empresa o elígela arriba para ver sus chats.' }
+        : { icono: 'mdi:lock-outline', titulo: 'Sin permiso de chat', texto: 'Tu rol no incluye el chat (avatar.chat). Pídeselo a un administrador.' };
+      return;
     }
-    // refresco periódico mientras la vista está montada (un solo temporizador por host)
-    if (h.__temporizador) clearInterval(h.__temporizador);
-    h.__temporizador = setInterval(() => {
-      if (!h.isConnected) {
-        clearInterval(h.__temporizador);
-        h.__temporizador = undefined;
+    const c = chat();
+    if (!c || !iempresa) return;
+    c.props = { titulo: 'Chats', clave: `av-canales-${iempresa}`, chat: chatDeRuta(props.id) };
+    // un backend por empresa (sobrevive a repintados del shell)
+    if (!h.__backend || h.__empresa !== iempresa) {
+      h.__backend?.cerrar();
+      h.__empresa = iempresa;
+      h.__backend = crearBackendAvatar({ iempresa });
+    }
+    c.addEventListener('av-chat-error', (e) => {
+      const msg = (e as CustomEvent<{ mensaje: string }>).detail.mensaje;
+      if (!apiChatPendiente(msg)) {
+        avisar(`Chat: ${msg}`, 'danger');
         return;
       }
-      void cargarCanales();
-      if (activo) void cargarMensajes(activo.icanal, true);
-    }, INTERVALO_MS);
+      // el API aún no publica el chat: demo local, sin perder la vista
+      h.__backend?.cerrar();
+      h.__backend = crearBackendDemo({ yo: 'ana' });
+      c.backend = h.__backend;
+      h.props = { aviso: 'El API del chat aún no está publicado: estás viendo el demo local (hablas como Ana Torres).' };
+    });
+    c.backend = h.__backend;
+    // atajos de la paleta global (Ctrl+K): «Nuevo chat» y «Nuevo grupo»
+    const intencion = (i: string | null | undefined) => {
+      if (i === 'chat-nuevo') c.abrirPanel('nuevo');
+      else if (i === 'grupo-nuevo') c.abrirPanel('grupo');
+    };
+    intencion(tomarIntencion('canales'));
+    if (h.__ruta) removeEventListener('av-ruta', h.__ruta);
+    h.__ruta = (e: Event) => {
+      if (!h.isConnected) return;
+      const guardada = tomarIntencion('canales');
+      intencion((e as CustomEvent<{ intencion?: string | null }>).detail?.intencion ?? guardada);
+    };
+    addEventListener('av-ruta', h.__ruta);
   },
-  // Repintado parcial: abrir/cerrar el formulario no rehace las columnas.
+  // Parcial: cambiar de chat (ruta), abrir el formulario o el aviso no rehacen el chat.
   (root, props, previos) => {
-    if (props.formulario === previos.formulario || props.canales !== previos.canales || props.id !== previos.id || props.error !== previos.error) return false;
+    const c = root.querySelector('#chat') as ConProps | null;
     const f = root.querySelector('#formulario') as ConProps | null;
     if (!f) return false;
-    f.props = { abierto: props.formulario, guardando: false, error: '' };
+    if (props.id !== previos.id && c) c.props = { chat: chatDeRuta(props.id) };
+    if (props.formulario !== previos.formulario) f.props = { abierto: props.formulario, guardando: false, error: '' };
+    if (props.aviso !== previos.aviso) {
+      const a = root.querySelector('.aviso') as HTMLElement | null;
+      a?.toggleAttribute('hidden', !props.aviso);
+      const txt = root.querySelector('.aviso-texto');
+      if (txt) txt.textContent = props.aviso;
+    }
     return true;
   },
 );

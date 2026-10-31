@@ -1,0 +1,55 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-llamada",
+  "category": "chat",
+  "navTitle": "Llamada",
+  "title": "&lt;av-chat-llamada&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-llamada",
+  "styles": "",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-llamada&gt;",
+      "lede": "Capa de llamada (los flujos van por propiedades, no por props).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-chat-llamada id=\"x\"></av-chat-llamada>",
+          "target": "#x",
+          "props": {
+            "fase": null,
+            "medio": "video",
+            "chatNombre": "Equipo Odys",
+            "de": "Beto Ruiz",
+            "iniciales": "BR",
+            "color": 3
+          },
+          "controls": [
+            {
+              "control": "select",
+              "prop": "props:fase",
+              "label": "fase",
+              "default": "",
+              "options": [
+                "",
+                "entrante",
+                "saliente",
+                "activa"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Lo monta av-chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para videoconferencias grandes (más de 6): un SFU.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Interfaz de llamada WebRTC genérica.",
+    "propuesta": "iswc-call"
+  }
+}

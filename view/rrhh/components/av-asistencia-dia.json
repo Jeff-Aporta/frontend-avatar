@@ -1,0 +1,80 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-asistencia-dia",
+  "category": "rrhh",
+  "navTitle": "Asistencia del día",
+  "title": "&lt;av-asistencia-dia&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-asistencia-dia",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-asistencia-dia&gt;",
+      "lede": "Marcar la asistencia del día.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-asistencia-dia id=\"d\"></av-asistencia-dia></div>",
+          "target": "#d",
+          "props": {
+            "fecha": "2026-10-30",
+            "cargando": false,
+            "puedeMarcar": true,
+            "ocupados": [],
+            "filas": [
+              {
+                "iempleado": 1,
+                "nombre": "María Aguirre",
+                "cargo": "Diseñadora Senior",
+                "departamento": "Diseño",
+                "estadoEmpleado": "activo",
+                "estado": "presente",
+                "entrada": "08:02",
+                "salida": null
+              },
+              {
+                "iempleado": 3,
+                "nombre": "Laura Cortés",
+                "cargo": "Directora de Marketing",
+                "departamento": "Marketing",
+                "estadoEmpleado": "activo",
+                "estado": "retardo",
+                "entrada": "09:25",
+                "salida": null
+              },
+              {
+                "iempleado": 6,
+                "nombre": "Pablo Díaz",
+                "cargo": "Analista",
+                "departamento": "Finanzas",
+                "estadoEmpleado": "activo",
+                "estado": null,
+                "entrada": null,
+                "salida": null
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:puedeMarcar",
+              "type": "boolean",
+              "label": "puedeMarcar",
+              "default": true
+            },
+            {
+              "prop": "props:cargando",
+              "type": "boolean",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la pestaña Asistencia.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para ver meses enteros: usa el historial.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

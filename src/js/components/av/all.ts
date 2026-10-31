@@ -7,18 +7,27 @@ import { setCssBase } from '../../base/componente.js';
 
 setCssBase(new URL('./', import.meta.url).href);
 
+await import('./av-logo.js');
+await import('./av-escena.js');
+await import('./av-buscador.js');
 await import('./av-cabecera.js');
 await import('./av-vacio.js');
 await import('./av-persona.js');
 await import('./av-empresa-selector.js');
-await import('./av-menu.js');
+await import('./av-indicadores.js');
 await import('../../../../view/inicio/components/all.js');
 await import('../../../../view/acceso/components/all.js');
 await import('../../../../view/panel/components/all.js');
+await import('../chat/all.js');
 await import('../../../../view/canales/components/all.js');
+await import('../../../../view/chat-demo/components/all.js');
 await import('../../../../view/proyectos/components/all.js');
 await import('../../../../view/crm/components/all.js');
 await import('../../../../view/organizacion/components/all.js');
 await import('../../../../view/asistente/components/all.js');
 await import('../../../../view/admin/components/all.js');
+await import('../../../../view/correos/components/all.js');
+await import('../../../../view/finanzas/components/all.js');
+await import('../../../../view/inventario/components/all.js');
+await import('../../../../view/rrhh/components/all.js');
 await import('./av-app.js');

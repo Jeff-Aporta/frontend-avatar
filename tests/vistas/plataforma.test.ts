@@ -1,23 +1,31 @@
-// plataforma.test.ts — núcleo sin navegador, sobre lo PUBLICADO en dist/cdn: router por hash y lectura de permisos.
+// plataforma.test.ts — núcleo sin navegador, sobre lo PUBLICADO en dist/cdn: router de rutas reales y permisos.
 //
-//   W-PLAT-10  el hash se traduce a { vista, id }; vacío o desconocido → inicio; una vista privada sin sesión → acceso
+//   W-PLAT-10  cada vista es una ruta real (/canales/); una URL se traduce a su vista y de vuelta; desconocida → inicio;
+//              una vista privada sin sesión → acceso; ninguna URL lleva # ni parámetros
 //   W-PLAT-11  el vector de permisos de DER decide por acción y verbo: true, false, partido por verbo y comodín "*"
 import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
 
-const { parsear, hashDe, resolver, VISTAS_PRIVADAS } = await import('../../dist/cdn/js/core/router.js');
+const { urlDe, vistaDeUrl, resolver, VISTAS_PRIVADAS } = await import('../../dist/cdn/js/core/router.js');
+const { PAGINAS } = await import('../../dist/cdn/js/consts/paginas.js');
+
+const RAIZ = 'https://jeff-aporta.github.io/frontend-avatar/';
 const { puede, rolDe, ACCION } = await import('../../dist/cdn/js/core/permisos.js');
 
 const perfil = (perms: Record<string, unknown>, roles: string[] = []) => ({ usuario: 'u', irol: roles[0] ?? 'USR', igrupo: 'AVATAR', roles, perms });
 
 export default definirPruebas([
   {
-    nombre: 'plataforma W-PLAT-10 el router traduce el hash y protege las vistas privadas',
+    nombre: 'plataforma W-PLAT-10 rutas reales por vista y vistas privadas protegidas',
     categoria: 'what',
     correr({ eq, expect }) {
-      eq('vacío → inicio', parsear(''), { vista: 'inicio', id: null });
-      eq('con id', parsear('#/canales/12'), { vista: 'canales', id: '12' });
-      eq('desconocida → inicio', parsear('#/loquesea'), { vista: 'inicio', id: null });
-      eq('hash de vuelta', hashDe('proyectos', 3), '#/proyectos/3');
+      eq('portada', urlDe('inicio', RAIZ), RAIZ);
+      eq('ruta de vista', urlDe('canales', RAIZ), `${RAIZ}canales/`);
+      eq('url → vista', vistaDeUrl(`${RAIZ}proyectos/`, RAIZ), 'proyectos');
+      eq('index.html explícito', vistaDeUrl(`${RAIZ}crm/index.html`, RAIZ), 'crm');
+      eq('raíz → inicio', vistaDeUrl(RAIZ, RAIZ), 'inicio');
+      eq('desconocida → inicio', vistaDeUrl(`${RAIZ}loquesea/`, RAIZ), 'inicio');
+      expect('ninguna ruta con # ni ?', PAGINAS.every((p: { vista: string }) => !/[#?]/.test(urlDe(p.vista, RAIZ))));
+      expect('ida y vuelta en todas', PAGINAS.every((p: { vista: string }) => vistaDeUrl(urlDe(p.vista, RAIZ), RAIZ) === p.vista));
       eq('sin sesión a privada → acceso', resolver({ vista: 'panel', id: null }, false), { vista: 'acceso', id: null });
       eq('con sesión se respeta', resolver({ vista: 'panel', id: null }, true), { vista: 'panel', id: null });
       expect('privadas conocidas', VISTAS_PRIVADAS.includes('admin') && !VISTAS_PRIVADAS.includes('inicio'));

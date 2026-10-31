@@ -29,11 +29,6 @@ const AvInicio = crearComponente<AvInicioProps>(import.meta.url, 'av-inicio', { 
       <av-precios id="precios"></av-precios>
       <av-caracteristicas id="tecnologia"></av-caracteristicas>
       <av-abierto id="abierto"></av-abierto>
-      <footer class="pie" part="pie">
-        <span class="marca">Avatar</span>
-        <span>Gestión digital y automatización · Odys — Operation Dashboard Year System</span>
-        <span>© ${new Date().getFullYear()}</span>
-      </footer>
     </div>
   `);
   const de = (id: string) => root.querySelector(`#${id}`) as ConProps;

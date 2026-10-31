@@ -1,0 +1,263 @@
+@use "tokens" as t;
+@use "mixins" as m;
+@use "chat" as c;
+
+/* av-chat-llamada — capa de llamada: tarjeta entrante/saliente o mosaico activo con controles. */
+:host {
+  @include m.host-bloque;
+  display: contents;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.capa {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: t.esp(4);
+  background: color-mix(in srgb, var(--iswc-bg) 55%, transparent);
+  backdrop-filter: blur(0.8em) saturate(1.3);
+  animation: aparecer 0.25s ease both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+.tarjeta {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: t.esp(4);
+  width: min(26em, 100%);
+  padding: t.esp(8) t.esp(6) t.esp(6);
+  box-sizing: border-box;
+  border-radius: calc(var(--av-radio, 1em) * 1.6);
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--iswc-accent) 28%, transparent), transparent 60%),
+    var(--iswc-bg-elev);
+  border: 1px solid color-mix(in srgb, var(--iswc-accent) 40%, transparent);
+  box-shadow: var(--av-neon, none), var(--av-sombra-tarjeta, var(--iswc-shadow));
+}
+
+.aviso-llamada {
+  display: grid;
+  justify-items: center;
+  gap: t.esp(2);
+  text-align: center;
+
+  .quien {
+    font-family: var(--av-font-titulo, inherit);
+    font-size: 1.4em;
+  }
+
+  .que {
+    color: var(--iswc-text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.foto {
+  position: relative;
+  display: inline-grid;
+  font-size: 5.5em;
+  @include c.fondo-persona;
+
+  iswc-avatar {
+    position: relative;
+    z-index: 1;
+  }
+
+  .onda {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 0.02em solid var(--iswc-accent);
+    animation: onda 2s ease-out infinite;
+  }
+
+  .onda.dos {
+    animation-delay: 1s;
+  }
+}
+
+@keyframes onda {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  to {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+.mosaico {
+  display: none;
+}
+
+.propio {
+  display: none;
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: t.esp(3);
+  font-size: 1.15em;
+
+  .c-aceptar,
+  .c-colgar,
+  .c-rechazar {
+    box-shadow: 0 0 1em color-mix(in srgb, currentColor 35%, transparent);
+  }
+
+  .c-aceptar {
+    animation: llamar 1.2s ease-in-out infinite;
+  }
+}
+
+@keyframes llamar {
+  50% {
+    transform: scale(1.1) rotate(-8deg);
+  }
+}
+
+.aviso {
+  margin: 0;
+  font-size: 0.82em;
+  text-align: center;
+  color: var(--iswc-warning-text, var(--iswc-text-dim));
+}
+
+/* llamada activa: pantalla completa con mosaico */
+.capa[data-fase="activa"] {
+  padding: 0;
+  background: var(--iswc-bg);
+
+  .tarjeta {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: 0;
+    padding: t.esp(4);
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    box-shadow: none;
+  }
+
+  .aviso-llamada {
+    grid-auto-flow: column;
+    align-items: center;
+    gap: t.esp(3);
+
+    .foto {
+      font-size: 2.2em;
+
+      .onda {
+        display: none;
+      }
+    }
+  }
+
+  .mosaico {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: t.esp(2);
+    grid-template-columns: repeat(auto-fit, minmax(min(22em, 100%), 1fr));
+    grid-auto-rows: 1fr;
+
+    &[data-n="1"] {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .propio:not([hidden]) {
+    display: block;
+    position: absolute;
+    right: t.esp(4);
+    bottom: 6em;
+    width: min(14em, 30%);
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: t.radio(lg);
+    border: 1px solid color-mix(in srgb, var(--iswc-accent) 45%, transparent);
+    box-shadow: var(--av-sombra-tarjeta, var(--iswc-shadow));
+    z-index: 2;
+
+    &[data-hablando="1"] {
+      box-shadow: 0 0 0 0.15em var(--iswc-accent), var(--av-neon, none);
+    }
+  }
+}
+
+.ficha {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 8em;
+  border-radius: t.radio(lg);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--iswc-accent) 16%, transparent), transparent 70%),
+    var(--iswc-bg-elev);
+  border: 1px solid var(--iswc-border-soft);
+  transition: box-shadow 0.2s ease;
+
+  video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+
+  &[data-video="1"] {
+    video {
+      opacity: 1;
+    }
+
+    .foto {
+      display: none;
+    }
+  }
+
+  .foto {
+    font-size: 4.5em;
+  }
+
+  .nombre {
+    position: absolute;
+    left: t.esp(2);
+    bottom: t.esp(2);
+    padding: 0.2em 0.6em;
+    border-radius: 1em;
+    font-size: 0.85em;
+    @include c.vidrio;
+  }
+
+  &[data-hablando="1"] {
+    box-shadow: inset 0 0 0 0.18em var(--iswc-accent), 0 0 1.5em color-mix(in srgb, var(--iswc-accent) 40%, transparent);
+  }
+
+  &[data-conectado="0"] {
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capa,
+  .foto .onda,
+  .controles .c-aceptar {
+    animation: none;
+  }
+}

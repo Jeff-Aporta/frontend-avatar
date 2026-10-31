@@ -1,0 +1,59 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-rrhh — cabecera, KPIs y pestañas; General con gráficas y pendientes; Asistencia con control del día e historial. */
+:host {
+  @include m.host-bloque;
+}
+
+.pagina {
+  max-width: 96em;
+  margin: 0 auto;
+  padding: t.esp(5);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: t.esp(4);
+
+  > * {
+    min-width: 0;
+  }
+}
+
+iswc-tab-panel {
+  padding-top: t.esp(4);
+}
+
+.general,
+.asistencia {
+  display: grid;
+  gap: t.esp(5);
+}
+
+.bloque {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.rotulo {
+  @include m.rotulo(0.85);
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  margin: 0;
+  font-size: 0.8em;
+
+  iswc-icon {
+    color: var(--iswc-accent);
+  }
+}
+
+@media (max-width: 48em) {
+  .pagina {
+    padding: t.esp(3);
+  }
+}
+
+.general > *,
+.asistencia > * {
+  min-width: 0;
+}

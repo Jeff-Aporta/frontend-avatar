@@ -1,5 +1,5 @@
 /**
- * <av-proyectos> — shell de la vista de proyectos (`#/proyectos/<iproyecto>`): selector de proyecto, tablero kanban,
+ * <av-proyectos> — shell de la vista de proyectos (`/proyectos/` (id `iproyecto` en el historial)): selector de proyecto, tablero kanban,
  * formulario de tarea, detalle con comentarios y formulario de proyecto. Es el único que habla con el API (plugin
  * `avatar` de DER: `tablero`, `mover` y los controllers `proyectos`, `columnas`, `tareas`, `comentarios`, `miembros`,
  * `equipos`); los hijos pintan y emiten `av-*`.
@@ -11,7 +11,7 @@ import { type AvProyectosProps, type Columna, ColumnaSchema, type Comentario, Co
 import { controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
-import { ir } from '../../../src/js/core/router.js';
+import { ir, tomarIntencion } from '../../../src/js/core/router.js';
 import { columnasPorDefecto } from '../utils/tareas.js';
 import './av-tablero.js';
 import './av-tarea-form.js';
@@ -228,6 +228,8 @@ const AvProyectos = crearComponente<AvProyectosProps>(import.meta.url, 'av-proye
     } catch {
       /* el tablero ya trajo las columnas */
     }
+    // Paleta global (Ctrl+K) → «Crear tarea»: abre el formulario en el tablero ya cargado.
+    if (tomarIntencion('proyectos') === 'tarea-nueva' && puedeTareas) $('tarea-form').props = { abierto: true, tarea: null, icolumna: null, iproyecto, columnas, miembros, error: '' };
   })();
 });
 

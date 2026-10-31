@@ -1,4 +1,4 @@
-import{crearComponente as e,define as n,html as i}from"../../../js/base/componente.js?v=3c3042";const l=e(import.meta.url,"av-comunidad",{titulo:"",texto:"",personas:[],cifras:[]},(c,a)=>{const o=a.personas.length||1;c.append(i`
+import{crearComponente as e,define as n,html as i}from"../../../js/base/componente.js?v=ehrr8d";const l=e(import.meta.url,"av-comunidad",{titulo:"",texto:"",personas:[],cifras:[]},(c,a)=>{const o=a.personas.length||1;c.append(i`
     <section class="seccion" part="seccion" aria-labelledby="t">
       <div class="constelacion" part="constelacion" aria-hidden="true">
         ${a.personas.map((s,t)=>i`

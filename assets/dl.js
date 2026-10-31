@@ -9,5 +9,5 @@ import { descargarIconos } from 'https://raw.githubusercontent.com/Jeff-Aporta/i
 await descargarIconos({
   raiz: new URL('..', import.meta.url),
   roots: ['index.html', 'src', 'view'],
-  extra: ["mdi:menu", "mdi:login", "mdi:logout", "mdi:close", "mdi:eye-outline", "mdi:eye-off-outline", "mdi:account", "mdi:chevron-down", "mdi:chevron-left", "mdi:chevron-right", "mdi:check", "mdi:magnify", "mdi:dots-vertical", "mdi:white-balance-sunny", "mdi:weather-night", "mdi:alert-circle-outline"],
+  extra: ["mdi:menu", "mdi:login", "mdi:logout", "mdi:close", "mdi:eye-outline", "mdi:eye-off-outline", "mdi:account", "mdi:chevron-down", "mdi:chevron-left", "mdi:chevron-right", "mdi:check", "mdi:magnify", "mdi:dots-vertical", "mdi:white-balance-sunny", "mdi:weather-night", "mdi:alert-circle-outline", "mdi:magnify-minus-outline", "mdi:magnify-plus-outline", "mdi:share-variant-outline", "mdi:fit-to-screen-outline"],
 });

@@ -1,5 +1,5 @@
 /**
- * <av-crm> — shell del CRM (`#/crm[/<icliente>]`): embudo por etapa, tabla de clientes y diálogo de cliente. Carga
+ * <av-crm> — shell del CRM (`/crm/` (id `icliente` en el historial)): embudo por etapa, tabla de clientes y diálogo de cliente. Carga
  * clientes y miembros de la empresa activa con los controllers de DER (`clientes`, `miembros`) y escribe solo con
  * `avatar.gestionar`. Con id en la ruta abre ese cliente.
  */
@@ -9,7 +9,7 @@ import { type AvCrmProps, type Cliente, type ClienteDatos, ClienteSchema, type M
 import { controller, mensajeDe } from '../../../src/js/core/api.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
-import { ir } from '../../../src/js/core/router.js';
+import { ir, tomarIntencion } from '../../../src/js/core/router.js';
 import { filtrarPorEtapa, moneda, totalesPorEtapa, valorPipeline } from '../utils/crm.js';
 import './av-embudo.js';
 import './av-clientes-grid.js';
@@ -117,6 +117,8 @@ const AvCrm = crearComponente<AvCrmProps>(import.meta.url, 'av-crm', { id: null,
       const c = clientes.find((x) => x.icliente === Number(props.id));
       if (c) abrir(c);
     }
+    // Paleta global (Ctrl+K) → «Nuevo cliente».
+    if (tomarIntencion('crm') === 'cliente-nuevo' && puedeEscribir) abrir(null);
   })();
 });
 

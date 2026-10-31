@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon de Avatar: el mismo hexágono de neón de <av-logo>, con los colores de la paleta por defecto (turquesa). -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a6cff"/>
+      <stop offset="1" stop-color="#14d6c2"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 4 56 18v28L32 60 8 46V18Z" fill="url(#g)"/>
+  <path d="M32 7.5 53 19.8v24.4L32 56.5 11 44.2V19.8Z" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.2"/>
+  <path d="M21 45 32 17l11 28M25.5 36h13" fill="none" stroke="#fff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32" cy="36" r="2.6" fill="#14d6c2" stroke="#fff" stroke-width="1.6"/>
+  <ellipse cx="32" cy="32" rx="27" ry="9.5" transform="rotate(-24 32 32)" fill="none" stroke="#bff6ef" stroke-width="1.6" stroke-dasharray="3 3.5"/>
+  <circle cx="54.5" cy="22" r="3" fill="#fff"/>
+</svg>

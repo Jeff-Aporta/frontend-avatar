@@ -1,7 +1,7 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
-/* av-app — shell: el armazón del kit ocupa el viewport; la vista hace su propio scroll dentro de ::part(main). */
+/* av-app — solo ajusta los armazones del kit a la identidad de Avatar (no dibuja estructura propia). Todo en em. */
 :host {
   @include m.host-bloque;
   height: 100dvh;
@@ -23,10 +23,74 @@
   min-height: 100%;
 }
 
-iswc-app-shell::part(bar) {
-  --iswc-shell-bar-min-height: 3em;
+/* Barra de los dos armazones: vidrio esmerilado con la línea de la paleta, como el menú del React original. */
+iswc-app-shell::part(bar),
+iswc-doc-layout::part(bar) {
+  backdrop-filter: blur(0.5em) saturate(1.2);
+  background: color-mix(in srgb, var(--iswc-bg) 82%, transparent);
+  border-bottom: 0.19em solid var(--av-borde-seccion);
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: t.esp(2);
+  color: inherit;
+  text-decoration: none;
+
+  av-logo,
+  &av-logo {
+    font-size: 1.1em;
+  }
+}
+
+/* Lateral del área privada: superficie con el velo de la paleta, como la barra de ODYS. */
+.privada::part(start) {
+  background: linear-gradient(180deg, var(--av-velo-fuerte), var(--av-velo) 40%, transparent), var(--iswc-bg-soft);
+}
+
+.privada::part(content) {
+  background: radial-gradient(60em 30em at 100% 0%, var(--av-velo), transparent 70%);
 }
 
 av-empresa-selector {
   max-width: 14em;
+}
+
+.esqueleto {
+  margin: t.esp(5);
+}
+
+/* Pie: marca, lema y los selectores de paleta y tema. */
+.pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.esp(3) t.esp(5);
+  padding: t.esp(4) t.esp(5);
+  border-top: 0.19em solid var(--av-borde-seccion);
+  background: linear-gradient(0deg, var(--av-velo), transparent);
+  color: var(--iswc-text-dim);
+  font-size: 0.88em;
+}
+
+.pie-marca {
+  font-family: var(--av-font-marca);
+  font-size: 1.25em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--iswc-accent);
+}
+
+.pie-tema {
+  display: inline-flex;
+  align-items: center;
+  gap: t.esp(2);
+  margin-left: auto;
+}
+
+.pie-rotulo {
+  @include m.rotulo(0.7);
+  font-size: 0.8em;
 }

@@ -1,0 +1,83 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-grupo-form",
+  "category": "chat",
+  "navTitle": "Formulario de grupo",
+  "title": "&lt;av-chat-grupo-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-grupo-form",
+  "styles": "",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-grupo-form&gt;",
+      "lede": "Diálogo de grupo en pasos.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-chat-grupo-form id=\"x\"></av-chat-grupo-form>",
+          "target": "#x",
+          "props": {
+            "personas": [
+              {
+                "id": "beto",
+                "nombre": "Beto Ruiz",
+                "foto": null,
+                "detalle": "Desarrollo",
+                "enLinea": true,
+                "color": 3,
+                "rol": ""
+              },
+              {
+                "id": "carla",
+                "nombre": "Carla Gómez",
+                "foto": null,
+                "detalle": "Diseño",
+                "enLinea": false,
+                "color": 5,
+                "rol": ""
+              },
+              {
+                "id": "dario",
+                "nombre": "Darío Peña",
+                "foto": null,
+                "detalle": "Ventas",
+                "enLinea": false,
+                "color": 0,
+                "rol": ""
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "control": "select",
+              "prop": "props:modo",
+              "label": "modo",
+              "default": "crear",
+              "options": [
+                "crear",
+                "editar",
+                "agregar"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Nuevo grupo y gestión de integrantes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para formularios genéricos: iswc-form.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Formulario de grupo genérico.",
+    "propuesta": "iswc-group-form"
+  }
+}

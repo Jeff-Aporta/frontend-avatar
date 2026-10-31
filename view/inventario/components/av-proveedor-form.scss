@@ -1,0 +1,41 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-proveedor-form — diálogo compacto de proveedor. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 34em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+}
+
+.nota {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  margin: 0;
+  font-size: 0.85em;
+  color: var(--iswc-text-dim);
+
+  iswc-icon {
+    color: var(--iswc-accent);
+  }
+}
+
+@media (max-width: 36em) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}

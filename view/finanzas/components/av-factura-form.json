@@ -1,0 +1,77 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-factura-form",
+  "category": "finanzas",
+  "navTitle": "Formulario de factura",
+  "title": "&lt;av-factura-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-factura-form",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-factura-form&gt;",
+      "lede": "Crear, emitir y cobrar facturas.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-factura-form id=\"d\"></av-factura-form></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "puedeEscribir": true,
+            "ocupado": false,
+            "error": "",
+            "clientes": [
+              {
+                "icliente": 1,
+                "nombre": "Juan Pérez",
+                "organizacion": "Tech Titans S.A."
+              }
+            ],
+            "factura": {
+              "ifactura": 4,
+              "numero": "FAC-000004",
+              "iempresa": 1,
+              "icliente": 1,
+              "items": [
+                {
+                  "descripcion": "Soporte y mantenimiento",
+                  "cantidad": 1,
+                  "precio": 3500000
+                }
+              ],
+              "subtotal": 3500000,
+              "impuesto": 19,
+              "total": 4165000,
+              "moneda": "COP",
+              "estado": "borrador",
+              "femision": null,
+              "fvence": null,
+              "fpago": null,
+              "notas": "Soporte mensual"
+            }
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "prop": "props:puedeEscribir",
+              "type": "boolean",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde Nueva factura o al abrir una factura.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar una factura ya emitida: se cobra o se anula.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

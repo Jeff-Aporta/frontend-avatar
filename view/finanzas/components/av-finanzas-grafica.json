@@ -1,0 +1,64 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-finanzas-grafica",
+  "category": "finanzas",
+  "navTitle": "Gráficas de finanzas",
+  "title": "&lt;av-finanzas-grafica&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-finanzas-grafica",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-finanzas-grafica&gt;",
+      "lede": "Gráficas del mes.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-finanzas-grafica id=\"d\"></av-finanzas-grafica></div>",
+          "target": "#d",
+          "props": {
+            "resumen": {
+              "iempresa": 1,
+              "mes": "2026-10",
+              "moneda": "COP",
+              "ingresos": {
+                "actual": 31780000,
+                "anterior": 24515000,
+                "variacion": 29.6
+              },
+              "gastos": {
+                "actual": 17347000,
+                "anterior": 31300000,
+                "variacion": -44.6
+              },
+              "beneficio": {
+                "actual": 14433000,
+                "anterior": -6785000,
+                "variacion": 312.7
+              },
+              "facturas_pendientes": {
+                "cantidad": 3,
+                "monto": {
+                  "actual": 14875000,
+                  "anterior": 13090000,
+                  "variacion": 13.6
+                }
+              },
+              "por_categoria": {
+                "Marketing": 2400000,
+                "Infraestructura": 747000,
+                "Nómina": 14200000
+              }
+            }
+          },
+          "controls": []
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la pestaña General de finanzas.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para series largas en el tiempo: el API resume solo dos meses.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

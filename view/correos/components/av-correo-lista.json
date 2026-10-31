@@ -1,0 +1,93 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-correo-lista",
+  "category": "correos",
+  "navTitle": "Lista de correos",
+  "title": "&lt;av-correo-lista&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-correo-lista",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-correo-lista&gt;",
+      "lede": "Correos de una carpeta.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-correo-lista id=\"d\"></av-correo-lista></div>",
+          "target": "#d",
+          "props": {
+            "carpeta": "entrada",
+            "activo": 8,
+            "puedeMarcar": true,
+            "texto": "",
+            "cargando": false,
+            "nombres": {
+              "carla": "Carla Ventas",
+              "admin": "Administrador"
+            },
+            "correos": [
+              {
+                "ibuzon": 8,
+                "icorreo": 3,
+                "carpeta": "entrada",
+                "leido": false,
+                "destacado": true,
+                "remitente": "carla",
+                "destinatarios": [
+                  "ana"
+                ],
+                "cc": [],
+                "asunto": "Propuesta Global Finance",
+                "cuerpo": "Te comparto la propuesta para Global Finance; necesito tu visto bueno.",
+                "etiquetas": [
+                  "crm",
+                  "urgente"
+                ],
+                "respuesta_a": null,
+                "creado": "2026-10-30T22:26:20.699Z"
+              },
+              {
+                "ibuzon": 2,
+                "icorreo": 1,
+                "carpeta": "entrada",
+                "leido": true,
+                "destacado": false,
+                "remitente": "admin",
+                "destinatarios": [
+                  "ana",
+                  "beto"
+                ],
+                "cc": [],
+                "asunto": "Bienvenidos a DUO eMail",
+                "cuerpo": "Desde hoy usamos el correo interno de Avatar.",
+                "etiquetas": [],
+                "respuesta_a": null,
+                "creado": "2026-10-29T15:00:00.000Z"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:cargando",
+              "type": "boolean",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "prop": "props:puedeMarcar",
+              "type": "boolean",
+              "label": "puedeMarcar",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En el panel izquierdo del buzón.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No filtra por sí misma: la búsqueda la hace el shell.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

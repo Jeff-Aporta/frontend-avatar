@@ -1,0 +1,28 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-transaccion-form — diálogo con pares de campos en fila. */
+:host {
+  display: contents;
+}
+
+iswc-dialog {
+  --width: 38em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(3);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.esp(3);
+}
+
+@media (max-width: 36em) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,6 @@
 # 45 — Asistente AVO
 
-> Alcance: la vista `asistente` (`#/asistente`): chat con el asistente AVO. Fuera: cómo AVO construye la respuesta
+> Alcance: la vista `asistente` (`/asistente/`): chat con el asistente AVO. Fuera: cómo AVO construye la respuesta
 > (repo `api-avatar`, flujo `consultas/preguntar`).
 
 ## 1. Propósito (WHAT)

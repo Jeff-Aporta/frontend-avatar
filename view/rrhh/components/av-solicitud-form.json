@@ -1,0 +1,50 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-solicitud-form",
+  "category": "rrhh",
+  "navTitle": "Formulario de solicitud",
+  "title": "&lt;av-solicitud-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-solicitud-form",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-solicitud-form&gt;",
+      "lede": "Nueva solicitud.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-solicitud-form id=\"d\"></av-solicitud-form></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "iempleado": 1,
+            "ocupado": false,
+            "error": "",
+            "empleados": [
+              {
+                "iempleado": 1,
+                "iempresa": 1,
+                "nombre": "María Aguirre",
+                "estado": "activo"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Con Nueva solicitud o desde la ficha de un empleado.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para aprobar: eso es av-solicitudes.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

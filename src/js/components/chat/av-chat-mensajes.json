@@ -1,0 +1,202 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-mensajes",
+  "category": "chat",
+  "navTitle": "Conversación",
+  "title": "&lt;av-chat-mensajes&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-mensajes",
+  "styles": ".stage{height:28rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-mensajes&gt;",
+      "lede": "Mensajes agrupados con burbujas reconciliadas (sin parpadeo).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-mensajes id=\"x\"></av-chat-mensajes></div>",
+          "target": "#x",
+          "props": {
+            "chat": {
+              "id": "g1",
+              "tipo": "grupo",
+              "nombre": "Equipo Odys",
+              "descripcion": "Coordinación",
+              "foto": null,
+              "miembros": [
+                {
+                  "id": "ana",
+                  "rol": "admin"
+                },
+                {
+                  "id": "beto",
+                  "rol": "miembro"
+                },
+                {
+                  "id": "carla",
+                  "rol": "miembro"
+                }
+              ],
+              "fijado": false,
+              "silenciado": false,
+              "archivado": false,
+              "marcadoNoLeido": false,
+              "noLeidos": 0,
+              "mensajeFijado": "m2",
+              "actividad": "2026-10-30T15:00:00.000Z",
+              "creado": "2026-10-30T15:00:00.000Z",
+              "lecturas": {
+                "beto": {
+                  "entregado": {
+                    "hasta": "2026-10-30T15:00:00.000Z",
+                    "cuando": "2026-10-30T15:00:00.000Z"
+                  },
+                  "leido": {
+                    "hasta": "2026-10-30T15:00:00.000Z",
+                    "cuando": "2026-10-30T15:00:00.000Z"
+                  }
+                },
+                "carla": {
+                  "entregado": {
+                    "hasta": "2026-10-30T15:00:00.000Z",
+                    "cuando": "2026-10-30T15:00:00.000Z"
+                  },
+                  "leido": {
+                    "hasta": null,
+                    "cuando": null
+                  }
+                }
+              },
+              "ultimo": null
+            },
+            "mensajes": [
+              {
+                "clave": "m1",
+                "id": "m1",
+                "chat": "g1",
+                "autor": "beto",
+                "tipo": "texto",
+                "texto": "¡Hola equipo! 👋",
+                "ts": "2026-10-30T14:30:00Z",
+                "editado": null,
+                "eliminado": false,
+                "reenviado": false,
+                "respuestaA": null,
+                "adjunto": null,
+                "reacciones": [],
+                "estado": "enviado",
+                "progreso": null,
+                "destacado": false,
+                "oculto": false,
+                "meta": {}
+              },
+              {
+                "clave": "m2",
+                "id": "m2",
+                "chat": "g1",
+                "autor": "ana",
+                "tipo": "texto",
+                "texto": "El *lunes* arrancamos la fase 2. Revisen https://avatar.odys.co",
+                "ts": "2026-10-30T14:32:00Z",
+                "editado": null,
+                "eliminado": false,
+                "reenviado": false,
+                "respuestaA": null,
+                "adjunto": null,
+                "reacciones": [
+                  {
+                    "usuario": "beto",
+                    "emoji": "👍"
+                  },
+                  {
+                    "usuario": "carla",
+                    "emoji": "❤️"
+                  }
+                ],
+                "estado": "enviado",
+                "progreso": null,
+                "destacado": false,
+                "oculto": false,
+                "meta": {}
+              },
+              {
+                "clave": "m3",
+                "id": "m3",
+                "chat": "g1",
+                "autor": "carla",
+                "tipo": "texto",
+                "texto": "Listo, comparto las piezas `v2` mañana",
+                "ts": "2026-10-30T14:33:00Z",
+                "editado": null,
+                "eliminado": false,
+                "reenviado": false,
+                "respuestaA": "m2",
+                "adjunto": null,
+                "reacciones": [],
+                "estado": "enviado",
+                "progreso": null,
+                "destacado": false,
+                "oculto": false,
+                "meta": {}
+              },
+              {
+                "clave": "m4",
+                "id": "m4",
+                "chat": "g1",
+                "autor": "ana",
+                "tipo": "texto",
+                "texto": "🎉🚀",
+                "ts": "2026-10-30T14:55:00Z",
+                "editado": null,
+                "eliminado": false,
+                "reenviado": false,
+                "respuestaA": null,
+                "adjunto": null,
+                "reacciones": [],
+                "estado": "enviado",
+                "progreso": null,
+                "destacado": false,
+                "oculto": false,
+                "meta": {}
+              }
+            ],
+            "yo": "ana",
+            "autores": {
+              "ana": {
+                "nombre": "Ana Torres",
+                "color": 1
+              },
+              "beto": {
+                "nombre": "Beto Ruiz",
+                "color": 3
+              },
+              "carla": {
+                "nombre": "Carla Gómez",
+                "color": 5
+              }
+            },
+            "primerNoLeido": "m3"
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:hayMas",
+              "label": "hayMas",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Centro de av-chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para un registro de eventos sin conversación: iswc-timeline.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "motivo": "Hilo de mensajes genérico con reconciliación por clave.",
+    "propuesta": "iswc-chat-thread"
+  }
+}

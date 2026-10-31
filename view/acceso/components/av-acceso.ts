@@ -60,7 +60,7 @@ const AvAcceso = crearComponente<AvAccesoProps>(
           <av-credenciales-demo id="demo" onav-credencial-elegida=${usar}></av-credenciales-demo>
         </section>
         <aside class="lado" part="lado" aria-hidden="true">
-          <img class="ilustracion" src=${new URL('assets/img/auth.svg', document.baseURI).href} alt="">
+          <av-escena class="ilustracion" escena="acceso"></av-escena>
         </aside>
       </div>
     `);

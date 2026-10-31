@@ -1,0 +1,80 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-producto-form",
+  "category": "inventario",
+  "navTitle": "Formulario de producto",
+  "title": "&lt;av-producto-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-producto-form",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-producto-form&gt;",
+      "lede": "Ficha de un producto.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-producto-form id=\"d\"></av-producto-form></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "puedeEscribir": true,
+            "ocupado": false,
+            "error": "",
+            "proveedores": [
+              {
+                "iproveedor": 1,
+                "iempresa": 1,
+                "nombre": "TecnoSuministros"
+              }
+            ],
+            "relacionados": [
+              {
+                "iproducto": 2,
+                "iempresa": 1,
+                "nombre": "Memoria RAM 16GB DDR4",
+                "stock": 25,
+                "stock_minimo": 10
+              }
+            ],
+            "producto": {
+              "iproducto": 1,
+              "sku": "PROD-00001",
+              "iempresa": 1,
+              "nombre": "Procesador i9-10900K",
+              "categoria": "Electrónicos",
+              "marca": "Intel",
+              "modelo": "BX8070110900K",
+              "precio": 499.99,
+              "costo": 380,
+              "stock": 3,
+              "stock_minimo": 5,
+              "ubicacion": "A1-B2",
+              "iproveedor": 1,
+              "bactivo": true
+            }
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "prop": "props:puedeEscribir",
+              "type": "boolean",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al abrir un producto o con Nuevo producto.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para cambiar el stock a mano: eso es un movimiento.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

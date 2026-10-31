@@ -1,0 +1,47 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-correos",
+  "category": "correos",
+  "navTitle": "Correos (shell)",
+  "title": "&lt;av-correos&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-correos",
+  "styles": ".stage{min-height:20rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-correos&gt;",
+      "lede": "La vista de correo completa (necesita sesión y empresa activa).",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-correos id=\"d\"></av-correos></div>",
+          "target": "#d",
+          "props": {
+            "id": null,
+            "version": 0
+          },
+          "controls": [
+            {
+              "prop": "props:id",
+              "type": "select",
+              "label": "id (carpeta)",
+              "options": [
+                "",
+                "entrada",
+                "enviados",
+                "archivados",
+                "papelera"
+              ],
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta correos (la monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

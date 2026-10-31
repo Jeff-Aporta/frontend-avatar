@@ -1,0 +1,65 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-correos — KPIs arriba y el buzón como una consola: carpetas + lista | lector en un panel dividido. */
+:host {
+  @include m.host-bloque;
+}
+
+.pagina {
+  max-width: 96em;
+  margin: 0 auto;
+  padding: t.esp(5);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: t.esp(4);
+
+  > * {
+    min-width: 0;
+  }
+}
+
+.buzon {
+  display: grid;
+  grid-template-columns: 13em minmax(0, 1fr);
+  gap: t.esp(3);
+  height: 44em;
+  padding: t.esp(3);
+  border: 1px solid var(--av-borde-seccion);
+  border-radius: calc(var(--av-radio) * 1.2);
+  background:
+    radial-gradient(120% 80% at 0% 0%, var(--av-velo-fuerte), transparent 55%),
+    var(--iswc-bg-elev);
+  box-shadow: var(--av-sombra-tarjeta);
+}
+
+.split {
+  height: 100%;
+  min-height: 0;
+  border: 1px solid var(--iswc-border-soft);
+  border-radius: var(--av-radio);
+  background: var(--iswc-bg);
+  overflow: hidden;
+
+  &::part(divider) {
+    background: var(--av-borde-seccion);
+  }
+}
+
+@media (max-width: 48em) {
+  .pagina {
+    padding: t.esp(3);
+  }
+
+  .buzon {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    height: auto;
+    min-height: 34em;
+    padding: t.esp(2);
+  }
+
+  .split {
+    min-height: 32em;
+  }
+}

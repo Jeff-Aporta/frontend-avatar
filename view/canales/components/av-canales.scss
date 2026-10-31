@@ -1,53 +1,45 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
-/* av-canales — dos columnas (lista fija | conversación), una sola en móvil según haya canal abierto. */
+/* av-canales — cabecera de la vista y el chat ocupando el alto disponible. */
 :host {
   @include m.host-bloque;
   height: 100%;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 .pagina {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 90em;
+  max-width: 100em;
   margin: 0 auto;
-  padding: t.esp(5) t.esp(5) 0;
+  padding: t.esp(5) t.esp(5) t.esp(4);
   gap: t.esp(3);
+  box-sizing: border-box;
 }
 
-.columnas {
+.chat {
   flex: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: 18em minmax(0, 1fr);
-  border: 1px solid var(--iswc-border-soft);
-  border-radius: t.radio(lg) t.radio(lg) 0 0;
+  min-height: 30em;
+  height: calc(100dvh - 11em);
+  border: 1px solid var(--av-borde-seccion, var(--iswc-border-soft));
+  border-radius: t.radio(lg);
   overflow: hidden;
-  background: var(--iswc-bg-elev);
-
-  .lista {
-    border-right: 1px solid var(--iswc-border-soft);
-    min-height: 0;
-  }
-
-  .conversacion {
-    min-height: 0;
-  }
+  box-shadow: var(--av-sombra-tarjeta, var(--iswc-shadow));
 }
 
 @media (max-width: 48em) {
   .pagina {
-    padding: t.esp(3) t.esp(3) 0;
+    padding: t.esp(2) t.esp(2) t.esp(2);
   }
 
-  .columnas {
-    grid-template-columns: 1fr;
-  }
-
-  .pagina[data-abierto="1"] .lista,
-  .pagina[data-abierto="0"] .conversacion {
-    display: none;
+  .chat {
+    height: calc(100dvh - 8em);
+    min-height: 24em;
+    border-radius: t.radio(md);
   }
 }

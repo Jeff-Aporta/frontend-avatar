@@ -1,0 +1,71 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-correo-lector",
+  "category": "correos",
+  "navTitle": "Lector de correo",
+  "title": "&lt;av-correo-lector&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-correo-lector",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-correo-lector&gt;",
+      "lede": "Lectura de un correo.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-correo-lector id=\"d\"></av-correo-lector></div>",
+          "target": "#d",
+          "props": {
+            "puedeMarcar": true,
+            "nombres": {
+              "carla": "Carla Ventas",
+              "ana": "Ana Gestora"
+            },
+            "relacionados": [
+              {
+                "ibuzon": 9,
+                "asunto": "Re: Propuesta Global Finance",
+                "remitente": "ana",
+                "creado": "2026-10-30T23:00:00.000Z"
+              }
+            ],
+            "correo": {
+              "ibuzon": 8,
+              "icorreo": 3,
+              "carpeta": "entrada",
+              "leido": true,
+              "destacado": true,
+              "remitente": "carla",
+              "destinatarios": [
+                "ana"
+              ],
+              "cc": [],
+              "asunto": "Propuesta Global Finance",
+              "cuerpo": "Hola Ana,\n\nTe comparto la propuesta para Global Finance; necesito tu visto bueno antes del viernes.\n\nCarla",
+              "etiquetas": [
+                "crm",
+                "urgente"
+              ],
+              "respuesta_a": null,
+              "creado": "2026-10-30T22:26:20.699Z"
+            }
+          },
+          "controls": [
+            {
+              "prop": "props:puedeMarcar",
+              "type": "boolean",
+              "label": "puedeMarcar",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En el panel derecho del buzón.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para redactar: eso es av-correo-redactar.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

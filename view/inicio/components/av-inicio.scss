@@ -17,23 +17,3 @@ av-precios {
   padding: 0 t.esp(5);
   box-sizing: border-box;
 }
-
-.pie {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: t.esp(3);
-  padding: t.esp(6) t.esp(5);
-  border-top: 0.19em solid var(--av-borde-seccion);
-  color: var(--iswc-text-dim);
-  font-size: 0.88em;
-
-  .marca {
-    font-family: var(--av-font-marca);
-    font-size: 1.3em;
-    letter-spacing: 0.08em;
-    color: var(--iswc-accent);
-    text-transform: uppercase;
-  }
-}

@@ -1,0 +1,55 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-escena",
+  "category": "transversal",
+  "navTitle": "Escena",
+  "title": "&lt;av-escena&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-escena",
+  "styles": ".stage{padding:1rem;max-width:30em}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-escena&gt;",
+      "lede": "Ilustración Corporate Memphis por capas, teñida con la paleta.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-escena id=\"e\"></av-escena></div>",
+          "target": "#e",
+          "props": {
+            "escena": "bienvenida"
+          },
+          "controls": [
+            {
+              "prop": "props:escena",
+              "type": "select",
+              "label": "escena",
+              "options": [
+                "bienvenida",
+                "acceso",
+                "chat",
+                "canales",
+                "asistente",
+                "proyectos",
+                "crm",
+                "finanzas",
+                "inventario",
+                "rrhh",
+                "correos",
+                "organizacion",
+                "logros",
+                "vacio"
+              ],
+              "default": "bienvenida"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarla</strong>Hero, acceso, cabeceras de módulo y estados vacíos: da personalidad sin cargar el contenido.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de listas ni tablas: es decorativa y pesa unas decenas de KB.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

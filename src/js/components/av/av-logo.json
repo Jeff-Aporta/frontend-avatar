@@ -1,0 +1,46 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-logo",
+  "category": "transversal",
+  "navTitle": "Logo",
+  "title": "&lt;av-logo&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-logo",
+  "styles": ".stage{padding:1rem;display:flex;gap:2em;align-items:center}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-logo&gt;",
+      "lede": "Logo de Avatar: hexágono de neón con los colores de la paleta activa.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-logo id=\"l\" style=\"font-size:2em\"></av-logo></div>",
+          "target": "#l",
+          "props": {
+            "wordmark": true,
+            "animado": true
+          },
+          "controls": [
+            {
+              "prop": "props:wordmark",
+              "type": "boolean",
+              "label": "wordmark",
+              "default": true
+            },
+            {
+              "prop": "props:animado",
+              "type": "boolean",
+              "label": "animado",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Marca de la barra, del pie y de pantallas de bienvenida. Cambia de color con la paleta.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como favicon: ahí va assets/img/logo.svg.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

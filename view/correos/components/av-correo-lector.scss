@@ -1,0 +1,165 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-correo-lector — barra de acciones, asunto con presencia y cuerpo en columna legible. */
+:host {
+  @include m.host-bloque;
+  height: 100%;
+}
+
+.nada {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  min-height: 16em;
+}
+
+.lector {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: t.esp(4);
+  height: 100%;
+  overflow-y: auto;
+  padding: t.esp(4) t.esp(5);
+  box-sizing: border-box;
+}
+
+.cabeza {
+  display: grid;
+  gap: t.esp(3);
+  padding-bottom: t.esp(4);
+  border-bottom: 1px solid var(--av-borde-seccion);
+}
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: t.esp(1) t.esp(2);
+
+  .separador {
+    flex: 1;
+  }
+
+  .volver {
+    display: none;
+  }
+}
+
+.asunto {
+  @include m.titulo;
+  margin: 0;
+  font-size: 1.5em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  background: var(--av-degradado-marca);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.esp(1);
+  font-size: 0.8em;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: t.esp(2);
+
+  .hora {
+    font-size: 0.85em;
+    color: var(--iswc-text-dim);
+  }
+}
+
+.para {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: t.esp(1) t.esp(3);
+  margin: 0;
+  font-size: 0.85em;
+
+  dt {
+    @include m.rotulo;
+    font-size: 0.85em;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--iswc-text-dim);
+    overflow-wrap: anywhere;
+  }
+}
+
+.cuerpo {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+  max-width: 46em;
+}
+
+.relacionados {
+  display: grid;
+  gap: t.esp(1);
+  padding: t.esp(3);
+  border: 1px dashed var(--av-borde-seccion);
+  border-radius: var(--av-radio);
+  background: var(--av-velo);
+
+  .rotulo {
+    @include m.rotulo;
+    display: flex;
+    align-items: center;
+    gap: t.esp(2);
+    margin: 0 0 t.esp(1);
+    font-size: 0.75em;
+  }
+
+  .relacionado {
+    width: 100%;
+
+    &::part(base) {
+      justify-content: flex-start;
+    }
+
+    &::part(label) {
+      flex: 1;
+      min-width: 0;
+      text-align: start;
+    }
+  }
+
+  .r-asunto {
+    @include m.una-linea;
+    display: block;
+  }
+
+  .r-quien {
+    font-size: 0.8em;
+    color: var(--iswc-text-dim);
+  }
+}
+
+@media (max-width: 48em) {
+  .lector {
+    padding: t.esp(3);
+  }
+
+  .barra .volver {
+    display: inline-flex;
+  }
+}
+
+/* Lector angosto (panel dividido o móvil): «A todos» y «Reenviar» quedan solo con ícono. */
+@container (max-width: 40em) {
+  .barra .txt {
+    display: none;
+  }
+}

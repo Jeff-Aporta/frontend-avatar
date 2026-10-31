@@ -69,7 +69,8 @@ async function compilar(): Promise<number> {
     const r = await esbuild.build({
       entryPoints: [f], bundle: barril || f === ZOD, write: false, format: 'esm', target: 'es2022', minify: true, define: DEFINE, ...(barril || f === ZOD ? { external: ['@avatar/vendor'] } : {}),
     });
-    const destino = barril && f.startsWith(SRC_JS) ? join(OUT, 'all.min.js') : publicada(f, barril ? '.min.js' : '.js');
+    // el barril de la app (components/<prefijo>/all.ts) es `all.min.js`; los de vistas y familias quedan junto a su carpeta
+    const destino = barril && f === join(SRC_JS, 'components', PREFIJO, 'all.ts') ? join(OUT, 'all.min.js') : publicada(f, barril ? '.min.js' : '.js');
     writeFileSync(destino, reescribir(f, r.outputFiles![0]!.text));
   }
   for (const css of listar(STAGING, '.css')) {

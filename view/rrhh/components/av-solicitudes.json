@@ -1,0 +1,79 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-solicitudes",
+  "category": "rrhh",
+  "navTitle": "Solicitudes",
+  "title": "&lt;av-solicitudes&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-solicitudes",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-solicitudes&gt;",
+      "lede": "Solicitudes por estado.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-solicitudes id=\"d\"></av-solicitudes></div>",
+          "target": "#d",
+          "props": {
+            "filtro": "pendiente",
+            "puedeResolver": true,
+            "compacto": false,
+            "ocupados": [],
+            "solicitudes": [
+              {
+                "isolicitud": 2,
+                "iempresa": 1,
+                "iempleado": 5,
+                "tipo": "permiso",
+                "desde": "2026-10-30",
+                "hasta": "2026-10-30",
+                "motivo": "Cita médica en la tarde",
+                "estado": "pendiente",
+                "empleado": "Carlos Gómez"
+              },
+              {
+                "isolicitud": 4,
+                "iempresa": 1,
+                "iempleado": 1,
+                "tipo": "vacaciones",
+                "desde": "2026-11-03",
+                "hasta": "2026-11-07",
+                "motivo": "Viaje",
+                "estado": "rechazada",
+                "resuelto_por": "fabio",
+                "empleado": "María Aguirre"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:filtro",
+              "type": "select",
+              "label": "filtro",
+              "options": [
+                "pendiente",
+                "aprobada",
+                "rechazada",
+                "todas"
+              ],
+              "default": "pendiente"
+            },
+            {
+              "prop": "props:compacto",
+              "type": "boolean",
+              "label": "compacto",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la pestaña Solicitudes y, compacto, en General.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para crear solicitudes: eso es av-solicitud-form.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

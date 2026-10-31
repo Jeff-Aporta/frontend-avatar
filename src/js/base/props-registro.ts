@@ -11,11 +11,16 @@ import { INICIO_PROPS } from '../consts/schemas/inicio.schemas.js';
 import { ACCESO_PROPS } from '../consts/schemas/acceso.schemas.js';
 import { PANEL_PROPS } from '../consts/schemas/panel.schemas.js';
 import { CANALES_PROPS } from '../consts/schemas/canales.schemas.js';
+import { CHAT_PROPS } from '../consts/schemas/chat.schemas.js';
 import { PROYECTOS_PROPS } from '../consts/schemas/proyectos.schemas.js';
 import { CRM_PROPS } from '../consts/schemas/crm.schemas.js';
 import { ORGANIZACION_PROPS } from '../consts/schemas/organizacion.schemas.js';
 import { ASISTENTE_PROPS } from '../consts/schemas/asistente.schemas.js';
 import { ADMIN_PROPS } from '../consts/schemas/admin.schemas.js';
+import { CORREOS_PROPS } from '../consts/schemas/correos.schemas.js';
+import { FINANZAS_PROPS } from '../consts/schemas/finanzas.schemas.js';
+import { INVENTARIO_PROPS } from '../consts/schemas/inventario.schemas.js';
+import { RRHH_PROPS } from '../consts/schemas/rrhh.schemas.js';
 
 const MAPA = new Map<string, ReadonlySet<string>>();
 
@@ -23,7 +28,7 @@ export function registrarClaves(tag: string, esquema: { shape: object }): void {
   MAPA.set(tag, clavesDe(esquema));
 }
 
-for (const grupo of [APP_PROPS, INICIO_PROPS, ACCESO_PROPS, PANEL_PROPS, CANALES_PROPS, PROYECTOS_PROPS, CRM_PROPS, ORGANIZACION_PROPS, ASISTENTE_PROPS, ADMIN_PROPS]) {
+for (const grupo of [APP_PROPS, INICIO_PROPS, ACCESO_PROPS, PANEL_PROPS, CANALES_PROPS, CHAT_PROPS, PROYECTOS_PROPS, CRM_PROPS, ORGANIZACION_PROPS, ASISTENTE_PROPS, ADMIN_PROPS, CORREOS_PROPS, FINANZAS_PROPS, INVENTARIO_PROPS, RRHH_PROPS]) {
   for (const [tag, esquema] of Object.entries(grupo as Record<string, { shape: object }>)) registrarClaves(tag, esquema);
 }
 

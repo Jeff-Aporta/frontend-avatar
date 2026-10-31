@@ -1,6 +1,6 @@
 # 55 — CRM: clientes y embudo de ventas
 
-> Alcance: la vista `crm` (`#/crm[/<icliente>]`): embudo por etapa, tabla de clientes y su formulario. Fuera: la
+> Alcance: la vista `crm` (`/crm/` (id `icliente` en el historial)): embudo por etapa, tabla de clientes y su formulario. Fuera: la
 > gráfica del embudo del panel (spec del panel) y los usuarios de la plataforma (admin).
 
 ## 1. Propósito (WHAT)
@@ -16,7 +16,7 @@ del pipeline de la empresa.
 - [W-CRM-04] El subtítulo dice cuántos clientes hay y el valor del pipeline (todo menos lo perdido).
 - [W-CRM-05] Clic en una fila abre el cliente; quien gestiona lo edita o lo elimina tras confirmar; quien no, lo ve en solo lectura.
 - [W-CRM-06] Quien gestiona crea clientes (nombre obligatorio, correo válido si se da, valor no negativo, responsable entre los miembros).
-- [W-CRM-07] Con `#/crm/<icliente>` el cliente se abre al cargar.
+- [W-CRM-07] Con `/crm/` (id `icliente` en el historial) el cliente se abre al cargar.
 
 ## 3. Guía HOW WEAK
 

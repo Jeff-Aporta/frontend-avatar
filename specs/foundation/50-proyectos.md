@@ -1,6 +1,6 @@
 # 50 — Proyectos: tableros kanban y tickets
 
-> Alcance: la vista `proyectos` (`#/proyectos/<iproyecto>`): selector de proyecto, tablero kanban, tareas, comentarios
+> Alcance: la vista `proyectos` (`/proyectos/` (id `iproyecto` en el historial)): selector de proyecto, tablero kanban, tareas, comentarios
 > y creación de proyectos. Fuera: el panel, el CRM y la administración de equipos (otras specs).
 
 ## 1. Propósito (WHAT)

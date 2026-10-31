@@ -1,0 +1,70 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-rrhh-tabla",
+  "category": "rrhh",
+  "navTitle": "Tabla de RRHH",
+  "title": "&lt;av-rrhh-tabla&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-rrhh-tabla",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-rrhh-tabla&gt;",
+      "lede": "Empleados o historial de asistencia.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-rrhh-tabla id=\"d\"></av-rrhh-tabla></div>",
+          "target": "#d",
+          "props": {
+            "entidad": "empleados",
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": [
+              {
+                "id": 1,
+                "iempleado": 1,
+                "nombre": "María Aguirre",
+                "email": "maria@avatar.test",
+                "departamento": "Diseño",
+                "cargo": "Diseñadora Senior",
+                "estado": "Activo",
+                "estadoClave": "activo",
+                "salario": 6500000,
+                "salarioTexto": "$ 6.500.000",
+                "fingreso": "2022-03-14"
+              },
+              {
+                "id": 2,
+                "iempleado": 2,
+                "nombre": "Juan Rodríguez",
+                "email": "juan@avatar.test",
+                "departamento": "Desarrollo",
+                "cargo": "Desarrollador Full-Stack",
+                "estado": "Vacaciones",
+                "estadoClave": "vacaciones",
+                "salario": 7200000,
+                "salarioTexto": "$ 7.200.000",
+                "fingreso": "2021-08-02"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:cargando",
+              "type": "boolean",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En las pestañas Empleados y Asistencia.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No filtra por sí misma: la búsqueda la hace el shell.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

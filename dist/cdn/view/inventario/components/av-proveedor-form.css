@@ -1,0 +1,1 @@
+@charset "UTF-8";:host{display:contents}iswc-dialog{--width: 34em}.campos{display:grid;gap:.75em}.fila{display:grid;grid-template-columns:1fr 1fr;gap:.75em}.nota{display:flex;align-items:center;gap:.5em;margin:0;font-size:.85em;color:var(--iswc-text-dim)}.nota iswc-icon{color:var(--iswc-accent)}@media(max-width:36em){.fila{grid-template-columns:1fr}}

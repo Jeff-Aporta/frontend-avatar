@@ -1,0 +1,1 @@
+@charset "UTF-8";:host{display:contents}iswc-dialog{--width: 40em}.campos{display:grid;gap:.75em}.fila{display:grid;grid-template-columns:1fr 1fr;gap:.75em}@media(max-width:36em){.fila{grid-template-columns:1fr}}

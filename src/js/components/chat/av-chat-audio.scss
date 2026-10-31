@@ -1,0 +1,89 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-chat-audio — botón, onda con avance, tiempo y velocidad. */
+:host {
+  @include m.host-bloque;
+}
+
+.audio {
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  min-width: 15em;
+  max-width: 22em;
+  padding: 0.2em 0.3em;
+}
+
+.play {
+  flex: none;
+}
+
+.pista {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 0.15em;
+}
+
+.onda {
+  display: flex;
+  align-items: center;
+  gap: 0.12em;
+  height: 1.8em;
+  cursor: pointer;
+  outline: none;
+  border-radius: 0.3em;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 1px var(--iswc-focus, var(--iswc-accent));
+  }
+
+  .barra {
+    flex: 1;
+    min-width: 0.12em;
+    height: calc(var(--h) * 100%);
+    border-radius: 0.2em;
+    background: color-mix(in srgb, var(--iswc-text-dim) 50%, transparent);
+    transition: background 0.12s linear;
+
+    &[data-on] {
+      background: var(--iswc-accent);
+      box-shadow: 0 0 0.3em color-mix(in srgb, var(--iswc-accent) 50%, transparent);
+    }
+  }
+}
+
+.tiempos {
+  font-size: 0.72em;
+  color: var(--iswc-text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.velocidad {
+  flex: none;
+  min-width: 2.6em;
+  padding: 0.2em 0.45em;
+  border: 1px solid var(--iswc-border-soft);
+  border-radius: 1em;
+  background: transparent;
+  color: var(--iswc-text-dim);
+  font: inherit;
+  font-size: 0.75em;
+  font-weight: 700;
+  cursor: pointer;
+
+  &[data-activa="1"] {
+    color: var(--iswc-accent);
+    border-color: var(--iswc-accent);
+  }
+}
+
+.mic {
+  flex: none;
+  color: var(--iswc-text-dim);
+}
+
+.audio[data-sonando="1"] .mic {
+  color: var(--iswc-accent);
+}

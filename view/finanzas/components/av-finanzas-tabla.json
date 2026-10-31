@@ -1,0 +1,70 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-finanzas-tabla",
+  "category": "finanzas",
+  "navTitle": "Tabla de finanzas",
+  "title": "&lt;av-finanzas-tabla&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-finanzas-tabla",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-finanzas-tabla&gt;",
+      "lede": "Transacciones o facturas.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-finanzas-tabla id=\"d\"></av-finanzas-tabla></div>",
+          "target": "#d",
+          "props": {
+            "entidad": "transacciones",
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": [
+              {
+                "id": 5,
+                "itransaccion": 5,
+                "fecha": "2026-10-12",
+                "tipo": "Gasto",
+                "tipoClave": "gasto",
+                "categoria": "Marketing",
+                "descripcion": "Campaña redes sociales",
+                "monto": 2400000,
+                "montoTexto": "$ 2.400.000",
+                "estado": "Completada",
+                "estadoClave": "completada"
+              },
+              {
+                "id": 2,
+                "itransaccion": 2,
+                "fecha": "2026-10-05",
+                "tipo": "Ingreso",
+                "tipoClave": "ingreso",
+                "categoria": "Licencias",
+                "descripcion": "Licencias anuales",
+                "monto": 3200,
+                "montoTexto": "US$ 3.200,00",
+                "estado": "Completada",
+                "estadoClave": "completada"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:cargando",
+              "type": "boolean",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En las pestañas Transacciones y Facturas.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No filtra por sí misma: la búsqueda la hace el shell.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

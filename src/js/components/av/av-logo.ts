@@ -1,0 +1,36 @@
+/**
+ * <av-logo> — el logo de Avatar en SVG en línea: un hexágono de neón con un monograma «A» (dos trazos y una barra que
+ * es un nodo de red) y una órbita con un satélite (el asistente AVO). Se pinta con los tokens de la paleta activa
+ * (`--iswc-accent`, `--iswc-color-contrast`), así que cambia de color con ella; con `wordmark` agrega el nombre en
+ * Orbitron. Escala con el font-size del contexto: todo en em.
+ */
+import { crearComponente, define, html } from '../../base/componente.js';
+import type { AvLogoProps } from '../../consts/schemas/componentes.schemas.js';
+
+const AvLogo = crearComponente<AvLogoProps>(import.meta.url, 'av-logo', { wordmark: false, animado: false }, (root, props, host) => {
+  // Se usa sobre todo como marcado (`<av-logo wordmark animado>`): los atributos booleanos equivalen a las props.
+  const wordmark = props.wordmark || host.hasAttribute('wordmark');
+  const animado = props.animado || host.hasAttribute('animado');
+  root.append(html`
+    <span class="logo" part="logo" data-animado=${animado ? '1' : '0'} role="img" aria-label="Avatar">
+      <svg class="marca" part="marca" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="var(--_c1)"></stop>
+            <stop offset="1" stop-color="var(--_c2)"></stop>
+          </linearGradient>
+        </defs>
+        <path class="hex" d="M32 4 56 18v28L32 60 8 46V18Z" fill="url(#g)"></path>
+        <path class="hex-borde" d="M32 7.5 53 19.8v24.4L32 56.5 11 44.2V19.8Z" fill="none"></path>
+        <path class="monograma" d="M21 45 32 17l11 28" fill="none"></path>
+        <path class="barra" d="M25.5 36h13" fill="none"></path>
+        <circle class="nodo" cx="32" cy="36" r="2.6"></circle>
+        <ellipse class="orbita" cx="32" cy="32" rx="27" ry="9.5" transform="rotate(-24 32 32)" fill="none"></ellipse>
+        <circle class="satelite" cx="54.5" cy="22" r="3"></circle>
+      </svg>
+      ${wordmark ? html`<span class="nombre" part="nombre">Avatar</span>` : null}
+    </span>
+  `);
+});
+
+define('av-logo', AvLogo);

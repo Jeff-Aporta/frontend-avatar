@@ -1,0 +1,30 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-inventario — cabecera, KPIs, franja de alertas y pestañas de catálogo. */
+:host {
+  @include m.host-bloque;
+}
+
+.pagina {
+  max-width: 96em;
+  margin: 0 auto;
+  padding: t.esp(5);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: t.esp(4);
+
+  > * {
+    min-width: 0;
+  }
+}
+
+iswc-tab-panel {
+  padding-top: t.esp(4);
+}
+
+@media (max-width: 48em) {
+  .pagina {
+    padding: t.esp(3);
+  }
+}

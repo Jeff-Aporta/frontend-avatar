@@ -32,3 +32,18 @@
   opacity: $opacidad;
   text-transform: uppercase;
 }
+
+/// Título de la identidad de Avatar: Exo 2 (Google Fonts), firme y un poco expandido.
+@mixin titulo {
+  font-family: var(--av-font-titulo, inherit);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/// Cifra o marca de impacto: Orbitron con brillo neón del acento de la paleta.
+@mixin impacto {
+  font-family: var(--av-font-impacto, inherit);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-shadow: var(--av-neon-texto, none);
+}

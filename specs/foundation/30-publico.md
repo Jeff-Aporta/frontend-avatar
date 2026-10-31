@@ -6,9 +6,9 @@ Quien no tiene sesión ve qué es Avatar y puede entrar.
 
 ## 2. Requisitos WHAT
 
-- [W-PUB-01] `#/` muestra la landing: lema «Todo tu negocio en una sola plataforma», texto, «Empieza ahora» (con sesión «Ir al panel») y «Conoce a AVO».
+- [W-PUB-01] `/` muestra la landing: lema «Todo tu negocio en una sola plataforma», texto, «Empieza ahora» (con sesión «Ir al panel») y «Conoce a AVO».
 - [W-PUB-02] Cuatro características (canales, proyectos, CRM, AVO) con ícono, título y texto, y tres planes (mensual, anual destacado, 3 años); «Suscribirse» lleva al acceso.
-- [W-PUB-03] `#/acceso` muestra el login del kit (`iswc-login`); envía usuario y contraseña al plugin de identidad de DER (`POST usuarios/login`) y con éxito navega al panel.
+- [W-PUB-03] `/acceso/` muestra el login del kit (`iswc-login`); envía usuario y contraseña al plugin de identidad de DER (`POST usuarios/login`) y con éxito navega al panel.
 - [W-PUB-04] Un error de login se muestra en el formulario sin borrar lo escrito: credenciales inválidas, bloqueo por intentos o API inalcanzable, cada uno con su mensaje.
 - [W-PUB-05] Las cuentas de prueba (ana, beto, carla) se listan con su rol; «Usar» rellena el formulario.
 - [W-PUB-06] También se entra desde la barra (`iswc-session-menu`), sin salir de la vista actual.

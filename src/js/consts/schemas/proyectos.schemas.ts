@@ -33,7 +33,7 @@ export type TareaDatos = z.infer<typeof TareaDatosSchema>;
 export const ProyectoDatosSchema = z.object({ nombre: z.string().min(1), descripcion: z.string().nullable().default(null), estado: z.string().default('activo'), finicio: z.string().nullable().default(null), ffin: z.string().nullable().default(null), iequipo: z.number().nullable().default(null) });
 export type ProyectoDatos = z.infer<typeof ProyectoDatosSchema>;
 
-/** `<av-proyectos>` (shell): id de la ruta (`#/proyectos/<iproyecto>`) y versión para forzar recarga. */
+/** `<av-proyectos>` (shell): id de la ruta (`/proyectos/` (id `iproyecto` en el historial)) y versión para forzar recarga. */
 export const AvProyectosPropsSchema = z.object({ id: z.string().nullable().default(null), version: z.number().default(0) });
 export type AvProyectosProps = z.infer<typeof AvProyectosPropsSchema>;
 

@@ -1,0 +1,72 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-conversor",
+  "category": "finanzas",
+  "navTitle": "Conversor de monedas",
+  "title": "&lt;av-conversor&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-conversor",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-conversor&gt;",
+      "lede": "Conversión entre COP, USD, MXN y EUR.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-conversor id=\"d\"></av-conversor></div>",
+          "target": "#d",
+          "props": {
+            "monto": 100,
+            "de": "USD",
+            "a": "COP",
+            "ocupado": false,
+            "error": "",
+            "resultado": {
+              "monto": 100,
+              "de": "USD",
+              "a": "COP",
+              "tasa": 4150,
+              "resultado": 415000
+            },
+            "tasas": [
+              {
+                "iempresa": 1,
+                "moneda": "COP",
+                "a_cop": 1
+              },
+              {
+                "iempresa": 1,
+                "moneda": "USD",
+                "a_cop": 4150
+              },
+              {
+                "iempresa": 1,
+                "moneda": "EUR",
+                "a_cop": 4500
+              },
+              {
+                "iempresa": 1,
+                "moneda": "MXN",
+                "a_cop": 230
+              }
+            ]
+          },
+          "controls": [
+            {
+              "prop": "props:ocupado",
+              "type": "boolean",
+              "label": "ocupado",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la pestaña General de finanzas.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No calcula por su cuenta: la tasa vigente la da el API.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

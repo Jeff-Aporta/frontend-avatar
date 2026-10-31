@@ -1,0 +1,51 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-proveedor-form",
+  "category": "inventario",
+  "navTitle": "Formulario de proveedor",
+  "title": "&lt;av-proveedor-form&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-proveedor-form",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-proveedor-form&gt;",
+      "lede": "Ficha de un proveedor.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-proveedor-form id=\"d\"></av-proveedor-form></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "productos": 2,
+            "puedeEscribir": true,
+            "ocupado": false,
+            "error": "",
+            "proveedor": {
+              "iproveedor": 1,
+              "iempresa": 1,
+              "nombre": "TecnoSuministros",
+              "contacto": "Andrés Mejía",
+              "email": "ventas@tecnosuministros.test",
+              "telefono": "+57 601 555 0101"
+            }
+          },
+          "controls": [
+            {
+              "prop": "props:abierto",
+              "type": "boolean",
+              "label": "abierto",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Con Proveedor o al abrir un proveedor.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para clientes: esos viven en el CRM.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

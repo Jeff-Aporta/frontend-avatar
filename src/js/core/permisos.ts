@@ -7,7 +7,16 @@
 import type { Perfil } from '../consts/schemas/api.schemas.js';
 
 /** Acciones con alias en el API (las mismas de `security.ts` del api-avatar). */
-export const ACCION = { chat: 'avatar.chat', tareas: 'avatar.tareas', gestionar: 'avatar.gestionar', seguridad: 'avatar.seguridad' } as const;
+export const ACCION = {
+  chat: 'avatar.chat',
+  tareas: 'avatar.tareas',
+  gestionar: 'avatar.gestionar',
+  seguridad: 'avatar.seguridad',
+  correo: 'avatar.correo',
+  finanzas: 'avatar.finanzas',
+  inventario: 'avatar.inventario',
+  rrhh: 'avatar.rrhh',
+} as const;
 
 function valorDe(perms: Record<string, unknown>, accion: string): unknown {
   if (accion in perms) return perms[accion];
