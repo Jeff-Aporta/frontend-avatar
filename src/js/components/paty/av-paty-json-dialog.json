@@ -26,7 +26,15 @@
             "valor": "{\n  \"modelo\": \"paty\",\n  \"temperature\": 0.2\n}",
             "readonly": true
           },
-          "target": "#json-ro"
+          "target": "#json-ro",
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:open",
+              "label": "open",
+              "default": false
+            }
+          ]
         },
         {
           "kind": "html",
