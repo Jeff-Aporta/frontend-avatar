@@ -53,5 +53,5 @@ export const ManifestDemoSchema = z.array(z.object({ tag: z.string(), file: z.st
 export type ManifestDemo = z.infer<typeof ManifestDemoSchema>;
 
 /** Lo que la galería usa del loader del kit. */
-export type LoaderGaleria = { load: (...t: string[]) => Promise<unknown>; selfBase: string };
+export type LoaderGaleria = { load: (...t: string[]) => Promise<unknown>; selfBase: string; catalog?: { tags?: Record<string, unknown> } };
 export type ConProps = HTMLElement & { props?: Record<string, unknown> };
