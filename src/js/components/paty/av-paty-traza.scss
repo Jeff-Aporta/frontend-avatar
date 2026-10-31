@@ -29,7 +29,7 @@
   text-align: left;
   cursor: pointer;
 
-  &:focus-visible { outline: 2px solid var(--iswc-color-brand-500); outline-offset: -2px; }
+  &:focus-visible { outline: 2px solid var(--iswc-color-brand-strong); outline-offset: -2px; }
 }
 
 .titulo { font-weight: 600; }
@@ -69,9 +69,9 @@
   cursor: pointer;
 
   &[aria-pressed="true"] {
-    background: var(--iswc-color-brand-500);
-    border-color: var(--iswc-color-brand-500);
-    color: var(--iswc-bg);
+    background: var(--iswc-color-brand-strong);
+    border-color: var(--iswc-color-brand-strong);
+    color: var(--iswc-on-brand);
   }
 }
 

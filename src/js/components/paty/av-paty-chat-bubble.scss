@@ -4,7 +4,7 @@
   font-size: 1em;
   display: block;
   position: relative;
-  font-family: var(--iswc-font-body, var(--iswc-font-sans));
+  font-family: var(--iswc-sans, var(--iswc-sans));
   line-height: 1.55;
   color: inherit;
 
@@ -170,7 +170,7 @@
     font-size: 0.875em;
     white-space: pre-wrap;
     word-wrap: break-word;
-    font-family: var(--iswc-font-body, var(--iswc-font-sans));
+    font-family: var(--iswc-sans, var(--iswc-sans));
     color: var(--iswc-text);
 
     :is(strong, b) {
@@ -181,7 +181,7 @@
     :is(em, i) { font-style: italic; }
 
     :is(code, pre) {
-      font-family: var(--iswc-font-mono, var(--iswc-mono));
+      font-family: var(--iswc-mono, var(--iswc-mono));
       background: var(--iswc-bg);
       padding: 2px 6px;
       border-radius: 4px;
@@ -248,7 +248,7 @@
     border-left: 3px solid var(--iswc-color-danger);
     font-size: 0.75em;
     color: var(--iswc-text-soft);
-    font-family: var(--iswc-font-mono, var(--iswc-mono));
+    font-family: var(--iswc-mono, var(--iswc-mono));
     white-space: pre-wrap;
     overflow-x: auto;
   }
