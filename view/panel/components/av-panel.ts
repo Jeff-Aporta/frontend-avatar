@@ -1,7 +1,7 @@
 /**
  * <av-panel> — shell del dashboard: cabecera, KPIs, gráficas de tareas y CRM y notificaciones. Carga el resumen de la
  * empresa activa (`empresa/{id}/resumen`) y las notificaciones (`notificaciones/mias`) con el plugin `avatar` de DER;
- * escucha `av-notificaciones-leer` y `av-empresa-cambio` para recargar.
+ * escucha `av-notificaciones-leer` para recargar; un cambio de empresa remonta la vista.
  */
 import { crearComponente, define, html } from '../../../src/js/base/componente.js';
 import { NotificacionSchema, ResumenSchema } from '../../../src/js/consts/schemas/api.schemas.js';
@@ -40,12 +40,12 @@ const AvPanel = crearComponente<AvPanelProps>(import.meta.url, 'av-panel', { res
   };
   root.append(html`
     <div class="pagina" part="pagina" onav-notificaciones-leer=${leer}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${() => { h.props = { resumen: null, error: '', version: (props.version ?? 0) + 1 }; }}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button slot="acciones" color="brand" oniswc-click=${() => ir('proyectos')}><iswc-icon slot="start" icon="mdi:view-column-outline"></iswc-icon>Ir a proyectos</iswc-button>
-      </av-cabecera>
+      </iswc-page-header>
       ${props.error ? html`<iswc-callout tone="danger"><strong slot="title">No se pudo cargar el panel</strong>${props.error}</iswc-callout>` : null}
-      ${!iempresa ? html`<av-vacio id="sin-empresa"><iswc-button color="brand" oniswc-click=${() => ir('organizacion')}>Ir a organización</iswc-button></av-vacio>` : html`
+      ${!iempresa ? html`<iswc-empty-state id="sin-empresa"><iswc-button color="brand" oniswc-click=${() => ir('organizacion')}>Ir a organización</iswc-button></iswc-empty-state>` : html`
         <av-kpis id="kpis"></av-kpis>
         <div class="rejilla" part="rejilla">
           <av-tareas-grafica id="tareas"></av-tareas-grafica>

@@ -12,7 +12,7 @@ Ruta `#/admin`. Sin `avatar.seguridad` solo muestra «Mi cuenta». Tras cambiar 
 ```
 <av-admin>
   #shadow-root
-    <div part="pagina"><av-cabecera> [<av-vacio id="sin-permiso">] <iswc-tab-group><iswc-tab-panel name="usuarios"><av-usuarios></iswc-tab-panel><iswc-tab-panel name="roles"><av-roles></iswc-tab-panel><iswc-tab-panel name="cuenta"><div class="cuenta">contraseña · sesiones</div></iswc-tab-panel></iswc-tab-group> <av-usuario-form></div>
+    <div part="pagina"><iswc-page-header> [<iswc-empty-state id="sin-permiso">] <iswc-tab-group><iswc-tab-panel name="usuarios"><av-usuarios></iswc-tab-panel><iswc-tab-panel name="roles"><av-roles></iswc-tab-panel><iswc-tab-panel name="cuenta"><div class="cuenta">contraseña · sesiones</div></iswc-tab-panel></iswc-tab-group> <av-usuario-form></div>
 ```
 
 ## Atributos observados

@@ -1,4 +1,4 @@
-<!-- Copia de skills/iswc-root/tools/build.md del kit Jeff-Aporta/is-webcomponents@a1df39adb9e421de874dd624901b72daa9e25e5c. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- Copia de skills/iswc-root/tools/build.md del kit Jeff-Aporta/is-webcomponents@42322344cbaa25967d44361c99b78c963d0f8543. No editar: se refresca con `deno task vendor:iswc`. -->
 <!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/tools/build.md -->
 # `/iswc-root:build`
 
@@ -20,7 +20,7 @@ CDN (o por copia local si la app ya corrió [`/iswc-root:local`](local.md)).
 2. **Scaffold del HTML** con bootstrap CDN mínimo:
 
    ```html
-   <html lang="es" data-theme="dark" data-palette="contapyme">
+   <html lang="es" data-theme="dark" data-palette="delfin">
    <head>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@main/dist/cdn/core/is-base.min.css">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@main/dist/cdn/core/palettes.min.css">

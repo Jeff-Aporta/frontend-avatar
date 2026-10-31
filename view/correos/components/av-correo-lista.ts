@@ -84,7 +84,7 @@ const AvCorreoLista = crearComponente<AvCorreoListaProps>(
           <span class="conteo" part="conteo"></span>
         </div>
         <div class="items" part="items" role="listbox" aria-label="Correos"></div>
-        <av-vacio class="vacio" hidden></av-vacio>
+        <iswc-empty-state class="vacio" hidden></iswc-empty-state>
       </div>
     `);
     pintarFilas(root, props, host);

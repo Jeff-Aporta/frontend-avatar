@@ -15,7 +15,7 @@ const AvClientesGrid = crearComponente<AvClientesGridProps>(
   { clientes: [], cargando: false },
   (root, props, host) => {
     if (!props.cargando && props.clientes.length === 0) {
-      root.append(html`<av-vacio id="vacio"></av-vacio>`);
+      root.append(html`<iswc-empty-state id="vacio"></iswc-empty-state>`);
       (root.querySelector('#vacio') as ConProps).props = { icono: 'mdi:account-search-outline', titulo: 'Sin clientes', texto: 'No hay clientes para mostrar con este filtro.' };
       return;
     }

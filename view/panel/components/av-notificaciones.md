@@ -12,7 +12,7 @@ Las últimas notificaciones (invitaciones, tareas movidas…), las no leídas co
 ```
 <av-notificaciones>
   #shadow-root
-    <iswc-card part="tarjeta"><iswc-button class="leer" slot="header-actions"><ul part="lista"><li data-leida>…</li></ul> | <av-vacio></iswc-card>
+    <iswc-card part="tarjeta"><iswc-button class="leer" slot="header-actions"><ul part="lista"><li data-leida>…</li></ul> | <iswc-empty-state></iswc-card>
 ```
 
 ## Atributos observados

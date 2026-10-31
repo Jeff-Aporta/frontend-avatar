@@ -12,7 +12,7 @@ Ruta `#/asistente`. Habla con `POST consultas/preguntar` (plugin `avatar` de DER
 ```
 <av-asistente>
   #shadow-root
-    <div part="pagina"><av-cabecera> <section part="chat"><div part="turnos"><av-avo-mensaje>…</div><div part="sugerencias"><iswc-button pill>…</div><div part="redactor"><iswc-textarea id="pregunta"> <iswc-button id="enviar"></div></section></div>
+    <div part="pagina"><iswc-page-header> <section part="chat"><div part="turnos"><av-avo-mensaje>…</div><div part="sugerencias"><iswc-button pill>…</div><div part="redactor"><iswc-textarea id="pregunta"> <iswc-button id="enviar"></div></section></div>
 ```
 
 ## Atributos observados

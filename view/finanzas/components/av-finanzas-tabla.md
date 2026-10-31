@@ -14,7 +14,7 @@ Tabla de transacciones o facturas (buscador + iswc-data-grid) con acciones Emiti
   #shadow-root
     <div part="barra"><iswc-input class="buscador" type="search"> <span part="conteo"></div>
     <iswc-data-grid part="grid" pagination>
-    <av-vacio class="vacio">
+    <iswc-empty-state class="vacio">
 ```
 
 ## Atributos observados

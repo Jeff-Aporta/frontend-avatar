@@ -17,8 +17,8 @@ el layout no se repinta.
   #shadow-root                                    #shadow-root
     <iswc-app-shell toast="top-end">                <iswc-doc-layout class="privada" toc="off" hide-end>
       <av-logo slot="brand">                          <a slot="brand"><av-logo></a>
-      <iswc-session-menu slot="actions">              <av-buscador slot="actions">   ← Ctrl+K
-      <iswc-theme-toggle slot="actions">              <av-empresa-selector slot="actions">
+      <iswc-session-menu slot="actions">              <iswc-semantic-search slot="actions">   ← Ctrl+K
+      <iswc-theme-toggle slot="actions">              <iswc-tenant-selector slot="actions">
       <main class="vista"> shell de la vista          <iswc-session-menu slot="actions">
       <footer class="pie" slot="footer">              <iswc-theme-toggle slot="actions">
                                                       <iswc-doc-index slot="start">  ← módulos

@@ -31,7 +31,7 @@ de Avatar. La vista se siente como un cliente de correo: carpetas a la izquierda
 
 ## 4. Contratos HOW STRONG
 
-- [HS-CORREO-01] Tags: `av-correos` (shell), `av-correo-carpetas`, `av-correo-lista`, `av-correo-lector`, `av-correo-redactar`; usa `av-indicadores` (transversal).
+- [HS-CORREO-01] Tags: `av-correos` (shell), `av-correo-carpetas`, `av-correo-lista`, `av-correo-lector`, `av-correo-redactar`; usa `iswc-stat-group` (transversal).
 - [HS-CORREO-02] Eventos: `av-correos-carpeta { carpeta }`, `av-correos-buscar { texto }`, `av-correo-abrir { ibuzon }`, `av-correo-marcar { ibuzon, cambios }`, `av-correo-responder { ibuzon, todos }`, `av-correo-reenviar { ibuzon }`, `av-correo-cerrar`, `av-correo-enviar { datos }`, `av-correo-redactar-cerrar`, `av-correo-redactar-error { mensaje }`.
 - [HS-CORREO-03] API (vendor DER): ops `bandeja(iempresa, carpeta)`, `resumenCorreo(iempresa)`, `marcarCorreo(ibuzon, { leido?, destacado?, carpeta? })`, `enviarCorreo({ iempresa, destinatarios, cc?, asunto, cuerpo, etiquetas?, respuesta_a? })` y el controller `miembros` (con `usuario`). Escritura con `avatar.correo`.
 

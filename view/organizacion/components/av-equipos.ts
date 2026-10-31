@@ -49,9 +49,9 @@ const AvEquipos = crearComponente<AvEquiposProps>(import.meta.url, 'av-equipos',
       </div>
       ${props.error ? html`<iswc-callout tone="danger">${props.error}</iswc-callout>` : null}
       ${props.cargando
-        ? html`<av-vacio id="cargando"></av-vacio>`
+        ? html`<iswc-empty-state id="cargando"></iswc-empty-state>`
         : props.items.length === 0
-        ? html`<av-vacio id="vacio">${props.puedeGestionar ? html`<iswc-button color="brand" oniswc-click=${() => abrirForm(null)}>Crear el primero</iswc-button>` : null}</av-vacio>`
+        ? html`<iswc-empty-state id="vacio">${props.puedeGestionar ? html`<iswc-button color="brand" oniswc-click=${() => abrirForm(null)}>Crear el primero</iswc-button>` : null}</iswc-empty-state>`
         : html`<div class="rejilla" part="rejilla">
             ${props.items.map((e, i) => {
               const libres = candidatos(props.miembros, e.integrantes);
@@ -73,7 +73,7 @@ const AvEquipos = crearComponente<AvEquiposProps>(import.meta.url, 'av-equipos',
                     ${e.integrantes.length === 0 ? html`<li class="nadie">Sin integrantes</li>` : null}
                     ${e.integrantes.map((it) => html`
                       <li class="integrante">
-                        <av-persona class="persona" data-iusuario=${it.iusuario}></av-persona>
+                        <iswc-person class="persona" data-iusuario=${it.iusuario}></iswc-person>
                         ${it.rol === 'lider' ? html`<iswc-tag color="brand" pill>${etiquetaRol('lider')}</iswc-tag>` : null}
                         ${props.puedeGestionar ? html`<iswc-button variant="plain" color="neutral" class="quitar" title=${`Quitar a ${nombreDe(it)}`} oniswc-click=${() => emitir(host, 'av-integrante-quitar', { iequipo: e.iequipo, iusuario: it.iusuario })}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>` : null}
                       </li>
@@ -103,10 +103,10 @@ const AvEquipos = crearComponente<AvEquiposProps>(import.meta.url, 'av-equipos',
       </iswc-dialog>
     </section>
   `);
-  for (const p of root.querySelectorAll<ConProps>('av-persona')) {
+  for (const p of root.querySelectorAll<ConProps>('iswc-person')) {
     const iusuario = p.dataset['iusuario'] ?? '';
     const it = props.items.flatMap((e) => e.integrantes).find((x) => x.iusuario === iusuario);
-    p.props = { iusuario, nombre: it?.usuario?.nombre ?? null, detalle: it ? etiquetaRol(it.rol) : '' };
+    p.props = { usuario: iusuario, nombre: it?.usuario?.nombre ?? null, detalle: it ? etiquetaRol(it.rol) : '' };
   }
   const cargando = root.querySelector('#cargando') as ConProps | null;
   if (cargando) cargando.props = { estado: 'cargando' };

@@ -12,7 +12,7 @@ Pestaña Equipos de la organización. El diálogo de crear/editar equipo vive de
 ```
 <av-equipos>
   #shadow-root
-    <section part="equipos"><div class="barra"><iswc-button id="nuevo"></div><div part="rejilla"><iswc-card class="equipo">header, descripción, <ul class="integrantes"><li><av-persona> <iswc-tag> <iswc-button class="quitar"></li></ul>, footer: <iswc-select id="cand-i"> <iswc-select id="rolc-i"> <iswc-button></iswc-card>…</div><iswc-dialog id="form">…</iswc-dialog></section>
+    <section part="equipos"><div class="barra"><iswc-button id="nuevo"></div><div part="rejilla"><iswc-card class="equipo">header, descripción, <ul class="integrantes"><li><iswc-person> <iswc-tag> <iswc-button class="quitar"></li></ul>, footer: <iswc-select id="cand-i"> <iswc-select id="rolc-i"> <iswc-button></iswc-card>…</div><iswc-dialog id="form">…</iswc-dialog></section>
 ```
 
 ## Atributos observados

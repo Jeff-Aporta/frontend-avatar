@@ -15,7 +15,7 @@ Lista de correos de una carpeta con buscador, estado leído, etiquetas, hora rel
     <div part="lista">
       <div part="barra"><iswc-input class="buscador" type="search"> <span part="conteo"></div>
       <div part="items" role="listbox"><div part="correo" role="option" data-leido aria-selected> <iswc-avatar> … <iswc-relative-time> <iswc-tag> <iswc-button class="estrella"></div>×N</div>
-      <av-vacio class="vacio">
+      <iswc-empty-state class="vacio">
 ```
 
 ## Atributos observados

@@ -1,5 +1,4 @@
-<!-- Copia de skills/iswc-root/catalog.md del kit Jeff-Aporta/is-webcomponents@a1df39adb9e421de874dd624901b72daa9e25e5c. No editar: se refresca con `deno task vendor:iswc`. -->
-<!-- @vendor 2026-10-14T16:13:19.844Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/catalog.md -->
+<!-- Copia de skills/iswc-root/catalog.md del kit Jeff-Aporta/is-webcomponents@42322344cbaa25967d44361c99b78c963d0f8543. No editar: se refresca con `deno task vendor:iswc`. -->
 # Catálogo iswc-* (inventario completo)
 
 Fuente viva: regenerar con `node scripts/sync-skill-catalog.mjs`.
@@ -29,14 +28,14 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 
 | API / módulo | CDN o ruta | Resumen | Guía |
 | --- | --- | --- | --- |
-| `iswcLoader` | `core/loader.min.js` | Entry CDN: loadCSS*, load/ensure/has, pin, configure, espejos jsDelivr -> githack -> Pages, sheets, registerApp, SHA quemado. | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/a1df39adb9e421de874dd624901b72daa9e25e5c/src/cdn/loader.md) |
-| `IswcUi / Ui` | `helpers/ui.min.js` | html, adoptCss, define, css, el: primitivas de apps dominio. No es CE. | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/a1df39adb9e421de874dd624901b72daa9e25e5c/src/components/helpers/ui.md) |
-| `mdToHtml` | `helpers/md-lite.min.js` | Markdown -> HTML sin npm; fences codigo e iswc-* (diagramas). | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/a1df39adb9e421de874dd624901b72daa9e25e5c/src/components/helpers/utils/md-lite.md) |
-| `resolveIswcFenceTag` | `helpers/md-iswc-fences.min.js` | Lang fence iswc-* -> tag de diagrama (flowchart, er, sequence, ...). | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/a1df39adb9e421de874dd624901b72daa9e25e5c/src/components/helpers/utils/md-iswc-fences.md) |
-| `hydrateMdEmbeds` | `helpers/md-hydrate.min.js` | Carga perezosa de los iswc-* que pusieron los renders por defecto del markdown. | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/a1df39adb9e421de874dd624901b72daa9e25e5c/src/components/helpers/utils/md-hydrate.md) |
-| `md-editor-api` | `helpers/md-editor-api.min.js` | CRUD/normalizacion para iswc-md-editor (endpoints, fieldMap, token). | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/a1df39adb9e421de874dd624901b72daa9e25e5c/src/components/helpers/utils/md-editor-api.md) |
-| `IswcResponseCache` | `helpers/response-cache.min.js` | SWR IndexedDB: vivo/leer/guardar/invalidar; no bloquea el pintado. | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/a1df39adb9e421de874dd624901b72daa9e25e5c/src/components/helpers/utils/response-cache.md) |
-| `sync-pins` | `scripts/sync-pins.mjs (repo)` | Tras commit del kit: propaga SHA a kit-pin / ISS / PIN (deno task sync:pins). | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/a1df39adb9e421de874dd624901b72daa9e25e5c/scripts/sync-pins.mjs) |
+| `iswcLoader` | `core/loader.min.js` | Entry CDN: loadCSS*, load/ensure/has, pin, configure, espejos jsDelivr -> githack -> Pages, sheets, registerApp, SHA quemado. | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/cdn/loader.md) |
+| `IswcUi / Ui` | `helpers/ui.min.js` | html, adoptCss, define, css, el: primitivas de apps dominio. No es CE. | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/components/helpers/ui.md) |
+| `mdToHtml` | `helpers/md-lite.min.js` | Markdown -> HTML sin npm; fences codigo e iswc-* (diagramas). | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/components/helpers/utils/md-lite.md) |
+| `resolveIswcFenceTag` | `helpers/md-iswc-fences.min.js` | Lang fence iswc-* -> tag de diagrama (flowchart, er, sequence, ...). | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/components/helpers/utils/md-iswc-fences.md) |
+| `hydrateMdEmbeds` | `helpers/md-hydrate.min.js` | Carga perezosa de los iswc-* que pusieron los renders por defecto del markdown. | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/components/helpers/utils/md-hydrate.md) |
+| `md-editor-api` | `helpers/md-editor-api.min.js` | CRUD/normalizacion para iswc-md-editor (endpoints, fieldMap, token). | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/components/helpers/utils/md-editor-api.md) |
+| `IswcResponseCache` | `helpers/response-cache.min.js` | SWR IndexedDB: vivo/leer/guardar/invalidar; no bloquea el pintado. | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/components/helpers/utils/response-cache.md) |
+| `sync-pins` | `scripts/sync-pins.mjs (repo)` | Tras commit del kit: propaga SHA a kit-pin / ISS / PIN (deno task sync:pins). | [docs](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/scripts/sync-pins.mjs) |
 
 ## Tags por categoría
 
@@ -88,6 +87,7 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 | `media/speech.md` | `<iswc-speech>` |
 | `media/media-recorder.md` | `<iswc-media-recorder>` |
 | `media/video-playlist.md` | `<iswc-video-playlist>` |
+| `media/person.md` | `<iswc-person>` |
 | `media/barcode.md` | `<iswc-barcode>` |
 | `media/barcode-scanner.md` | `<iswc-barcode-scanner>` |
 | `media/image-editor.md` | `<iswc-image-editor>` |
@@ -112,6 +112,10 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 | `feedback/cdn-snippet.md` | `<iswc-cdn-snippet>` |
 | `feedback/popconfirm.md` | `<iswc-popconfirm>` |
 | `feedback/confirm-modal.md` | `<iswc-confirm-modal>` |
+| `feedback/stream-bubble.md` | `<iswc-stream-bubble>` |
+| `feedback/status-pill.md` | `<iswc-status-pill>` |
+| `feedback/loading.md` | `<iswc-loading>` |
+| `feedback/empty-state.md` | `<iswc-empty-state>` |
 | `feedback/palette-selector.md` | `<iswc-palette-selector>` |
 
 ### layout
@@ -133,6 +137,7 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 | `layout/divider.md` | `<iswc-divider>` |
 | `layout/scrollspy.md` | `<iswc-scrollspy>` |
 | `layout/demo.md` | `<iswc-demo>` |
+| `layout/page-header.md` | `<iswc-page-header>` |
 | `layout/dock.md` | `<iswc-dock>` |
 | `layout/dock-item.md` | `<iswc-dock-item>` |
 | `layout/doc-layout.md` | `<iswc-doc-layout>` |
@@ -169,8 +174,8 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 | `navigation/pager.md` | `<iswc-pager>` |
 | `navigation/doc-index.md` | `<iswc-doc-index>` |
 | `navigation/breadcrumb-item.md` | `<iswc-breadcrumb-item>` |
-| `navigation/tab-group.md` | `<iswc-tab-group>`, `<iswc-tab>`, `<iswc-tab-panel>` |
 | `navigation/app-nav.md` | `<iswc-app-nav>` |
+| `navigation/tab-group.md` | `<iswc-tab-group>`, `<iswc-tab>`, `<iswc-tab-panel>` |
 | `navigation/scroller.md` | `<iswc-scroller>` |
 | `navigation/carousel.md` | `<iswc-carousel>` |
 | `navigation/carousel-item.md` | `<iswc-carousel-item>` |
@@ -178,6 +183,7 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 | `navigation/tree-item.md` | `<iswc-tree-item>` |
 | `navigation/stepper.md` | `<iswc-stepper>` |
 | `navigation/stepper-step.md` | `<iswc-stepper-step>` |
+| `navigation/pagination.md` | `<iswc-pagination>` |
 | `navigation/mega-menu.md` | `<iswc-mega-menu>` |
 
 ### forms
@@ -211,6 +217,7 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 | `forms/date-time-input.md` | `<iswc-date-time-input>` |
 | `forms/date-range-input.md` | `<iswc-date-range-input>` |
 | `forms/pin-input.md` | `<iswc-pin-input>` |
+| `forms/tenant-selector.md` | `<iswc-tenant-selector>` |
 | `forms/masked-input.md` | `<iswc-masked-input>` |
 | `forms/inline-edit.md` | `<iswc-inline-edit>` |
 | `forms/mention.md` | `<iswc-mention>` |
@@ -233,6 +240,8 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 | --- | --- |
 | `data/data-grid.md` | `<iswc-data-grid>` |
 | `data/stat.md` | `<iswc-stat>` |
+| `data/trace-log.md` | `<iswc-trace-log>` |
+| `data/stat-group.md` | `<iswc-stat-group>` |
 | `data/meta-list.md` | `<iswc-meta-list>` |
 | `data/transfer.md` | `<iswc-transfer>` |
 | `data/transfer-item.md` | `<iswc-transfer-item>` |
@@ -294,6 +303,8 @@ Skill general: [SKILL.md](SKILL.md) · Runtime sin tag: [tools/runtime.md](tools
 
 | Doc | Tags |
 | --- | --- |
+| `overlays/json-dialog.md` | `<iswc-json-dialog>` |
+| `overlays/semantic-search.md` | `<iswc-semantic-search>` |
 | `overlays/command-palette.md` | `<iswc-command-palette>` |
 | `overlays/pdf-viewer.md` | `<iswc-pdf-viewer>` |
 | `overlays/window.md` | `<iswc-window>` |

@@ -70,11 +70,11 @@ const AvCanales = crearComponente<AvCanalesProps>(
         onav-canal-form-cerrar=${() => { h.props = { formulario: false }; }}
         onav-canal-crear=${crear}
         onav-chat-abierto=${(e: Event) => ir('canales', (e as CustomEvent<{ icanal: string | null }>).detail.icanal)}>
-        <av-cabecera id="cabecera">
+        <iswc-page-header id="cabecera">
           ${puedeCrear && vista === 'listo' ? html`<iswc-button slot="acciones" variant="soft" color="brand" oniswc-click=${() => { h.props = { formulario: true }; void cargarEquipos(); }}><iswc-icon slot="start" icon="mdi:pound-box-outline"></iswc-icon>Nuevo canal</iswc-button>` : null}
-        </av-cabecera>
+        </iswc-page-header>
         <iswc-callout class="aviso" tone="warning" color="warning" ?hidden=${!props.aviso}><strong slot="title">Chat</strong><span class="aviso-texto">${props.aviso}</span></iswc-callout>
-        ${vista === 'listo' ? html`<av-chat id="chat" class="chat"></av-chat>` : html`<av-vacio id="vacio"></av-vacio>`}
+        ${vista === 'listo' ? html`<av-chat id="chat" class="chat"></av-chat>` : html`<iswc-empty-state id="vacio"></iswc-empty-state>`}
         <av-canal-form id="formulario"></av-canal-form>
       </div>
     `);

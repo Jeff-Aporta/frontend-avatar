@@ -12,7 +12,7 @@ Ruta `#/canales/<icanal>`. Dos columnas en escritorio; en móvil la lista o la c
 ```
 <av-canales>
   #shadow-root
-    <div part="pagina" data-abierto><av-cabecera> <div part="columnas"><av-canal-lista id="lista"> <av-conversacion id="conversacion"></div> <av-canal-form id="formulario"></div>
+    <div part="pagina" data-abierto><iswc-page-header> <div part="columnas"><av-canal-lista id="lista"> <av-conversacion id="conversacion"></div> <av-canal-form id="formulario"></div>
 ```
 
 ## Atributos observados

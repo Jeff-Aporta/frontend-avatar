@@ -20,11 +20,11 @@ const AvFinanzasGrafica = crearComponente<AvFinanzasGraficaProps>(
       <div class="rejilla" part="rejilla">
         <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
           <strong slot="header" class="titulo"><iswc-icon icon="mdi:chart-bar"></iswc-icon> Mes contra mes <span class="mes">${r ? nombreMes(r.mes) : ''}</span></strong>
-          ${r ? html`<iswc-bar-chart id="barras" class="grafica" label="Ingresos, gastos y beneficio: mes anterior contra el actual" legend-position="bottom"></iswc-bar-chart>` : html`<av-vacio class="vacio"></av-vacio>`}
+          ${r ? html`<iswc-bar-chart id="barras" class="grafica" label="Ingresos, gastos y beneficio: mes anterior contra el actual" legend-position="bottom"></iswc-bar-chart>` : html`<iswc-empty-state class="vacio"></iswc-empty-state>`}
         </iswc-card>
         <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
           <strong slot="header" class="titulo"><iswc-icon icon="mdi:chart-donut"></iswc-icon> Gastos por categoría</strong>
-          ${categorias ? html`<iswc-doughnut-chart id="dona" class="grafica" label="Gastos del mes por categoría" legend-position="bottom"></iswc-doughnut-chart>` : html`<av-vacio class="vacio"></av-vacio>`}
+          ${categorias ? html`<iswc-doughnut-chart id="dona" class="grafica" label="Gastos del mes por categoría" legend-position="bottom"></iswc-doughnut-chart>` : html`<iswc-empty-state class="vacio"></iswc-empty-state>`}
         </iswc-card>
       </div>
     `);

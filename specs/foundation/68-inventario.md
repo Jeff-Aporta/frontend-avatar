@@ -30,7 +30,7 @@ alertas avisan lo que está en o bajo su mínimo y los pedidos ordenan compras y
 
 ## 4. Contratos HOW STRONG
 
-- [HS-INV-01] Tags: `av-inventario` (shell), `av-stock-alertas`, `av-inventario-tabla`, `av-producto-form`, `av-movimiento-form`, `av-pedido-form`, `av-proveedor-form`; usa `av-indicadores`.
+- [HS-INV-01] Tags: `av-inventario` (shell), `av-stock-alertas`, `av-inventario-tabla`, `av-producto-form`, `av-movimiento-form`, `av-pedido-form`, `av-proveedor-form`; usa `iswc-stat-group`.
 - [HS-INV-02] Eventos: `av-inventario-buscar|abrir|accion`, `av-producto-mover { iproducto, tipo }`, `av-producto-guardar`, `av-movimiento-guardar`, `av-pedido-guardar|eliminar`, `av-proveedor-guardar|eliminar`, `*-form-cerrar`, `*-form-error { mensaje }`.
 - [HS-INV-03] API: ops `resumenInventario(iempresa)`, `alertas(iempresa)`, `movimiento(iproducto, { tipo, cantidad, motivo? })`; controllers `productos`, `movimientos`, `pedidos`, `itemspedido`, `proveedores`, `clientes`. Escritura con `avatar.inventario`.
 

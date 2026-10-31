@@ -1,6 +1,6 @@
 /**
  * grilla.ts — la tabla de catálogo que comparten las vistas de negocio: un buscador (`iswc-input`) y un
- * `iswc-data-grid` del kit, más un estado vacío (`av-vacio`). La búsqueda NO filtra aquí: emite `<prefijo>-buscar`
+ * `iswc-data-grid` del kit, más un estado vacío (`iswc-empty-state`). La búsqueda NO filtra aquí: emite `<prefijo>-buscar`
  * para que el shell decida cómo buscar (hoy por texto; mañana semántica) y devuelva las filas.
  *
  * Eventos (todos con `entidad`): `<prefijo>-buscar { entidad, texto }`, `<prefijo>-abrir { entidad, id }` (clic en
@@ -96,7 +96,7 @@ export function montarGrilla(root: ShadowRoot, o: OpcionesGrilla): void {
       <span class="conteo" part="conteo"></span>
     </div>
     <iswc-data-grid class="grid" part="grid" pagination page-size="10" page-size-options="10,25,50" density="compact" disable-row-selection-on-click oniswc-row-click=${abrir}></iswc-data-grid>
-    <av-vacio class="vacio" hidden></av-vacio>
+    <iswc-empty-state class="vacio" hidden></iswc-empty-state>
   `);
   const grid = root.querySelector('.grid') as GridEl;
   grid.getRowId = (row) => row[o.idCampo];

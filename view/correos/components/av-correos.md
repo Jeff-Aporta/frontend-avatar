@@ -12,7 +12,7 @@ Shell de DUO eMail: KPIs del buzón, carpetas, lista y lector en panel dividido 
 ```
 <av-correos>
   #shadow-root
-    <div part="pagina"><av-cabecera> <iswc-callout> (sin permiso) <av-indicadores id="kpis">
+    <div part="pagina"><iswc-page-header> <iswc-callout> (sin permiso) <iswc-stat-group id="kpis">
       <section part="buzon"><av-correo-carpetas> <iswc-split-panel><av-correo-lista slot="start"> <av-correo-lector slot="end"></iswc-split-panel></section>
       <av-correo-redactar></div>
 ```

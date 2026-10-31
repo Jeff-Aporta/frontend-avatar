@@ -217,14 +217,14 @@ const AvFinanzas = crearComponente<AvFinanzasProps>(import.meta.url, 'av-finanza
       onav-factura-guardar=${guardarFactura} onav-factura-eliminar=${eliminarFactura}
       onav-factura-form-cerrar=${() => ($('form-factura').props = { abierto: false })}
       onav-factura-form-error=${(e: Event) => avisar((e as Detalle<{ mensaje: string }>).detail.mensaje, 'warning')}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirFactura(null)}><iswc-icon slot="start" icon="mdi:file-document-plus-outline"></iswc-icon>Nueva factura</iswc-button>
         <iswc-button slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirTransaccion(null)}><iswc-icon slot="start" icon="mdi:plus-circle-outline"></iswc-icon>Nueva transacción</iswc-button>
-      </av-cabecera>
-      ${!iempresa ? html`<av-vacio id="sin-empresa"></av-vacio>` : html`
+      </iswc-page-header>
+      ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`
         ${puedeEscribir ? null : html`<iswc-callout color="warning"><strong>Solo lectura.</strong> Tu rol no incluye el permiso de finanzas (avatar.finanzas): puedes consultar cifras, transacciones y facturas, pero no registrar, emitir ni cobrar.</iswc-callout>`}
-        <av-indicadores id="kpis"></av-indicadores>
+        <iswc-stat-group id="kpis"></iswc-stat-group>
         <iswc-tab-group active=${pestana}>
           <iswc-tab slot="nav" panel="general"><iswc-icon slot="start" icon="mdi:view-dashboard-variant-outline"></iswc-icon>General</iswc-tab>
           <iswc-tab slot="nav" panel="transacciones"><iswc-icon slot="start" icon="mdi:swap-vertical"></iswc-icon>Transacciones</iswc-tab>

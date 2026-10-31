@@ -12,7 +12,7 @@ type ConProps = HTMLElement & { props: Record<string, unknown> };
 
 const AvTablero = crearComponente<AvTableroProps>(import.meta.url, 'av-tablero', { tablero: null, cargando: false, puedeMover: false }, (root, props, host) => {
   if (props.cargando || !props.tablero) {
-    root.append(html`<av-vacio id="estado"></av-vacio>`);
+    root.append(html`<iswc-empty-state id="estado"></iswc-empty-state>`);
     (root.querySelector('#estado') as ConProps).props = props.cargando ? { estado: 'cargando' } : { icono: 'mdi:view-column-outline', titulo: 'Sin tablero', texto: 'Elige un proyecto para ver su tablero.' };
     return;
   }
@@ -39,7 +39,7 @@ const AvTablero = crearComponente<AvTableroProps>(import.meta.url, 'av-tablero',
               ${etiquetasDe(t.etiquetas).length ? html`<span class="etiquetas">${etiquetasDe(t.etiquetas).map((e) => html`<iswc-tag color="neutral" variant="outlined">${e}</iswc-tag>`)}</span>` : null}
               <span slot="footer" class="pie">
                 ${t.fvence ? html`<span class="vence" data-vencida=${estaVencida(t) ? '1' : '0'}><iswc-icon icon=${estaVencida(t) ? 'mdi:alarm' : 'mdi:calendar-outline'}></iswc-icon>${fechaCorta(t.fvence)}</span>` : html`<span></span>`}
-                ${t.asignado_a ? html`<av-persona class="asignado" data-iusuario=${t.asignado_a} data-nombre=${t.asignado?.nombre ?? ''}></av-persona>` : null}
+                ${t.asignado_a ? html`<iswc-person class="asignado" data-iusuario=${t.asignado_a} data-nombre=${t.asignado?.nombre ?? ''}></iswc-person>` : null}
               </span>
             </iswc-kanban-card>
           `)}
@@ -47,7 +47,7 @@ const AvTablero = crearComponente<AvTableroProps>(import.meta.url, 'av-tablero',
       `)}
     </iswc-kanban>
   `);
-  for (const p of root.querySelectorAll<ConProps>('av-persona')) p.props = { iusuario: p.dataset['iusuario'], nombre: p.dataset['nombre'] || null, compacto: true };
+  for (const p of root.querySelectorAll<ConProps>('iswc-person')) p.props = { usuario: p.dataset['iusuario'], nombre: p.dataset['nombre'] || null, compacto: true };
 });
 
 define('av-tablero', AvTablero);

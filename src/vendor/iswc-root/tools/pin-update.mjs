@@ -1,4 +1,4 @@
-// @vendor iswc-root@a1df39adb9e421de874dd624901b72daa9e25e5c dist/cdn/vendor-distributions/shared/tools/pin-update.mjs
+// @vendor iswc-root@42322344cbaa25967d44361c99b78c963d0f8543 dist/cdn/vendor-distributions/shared/tools/pin-update.mjs
 // No editar: se cambia en el kit y se descarga con `deno task vendor:iswc`.
 // @vendor 2026-10-13T21:34:50.004Z Jeff-Aporta/is-webcomponents@main src/vendor-distributions/shared/tools/pin-update.mjs
 // @doc https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@main/skills/iswc-foundation/references/06-pines-y-vendor.md

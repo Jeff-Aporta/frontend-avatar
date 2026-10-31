@@ -183,13 +183,13 @@ const AvCorreos = crearComponente<AvCorreosProps>(import.meta.url, 'av-correos',
       onav-correo-enviar=${enviar}
       onav-correo-redactar-cerrar=${() => ($('redactar').props = { abierto: false })}
       onav-correo-redactar-error=${(e: Event) => avisar((e as Detalle<{ mensaje: string }>).detail.mensaje, 'warning')}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${() => { void cargarResumen(); void cargarBandeja(); }}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button slot="acciones" color="brand" ?disabled=${!puedeMarcar || !iempresa} oniswc-click=${() => redactar()}><iswc-icon slot="start" icon="mdi:email-edit-outline"></iswc-icon>Redactar</iswc-button>
-      </av-cabecera>
-      ${!iempresa ? html`<av-vacio id="sin-empresa"></av-vacio>` : html`
+      </iswc-page-header>
+      ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`
         ${puedeMarcar ? null : html`<iswc-callout color="warning" class="permiso"><strong>Solo lectura.</strong> Tu rol no incluye el permiso de correo (avatar.correo). Puedes leer tu buzón, pero no redactar, responder ni moverlo de carpeta.</iswc-callout>`}
-        <av-indicadores id="kpis"></av-indicadores>
+        <iswc-stat-group id="kpis"></iswc-stat-group>
         <section class="buzon" part="buzon" aria-label="Buzón">
           <av-correo-carpetas id="carpetas" class="carpetas"></av-correo-carpetas>
           <iswc-split-panel id="split" class="split" position="42" storage-key="av-correos-split">

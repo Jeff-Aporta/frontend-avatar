@@ -12,7 +12,7 @@ Shell de finanzas: KPIs del mes, gráficas, conversor de monedas, transacciones 
 ```
 <av-finanzas>
   #shadow-root
-    <div part="pagina"><av-cabecera> <iswc-callout> (sin permiso) <av-indicadores id="kpis">
+    <div part="pagina"><iswc-page-header> <iswc-callout> (sin permiso) <iswc-stat-group id="kpis">
       <iswc-tab-group><iswc-tab>×3 <iswc-tab-panel name="general"><av-finanzas-grafica> <av-conversor></iswc-tab-panel>
         <iswc-tab-panel name="transacciones"><av-finanzas-tabla> <iswc-tab-panel name="facturas"><av-finanzas-tabla></iswc-tab-group>
       <av-transaccion-form> <av-factura-form></div>

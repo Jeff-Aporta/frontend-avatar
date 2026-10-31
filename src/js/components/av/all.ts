@@ -9,12 +9,6 @@ setCssBase(new URL('./', import.meta.url).href);
 
 await import('./av-logo.js');
 await import('./av-escena.js');
-await import('./av-buscador.js');
-await import('./av-cabecera.js');
-await import('./av-vacio.js');
-await import('./av-persona.js');
-await import('./av-empresa-selector.js');
-await import('./av-indicadores.js');
 await import('../../../../view/inicio/components/all.js');
 await import('../../../../view/acceso/components/all.js');
 await import('../../../../view/panel/components/all.js');

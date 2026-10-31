@@ -47,6 +47,12 @@ export const SHELL_KIT_TAGS = [
   'iswc-grid-layout',
   'iswc-dialog',
   'iswc-input',
+  'iswc-page-header',
+  'iswc-empty-state',
+  'iswc-person',
+  'iswc-stat-group',
+  'iswc-tenant-selector',
+  'iswc-semantic-search',
 ] as const;
 
 /** Hijos que registra su padre: nunca se piden al loader (lo rechaza y tumba la carga). */
@@ -68,7 +74,7 @@ export const VIEW_KIT_TAGS: Record<string, readonly string[]> = {
   finanzas: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-bar-chart', 'iswc-doughnut-chart'],
   inventario: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-switch'],
   rrhh: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-bar-chart', 'iswc-doughnut-chart'],
-  demo: ['iswc-code', 'iswc-dialog'],
+  demo: ['iswc-loading', 'iswc-status-pill', 'iswc-trace-log', 'iswc-pagination', 'iswc-json-dialog', 'iswc-stream-bubble', 'iswc-code', 'iswc-dialog'],
 };
 
 /** Todos los tags del kit de la app (shell + vistas), sin repetir: lo usa la galería. */
@@ -76,8 +82,8 @@ export const KIT_TAGS: readonly string[] = [...new Set([...SHELL_KIT_TAGS, ...Ob
 
 export const PREFIJO = 'av';
 
-/** Transversales (varias vistas): shell, cabecera de página, estado vacío, persona y selector de empresa. */
-export const APP_TAGS = ['av-logo', 'av-escena', 'av-buscador', 'av-cabecera', 'av-vacio', 'av-persona', 'av-empresa-selector', 'av-indicadores', 'av-perfil-selector', 'av-perfiles-tabla', 'av-app'] as const;
+/** Transversales (varias vistas): shell, logo, escena y selector de perfil. */
+export const APP_TAGS = ['av-logo', 'av-escena', 'av-perfil-selector', 'av-perfiles-tabla', 'av-app'] as const;
 
 /** Por vista: hijos antes que el shell (el último es el shell de la vista). */
 export const VIEW_TAGS = {
@@ -108,15 +114,12 @@ export const FAMILIA_TAGS = {
     'av-chat-mensajes', 'av-chat-compositor', 'av-chat-visor', 'av-chat-busqueda', 'av-chat-nuevo', 'av-chat-grupo-form', 'av-chat-tema', 'av-chat-info', 'av-chat-reenviar',
     'av-chat-llamada', 'av-chat',
   ],
-  /** Traídos de ISW-TestPatyIA para auditarlos en el explorador: solo los carga la galería. */
-  paty: ['av-paty-cargando', 'av-paty-process', 'av-paty-traza', 'av-paty-pagination', 'av-paty-chat-bubble', 'av-paty-json-dialog'],
 } as const satisfies Record<string, readonly `av-${string}`[]>;
 
 /** Familias que carga cada vista (antes que sus propios componentes). */
 export const VIEW_FAMILIAS: Record<string, readonly (keyof typeof FAMILIA_TAGS)[]> = {
   canales: ['chat'],
   'chat-demo': ['chat'],
-  demo: ['paty'],
 };
 
 export type AppTag = (typeof APP_TAGS)[number] | (typeof VIEW_TAGS)[keyof typeof VIEW_TAGS][number] | (typeof FAMILIA_TAGS)[keyof typeof FAMILIA_TAGS][number];

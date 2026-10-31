@@ -13,10 +13,10 @@ const AvTareasGrafica = crearComponente<AvTareasGraficaProps>(import.meta.url, '
       <strong slot="header"><iswc-icon icon="mdi:chart-donut"></iswc-icon> Tareas por estado</strong>
       ${config && t && t.total > 0
         ? html`<iswc-doughnut-chart class="grafica" part="grafica" label="Tareas por estado" legend-position="bottom">${raw(`<script type="application/json">${JSON.stringify(config).replace(/</g, '\\u003c')}</script>`)}</iswc-doughnut-chart>`
-        : html`<av-vacio class="vacio"></av-vacio>`}
+        : html`<iswc-empty-state class="vacio"></iswc-empty-state>`}
     </iswc-card>
   `);
-  const vacio = root.querySelector('av-vacio') as (HTMLElement & { props: Record<string, unknown> }) | null;
+  const vacio = root.querySelector('iswc-empty-state') as (HTMLElement & { props: Record<string, unknown> }) | null;
   if (vacio) vacio.props = t ? { icono: 'mdi:checkbox-blank-circle-outline', titulo: 'Sin tareas', texto: 'Cuando el equipo cree tareas aparecerán aquí por estado.' } : { estado: 'cargando' };
 });
 

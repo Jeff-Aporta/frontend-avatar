@@ -14,7 +14,7 @@ Tabla de productos, movimientos, pedidos o proveedores (buscador + iswc-data-gri
   #shadow-root
     <div part="barra"><iswc-input class="buscador" type="search"> <span part="conteo"></div>
     <iswc-data-grid part="grid" pagination>
-    <av-vacio class="vacio">
+    <iswc-empty-state class="vacio">
 ```
 
 ## Atributos observados

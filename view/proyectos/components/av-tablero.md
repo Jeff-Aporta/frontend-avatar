@@ -14,7 +14,7 @@ Pinta el tablero que devuelve `proyecto/{id}/tablero`. No habla con el API: emit
   #shadow-root
     <iswc-kanban part="tablero">
       <iswc-kanban-column data-icolumna title accent badge><iswc-button class="nueva" slot="header-actions">
-        <iswc-kanban-card data-itarea heading tag tag-color data-vencida>descripción, etiquetas, <span slot="footer">vence · <av-persona compacto></span>
+        <iswc-kanban-card data-itarea heading tag tag-color data-vencida>descripción, etiquetas, <span slot="footer">vence · <iswc-person compacto></span>
 ```
 
 ## Atributos observados

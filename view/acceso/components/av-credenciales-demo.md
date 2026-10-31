@@ -12,7 +12,7 @@ Ayuda para entrar a la demo: lista de usuarios con su rol y un botón «Usar» p
 ```
 <av-credenciales-demo>
   #shadow-root
-    <iswc-card part="tarjeta"><ul part="lista"><li><av-persona> descripción <iswc-button class="usar"></li>…</ul><p class="nota"></iswc-card>
+    <iswc-card part="tarjeta"><ul part="lista"><li><iswc-person> descripción <iswc-button class="usar"></li>…</ul><p class="nota"></iswc-card>
 ```
 
 ## Atributos observados

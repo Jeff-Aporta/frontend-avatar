@@ -28,7 +28,7 @@ desde un solo lugar.
 
 ## 4. Contratos HOW STRONG
 
-- [HS-RRHH-01] Tags: `av-rrhh` (shell), `av-rrhh-grafica`, `av-asistencia-dia`, `av-rrhh-tabla`, `av-solicitudes`, `av-empleado-form`, `av-solicitud-form`; usa `av-indicadores`.
+- [HS-RRHH-01] Tags: `av-rrhh` (shell), `av-rrhh-grafica`, `av-asistencia-dia`, `av-rrhh-tabla`, `av-solicitudes`, `av-empleado-form`, `av-solicitud-form`; usa `iswc-stat-group`.
 - [HS-RRHH-02] Eventos: `av-rrhh-buscar|abrir`, `av-asistencia-fecha { fecha }`, `av-asistencia-marcar { iempleado, estado, fecha, entrada, salida }`, `av-solicitudes-filtro { filtro }`, `av-solicitud-resolver { isolicitud, accion }`, `av-solicitud-nueva { iempleado }`, `av-solicitud-guardar`, `av-empleado-guardar|eliminar`, `*-form-cerrar`, `*-form-error { mensaje }`.
 - [HS-RRHH-03] API: ops `resumenRrhh(iempresa)`, `marcarAsistencia(iempleado, { estado, fecha?, entrada?, salida? })`, `aprobar(isolicitud, {})`, `rechazar(isolicitud, {})`; controllers `empleados`, `asistencias`, `solicitudes`, `miembros`. Escritura con `avatar.rrhh`.
 

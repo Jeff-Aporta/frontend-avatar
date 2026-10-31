@@ -12,7 +12,7 @@ Contacto → propuesta → negociación → cerrado / perdido.
 ```
 <av-embudo-grafica>
   #shadow-root
-    <iswc-card part="tarjeta"><iswc-tag slot="header-actions">pipeline</iswc-tag><iswc-bar-chart part="grafica"> | <av-vacio></iswc-card>
+    <iswc-card part="tarjeta"><iswc-tag slot="header-actions">pipeline</iswc-tag><iswc-bar-chart part="grafica"> | <iswc-empty-state></iswc-card>
 ```
 
 ## Atributos observados

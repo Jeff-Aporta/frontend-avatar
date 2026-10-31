@@ -22,41 +22,6 @@ export const AvAppPropsSchema = z.object({
 });
 export type AvAppProps = z.infer<typeof AvAppPropsSchema>;
 
-/** `<av-cabecera>`: título de página, subtítulo e ícono; las acciones van en el slot `acciones`. */
-export const AvCabeceraPropsSchema = z.object({
-  titulo: z.string().default(''),
-  subtitulo: z.string().default(''),
-  icono: z.string().default(''),
-});
-export type AvCabeceraProps = z.infer<typeof AvCabeceraPropsSchema>;
-
-/** `<av-vacio>`: estado vacío / cargando / error con ícono, título y texto; acción en el slot. */
-export const AvVacioPropsSchema = z.object({
-  icono: z.string().default('mdi:inbox-outline'),
-  titulo: z.string().default('Nada por aquí'),
-  texto: z.string().default(''),
-  estado: z.enum(['vacio', 'cargando', 'error']).default('vacio'),
-  /** `caja` punteada para listas; `tarjeta` con cuerpo propio para una vista entera (sin sesión, sin permiso). */
-  variante: z.enum(['caja', 'tarjeta']).default('caja'),
-});
-export type AvVacioProps = z.infer<typeof AvVacioPropsSchema>;
-
-/** `<av-persona>`: avatar con iniciales + nombre (o id) de un usuario; `compacto` oculta el nombre. */
-export const AvPersonaPropsSchema = z.object({
-  iusuario: z.string().default(''),
-  nombre: z.string().nullable().default(null),
-  detalle: z.string().default(''),
-  compacto: z.boolean().default(false),
-});
-export type AvPersonaProps = z.infer<typeof AvPersonaPropsSchema>;
-
-/** `<av-empresa-selector>`: empresas del usuario y la activa. Emite `av-empresa-cambio { iempresa }`. */
-export const AvEmpresaSelectorPropsSchema = z.object({
-  empresas: z.array(z.object({ iempresa: z.number(), nombre: z.string(), rol: z.string() })).default([]),
-  activa: z.number().nullable().default(null),
-});
-export type AvEmpresaSelectorProps = z.infer<typeof AvEmpresaSelectorPropsSchema>;
-
 /** `<av-logo>`: logo de Avatar en SVG con los tokens de la paleta; `wordmark` agrega el nombre; `animado` hace orbitar el satélite. */
 export const AvLogoPropsSchema = z.object({
   wordmark: z.boolean().default(false),
@@ -64,7 +29,7 @@ export const AvLogoPropsSchema = z.object({
 });
 export type AvLogoProps = z.infer<typeof AvLogoPropsSchema>;
 
-/** Un indicador (KPI) de `<av-indicadores>`: lo que pinta un `iswc-stat`. */
+/** Un indicador (KPI) para `<iswc-stat-group>`: lo que devuelven los `indicadores*` de cada vista. */
 export const IndicadorSchema = z.object({
   id: z.string(),
   label: z.string(),
@@ -77,22 +42,12 @@ export const IndicadorSchema = z.object({
 });
 export type Indicador = z.infer<typeof IndicadorSchema>;
 
-/** `<av-indicadores>`: fila de KPIs (`null` = esqueletos mientras carga). */
-export const AvIndicadoresPropsSchema = z.object({ items: z.array(IndicadorSchema).nullable().default(null), esqueletos: z.number().default(4) });
-export type AvIndicadoresProps = z.infer<typeof AvIndicadoresPropsSchema>;
-
 /** `<av-escena>`: ilustración Memphis por capas (`core/escenas.ts`); `etiqueta` la vuelve informativa para lectores de pantalla. */
 export const AvEscenaPropsSchema = z.object({
   escena: z.string().default('bienvenida'),
   etiqueta: z.string().default(''),
 });
 export type AvEscenaProps = z.infer<typeof AvEscenaPropsSchema>;
-
-/** `<av-buscador>`: búsqueda global (paleta de comandos del kit con orden semántico); `permitidos` limita las vistas. */
-export const AvBuscadorPropsSchema = z.object({
-  permitidos: z.array(z.string()).default([]),
-});
-export type AvBuscadorProps = z.infer<typeof AvBuscadorPropsSchema>;
 
 /** `<av-perfil-selector>`: cambia de perfil; sin sesión guardada para ese perfil pide su PIN. */
 export const AvPerfilSelectorPropsSchema = z.object({ perfiles: z.array(PerfilPruebaSchema).default([]), activo: z.string().default('') });
@@ -104,14 +59,8 @@ export type AvPerfilesTablaProps = z.infer<typeof AvPerfilesTablaPropsSchema>;
 /** Props de los transversales, por tag (lo lee `props-registro.ts`). */
 export const APP_PROPS = {
   'av-app': AvAppPropsSchema,
-  'av-cabecera': AvCabeceraPropsSchema,
-  'av-vacio': AvVacioPropsSchema,
-  'av-persona': AvPersonaPropsSchema,
-  'av-empresa-selector': AvEmpresaSelectorPropsSchema,
   'av-logo': AvLogoPropsSchema,
-  'av-indicadores': AvIndicadoresPropsSchema,
   'av-escena': AvEscenaPropsSchema,
-  'av-buscador': AvBuscadorPropsSchema,
   'av-perfil-selector': AvPerfilSelectorPropsSchema,
   'av-perfiles-tabla': AvPerfilesTablaPropsSchema,
 } as const;

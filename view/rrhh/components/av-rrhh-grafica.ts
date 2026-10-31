@@ -20,11 +20,11 @@ const AvRrhhGrafica = crearComponente<AvRrhhGraficaProps>(
       <div class="rejilla" part="rejilla">
         <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
           <strong slot="header" class="titulo"><iswc-icon icon="mdi:chart-donut"></iswc-icon> Asistencia de hoy</strong>
-          ${asis ? html`<iswc-doughnut-chart id="asistencia" class="grafica" label="Asistencia de hoy por estado" legend-position="bottom"></iswc-doughnut-chart>` : html`<av-vacio class="vacio" data-cual="asistencia"></av-vacio>`}
+          ${asis ? html`<iswc-doughnut-chart id="asistencia" class="grafica" label="Asistencia de hoy por estado" legend-position="bottom"></iswc-doughnut-chart>` : html`<iswc-empty-state class="vacio" data-cual="asistencia"></iswc-empty-state>`}
         </iswc-card>
         <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
           <strong slot="header" class="titulo"><iswc-icon icon="mdi:office-building-outline"></iswc-icon> Plantilla por departamento</strong>
-          ${deps ? html`<iswc-bar-chart id="departamentos" class="grafica" label="Personas por departamento" legend-position="bottom"></iswc-bar-chart>` : html`<av-vacio class="vacio" data-cual="departamentos"></av-vacio>`}
+          ${deps ? html`<iswc-bar-chart id="departamentos" class="grafica" label="Personas por departamento" legend-position="bottom"></iswc-bar-chart>` : html`<iswc-empty-state class="vacio" data-cual="departamentos"></iswc-empty-state>`}
         </iswc-card>
       </div>
     `);

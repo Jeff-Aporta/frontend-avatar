@@ -261,16 +261,16 @@ const AvInventario = crearComponente<AvInventarioProps>(import.meta.url, 'av-inv
       onav-movimiento-guardar=${guardarMovimiento} onav-movimiento-form-cerrar=${cerrar('form-movimiento')} onav-movimiento-form-error=${aviso}
       onav-pedido-guardar=${guardarPedido} onav-pedido-eliminar=${eliminarPedido} onav-pedido-form-cerrar=${cerrar('form-pedido')} onav-pedido-form-error=${aviso}
       onav-proveedor-guardar=${guardarProveedor} onav-proveedor-eliminar=${eliminarProveedor} onav-proveedor-form-cerrar=${cerrar('form-proveedor')} onav-proveedor-form-error=${aviso}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirMovimiento(null, 'entrada')}><iswc-icon slot="start" icon="mdi:swap-vertical-bold"></iswc-icon>Movimiento</iswc-button>
         <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => void abrirPedido(null)}><iswc-icon slot="start" icon="mdi:truck-plus-outline"></iswc-icon>Pedido</iswc-button>
         <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirProveedor(null)}><iswc-icon slot="start" icon="mdi:factory"></iswc-icon>Proveedor</iswc-button>
         <iswc-button slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => void abrirProducto(null)}><iswc-icon slot="start" icon="mdi:package-variant-plus"></iswc-icon>Nuevo producto</iswc-button>
-      </av-cabecera>
-      ${!iempresa ? html`<av-vacio id="sin-empresa"></av-vacio>` : html`
+      </iswc-page-header>
+      ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`
         ${puedeEscribir ? null : html`<iswc-callout color="warning"><strong>Solo lectura.</strong> Tu rol no incluye el permiso de inventario (avatar.inventario): puedes consultar stock, kardex y pedidos, pero no mover stock ni editar el catálogo.</iswc-callout>`}
-        <av-indicadores id="kpis"></av-indicadores>
+        <iswc-stat-group id="kpis"></iswc-stat-group>
         <av-stock-alertas id="alertas"></av-stock-alertas>
         <iswc-tab-group active=${pestana}>
           <iswc-tab slot="nav" panel="productos"><iswc-icon slot="start" icon="mdi:package-variant-closed"></iswc-icon>Productos</iswc-tab>

@@ -57,7 +57,7 @@ const AvSolicitudes = crearComponente<AvSolicitudesProps>(import.meta.url, 'av-s
                   <iswc-popconfirm for=${`rechazar-${s.isolicitud}`} message=${`¿Rechazar la solicitud de ${s.empleado}?`} oniswc-popconfirm-confirm=${() => emitir(host, 'av-solicitud-resolver', { isolicitud: s.isolicitud, accion: 'rechazar' })}><iswc-button slot="confirm" color="danger">Sí, rechazar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>
                 </div>` : null}
             </article>`;
-        }) : html`<av-vacio class="vacio"></av-vacio>`}
+        }) : html`<iswc-empty-state class="vacio"></iswc-empty-state>`}
       </div>
     </section>
   `);

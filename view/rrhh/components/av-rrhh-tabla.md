@@ -14,7 +14,7 @@ Tabla de empleados o del historial de asistencias (buscador + iswc-data-grid); l
   #shadow-root
     <div part="barra"><iswc-input class="buscador" type="search"> <span part="conteo"></div>
     <iswc-data-grid part="grid" pagination>
-    <av-vacio class="vacio">
+    <iswc-empty-state class="vacio">
 ```
 
 ## Atributos observados

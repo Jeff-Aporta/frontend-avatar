@@ -9,6 +9,7 @@ import type { LoaderGaleria } from '../../../src/js/consts/schemas/demo.schemas.
 /** Categoría → rótulo: el orden de las claves es el del catálogo. */
 const CATEGORIAS: Record<string, string> = {
   propuestas: 'Propuestas generalizables',
+  'propuestas-ia': 'Propuesta: IA en el navegador',
   'propuestas-chat': 'Propuesta: familia del chat',
   shell: 'Armazón',
   transversal: 'Transversales',
@@ -31,6 +32,8 @@ const CATEGORIAS: Record<string, string> = {
 
 const L = (globalThis as { iswcLoader?: LoaderGaleria }).iswcLoader;
 if (!L) throw new Error('galería: falta iswcLoader');
-await L.load(...KIT_TAGS, ...tagsArranque());
+// Un tag que el kit fijado aún no publica se omite: rechazarlo dejaría toda la galería en blanco.
+const disponibles = [...KIT_TAGS, ...tagsArranque()].filter((tag) => !tag.startsWith('iswc-') || L.catalog?.tags?.[tag]);
+await L.load(...disponibles);
 const { montarGaleria } = await import(new URL('../preview/doc-demo-galeria.min.js', L.selfBase).href);
 await montarGaleria({ manifest: new URL('manifest.json', location.href), categorias: CATEGORIAS });

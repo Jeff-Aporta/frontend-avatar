@@ -14,7 +14,7 @@ Solicitudes de vacaciones, permisos y certificados en tarjetas, con filtro por e
   #shadow-root
     <section part="solicitudes">
       <div part="filtros"><iswc-button aria-pressed> <iswc-badge slot="end">×4</div> (no en compacto)
-      <div part="lista"><article part="solicitud" data-estado><div class="icono"> cuerpo <div class="acciones"><iswc-button>Aprobar <iswc-button>Rechazar <iswc-popconfirm></div></article>×N | <av-vacio></div>
+      <div part="lista"><article part="solicitud" data-estado><div class="icono"> cuerpo <div class="acciones"><iswc-button>Aprobar <iswc-button>Rechazar <iswc-popconfirm></div></article>×N | <iswc-empty-state></div>
 ```
 
 ## Atributos observados

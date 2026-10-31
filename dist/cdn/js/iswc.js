@@ -1,1 +1,1 @@
-const d="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@919db0bd128bced2f283a2c4f43a1cd98ae67df0/dist/cdn/core/loader.min.js";export{d as ISWC_LOADER_HREF};
+const c="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@42322344cbaa25967d44361c99b78c963d0f8543/dist/cdn/core/loader.min.js";export{c as ISWC_LOADER_HREF};

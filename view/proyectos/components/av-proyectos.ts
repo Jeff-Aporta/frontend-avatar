@@ -167,13 +167,13 @@ const AvProyectos = crearComponente<AvProyectosProps>(import.meta.url, 'av-proye
       onav-tarea-guardar=${alGuardarTarea} onav-tarea-form-cerrar=${() => ($('tarea-form').props = { abierto: false })} onav-tarea-form-error=${(e: Event) => avisar((e as CustomEvent<{ mensaje: string }>).detail.mensaje, 'warning')}
       onav-tarea-comentar=${alComentar} onav-tarea-editar=${alEditar} onav-tarea-eliminar=${alEliminar} onav-tarea-detalle-cerrar=${() => ($('detalle').props = { abierto: false })}
       onav-proyecto-guardar=${alGuardarProyecto} onav-proyecto-form-cerrar=${() => ($('proyecto-form').props = { abierto: false })} onav-proyecto-form-error=${(e: Event) => avisar((e as CustomEvent<{ mensaje: string }>).detail.mensaje, 'warning')}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         <iswc-select slot="acciones" id="selector" class="selector" aria-label="Proyecto" placeholder="Elige un proyecto" oniswc-change=${alElegir}></iswc-select>
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         ${puedeTareas && iproyecto ? html`<iswc-button slot="acciones" color="brand" oniswc-click=${() => ($('tarea-form').props = { abierto: true, tarea: null, icolumna: null, iproyecto, columnas, miembros, error: '' })}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nueva tarea</iswc-button>` : null}
         ${puedeGestionar ? html`<iswc-button slot="acciones" variant="outlined" color="brand" oniswc-click=${() => ($('proyecto-form').props = { abierto: true, equipos, error: '' })}><iswc-icon slot="start" icon="mdi:folder-plus-outline"></iswc-icon>Nuevo proyecto</iswc-button>` : null}
-      </av-cabecera>
-      ${!iempresa ? html`<av-vacio id="sin-empresa"></av-vacio>` : html`<av-vacio id="sin-proyectos" hidden></av-vacio><av-tablero id="tablero"></av-tablero>`}
+      </iswc-page-header>
+      ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`<iswc-empty-state id="sin-proyectos" hidden></iswc-empty-state><av-tablero id="tablero"></av-tablero>`}
       <av-tarea-form id="tarea-form"></av-tarea-form>
       <av-tarea-detalle id="detalle"></av-tarea-detalle>
       <av-proyecto-form id="proyecto-form"></av-proyecto-form>

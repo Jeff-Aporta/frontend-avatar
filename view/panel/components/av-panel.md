@@ -12,7 +12,7 @@ La primera pantalla con sesión (`#/panel`). Carga `empresa/{id}/resumen` y `not
 ```
 <av-panel>
   #shadow-root
-    <div part="pagina"><av-cabecera> <av-kpis> <div part="rejilla"><av-tareas-grafica> <av-embudo-grafica> <av-notificaciones></div></div>
+    <div part="pagina"><iswc-page-header> <av-kpis> <div part="rejilla"><av-tareas-grafica> <av-embudo-grafica> <av-notificaciones></div></div>
 ```
 
 ## Atributos observados

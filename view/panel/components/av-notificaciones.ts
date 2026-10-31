@@ -14,9 +14,9 @@ const AvNotificaciones = crearComponente<AvNotificacionesProps>(import.meta.url,
       <strong slot="header"><iswc-icon icon="mdi:bell-outline"></iswc-icon> Notificaciones ${sinLeer.length ? html`<iswc-badge color="danger" pill>${sinLeer.length}</iswc-badge>` : null}</strong>
       ${sinLeer.length ? html`<iswc-button slot="header-actions" variant="plain" color="neutral" class="leer" oniswc-click=${() => emitir(host, 'av-notificaciones-leer', { ids: [] })}>Marcar leídas</iswc-button>` : null}
       ${props.cargando
-        ? html`<av-vacio class="vacio" id="cargando"></av-vacio>`
+        ? html`<iswc-empty-state class="vacio" id="cargando"></iswc-empty-state>`
         : props.items.length === 0
-        ? html`<av-vacio class="vacio" id="vacio"></av-vacio>`
+        ? html`<iswc-empty-state class="vacio" id="vacio"></iswc-empty-state>`
         : html`<ul class="lista" part="lista">
             ${props.items.slice(0, 8).map((n) => html`
               <li class="item" data-leida=${n.leida ? '1' : '0'}>

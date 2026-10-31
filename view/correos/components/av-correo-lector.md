@@ -13,9 +13,9 @@ Panel de lectura de un correo con acciones (responder, reenviar, destacar, no le
 <av-correo-lector>
   #shadow-root
     <article part="lector">
-      <header part="cabeza"><div part="barra" role="toolbar"><iswc-button>…</div> <h2 part="asunto"> <iswc-tag>… <div part="meta"><av-persona> <iswc-relative-time></div> <dl class="para"></header>
+      <header part="cabeza"><div part="barra" role="toolbar"><iswc-button>…</div> <h2 part="asunto"> <iswc-tag>… <div part="meta"><iswc-person> <iswc-relative-time></div> <dl class="para"></header>
       <div part="cuerpo"> <section part="relacionados"> (si hay) <iswc-callout> (sin permiso)
-    | <av-vacio> (sin correo)
+    | <iswc-empty-state> (sin correo)
 ```
 
 ## Atributos observados

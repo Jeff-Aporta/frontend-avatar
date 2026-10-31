@@ -12,7 +12,7 @@ Pestaña Miembros de la organización. Orden: propietario, admin, miembro, invit
 ```
 <av-miembros>
   #shadow-root
-    <iswc-card part="tarjeta"><iswc-button id="invitar" slot="header-actions"><ul part="lista"><li class="fila"><av-persona> <iswc-tag> cargo <iswc-button class="quitar"> + <iswc-popconfirm></li>…</ul> | <av-vacio></iswc-card>
+    <iswc-card part="tarjeta"><iswc-button id="invitar" slot="header-actions"><ul part="lista"><li class="fila"><iswc-person> <iswc-tag> cargo <iswc-button class="quitar"> + <iswc-popconfirm></li>…</ul> | <iswc-empty-state></iswc-card>
 ```
 
 ## Atributos observados

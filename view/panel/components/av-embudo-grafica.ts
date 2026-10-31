@@ -14,10 +14,10 @@ const AvEmbudoGrafica = crearComponente<AvEmbudoGraficaProps>(import.meta.url, '
       ${c ? html`<iswc-tag slot="header-actions" color="success">${moneda(c.valor_pipeline)}</iswc-tag>` : null}
       ${config && c && c.total > 0
         ? html`<iswc-bar-chart class="grafica" part="grafica" label="Clientes por etapa" without-legend>${raw(`<script type="application/json">${JSON.stringify(config).replace(/</g, '\\u003c')}</script>`)}</iswc-bar-chart>`
-        : html`<av-vacio class="vacio"></av-vacio>`}
+        : html`<iswc-empty-state class="vacio"></iswc-empty-state>`}
     </iswc-card>
   `);
-  const vacio = root.querySelector('av-vacio') as (HTMLElement & { props: Record<string, unknown> }) | null;
+  const vacio = root.querySelector('iswc-empty-state') as (HTMLElement & { props: Record<string, unknown> }) | null;
   if (vacio) vacio.props = c ? { icono: 'mdi:account-heart-outline', titulo: 'Sin clientes', texto: 'Registra clientes en el CRM para ver el embudo.' } : { estado: 'cargando' };
 });
 

@@ -12,26 +12,6 @@
     "file": "../../src/js/components/av/av-escena.json"
   },
   {
-    "tag": "av-buscador",
-    "file": "../../src/js/components/av/av-buscador.json"
-  },
-  {
-    "tag": "av-cabecera",
-    "file": "../../src/js/components/av/av-cabecera.json"
-  },
-  {
-    "tag": "av-vacio",
-    "file": "../../src/js/components/av/av-vacio.json"
-  },
-  {
-    "tag": "av-persona",
-    "file": "../../src/js/components/av/av-persona.json"
-  },
-  {
-    "tag": "av-empresa-selector",
-    "file": "../../src/js/components/av/av-empresa-selector.json"
-  },
-  {
     "tag": "av-hero",
     "file": "../inicio/components/av-hero.json"
   },
@@ -248,10 +228,6 @@
     "file": "../admin/components/av-admin.json"
   },
   {
-    "tag": "av-indicadores",
-    "file": "../../src/js/components/av/av-indicadores.json"
-  },
-  {
     "tag": "av-correo-carpetas",
     "file": "../correos/components/av-correo-carpetas.json"
   },
@@ -350,30 +326,6 @@
   {
     "tag": "av-rrhh",
     "file": "../rrhh/components/av-rrhh.json"
-  },
-  {
-    "tag": "av-paty-cargando",
-    "file": "../../src/js/components/paty/av-paty-cargando.json"
-  },
-  {
-    "tag": "av-paty-process",
-    "file": "../../src/js/components/paty/av-paty-process.json"
-  },
-  {
-    "tag": "av-paty-traza",
-    "file": "../../src/js/components/paty/av-paty-traza.json"
-  },
-  {
-    "tag": "av-paty-pagination",
-    "file": "../../src/js/components/paty/av-paty-pagination.json"
-  },
-  {
-    "tag": "av-paty-chat-bubble",
-    "file": "../../src/js/components/paty/av-paty-chat-bubble.json"
-  },
-  {
-    "tag": "av-paty-json-dialog",
-    "file": "../../src/js/components/paty/av-paty-json-dialog.json"
   },
   {
     "tag": "av-perfil-selector",

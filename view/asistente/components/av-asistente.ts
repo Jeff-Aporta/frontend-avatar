@@ -55,14 +55,14 @@ const AvAsistente = crearComponente<AvAsistenteProps>(
     const sugerencias = props.sugerencias.length ? props.sugerencias : SUGERENCIAS_INICIALES;
     root.append(html`
       <div class="pagina" part="pagina">
-        <av-cabecera id="cabecera"></av-cabecera>
+        <iswc-page-header id="cabecera"></iswc-page-header>
         ${props.error ? html`<iswc-callout tone="danger"><strong slot="title">AVO no pudo responder</strong>${props.error}</iswc-callout>` : null}
         <section class="chat" part="chat">
           <div class="turnos" id="turnos" part="turnos">
             ${props.cargando
-              ? html`<av-vacio id="cargando"></av-vacio>`
+              ? html`<iswc-empty-state id="cargando"></iswc-empty-state>`
               : props.turnos.length === 0
-              ? html`<av-vacio id="bienvenida"></av-vacio>`
+              ? html`<iswc-empty-state id="bienvenida"></iswc-empty-state>`
               : props.turnos.map((t) => {
                 const el = document.createElement('av-avo-mensaje') as ConProps;
                 el.props = { turno: t, nombre };

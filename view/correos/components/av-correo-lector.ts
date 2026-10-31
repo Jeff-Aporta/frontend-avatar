@@ -14,7 +14,7 @@ type ConProps = HTMLElement & { props: Record<string, unknown> };
 const AvCorreoLector = crearComponente<AvCorreoLectorProps>(import.meta.url, 'av-correo-lector', { correo: null, nombres: {}, puedeMarcar: false, relacionados: [] }, (root, props, host) => {
   const c = props.correo;
   if (!c) {
-    root.append(html`<div class="nada" part="nada"><av-vacio id="vacio"></av-vacio></div>`);
+    root.append(html`<div class="nada" part="nada"><iswc-empty-state id="vacio"></iswc-empty-state></div>`);
     (root.querySelector('#vacio') as ConProps).props = { icono: 'mdi:email-open-outline', titulo: 'Elige un correo', texto: 'Ábrelo desde la lista para leerlo y responder.' };
     return;
   }
@@ -37,7 +37,7 @@ const AvCorreoLector = crearComponente<AvCorreoLectorProps>(import.meta.url, 'av
         <h2 class="asunto" part="asunto">${c.asunto}</h2>
         ${c.etiquetas.length ? html`<div class="etiquetas">${c.etiquetas.map((t) => html`<iswc-tag color=${t === 'urgente' ? 'danger' : 'brand'} variant="outlined" pill>${t}</iswc-tag>`)}</div>` : null}
         <div class="meta" part="meta">
-          <av-persona id="remitente"></av-persona>
+          <iswc-person id="remitente"></iswc-person>
           <iswc-relative-time class="hora" date=${c.creado}></iswc-relative-time>
         </div>
         <dl class="para">
@@ -54,7 +54,7 @@ const AvCorreoLector = crearComponente<AvCorreoLectorProps>(import.meta.url, 'av
       ${ro ? html`<iswc-callout color="brand" class="aviso">Tu rol no tiene permiso de correo (avatar.correo): puedes leer, pero no responder ni ordenar el buzón.</iswc-callout>` : null}
     </article>
   `);
-  (root.querySelector('#remitente') as ConProps).props = { iusuario: c.remitente, nombre: props.nombres[c.remitente] ?? null, detalle: `<${c.remitente}>` };
+  (root.querySelector('#remitente') as ConProps).props = { usuario: c.remitente, nombre: props.nombres[c.remitente] ?? null, detalle: `<${c.remitente}>` };
 });
 
 define('av-correo-lector', AvCorreoLector);

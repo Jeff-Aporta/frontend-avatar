@@ -23,6 +23,15 @@
   --av-degradado-marca: linear-gradient(120deg, var(--iswc-color-brand-stronger), var(--iswc-accent) 55%, var(--iswc-color-contrast, var(--iswc-color-brand-pale)));
   --av-sombra-tarjeta: 0 1px 0 rgb(255 255 255 / 4%), 0 0.625em 1.875em color-mix(in srgb, var(--iswc-accent) 12%, rgb(0 0 0 / 10%));
   --av-radio: 0.9em;
+  /* El aire de Avatar en los componentes del kit. */
+  --iswc-page-header-title-font: var(--av-font-titulo);
+  --iswc-stat-group-radius: var(--av-radio);
+  --iswc-stat-group-border: var(--av-borde-seccion);
+  --iswc-stat-group-tint: linear-gradient(160deg, var(--av-velo-fuerte), transparent 60%);
+  --iswc-stat-group-shadow: var(--av-sombra-tarjeta);
+  --iswc-stat-group-value-font: var(--av-font-impacto);
+  --iswc-stat-group-value-spacing: 0.04em;
+  --iswc-stat-group-value-glow: var(--av-neon-texto);
 }
 
 /* Las figuras del banner apenas se insinúan en claro; en oscuro pueden verse más. */

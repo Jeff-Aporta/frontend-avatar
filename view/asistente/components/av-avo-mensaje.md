@@ -12,7 +12,7 @@ Un turno de la conversación con el asistente.
 ```
 <av-avo-mensaje>
   #shadow-root
-    <article part="turno" data-quien="yo|avo"><span part="avatar"> | <av-persona> <div part="burbuja"><p> <iswc-relative-time></div></article>
+    <article part="turno" data-quien="yo|avo"><span part="avatar"> | <iswc-person> <div part="burbuja"><p> <iswc-relative-time></div></article>
 ```
 
 ## Atributos observados

@@ -15,13 +15,13 @@ const AvMiembros = crearComponente<AvMiembrosProps>(import.meta.url, 'av-miembro
       <strong slot="header"><iswc-icon icon="mdi:account-group-outline"></iswc-icon> Miembros <iswc-badge color="neutral" pill>${lista.length}</iswc-badge></strong>
       ${props.puedeGestionar ? html`<iswc-button slot="header-actions" color="brand" id="invitar" oniswc-click=${() => emitir(host, 'av-miembros-invitar', {})}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Invitar</iswc-button>` : null}
       ${props.cargando
-        ? html`<av-vacio id="cargando"></av-vacio>`
+        ? html`<iswc-empty-state id="cargando"></iswc-empty-state>`
         : lista.length === 0
-        ? html`<av-vacio id="vacio"></av-vacio>`
+        ? html`<iswc-empty-state id="vacio"></iswc-empty-state>`
         : html`<ul class="lista" part="lista">
             ${lista.map((m, i) => html`
               <li class="fila" data-iusuario=${m.iusuario}>
-                <av-persona class="persona"></av-persona>
+                <iswc-person class="persona"></iswc-person>
                 <iswc-tag color=${colorRol(m.rol)} pill>${etiquetaRol(m.rol)}</iswc-tag>
                 <span class="cargo">${m.cargo ?? ''}</span>
                 ${props.puedeGestionar && m.rol !== 'propietario'
@@ -36,10 +36,10 @@ const AvMiembros = crearComponente<AvMiembrosProps>(import.meta.url, 'av-miembro
           </ul>`}
     </iswc-card>
   `);
-  const personas = root.querySelectorAll<ConProps>('av-persona');
+  const personas = root.querySelectorAll<ConProps>('iswc-person');
   lista.forEach((m, i) => {
     const p = personas[i];
-    if (p) p.props = { iusuario: m.iusuario, nombre: m.usuario?.nombre ?? null, detalle: m.usuario?.email ?? m.iusuario };
+    if (p) p.props = { usuario: m.iusuario, nombre: m.usuario?.nombre ?? null, detalle: m.usuario?.email ?? m.iusuario };
   });
   const cargando = root.querySelector('#cargando') as ConProps | null;
   if (cargando) cargando.props = { estado: 'cargando' };

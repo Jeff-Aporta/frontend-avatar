@@ -246,14 +246,14 @@ const AvRrhh = crearComponente<AvRrhhProps>(import.meta.url, 'av-rrhh', { id: nu
       onav-solicitud-resolver=${resolver} onav-solicitud-nueva=${(e: Event) => abrirSolicitud((e as Detalle<{ iempleado: number }>).detail.iempleado)}
       onav-solicitud-guardar=${guardarSolicitud} onav-solicitud-form-cerrar=${() => ($('form-solicitud').props = { abierto: false })} onav-solicitud-form-error=${aviso}
       onav-empleado-guardar=${guardarEmpleado} onav-empleado-eliminar=${eliminarEmpleado} onav-empleado-form-cerrar=${() => ($('form-empleado').props = { abierto: false })} onav-empleado-form-error=${aviso}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirSolicitud(null)}><iswc-icon slot="start" icon="mdi:calendar-plus"></iswc-icon>Nueva solicitud</iswc-button>
         <iswc-button slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirEmpleado(null)}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo empleado</iswc-button>
-      </av-cabecera>
-      ${!iempresa ? html`<av-vacio id="sin-empresa"></av-vacio>` : html`
+      </iswc-page-header>
+      ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`
         ${puedeEscribir ? null : html`<iswc-callout color="warning"><strong>Solo lectura.</strong> Tu rol no incluye el permiso de recursos humanos (avatar.rrhh): puedes consultar la plantilla, la asistencia y las solicitudes, pero no marcar asistencia, registrar o aprobar solicitudes ni editar empleados.</iswc-callout>`}
-        <av-indicadores id="kpis"></av-indicadores>
+        <iswc-stat-group id="kpis"></iswc-stat-group>
         <iswc-tab-group active=${pestana}>
           <iswc-tab slot="nav" panel="general"><iswc-icon slot="start" icon="mdi:view-dashboard-variant-outline"></iswc-icon>General</iswc-tab>
           <iswc-tab slot="nav" panel="empleados"><iswc-icon slot="start" icon="mdi:account-group-outline"></iswc-icon>Empleados</iswc-tab>

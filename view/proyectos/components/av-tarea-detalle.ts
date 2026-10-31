@@ -39,7 +39,7 @@ const AvTareaDetalle = crearComponente<AvTareaDetalleProps>(
                 ${etiquetasDe(t.etiquetas).map((e) => html`<iswc-tag color="neutral" variant="outlined">${e}</iswc-tag>`)}
               </div>
               <dl class="datos">
-                <dt>Asignado</dt><dd>${t.asignado_a ? html`<av-persona id="asignado"></av-persona>` : 'Sin asignar'}</dd>
+                <dt>Asignado</dt><dd>${t.asignado_a ? html`<iswc-person id="asignado"></iswc-person>` : 'Sin asignar'}</dd>
                 <dt>Creado por</dt><dd>${t.creado_por ?? '—'}</dd>
               </dl>
               <p class="descripcion">${t.descripcion || 'Sin descripción.'}</p>
@@ -48,7 +48,7 @@ const AvTareaDetalle = crearComponente<AvTareaDetalleProps>(
               ${props.comentarios.length === 0 ? html`<p class="vacio">Nadie ha comentado todavía.</p>` : html`<ul class="comentarios" part="comentarios">
                 ${props.comentarios.map((c) => html`
                   <li class="comentario">
-                    <av-persona class="autor" data-iusuario=${c.iusuario} data-nombre=${c.autor?.nombre ?? ''}></av-persona>
+                    <iswc-person class="autor" data-iusuario=${c.iusuario} data-nombre=${c.autor?.nombre ?? ''}></iswc-person>
                     <p class="texto">${c.contenido}</p>
                     ${c.creado ? html`<iswc-relative-time class="cuando" date=${typeof c.creado === 'string' ? c.creado : c.creado.toISOString()} format="short"></iswc-relative-time>` : null}
                   </li>
@@ -59,12 +59,12 @@ const AvTareaDetalle = crearComponente<AvTareaDetalleProps>(
             ${props.puedeEditar ? html`<iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${() => emitir(host, 'av-tarea-editar', { itarea: t.itarea })}><iswc-icon slot="start" icon="mdi:pencil-outline"></iswc-icon>Editar</iswc-button>` : null}
             ${props.puedeEliminar ? html`<iswc-button slot="footer" id="eliminar" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar esta tarea y sus comentarios?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-tarea-eliminar', { itarea: t.itarea })}><iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
           `
-          : html`<av-vacio id="sin"></av-vacio>`}
+          : html`<iswc-empty-state id="sin"></iswc-empty-state>`}
       </iswc-drawer>
     `);
     const asignado = root.querySelector('#asignado') as ConProps | null;
-    if (asignado && t) asignado.props = { iusuario: t.asignado_a, nombre: t.asignado?.nombre ?? null };
-    for (const p of root.querySelectorAll<ConProps>('.autor')) p.props = { iusuario: p.dataset['iusuario'], nombre: p.dataset['nombre'] || null };
+    if (asignado && t) asignado.props = { usuario: t.asignado_a, nombre: t.asignado?.nombre ?? null };
+    for (const p of root.querySelectorAll<ConProps>('.autor')) p.props = { usuario: p.dataset['iusuario'], nombre: p.dataset['nombre'] || null };
     const sin = root.querySelector('#sin') as ConProps | null;
     if (sin) sin.props = { estado: 'cargando' };
   },

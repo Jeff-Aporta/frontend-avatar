@@ -1,12 +1,12 @@
-import{crearComponente as u,define as m,html as o}from"../../../js/base/componente.js?v=zohalw";import{nombreMes as d,serieCategorias as i,serieComparativa as l}from"../utils/finanzas.js?v=ct4umv";const f=u(import.meta.url,"av-finanzas-grafica",{resumen:null},(r,c)=>{const a=c.resumen,s=a?i(a):null;r.append(o`
+import{crearComponente as m,define as u,html as e}from"../../../js/base/componente.js?v=p6quri";import{nombreMes as d,serieCategorias as i,serieComparativa as l}from"../utils/finanzas.js?v=ct4umv";const f=m(import.meta.url,"av-finanzas-grafica",{resumen:null},(r,o)=>{const a=o.resumen,s=a?i(a):null;r.append(e`
       <div class="rejilla" part="rejilla">
         <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
           <strong slot="header" class="titulo"><iswc-icon icon="mdi:chart-bar"></iswc-icon> Mes contra mes <span class="mes">${a?d(a.mes):""}</span></strong>
-          ${a?o`<iswc-bar-chart id="barras" class="grafica" label="Ingresos, gastos y beneficio: mes anterior contra el actual" legend-position="bottom"></iswc-bar-chart>`:o`<av-vacio class="vacio"></av-vacio>`}
+          ${a?e`<iswc-bar-chart id="barras" class="grafica" label="Ingresos, gastos y beneficio: mes anterior contra el actual" legend-position="bottom"></iswc-bar-chart>`:e`<iswc-empty-state class="vacio"></iswc-empty-state>`}
         </iswc-card>
         <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
           <strong slot="header" class="titulo"><iswc-icon icon="mdi:chart-donut"></iswc-icon> Gastos por categoría</strong>
-          ${s?o`<iswc-doughnut-chart id="dona" class="grafica" label="Gastos del mes por categoría" legend-position="bottom"></iswc-doughnut-chart>`:o`<av-vacio class="vacio"></av-vacio>`}
+          ${s?e`<iswc-doughnut-chart id="dona" class="grafica" label="Gastos del mes por categoría" legend-position="bottom"></iswc-doughnut-chart>`:e`<iswc-empty-state class="vacio"></iswc-empty-state>`}
         </iswc-card>
       </div>
-    `),a&&(r.querySelector("#barras").config=l(a)),s&&(r.querySelector("#dona").config=s);for(const e of r.querySelectorAll(".vacio"))e.props=a?{icono:"mdi:chart-donut",titulo:"Sin gastos este mes",texto:"Cuando registres gastos ver\xE1s aqu\xED su reparto."}:{estado:"cargando"}},(r,c,a)=>{const s=c.resumen,e=r.querySelector("#barras"),n=r.querySelector("#dona"),t=s?i(s):null;return!s||!a.resumen||!e||!!n!=!!t||s.mes!==a.resumen.mes?!1:(e.config=l(s),n&&t&&(n.config=t),!0)});m("av-finanzas-grafica",f);
+    `),a&&(r.querySelector("#barras").config=l(a)),s&&(r.querySelector("#dona").config=s);for(const t of r.querySelectorAll(".vacio"))t.props=a?{icono:"mdi:chart-donut",titulo:"Sin gastos este mes",texto:"Cuando registres gastos ver\xE1s aqu\xED su reparto."}:{estado:"cargando"}},(r,o,a)=>{const s=o.resumen,t=r.querySelector("#barras"),c=r.querySelector("#dona"),n=s?i(s):null;return!s||!a.resumen||!t||!!c!=!!n||s.mes!==a.resumen.mes?!1:(t.config=l(s),c&&n&&(c.config=n),!0)});u("av-finanzas-grafica",f);

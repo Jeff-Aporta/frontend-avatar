@@ -226,10 +226,10 @@ const AvAdmin = crearComponente<AvAdminProps>(import.meta.url, 'av-admin', { id:
       onav-usuario-editar=${editarUsuario} onav-usuario-eliminar=${eliminarUsuario} onav-usuario-rol=${cambiarRol}
       onav-usuario-guardar=${guardarUsuario} onav-usuario-cerrar=${() => (q<ConProps>('#usuario-form')!.props = { abierto: false })}
       onav-almacenamiento-guardar=${guardarAlmacenamiento} onav-rol-crear=${crearRol} onav-accion-poner=${ponerAccion} onav-accion-quitar=${quitarAccion}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${() => (h.props = { version: (props.version ?? 0) + 1 })}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
-      </av-cabecera>
-      ${admin ? null : html`<av-vacio id="sin-permiso"></av-vacio>`}
+      </iswc-page-header>
+      ${admin ? null : html`<iswc-empty-state id="sin-permiso"></iswc-empty-state>`}
       <iswc-tab-group active=${pestanaInicial} oniswc-tab-show=${cambiarPestana}>
         ${admin ? html`<iswc-tab slot="nav" panel="usuarios"><iswc-icon slot="start" icon="mdi:account-multiple-outline"></iswc-icon>Usuarios</iswc-tab>
           <iswc-tab slot="nav" panel="roles"><iswc-icon slot="start" icon="mdi:shield-key-outline"></iswc-icon>Roles y permisos</iswc-tab>

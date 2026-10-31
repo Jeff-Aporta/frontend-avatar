@@ -14,7 +14,7 @@ DER (`tareas`, `comentarios`, `proyectos`, `columnas`).
 ```
 <av-proyectos>
   #shadow-root
-    <div part="pagina"><av-cabecera><iswc-select id="selector" slot="acciones"> botones</av-cabecera> <av-vacio id="sin-proyectos"> <av-tablero id="tablero"> <av-tarea-form> <av-tarea-detalle> <av-proyecto-form></div>
+    <div part="pagina"><iswc-page-header><iswc-select id="selector" slot="acciones"> botones</iswc-page-header> <iswc-empty-state id="sin-proyectos"> <av-tablero id="tablero"> <av-tarea-form> <av-tarea-detalle> <av-proyecto-form></div>
 ```
 
 ## Atributos observados

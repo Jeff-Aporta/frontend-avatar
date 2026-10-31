@@ -1,4 +1,4 @@
-// @vendor iswc-root@a1df39adb9e421de874dd624901b72daa9e25e5c dist/cdn/build/stamp-hashes.ts
+// @vendor iswc-root@42322344cbaa25967d44361c99b78c963d0f8543 dist/cdn/build/stamp-hashes.ts
 // No editar: se cambia en el kit y se descarga con `deno task vendor:iswc`.
 /**
  * Sella `?v=` en los import relativos y devuelve el mapa de hashes.

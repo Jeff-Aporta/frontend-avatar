@@ -5,14 +5,14 @@ description: Tabla de clientes del CRM (iswc-data-grid) con búsqueda rápida y 
 
 # `<av-clientes-grid>`
 
-Lista los clientes filtrados. Sin filas muestra `av-vacio`.
+Lista los clientes filtrados. Sin filas muestra `iswc-empty-state`.
 
 ## Anatomía
 
 ```
 <av-clientes-grid>
   #shadow-root
-    <iswc-data-grid id="grid" part="grid" quick-filter show-toolbar pagination> | <av-vacio>
+    <iswc-data-grid id="grid" part="grid" quick-filter show-toolbar pagination> | <iswc-empty-state>
 ```
 
 ## Atributos observados

@@ -12,7 +12,7 @@ const AvCredencialesDemo = crearComponente<AvCredencialesDemoProps>(import.meta.
       <ul class="lista" part="lista">
         ${props.items.map((c) => html`
           <li class="fila">
-            <av-persona class="persona"></av-persona>
+            <iswc-person class="persona"></iswc-person>
             <span class="descripcion">${c.descripcion} PIN <code>${c.password}</code></span>
             <iswc-button variant="outlined" color="neutral" class="usar" data-usuario=${c.usuario} oniswc-click=${() => emitir(host, 'av-credencial-elegida', { usuario: c.usuario, password: c.password })}>Usar</iswc-button>
           </li>
@@ -21,10 +21,10 @@ const AvCredencialesDemo = crearComponente<AvCredencialesDemoProps>(import.meta.
       <p class="nota">Cada cuenta entra con su PIN de 4 dígitos.</p>
     </iswc-card>
   `);
-  const personas = root.querySelectorAll<HTMLElement & { props: Record<string, unknown> }>('av-persona');
+  const personas = root.querySelectorAll<HTMLElement & { props: Record<string, unknown> }>('iswc-person');
   props.items.forEach((c, i) => {
     const p = personas[i];
-    if (p) p.props = { iusuario: c.usuario, nombre: c.usuario, detalle: c.rol };
+    if (p) p.props = { usuario: c.usuario, nombre: c.usuario, detalle: c.rol };
   });
 });
 

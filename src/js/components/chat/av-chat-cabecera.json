@@ -42,7 +42,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de av-chat-mensajes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Como cabecera de página: av-cabecera.</iswc-callout>"
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de av-chat-mensajes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Como cabecera de página: iswc-page-header.</iswc-callout>"
         },
         {
           "kind": "html",

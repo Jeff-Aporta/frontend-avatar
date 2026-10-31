@@ -14,7 +14,7 @@ usuario como propietario y la deja activa.
 ```
 <av-organizacion>
   #shadow-root
-    <div part="pagina"><av-cabecera> <iswc-tab-group><iswc-tab-panel name="empresa"><iswc-card id="ficha"><dl class="datos"></iswc-card></iswc-tab-panel><iswc-tab-panel name="miembros"><av-miembros></iswc-tab-panel><iswc-tab-panel name="equipos"><av-equipos></iswc-tab-panel></iswc-tab-group> <av-empresa-form> <av-invitar-form></div>
+    <div part="pagina"><iswc-page-header> <iswc-tab-group><iswc-tab-panel name="empresa"><iswc-card id="ficha"><dl class="datos"></iswc-card></iswc-tab-panel><iswc-tab-panel name="miembros"><av-miembros></iswc-tab-panel><iswc-tab-panel name="equipos"><av-equipos></iswc-tab-panel></iswc-tab-group> <av-empresa-form> <av-invitar-form></div>
 ```
 
 ## Atributos observados

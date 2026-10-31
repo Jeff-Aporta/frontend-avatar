@@ -211,12 +211,12 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
       onav-empresa-guardar=${guardarEmpresa} onav-empresa-cerrar=${() => (q<ConProps>('#empresa-form')!.props = { abierto: false })}
       onav-miembros-invitar=${abrirInvitar} onav-invitar-guardar=${invitar} onav-invitar-cerrar=${() => (q<ConProps>('#invitar-form')!.props = { abierto: false })} onav-miembro-quitar=${quitarMiembro}
       onav-equipo-guardar=${guardarEquipo} onav-equipo-eliminar=${eliminarEquipo} onav-integrante-agregar=${agregarIntegrante} onav-integrante-quitar=${quitarIntegrante}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         ${gestiona ? html`<iswc-button slot="acciones" variant="outlined" color="neutral" id="nueva-empresa" oniswc-click=${() => abrirEmpresa({ iempresa: null, nombre: '', nit: '', sector: '', descripcion: '' })}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nueva empresa</iswc-button>` : null}
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
-      </av-cabecera>
+      </iswc-page-header>
       ${!iempresa
-        ? html`<av-vacio id="sin-empresa">${gestiona ? html`<iswc-button color="brand" oniswc-click=${() => abrirEmpresa({ iempresa: null, nombre: '', nit: '', sector: '', descripcion: '' })}>Crear mi empresa</iswc-button>` : null}</av-vacio>`
+        ? html`<iswc-empty-state id="sin-empresa">${gestiona ? html`<iswc-button color="brand" oniswc-click=${() => abrirEmpresa({ iempresa: null, nombre: '', nit: '', sector: '', descripcion: '' })}>Crear mi empresa</iswc-button>` : null}</iswc-empty-state>`
         : html`
           <iswc-tab-group active=${props.pestana} oniswc-tab-show=${cambiarPestana}>
             <iswc-tab slot="nav" panel="empresa"><iswc-icon slot="start" icon="mdi:domain"></iswc-icon>Empresa</iswc-tab>
@@ -232,7 +232,7 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
                   <dt>Descripción</dt><dd id="e-descripcion"></dd>
                 </dl>
               </iswc-card>
-              <av-vacio id="ficha-vacia"></av-vacio>
+              <iswc-empty-state id="ficha-vacia"></iswc-empty-state>
             </iswc-tab-panel>
             <iswc-tab-panel name="miembros"><av-miembros id="miembros"></av-miembros></iswc-tab-panel>
             <iswc-tab-panel name="equipos"><av-equipos id="equipos"></av-equipos></iswc-tab-panel>

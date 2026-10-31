@@ -30,7 +30,7 @@ clientes del CRM y convierte montos entre COP, USD, MXN y EUR con las tasas de l
 
 ## 4. Contratos HOW STRONG
 
-- [HS-FIN-01] Tags: `av-finanzas` (shell), `av-finanzas-grafica`, `av-conversor`, `av-finanzas-tabla`, `av-transaccion-form`, `av-factura-form`; usa `av-indicadores`.
+- [HS-FIN-01] Tags: `av-finanzas` (shell), `av-finanzas-grafica`, `av-conversor`, `av-finanzas-tabla`, `av-transaccion-form`, `av-factura-form`; usa `iswc-stat-group`.
 - [HS-FIN-02] Eventos: `av-finanzas-buscar { entidad, texto }`, `av-finanzas-abrir { entidad, id }`, `av-finanzas-accion { entidad, accion: 'emitir' | 'pagar', id }`, `av-conversor-convertir { monto, de, a }`, `av-transaccion-guardar|eliminar`, `av-factura-guardar|eliminar`, `*-form-cerrar`, `*-form-error { mensaje }`.
 - [HS-FIN-03] API: ops `resumenFinanzas(iempresa)`, `convertir({ iempresa, monto, de, a })`, `emitir(ifactura, {})`, `pagar(ifactura, {})`; controllers `transacciones`, `facturas`, `tasas`, `clientes`. Escritura con `avatar.finanzas`.
 

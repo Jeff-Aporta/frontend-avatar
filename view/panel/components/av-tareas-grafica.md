@@ -12,7 +12,7 @@ Abiertas / en progreso / en revisión / cerradas, en una dona del kit.
 ```
 <av-tareas-grafica>
   #shadow-root
-    <iswc-card part="tarjeta"><iswc-doughnut-chart part="grafica"><script type="application/json"> | <av-vacio></iswc-card>
+    <iswc-card part="tarjeta"><iswc-doughnut-chart part="grafica"><script type="application/json"> | <iswc-empty-state></iswc-card>
 ```
 
 ## Atributos observados

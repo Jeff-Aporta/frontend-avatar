@@ -92,11 +92,11 @@ const AvCrm = crearComponente<AvCrmProps>(import.meta.url, 'av-crm', { id: null,
       onav-cliente-guardar=${alGuardar} onav-cliente-eliminar=${alEliminar}
       onav-cliente-form-cerrar=${() => { $('form').props = { abierto: false }; if (props.id) ir('crm'); }}
       onav-cliente-form-error=${(e: Event) => avisar((e as CustomEvent<{ mensaje: string }>).detail.mensaje, 'warning')}>
-      <av-cabecera id="cabecera">
+      <iswc-page-header id="cabecera">
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${() => (h.props = { version: (props.version ?? 0) + 1 })}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         ${puedeEscribir ? html`<iswc-button slot="acciones" color="brand" oniswc-click=${() => abrir(null)}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo cliente</iswc-button>` : null}
-      </av-cabecera>
-      ${iempresa ? html`<av-embudo id="embudo"></av-embudo><av-clientes-grid id="grid"></av-clientes-grid>` : html`<av-vacio id="sin-empresa"></av-vacio>`}
+      </iswc-page-header>
+      ${iempresa ? html`<av-embudo id="embudo"></av-embudo><av-clientes-grid id="grid"></av-clientes-grid>` : html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>`}
       <av-cliente-form id="form"></av-cliente-form>
     </div>
   `);

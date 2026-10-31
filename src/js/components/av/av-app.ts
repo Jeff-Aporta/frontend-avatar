@@ -14,14 +14,14 @@
 import { avisar, crearComponente, define, html } from '../../base/componente.js';
 import type { AvAppProps, Ruta } from '../../consts/schemas/componentes.schemas.js';
 import { cargarPerfil, cerrarSesion, conectar, iniciarSesion, mensajeDe, perfilesPrueba } from '../../core/api.js';
-import { alCambiar, empresaActiva, estado, haySesion } from '../../core/estado.js';
+import { conectarBuscador } from '../../core/buscador.js';
+import { alCambiar, empresaActiva, estado, fijar, haySesion } from '../../core/estado.js';
 import { ACCION, puede, rolDe } from '../../core/permisos.js';
 import { destinoTrasAcceso, escuchar, ir, recordarDestino, resolver, rutaActual, VISTA_SESION, VISTAS_PRIVADAS } from '../../core/router.js';
 import { MODULOS, type Modulo } from '../../consts/comandos.js';
 import { COLUMNAS_PIE } from '../../consts/paginas.js';
 import { PAGINAS } from '../../consts/paginas.js';
 import { tagsDeVista, VIEW_TAGS } from '../../kit-tags.js';
-import './av-empresa-selector.js';
 import './av-perfil-selector.js';
 import './av-perfiles-tabla.js';
 
@@ -77,6 +77,12 @@ function precargarEnReposo(vistas: string[]): void {
 }
 
 /** El shell de una vista, con esqueleto mientras su tag no está definido (carga perezosa). */
+/** Empresas del usuario para `<iswc-tenant-selector>`. */
+function propsSelector(): Record<string, unknown> {
+  const opciones = (estado.yo?.empresas ?? []).map((e) => ({ id: e.iempresa, nombre: e.nombre }));
+  return { opciones, activa: empresaActiva(), etiqueta: 'Empresa activa', sinOpciones: 'Sin empresa' };
+}
+
 function montarVista(vista: string, id: string | null, conSesion: boolean): DocumentFragment {
   const tag = SHELLS[vista] ?? SHELLS['inicio']!;
   void cargarVista(vista);
@@ -87,7 +93,7 @@ function montarVista(vista: string, id: string | null, conSesion: boolean): Docu
   const frag = document.createDocumentFragment();
   frag.append(shell);
   if (!customElements.get(tag)) {
-    const esqueleto = document.createElement('av-vacio') as ConProps;
+    const esqueleto = document.createElement('iswc-empty-state') as ConProps;
     esqueleto.props = { estado: 'cargando' };
     esqueleto.classList.add('esqueleto');
     frag.append(esqueleto);
@@ -251,8 +257,8 @@ const AvApp = crearComponente<AvAppProps>(
     root.append(html`
       <iswc-doc-layout class="privada" storage-key="avatar-app" toc="off" hide-end start-width="260">
         <a slot="brand" class="marca" href=${raizSitio()} aria-label="Avatar, ir al inicio"><av-logo wordmark animado></av-logo></a>
-        <av-buscador slot="actions"></av-buscador>
-        <av-empresa-selector slot="actions"></av-empresa-selector>
+        <iswc-semantic-search slot="actions"></iswc-semantic-search>
+        <iswc-tenant-selector slot="actions"></iswc-tenant-selector>
         <av-perfil-selector slot="actions" id="perfil"></av-perfil-selector>
         ${sesionMenu(true)}
         <iswc-doc-index slot="start" id="indice" placeholder="Buscar módulo…"
@@ -265,12 +271,12 @@ const AvApp = crearComponente<AvAppProps>(
     const indice = root.querySelector('#indice') as IndiceEl & { textos: Record<string, string> };
     indice.textos = { placeholder: 'Buscar módulo…', sinResultados: 'Ningún módulo coincide.', resumen: '' };
     indice.items = modulos(admin);
-    const buscador = root.querySelector('av-buscador') as ConProps;
-    buscador.props = { permitidos: modulos(admin).map((m) => m.id) };
-    buscador.addEventListener('av-buscador-global', (e) => void accionGlobal((e as CustomEvent<{ accion: string }>).detail.accion, root));
+    conectarBuscador(root.querySelector('iswc-semantic-search') as ConProps, modulos(admin).map((m) => m.id), (accion) => void accionGlobal(accion, root));
     indice.current = props.vista;
     (root.querySelector('#perfil') as ConProps).props = { activo: estado.yo?.iusuario ?? '' };
-    (root.querySelector('av-empresa-selector') as ConProps).props = { empresas: estado.yo?.empresas ?? [], activa: empresaActiva() };
+    const selector = root.querySelector('iswc-tenant-selector') as ConProps;
+    selector.addEventListener('iswc-tenant-change', (e) => fijar({ empresa: Number((e as CustomEvent<{ id: number }>).detail.id) }));
+    selector.props = propsSelector();
   },
   // Repintado parcial dentro de la página: otro id solo pasa el id al shell de la vista; otra empresa (`version`)
   // remonta solo el contenido y el selector. El layout (anchos, cajón, índice) nunca se repinta: sin parpadeo.
@@ -280,8 +286,8 @@ const AvApp = crearComponente<AvAppProps>(
     if (!vista) return false;
     if (props.version !== previos.version) {
       vista.replaceChildren(montarVista(props.vista, props.id, true));
-      const selector = root.querySelector('av-empresa-selector') as ConProps | null;
-      if (selector) selector.props = { empresas: estado.yo?.empresas ?? [], activa: empresaActiva() };
+      const selector = root.querySelector('iswc-tenant-selector') as ConProps | null;
+      if (selector) selector.props = propsSelector();
       (root.querySelector('iswc-doc-layout') as LayoutEl | null)?.scrollContentTo?.(0);
       return true;
     }
