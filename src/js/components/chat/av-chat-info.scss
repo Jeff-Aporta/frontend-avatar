@@ -170,10 +170,10 @@
 
   .ico {
     font-size: 1.6em;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
 
     &.estrella {
-      color: var(--iswc-color-warning);
+      color: var(--iswc-warning-text);
     }
   }
 }
@@ -198,7 +198,7 @@
   }
 
   a {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 }
 
@@ -288,6 +288,6 @@
   }
 
   &.leidos h4 iswc-icon {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 }

@@ -19,6 +19,7 @@
   --av-velo: color-mix(in srgb, var(--iswc-accent) 7%, transparent);
   --av-velo-fuerte: color-mix(in srgb, var(--iswc-accent) 16%, transparent);
   --av-borde-seccion: color-mix(in srgb, var(--iswc-accent) 22%, transparent);
+  --av-degradado-texto: linear-gradient(120deg, var(--iswc-brand-text), var(--iswc-accent) 55%, var(--iswc-color-contrast, var(--iswc-color-brand-pale)));
   --av-degradado-marca: linear-gradient(120deg, var(--iswc-color-brand-stronger), var(--iswc-accent) 55%, var(--iswc-color-contrast, var(--iswc-color-brand-pale)));
   --av-sombra-tarjeta: 0 1px 0 rgb(255 255 255 / 4%), 0 0.625em 1.875em color-mix(in srgb, var(--iswc-accent) 12%, rgb(0 0 0 / 10%));
   --av-radio: 0.9em;
@@ -27,7 +28,7 @@
 /* Las figuras del banner apenas se insinúan en claro; en oscuro pueden verse más. */
 [data-theme="light"] {
   --av-banner-opacidad: 0.07;
-}
+} 
 
 html,
 body {

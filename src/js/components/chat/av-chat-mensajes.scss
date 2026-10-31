@@ -44,7 +44,7 @@
   @include c.entrada(-0.3em);
 
   > iswc-icon {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     transform: rotate(35deg);
   }
 
@@ -54,7 +54,7 @@
 
     strong {
       font-size: 0.75em;
-      color: var(--iswc-accent);
+      color: var(--iswc-brand-text);
     }
 
     span {
@@ -129,7 +129,7 @@
   span {
     font-size: 0.78em;
     font-weight: 700;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     text-shadow: var(--av-neon-texto, none);
   }
 }
@@ -154,7 +154,7 @@
 
   &:hover,
   &:focus-visible {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     outline: none;
     @include c.neon;
   }
@@ -193,7 +193,7 @@
   border-radius: t.radio(lg);
   background: color-mix(in srgb, var(--iswc-bg) 80%, transparent);
   backdrop-filter: blur(0.3em);
-  color: var(--iswc-accent);
+  color: var(--iswc-brand-text);
   font-weight: 600;
   pointer-events: none;
 
@@ -266,7 +266,7 @@
 
   iswc-icon {
     font-size: 4em;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     filter: drop-shadow(0 0 0.6em color-mix(in srgb, var(--iswc-accent) 55%, transparent));
     animation: flotar 4s ease-in-out infinite;
   }

@@ -10,7 +10,7 @@
   position: relative;
   isolation: isolate;
   padding: t.esp(10) t.esp(5);
-  background: var(--av-degradado-marca);
+  background: linear-gradient(120deg, var(--iswc-color-brand-stronger), var(--iswc-color-brand-strong));
   color: var(--iswc-on-brand, #fff);
   overflow: hidden;
 

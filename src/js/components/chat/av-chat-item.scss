@@ -56,7 +56,7 @@
     padding: 0.18em;
     border-radius: 50%;
     background: var(--iswc-bg-elev);
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     box-shadow: 0 0 0 1px var(--iswc-border-soft);
   }
 
@@ -101,7 +101,7 @@
 }
 
 [data-sinleer="1"] .hora {
-  color: var(--iswc-accent);
+  color: var(--iswc-brand-text);
   font-weight: 600;
 }
 
@@ -113,7 +113,7 @@
   @include m.una-linea;
 
   &.escribiendo {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     font-style: italic;
   }
 }
@@ -129,11 +129,11 @@
   color: var(--iswc-text-dim);
 
   &[data-marca="leido"] {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 
   &[data-marca="fallido"] {
-    color: var(--iswc-color-danger);
+    color: var(--iswc-danger-text);
   }
 }
 
@@ -158,7 +158,7 @@
   border-radius: 1em;
   font-size: 0.72em;
   font-weight: 700;
-  background: var(--iswc-accent);
+  background: var(--iswc-color-brand-strong);
   color: var(--iswc-on-brand, var(--iswc-bg));
   box-shadow: var(--av-neon, none);
 

@@ -87,11 +87,11 @@
     font-family: var(--av-font-impacto);
     font-weight: 400;
     font-size: 1.9em;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 
   .etiqueta {
-    color: color-mix(in srgb, currentColor 62%, transparent);
+    color: color-mix(in srgb, currentColor 78%, transparent);
     font-size: 0.9em;
   }
 }

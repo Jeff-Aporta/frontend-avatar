@@ -45,7 +45,7 @@ iswc-tab-panel {
   gap: t.esp(3);
 
   iswc-icon {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     font-size: 1.3em;
   }
 
@@ -60,6 +60,6 @@ iswc-tab-panel {
   }
 
   &[data-actual="1"] strong {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 }

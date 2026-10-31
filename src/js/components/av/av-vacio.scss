@@ -15,12 +15,13 @@
   color: var(--iswc-text-dim);
   border: 1px dashed var(--iswc-border);
   border-radius: t.radio(lg);
+  @include m.papel;
   background: var(--iswc-bg-soft);
   color: var(--iswc-text);
 
   .icono {
     font-size: 2.2em;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 
   .titulo {

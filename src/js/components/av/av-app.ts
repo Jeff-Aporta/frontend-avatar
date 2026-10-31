@@ -105,7 +105,7 @@ function pie(slot: string | null) {
       <span class="pie-lema">Gestión digital y automatización · Odys</span>
       <span class="pie-tema">
         <span class="pie-rotulo">Paleta</span>
-        <iswc-palette-selector aria-label="Elegir la paleta de colores"></iswc-palette-selector>
+        <iswc-palette-selector scope="root" aria-label="Elegir la paleta de colores"></iswc-palette-selector>
         <iswc-theme-toggle scope="root"></iswc-theme-toggle>
       </span>
     </footer>

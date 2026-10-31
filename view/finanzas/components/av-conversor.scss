@@ -25,7 +25,7 @@
   gap: t.esp(2);
 
   iswc-icon {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 }
 
@@ -51,7 +51,7 @@
     @include m.impacto;
     font-size: 2em;
     line-height: 1.1;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     overflow-wrap: anywhere;
   }
 
@@ -61,7 +61,7 @@
   }
 
   .error {
-    color: var(--iswc-color-danger);
+    color: var(--iswc-danger-text);
   }
 }
 

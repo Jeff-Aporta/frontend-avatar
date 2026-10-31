@@ -27,7 +27,7 @@
   margin: t.esp(2) auto 0;
   max-width: 40em;
   text-align: center;
-  color: color-mix(in srgb, currentColor 62%, transparent);
+  color: color-mix(in srgb, currentColor 78%, transparent);
 }
 
 .rejilla {
@@ -84,7 +84,7 @@
 
   .icono {
     font-size: 3.2em;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     filter: drop-shadow(0 0.5em 1em var(--av-velo-fuerte));
   }
 }
@@ -102,6 +102,7 @@
 
 /* En tarjeta es un papel: vuelve al texto del tema. Sin caja, el texto va sobre la página. */
 .seccion[data-variante="tarjetas"] .item {
+  @include m.papel;
   color: var(--iswc-text);
 }
 

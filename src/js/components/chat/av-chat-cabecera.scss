@@ -73,7 +73,7 @@
   @include m.una-linea;
 
   &[data-activo="1"] {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     text-shadow: var(--av-neon-texto, none);
   }
 }

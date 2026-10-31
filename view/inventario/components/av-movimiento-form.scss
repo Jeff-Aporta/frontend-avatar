@@ -47,12 +47,12 @@ iswc-dialog {
   }
 
   .nuevo {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 
   &[data-error] .nuevo {
     font-size: 1em;
-    color: var(--iswc-color-danger);
+    color: var(--iswc-danger-text);
     text-shadow: none;
   }
 }

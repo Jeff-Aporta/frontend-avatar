@@ -49,7 +49,7 @@
   }
 
   &.grupo .datos strong {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 }
 
@@ -65,7 +65,7 @@
     height: 1em;
     border-radius: 50%;
     background: var(--iswc-brand-soft);
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
 
     iswc-icon {
       font-size: 0.5em;

@@ -27,7 +27,7 @@
   }
 
   .icono {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     font-size: 1.2em;
     margin-top: 0.1em;
   }
@@ -49,7 +49,7 @@
   }
 
   &[data-leida="1"] {
-    opacity: 0.6;
+    opacity: 0.85;
   }
 }
 

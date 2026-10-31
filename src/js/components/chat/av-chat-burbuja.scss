@@ -254,13 +254,13 @@
   }
 
   .enlace {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     text-decoration: underline;
     text-underline-offset: 0.15em;
   }
 
   .mencion {
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
     font-weight: 600;
     padding: 0 0.15em;
     border-radius: 0.3em;
@@ -286,19 +286,19 @@
   }
 
   .estrella {
-    color: var(--iswc-color-warning);
+    color: var(--iswc-warning-text);
   }
 
   .marca {
     font-size: 1.45em;
 
     &[data-marca="leido"] {
-      color: var(--iswc-accent);
+      color: var(--iswc-brand-text);
       filter: drop-shadow(0 0 0.25em color-mix(in srgb, var(--iswc-accent) 70%, transparent));
     }
 
     &[data-marca="fallido"] {
-      color: var(--iswc-color-danger);
+      color: var(--iswc-danger-text);
     }
   }
 }
@@ -340,7 +340,7 @@
   background: transparent;
   font: inherit;
   font-size: 0.78em;
-  color: var(--iswc-color-danger);
+  color: var(--iswc-danger-text);
   cursor: pointer;
 }
 
@@ -372,7 +372,7 @@
   }
 
   .hora {
-    opacity: 0.75;
+    opacity: 0.9;
     font-variant-numeric: tabular-nums;
   }
 
@@ -381,11 +381,11 @@
     border-color: var(--av-borde-seccion, var(--iswc-border-soft));
 
     iswc-icon {
-      color: var(--iswc-accent);
+      color: var(--iswc-brand-text);
     }
   }
 
   &[data-perdida="1"] .pildora iswc-icon {
-    color: var(--iswc-color-danger);
+    color: var(--iswc-danger-text);
   }
 }

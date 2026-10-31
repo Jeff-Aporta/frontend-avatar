@@ -77,7 +77,7 @@ iswc-dialog {
   dd.total {
     @include m.impacto;
     font-size: 1.2em;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 }
 

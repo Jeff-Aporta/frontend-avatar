@@ -28,13 +28,13 @@
     letter-spacing: -0.01em;
 
     iswc-icon {
-      color: var(--iswc-accent);
+      color: var(--iswc-brand-text);
     }
   }
 
   .subtitulo {
     margin: t.esp(1) 0 0;
-    color: color-mix(in srgb, currentColor 62%, transparent);
+    color: color-mix(in srgb, currentColor 78%, transparent);
     font-size: 0.95em;
   }
 

@@ -110,17 +110,17 @@
     border-radius: 50%;
     @include c.neon;
     --iswc-control-bg: var(--iswc-brand-soft);
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 
   .foto-rotulo {
     font-size: 0.82em;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 }
 
 .error {
   margin: t.esp(2) 0 0;
   font-size: 0.85em;
-  color: var(--iswc-color-danger);
+  color: var(--iswc-danger-text);
 }

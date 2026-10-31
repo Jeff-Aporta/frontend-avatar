@@ -39,7 +39,7 @@
 
   .contexto-icono {
     font-size: 1.2em;
-    color: var(--iswc-accent);
+    color: var(--iswc-brand-text);
   }
 
   .contexto-texto {
@@ -150,7 +150,7 @@
 .aviso {
   margin: 0;
   font-size: 0.8em;
-  color: var(--iswc-color-danger);
+  color: var(--iswc-danger-text);
 }
 
 .cuenta {
@@ -161,7 +161,7 @@
   color: var(--iswc-text-dim);
 
   &[data-excede="1"] {
-    color: var(--iswc-color-danger);
+    color: var(--iswc-danger-text);
     font-weight: 700;
   }
 }

@@ -25,7 +25,7 @@ iswc-dialog {
   @include m.rotulo(0.8);
   margin: 0;
   font-size: 0.75em;
-  color: var(--iswc-accent);
+  color: var(--iswc-brand-text);
 }
 
 @media (max-width: 36em) {

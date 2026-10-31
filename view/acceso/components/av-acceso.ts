@@ -56,7 +56,7 @@ const AvAcceso = crearComponente<AvAccesoProps>(
     root.append(html`
       <div class="pagina" part="pagina">
         <section class="panel" part="panel">
-          <iswc-login id="login" heading="Entrar a Avatar" subtitle="Tu equipo, tus canales y tus proyectos en un solo lugar" provider="Avatar" password-toggle ?busy=${props.ocupado} error=${props.error} oniswc-login-submit=${enviar}></iswc-login>
+          <iswc-login id="login" heading="Entrar a Avatar" provider="Avatar" password-toggle ?busy=${props.ocupado} error=${props.error} oniswc-login-submit=${enviar}></iswc-login>
           <av-credenciales-demo id="demo" onav-credencial-elegida=${usar}></av-credenciales-demo>
         </section>
         <aside class="lado" part="lado" aria-hidden="true">
@@ -64,7 +64,12 @@ const AvAcceso = crearComponente<AvAccesoProps>(
         </aside>
       </div>
     `);
-    (root.querySelector('#demo') as ConProps).props = { items: credencialesDemo() };
+    const items = credencialesDemo();
+    (root.querySelector('#demo') as ConProps).props = { items };
+    // Provisional para las pruebas: el formulario arranca con la primera cuenta de muestra.
+    const [primera] = items;
+    const login = root.querySelector('#login') as LoginEl;
+    if (primera) void customElements.whenDefined('iswc-login').then(() => rellenar(login, primera.usuario, primera.password));
   },
   // Repintado parcial: ocupado/error solo tocan atributos del login (el formulario conserva lo escrito).
   (root, props) => {
