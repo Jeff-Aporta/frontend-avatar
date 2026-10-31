@@ -1,0 +1,57 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-chat-tema — muestras de tema y formulario del tema propio. */
+:host {
+  @include m.host-bloque;
+}
+
+.tema {
+  display: grid;
+  gap: t.esp(2);
+  padding: t.esp(3) t.esp(4);
+}
+
+.titulo {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.muestras {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.4em, 1fr));
+  gap: t.esp(2);
+}
+
+.muestra {
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid var(--iswc-border);
+  border-radius: 50%;
+  background: var(--iswc-bg-soft);
+  color: var(--iswc-text);
+  font: inherit;
+  font-size: 0.7em;
+  cursor: pointer;
+
+  &[aria-checked="true"] {
+    outline: 0.15em solid var(--iswc-text);
+    outline-offset: 0.12em;
+  }
+
+  &:focus-visible {
+    outline: 0.15em solid var(--iswc-focus, var(--iswc-accent));
+    outline-offset: 0.12em;
+  }
+}
+
+.propio summary {
+  cursor: pointer;
+  color: var(--iswc-text-soft);
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(2);
+  margin-top: t.esp(2);
+}

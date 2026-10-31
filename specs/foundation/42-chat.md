@@ -36,7 +36,7 @@ lectura, no leídos, búsqueda precisa (por texto y por significado) y llamadas 
 - [W-CHAT-17] Lo enviado aparece al instante con un reloj (pendiente); al confirmarlo el API pasa a ✓ (enviado); cuando llega a otro front, ✓✓ gris (entregado); cuando todos lo leyeron, ✓✓ en color (leído). En grupos, «leído» exige a todos los integrantes.
 - [W-CHAT-18] Un envío que falla queda marcado con «no enviado · reintentar»; nada se pierde al recargar (cola local).
 - [W-CHAT-19] Selector de emojis en el redactor; responder a un mensaje muestra la cita arriba del redactor y en la burbuja; tocar la cita lleva al original y lo resalta.
-- [W-CHAT-20] Adjuntos: archivo, imagen o video por botón, arrastrar y soltar o pegar. Antes de enviar se ve la vista previa con texto opcional; durante la subida, una barra de progreso cancelable. Máximo 25 MB por archivo.
+- [W-CHAT-20] Adjuntos: archivo, imagen o video por botón, arrastrar y soltar o pegar. Antes de enviar se ve la vista previa con texto opcional; durante la subida, una barra de progreso cancelable. El máximo por archivo lo define Administración (30 MB de fábrica).
 - [W-CHAT-21] Notas de voz: mantener o tocar el micrófono graba (con tiempo y onda), se puede cancelar; se reproduce con barra de avance y velocidad 1×/1.5×/2×.
 - [W-CHAT-22] Imágenes y videos se ven en miniatura en la burbuja y a pantalla completa al tocarlos; documentos con ícono, nombre, tamaño y descarga.
 
@@ -56,6 +56,9 @@ lectura, no leídos, búsqueda precisa (por texto y por significado) y llamadas 
 
 ### Búsqueda
 - [W-CHAT-33] Buscar dentro de un chat o en todos: modo «texto» (palabras) y modo «significado» (semántica: encuentra «reunión del lunes» aunque el mensaje diga «nos vemos el lunes a las 9»). Los resultados muestran chat, autor, fecha y el fragmento resaltado; tocar uno abre el chat en ese mensaje.
+
+### Temas
+- [W-CHAT-47] Cada chat tiene tema: doce predefinidos, uno propio con dos colores y ángulo, o el de la app. Lo cambia cualquier integrante y lo ven todos al instante.
 
 ### Grupos
 - [W-CHAT-34] Info del grupo: foto, nombre, descripción, integrantes con su rol, multimedia, archivos y enlaces compartidos, destacados.

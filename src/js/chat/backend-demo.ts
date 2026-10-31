@@ -91,6 +91,7 @@ export function semilla(ahora = Date.now()): Almacen {
     return { clave: `s${n}`, id: String(n), chat, autor, tipo: 'texto', texto, ts: hace(min), editado: null, eliminado: false, reenviado: false, respuestaA: null, adjunto: null, reacciones: [], estado: 'enviado', meta: {}, ...extra };
   };
   const base = (id: string, tipo: Chat['tipo'], nombre: string, miembros: { id: string; rol?: 'admin' | 'miembro' }[], creadoMin: number, descripcion = ''): ChatDemo => ({
+    tema: null,
     id, tipo, nombre, descripcion, foto: null, miembros: miembros.map((m) => ({ id: m.id, rol: m.rol ?? 'miembro' })), mensajeFijado: null, actividad: hace(creadoMin), creado: hace(creadoMin), lecturas: {},
   });
   const dia = 24 * 60;
@@ -659,17 +660,21 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
       const ya = A.chats.find((c) => c.tipo === 'directo' && c.miembros.length === 2 && c.miembros.some((m) => m.id === yo) && c.miembros.some((m) => m.id === usuario));
       if (ya) return vistaChat(ya);
       const t = iso();
-      const c: ChatDemo = { id: `d-${[yo, usuario].sort().join('-')}-${Date.now().toString(36)}`, tipo: 'directo', nombre: '', descripcion: '', foto: null, miembros: [{ id: yo, rol: 'miembro' }, { id: usuario, rol: 'miembro' }], mensajeFijado: null, actividad: t, creado: t, lecturas: {} };
+      const c: ChatDemo = { id: `d-${[yo, usuario].sort().join('-')}-${Date.now().toString(36)}`, tema: null, tipo: 'directo', nombre: '', descripcion: '', foto: null, miembros: [{ id: yo, rol: 'miembro' }, { id: usuario, rol: 'miembro' }], mensajeFijado: null, actividad: t, creado: t, lecturas: {} };
       operar({ op: 'chat', chat: c });
       return vistaChat(c);
     },
     async grupo(d: DatosGrupo) {
       const t = iso();
       const miembros = [{ id: yo, rol: 'admin' as const }, ...[...new Set(d.miembros)].filter((m) => m !== yo).map((id) => ({ id, rol: 'miembro' as const }))];
-      const c: ChatDemo = { id: `g-${Date.now().toString(36)}`, tipo: 'grupo', nombre: d.nombre.trim(), descripcion: d.descripcion?.trim() ?? '', foto: d.foto ?? null, miembros, mensajeFijado: null, actividad: t, creado: t, lecturas: {} };
+      const c: ChatDemo = { id: `g-${Date.now().toString(36)}`, tema: null, tipo: 'grupo', nombre: d.nombre.trim(), descripcion: d.descripcion?.trim() ?? '', foto: d.foto ?? null, miembros, mensajeFijado: null, actividad: t, creado: t, lecturas: {} };
       operar({ op: 'chat', chat: c });
       sistema(c.id, textos().creoGrupo(nombre(yo), c.nombre));
       return vistaChat(chatDemo(c.id)!);
+    },
+    async tema(chat, tema) {
+      const c = chatDemo(chat);
+      if (c) operar({ op: 'chat', chat: { ...c, tema } });
     },
     async editarGrupo(chat, d) {
       const c = chatDemo(chat);

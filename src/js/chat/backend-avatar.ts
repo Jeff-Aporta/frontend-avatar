@@ -19,6 +19,8 @@ import {
   type Adjunto, type Borrador, type Chat, type EventoChat, type InfoLectura, type Lectura, type MensajeChat, type ModoBusqueda, type ModoEscritura, nuevaClave,
   type Preferencias, type RegistroLlamada, type ResultadoBusqueda, type SenalLlamada, SenalLlamadaSchema, type UsuarioChat,
 } from './tipos.js';
+import { TemaChatSchema } from './tipos.js';
+import { fijarLimiteMb } from './formato.js';
 
 /* ── forma de lo que devuelve el API ─────────────────────────── */
 
@@ -36,6 +38,7 @@ export const ResumenApi = z.object({
   descripcion: z.string().nullable().optional(),
   foto: z.number().nullable().optional(),
   foto_url: z.string().nullable().optional(),
+  tema: TemaChatSchema.nullable().optional(),
   otro: UsuarioApi.nullable().optional(),
   ultimo: UltimoApi.nullable().optional(),
   sin_leer: z.number().optional(),
@@ -117,7 +120,7 @@ export function chatDe(c: z.infer<typeof ResumenApi>, yo: string): Chat {
   const u = c.ultimo;
   const miembros = c.tipo === 'directo' && c.otro ? [{ id: yo, rol: 'miembro' as const }, { id: c.otro.iusuario, rol: 'miembro' as const }] : [];
   return {
-    id: c.icanal, tipo: c.tipo, nombre: c.nombre ?? '', descripcion: c.descripcion ?? '', foto: c.foto_url ?? null, miembros, fijado: !!c.fijado, silenciado: !!c.silenciado,
+    id: c.icanal, tipo: c.tipo, nombre: c.nombre ?? '', descripcion: c.descripcion ?? '', foto: c.foto_url ?? null, tema: c.tema ?? null, miembros, fijado: !!c.fijado, silenciado: !!c.silenciado,
     archivado: !!c.archivado, marcadoNoLeido: !!c.no_leido, noLeidos: c.sin_leer ?? 0, mensajeFijado: c.mensaje_fijado == null ? null : String(c.mensaje_fijado),
     actividad: c.actividad ?? u?.creado ?? '', creado: '', lecturas: {},
     ultimo: u
@@ -328,7 +331,7 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
               return;
             }
             const c = chatDe(mio, yo);
-            emitir({ tipo: 'chat', chat: { id: c.id, tipo: c.tipo, nombre: c.nombre, descripcion: c.descripcion, foto: c.foto, mensajeFijado: c.mensajeFijado, actividad: c.actividad, ...(c.miembros.length ? { miembros: c.miembros } : {}) } });
+            emitir({ tipo: 'chat', chat: { id: c.id, tipo: c.tipo, nombre: c.nombre, descripcion: c.descripcion, foto: c.foto, tema: c.tema, mensajeFijado: c.mensajeFijado, actividad: c.actividad, ...(c.miembros.length ? { miembros: c.miembros } : {}) } });
             await cargarLecturas(chat);
           } catch {
             /* se corrige al reconectar */
@@ -360,6 +363,7 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
     yo,
     front,
     async iniciar() {
+      void op('ajustesArchivos').then((a: unknown) => fijarLimiteMb(Number((a as { max_mb?: number }).max_mb))).catch(() => undefined);
       const d = await iniciar();
       if (!conectada) {
         conectada = true;
@@ -467,6 +471,10 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
       const c = chatDe(r.data, yo);
       void cargarLecturas(c.id);
       return c;
+    },
+    async tema(chat, tema) {
+      const r = ResumenApi.safeParse(await op('editarCanal', Number(chat), { tema }));
+      if (r.success) emitir({ tipo: 'chat', chat: { id: String(r.data.icanal), tema: r.data.tema ?? null } });
     },
     async editarGrupo(chat, d) {
       const r = ResumenApi.safeParse(await op('editarCanal', Number(chat), { ...(d.nombre ? { nombre: d.nombre } : {}), ...(d.descripcion !== undefined ? { descripcion: d.descripcion || null } : {}) }));

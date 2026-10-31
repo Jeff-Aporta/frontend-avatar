@@ -1,0 +1,18 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-almacenamiento — tarjeta de límites. */
+:host {
+  @include m.host-bloque;
+  max-width: 32em;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(2);
+}
+
+.uso {
+  margin: 0;
+  color: var(--iswc-text-soft);
+}

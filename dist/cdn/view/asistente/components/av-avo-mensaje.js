@@ -1,4 +1,4 @@
-import{crearComponente as t,define as i,html as a}from"../../../js/base/componente.js?v=333q2n";const c=t(import.meta.url,"av-avo-mensaje",{turno:null,nombre:""},(s,o)=>{const e=o.turno;if(!e)return;const n=e.quien==="avo";s.append(a`
+import{crearComponente as t,define as i,html as a}from"../../../js/base/componente.js?v=zohalw";const c=t(import.meta.url,"av-avo-mensaje",{turno:null,nombre:""},(s,o)=>{const e=o.turno;if(!e)return;const n=e.quien==="avo";s.append(a`
     <article class="turno" part="turno" data-quien=${e.quien}>
       ${n?a`<span class="avo" part="avatar" title="AVO"><iswc-icon icon="mdi:robot-outline"></iswc-icon></span>`:a`<av-persona id="persona" class="persona"></av-persona>`}
       <div class="burbuja" part="burbuja">

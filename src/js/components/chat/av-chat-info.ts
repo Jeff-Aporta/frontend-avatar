@@ -20,7 +20,7 @@ const AvChatInfo = crearComponente<AvChatInfoProps>(
   import.meta.url,
   'av-chat-info',
   {
-    abierto: false, modo: 'chat', id: null, tipo: 'directo', nombre: '', descripcion: '', foto: null, iniciales: '', color: 0, estado: '', yo: '', soyAdmin: false,
+    abierto: false, tema: null, modo: 'chat', id: null, tipo: 'directo', nombre: '', descripcion: '', foto: null, iniciales: '', color: 0, estado: '', yo: '', soyAdmin: false,
     miembros: [], fijado: false, silenciado: false, archivado: false, multimedia: [], archivos: [], enlaces: [], destacados: [], mensaje: null,
   },
   (root, props, hostEl) => {
@@ -79,6 +79,7 @@ const AvChatInfo = crearComponente<AvChatInfoProps>(
             <iswc-button variant=${props.fijado ? 'soft' : 'plain'} color=${props.fijado ? 'brand' : 'neutral'} oniswc-click=${() => pref({ fijado: !props.fijado })}><iswc-icon slot="start" icon="mdi:pin-outline"></iswc-icon>${props.fijado ? t.desfijarChat : t.fijarChat}</iswc-button>
             <iswc-button variant=${props.archivado ? 'soft' : 'plain'} color=${props.archivado ? 'brand' : 'neutral'} oniswc-click=${() => pref({ archivado: !props.archivado })}><iswc-icon slot="start" icon="mdi:archive-outline"></iswc-icon>${props.archivado ? t.desarchivar : t.archivar}</iswc-button>
           </section>
+          <av-chat-tema class="tema"></av-chat-tema>
           <iswc-tab-group class="pestanas" active=${tab} oniswc-tab-show=${(e: Event) => { host.__tab = (e as CustomEvent<{ name: string }>).detail?.name ?? tab; }}>
             <iswc-tab slot="nav" panel="multimedia">${t.multimedia} <small>${props.multimedia.length}</small></iswc-tab>
             <iswc-tab slot="nav" panel="archivos">${t.archivos} <small>${props.archivos.length}</small></iswc-tab>
@@ -120,6 +121,8 @@ const AvChatInfo = crearComponente<AvChatInfoProps>(
         </div>
       </aside>
     `);
+    const selectorTema = root.querySelector('av-chat-tema') as (HTMLElement & { props: { tema: unknown } }) | null;
+    if (selectorTema) selectorTema.props = { tema: props.tema };
   },
 );
 

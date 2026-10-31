@@ -6,7 +6,7 @@
  * que el usuario puede ver (W-CHAT-45), y aparte las señales de llamada (`alSenal`).
  */
 import type {
-  Adjunto, Borrador, Chat, EventoChat, InfoLectura, MensajeChat, ModoBusqueda, ModoEscritura, Preferencias, RegistroLlamada, ResultadoBusqueda, SenalLlamada,
+  Adjunto, Borrador, Chat, EventoChat, InfoLectura, MensajeChat, ModoBusqueda, ModoEscritura, Preferencias, RegistroLlamada, ResultadoBusqueda, SenalLlamada, TemaChat,
   UsuarioChat,
 } from './tipos.js';
 
@@ -47,6 +47,8 @@ export interface ChatBackend {
   directo(usuario: string): Promise<Chat>;
   grupo(d: DatosGrupo): Promise<Chat>;
   editarGrupo(chat: string, d: { nombre?: string; descripcion?: string; foto?: string | null }): Promise<void>;
+  /** Cambia el tema del chat para todos sus integrantes (`null` vuelve al de la app). */
+  tema(chat: string, tema: TemaChat | null): Promise<void>;
   miembros(chat: string, accion: AccionMiembros, usuarios: string[]): Promise<void>;
   buscar(q: string, modo: ModoBusqueda, chat?: string | null): Promise<ResultadoBusqueda[]>;
   /** Envía una señal de llamada por la sala. */

@@ -10,6 +10,10 @@
 import { z } from '../base/zod.js';
 
 export const TipoChatSchema = z.enum(['directo', 'grupo', 'publico', 'privado']);
+
+/** Tema del chat: predefinido por `id` o `propio` con sus colores. */
+export const TemaChatSchema = z.object({ id: z.string(), color1: z.string().optional(), color2: z.string().optional(), angulo: z.number().optional(), fondo: z.string().optional() });
+export type TemaChat = z.infer<typeof TemaChatSchema>;
 export type TipoChat = z.infer<typeof TipoChatSchema>;
 
 export const TipoMensajeSchema = z.enum(['texto', 'sistema', 'archivo', 'imagen', 'video', 'audio', 'llamada']);
@@ -52,6 +56,7 @@ const ChatBaseSchema = z.object({
   nombre: z.string().default(''),
   descripcion: z.string().default(''),
   foto: z.string().nullable().default(null),
+  tema: TemaChatSchema.nullable().default(null),
   miembros: z.array(MiembroSchema).default([]),
   fijado: z.boolean().default(false),
   silenciado: z.boolean().default(false),

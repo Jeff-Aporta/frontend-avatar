@@ -4,7 +4,7 @@
  * vista) y el mapa `CHAT_PROPS` que lee `props-registro.ts`.
  */
 import { z } from '../../base/zod.js';
-import { AdjuntoSchema, ChatSchema, ConexionSchema, MensajeChatSchema, TipoChatSchema } from '../../chat/tipos.js';
+import { AdjuntoSchema, ChatSchema, ConexionSchema, MensajeChatSchema, TemaChatSchema, TipoChatSchema } from '../../chat/tipos.js';
 
 export const MarcaEnvioSchema = z.enum(['pendiente', 'fallido', 'enviado', 'entregado', 'leido']);
 
@@ -175,7 +175,12 @@ export type AvChatGrupoFormProps = z.infer<typeof AvChatGrupoFormPropsSchema>;
 export const ElementoInfoSchema = z.object({ ref: z.string(), titulo: z.string().default(''), detalle: z.string().default(''), url: z.string().default(''), tipo: z.string().default(''), bytes: z.number().default(0), color: z.number().default(0) });
 export type ElementoInfo = z.infer<typeof ElementoInfoSchema>;
 
+/** `<av-chat-tema>`: elige el tema del chat; emite `av-chat-tema { tema }`. */
+export const AvChatTemaPropsSchema = z.object({ tema: TemaChatSchema.nullable().default(null) });
+export type AvChatTemaProps = z.infer<typeof AvChatTemaPropsSchema>;
+
 export const AvChatInfoPropsSchema = z.object({
+  tema: TemaChatSchema.nullable().default(null),
   abierto: z.boolean().default(false),
   modo: z.enum(['chat', 'mensaje']).default('chat'),
   id: z.string().nullable().default(null),
@@ -250,6 +255,7 @@ export const CHAT_PROPS = {
   'av-chat-nuevo': AvChatNuevoPropsSchema,
   'av-chat-grupo-form': AvChatGrupoFormPropsSchema,
   'av-chat-info': AvChatInfoPropsSchema,
+  'av-chat-tema': AvChatTemaPropsSchema,
   'av-chat-reenviar': AvChatReenviarPropsSchema,
   'av-chat-llamada': AvChatLlamadaPropsSchema,
   'av-chat-demo': AvChatDemoPropsSchema,

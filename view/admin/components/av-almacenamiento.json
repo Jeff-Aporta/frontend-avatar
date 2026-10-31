@@ -1,0 +1,54 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-almacenamiento",
+  "category": "admin",
+  "navTitle": "Almacenamiento",
+  "title": "&lt;av-almacenamiento&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-almacenamiento",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-almacenamiento&gt;",
+      "lede": "Límite por archivo y uso de R2.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-almacenamiento id=\"a\"></av-almacenamiento></div>",
+          "target": "#a",
+          "props": {
+            "maxMb": 30,
+            "topeMb": 95,
+            "archivos": 12,
+            "bytes": 73400320
+          },
+          "controls": [
+            {
+              "control": "number",
+              "prop": "props:maxMb",
+              "label": "maxMb",
+              "default": 30
+            },
+            {
+              "control": "number",
+              "prop": "props:archivos",
+              "label": "archivos",
+              "default": 12
+            },
+            {
+              "control": "number",
+              "prop": "props:bytes",
+              "label": "bytes",
+              "default": 73400320
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En Administración, al crecer el almacenamiento.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para cuotas por usuario: es un límite global por archivo.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

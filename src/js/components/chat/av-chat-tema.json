@@ -1,0 +1,43 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-chat-tema",
+  "category": "chat",
+  "navTitle": "Tema del chat",
+  "title": "&lt;av-chat-tema&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-chat-tema",
+  "styles": ".stage{padding:1rem;max-width:22em}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-chat-tema&gt;",
+      "lede": "Colores, degradados y temas por chat.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-chat-tema id=\"t\"></av-chat-tema></div>",
+          "target": "#t",
+          "props": {
+            "tema": {
+              "id": "uva"
+            }
+          },
+          "controls": [
+            {
+              "control": "json",
+              "prop": "props:tema",
+              "label": "tema",
+              "default": {
+                "id": "uva"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la configuración de un chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para el tema de la app: eso es la paleta del pie.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

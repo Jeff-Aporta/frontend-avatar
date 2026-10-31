@@ -1,4 +1,4 @@
-import{normalizar as t}from"./formato.js?v=d40ok6";const o=a=>a.trim().split(`
+import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 `).map(e=>{const[r,...i]=e.trim().split(" ");return{e:r,k:i.join(" ")}}),l=[{id:"caras",nombre:"Caras",icono:"mdi:emoticon-happy-outline",emojis:o(`
 \u{1F600} feliz sonrisa
 \u{1F603} alegre contento

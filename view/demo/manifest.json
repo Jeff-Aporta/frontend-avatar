@@ -382,5 +382,13 @@
   {
     "tag": "av-perfiles-tabla",
     "file": "../../src/js/components/av/av-perfiles-tabla.json"
+  },
+  {
+    "tag": "av-chat-tema",
+    "file": "../../src/js/components/chat/av-chat-tema.json"
+  },
+  {
+    "tag": "av-almacenamiento",
+    "file": "../admin/components/av-almacenamiento.json"
   }
 ]

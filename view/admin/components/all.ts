@@ -6,4 +6,5 @@ setCssBase(new URL('../../../', import.meta.url).href);
 await import('./av-usuario-form.js');
 await import('./av-usuarios.js');
 await import('./av-roles.js');
+await import('./av-almacenamiento.js');
 await import('./av-admin.js');

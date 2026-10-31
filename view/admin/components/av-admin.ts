@@ -7,7 +7,7 @@ import { crearComponente, define, html, avisar } from '../../../src/js/base/comp
 import { z } from '../../../src/js/base/zod.js';
 import type { AvAdminProps, Rol, RolUsuario, Usuario, UsuarioForm } from '../../../src/js/consts/schemas/admin.schemas.js';
 import { AccionRolSchema, CatalogoEntradaSchema, RolSchema, RolUsuarioSchema, SesionSchema, UsuarioSchema } from '../../../src/js/consts/schemas/admin.schemas.js';
-import { auth, cerrarSesion, mensajeDe, permisos, refrescarPermisos } from '../../../src/js/core/api.js';
+import { auth, cerrarSesion, dominio, mensajeDe, permisos, refrescarPermisos } from '../../../src/js/core/api.js';
 import { estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
 import { ir } from '../../../src/js/core/router.js';
@@ -15,6 +15,7 @@ import { cuerpoUsuario, GRUPO } from '../utils/admin.js';
 import './av-usuario-form.js';
 import './av-usuarios.js';
 import './av-roles.js';
+import './av-almacenamiento.js';
 
 type ConProps = HTMLElement & { props: Record<string, unknown> };
 type Host = HTMLElement & { props: Partial<AvAdminProps> };
@@ -189,9 +190,33 @@ const AvAdmin = crearComponente<AvAdminProps>(import.meta.url, 'av-admin', { id:
     ir('acceso');
   };
 
+  // ---- almacenamiento
+  const cargarAlmacenamiento = async () => {
+    const a = q<ConProps>('#almacenamiento');
+    if (!a) return;
+    try {
+      const r = (await dominio()['ajustesArchivos']!(true)) as { max_mb: number; tope_mb: number; archivos: number | null; bytes: number | null };
+      a.props = { maxMb: r.max_mb, topeMb: r.tope_mb, archivos: r.archivos, bytes: r.bytes };
+    } catch (err) {
+      fallo(err);
+    }
+  };
+  const guardarAlmacenamiento = async (e: Event) => {
+    const a = q<ConProps>('#almacenamiento')!;
+    a.props = { ocupado: true };
+    try {
+      await dominio()['guardarAjustesArchivos']!((e as CustomEvent<{ max_mb: number }>).detail);
+      avisar('Límite actualizado', 'success');
+      await cargarAlmacenamiento();
+    } catch (err) {
+      fallo(err);
+    }
+    a.props = { ocupado: false };
+  };
+
   const cambiarPestana = (e: Event) => {
     const { name } = (e as CustomEvent<{ name: string }>).detail;
-    if (name === 'usuarios' || name === 'roles' || name === 'cuenta') h.props.pestana = name;
+    if (name === 'usuarios' || name === 'roles' || name === 'almacenamiento' || name === 'cuenta') h.props.pestana = name;
   };
   const pestanaInicial = admin ? props.pestana : 'cuenta';
 
@@ -200,17 +225,19 @@ const AvAdmin = crearComponente<AvAdminProps>(import.meta.url, 'av-admin', { id:
       onav-usuario-nuevo=${() => abrirUsuario({ nuevo: true, iusuario: '', nombre: '', email: '', password: '', bactivo: true })}
       onav-usuario-editar=${editarUsuario} onav-usuario-eliminar=${eliminarUsuario} onav-usuario-rol=${cambiarRol}
       onav-usuario-guardar=${guardarUsuario} onav-usuario-cerrar=${() => (q<ConProps>('#usuario-form')!.props = { abierto: false })}
-      onav-rol-crear=${crearRol} onav-accion-poner=${ponerAccion} onav-accion-quitar=${quitarAccion}>
+      onav-almacenamiento-guardar=${guardarAlmacenamiento} onav-rol-crear=${crearRol} onav-accion-poner=${ponerAccion} onav-accion-quitar=${quitarAccion}>
       <av-cabecera id="cabecera">
         <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${() => (h.props = { version: (props.version ?? 0) + 1 })}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
       </av-cabecera>
       ${admin ? null : html`<av-vacio id="sin-permiso"></av-vacio>`}
       <iswc-tab-group active=${pestanaInicial} oniswc-tab-show=${cambiarPestana}>
         ${admin ? html`<iswc-tab slot="nav" panel="usuarios"><iswc-icon slot="start" icon="mdi:account-multiple-outline"></iswc-icon>Usuarios</iswc-tab>
-          <iswc-tab slot="nav" panel="roles"><iswc-icon slot="start" icon="mdi:shield-key-outline"></iswc-icon>Roles y permisos</iswc-tab>` : null}
+          <iswc-tab slot="nav" panel="roles"><iswc-icon slot="start" icon="mdi:shield-key-outline"></iswc-icon>Roles y permisos</iswc-tab>
+          <iswc-tab slot="nav" panel="almacenamiento"><iswc-icon slot="start" icon="mdi:database-cog-outline"></iswc-icon>Almacenamiento</iswc-tab>` : null}
         <iswc-tab slot="nav" panel="cuenta"><iswc-icon slot="start" icon="mdi:account-cog-outline"></iswc-icon>Mi cuenta</iswc-tab>
         ${admin ? html`<iswc-tab-panel name="usuarios"><av-usuarios id="usuarios"></av-usuarios></iswc-tab-panel>
-          <iswc-tab-panel name="roles"><av-roles id="roles"></av-roles></iswc-tab-panel>` : null}
+          <iswc-tab-panel name="roles"><av-roles id="roles"></av-roles></iswc-tab-panel>
+          <iswc-tab-panel name="almacenamiento"><av-almacenamiento id="almacenamiento"></av-almacenamiento></iswc-tab-panel>` : null}
         <iswc-tab-panel name="cuenta">
           <div class="cuenta">
             <iswc-card variant="outlined">
@@ -245,6 +272,7 @@ const AvAdmin = crearComponente<AvAdminProps>(import.meta.url, 'av-admin', { id:
   if (!admin) return;
   void cargarUsuarios();
   void cargarRoles();
+  void cargarAlmacenamiento();
 });
 
 define('av-admin', AvAdmin);

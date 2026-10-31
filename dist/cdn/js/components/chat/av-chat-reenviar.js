@@ -1,4 +1,4 @@
-import{crearComponente as A,define as L,emitir as b,html as f}from"../../base/componente.js?v=333q2n";import{normalizar as w}from"../../chat/formato.js?v=d40ok6";import{textos as q}from"../../chat/textos.js?v=gpj3dh";function y(t,o,n){const r=q();let i=o,a=new Set;t.append(f`
+import{crearComponente as A,define as L,emitir as b,html as f}from"../../base/componente.js?v=zohalw";import{normalizar as w}from"../../chat/formato.js?v=xzgyvo";import{textos as q}from"../../chat/textos.js?v=gpj3dh";function y(t,o,n){const r=q();let i=o,a=new Set;t.append(f`
     <iswc-dialog class="dialogo" label=${r.reenviarA} backdrop-variant="basic">
       <div class="contenido">
         <iswc-input class="q" type="search" clearable placeholder=${r.buscarChats} aria-label=${r.buscarChats}><iswc-icon slot="start" icon="mdi:magnify"></iswc-icon></iswc-input>

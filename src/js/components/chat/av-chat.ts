@@ -29,6 +29,9 @@ import './av-chat-cabecera.js';
 import './av-chat-mensajes.js';
 import './av-chat-compositor.js';
 import './av-chat-info.js';
+import './av-chat-tema.js';
+import { VARS_TEMA, varsDeTema } from '../../chat/temas.js';
+import type { TemaChat } from '../../chat/tipos.js';
 import './av-chat-busqueda.js';
 import './av-chat-nuevo.js';
 import './av-chat-grupo-form.js';
@@ -712,7 +715,7 @@ class AvChat extends HTMLElement {
               <av-chat-compositor id="compositor"></av-chat-compositor>
             </div>
             <div slot="end" class="lateral" part="lateral">
-              <av-chat-info id="info"></av-chat-info>
+              <av-chat-info id="info" onav-chat-tema=${(e: Event) => void this.#cambiarTema((e as CustomEvent<{ tema: TemaChat | null }>).detail.tema)}></av-chat-info>
               <av-chat-busqueda id="busqueda"></av-chat-busqueda>
             </div>
           </iswc-split-panel>
@@ -846,6 +849,16 @@ class AvChat extends HTMLElement {
 
   /* ── reparto de props ── */
 
+  async #cambiarTema(tema: TemaChat | null): Promise<void> {
+    const activo = this.#e?.activo;
+    if (!activo || !this.#backend) return;
+    try {
+      await this.#backend.tema(activo, tema);
+    } catch (err) {
+      avisar(err instanceof Error ? err.message : String(err), 'danger');
+    }
+  }
+
   #pintar(): void {
     const t = textos();
     const e = this.#e;
@@ -853,6 +866,12 @@ class AvChat extends HTMLElement {
     const yo = e.yo;
     const q = (id: string) => this.#root.querySelector(`#${id}`) as ConProps;
     const activo = e.activo ? e.chats[e.activo] ?? null : null;
+    const vars = varsDeTema(activo?.tema);
+    for (const v of VARS_TEMA) {
+      const valor = vars[v];
+      if (valor) this.style.setProperty(v, valor);
+      else this.style.removeProperty(v);
+    }
     const ahora = Date.now();
     const nombreDe = (id: string) => (id === yo ? t.tu : e.usuarios[id]?.nombre ?? id);
     const primerNombre = (id: string) => (id === yo ? t.tu : (e.usuarios[id]?.nombre ?? id).split(/\s+/)[0] ?? id);
@@ -921,6 +940,7 @@ class AvChat extends HTMLElement {
       const otro = otroDe(activo, yo);
       const persona = (id: string, rol = ''): PersonaVista => ({ id, nombre: e.usuarios[id]?.nombre ?? id, foto: e.usuarios[id]?.foto ?? null, detalle: e.usuarios[id]?.detalle ?? '', enLinea: !!e.usuarios[id]?.enLinea, color: colorDe(id), rol });
       q('info').props = {
+tema: activo.tema,
         abierto: ui.panel === 'info', modo: infoMsg ? 'mensaje' : 'chat', id: activo.id, tipo: activo.tipo, nombre: nombreChat(activo, e.usuarios, yo), descripcion: activo.descripcion,
         foto: fotoChat(activo), iniciales: iniciales(nombreChat(activo, e.usuarios, yo)), color: colorChat(activo), estado: activo.tipo === 'directo' ? textoPresencia(otro ? e.usuarios[otro] : undefined, t) : '',
         yo, soyAdmin: esAdmin(activo, yo), miembros: activo.miembros.map((m) => persona(m.id, m.rol)).sort((a, b) => (a.rol === b.rol ? a.nombre.localeCompare(b.nombre) : a.rol === 'admin' ? -1 : 1)),

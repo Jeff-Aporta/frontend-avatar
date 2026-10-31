@@ -34,7 +34,7 @@ export const UsuarioFormSchema = z.object({ nuevo: z.boolean().default(true), iu
 export type UsuarioForm = z.infer<typeof UsuarioFormSchema>;
 
 /** `<av-admin>` (shell): id de la ruta, pestaña y versión para recargar. */
-export const AvAdminPropsSchema = z.object({ id: z.string().nullable().default(null), pestana: z.enum(['usuarios', 'roles', 'cuenta']).default('usuarios'), version: z.number().default(0) });
+export const AvAdminPropsSchema = z.object({ id: z.string().nullable().default(null), pestana: z.enum(['usuarios', 'roles', 'almacenamiento', 'cuenta']).default('usuarios'), version: z.number().default(0) });
 export type AvAdminProps = z.infer<typeof AvAdminPropsSchema>;
 
 /** `<av-usuario-form>`: diálogo crear/editar usuario. Emite `av-usuario-guardar { datos }` y `av-usuario-cerrar`. */
@@ -50,7 +50,12 @@ export const AvRolesPropsSchema = z.object({ roles: z.array(RolSchema).default([
 export type AvRolesProps = z.infer<typeof AvRolesPropsSchema>;
 
 /** Props de la vista, por tag. */
+/** `<av-almacenamiento>`: límite por archivo y uso del almacenamiento; emite `av-almacenamiento-guardar { max_mb }`. */
+export const AvAlmacenamientoPropsSchema = z.object({ maxMb: z.number().default(30), topeMb: z.number().default(95), archivos: z.number().nullable().default(null), bytes: z.number().nullable().default(null), ocupado: z.boolean().default(false) });
+export type AvAlmacenamientoProps = z.infer<typeof AvAlmacenamientoPropsSchema>;
+
 export const ADMIN_PROPS = {
+  'av-almacenamiento': AvAlmacenamientoPropsSchema,
   'av-admin': AvAdminPropsSchema,
   'av-usuario-form': AvUsuarioFormPropsSchema,
   'av-usuarios': AvUsuariosPropsSchema,

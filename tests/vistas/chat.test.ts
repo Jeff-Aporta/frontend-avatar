@@ -17,6 +17,7 @@ const E = await import('../../dist/cdn/js/chat/estado.js');
 const F = await import('../../dist/cdn/js/chat/formato.js');
 const { TEXTOS_ES } = await import('../../dist/cdn/js/chat/textos.js');
 const { crearCola } = await import('../../dist/cdn/js/chat/cola.js');
+const { TEMAS, coloresDe, varsDeTema } = await import('../../dist/cdn/js/chat/temas.js');
 const { Sala, retardo } = await import('../../dist/cdn/js/chat/sala.js');
 const { crearBackendDemo, semilla, similitudLexica } = await import('../../dist/cdn/js/chat/backend-demo.js');
 
@@ -243,9 +244,23 @@ export default definirPruebas([
       eq('> 4000', F.validarTexto('x'.repeat(4001)), null);
       eq('4000 justo', F.validarTexto('x'.repeat(4000))?.length, 4000);
       eq('archivo ok', F.validarArchivo({ name: 'a.pdf', size: 1000 }, TEXTOS_ES), null);
-      eq('más de 25 MB', F.validarArchivo({ name: 'a.zip', size: 26 * 1024 * 1024 }, TEXTOS_ES), TEXTOS_ES.archivoGrande(25));
+      eq('más del límite', F.validarArchivo({ name: 'a.zip', size: 31 * 1024 * 1024 }, TEXTOS_ES), TEXTOS_ES.archivoGrande(30));
+      F.fijarLimiteMb(50);
+      eq('el límite lo manda el API', F.validarArchivo({ name: 'a.zip', size: 31 * 1024 * 1024 }, TEXTOS_ES), null);
+      F.fijarLimiteMb(30);
       eq('tipo bloqueado', F.validarArchivo({ name: 'setup.EXE', size: 10 }, TEXTOS_ES), TEXTOS_ES.archivoBloqueado);
       eq('tipo por mime', [F.tipoDeMime('image/png'), F.tipoDeMime('video/mp4'), F.tipoDeMime('audio/webm'), F.tipoDeMime('application/pdf')], ['imagen', 'video', 'audio', 'archivo']);
+    },
+  },
+  {
+    nombre: 'chat W-CHAT-47 temas por chat: predefinidos, propios y el de la app',
+    categoria: 'what',
+    correr({ eq, expect }) {
+      expect('hay doce predefinidos', TEMAS.length === 12);
+      eq('sin tema no hay variables', varsDeTema(null), {});
+      expect('un predefinido da degradado', varsDeTema({ id: 'uva' })['--chat-propia']!.includes('linear-gradient'));
+      eq('uno propio usa sus colores', coloresDe({ id: 'propio', color1: '#111111', color2: '#222222', angulo: 90 })!.angulo, 90);
+      eq('uno desconocido cae al de la app', coloresDe({ id: 'nada' }), null);
     },
   },
   {

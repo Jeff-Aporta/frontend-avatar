@@ -6,7 +6,7 @@
 :host {
   @include m.host-bloque;
   --_ajena: var(--iswc-bg-elev);
-  --_propia: color-mix(in srgb, var(--iswc-accent) 24%, var(--iswc-bg-elev));
+  --_propia: var(--chat-propia, color-mix(in srgb, var(--iswc-accent) 24%, var(--iswc-bg-elev)));
   --_propia-borde: color-mix(in srgb, var(--iswc-accent) 45%, transparent);
   --_cola: 0.55em;
 }
@@ -71,6 +71,7 @@
 
 .fila[data-propio="1"] .burbuja {
   background: var(--_propia);
+  color: var(--chat-propia-texto, inherit);
   border-color: var(--_propia-borde);
   box-shadow: 0 0 0.9em color-mix(in srgb, var(--iswc-accent) 14%, transparent);
 }

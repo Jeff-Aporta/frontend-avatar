@@ -20,6 +20,7 @@ await import('./av-chat-visor.js');
 await import('./av-chat-busqueda.js');
 await import('./av-chat-nuevo.js');
 await import('./av-chat-grupo-form.js');
+await import('./av-chat-tema.js');
 await import('./av-chat-info.js');
 await import('./av-chat-reenviar.js');
 await import('./av-chat-llamada.js');

@@ -96,7 +96,7 @@ export function reducir(e: EstadoChat, ev: EventoChat): EstadoChat {
       const previo = e.chats[ev.chat.id];
       if (!previo && !ev.chat.tipo) return e;
       const base: Chat = previo ?? {
-        id: ev.chat.id, tipo: ev.chat.tipo!, nombre: '', descripcion: '', foto: null, miembros: [], fijado: false, silenciado: false, archivado: false,
+        id: ev.chat.id, tipo: ev.chat.tipo!, nombre: '', descripcion: '', foto: null, tema: null, miembros: [], fijado: false, silenciado: false, archivado: false,
         marcadoNoLeido: false, noLeidos: 0, mensajeFijado: null, actividad: '', creado: '', lecturas: {}, ultimo: null,
       };
       const limpio = Object.fromEntries(Object.entries(ev.chat).filter(([, v]) => v !== undefined));

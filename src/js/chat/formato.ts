@@ -10,8 +10,12 @@ import type { Chat, MensajeChat, TipoMensaje, UsuarioChat } from './tipos.js';
 import type { Textos } from './textos.js';
 
 export const MAX_TEXTO = 4000;
-export const MAX_MB = 25;
-export const MAX_BYTES = MAX_MB * 1024 * 1024;
+/** Límite por archivo: lo manda el API (`ajustes/archivos`, se cambia en Administración); este es el de fábrica. */
+let maxMb = 30;
+export const limiteMb = (): number => maxMb;
+export const fijarLimiteMb = (mb: number): void => {
+  if (mb > 0) maxMb = mb;
+};
 export const RAFAGA_MS = 5 * 60 * 1000;
 export const EDITAR_MS = 15 * 60 * 1000;
 export const ELIMINAR_TODOS_MS = 60 * 60 * 1000;
@@ -291,7 +295,7 @@ export function validarTexto(texto: string): string | null {
 
 /** Motivo de rechazo de un archivo antes de subirlo, o `null` si sirve. */
 export function validarArchivo(a: { name?: string; size: number }, t: Pick<Textos, 'archivoGrande' | 'archivoBloqueado'>): string | null {
-  if (a.size > MAX_BYTES) return t.archivoGrande(MAX_MB);
+  if (a.size > maxMb * 1024 * 1024) return t.archivoGrande(maxMb);
   const ext = (a.name ?? '').toLowerCase().split('.').pop() ?? '';
   if (a.name?.includes('.') && EXTENSIONES_BLOQUEADAS.includes(ext)) return t.archivoBloqueado;
   return null;
