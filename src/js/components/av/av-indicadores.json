@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-indicadores",
-  "category": "transversal",
+  "category": "propuestas",
   "navTitle": "Indicadores",
   "title": "&lt;av-indicadores&gt;",
   "titleHtml": false,
@@ -73,7 +73,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-stat-group</strong>Fila de KPIs responsive sin dominio: solo iswc-stat en rejilla con esqueletos y refresco sin repintar. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-stat-group</strong>Fila de KPIs responsive sin dominio: solo iswc-stat en rejilla con esqueletos y refresco sin repintar. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

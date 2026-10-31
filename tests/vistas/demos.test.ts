@@ -38,4 +38,14 @@ export default definirPruebas([
       }
     },
   },
+  {
+    nombre: 'demos W-DEMO-04 toda propuesta para iswc está en su sección y nada más entra en ella',
+    categoria: 'what',
+    correr({ expect }) {
+      for (const d of definiciones) {
+        const def = DefinicionDemoSchema.parse(d.json);
+        expect(d.tag, !!def.reuso === def.category.startsWith('propuestas'), def.category);
+      }
+    },
+  },
 ]);

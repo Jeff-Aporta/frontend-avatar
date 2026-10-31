@@ -107,7 +107,7 @@ export const FAMILIA_TAGS = {
     'av-chat-llamada', 'av-chat',
   ],
   /** Traídos de ISW-TestPatyIA para auditarlos en el explorador: solo los carga la galería. */
-  paty: ['av-paty-cargando', 'av-paty-sin-sesion', 'av-paty-process', 'av-paty-adjunto', 'av-paty-traza', 'av-paty-pagination', 'av-paty-chat-bubble', 'av-paty-json-dialog'],
+  paty: ['av-paty-cargando', 'av-paty-process', 'av-paty-traza', 'av-paty-pagination', 'av-paty-chat-bubble', 'av-paty-json-dialog'],
 } as const satisfies Record<string, readonly `av-${string}`[]>;
 
 /** Familias que carga cada vista (antes que sus propios componentes). */

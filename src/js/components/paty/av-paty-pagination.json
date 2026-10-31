@@ -6,7 +6,7 @@
     "propuesta": "iswc-pagination",
     "motivo": "Paginador numérico con pista desplazable, sin datos de Paty."
   },
-  "category": "paty",
+  "category": "propuestas",
   "navTitle": "Paginación",
   "title": "&lt;av-paty-pagination&gt;",
   "titleHtml": false,
@@ -171,7 +171,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-pagination</strong>Paginador numérico con pista desplazable, sin datos de Paty. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-pagination</strong>Paginador numérico con pista desplazable, sin datos de Paty. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

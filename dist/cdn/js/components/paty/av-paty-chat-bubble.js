@@ -1,4 +1,4 @@
-import{adoptCss as y}from"./_paty.js?v=wt56bb";const v=`
+import{adoptCss as y}from"./_paty.js?v=b2rc33";const v=`
     <div class="bubble">
         <div class="avatar" aria-hidden="true">P</div>
         <div class="status-pill"><span class="dot"></span><span class="status-label">idle</span></div>

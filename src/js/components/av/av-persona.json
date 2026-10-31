@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-persona",
-  "category": "transversal",
+  "category": "propuestas",
   "navTitle": "Persona",
   "title": "&lt;av-persona&gt;",
   "titleHtml": false,
@@ -51,7 +51,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-person</strong>Avatar con nombre y rol, común a cualquier app con usuarios. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-person</strong>Avatar con nombre y rol, común a cualquier app con usuarios. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

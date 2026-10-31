@@ -8,6 +8,8 @@ import type { LoaderGaleria } from '../../../src/js/consts/schemas/demo.schemas.
 
 /** Categoría → rótulo: el orden de las claves es el del catálogo. */
 const CATEGORIAS: Record<string, string> = {
+  propuestas: 'Propuestas generalizables',
+  'propuestas-chat': 'Propuesta: familia del chat',
   shell: 'Armazón',
   transversal: 'Transversales',
   inicio: 'Portada',
@@ -25,7 +27,6 @@ const CATEGORIAS: Record<string, string> = {
   organizacion: 'Organización',
   asistente: 'Asistente',
   admin: 'Administración',
-  paty: 'Propuestas de PatyIA',
 };
 
 const L = (globalThis as { iswcLoader?: LoaderGaleria }).iswcLoader;

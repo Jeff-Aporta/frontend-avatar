@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-chat-lista",
-  "category": "chat",
+  "category": "propuestas-chat",
   "navTitle": "Lista de chats",
   "title": "&lt;av-chat-lista&gt;",
   "titleHtml": false,
@@ -113,7 +113,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-list</strong>Lista de conversaciones genérica con reconciliación por clave. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-list</strong>Lista de conversaciones genérica con reconciliación por clave. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

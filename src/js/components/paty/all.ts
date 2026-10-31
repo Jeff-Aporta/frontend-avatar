@@ -6,9 +6,7 @@ import { setCssBase } from '../../base/componente.js';
 setCssBase(new URL('../../../', import.meta.url).href);
 
 await import('./av-paty-cargando.js');
-await import('./av-paty-sin-sesion.js');
 await import('./av-paty-process.js');
-await import('./av-paty-adjunto.js');
 await import('./av-paty-traza.js');
 await import('./av-paty-pagination.js');
 await import('./av-paty-chat-bubble.js');

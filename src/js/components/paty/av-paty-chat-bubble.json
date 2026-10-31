@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-paty-chat-bubble",
-  "category": "paty",
+  "category": "propuestas",
   "navTitle": "Burbuja",
   "title": "&lt;av-paty-chat-bubble&gt;",
   "titleHtml": false,
@@ -42,7 +42,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-stream-bubble</strong>Burbuja con estados de streaming. Complementa o compite con av-chat-burbuja. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-stream-bubble</strong>Burbuja con estados de streaming de un asistente. Serviría para av-avo-mensaje; no reemplaza a av-chat-burbuja. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }
@@ -51,7 +51,7 @@
   "reuso": {
     "candidato": "iswc-root",
     "propuesta": "iswc-stream-bubble",
-    "motivo": "Burbuja con estados de streaming. Complementa o compite con av-chat-burbuja."
+    "motivo": "Burbuja con estados de streaming de un asistente. Serviría para av-avo-mensaje; no reemplaza a av-chat-burbuja."
   },
   "origen": "ISW-TestPatyIA"
 }

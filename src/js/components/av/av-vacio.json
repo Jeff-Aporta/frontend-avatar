@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-vacio",
-  "category": "transversal",
+  "category": "propuestas",
   "navTitle": "Vacío",
   "title": "&lt;av-vacio&gt;",
   "titleHtml": false,
@@ -20,7 +20,8 @@
           "props": {
             "titulo": "Sin proyectos",
             "texto": "Crea un proyecto para empezar un tablero.",
-            "estado": "vacio"
+            "estado": "vacio",
+            "variante": "caja"
           },
           "controls": [
             {
@@ -45,6 +46,16 @@
               "prop": "props:texto",
               "label": "texto",
               "default": "Crea un proyecto para empezar un tablero."
+            },
+            {
+              "control": "select",
+              "prop": "props:variante",
+              "label": "variante",
+              "options": [
+                "caja",
+                "tarjeta"
+              ],
+              "default": "caja"
             }
           ]
         },
@@ -55,7 +66,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-empty-state</strong>Estado vacío con ícono, texto y acción para cualquier lista. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-empty-state</strong>Estado vacío, cargando o error con acción. Consolida paty-sin-sesion: de Paty toma la variante tarjeta. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }
@@ -63,6 +74,6 @@
   "reuso": {
     "candidato": "iswc-root",
     "propuesta": "iswc-empty-state",
-    "motivo": "Estado vacío con ícono, texto y acción para cualquier lista."
+    "motivo": "Estado vacío, cargando o error con acción. Consolida paty-sin-sesion: de Paty toma la variante tarjeta."
   }
 }

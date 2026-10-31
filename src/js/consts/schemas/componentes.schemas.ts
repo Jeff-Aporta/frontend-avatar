@@ -35,6 +35,8 @@ export const AvVacioPropsSchema = z.object({
   titulo: z.string().default('Nada por aquí'),
   texto: z.string().default(''),
   estado: z.enum(['vacio', 'cargando', 'error']).default('vacio'),
+  /** `caja` punteada para listas; `tarjeta` con cuerpo propio para una vista entera (sin sesión, sin permiso). */
+  variante: z.enum(['caja', 'tarjeta']).default('caja'),
 });
 export type AvVacioProps = z.infer<typeof AvVacioPropsSchema>;
 

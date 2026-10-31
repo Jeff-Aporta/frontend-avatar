@@ -6,7 +6,7 @@
     "propuesta": "iswc-status-pill",
     "motivo": "Pastilla de estado pendiente, hecho o error para cualquier feed de procesos."
   },
-  "category": "paty",
+  "category": "propuestas",
   "navTitle": "Proceso",
   "title": "&lt;av-paty-process&gt;",
   "titleHtml": false,
@@ -51,7 +51,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-status-pill</strong>Pastilla de estado pendiente, hecho o error para cualquier feed de procesos. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-status-pill</strong>Pastilla de estado pendiente, hecho o error para cualquier feed de procesos. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

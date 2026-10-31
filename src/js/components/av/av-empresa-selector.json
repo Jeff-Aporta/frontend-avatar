@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-empresa-selector",
-  "category": "transversal",
+  "category": "propuestas",
   "navTitle": "Empresa selector",
   "title": "&lt;av-empresa-selector&gt;",
   "titleHtml": false,
@@ -48,7 +48,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-tenant-selector</strong>Selector de empresa activa para apps con varios clientes. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-tenant-selector</strong>Selector de empresa activa para apps con varios clientes. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-paty-traza",
-  "category": "paty",
+  "category": "propuestas",
   "navTitle": "Traza del ISS",
   "title": "&lt;av-paty-traza&gt;",
   "titleHtml": false,
@@ -125,7 +125,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-trace-log</strong>Registro de pasos con tiempo, nivel y datos para cualquier proceso largo. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-trace-log</strong>Registro de pasos con tiempo, nivel y datos para cualquier proceso largo. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     },

@@ -6,7 +6,7 @@
     "propuesta": "iswc-json-dialog",
     "motivo": "Diálogo para ver o editar JSON con validador externo."
   },
-  "category": "paty",
+  "category": "propuestas",
   "navTitle": "Diálogo JSON",
   "title": "&lt;av-paty-json-dialog&gt;",
   "titleHtml": false,
@@ -43,7 +43,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-json-dialog</strong>Diálogo para ver o editar JSON con validador externo. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-json-dialog</strong>Diálogo para ver o editar JSON con validador externo. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     },

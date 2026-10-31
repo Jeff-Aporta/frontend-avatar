@@ -29,6 +29,7 @@ Lo que se muestra cuando una lista o panel no tiene datos, está cargando o fall
 | `titulo` | `string` | `Nada por aquí` | Título. |
 | `texto` | `string` | `''` | Explicación. |
 | `estado` | `vacio \| cargando \| error` | `vacio` | Qué se muestra. |
+| `variante` | `caja \| tarjeta` | `caja` | `tarjeta` para una vista entera: sin sesión o sin permiso. |
 
 ## Eventos
 

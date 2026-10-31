@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-cabecera",
-  "category": "transversal",
+  "category": "propuestas",
   "navTitle": "Cabecera",
   "title": "&lt;av-cabecera&gt;",
   "titleHtml": false,
@@ -50,7 +50,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-page-header</strong>Título, subtítulo y acciones de cualquier vista, sin dominio. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-page-header</strong>Título, subtítulo y acciones de cualquier vista, sin dominio. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

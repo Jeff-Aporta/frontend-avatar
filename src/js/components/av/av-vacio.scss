@@ -33,6 +33,12 @@
     max-width: 36em;
   }
 
+  &[data-variante="tarjeta"] {
+    border-style: solid;
+    background: var(--iswc-bg-elev);
+    box-shadow: var(--iswc-shadow);
+  }
+
   &[data-estado="error"] .icono {
     color: var(--iswc-danger-text);
   }

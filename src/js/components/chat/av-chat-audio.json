@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-chat-audio",
-  "category": "chat",
+  "category": "propuestas-chat",
   "navTitle": "Nota de voz",
   "title": "&lt;av-chat-audio&gt;",
   "titleHtml": false,
@@ -52,7 +52,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-voice-note</strong>Reproductor de notas de voz genérico. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-voice-note</strong>Reproductor de notas de voz genérico. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

@@ -356,16 +356,8 @@
     "file": "../../src/js/components/paty/av-paty-cargando.json"
   },
   {
-    "tag": "av-paty-sin-sesion",
-    "file": "../../src/js/components/paty/av-paty-sin-sesion.json"
-  },
-  {
     "tag": "av-paty-process",
     "file": "../../src/js/components/paty/av-paty-process.json"
-  },
-  {
-    "tag": "av-paty-adjunto",
-    "file": "../../src/js/components/paty/av-paty-adjunto.json"
   },
   {
     "tag": "av-paty-traza",

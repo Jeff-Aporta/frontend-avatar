@@ -1,7 +1,7 @@
 {
   "$schema": "iswc-preview/v1",
   "tag": "av-chat-mensajes",
-  "category": "chat",
+  "category": "propuestas-chat",
   "navTitle": "Conversación",
   "title": "&lt;av-chat-mensajes&gt;",
   "titleHtml": false,
@@ -194,7 +194,7 @@
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-thread</strong>Hilo de mensajes genérico con reconciliación por clave. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-thread</strong>Hilo de mensajes genérico con reconciliación por clave. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

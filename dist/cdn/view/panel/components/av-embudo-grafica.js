@@ -1,4 +1,4 @@
-import{crearComponente as r,define as n,html as e,raw as l}from"../../../js/base/componente.js?v=17uldv";import{moneda as p,serieEmbudo as o}from"../utils/panel.js?v=8snlwa";const d=r(import.meta.url,"av-embudo-grafica",{clientes:null},(t,c)=>{const a=c.clientes,i=a?{data:{labels:o(a).labels,datasets:[{label:"Clientes",data:o(a).data}]},options:{plugins:{legend:{display:!1}}}}:null;t.append(e`
+import{crearComponente as r,define as n,html as e,raw as l}from"../../../js/base/componente.js?v=0air4b";import{moneda as p,serieEmbudo as o}from"../utils/panel.js?v=8snlwa";const d=r(import.meta.url,"av-embudo-grafica",{clientes:null},(t,c)=>{const a=c.clientes,i=a?{data:{labels:o(a).labels,datasets:[{label:"Clientes",data:o(a).data}]},options:{plugins:{legend:{display:!1}}}}:null;t.append(e`
     <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
       <strong slot="header"><iswc-icon icon="mdi:filter-variant"></iswc-icon> Embudo CRM</strong>
       ${a?e`<iswc-tag slot="header-actions" color="success">${p(a.valor_pipeline)}</iswc-tag>`:null}

@@ -1,4 +1,4 @@
-import{crearComponente as t,define as l,emitir as d,html as r}from"../../../js/base/componente.js?v=17uldv";const u=t(import.meta.url,"av-credenciales-demo",{items:[]},(a,e,i)=>{a.append(r`
+import{crearComponente as t,define as l,emitir as d,html as r}from"../../../js/base/componente.js?v=0air4b";const u=t(import.meta.url,"av-credenciales-demo",{items:[]},(a,e,i)=>{a.append(r`
     <iswc-card variant="filled-outlined" class="tarjeta" part="tarjeta">
       <strong slot="header"><iswc-icon icon="mdi:account-group-outline"></iswc-icon> Cuentas de prueba</strong>
       <ul class="lista" part="lista">
