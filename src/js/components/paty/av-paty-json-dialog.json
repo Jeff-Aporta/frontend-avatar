@@ -1,0 +1,77 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-paty-json-dialog",
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-json-dialog",
+    "motivo": "Diálogo para ver o editar JSON con validador externo."
+  },
+  "category": "paty",
+  "navTitle": "Diálogo JSON",
+  "title": "&lt;av-paty-json-dialog&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-paty-json-dialog",
+  "styles": ".casos{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}.casos iswc-card{height:100%}.casos p{margin:.35em 0 0;opacity:.85;font-size:.92em;line-height:1.35}.fila{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}",
+  "sections": [
+    {
+      "id": "lectura",
+      "title": "Solo lectura",
+      "lede": "Inspeccionar un JSON sin editarlo. El pie dice Cerrar; no hay Aplicar.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>open</strong> en el panel de atributos.</iswc-callout><div class=\"fila\"><iswc-button type=\"button\" data-demo-open color=\"brand\">Abrir lectura</iswc-button><av-paty-json-dialog id=\"json-ro\"></av-paty-json-dialog></div>",
+          "props": {
+            "titulo": "Config efectiva",
+            "valor": "{\n  \"modelo\": \"paty\",\n  \"temperature\": 0.2\n}",
+            "readonly": true
+          },
+          "target": "#json-ro"
+        },
+        {
+          "kind": "html",
+          "html": "<div class=\"casos\"><iswc-card variant=\"outlined\"><strong slot=\"header\">Caso</strong><p>Ver la config que llegó del backend o del log, sin riesgo de tocarla.</p></iswc-card><iswc-card variant=\"outlined\"><strong slot=\"header\">Qué ver</strong><p><code>readonly: true</code> → editor bloqueado, un solo botón Cerrar.</p></iswc-card></div>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-json-dialog</strong>Diálogo para ver o editar JSON con validador externo. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+        }
+      ]
+    },
+    {
+      "id": "edicion",
+      "title": "Edición + validar",
+      "lede": "El anfitrión pasa <code>validar</code>. Aplicar solo se enciende si <code>ok</code>.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"fila\"><iswc-button type=\"button\" data-demo-open color=\"brand\">Abrir editable</iswc-button><av-paty-json-dialog id=\"json-rw\"></av-paty-json-dialog></div>",
+          "props": {
+            "titulo": "Editar JSON",
+            "valor": "{\n  \"activo\": true,\n  \"limite\": 10\n}",
+            "readonly": false
+          },
+          "target": "#json-rw",
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "prop:readonly",
+              "label": "readonly"
+            },
+            {
+              "control": "text",
+              "prop": "prop:titulo",
+              "label": "titulo"
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<div class=\"casos\"><iswc-card variant=\"outlined\"><strong slot=\"header\">Caso</strong><p>Ajuste que se edita como documento (mapeo, jconfig), no como formulario de inputs sueltos.</p></iswc-card><iswc-card variant=\"outlined\"><strong slot=\"header\">Contrato</strong><p>Sin <code>validar</code>, Aplicar queda apagado. Con validar, el host recibe <code>paty-json-aplicar</code> con el valor normalizado.</p></iswc-card><iswc-card variant=\"accent\"><strong slot=\"header\">Cuándo no</strong><p>No lo uses para un formulario de campos sueltos (usuario, switch, select). Ahí van inputs normales.</p></iswc-card></div>"
+        }
+      ]
+    }
+  ],
+  "origen": "ISW-TestPatyIA"
+}

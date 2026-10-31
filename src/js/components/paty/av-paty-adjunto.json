@@ -1,0 +1,140 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-paty-adjunto",
+  "category": "paty",
+  "navTitle": "Adjunto",
+  "title": "&lt;av-paty-adjunto&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-paty-adjunto",
+  "styles": ".fila{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;min-height:4.5rem;padding:.35rem 0}.nota{margin:0 0 .35rem;font-size:.85em;color:var(--iswc-text-dim)}.caja{border:1px dashed var(--iswc-border);border-radius:12px;padding:.7rem;margin:0 0 .75rem}.em6{font-size:6rem}.em3{font-size:3rem}.em4{font-size:4rem}.em2{font-size:2rem}.casos{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}.casos iswc-card{height:100%}.casos p{margin:.35em 0 0;opacity:.85;font-size:.92em;line-height:1.35}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-paty-adjunto&gt;",
+      "lede": "Mocks locales por kind. Alto = 1em; el padre fija font-size. Archivos en /mocks/adjuntos/.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"caja\"><p class=\"nota\"><code>kind=imagen</code> · preview = thumb local · click abre original. font-size 6rem.</p><div class=\"fila em6\"><av-paty-adjunto id=\"adj-img\" ifile=\"2DK\" kind=\"imagen\" mime=\"image/svg+xml\" filename=\"vision-demo.svg\" width=\"64\" height=\"64\" src-thumb=\"../../mocks/adjuntos/thumb.svg\" src-med=\"../../mocks/adjuntos/med.svg\" src-original=\"../../mocks/adjuntos/original.svg\"></av-paty-adjunto></div></div>",
+          "controls": [
+            {
+              "control": "select",
+              "prop": "attr:mode",
+              "label": "mode",
+              "options": [
+                "xml",
+                "md"
+              ]
+            },
+            {
+              "control": "text",
+              "prop": "attr:filename",
+              "label": "filename"
+            },
+            {
+              "control": "select",
+              "prop": "attr:src-thumb",
+              "label": "src-thumb",
+              "options": [
+                "../../mocks/adjuntos/thumb.svg",
+                "../../mocks/adjuntos/med.svg",
+                "../../mocks/adjuntos/original.svg"
+              ]
+            }
+          ],
+          "target": "#adj-img"
+        },
+        {
+          "kind": "demo",
+          "html": "<div class=\"caja\"><p class=\"nota\"><code>kind=audio</code> · webm local reproducible. font-size 3rem.</p><div class=\"fila em3\"><av-paty-adjunto id=\"adj-audio\" ifile=\"6BZ\" kind=\"audio\" mime=\"audio/webm\" filename=\"nota.webm\" src=\"../../mocks/adjuntos/nota.webm\" durationSec=\"8\"></av-paty-adjunto></div></div>",
+          "controls": [
+            {
+              "control": "select",
+              "prop": "attr:mode",
+              "label": "mode",
+              "options": [
+                "xml",
+                "md"
+              ]
+            },
+            {
+              "control": "text",
+              "prop": "attr:filename",
+              "label": "filename"
+            },
+            {
+              "control": "text",
+              "prop": "attr:transcripcion",
+              "label": "transcripcion"
+            }
+          ],
+          "target": "#adj-audio"
+        },
+        {
+          "kind": "demo",
+          "html": "<div class=\"caja\"><p class=\"nota\"><code>kind=documento</code> · pdf / csv / txt locales (descarga o abre). font-size 4rem.</p><div class=\"fila em4\"><av-paty-adjunto id=\"adj-pdf\" ifile=\"3CX\" kind=\"documento\" mime=\"application/pdf\" filename=\"contrato.pdf\" src=\"../../mocks/adjuntos/contrato.pdf\"></av-paty-adjunto><av-paty-adjunto id=\"adj-xls\" ifile=\"4DY\" kind=\"documento\" mime=\"text/csv\" filename=\"ventas.csv\" src=\"../../mocks/adjuntos/ventas.csv\"></av-paty-adjunto><av-paty-adjunto id=\"adj-txt\" ifile=\"5EZ\" kind=\"documento\" mime=\"text/plain\" filename=\"notas.txt\" src=\"../../mocks/adjuntos/notas.txt\"></av-paty-adjunto></div></div>",
+          "controls": [
+            {
+              "control": "select",
+              "prop": "attr:mode",
+              "label": "mode",
+              "options": [
+                "xml",
+                "md"
+              ]
+            },
+            {
+              "control": "text",
+              "prop": "attr:filename",
+              "label": "filename"
+            },
+            {
+              "control": "select",
+              "prop": "attr:mime",
+              "label": "mime",
+              "options": [
+                "application/pdf",
+                "text/csv",
+                "text/plain",
+                "application/vnd.ms-excel",
+                "application/msword"
+              ]
+            }
+          ],
+          "target": "#adj-pdf"
+        },
+        {
+          "kind": "demo",
+          "html": "<div class=\"caja\"><p class=\"nota\">Los tres kinds juntos · font-size 2rem (escala realista en chat).</p><div class=\"fila em2\"><av-paty-adjunto id=\"adj-mix-img\" ifile=\"I1\" kind=\"imagen\" mime=\"image/svg+xml\" filename=\"thumb.svg\" width=\"64\" height=\"64\" src-thumb=\"../../mocks/adjuntos/thumb.svg\" src-original=\"../../mocks/adjuntos/original.svg\"></av-paty-adjunto><av-paty-adjunto id=\"adj-mix-audio\" ifile=\"A1\" kind=\"audio\" mime=\"audio/webm\" filename=\"nota.webm\" src=\"../../mocks/adjuntos/nota.webm\"></av-paty-adjunto><av-paty-adjunto id=\"adj-mix-pdf\" ifile=\"D1\" kind=\"documento\" mime=\"application/pdf\" filename=\"contrato.pdf\" src=\"../../mocks/adjuntos/contrato.pdf\"></av-paty-adjunto><av-paty-adjunto id=\"adj-mix-txt\" ifile=\"D2\" kind=\"documento\" mime=\"text/plain\" filename=\"notas.txt\" src=\"../../mocks/adjuntos/notas.txt\"></av-paty-adjunto></div></div>",
+          "controls": [
+            {
+              "control": "select",
+              "prop": "attr:mode",
+              "label": "mode",
+              "options": [
+                "xml",
+                "md"
+              ]
+            }
+          ],
+          "target": "#adj-mix-img"
+        },
+        {
+          "kind": "html",
+          "html": "<div class=\"casos\"><iswc-card variant=\"outlined\"><strong slot=\"header\">Imagen</strong><p>Preview = <code>thumb</code>. Click abre <code>original</code>. Alto siempre 1em del font-size padre.</p></iswc-card><iswc-card variant=\"outlined\"><strong slot=\"header\">Audio</strong><p>Chip + controles nativos. Mock local <code>nota.webm</code>.</p></iswc-card><iswc-card variant=\"outlined\"><strong slot=\"header\">Documento</strong><p>Icono por mime/ext (pdf/csv/txt…). Descarga el archivo local del mock.</p></iswc-card><iswc-card variant=\"accent\"><strong slot=\"header\">Datos</strong><p>Acepta <code>jfile</code> JSON, hijos <code>meta/variants</code> o attrs <code>src-thumb|med|original</code>. Sin URLs externas en el playground.</p></iswc-card></div>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-attachment</strong>Adjunto de imagen, audio o documento. Compite con av-chat-adjunto: elegir uno. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-attachment",
+    "motivo": "Adjunto de imagen, audio o documento. Compite con av-chat-adjunto: elegir uno."
+  },
+  "origen": "ISW-TestPatyIA"
+}

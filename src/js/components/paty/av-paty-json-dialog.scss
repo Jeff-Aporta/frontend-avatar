@@ -1,0 +1,50 @@
+/* av-paty-json-dialog — editor JSON de configuración. */
+
+:host {
+  color: inherit;
+  font-size: 1em;
+  display: contents;
+
+  .dialogo {
+    &::part(backdrop) {
+      opacity: 1;
+      background: color-mix(in srgb, black 18%, transparent);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    .errores {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.8em;
+      line-height: 1.5;
+    }
+
+    .editor {
+      display: block;
+      min-height: 12rem;
+      max-height: min(60vh, 30rem);
+      overflow: auto;
+      scrollbar-width: thin;
+      scrollbar-color: color-mix(in srgb, var(--iswc-text) 16%, transparent) transparent;
+
+      /* Viewport bajo: el editor no roba el alto que necesita el pie. */
+      @media (max-height: 42rem) {
+        min-height: 8rem;
+      }
+    }
+  }
+
+  /* Controles: tamano y color salen del contexto, igual que iswc-icon. */
+  & :is(iswc-switch, iswc-checkbox):not([color]) {
+    font-size: 1em;
+    color: inherit;
+    --iswc-switch-accent: currentColor;
+    --iswc-switch-thumb: var(--iswc-bg, #fff);
+    --iswc-checkbox-accent: currentColor;
+    --iswc-checkbox-fill: currentColor;
+    --iswc-checkbox-bg: transparent;
+    --iswc-checkbox-border: color-mix(in srgb, currentColor 48%, transparent);
+    --iswc-checkbox-on-accent: var(--iswc-bg, #fff);
+  }
+}

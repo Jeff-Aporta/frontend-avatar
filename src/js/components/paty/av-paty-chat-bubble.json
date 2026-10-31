@@ -1,0 +1,57 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-paty-chat-bubble",
+  "category": "paty",
+  "navTitle": "Burbuja",
+  "title": "&lt;av-paty-chat-bubble&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-paty-chat-bubble",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-paty-chat-bubble&gt;",
+      "lede": "Burbuja del stream. state vale idle, streaming, end o error.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-paty-chat-bubble text=\"Escribiendo la respuesta\" state=\"streaming\"></av-paty-chat-bubble>",
+          "controls": [
+            {
+              "control": "text",
+              "prop": "attr:text",
+              "label": "text"
+            },
+            {
+              "control": "select",
+              "prop": "attr:state",
+              "label": "state",
+              "options": [
+                "idle",
+                "streaming",
+                "end",
+                "error"
+              ]
+            }
+          ],
+          "target": "av-paty-chat-bubble"
+        },
+        {
+          "kind": "html",
+          "html": "<div class=\"casos\"><iswc-callout color=\"success\" icon=\"mdi:check-circle-outline\"><strong>Cuándo usarlo</strong><p>PatyIA todavía está escribiendo la respuesta.</p></iswc-callout><iswc-callout color=\"danger\" icon=\"mdi:alert-octagon-outline\"><strong>Cuándo no</strong><p>No uses writing: ese valor no existe y el badge cae en idle.</p></iswc-callout></div>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-stream-bubble</strong>Burbuja con estados de streaming. Complementa o compite con av-chat-burbuja. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "styles": ".casos{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}.casos iswc-callout{height:100%}.casos iswc-callout::part(base){height:100%;box-sizing:border-box}.casos p{margin:.35em 0 0;opacity:.85;font-size:.92em;line-height:1.35}",
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-stream-bubble",
+    "motivo": "Burbuja con estados de streaming. Complementa o compite con av-chat-burbuja."
+  },
+  "origen": "ISW-TestPatyIA"
+}

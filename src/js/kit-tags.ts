@@ -66,6 +66,7 @@ export const VIEW_KIT_TAGS: Record<string, readonly string[]> = {
   finanzas: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-bar-chart', 'iswc-doughnut-chart'],
   inventario: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-switch'],
   rrhh: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-bar-chart', 'iswc-doughnut-chart'],
+  demo: ['iswc-code', 'iswc-dialog'],
 };
 
 /** Todos los tags del kit de la app (shell + vistas), sin repetir: lo usa la galería. */
@@ -105,12 +106,15 @@ export const FAMILIA_TAGS = {
     'av-chat-mensajes', 'av-chat-compositor', 'av-chat-visor', 'av-chat-busqueda', 'av-chat-nuevo', 'av-chat-grupo-form', 'av-chat-info', 'av-chat-reenviar',
     'av-chat-llamada', 'av-chat',
   ],
+  /** Traídos de ISW-TestPatyIA para auditarlos en el explorador: solo los carga la galería. */
+  paty: ['av-paty-cargando', 'av-paty-sin-sesion', 'av-paty-process', 'av-paty-adjunto', 'av-paty-traza', 'av-paty-pagination', 'av-paty-chat-bubble', 'av-paty-json-dialog'],
 } as const satisfies Record<string, readonly `av-${string}`[]>;
 
 /** Familias que carga cada vista (antes que sus propios componentes). */
 export const VIEW_FAMILIAS: Record<string, readonly (keyof typeof FAMILIA_TAGS)[]> = {
   canales: ['chat'],
   'chat-demo': ['chat'],
+  demo: ['paty'],
 };
 
 export type AppTag = (typeof APP_TAGS)[number] | (typeof VIEW_TAGS)[keyof typeof VIEW_TAGS][number] | (typeof FAMILIA_TAGS)[keyof typeof FAMILIA_TAGS][number];

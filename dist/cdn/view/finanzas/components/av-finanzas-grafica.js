@@ -1,4 +1,4 @@
-import{crearComponente as u,define as m,html as o}from"../../../js/base/componente.js?v=ehrr8d";import{nombreMes as d,serieCategorias as i,serieComparativa as l}from"../utils/finanzas.js?v=ct4umv";const f=u(import.meta.url,"av-finanzas-grafica",{resumen:null},(r,c)=>{const a=c.resumen,s=a?i(a):null;r.append(o`
+import{crearComponente as u,define as m,html as o}from"../../../js/base/componente.js?v=17uldv";import{nombreMes as d,serieCategorias as i,serieComparativa as l}from"../utils/finanzas.js?v=ct4umv";const f=u(import.meta.url,"av-finanzas-grafica",{resumen:null},(r,c)=>{const a=c.resumen,s=a?i(a):null;r.append(o`
       <div class="rejilla" part="rejilla">
         <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
           <strong slot="header" class="titulo"><iswc-icon icon="mdi:chart-bar"></iswc-icon> Mes contra mes <span class="mes">${a?d(a.mes):""}</span></strong>

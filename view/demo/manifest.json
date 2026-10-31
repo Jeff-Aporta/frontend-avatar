@@ -350,5 +350,37 @@
   {
     "tag": "av-rrhh",
     "file": "../rrhh/components/av-rrhh.json"
+  },
+  {
+    "tag": "av-paty-cargando",
+    "file": "../../src/js/components/paty/av-paty-cargando.json"
+  },
+  {
+    "tag": "av-paty-sin-sesion",
+    "file": "../../src/js/components/paty/av-paty-sin-sesion.json"
+  },
+  {
+    "tag": "av-paty-process",
+    "file": "../../src/js/components/paty/av-paty-process.json"
+  },
+  {
+    "tag": "av-paty-adjunto",
+    "file": "../../src/js/components/paty/av-paty-adjunto.json"
+  },
+  {
+    "tag": "av-paty-traza",
+    "file": "../../src/js/components/paty/av-paty-traza.json"
+  },
+  {
+    "tag": "av-paty-pagination",
+    "file": "../../src/js/components/paty/av-paty-pagination.json"
+  },
+  {
+    "tag": "av-paty-chat-bubble",
+    "file": "../../src/js/components/paty/av-paty-chat-bubble.json"
+  },
+  {
+    "tag": "av-paty-json-dialog",
+    "file": "../../src/js/components/paty/av-paty-json-dialog.json"
   }
 ]

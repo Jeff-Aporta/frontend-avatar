@@ -1,0 +1,56 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-paty-sin-sesion",
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-empty-state",
+    "motivo": "Estado vacío centrado. Compite con av-vacio por la misma propuesta: elegir uno."
+  },
+  "category": "paty",
+  "navTitle": "Sin sesión",
+  "title": "&lt;av-paty-sin-sesion&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-paty-sin-sesion",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-paty-sin-sesion&gt;",
+      "lede": "Aviso vacío: icono, título y texto. El sitio pone las tres cosas.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-paty-sin-sesion icon=\"mdi:lock-outline\" titulo=\"Inicia sesión\" texto=\"El aviso recibe icono, título y texto.\"></av-paty-sin-sesion>",
+          "controls": [
+            {
+              "control": "text",
+              "prop": "attr:titulo",
+              "label": "titulo"
+            },
+            {
+              "control": "text",
+              "prop": "attr:texto",
+              "label": "texto"
+            },
+            {
+              "control": "text",
+              "prop": "attr:icon",
+              "label": "icon"
+            }
+          ],
+          "target": "av-paty-sin-sesion"
+        },
+        {
+          "kind": "html",
+          "html": "<div class=\"casos\"><iswc-callout color=\"success\" icon=\"mdi:check-circle-outline\"><strong>Cuándo usarlo</strong><p>Una vista que no puede seguir sin sesión o sin datos.</p></iswc-callout><iswc-callout color=\"danger\" icon=\"mdi:alert-octagon-outline\"><strong>Cuándo no</strong><p>No maquilles aquí el rol ni el permiso de escritura.</p></iswc-callout></div>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-empty-state</strong>Estado vacío centrado. Compite con av-vacio por la misma propuesta: elegir uno. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "styles": ".casos{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}.casos iswc-callout{height:100%}.casos iswc-callout::part(base){height:100%;box-sizing:border-box}.casos p{margin:.35em 0 0;opacity:.85;font-size:.92em;line-height:1.35}",
+  "origen": "ISW-TestPatyIA"
+}

@@ -1,0 +1,56 @@
+/* Mismo cartel en chat, logs, instrucciones y sistema. */
+
+:host {
+  color: inherit;
+  font-size: 1em;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  min-height: 18rem;
+  flex: 1 1 auto;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+
+  /* Controles: tamano y color salen del contexto, igual que iswc-icon. */
+  & iswc-switch:not([color]),
+  & iswc-checkbox:not([color]) {
+    font-size: 1em;
+    color: inherit;
+    --iswc-switch-accent: currentColor;
+    --iswc-switch-thumb: var(--iswc-bg);
+    --iswc-checkbox-accent: currentColor;
+    --iswc-checkbox-fill: currentColor;
+    --iswc-checkbox-bg: transparent;
+    --iswc-checkbox-border: color-mix(in srgb, currentColor 48%, transparent);
+    --iswc-checkbox-on-accent: var(--iswc-bg);
+  }
+}
+
+.tarjeta {
+  max-width: 28rem;
+  padding: 1.85rem 1.6rem;
+  text-align: center;
+  border: 1px solid var(--iswc-border-soft);
+  border-radius: 14px;
+  background: var(--iswc-bg-elev);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--iswc-text) 6%, transparent);
+
+  & .icono {
+    font-size: 2.75em;
+    color: var(--iswc-accent);
+  }
+
+  & .titulo {
+    margin: 0.85rem 0 0;
+    font-size: 1.08em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  & .texto {
+    margin: 0.55rem 0 0;
+    font-size: 0.88em;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--iswc-text) 68%, transparent);
+  }
+}

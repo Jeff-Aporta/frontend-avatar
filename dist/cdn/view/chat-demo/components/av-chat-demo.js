@@ -1,4 +1,4 @@
-import{avisar as u,crearComponente as g,define as C,html as l}from"../../../js/base/componente.js?v=ehrr8d";import{crearBackendDemo as _,personasDemo as f}from"../../../js/chat/backend-demo.js?v=3ovdqo";import{personaInicial as E,primeraLibre as S,urlComo as v}from"../utils/demo.js?v=y2ya1f";function A(e,s,i){const o=i,n=f(),w=(()=>{try{return!!localStorage.getItem("avatar:token")}catch{return!1}})();e.append(l`
+import{avisar as u,crearComponente as g,define as C,html as l}from"../../../js/base/componente.js?v=17uldv";import{crearBackendDemo as _,personasDemo as f}from"../../../js/chat/backend-demo.js?v=3ovdqo";import{personaInicial as E,primeraLibre as S,urlComo as v}from"../utils/demo.js?v=y2ya1f";function A(e,s,i){const o=i,n=f(),w=(()=>{try{return!!localStorage.getItem("avatar:token")}catch{return!1}})();e.append(l`
     <div class="demo" part="demo">
       <header class="barra" part="barra">
         <span class="marca"><av-logo></av-logo><span class="titulo">Chat <em>en vivo</em></span><iswc-tag class="etiqueta" color="brand" pill>demo</iswc-tag></span>

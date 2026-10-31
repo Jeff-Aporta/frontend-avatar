@@ -1,0 +1,172 @@
+/* av-paty-adjunto — preview compacto. Alto = 1em del host (fsz del padre). */
+
+:host {
+  color: inherit;
+  font-size: 1em;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  height: 1em;
+  max-height: 1em;
+  margin: 0;
+  line-height: 1;
+  box-sizing: border-box;
+
+  &[mode="md"] {
+    display: inline;
+    height: auto;
+    max-height: none;
+  }
+
+  & .md {
+    font: inherit;
+    color: inherit;
+  }
+
+  & iswc-switch:not([color]),
+  & iswc-checkbox:not([color]) {
+    font-size: 1em;
+    color: inherit;
+    --iswc-switch-accent: currentColor;
+    --iswc-switch-thumb: var(--iswc-bg);
+    --iswc-checkbox-accent: currentColor;
+    --iswc-checkbox-fill: currentColor;
+    --iswc-checkbox-bg: transparent;
+    --iswc-checkbox-border: color-mix(in srgb, currentColor 48%, transparent);
+    --iswc-checkbox-on-accent: var(--iswc-bg);
+  }
+}
+
+.adjunto {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18em;
+  height: 1em;
+  max-height: 1em;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 0.18em;
+  border: 0.04em solid color-mix(in srgb, currentColor 22%, transparent);
+  background: color-mix(in srgb, var(--iswc-bg) 72%, currentColor 8%);
+
+  &[disabled] {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  & .adjunto__icono {
+    flex: none;
+    font-size: 0.62em;
+    color: var(--iswc-color-brand, var(--iswc-accent, currentColor));
+  }
+
+  /* ── Imagen: thumb 1em de alto, ancho por aspect ── */
+  &.adjunto--imagen {
+    display: block;
+    height: 1em;
+    min-width: 0.6em;
+    padding: 0;
+    border: 0;
+    background: color-mix(in srgb, currentColor 10%, transparent);
+
+    &:hover,
+    &:focus-visible {
+      outline: 0.04em solid var(--iswc-color-brand, var(--iswc-accent));
+      outline-offset: 0.04em;
+    }
+
+    & .adjunto__preview {
+      display: block;
+      width: 100%;
+      height: 1em;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 0.18em;
+    }
+
+    & .adjunto__placeholder {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 1em;
+      color: color-mix(in srgb, currentColor 55%, transparent);
+
+      & iswc-icon { font-size: 0.55em; }
+    }
+  }
+
+  /* ── Audio: chip + controls nativos a 1em ── */
+  &.adjunto--audio {
+    padding: 0 0.22em 0 0.16em;
+    min-width: 4.5em;
+    max-width: 12em;
+
+    & .adjunto__audio {
+      display: block;
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 0.82em;
+      max-height: 0.82em;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      color-scheme: dark;
+    }
+
+    & .adjunto__meta {
+      flex: none;
+      font-size: 0.38em;
+      font-variant-numeric: tabular-nums;
+      color: color-mix(in srgb, currentColor 55%, transparent);
+      letter-spacing: 0.02em;
+    }
+
+    & .adjunto__vacio {
+      font-size: 0.4em;
+      color: color-mix(in srgb, currentColor 50%, transparent);
+      font-style: italic;
+      padding-inline: 0.2em;
+    }
+  }
+
+  /* ── Documento: icono + nombre + extensión ── */
+  &.adjunto--documento {
+    padding: 0 0.28em 0 0.16em;
+    max-width: 10em;
+    cursor: pointer;
+    color: inherit;
+
+    &:hover,
+    &:focus-visible {
+      background: color-mix(in srgb, var(--iswc-color-brand, var(--iswc-accent)) 16%, transparent);
+      border-color: color-mix(in srgb, var(--iswc-color-brand, var(--iswc-accent)) 45%, transparent);
+    }
+
+    & .adjunto__nombre {
+      flex: 1 1 auto;
+      min-width: 0;
+      font-size: 0.42em;
+      font-weight: 560;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    & .adjunto__ext {
+      flex: none;
+      font-size: 0.32em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 0.15em 0.35em;
+      border-radius: 0.25em;
+      background: color-mix(in srgb, var(--iswc-color-brand, var(--iswc-accent)) 22%, transparent);
+      color: var(--iswc-color-brand, var(--iswc-accent));
+    }
+  }
+}

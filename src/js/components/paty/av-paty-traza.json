@@ -1,0 +1,231 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-paty-traza",
+  "category": "paty",
+  "navTitle": "Traza del ISS",
+  "title": "&lt;av-paty-traza&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-paty-traza",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-paty-traza&gt;",
+      "lede": "Log del turno que narra el ISS: cada paso con su tiempo, nivel y datos.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-paty-traza id=\"p-traza\"></av-paty-traza></div>",
+          "props": {
+            "eventos": [
+              {
+                "seq": 1,
+                "ts": "2026-10-31T10:00:00.000Z",
+                "ms": 0,
+                "nivel": "info",
+                "etapa": "entrada",
+                "mensaje": "Consulta recibida"
+              },
+              {
+                "seq": 2,
+                "ts": "2026-10-31T10:00:00.120Z",
+                "ms": 120,
+                "nivel": "debug",
+                "etapa": "contexto",
+                "mensaje": "Documentos cargados",
+                "dur": 85
+              },
+              {
+                "seq": 3,
+                "ts": "2026-10-31T10:00:01.400Z",
+                "ms": 1400,
+                "nivel": "warn",
+                "etapa": "modelo",
+                "mensaje": "Respuesta lenta del proveedor",
+                "dur": 1280
+              },
+              {
+                "seq": 4,
+                "ts": "2026-10-31T10:00:02.100Z",
+                "ms": 2100,
+                "nivel": "error",
+                "etapa": "salida",
+                "mensaje": "Reintento del guardado"
+              }
+            ],
+            "abierto": true,
+            "filtro": "todo"
+          },
+          "target": "#p-traza",
+          "controls": [
+            {
+              "control": "select",
+              "prop": "props:filtro",
+              "label": "filtro",
+              "options": [
+                "todo",
+                "info",
+                "warn",
+                "error"
+              ],
+              "default": "todo"
+            },
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": true
+            },
+            {
+              "control": "json",
+              "prop": "props:eventos",
+              "label": "eventos",
+              "default": [
+                {
+                  "seq": 1,
+                  "ts": "2026-10-31T10:00:00.000Z",
+                  "ms": 0,
+                  "nivel": "info",
+                  "etapa": "entrada",
+                  "mensaje": "Consulta recibida"
+                },
+                {
+                  "seq": 2,
+                  "ts": "2026-10-31T10:00:00.120Z",
+                  "ms": 120,
+                  "nivel": "debug",
+                  "etapa": "contexto",
+                  "mensaje": "Documentos cargados",
+                  "dur": 85
+                },
+                {
+                  "seq": 3,
+                  "ts": "2026-10-31T10:00:01.400Z",
+                  "ms": 1400,
+                  "nivel": "warn",
+                  "etapa": "modelo",
+                  "mensaje": "Respuesta lenta del proveedor",
+                  "dur": 1280
+                },
+                {
+                  "seq": 4,
+                  "ts": "2026-10-31T10:00:02.100Z",
+                  "ms": 2100,
+                  "nivel": "error",
+                  "etapa": "salida",
+                  "mensaje": "Reintento del guardado"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<div class=\"casos\"><iswc-callout color=\"success\" icon=\"mdi:check-circle-outline\"><strong>Cuándo usarlo</strong><p>Debajo de la respuesta del asistente, para ver qué hizo el ISS en el turno.</p></iswc-callout><iswc-callout color=\"danger\" icon=\"mdi:alert-octagon-outline\"><strong>Cuándo no</strong><p>No reemplaza a los pasos de proceso ni al JSON completo del log.</p></iswc-callout></div>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-trace-log</strong>Registro de pasos con tiempo, nivel y datos para cualquier proceso largo. Viene de PatyIA. Pendiente de aprobación.</iswc-callout>"
+        }
+      ]
+    },
+    {
+      "id": "en-vivo",
+      "title": "En vivo",
+      "lede": "Mientras el turno sigue en curso: abierta y con el último paso marcado.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<av-paty-traza en-vivo></av-paty-traza>",
+          "props": {
+            "eventos": [
+              {
+                "seq": 0,
+                "ts": "2026-10-09T13:02:00.000Z",
+                "ms": 0,
+                "nivel": "info",
+                "etapa": "historial",
+                "mensaje": "Leyendo la bitacora de la conversacion"
+              },
+              {
+                "seq": 1,
+                "ts": "2026-10-09T13:02:00.040Z",
+                "ms": 40,
+                "nivel": "info",
+                "etapa": "historial",
+                "mensaje": "Leyendo la bitacora de la conversacion: listo",
+                "dur": 40,
+                "datos": {
+                  "mensajes": 6
+                }
+              },
+              {
+                "seq": 2,
+                "ts": "2026-10-09T13:02:00.060Z",
+                "ms": 60,
+                "nivel": "info",
+                "etapa": "turno",
+                "mensaje": "Turno iniciado",
+                "datos": {
+                  "iconversacion": 244,
+                  "modeloConversacion": "gpt-5-nano",
+                  "maxVectorStores": 2
+                }
+              },
+              {
+                "seq": 3,
+                "ts": "2026-10-09T13:02:01.200Z",
+                "ms": 1200,
+                "nivel": "info",
+                "etapa": "contexto",
+                "mensaje": "Contexto resuelto",
+                "datos": {
+                  "itdconsulta": "1",
+                  "hijo": "1.4",
+                  "vectorStores": [
+                    "vs_a",
+                    "vs_b"
+                  ]
+                }
+              },
+              {
+                "seq": 4,
+                "ts": "2026-10-09T13:02:01.250Z",
+                "ms": 1250,
+                "nivel": "info",
+                "etapa": "llm-request",
+                "mensaje": "Peticion a OpenAI (Responses API, streaming)",
+                "datos": {
+                  "modelo": "gpt-5-nano",
+                  "vectorStores": [
+                    "vs_a",
+                    "vs_b"
+                  ]
+                }
+              },
+              {
+                "seq": 5,
+                "ts": "2026-10-09T13:02:06.250Z",
+                "ms": 6250,
+                "nivel": "info",
+                "etapa": "llm-espera",
+                "mensaje": "Esperando la primera respuesta de OpenAI (5 s)",
+                "datos": {
+                  "esperandoMs": 5000
+                }
+              }
+            ]
+          },
+          "target": "av-paty-traza"
+        }
+      ]
+    }
+  ],
+  "styles": ".casos{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}.casos iswc-callout{height:100%}.casos p{margin:.35em 0 0;opacity:.85;font-size:.92em;line-height:1.35}",
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-trace-log",
+    "motivo": "Registro de pasos con tiempo, nivel y datos para cualquier proceso largo."
+  },
+  "origen": "ISW-TestPatyIA"
+}

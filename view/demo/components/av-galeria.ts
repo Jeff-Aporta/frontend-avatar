@@ -25,6 +25,7 @@ const CATEGORIAS: Record<string, string> = {
   organizacion: 'Organización',
   asistente: 'Asistente',
   admin: 'Administración',
+  paty: 'Propuestas de PatyIA',
 };
 
 const L = (globalThis as { iswcLoader?: LoaderGaleria }).iswcLoader;
