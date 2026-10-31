@@ -13,8 +13,48 @@
       "title": "&lt;av-clientes-grid&gt;",
       "lede": "Tabla de clientes.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-clientes-grid id=\"g\"></av-clientes-grid></div>", "target": "#g", "props": { "cargando": false, "clientes": [ { "icliente": 1, "iempresa": 1, "nombre": "Juan Pérez", "organizacion": "Tech Titans S.A.", "email": "juan@tech.test", "etapa": "contacto", "valor": 5200, "responsable": "carla" }, { "icliente": 2, "iempresa": 1, "nombre": "Pedro Sánchez", "organizacion": "Global Finance", "email": "pedro@global.test", "etapa": "propuesta", "valor": 7500, "responsable": "carla" } ] }, "controls": [ { "prop": "props:cargando", "type": "boolean", "label": "cargando", "default": false } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la vista CRM.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar en línea: se edita en av-cliente-form.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-clientes-grid id=\"g\"></av-clientes-grid></div>",
+          "target": "#g",
+          "props": {
+            "cargando": false,
+            "clientes": [
+              {
+                "icliente": 1,
+                "iempresa": 1,
+                "nombre": "Juan Pérez",
+                "organizacion": "Tech Titans S.A.",
+                "email": "juan@tech.test",
+                "etapa": "contacto",
+                "valor": 5200,
+                "responsable": "carla"
+              },
+              {
+                "icliente": 2,
+                "iempresa": 1,
+                "nombre": "Pedro Sánchez",
+                "organizacion": "Global Finance",
+                "email": "pedro@global.test",
+                "etapa": "propuesta",
+                "valor": 7500,
+                "responsable": "carla"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la vista CRM.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar en línea: se edita en av-cliente-form.</iswc-callout>"
+        }
       ]
     }
   ]

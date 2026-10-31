@@ -13,8 +13,52 @@
       "title": "&lt;av-cliente-form&gt;",
       "lede": "Diálogo de cliente.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-cliente-form id=\"f\"></av-cliente-form></div>", "target": "#f", "props": { "abierto": false, "puedeEscribir": true, "cliente": { "icliente": 1, "iempresa": 1, "nombre": "Juan Pérez", "organizacion": "Tech Titans S.A.", "email": "juan@tech.test", "etapa": "contacto", "valor": 5200, "responsable": "carla" }, "miembros": [ { "iusuario": "carla", "usuario": { "iusuario": "carla", "nombre": "Carla Comercial" } } ] }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": false }, { "prop": "props:puedeEscribir", "type": "boolean", "label": "puedeEscribir", "default": true } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-crm al crear o abrir un cliente.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para usuarios de la plataforma: esos se gestionan en Admin.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-cliente-form id=\"f\"></av-cliente-form></div>",
+          "target": "#f",
+          "props": {
+            "abierto": false,
+            "puedeEscribir": true,
+            "cliente": {
+              "icliente": 1,
+              "iempresa": 1,
+              "nombre": "Juan Pérez",
+              "organizacion": "Tech Titans S.A.",
+              "email": "juan@tech.test",
+              "etapa": "contacto",
+              "valor": 5200,
+              "responsable": "carla"
+            },
+            "miembros": [
+              {
+                "iusuario": "carla",
+                "usuario": {
+                  "iusuario": "carla",
+                  "nombre": "Carla Comercial"
+                }
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-crm al crear o abrir un cliente.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para usuarios de la plataforma: esos se gestionan en Admin.</iswc-callout>"
+        }
       ]
     }
   ]

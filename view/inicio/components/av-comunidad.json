@@ -35,8 +35,8 @@
           },
           "controls": [
             {
+              "control": "text",
               "prop": "props:titulo",
-              "type": "text",
               "label": "titulo",
               "default": "Únete a nuestra comunidad"
             }

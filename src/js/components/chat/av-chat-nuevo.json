@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<av-chat-nuevo id=\"x\"></av-chat-nuevo>",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><av-chat-nuevo id=\"x\"></av-chat-nuevo>",
           "target": "#x",
           "props": {
             "personas": [

@@ -42,8 +42,8 @@
           },
           "controls": [
             {
+              "control": "boolean",
               "prop": "props:puedeMover",
-              "type": "boolean",
               "label": "puedeMover",
               "default": true
             }

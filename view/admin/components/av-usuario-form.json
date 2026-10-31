@@ -13,8 +13,40 @@
       "title": "&lt;av-usuario-form&gt;",
       "lede": "Diálogo de usuario.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-usuario-form id=\"f\"></av-usuario-form></div>", "target": "#f", "props": { "abierto": true, "datos": { "nuevo": true, "iusuario": "", "nombre": "", "email": "", "password": "", "bactivo": true } }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": true }, { "prop": "props:error", "type": "text", "label": "error", "default": "" } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-admin, pestaña Usuarios.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para cambiar la contraseña propia: eso es Mi cuenta.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-usuario-form id=\"f\"></av-usuario-form></div>",
+          "target": "#f",
+          "props": {
+            "abierto": true,
+            "datos": {
+              "nuevo": true,
+              "iusuario": "",
+              "nombre": "",
+              "email": "",
+              "password": "",
+              "bactivo": true
+            }
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": true
+            },
+            {
+              "control": "text",
+              "prop": "props:error",
+              "label": "error",
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-admin, pestaña Usuarios.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para cambiar la contraseña propia: eso es Mi cuenta.</iswc-callout>"
+        }
       ]
     }
   ]

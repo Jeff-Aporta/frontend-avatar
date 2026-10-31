@@ -5,9 +5,10 @@ description: Escribir el playground .json (iswc-preview/v1) y registrar un compo
 
 # Demo de componente (`<tag>.json` + galería)
 
-La galería (`view/demo/index.html`) lee `view/demo/manifest.json`, valida cada `.json` con Zod
-(`src/js/consts/schemas/demo.schemas.ts`; la forma canónica completa es `@iswc/component-schemas`)
-y lo monta con `<iswc-preview-component>` del kit. Lo que no valida se avisa y no se muestra.
+El explorador (`view/demo/index.html`, generado por `scripts/build/paginas.ts`) es el `<iswc-doc-demo>` del kit: una SPA
+con el estado en `?s=` que `doc-demo-galeria` del kit alimenta con `view/demo/manifest.json`. El guardián
+`tests/vistas/demos.test.ts` valida cada `.json` con Zod (`src/js/consts/schemas/demo.schemas.ts`; la forma canónica
+completa es `@iswc/component-schemas`): lo que no valida se avisa y no se muestra.
 
 ## Forma
 
@@ -45,7 +46,9 @@ y lo monta con `<iswc-preview-component>` del kit. Lo que no valida se avisa y n
 | `prop:<nombre>` | Asigna la propiedad JS |
 | `props:<clave>` | Mezcla `{ clave: valor }` en `.props` (componentes con props) |
 
-`control` ∈ `select` (con `options`), `text`, `boolean`, `number` (`min`, `max`, `step`).
+`control` ∈ `select` (con `options`), `text`, `boolean`, `number` (`min`, `max`, `step`), `json`. El `default` de un
+`props:x` es el dato de muestra del bloque: el playground lo aplica al montar. Un componente que es diálogo o cajón
+lleva en el escenario un `iswc-callout` que dice cómo abrirlo.
 
 ## Reglas
 

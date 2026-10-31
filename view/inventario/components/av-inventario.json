@@ -23,8 +23,8 @@
           },
           "controls": [
             {
+              "control": "select",
               "prop": "props:id",
-              "type": "select",
               "label": "id (pestaña)",
               "options": [
                 "",
@@ -33,7 +33,7 @@
                 "pedidos",
                 "proveedores"
               ],
-              "default": ""
+              "default": null
             }
           ]
         },

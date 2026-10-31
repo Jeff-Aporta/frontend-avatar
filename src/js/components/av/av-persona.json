@@ -17,14 +17,37 @@
           "kind": "demo",
           "html": "<div class=\"stage\"><av-persona id=\"p\"></av-persona></div>",
           "target": "#p",
-          "props": { "iusuario": "ana", "nombre": "Ana Gestora", "detalle": "Gestora", "compacto": false },
+          "props": {
+            "iusuario": "ana",
+            "nombre": "Ana Gestora",
+            "detalle": "Gestora",
+            "compacto": false
+          },
           "controls": [
-            { "prop": "props:nombre", "type": "text", "label": "nombre", "default": "Ana Gestora" },
-            { "prop": "props:detalle", "type": "text", "label": "detalle", "default": "Gestora" },
-            { "prop": "props:compacto", "type": "boolean", "label": "compacto", "default": false }
+            {
+              "control": "text",
+              "prop": "props:nombre",
+              "label": "nombre",
+              "default": "Ana Gestora"
+            },
+            {
+              "control": "text",
+              "prop": "props:detalle",
+              "label": "detalle",
+              "default": "Gestora"
+            },
+            {
+              "control": "boolean",
+              "prop": "props:compacto",
+              "label": "compacto",
+              "default": false
+            }
           ]
         },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Donde aparezca un usuario: autor de un mensaje, asignado de una tarea, miembro.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para la sesión de la barra: eso es iswc-session-menu.</iswc-callout>" }
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Donde aparezca un usuario: autor de un mensaje, asignado de una tarea, miembro.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para la sesión de la barra: eso es iswc-session-menu.</iswc-callout>"
+        }
       ]
     }
   ]

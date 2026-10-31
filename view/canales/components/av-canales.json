@@ -13,8 +13,38 @@
       "title": "&lt;av-canales&gt;",
       "lede": "La vista completa (necesita sesión para datos reales).",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-canales id=\"c\"></av-canales></div>", "target": "#c", "props": { "cargando": false, "canales": [ { "icanal": 1, "iempresa": 1, "iequipo": null, "nombre": "general", "tipo": "publico", "descripcion": "Toda la empresa", "sin_leer": 1, "ultimo": null } ] }, "controls": [ { "prop": "props:formulario", "type": "boolean", "label": "formulario", "default": false } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/canales (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-canales id=\"c\"></av-canales></div>",
+          "target": "#c",
+          "props": {
+            "cargando": false,
+            "canales": [
+              {
+                "icanal": 1,
+                "iempresa": 1,
+                "iequipo": null,
+                "nombre": "general",
+                "tipo": "publico",
+                "descripcion": "Toda la empresa",
+                "sin_leer": 1,
+                "ultimo": null
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:formulario",
+              "label": "formulario",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/canales (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
       ]
     }
   ]

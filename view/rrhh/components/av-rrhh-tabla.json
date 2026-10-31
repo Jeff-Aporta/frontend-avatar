@@ -53,8 +53,8 @@
           },
           "controls": [
             {
+              "control": "boolean",
               "prop": "props:cargando",
-              "type": "boolean",
               "label": "cargando",
               "default": false
             }

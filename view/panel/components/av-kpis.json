@@ -13,8 +13,78 @@
       "title": "&lt;av-kpis&gt;",
       "lede": "Tarjetas KPI del resumen.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-kpis id=\"k\"></av-kpis></div>", "target": "#k", "props": { "resumen": { "iempresa": 1, "nombre": "Avatar Demo", "miembros": 4, "equipos": 2, "canales": 3, "proyectos": 1, "tareas": { "total": 6, "abiertas": 2, "en_progreso": 2, "en_revision": 1, "cerradas": 1, "vencidas": 0 }, "clientes": { "total": 4, "por_etapa": { "contacto": 1, "propuesta": 1, "negociacion": 1, "cerrado": 1 }, "valor_pipeline": 20100 }, "mensajes_hoy": 5 } }, "controls": [ { "prop": "props:resumen", "type": "json", "label": "resumen", "default": null } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba del panel.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para listas: solo cifras.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-kpis id=\"k\"></av-kpis></div>",
+          "target": "#k",
+          "props": {
+            "resumen": {
+              "iempresa": 1,
+              "nombre": "Avatar Demo",
+              "miembros": 4,
+              "equipos": 2,
+              "canales": 3,
+              "proyectos": 1,
+              "tareas": {
+                "total": 6,
+                "abiertas": 2,
+                "en_progreso": 2,
+                "en_revision": 1,
+                "cerradas": 1,
+                "vencidas": 0
+              },
+              "clientes": {
+                "total": 4,
+                "por_etapa": {
+                  "contacto": 1,
+                  "propuesta": 1,
+                  "negociacion": 1,
+                  "cerrado": 1
+                },
+                "valor_pipeline": 20100
+              },
+              "mensajes_hoy": 5
+            }
+          },
+          "controls": [
+            {
+              "control": "json",
+              "prop": "props:resumen",
+              "label": "resumen",
+              "default": {
+                "iempresa": 1,
+                "nombre": "Avatar Demo",
+                "miembros": 4,
+                "equipos": 2,
+                "canales": 3,
+                "proyectos": 1,
+                "tareas": {
+                  "total": 6,
+                  "abiertas": 2,
+                  "en_progreso": 2,
+                  "en_revision": 1,
+                  "cerradas": 1,
+                  "vencidas": 0
+                },
+                "clientes": {
+                  "total": 4,
+                  "por_etapa": {
+                    "contacto": 1,
+                    "propuesta": 1,
+                    "negociacion": 1,
+                    "cerrado": 1
+                  },
+                  "valor_pipeline": 20100
+                },
+                "mensajes_hoy": 5
+              }
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba del panel.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para listas: solo cifras.</iswc-callout>"
+        }
       ]
     }
   ]

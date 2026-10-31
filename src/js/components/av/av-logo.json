@@ -23,14 +23,14 @@
           },
           "controls": [
             {
+              "control": "boolean",
               "prop": "props:wordmark",
-              "type": "boolean",
               "label": "wordmark",
               "default": true
             },
             {
+              "control": "boolean",
               "prop": "props:animado",
-              "type": "boolean",
               "label": "animado",
               "default": true
             }

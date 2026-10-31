@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<av-chat-reenviar id=\"x\"></av-chat-reenviar>",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><av-chat-reenviar id=\"x\"></av-chat-reenviar>",
           "target": "#x",
           "props": {
             "ref": "m1",

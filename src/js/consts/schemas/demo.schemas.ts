@@ -1,14 +1,14 @@
 /**
  * demo.schemas.ts — playground `iswc-preview/v1` de cada componente (`<tag>.json`) y el índice de la
  * galería (`view/demo/manifest.json`). La forma canónica completa vive en el kit
- * (`@iswc/component-schemas`, pineado en deno.json; los guardianes validan contra ella); aquí va lo
- * que la galería usa en runtime, con `.passthrough()` para no romper campos extra.
+ * (`@iswc/component-schemas`, pineado en deno.json); aquí va lo que exige el guardián
+ * (`tests/vistas/demos.test.ts`), con `.passthrough()` para no romper campos extra.
  */
 import { z } from '../../base/zod.js';
 
 /** `attr:x` escribe el atributo · `prop:x` la propiedad JS · `props:x` mezcla `{ x }` en `.props`. */
 export const ControlDemoSchema = z.object({
-  control: z.enum(['select', 'text', 'boolean', 'number']),
+  control: z.enum(['select', 'text', 'boolean', 'number', 'json']),
   prop: z.string().regex(/^(?:(?:attr|prop|props):)?[\w-]+$/),
   label: z.string(),
   default: z.unknown().optional(),

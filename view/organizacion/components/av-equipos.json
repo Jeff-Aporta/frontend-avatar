@@ -13,8 +13,81 @@
       "title": "&lt;av-equipos&gt;",
       "lede": "Equipos de la empresa con integrantes.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-equipos id=\"e\"></av-equipos></div>", "target": "#e", "props": { "items": [ { "iequipo": 1, "iempresa": 1, "nombre": "Desarrollo", "descripcion": "Producto y plataforma", "color": "#2563eb", "integrantes": [ { "iequipo": 1, "iusuario": "ana", "rol": "lider", "usuario": { "iusuario": "ana", "nombre": "Ana Gestora" } }, { "iequipo": 1, "iusuario": "beto", "rol": "integrante", "usuario": { "iusuario": "beto", "nombre": "Beto Desarrollador" } } ] }, { "iequipo": 2, "iempresa": 1, "nombre": "Comercial", "descripcion": "Ventas y clientes", "color": "#16a34a", "integrantes": [] } ], "miembros": [ { "iempresa": 1, "iusuario": "carla", "rol": "miembro", "usuario": { "iusuario": "carla", "nombre": "Carla Comercial" } } ], "puedeGestionar": true, "cargando": false }, "controls": [ { "prop": "props:puedeGestionar", "type": "boolean", "label": "puedeGestionar", "default": true }, { "prop": "props:cargando", "type": "boolean", "label": "cargando", "default": false } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Equipos de av-organizacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para miembros de la empresa: eso es av-miembros.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-equipos id=\"e\"></av-equipos></div>",
+          "target": "#e",
+          "props": {
+            "items": [
+              {
+                "iequipo": 1,
+                "iempresa": 1,
+                "nombre": "Desarrollo",
+                "descripcion": "Producto y plataforma",
+                "color": "#2563eb",
+                "integrantes": [
+                  {
+                    "iequipo": 1,
+                    "iusuario": "ana",
+                    "rol": "lider",
+                    "usuario": {
+                      "iusuario": "ana",
+                      "nombre": "Ana Gestora"
+                    }
+                  },
+                  {
+                    "iequipo": 1,
+                    "iusuario": "beto",
+                    "rol": "integrante",
+                    "usuario": {
+                      "iusuario": "beto",
+                      "nombre": "Beto Desarrollador"
+                    }
+                  }
+                ]
+              },
+              {
+                "iequipo": 2,
+                "iempresa": 1,
+                "nombre": "Comercial",
+                "descripcion": "Ventas y clientes",
+                "color": "#16a34a",
+                "integrantes": []
+              }
+            ],
+            "miembros": [
+              {
+                "iempresa": 1,
+                "iusuario": "carla",
+                "rol": "miembro",
+                "usuario": {
+                  "iusuario": "carla",
+                  "nombre": "Carla Comercial"
+                }
+              }
+            ],
+            "puedeGestionar": true,
+            "cargando": false
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:puedeGestionar",
+              "label": "puedeGestionar",
+              "default": true
+            },
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Equipos de av-organizacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para miembros de la empresa: eso es av-miembros.</iswc-callout>"
+        }
       ]
     }
   ]

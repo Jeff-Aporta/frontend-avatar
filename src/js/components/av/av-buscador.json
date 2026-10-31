@@ -20,7 +20,14 @@
           "props": {
             "permitidos": []
           },
-          "controls": []
+          "controls": [
+            {
+              "control": "json",
+              "prop": "props:permitidos",
+              "label": "permitidos",
+              "default": []
+            }
+          ]
         },
         {
           "kind": "html",

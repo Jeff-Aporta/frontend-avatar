@@ -13,8 +13,65 @@
       "title": "&lt;av-tarea-form&gt;",
       "lede": "Diálogo de crear/editar tarea.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-tarea-form id=\"f\"></av-tarea-form></div>", "target": "#f", "props": { "abierto": false, "iproyecto": 1, "icolumna": 1, "columnas": [ { "icolumna": 1, "nombre": "Por hacer", "orden": 0, "cierra": false }, { "icolumna": 4, "nombre": "Hecho", "orden": 3, "cierra": true } ], "miembros": [ { "iempresa": 1, "iusuario": "ana", "rol": "admin", "usuario": { "iusuario": "ana", "nombre": "Ana Gestora" } } ] }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": false }, { "prop": "props:ocupado", "type": "boolean", "label": "ocupado", "default": false }, { "prop": "props:error", "type": "text", "label": "error", "default": "" } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-proyectos, al pulsar «Nueva tarea» o «Editar».</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para mover de columna: eso es arrastrar en el tablero.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-tarea-form id=\"f\"></av-tarea-form></div>",
+          "target": "#f",
+          "props": {
+            "abierto": false,
+            "iproyecto": 1,
+            "icolumna": 1,
+            "columnas": [
+              {
+                "icolumna": 1,
+                "nombre": "Por hacer",
+                "orden": 0,
+                "cierra": false
+              },
+              {
+                "icolumna": 4,
+                "nombre": "Hecho",
+                "orden": 3,
+                "cierra": true
+              }
+            ],
+            "miembros": [
+              {
+                "iempresa": 1,
+                "iusuario": "ana",
+                "rol": "admin",
+                "usuario": {
+                  "iusuario": "ana",
+                  "nombre": "Ana Gestora"
+                }
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "control": "boolean",
+              "prop": "props:ocupado",
+              "label": "ocupado",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:error",
+              "label": "error",
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-proyectos, al pulsar «Nueva tarea» o «Editar».</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para mover de columna: eso es arrastrar en el tablero.</iswc-callout>"
+        }
       ]
     }
   ]

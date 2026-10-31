@@ -5,4 +5,4 @@
  * y `deno task pin` lo audita). Prohibido `@main`, `@latest`, SHA corto o GitHub Pages, y prohibido
  * reconstruir CDN/REPO/PIN en la app: el loader expone `L.host`, `L.repo`, `L.shaDefault`.
  */
-export const ISWC_LOADER_HREF = 'https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@380387c9117fba8bee1ec5162a9b1ec4aee7fe13/dist/cdn/core/loader.min.js';
+export const ISWC_LOADER_HREF = 'https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@9f310d5bed957d26c563a420b4e96c413fe2e67f/dist/cdn/core/loader.min.js';

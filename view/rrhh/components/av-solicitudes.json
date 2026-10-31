@@ -50,8 +50,8 @@
           },
           "controls": [
             {
+              "control": "select",
               "prop": "props:filtro",
-              "type": "select",
               "label": "filtro",
               "options": [
                 "pendiente",
@@ -62,8 +62,8 @@
               "default": "pendiente"
             },
             {
+              "control": "boolean",
               "prop": "props:compacto",
-              "type": "boolean",
               "label": "compacto",
               "default": false
             }

@@ -25,12 +25,12 @@
     "zod": "npm:zod@4.6.7",
     "sass": "npm:sass@^1.105.0",
     "@std/http/file-server": "jsr:@std/http@1/file-server",
-    "@iswc/component-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/380387c9117fba8bee1ec5162a9b1ec4aee7fe13/src/previews/_kit/schemas/component.schemas.ts",
-    "@iswc/loader-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/380387c9117fba8bee1ec5162a9b1ec4aee7fe13/src/cdn/schemas/loader.schemas.ts",
+    "@iswc/component-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/9f310d5bed957d26c563a420b4e96c413fe2e67f/src/previews/_kit/schemas/component.schemas.ts",
+    "@iswc/loader-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/9f310d5bed957d26c563a420b4e96c413fe2e67f/src/cdn/schemas/loader.schemas.ts",
     "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/src/vendor.ts",
     "@Jeff-Aporta/DER/": "https://cdn.jsdelivr.net/gh/Jeff-Aporta/DER@2c2ebdc0ed09290aca3264bbfe727477cd677d9c/",
-    "@Jeff-Aporta/wc-base/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/380387c9117fba8bee1ec5162a9b1ec4aee7fe13/src/vendor-distributions/shared/",
-    "@Jeff-Aporta/wc-diagrams/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/380387c9117fba8bee1ec5162a9b1ec4aee7fe13/src/components/diagrams/schemas/"
+    "@Jeff-Aporta/wc-base/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/9f310d5bed957d26c563a420b4e96c413fe2e67f/src/vendor-distributions/shared/",
+    "@Jeff-Aporta/wc-diagrams/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/9f310d5bed957d26c563a420b4e96c413fe2e67f/src/components/diagrams/schemas/"
   },
   "tasks": {
     "build:scss": "deno run -A scripts/build/build-scss.mjs",

@@ -13,8 +13,42 @@
       "title": "&lt;av-proyecto-form&gt;",
       "lede": "Diálogo de proyecto nuevo.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-proyecto-form id=\"f\"></av-proyecto-form></div>", "target": "#f", "props": { "abierto": false, "equipos": [ { "iequipo": 1, "nombre": "Desarrollo" }, { "iequipo": 2, "nombre": "Comercial" } ] }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": false }, { "prop": "props:ocupado", "type": "boolean", "label": "ocupado", "default": false } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-proyectos con permiso de gestión.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar columnas.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-proyecto-form id=\"f\"></av-proyecto-form></div>",
+          "target": "#f",
+          "props": {
+            "abierto": false,
+            "equipos": [
+              {
+                "iequipo": 1,
+                "nombre": "Desarrollo"
+              },
+              {
+                "iequipo": 2,
+                "nombre": "Comercial"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "control": "boolean",
+              "prop": "props:ocupado",
+              "label": "ocupado",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde av-proyectos con permiso de gestión.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar columnas.</iswc-callout>"
+        }
       ]
     }
   ]

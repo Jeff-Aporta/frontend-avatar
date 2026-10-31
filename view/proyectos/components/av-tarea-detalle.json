@@ -13,8 +13,68 @@
       "title": "&lt;av-tarea-detalle&gt;",
       "lede": "Cajón con la tarea y sus comentarios.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-tarea-detalle id=\"d\"></av-tarea-detalle></div>", "target": "#d", "props": { "abierto": false, "puedeComentar": true, "puedeEditar": true, "puedeEliminar": true, "tarea": { "itarea": 2, "codigo": "TK-000002", "iproyecto": 1, "icolumna": 2, "titulo": "Login con JWT y permisos por rol", "descripcion": "Plugins identity + permissions de DER en el API.", "prioridad": "urgente", "estado": "en_progreso", "asignado_a": "beto", "creado_por": "ana", "fvence": "2026-11-02", "etiquetas": ["odys"], "asignado": { "iusuario": "beto", "nombre": "Beto Desarrollador" } }, "comentarios": [ { "icomentario": 1, "itarea": 2, "iusuario": "ana", "contenido": "Recuerda probar el bloqueo por intentos fallidos.", "creado": "2026-10-30T12:00:00Z", "autor": { "iusuario": "ana", "nombre": "Ana Gestora" } } ] }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": false }, { "prop": "props:puedeEliminar", "type": "boolean", "label": "puedeEliminar", "default": true } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al hacer clic en una tarjeta del tablero.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para crear tareas: eso es av-tarea-form.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-tarea-detalle id=\"d\"></av-tarea-detalle></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "puedeComentar": true,
+            "puedeEditar": true,
+            "puedeEliminar": true,
+            "tarea": {
+              "itarea": 2,
+              "codigo": "TK-000002",
+              "iproyecto": 1,
+              "icolumna": 2,
+              "titulo": "Login con JWT y permisos por rol",
+              "descripcion": "Plugins identity + permissions de DER en el API.",
+              "prioridad": "urgente",
+              "estado": "en_progreso",
+              "asignado_a": "beto",
+              "creado_por": "ana",
+              "fvence": "2026-11-02",
+              "etiquetas": [
+                "odys"
+              ],
+              "asignado": {
+                "iusuario": "beto",
+                "nombre": "Beto Desarrollador"
+              }
+            },
+            "comentarios": [
+              {
+                "icomentario": 1,
+                "itarea": 2,
+                "iusuario": "ana",
+                "contenido": "Recuerda probar el bloqueo por intentos fallidos.",
+                "creado": "2026-10-30T12:00:00Z",
+                "autor": {
+                  "iusuario": "ana",
+                  "nombre": "Ana Gestora"
+                }
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEliminar",
+              "label": "puedeEliminar",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al hacer clic en una tarjeta del tablero.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para crear tareas: eso es av-tarea-form.</iswc-callout>"
+        }
       ]
     }
   ]

@@ -13,8 +13,78 @@
       "title": "&lt;av-roles&gt;",
       "lede": "Roles y sus acciones.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-roles id=\"r\"></av-roles></div>", "target": "#r", "props": { "roles": [ { "irol": "USR", "igrupo": "AVATAR", "nombre": "Rol base" }, { "irol": "GESTOR", "igrupo": "AVATAR", "nombre": "Gestor" }, { "irol": "ADMIN", "igrupo": "AVATAR" } ], "acciones": [ { "irol": "USR", "iaccion": "*", "valor": { "GET": true, "POST": false } }, { "irol": "USR", "iaccion": "avatar.chat", "valor": true }, { "irol": "GESTOR", "iaccion": "avatar.gestionar", "valor": true } ], "catalogo": [ { "id": "avatar.chat", "routes": [] }, { "id": "avatar.gestionar", "routes": [] } ], "cargando": false }, "controls": [ { "prop": "props:cargando", "type": "boolean", "label": "cargando", "default": false }, { "prop": "props:error", "type": "text", "label": "error", "default": "" } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Roles de av-admin.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No decide permisos en el front: el server manda.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-roles id=\"r\"></av-roles></div>",
+          "target": "#r",
+          "props": {
+            "roles": [
+              {
+                "irol": "USR",
+                "igrupo": "AVATAR",
+                "nombre": "Rol base"
+              },
+              {
+                "irol": "GESTOR",
+                "igrupo": "AVATAR",
+                "nombre": "Gestor"
+              },
+              {
+                "irol": "ADMIN",
+                "igrupo": "AVATAR"
+              }
+            ],
+            "acciones": [
+              {
+                "irol": "USR",
+                "iaccion": "*",
+                "valor": {
+                  "GET": true,
+                  "POST": false
+                }
+              },
+              {
+                "irol": "USR",
+                "iaccion": "avatar.chat",
+                "valor": true
+              },
+              {
+                "irol": "GESTOR",
+                "iaccion": "avatar.gestionar",
+                "valor": true
+              }
+            ],
+            "catalogo": [
+              {
+                "id": "avatar.chat",
+                "routes": []
+              },
+              {
+                "id": "avatar.gestionar",
+                "routes": []
+              }
+            ],
+            "cargando": false
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:error",
+              "label": "error",
+              "default": ""
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Roles de av-admin.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No decide permisos en el front: el server manda.</iswc-callout>"
+        }
       ]
     }
   ]

@@ -23,8 +23,8 @@
           },
           "controls": [
             {
+              "control": "select",
               "prop": "props:id",
-              "type": "select",
               "label": "id (carpeta)",
               "options": [
                 "",
@@ -33,7 +33,7 @@
                 "archivados",
                 "papelera"
               ],
-              "default": ""
+              "default": null
             }
           ]
         },

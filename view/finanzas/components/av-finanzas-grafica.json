@@ -52,7 +52,46 @@
               }
             }
           },
-          "controls": []
+          "controls": [
+            {
+              "control": "json",
+              "prop": "props:resumen",
+              "label": "resumen",
+              "default": {
+                "iempresa": 1,
+                "mes": "2026-10",
+                "moneda": "COP",
+                "ingresos": {
+                  "actual": 31780000,
+                  "anterior": 24515000,
+                  "variacion": 29.6
+                },
+                "gastos": {
+                  "actual": 17347000,
+                  "anterior": 31300000,
+                  "variacion": -44.6
+                },
+                "beneficio": {
+                  "actual": 14433000,
+                  "anterior": -6785000,
+                  "variacion": 312.7
+                },
+                "facturas_pendientes": {
+                  "cantidad": 3,
+                  "monto": {
+                    "actual": 14875000,
+                    "anterior": 13090000,
+                    "variacion": 13.6
+                  }
+                },
+                "por_categoria": {
+                  "Marketing": 2400000,
+                  "Infraestructura": 747000,
+                  "Nómina": 14200000
+                }
+              }
+            }
+          ]
         },
         {
           "kind": "html",

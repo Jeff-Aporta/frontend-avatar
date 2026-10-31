@@ -17,12 +17,34 @@
           "kind": "demo",
           "html": "<div class=\"stage\"><av-empresa-selector id=\"s\"></av-empresa-selector></div>",
           "target": "#s",
-          "props": { "empresas": [{ "iempresa": 1, "nombre": "Avatar Demo S.A.S.", "rol": "admin" }, { "iempresa": 2, "nombre": "Otra empresa", "rol": "miembro" }], "activa": 1 },
+          "props": {
+            "empresas": [
+              {
+                "iempresa": 1,
+                "nombre": "Avatar Demo S.A.S.",
+                "rol": "admin"
+              },
+              {
+                "iempresa": 2,
+                "nombre": "Otra empresa",
+                "rol": "miembro"
+              }
+            ],
+            "activa": 1
+          },
           "controls": [
-            { "prop": "props:activa", "type": "number", "label": "activa", "default": 1 }
+            {
+              "control": "number",
+              "prop": "props:activa",
+              "label": "activa",
+              "default": 1
+            }
           ]
         },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la barra, con sesión.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de una vista: la empresa activa es una sola para toda la app.</iswc-callout>" }
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la barra, con sesión.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de una vista: la empresa activa es una sola para toda la app.</iswc-callout>"
+        }
       ]
     }
   ]

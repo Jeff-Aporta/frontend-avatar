@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<av-chat-llamada id=\"x\"></av-chat-llamada>",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página desde la vista que lo usa.</iswc-callout><av-chat-llamada id=\"x\"></av-chat-llamada>",
           "target": "#x",
           "props": {
             "fase": null,
@@ -30,7 +30,7 @@
               "control": "select",
               "prop": "props:fase",
               "label": "fase",
-              "default": "",
+              "default": null,
               "options": [
                 "",
                 "entrante",

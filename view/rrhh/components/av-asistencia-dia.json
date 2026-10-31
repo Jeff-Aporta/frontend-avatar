@@ -57,14 +57,14 @@
           },
           "controls": [
             {
+              "control": "boolean",
               "prop": "props:puedeMarcar",
-              "type": "boolean",
               "label": "puedeMarcar",
               "default": true
             },
             {
+              "control": "boolean",
               "prop": "props:cargando",
-              "type": "boolean",
               "label": "cargando",
               "default": false
             }

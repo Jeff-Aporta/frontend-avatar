@@ -17,14 +17,41 @@
           "kind": "demo",
           "html": "<div class=\"stage\"><av-vacio id=\"v\"><iswc-button color=\"brand\">Crear el primero</iswc-button></av-vacio></div>",
           "target": "#v",
-          "props": { "titulo": "Sin proyectos", "texto": "Crea un proyecto para empezar un tablero.", "estado": "vacio" },
+          "props": {
+            "titulo": "Sin proyectos",
+            "texto": "Crea un proyecto para empezar un tablero.",
+            "estado": "vacio"
+          },
           "controls": [
-            { "prop": "props:estado", "type": "select", "label": "estado", "options": ["vacio", "cargando", "error"], "default": "vacio" },
-            { "prop": "props:titulo", "type": "text", "label": "titulo", "default": "Sin proyectos" },
-            { "prop": "props:texto", "type": "text", "label": "texto", "default": "Crea un proyecto para empezar un tablero." }
+            {
+              "control": "select",
+              "prop": "props:estado",
+              "label": "estado",
+              "options": [
+                "vacio",
+                "cargando",
+                "error"
+              ],
+              "default": "vacio"
+            },
+            {
+              "control": "text",
+              "prop": "props:titulo",
+              "label": "titulo",
+              "default": "Sin proyectos"
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": "Crea un proyecto para empezar un tablero."
+            }
           ]
         },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Listas o paneles sin datos, cargando o con error.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para mensajes de validación de un formulario: ahí va error-text del campo.</iswc-callout>" }
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Listas o paneles sin datos, cargando o con error.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para mensajes de validación de un formulario: ahí va error-text del campo.</iswc-callout>"
+        }
       ]
     }
   ]

@@ -1,31 +1,31 @@
 <!doctype html>
-<html lang="es" data-theme="dark" data-palette="contapyme">
+<!-- Generado por scripts/build/paginas.ts desde src/js/consts/paginas.ts. No editar a mano. -->
+<html lang="es" data-theme="light" data-palette="turquesa" data-vista="demo">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Avatar · componentes</title>
-<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<base href="../../">
+<title>Demos · Avatar</title>
+<meta name="description" content="Explorador de los componentes de Avatar.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="application-name" content="Avatar">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="alternate icon" href="assets/img/tabicon_256x256.png">
+<meta name="theme-color" content="#0a6cff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://api-avatar.jeffaporta.workers.dev" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Orbitron:wght@500;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap">
-<script src="../../dist/cdn/boot.js"></script>
-<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@380387c9117fba8bee1ec5162a9b1ec4aee7fe13/dist/cdn/core/loader.min.js"></script>
-<script type="module" src="../../dist/cdn/avLoader.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@380387c9117fba8bee1ec5162a9b1ec4aee7fe13/dist/cdn/preview/preview-component.min.css">
-<style>
-  html, body { margin: 0; height: 100%; background: var(--iswc-bg); color: var(--iswc-text); font-family: var(--iswc-font-sans); }
-  .galeria { display: grid; grid-template-columns: 14rem 1fr; height: 100%; }
-  .galeria nav { display: grid; align-content: start; gap: 0.25rem; padding: 0.75rem; border-right: 1px solid var(--iswc-border-soft); overflow: auto; }
-  .galeria nav iswc-button[aria-current="true"] { --iswc-button-bg: var(--iswc-brand-soft); }
-</style>
+<script type="importmap">{ "imports": { "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=e61eb072" } }</script>
+<script src="dist/cdn/boot.js?v=9i3wwr"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@9f310d5bed957d26c563a420b4e96c413fe2e67f/dist/cdn/core/loader.min.js"></script>
+<script type="module" src="dist/cdn/avLoader.min.js?v=dfkjo4"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@9f310d5bed957d26c563a420b4e96c413fe2e67f/dist/cdn/preview/doc-demo-host.min.js"></script>
+<script type="module" src="dist/cdn/view/demo/components/av-galeria.js?v=uk2sv8"></script>
 </head>
 <body>
-  <div class="galeria">
-    <nav id="nav" aria-label="Componentes"></nav>
-    <iswc-preview-component id="preview"></iswc-preview-component>
-  </div>
-  <!-- La galería marca `data-app-ready` al montar; el watchdog revela la página si falla. -->
-  <script>setTimeout(function () { document.documentElement.setAttribute('data-app-ready', ''); }, 6000);</script>
-  <script type="module" src="../../dist/cdn/view/demo/components/av-galeria.js"></script>
+<iswc-doc-demo brand="Avatar" brand-icon="mdi:hexagon-outline" brand-href="./" nav-label="Componentes" sheets-cache="avatar-demos" storage-key-nav="avatar-demos-nav"></iswc-doc-demo>
 </body>
 </html>

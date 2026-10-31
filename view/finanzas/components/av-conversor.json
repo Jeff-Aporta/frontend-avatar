@@ -55,8 +55,8 @@
           },
           "controls": [
             {
+              "control": "boolean",
               "prop": "props:ocupado",
-              "type": "boolean",
               "label": "ocupado",
               "default": false
             }

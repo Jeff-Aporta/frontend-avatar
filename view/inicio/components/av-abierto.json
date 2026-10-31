@@ -29,8 +29,8 @@
           },
           "controls": [
             {
+              "control": "text",
               "prop": "props:titulo",
-              "type": "text",
               "label": "titulo",
               "default": "Un software empresarial moderno, flexible y abierto"
             }

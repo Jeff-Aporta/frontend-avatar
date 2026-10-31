@@ -6,6 +6,7 @@
  *   404.html                   → la app en la portada (GitHub Pages lo sirve en rutas inexistentes)
  *   view/<v>/index.html        → la vista aislada (QA): `<iswc-toast>` + el shell de la vista, con sesión
  *   view/<v>/demo/index.html   → la vista con datos de muestra (solo si la carpeta `demo/` existe)
+ *   view/demo/index.html       → explorador de demos de todos los componentes (`<iswc-doc-demo>` del kit)
  *
  * Todas comparten la misma cabecera: metadatos (title, description, canonical, Open Graph, Twitter, robots, color),
  * `<base href>` a la raíz del sitio (las URLs se resuelven igual a cualquier profundidad), fuentes de Google, import
@@ -33,7 +34,7 @@ const recurso = (archivo: string) => {
   return `dist/cdn/${archivo}?v=${h}`;
 };
 
-type Opciones = { base: string; vista: string; titulo: string; descripcion: string; canonical: string | null; indexable: boolean; cuerpo: string; atributos?: string };
+type Opciones = { base: string; vista: string; titulo: string; descripcion: string; canonical: string | null; indexable: boolean; cuerpo: string; atributos?: string; explorador?: boolean };
 
 function documento(o: Opciones): string {
   const robots = o.indexable ? 'index, follow' : 'noindex, nofollow';
@@ -72,11 +73,14 @@ function documento(o: Opciones): string {
 <link rel="preconnect" href="https://api-avatar.jeffaporta.workers.dev" crossorigin>
 <link rel="stylesheet" href="${FUENTES}">
 <script type="importmap">{ "imports": { "@avatar/vendor": "${deno.avatar.vendor}" } }</script>
-<script src="${recurso('boot.js')}"></script>
-<link rel="stylesheet" href="${recurso('styles/app.css')}">
+<script src="${recurso('boot.js')}"></script>${o.explorador ? '' : `
+<link rel="stylesheet" href="${recurso('styles/app.css')}">`}
 <script type="module" src="${KIT}"></script>
 <script type="module" src="${recurso('avLoader.min.js')}"></script>
-<script type="module" src="${recurso('js/arranque.js')}"></script>
+${o.explorador
+    ? `<script type="module" src="${KIT.replace('core/loader.min.js', 'preview/doc-demo-host.min.js')}"></script>
+<script type="module" src="${recurso('view/demo/components/av-galeria.js')}"></script>`
+    : `<script type="module" src="${recurso('js/arranque.js')}"></script>`}
 </head>
 <body>
 ${o.cuerpo}
@@ -115,6 +119,10 @@ for (const p of PAGINAS) {
     hechas.push(escribir(demo, documento({ base: baseDe(demo), vista: p.vista, titulo: `${p.titulo} (demo) · ${SITIO}`, descripcion: p.descripcion, canonical: null, indexable: false, cuerpo, atributos: ' data-demo' })));
   }
 }
+
+// Explorador de demos: el shell del kit con todos los playground (`view/demo/manifest.json`).
+const explorador = 'view/demo/index.html';
+hechas.push(escribir(explorador, documento({ base: baseDe(explorador), vista: 'demo', titulo: `Demos · ${SITIO}`, descripcion: 'Explorador de los componentes de Avatar.', canonical: null, indexable: false, explorador: true, cuerpo: `<iswc-doc-demo brand="${SITIO}" brand-icon="mdi:hexagon-outline" brand-href="./" nav-label="Componentes" sheets-cache="avatar-demos" storage-key-nav="avatar-demos-nav"></iswc-doc-demo>` })));
 
 // Mapa del sitio con las rutas indexables.
 const indexables = PAGINAS.filter((p) => p.indexable).map((p) => `  <url><loc>${URL_PUBLICA}${p.ruta}</loc></url>`).join('\n');

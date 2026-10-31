@@ -51,7 +51,27 @@
               "nomina_mensual": 46900000
             }
           },
-          "controls": []
+          "controls": [
+            {
+              "control": "json",
+              "prop": "props:departamentos",
+              "label": "departamentos",
+              "default": [
+                {
+                  "nombre": "Desarrollo",
+                  "cantidad": 2
+                },
+                {
+                  "nombre": "Diseño",
+                  "cantidad": 1
+                },
+                {
+                  "nombre": "Marketing",
+                  "cantidad": 1
+                }
+              ]
+            }
+          ]
         },
         {
           "kind": "html",

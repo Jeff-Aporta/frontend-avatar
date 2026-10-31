@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<div class=\"stage\"><av-factura-form id=\"d\"></av-factura-form></div>",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-factura-form id=\"d\"></av-factura-form></div>",
           "target": "#d",
           "props": {
             "abierto": false,
@@ -54,14 +54,14 @@
           },
           "controls": [
             {
+              "control": "boolean",
               "prop": "props:abierto",
-              "type": "boolean",
               "label": "abierto",
               "default": false
             },
             {
+              "control": "boolean",
               "prop": "props:puedeEscribir",
-              "type": "boolean",
               "label": "puedeEscribir",
               "default": true
             }

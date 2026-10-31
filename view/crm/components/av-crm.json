@@ -13,8 +13,27 @@
       "title": "&lt;av-crm&gt;",
       "lede": "La vista CRM completa (necesita sesión y empresa activa).",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-crm id=\"c\"></av-crm></div>", "target": "#c", "props": { "id": null, "version": 0 }, "controls": [ { "prop": "props:id", "type": "text", "label": "id (icliente)", "default": "" } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/crm (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-crm id=\"c\"></av-crm></div>",
+          "target": "#c",
+          "props": {
+            "id": null,
+            "version": 0
+          },
+          "controls": [
+            {
+              "control": "text",
+              "prop": "props:id",
+              "label": "id (icliente)",
+              "default": null
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/crm (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
       ]
     }
   ]

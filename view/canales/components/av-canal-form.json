@@ -13,8 +13,44 @@
       "title": "&lt;av-canal-form&gt;",
       "lede": "Diálogo de canal nuevo (ábrelo con el control).",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-canal-form id=\"f\"></av-canal-form></div>", "target": "#f", "props": { "abierto": false, "equipos": [ { "iequipo": 1, "nombre": "Desarrollo" }, { "iequipo": 2, "nombre": "Comercial" } ], "guardando": false, "error": "" }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": false }, { "prop": "props:guardando", "type": "boolean", "label": "guardando", "default": false } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde «Nuevo canal» de av-canales (solo con permiso de gestión).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar un canal existente (fuera de alcance).</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-canal-form id=\"f\"></av-canal-form></div>",
+          "target": "#f",
+          "props": {
+            "abierto": false,
+            "equipos": [
+              {
+                "iequipo": 1,
+                "nombre": "Desarrollo"
+              },
+              {
+                "iequipo": 2,
+                "nombre": "Comercial"
+              }
+            ],
+            "guardando": false,
+            "error": ""
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "control": "boolean",
+              "prop": "props:guardando",
+              "label": "guardando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde «Nuevo canal» de av-canales (solo con permiso de gestión).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar un canal existente (fuera de alcance).</iswc-callout>"
+        }
       ]
     }
   ]

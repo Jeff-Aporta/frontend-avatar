@@ -13,8 +13,72 @@
       "title": "&lt;av-usuarios&gt;",
       "lede": "Usuarios con rol principal.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-usuarios id=\"u\"></av-usuarios></div>", "target": "#u", "props": { "items": [ { "iusuario": "admin", "nombre": "Administrador", "email": null, "bactivo": true }, { "iusuario": "ana", "nombre": "Ana Gestora", "email": "ana@avatar.test", "bactivo": true }, { "iusuario": "beto", "nombre": "Beto Desarrollador", "email": "beto@avatar.test", "bactivo": true } ], "roles": [ { "irol": "USR", "igrupo": "AVATAR" }, { "irol": "GESTOR", "igrupo": "AVATAR" }, { "irol": "ADMIN", "igrupo": "AVATAR" } ], "asignaciones": [ { "iusuario": "admin", "irol": "ADMIN", "bprincipal": true }, { "iusuario": "ana", "irol": "GESTOR", "bprincipal": true } ], "cargando": false }, "controls": [ { "prop": "props:cargando", "type": "boolean", "label": "cargando", "default": false } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Usuarios de av-admin.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para miembros de una empresa: eso es av-miembros.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-usuarios id=\"u\"></av-usuarios></div>",
+          "target": "#u",
+          "props": {
+            "items": [
+              {
+                "iusuario": "admin",
+                "nombre": "Administrador",
+                "email": null,
+                "bactivo": true
+              },
+              {
+                "iusuario": "ana",
+                "nombre": "Ana Gestora",
+                "email": "ana@avatar.test",
+                "bactivo": true
+              },
+              {
+                "iusuario": "beto",
+                "nombre": "Beto Desarrollador",
+                "email": "beto@avatar.test",
+                "bactivo": true
+              }
+            ],
+            "roles": [
+              {
+                "irol": "USR",
+                "igrupo": "AVATAR"
+              },
+              {
+                "irol": "GESTOR",
+                "igrupo": "AVATAR"
+              },
+              {
+                "irol": "ADMIN",
+                "igrupo": "AVATAR"
+              }
+            ],
+            "asignaciones": [
+              {
+                "iusuario": "admin",
+                "irol": "ADMIN",
+                "bprincipal": true
+              },
+              {
+                "iusuario": "ana",
+                "irol": "GESTOR",
+                "bprincipal": true
+              }
+            ],
+            "cargando": false
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Usuarios de av-admin.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para miembros de una empresa: eso es av-miembros.</iswc-callout>"
+        }
       ]
     }
   ]

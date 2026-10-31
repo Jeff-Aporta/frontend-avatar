@@ -13,8 +13,26 @@
       "title": "&lt;av-hero&gt;",
       "lede": "Portada de la landing.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-hero id=\"h\"></av-hero></div>", "target": "#h", "props": { "sesion": false }, "controls": [ { "prop": "props:sesion", "type": "boolean", "label": "sesion", "default": false } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de la landing.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de la app privada.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-hero id=\"h\"></av-hero></div>",
+          "target": "#h",
+          "props": {
+            "sesion": false
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:sesion",
+              "label": "sesion",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de la landing.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de la app privada.</iswc-callout>"
+        }
       ]
     }
   ]

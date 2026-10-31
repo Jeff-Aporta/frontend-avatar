@@ -13,8 +13,51 @@
       "title": "&lt;av-invitar-form&gt;",
       "lede": "Diálogo de invitación.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-invitar-form id=\"f\"></av-invitar-form></div>", "target": "#f", "props": { "abierto": true, "usuarios": [ { "iusuario": "dani", "nombre": "Dani Nuevo" }, { "iusuario": "eva", "nombre": "Eva Soporte" } ] }, "controls": [ { "prop": "props:abierto", "type": "boolean", "label": "abierto", "default": true }, { "prop": "props:usuarios", "type": "json", "label": "usuarios", "default": [] } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde la pestaña Miembros de av-organizacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No crea usuarios: eso es av-usuario-form (admin).</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-invitar-form id=\"f\"></av-invitar-form></div>",
+          "target": "#f",
+          "props": {
+            "abierto": true,
+            "usuarios": [
+              {
+                "iusuario": "dani",
+                "nombre": "Dani Nuevo"
+              },
+              {
+                "iusuario": "eva",
+                "nombre": "Eva Soporte"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": true
+            },
+            {
+              "control": "json",
+              "prop": "props:usuarios",
+              "label": "usuarios",
+              "default": [
+                {
+                  "iusuario": "dani",
+                  "nombre": "Dani Nuevo"
+                },
+                {
+                  "iusuario": "eva",
+                  "nombre": "Eva Soporte"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde la pestaña Miembros de av-organizacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No crea usuarios: eso es av-usuario-form (admin).</iswc-callout>"
+        }
       ]
     }
   ]

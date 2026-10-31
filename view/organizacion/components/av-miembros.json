@@ -13,8 +13,66 @@
       "title": "&lt;av-miembros&gt;",
       "lede": "Miembros de la empresa.",
       "blocks": [
-        { "kind": "demo", "html": "<div class=\"stage\"><av-miembros id=\"m\"></av-miembros></div>", "target": "#m", "props": { "items": [ { "iempresa": 1, "iusuario": "admin", "rol": "propietario", "cargo": null, "usuario": { "iusuario": "admin", "nombre": "Administrador" } }, { "iempresa": 1, "iusuario": "ana", "rol": "admin", "cargo": "Gestora", "usuario": { "iusuario": "ana", "nombre": "Ana Gestora", "email": "ana@avatar.test" } }, { "iempresa": 1, "iusuario": "beto", "rol": "miembro", "cargo": "Desarrollador", "usuario": { "iusuario": "beto", "nombre": "Beto Desarrollador" } } ], "puedeGestionar": true, "cargando": false }, "controls": [ { "prop": "props:puedeGestionar", "type": "boolean", "label": "puedeGestionar", "default": true }, { "prop": "props:cargando", "type": "boolean", "label": "cargando", "default": false } ] },
-        { "kind": "html", "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Miembros de av-organizacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para integrantes de un equipo: eso vive en av-equipos.</iswc-callout>" }
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-miembros id=\"m\"></av-miembros></div>",
+          "target": "#m",
+          "props": {
+            "items": [
+              {
+                "iempresa": 1,
+                "iusuario": "admin",
+                "rol": "propietario",
+                "cargo": null,
+                "usuario": {
+                  "iusuario": "admin",
+                  "nombre": "Administrador"
+                }
+              },
+              {
+                "iempresa": 1,
+                "iusuario": "ana",
+                "rol": "admin",
+                "cargo": "Gestora",
+                "usuario": {
+                  "iusuario": "ana",
+                  "nombre": "Ana Gestora",
+                  "email": "ana@avatar.test"
+                }
+              },
+              {
+                "iempresa": 1,
+                "iusuario": "beto",
+                "rol": "miembro",
+                "cargo": "Desarrollador",
+                "usuario": {
+                  "iusuario": "beto",
+                  "nombre": "Beto Desarrollador"
+                }
+              }
+            ],
+            "puedeGestionar": true,
+            "cargando": false
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:puedeGestionar",
+              "label": "puedeGestionar",
+              "default": true
+            },
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Miembros de av-organizacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para integrantes de un equipo: eso vive en av-equipos.</iswc-callout>"
+        }
       ]
     }
   ]

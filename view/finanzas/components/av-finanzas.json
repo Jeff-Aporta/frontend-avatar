@@ -23,8 +23,8 @@
           },
           "controls": [
             {
+              "control": "select",
               "prop": "props:id",
-              "type": "select",
               "label": "id (pestaña)",
               "options": [
                 "",
@@ -32,7 +32,7 @@
                 "transacciones",
                 "facturas"
               ],
-              "default": ""
+              "default": null
             }
           ]
         },
