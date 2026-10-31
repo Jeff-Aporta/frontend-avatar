@@ -10,6 +10,7 @@
   padding: t.esp(8) 0;
 
   .titulo {
+    color: inherit;
     @include m.titulo;
     margin: 0 0 t.esp(5);
     font-size: 1.6em;

@@ -24,7 +24,7 @@
   height: 120%;
   object-fit: cover;
   object-position: left top;
-  opacity: 0.28;
+  opacity: var(--av-banner-opacidad, 0.28);
   filter: hue-rotate(var(--iswc-hue-rotate, 0deg)) saturate(1.1);
   z-index: -2;
   pointer-events: none;

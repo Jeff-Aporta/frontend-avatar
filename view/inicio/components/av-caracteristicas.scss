@@ -14,6 +14,7 @@
 }
 
 .titulo {
+  color: inherit;
   @include m.titulo;
   margin: 0;
   text-align: center;
@@ -26,7 +27,7 @@
   margin: t.esp(2) auto 0;
   max-width: 40em;
   text-align: center;
-  color: var(--iswc-text-dim);
+  color: color-mix(in srgb, currentColor 62%, transparent);
 }
 
 .rejilla {
@@ -97,4 +98,13 @@
       box-shadow: 0 0.875em 2.5em color-mix(in srgb, var(--iswc-accent) 22%, rgb(0 0 0 / 12%));
     }
   }
+}
+
+/* En tarjeta es un papel: vuelve al texto del tema. Sin caja, el texto va sobre la página. */
+.seccion[data-variante="tarjetas"] .item {
+  color: var(--iswc-text);
+}
+
+.seccion[data-variante="iconos"] .item .texto {
+  color: color-mix(in srgb, currentColor 75%, transparent);
 }

@@ -19,6 +19,7 @@
   .titulo {
     @include m.titulo;
     display: flex;
+    color: inherit;
     align-items: center;
     gap: t.esp(2);
     margin: 0;
@@ -33,7 +34,7 @@
 
   .subtitulo {
     margin: t.esp(1) 0 0;
-    color: var(--iswc-text-dim);
+    color: color-mix(in srgb, currentColor 62%, transparent);
     font-size: 0.95em;
   }
 

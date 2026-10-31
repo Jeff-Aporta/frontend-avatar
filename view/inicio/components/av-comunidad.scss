@@ -59,6 +59,7 @@
 }
 
 .titulo {
+  color: inherit;
   @include m.titulo;
   margin: 0;
   font-size: clamp(1.6em, 3.2vw, 2.4em);
@@ -68,7 +69,7 @@
 
 .lede {
   margin: t.esp(3) 0 t.esp(6);
-  color: var(--iswc-text-soft);
+  color: color-mix(in srgb, currentColor 75%, transparent);
   font-size: 1.08em;
 }
 
@@ -90,7 +91,7 @@
   }
 
   .etiqueta {
-    color: var(--iswc-text-dim);
+    color: color-mix(in srgb, currentColor 62%, transparent);
     font-size: 0.9em;
   }
 }

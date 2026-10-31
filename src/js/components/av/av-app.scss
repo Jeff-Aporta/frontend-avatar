@@ -5,8 +5,8 @@
 :host {
   @include m.host-bloque;
   height: 100dvh;
-  background: var(--iswc-bg);
-  color: var(--iswc-text);
+  background: var(--iswc-bg-page);
+  color: var(--iswc-text-page);
 }
 
 .arranque {

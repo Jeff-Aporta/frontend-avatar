@@ -24,12 +24,17 @@
   --av-radio: 0.9em;
 }
 
+/* Las figuras del banner apenas se insinúan en claro; en oscuro pueden verse más. */
+[data-theme="light"] {
+  --av-banner-opacidad: 0.07;
+}
+
 html,
 body {
   margin: 0;
   min-height: 100%;
-  background: var(--iswc-bg);
-  color: var(--iswc-text);
+  background: var(--iswc-bg-page);
+  color: var(--iswc-text-page);
   font-family: var(--iswc-font-sans);
 }
 
