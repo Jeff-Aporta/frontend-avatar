@@ -1,16 +1,13 @@
 /**
- * demo.ts — dominio de la vista `acceso` (sin DOM): los usuarios de muestra que siembra `api-avatar` (`deno task demo`)
+ * demo.ts — dominio de la vista `acceso` (sin DOM): los perfiles de prueba que publica `api-avatar`
  * y el texto de ayuda del acceso.
  */
 import type { CredencialDemo } from '../../../src/js/consts/schemas/acceso.schemas.js';
+import type { PerfilPrueba } from '../../../src/js/consts/schemas/api.schemas.js';
 
-/** Usuarios de muestra: los mismos de `src/seed.ts` del API (el admin se crea con la contraseña del secreto). */
-export function credencialesDemo(): CredencialDemo[] {
-  return [
-    { usuario: 'ana', password: 'avatar-demo-2026', rol: 'Gestora', descripcion: 'Administra empresas, equipos, canales, proyectos y CRM.' },
-    { usuario: 'beto', password: 'avatar-demo-2026', rol: 'Usuario', descripcion: 'Chatea, mueve sus tareas y comenta.' },
-    { usuario: 'carla', password: 'avatar-demo-2026', rol: 'Usuario', descripcion: 'Comercial: ve el CRM y conversa con su equipo.' },
-  ];
+/** Perfiles de prueba como credenciales del acceso: el PIN hace de contraseña. */
+export function credencialesDe(perfiles: PerfilPrueba[]): CredencialDemo[] {
+  return perfiles.map((p) => ({ usuario: p.iusuario, password: p.pin, rol: p.rol, descripcion: p.descripcion }));
 }
 
 /** Mensaje de error legible para el formulario a partir del mensaje del API. */

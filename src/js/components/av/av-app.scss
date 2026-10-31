@@ -63,16 +63,40 @@ av-empresa-selector {
 
 /* Pie: marca, lema y los selectores de paleta y tema. */
 .pie {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: t.esp(3) t.esp(5);
-  padding: t.esp(4) t.esp(5);
-  border-top: 0.19em solid var(--av-borde-seccion);
-  background: linear-gradient(0deg, var(--av-velo), transparent);
-  color: var(--iswc-text-dim);
-  font-size: 0.88em;
+  display: grid;
+  grid-template-columns: minmax(12em, 1.4fr) repeat(auto-fit, minmax(10em, 1fr));
+  gap: t.esp(4) t.esp(6);
+  align-items: start;
+  padding: t.esp(5);
+  border-top: 1px solid var(--iswc-border-soft);
+  font-size: 0.92em;
+}
+
+.pie-col {
+  display: grid;
+  gap: t.esp(1);
+  justify-items: start;
+  min-width: 0;
+
+  a,
+  .pie-accion {
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
+}
+
+.pie-accion {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pie-titulo {
+  @include m.rotulo(0.8);
+  font-size: 0.8em;
 }
 
 .pie-marca {
@@ -83,26 +107,9 @@ av-empresa-selector {
   color: var(--iswc-brand-text);
 }
 
-.pie-enlaces {
-  display: flex;
-  flex-wrap: wrap;
-  gap: t.esp(1) t.esp(4);
-  font-size: 0.9em;
-
-  a {
-    color: inherit;
-    text-underline-offset: 0.2em;
-  }
-}
-
 .pie-tema {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: t.esp(2);
-  margin-left: auto;
-}
-
-.pie-rotulo {
-  @include m.rotulo(0.7);
-  font-size: 0.8em;
 }

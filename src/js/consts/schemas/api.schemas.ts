@@ -95,3 +95,7 @@ export const NotificacionSchema = z.object({
   creado: z.union([z.string(), z.date()]).nullable().optional(),
 });
 export type Notificacion = z.infer<typeof NotificacionSchema>;
+
+/** Perfil de prueba público (`GET perfiles/lista`): el PIN va en claro a propósito hasta tener MVP. */
+export const PerfilPruebaSchema = z.object({ iusuario: z.string(), nombre: z.string(), pin: z.string(), rol: z.string(), descripcion: z.string() });
+export type PerfilPrueba = z.infer<typeof PerfilPruebaSchema>;

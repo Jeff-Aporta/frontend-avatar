@@ -1,4 +1,4 @@
-import{crearComponente as o,define as c,emitir as n,html as t}from"../../../js/base/componente.js?v=0air4b";const i=o(import.meta.url,"av-correo-carpetas",{carpetas:[],activa:"entrada"},(e,r,s)=>{e.append(t`
+import{crearComponente as o,define as c,emitir as n,html as t}from"../../../js/base/componente.js?v=333q2n";const i=o(import.meta.url,"av-correo-carpetas",{carpetas:[],activa:"entrada"},(e,r,s)=>{e.append(t`
     <nav class="carpetas" part="carpetas" aria-label="Carpetas del correo">
       ${r.carpetas.map(a=>t`
         <iswc-button class="carpeta" data-carpeta=${a.carpeta} variant=${a.carpeta===r.activa?"soft":"plain"} color=${a.carpeta===r.activa?"brand":"neutral"} aria-current=${a.carpeta===r.activa?"page":"false"}

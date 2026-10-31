@@ -13,12 +13,12 @@ const AvCredencialesDemo = crearComponente<AvCredencialesDemoProps>(import.meta.
         ${props.items.map((c) => html`
           <li class="fila">
             <av-persona class="persona"></av-persona>
-            <span class="descripcion">${c.descripcion}</span>
+            <span class="descripcion">${c.descripcion} PIN <code>${c.password}</code></span>
             <iswc-button variant="outlined" color="neutral" class="usar" data-usuario=${c.usuario} oniswc-click=${() => emitir(host, 'av-credencial-elegida', { usuario: c.usuario, password: c.password })}>Usar</iswc-button>
           </li>
         `)}
       </ul>
-      <p class="nota">Contraseña de todas: <code>avatar-demo-2026</code>. El administrador usa el secreto del despliegue.</p>
+      <p class="nota">Cada cuenta entra con su PIN de 4 dígitos.</p>
     </iswc-card>
   `);
   const personas = root.querySelectorAll<HTMLElement & { props: Record<string, unknown> }>('av-persona');

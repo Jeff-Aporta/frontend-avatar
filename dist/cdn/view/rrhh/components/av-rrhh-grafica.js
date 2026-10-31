@@ -1,4 +1,4 @@
-import{crearComponente as l,define as d,html as r}from"../../../js/base/componente.js?v=0air4b";import{serieAsistenciaHoy as c,seriePorDepartamento as n}from"../utils/rrhh.js?v=n0wjd8";const u=l(import.meta.url,"av-rrhh-grafica",{resumen:null,departamentos:[]},(e,a)=>{const t=a.resumen?c(a.resumen):null,i=n(a.departamentos);e.append(r`
+import{crearComponente as l,define as d,html as r}from"../../../js/base/componente.js?v=333q2n";import{serieAsistenciaHoy as c,seriePorDepartamento as n}from"../utils/rrhh.js?v=n0wjd8";const u=l(import.meta.url,"av-rrhh-grafica",{resumen:null,departamentos:[]},(e,a)=>{const t=a.resumen?c(a.resumen):null,i=n(a.departamentos);e.append(r`
       <div class="rejilla" part="rejilla">
         <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
           <strong slot="header" class="titulo"><iswc-icon icon="mdi:chart-donut"></iswc-icon> Asistencia de hoy</strong>

@@ -374,5 +374,13 @@
   {
     "tag": "av-paty-json-dialog",
     "file": "../../src/js/components/paty/av-paty-json-dialog.json"
+  },
+  {
+    "tag": "av-perfil-selector",
+    "file": "../../src/js/components/av/av-perfil-selector.json"
+  },
+  {
+    "tag": "av-perfiles-tabla",
+    "file": "../../src/js/components/av/av-perfiles-tabla.json"
   }
 ]

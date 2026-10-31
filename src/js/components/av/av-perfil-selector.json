@@ -1,0 +1,76 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-perfil-selector",
+  "category": "transversal",
+  "navTitle": "Selector de perfil",
+  "title": "&lt;av-perfil-selector&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-perfil-selector",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-perfil-selector&gt;",
+      "lede": "Cambia de perfil de prueba con PIN.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-perfil-selector id=\"d\"></av-perfil-selector></div>",
+          "target": "#d",
+          "props": {
+            "perfiles": [
+              {
+                "iusuario": "ana",
+                "nombre": "Ana Gestora",
+                "pin": "1234",
+                "rol": "Gestora",
+                "descripcion": "Empresas, equipos y CRM."
+              },
+              {
+                "iusuario": "beto",
+                "nombre": "Beto Desarrollador",
+                "pin": "2345",
+                "rol": "Usuario",
+                "descripcion": "Chatea y mueve tareas."
+              }
+            ],
+            "activo": "ana"
+          },
+          "controls": [
+            {
+              "control": "text",
+              "prop": "props:activo",
+              "label": "activo",
+              "default": "ana"
+            },
+            {
+              "control": "json",
+              "prop": "props:perfiles",
+              "label": "perfiles",
+              "default": [
+                {
+                  "iusuario": "ana",
+                  "nombre": "Ana Gestora",
+                  "pin": "1234",
+                  "rol": "Gestora",
+                  "descripcion": "Empresas, equipos y CRM."
+                },
+                {
+                  "iusuario": "beto",
+                  "nombre": "Beto Desarrollador",
+                  "pin": "2345",
+                  "rol": "Usuario",
+                  "descripcion": "Chatea y mueve tareas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la barra, mientras las cuentas sean de prueba.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para cuentas reales: su PIN es público.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

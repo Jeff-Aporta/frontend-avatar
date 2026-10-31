@@ -29,12 +29,10 @@ export const PAGINAS: Pagina[] = [
   { vista: 'admin', ruta: 'admin/', shell: 'av-admin', titulo: 'Administración', descripcion: 'Usuarios, roles y permisos.', privada: true, indexable: false },
 ];
 
-/** Enlaces del pie: páginas abiertas y demos (`ruta` relativa a la raíz del sitio). */
-export const ENLACES_PIE: { ruta: string; titulo: string }[] = [
-  { ruta: '', titulo: 'Inicio' },
-  { ruta: 'acceso/', titulo: 'Entrar' },
-  { ruta: 'chat-demo/', titulo: 'Chat en vivo' },
-  { ruta: 'view/demo/', titulo: 'Demos de componentes' },
+/** Columnas de enlaces del pie (`ruta` relativa a la raíz del sitio). */
+export const COLUMNAS_PIE: { titulo: string; enlaces: { ruta: string; titulo: string }[] }[] = [
+  { titulo: 'Avatar', enlaces: [{ ruta: '', titulo: 'Inicio' }, { ruta: 'acceso/', titulo: 'Entrar' }] },
+  { titulo: 'Demos', enlaces: [{ ruta: 'chat-demo/', titulo: 'Chat en vivo' }, { ruta: 'view/demo/', titulo: 'Demos de componentes' }] },
 ];
 
 /** Página de una vista (o undefined). */

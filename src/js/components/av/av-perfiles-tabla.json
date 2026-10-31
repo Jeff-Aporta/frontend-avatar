@@ -1,0 +1,76 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-perfiles-tabla",
+  "category": "transversal",
+  "navTitle": "Tabla de perfiles",
+  "title": "&lt;av-perfiles-tabla&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-perfiles-tabla",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-perfiles-tabla&gt;",
+      "lede": "Usuarios, nombres, roles y PIN de prueba.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-perfiles-tabla id=\"d\"></av-perfiles-tabla></div>",
+          "target": "#d",
+          "props": {
+            "abierto": false,
+            "perfiles": [
+              {
+                "iusuario": "ana",
+                "nombre": "Ana Gestora",
+                "pin": "1234",
+                "rol": "Gestora",
+                "descripcion": "Empresas, equipos y CRM."
+              },
+              {
+                "iusuario": "beto",
+                "nombre": "Beto Desarrollador",
+                "pin": "2345",
+                "rol": "Usuario",
+                "descripcion": "Chatea y mueve tareas."
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:abierto",
+              "label": "abierto",
+              "default": false
+            },
+            {
+              "control": "json",
+              "prop": "props:perfiles",
+              "label": "perfiles",
+              "default": [
+                {
+                  "iusuario": "ana",
+                  "nombre": "Ana Gestora",
+                  "pin": "1234",
+                  "rol": "Gestora",
+                  "descripcion": "Empresas, equipos y CRM."
+                },
+                {
+                  "iusuario": "beto",
+                  "nombre": "Beto Desarrollador",
+                  "pin": "2345",
+                  "rol": "Usuario",
+                  "descripcion": "Chatea y mueve tareas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde el pie, para saber con qué entrar.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para cuentas reales.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

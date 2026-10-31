@@ -1,4 +1,4 @@
-import{crearComponente as o,define as e,html as t}from"../../../js/base/componente.js?v=0air4b";const r=o(import.meta.url,"av-abierto",{titulo:"",pilares:[]},(s,a)=>{s.append(t`
+import{crearComponente as o,define as e,html as t}from"../../../js/base/componente.js?v=333q2n";const r=o(import.meta.url,"av-abierto",{titulo:"",pilares:[]},(s,a)=>{s.append(t`
     <section class="banda" part="banda" aria-labelledby="t">
       <div class="interior">
         <h2 id="t" class="titulo">${a.titulo}</h2>

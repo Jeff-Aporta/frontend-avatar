@@ -6,6 +6,7 @@
  * Datos que vienen de fuera (API, URL, almacenamiento) se PARSEAN con su schema (`safeParse`), nunca se castean con `as`.
  */
 import { z } from '../../base/zod.js';
+import { PerfilPruebaSchema } from './api.schemas.js';
 
 /** Ruta de la app: vista (una página real por vista) e id opcional del registro abierto (viaja en el historial). */
 export const RutaSchema = z.object({ vista: z.string(), id: z.string().nullable() });
@@ -93,6 +94,13 @@ export const AvBuscadorPropsSchema = z.object({
 });
 export type AvBuscadorProps = z.infer<typeof AvBuscadorPropsSchema>;
 
+/** `<av-perfil-selector>`: cambia de perfil; sin sesión guardada para ese perfil pide su PIN. */
+export const AvPerfilSelectorPropsSchema = z.object({ perfiles: z.array(PerfilPruebaSchema).default([]), activo: z.string().default('') });
+export type AvPerfilSelectorProps = z.infer<typeof AvPerfilSelectorPropsSchema>;
+/** `<av-perfiles-tabla>`: diálogo con usuario, nombre, rol y PIN de los perfiles de prueba. */
+export const AvPerfilesTablaPropsSchema = z.object({ abierto: z.boolean().default(false), perfiles: z.array(PerfilPruebaSchema).default([]) });
+export type AvPerfilesTablaProps = z.infer<typeof AvPerfilesTablaPropsSchema>;
+
 /** Props de los transversales, por tag (lo lee `props-registro.ts`). */
 export const APP_PROPS = {
   'av-app': AvAppPropsSchema,
@@ -104,6 +112,8 @@ export const APP_PROPS = {
   'av-indicadores': AvIndicadoresPropsSchema,
   'av-escena': AvEscenaPropsSchema,
   'av-buscador': AvBuscadorPropsSchema,
+  'av-perfil-selector': AvPerfilSelectorPropsSchema,
+  'av-perfiles-tabla': AvPerfilesTablaPropsSchema,
 } as const;
 
 /** Base (`componente.ts`): atributos e hijos del helper `el()`. */

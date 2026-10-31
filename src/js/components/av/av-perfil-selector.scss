@@ -1,0 +1,23 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-perfil-selector — menú de perfiles y diálogo de PIN. */
+:host {
+  display: inline-block;
+}
+
+.campos {
+  display: grid;
+  gap: t.esp(2);
+  min-width: min(20em, 80vw);
+}
+
+.texto {
+  margin: 0;
+}
+
+.error {
+  margin: 0;
+  color: var(--iswc-danger-text);
+  font-size: 0.9em;
+}

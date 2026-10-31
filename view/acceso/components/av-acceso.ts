@@ -5,9 +5,9 @@
  */
 import { crearComponente, define, html } from '../../../src/js/base/componente.js';
 import type { AvAccesoProps } from '../../../src/js/consts/schemas/acceso.schemas.js';
-import { iniciarSesion, mensajeDe } from '../../../src/js/core/api.js';
+import { iniciarSesion, mensajeDe, perfilesPrueba } from '../../../src/js/core/api.js';
 import { ir, VISTA_SESION } from '../../../src/js/core/router.js';
-import { credencialesDemo, mensajeAcceso } from '../utils/demo.js';
+import { credencialesDe, mensajeAcceso } from '../utils/demo.js';
 import './av-credenciales-demo.js';
 
 type LoginEl = HTMLElement & { busy: boolean; reset(): void; focus(): void };
@@ -16,7 +16,7 @@ type ConProps = HTMLElement & { props: Record<string, unknown> };
 
 /** Escribe usuario y contraseña en los campos internos del `<iswc-login>` (misma técnica que un gestor de contraseñas). */
 export function rellenar(login: HTMLElement, usuario: string, password: string): void {
-  const campos = login.shadowRoot?.querySelectorAll<HTMLElement & { value: string }>('iswc-input') ?? [];
+  const campos = [...(login.shadowRoot?.querySelectorAll<HTMLElement & { value: string }>('iswc-input') ?? [])].slice(0, 2);
   for (const campo of campos) {
     const tipo = campo.getAttribute('type') ?? campo.getAttribute('name') ?? '';
     const esClave = /password/i.test(tipo) || /password|clave|contrase/i.test(campo.getAttribute('name') ?? '') || /password/i.test(campo.getAttribute('label') ?? '') || /contrase/i.test(campo.getAttribute('label') ?? '');
@@ -64,12 +64,15 @@ const AvAcceso = crearComponente<AvAccesoProps>(
         </aside>
       </div>
     `);
-    const items = credencialesDemo();
-    (root.querySelector('#demo') as ConProps).props = { items };
-    // Provisional para las pruebas: el formulario arranca con la primera cuenta de muestra.
-    const [primera] = items;
+    // Provisional para las pruebas: el formulario arranca con el primer perfil que trabaja con la empresa.
     const login = root.querySelector('#login') as LoginEl;
-    if (primera) void customElements.whenDefined('iswc-login').then(() => rellenar(login, primera.usuario, primera.password));
+    void perfilesPrueba().then(async (perfiles) => {
+      const items = credencialesDe(perfiles);
+      (root.querySelector('#demo') as ConProps).props = { items };
+      const primera = items.find((c) => c.usuario === 'ana') ?? items[0];
+      await customElements.whenDefined('iswc-login');
+      if (primera) rellenar(login, primera.usuario, primera.password);
+    }).catch(() => undefined);
   },
   // Repintado parcial: ocupado/error solo tocan atributos del login (el formulario conserva lo escrito).
   (root, props) => {

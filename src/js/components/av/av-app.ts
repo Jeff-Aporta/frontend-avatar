@@ -11,17 +11,19 @@
  * a la página de `acceso` recordando el destino) y monta el shell de la vista con `props = { id }`. Carga perezosa: cada vista se
  * pide al navegar (`cargarVista`), se precargan en reposo las probables y, mientras se define, se ve un esqueleto.
  */
-import { crearComponente, define, html } from '../../base/componente.js';
+import { avisar, crearComponente, define, html } from '../../base/componente.js';
 import type { AvAppProps, Ruta } from '../../consts/schemas/componentes.schemas.js';
-import { cargarPerfil, cerrarSesion, conectar, iniciarSesion, mensajeDe } from '../../core/api.js';
+import { cargarPerfil, cerrarSesion, conectar, iniciarSesion, mensajeDe, perfilesPrueba } from '../../core/api.js';
 import { alCambiar, empresaActiva, estado, haySesion } from '../../core/estado.js';
 import { ACCION, puede, rolDe } from '../../core/permisos.js';
 import { destinoTrasAcceso, escuchar, ir, recordarDestino, resolver, rutaActual, VISTA_SESION, VISTAS_PRIVADAS } from '../../core/router.js';
 import { MODULOS, type Modulo } from '../../consts/comandos.js';
-import { ENLACES_PIE } from '../../consts/paginas.js';
+import { COLUMNAS_PIE } from '../../consts/paginas.js';
 import { PAGINAS } from '../../consts/paginas.js';
 import { tagsDeVista, VIEW_TAGS } from '../../kit-tags.js';
 import './av-empresa-selector.js';
+import './av-perfil-selector.js';
+import './av-perfiles-tabla.js';
 
 /** Vista → tag del shell de esa vista (cada vista tiene UN shell; la tabla de páginas es la fuente). */
 const SHELLS: Record<string, string> = Object.fromEntries(PAGINAS.map((p) => [p.vista, p.shell]));
@@ -95,25 +97,61 @@ function montarVista(vista: string, id: string | null, conSesion: boolean): Docu
 }
 
 /**
- * Pie de la app (como el footer del React, que tenía el selector de tema): marca, lema y el selector de paleta del kit
- * (`iswc-palette-selector`, alimentado con las paletas publicadas por el kit) junto al de claro/oscuro. Cambiar la
- * paleta reescribe `data-palette` de `<html>` y TODA la interfaz se re-tiñe: los colores salen solo de tokens.
+ * Pie de la app, en columnas: marca, enlaces del sitio, pruebas y tema. La paleta y el modo van aquí, a la vista, para
+ * comparar temas mientras se prueba; cambiarlos reescribe `<html>` y TODA la interfaz se re-tiñe. «Perfiles de prueba» es
+ * una acción: abre la tabla con usuario, nombre y PIN.
  */
 function pie(slot: string | null) {
   return html`
     <footer class="pie" part="pie" slot=${slot}>
-      <span class="pie-marca"><av-logo wordmark></av-logo></span>
-      <span class="pie-lema">Gestión digital y automatización · Odys</span>
-      <nav class="pie-enlaces" part="pie-enlaces" aria-label="Enlaces del sitio">
-        ${ENLACES_PIE.map((e) => html`<a href=${new URL(e.ruta, raizSitio()).href}>${e.titulo}</a>`)}
-      </nav>
-      <span class="pie-tema">
-        <span class="pie-rotulo">Paleta</span>
-        <iswc-palette-selector scope="root" aria-label="Elegir la paleta de colores"></iswc-palette-selector>
-        <iswc-theme-toggle scope="root"></iswc-theme-toggle>
-      </span>
+      <div class="pie-col pie-col-marca">
+        <span class="pie-marca"><av-logo wordmark></av-logo></span>
+        <span class="pie-lema">Gestión digital y automatización · Odys</span>
+      </div>
+      ${COLUMNAS_PIE.map((c) => html`
+        <nav class="pie-col" aria-label=${c.titulo}>
+          <strong class="pie-titulo">${c.titulo}</strong>
+          ${c.enlaces.map((e) => html`<a href=${new URL(e.ruta, raizSitio()).href}>${e.titulo}</a>`)}
+        </nav>`)}
+      <div class="pie-col">
+        <strong class="pie-titulo">Pruebas</strong>
+        <button class="pie-accion" type="button" onclick=${abrirPerfiles}>Perfiles de prueba</button>
+      </div>
+      <div class="pie-col">
+        <strong class="pie-titulo">Tema</strong>
+        <span class="pie-tema">
+          <iswc-palette-selector scope="root" aria-label="Elegir la paleta de colores"></iswc-palette-selector>
+          <iswc-theme-toggle scope="root"></iswc-theme-toggle>
+        </span>
+      </div>
     </footer>
+    <av-perfiles-tabla id="perfiles-tabla" onav-perfiles-cerrar=${cerrarPerfiles} onav-perfil-usar=${usarPerfil}></av-perfiles-tabla>
   `;
+}
+
+const tablaDe = (e: Event) => ((e.currentTarget as HTMLElement).getRootNode() as ShadowRoot).querySelector('#perfiles-tabla') as ConProps;
+
+/** Abre la tabla de perfiles de prueba. */
+async function abrirPerfiles(e: Event): Promise<void> {
+  const tabla = tablaDe(e);
+  tabla.props = { abierto: true };
+  try {
+    tabla.props = { perfiles: await perfilesPrueba() };
+  } catch (err) {
+    avisar(mensajeDe(err), 'danger');
+  }
+}
+
+function cerrarPerfiles(e: Event): void {
+  (e.currentTarget as ConProps).props = { abierto: false };
+}
+
+/** «Usar» en la tabla: el selector decide si el cambio es directo o pide el PIN. */
+function usarPerfil(e: Event): void {
+  const tabla = e.currentTarget as ConProps;
+  tabla.props = { abierto: false };
+  const selector = (tabla.getRootNode() as ShadowRoot).querySelector('av-perfil-selector');
+  selector?.dispatchEvent(new CustomEvent('av-perfil-pedir', { detail: (e as CustomEvent).detail }));
 }
 
 /** Acciones globales de la paleta de comandos: tema, paleta (lleva al selector del pie) y salir. */
@@ -200,12 +238,13 @@ const AvApp = crearComponente<AvAppProps>(
         <iswc-app-shell class="publica" brand="Avatar" brand-href=${raizSitio()} home-label="Ir al inicio" toast="top-end">
           <av-logo slot="brand" class="marca" wordmark animado></av-logo>
           ${conSesion ? html`<iswc-button slot="actions" variant="outlined" color="brand" oniswc-click=${() => ir(VISTA_SESION)}><iswc-icon slot="start" icon="mdi:view-dashboard-outline"></iswc-icon>Ir al panel</iswc-button>` : null}
+          <av-perfil-selector slot="actions" id="perfil"></av-perfil-selector>
           ${sesionMenu(conSesion)}
-          <iswc-theme-toggle slot="actions" scope="root"></iswc-theme-toggle>
           <main class="vista" part="vista">${montarVista(props.vista, props.id, conSesion)}</main>
           ${pie('footer')}
         </iswc-app-shell>
       `);
+      (root.querySelector('#perfil') as ConProps).props = { activo: estado.yo?.iusuario ?? '' };
       return;
     }
     const admin = puede(estado.perfil, ACCION.seguridad, 'PUT');
@@ -214,8 +253,8 @@ const AvApp = crearComponente<AvAppProps>(
         <a slot="brand" class="marca" href=${raizSitio()} aria-label="Avatar, ir al inicio"><av-logo wordmark animado></av-logo></a>
         <av-buscador slot="actions"></av-buscador>
         <av-empresa-selector slot="actions"></av-empresa-selector>
+        <av-perfil-selector slot="actions" id="perfil"></av-perfil-selector>
         ${sesionMenu(true)}
-        <iswc-theme-toggle slot="actions" scope="root"></iswc-theme-toggle>
         <iswc-doc-index slot="start" id="indice" placeholder="Buscar módulo…"
           oniswc-doc-index-select=${(e: Event) => ir((e as CustomEvent<{ id: string }>).detail.id)}></iswc-doc-index>
         <main class="vista" part="vista">${montarVista(props.vista, props.id, true)}</main>
@@ -230,6 +269,7 @@ const AvApp = crearComponente<AvAppProps>(
     buscador.props = { permitidos: modulos(admin).map((m) => m.id) };
     buscador.addEventListener('av-buscador-global', (e) => void accionGlobal((e as CustomEvent<{ accion: string }>).detail.accion, root));
     indice.current = props.vista;
+    (root.querySelector('#perfil') as ConProps).props = { activo: estado.yo?.iusuario ?? '' };
     (root.querySelector('av-empresa-selector') as ConProps).props = { empresas: estado.yo?.empresas ?? [], activa: empresaActiva() };
   },
   // Repintado parcial dentro de la página: otro id solo pasa el id al shell de la vista; otra empresa (`version`)

@@ -1,31 +1,20 @@
 /**
  * api.ts — el cliente DER del front: plugins `avatar` (las catorce entidades + sus paths), `identity` (login JWT,
- * usuarios) y `permissions` (roles) armados con `createClient` contra el API. El token vive en localStorage
- * (`avatar:token`) y viaja en todas las peticiones. Nada de fetch suelto: todo pasa por los controllers y las `ops`.
+ * usuarios) y `permissions` (roles) armados con `createClient` contra el API. Los tokens viven en la bóveda
+ * de cuentas (`core/cuentas.ts`) y el del perfil activo viaja en todas las peticiones. Nada de fetch suelto: todo pasa por los controllers y las `ops`.
  */
-import { avatar, type ClientController, type ClientPlugin, createClient, identity, permissions, registry } from '@avatar/vendor';
+import { avatar, type ClientController, type ClientPlugin, createClient, identity, passwordDePin, permissions, registry } from '@avatar/vendor';
 import { apiUrl } from '../consts/config.js';
-import { type Perfil, PerfilSchema, type Yo, YoSchema } from '../consts/schemas/api.schemas.js';
+import { z } from '../base/zod.js';
+import { type Perfil, type PerfilPrueba, PerfilPruebaSchema, PerfilSchema, type Yo, YoSchema } from '../consts/schemas/api.schemas.js';
+import { activar, guardarCuenta, quitarActiva, tokenActivo } from './cuentas.js';
 import { estado, fijar } from './estado.js';
 import { usarVectorizador } from './semantica.js';
 
-const CLAVE_TOKEN = 'avatar:token';
-
-function leerToken(): string | null {
-  try {
-    return localStorage.getItem(CLAVE_TOKEN);
-  } catch {
-    return null;
-  }
-}
-
+/** El cliente de identidad avisa cada token nuevo: va a la bóveda (`core/cuentas.ts`) a nombre de su dueño. */
 function guardarToken(t: string | null): void {
-  try {
-    if (t) localStorage.setItem(CLAVE_TOKEN, t);
-    else localStorage.removeItem(CLAVE_TOKEN);
-  } catch {
-    /* sin almacenamiento */
-  }
+  if (t) guardarCuenta(t);
+  else quitarActiva();
   fijar({ token: t });
 }
 
@@ -39,7 +28,7 @@ function cabeceras(): HeadersInit {
 
 /** Arma (una vez) los plugins del cliente contra la URL del API. */
 export function conectar(baseUrl = apiUrl()): void {
-  const token = leerToken();
+  const token = tokenActivo();
   fijar({ token });
   plugins = {
     auth: createClient(identity, { baseUrl, token, onToken: guardarToken }),
@@ -96,7 +85,8 @@ export async function cargarPerfil(): Promise<Yo | null> {
 
 /** Inicia sesión (POST usuarios/login vía el plugin: mismo Zod que el server) y carga el perfil. */
 export async function iniciarSesion(usuario: string, password: string): Promise<Yo> {
-  await armados().auth['login']({ usuario, password });
+  // Un perfil de prueba entra con su PIN: la contraseña real sale de `passwordDePin`, el mismo cálculo de la siembra.
+  await armados().auth['login']({ usuario, password: /^\d{4}$/.test(password) ? passwordDePin(password) : password });
   const yo = await cargarPerfil();
   if (!yo) throw new Error('No se pudo cargar el perfil');
   return yo;
@@ -112,6 +102,17 @@ export async function cerrarSesion(): Promise<void> {
     guardarToken(null);
     fijar({ yo: null, perfil: null });
   }
+}
+
+/** Perfiles de prueba públicos (`perfiles/lista`): no pide sesión. */
+export async function perfilesPrueba(): Promise<PerfilPrueba[]> {
+  return z.array(PerfilPruebaSchema).parse(await dominio()['perfilesPrueba']!());
+}
+
+/** Cambia al perfil ya guardado en la bóveda: la página arranca de nuevo con su sesión. */
+export function cambiarPerfil(usuario: string): void {
+  activar(usuario);
+  location.reload();
 }
 
 /** Perfil de permisos refrescado (tras cambiar roles). */

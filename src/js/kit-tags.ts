@@ -45,6 +45,8 @@ export const SHELL_KIT_TAGS = [
   'iswc-card',
   'iswc-stat',
   'iswc-grid-layout',
+  'iswc-dialog',
+  'iswc-input',
 ] as const;
 
 /** Hijos que registra su padre: nunca se piden al loader (lo rechaza y tumba la carga). */
@@ -75,7 +77,7 @@ export const KIT_TAGS: readonly string[] = [...new Set([...SHELL_KIT_TAGS, ...Ob
 export const PREFIJO = 'av';
 
 /** Transversales (varias vistas): shell, cabecera de página, estado vacío, persona y selector de empresa. */
-export const APP_TAGS = ['av-logo', 'av-escena', 'av-buscador', 'av-cabecera', 'av-vacio', 'av-persona', 'av-empresa-selector', 'av-indicadores', 'av-app'] as const;
+export const APP_TAGS = ['av-logo', 'av-escena', 'av-buscador', 'av-cabecera', 'av-vacio', 'av-persona', 'av-empresa-selector', 'av-indicadores', 'av-perfil-selector', 'av-perfiles-tabla', 'av-app'] as const;
 
 /** Por vista: hijos antes que el shell (el último es el shell de la vista). */
 export const VIEW_TAGS = {
