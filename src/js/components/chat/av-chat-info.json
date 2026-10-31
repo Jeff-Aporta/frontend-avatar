@@ -70,6 +70,11 @@
         {
           "kind": "html",
           "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Panel lateral del chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para fichas de cliente o usuario: sus vistas.</iswc-callout>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-info</strong>Panel de info de conversación genérico. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
         }
       ]
     }

@@ -52,6 +52,11 @@
         {
           "kind": "html",
           "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Bajo una burbuja.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para votaciones o encuestas: iswc-rating.</iswc-callout>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-reactions</strong>Reacciones con emoji genéricas. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
         }
       ]
     }

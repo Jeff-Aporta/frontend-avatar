@@ -83,6 +83,18 @@ av-empresa-selector {
   color: var(--iswc-brand-text);
 }
 
+.pie-enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.esp(1) t.esp(4);
+  font-size: 0.9em;
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
+}
+
 .pie-tema {
   display: inline-flex;
   align-items: center;

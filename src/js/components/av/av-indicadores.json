@@ -69,6 +69,11 @@
         {
           "kind": "html",
           "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de una vista de negocio, bajo la cabecera.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para tablas de cifras: para eso iswc-data-grid.</iswc-callout>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-stat-group</strong>Fila de KPIs responsive sin dominio: solo iswc-stat en rejilla con esqueletos y refresco sin repintar. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
         }
       ]
     }

@@ -46,8 +46,18 @@
         {
           "kind": "html",
           "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de toda vista privada.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como título de una tarjeta: ahí va el slot header de iswc-card.</iswc-callout>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-page-header</strong>Título, subtítulo y acciones de cualquier vista, sin dominio. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
         }
       ]
     }
-  ]
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-page-header",
+    "motivo": "Título, subtítulo y acciones de cualquier vista, sin dominio."
+  }
 }

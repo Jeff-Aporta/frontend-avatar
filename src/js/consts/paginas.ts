@@ -29,6 +29,14 @@ export const PAGINAS: Pagina[] = [
   { vista: 'admin', ruta: 'admin/', shell: 'av-admin', titulo: 'Administración', descripcion: 'Usuarios, roles y permisos.', privada: true, indexable: false },
 ];
 
+/** Enlaces del pie: páginas abiertas y demos (`ruta` relativa a la raíz del sitio). */
+export const ENLACES_PIE: { ruta: string; titulo: string }[] = [
+  { ruta: '', titulo: 'Inicio' },
+  { ruta: 'acceso/', titulo: 'Entrar' },
+  { ruta: 'chat-demo/', titulo: 'Chat en vivo' },
+  { ruta: 'view/demo/', titulo: 'Demos de componentes' },
+];
+
 /** Página de una vista (o undefined). */
 export const paginaDe = (vista: string): Pagina | undefined => PAGINAS.find((p) => p.vista === vista);
 

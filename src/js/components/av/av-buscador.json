@@ -32,8 +32,18 @@
         {
           "kind": "html",
           "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la barra del área privada: ir a un módulo o lanzar una acción escribiendo lo que se quiere, con otras palabras.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para buscar dentro de una lista: cada vista tiene su propio filtro.</iswc-callout>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-semantic-search</strong>Paleta de comandos con orden por significado y embeddings. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
         }
       ]
     }
-  ]
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-semantic-search",
+    "motivo": "Paleta de comandos con orden por significado y embeddings."
+  }
 }

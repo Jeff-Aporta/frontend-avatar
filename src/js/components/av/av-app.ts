@@ -18,6 +18,7 @@ import { alCambiar, empresaActiva, estado, haySesion } from '../../core/estado.j
 import { ACCION, puede, rolDe } from '../../core/permisos.js';
 import { destinoTrasAcceso, escuchar, ir, recordarDestino, resolver, rutaActual, VISTA_SESION, VISTAS_PRIVADAS } from '../../core/router.js';
 import { MODULOS, type Modulo } from '../../consts/comandos.js';
+import { ENLACES_PIE } from '../../consts/paginas.js';
 import { PAGINAS } from '../../consts/paginas.js';
 import { tagsDeVista, VIEW_TAGS } from '../../kit-tags.js';
 import './av-empresa-selector.js';
@@ -103,6 +104,9 @@ function pie(slot: string | null) {
     <footer class="pie" part="pie" slot=${slot}>
       <span class="pie-marca"><av-logo wordmark></av-logo></span>
       <span class="pie-lema">Gestión digital y automatización · Odys</span>
+      <nav class="pie-enlaces" part="pie-enlaces" aria-label="Enlaces del sitio">
+        ${ENLACES_PIE.map((e) => html`<a href=${new URL(e.ruta, raizSitio()).href}>${e.titulo}</a>`)}
+      </nav>
       <span class="pie-tema">
         <span class="pie-rotulo">Paleta</span>
         <iswc-palette-selector scope="root" aria-label="Elegir la paleta de colores"></iswc-palette-selector>

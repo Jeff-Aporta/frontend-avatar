@@ -47,8 +47,18 @@
         {
           "kind": "html",
           "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Donde aparezca un usuario: autor de un mensaje, asignado de una tarea, miembro.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para la sesión de la barra: eso es iswc-session-menu.</iswc-callout>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-person</strong>Avatar con nombre y rol, común a cualquier app con usuarios. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
         }
       ]
     }
-  ]
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-person",
+    "motivo": "Avatar con nombre y rol, común a cualquier app con usuarios."
+  }
 }

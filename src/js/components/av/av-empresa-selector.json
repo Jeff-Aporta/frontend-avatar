@@ -44,8 +44,18 @@
         {
           "kind": "html",
           "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la barra, con sesión.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de una vista: la empresa activa es una sola para toda la app.</iswc-callout>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-tenant-selector</strong>Selector de empresa activa para apps con varios clientes. Pendiente de aprobación: sigue en Avatar hasta que se apruebe.</iswc-callout>"
         }
       ]
     }
-  ]
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-tenant-selector",
+    "motivo": "Selector de empresa activa para apps con varios clientes."
+  }
 }
