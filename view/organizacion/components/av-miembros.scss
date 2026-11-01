@@ -28,7 +28,6 @@
 
   /* Columna de ancho fijo: todos los roles miden igual, centrados y sin truncar. */
   iswc-tag {
-    --iswc-tag-size: 0.72em;
     inline-size: 100%;
 
     &::part(tag) {
