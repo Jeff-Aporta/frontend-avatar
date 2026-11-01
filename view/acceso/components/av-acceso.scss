@@ -11,10 +11,9 @@
   grid-template-columns: minmax(0, 24em) minmax(0, 1fr);
   gap: t.esp(8);
   align-items: center;
-  max-width: 72em;
   min-height: calc(100dvh - 4em);
   margin: 0 auto;
-  padding: t.esp(6) t.esp(5);
+  padding: t.esp(6) var(--av-gutter);
 }
 
 .panel {

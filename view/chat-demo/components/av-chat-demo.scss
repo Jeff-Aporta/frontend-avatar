@@ -4,7 +4,7 @@
 /* av-chat-demo — barra del demo y el chat a toda la altura. */
 :host {
   @include m.host-bloque;
-  height: 100dvh;
+  height: 100%;
 }
 
 .demo {

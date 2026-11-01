@@ -74,6 +74,18 @@ function montar(root: ShadowRoot, props: AvChatCompositorProps, host: Host): voi
   const accion = root.querySelector('.b-accion') as HTMLElement;
   const accionIcono = accion.querySelector('iswc-icon') as HTMLElement;
   const panel = root.querySelector('.panel-emojis') as HTMLElement;
+  const cerrarEmojis = () => {
+    panel.hidden = true;
+    root.querySelector('.b-emoji')?.setAttribute('aria-expanded', 'false');
+  };
+  panel.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') cerrarEmojis();
+  });
+  const fuera = (e: Event) => {
+    if (!host.isConnected) return document.removeEventListener('pointerdown', fuera);
+    if (!panel.hidden && !e.composedPath().some((n) => n === panel || (n as HTMLElement).classList?.contains('b-emoji'))) cerrarEmojis();
+  };
+  document.addEventListener('pointerdown', fuera);
   const bEmoji = root.querySelector('.b-emoji') as HTMLElement;
   const contexto = root.querySelector('.contexto') as HTMLElement;
   const adjuntos = root.querySelector('.adjuntos') as HTMLElement;

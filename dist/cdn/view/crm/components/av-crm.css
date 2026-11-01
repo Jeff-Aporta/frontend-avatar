@@ -1,1 +1,1 @@
-@charset "UTF-8";:host{display:block;min-width:0;font-family:var(--iswc-font-sans)}.pagina{max-width:var(--av-pagina-ancho, 90em);margin:0 auto;padding:var(--av-pagina-relleno, 1.25em);display:grid;gap:1em}
+@charset "UTF-8";:host{display:block;min-width:0;font-family:var(--iswc-font-sans)}.pagina{margin:0 auto;padding:var(--av-pagina-relleno, 1em var(--av-gutter));display:grid;gap:1em}

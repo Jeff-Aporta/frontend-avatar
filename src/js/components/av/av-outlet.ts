@@ -13,6 +13,7 @@ type ConProps = HTMLElement & { props: Record<string, unknown> };
 const SHELLS: Record<string, string> = Object.fromEntries(PAGINAS.map((p) => [p.vista, p.shell]));
 
 function montar(host: HTMLElement, p: AvOutletProps): void {
+  const pie = [...host.querySelectorAll(':scope > [slot="pie"], :scope > av-perfiles-tabla')];
   host.dataset['layout'] = paginaDe(p.vista)?.layout ?? 'normal';
   if (p.vista === VISTA_404) {
     const nada = document.createElement('iswc-empty-state') as ConProps;
@@ -21,7 +22,7 @@ function montar(host: HTMLElement, p: AvOutletProps): void {
     volver.setAttribute('vista', 'inicio');
     volver.textContent = 'Ir al inicio';
     nada.append(volver);
-    host.replaceChildren(nada);
+    host.replaceChildren(nada, ...pie);
     return;
   }
   const tag = SHELLS[p.vista] ?? SHELLS['inicio']!;
@@ -29,12 +30,12 @@ function montar(host: HTMLElement, p: AvOutletProps): void {
   const shell = document.createElement(tag) as ConProps;
   if (p.vista === 'inicio') shell.props = { sesion: p.sesion };
   else if (p.id != null) shell.props = { id: p.id };
-  host.replaceChildren(shell);
+  host.replaceChildren(shell, ...pie);
   if (customElements.get(tag)) return;
   const esqueleto = document.createElement('iswc-empty-state') as ConProps;
   esqueleto.props = { estado: 'cargando' };
   esqueleto.classList.add('esqueleto');
-  host.append(esqueleto);
+  host.insertBefore(esqueleto, shell.nextSibling);
   void customElements.whenDefined(tag).then(() => esqueleto.remove());
 }
 
@@ -43,7 +44,7 @@ const AvOutlet = crearComponente<AvOutletProps>(
   'av-outlet',
   { vista: '', id: null, sesion: false, version: 0 },
   (root, props, host) => {
-    root.append(html`<slot></slot>`);
+    root.append(html`<slot></slot><slot name="pie"></slot>`);
     if (props.vista) montar(host, props);
   },
   (_root, props, previos, host) => {

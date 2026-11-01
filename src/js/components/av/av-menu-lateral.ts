@@ -7,11 +7,16 @@ import { escuchar, ir, precargar, rutaActual } from '../../core/router.js';
 
 type Indice = HTMLElement & { items: unknown[]; current: string; textos: Record<string, string> };
 
-const AvMenuLateral = crearComponente<AvMenuLateralProps>(import.meta.url, 'av-menu-lateral', { items: [] }, (root, props, host) => {
-  root.append(html`<iswc-doc-index part="indice" placeholder="Buscar módulo…" oniswc-doc-index-select=${(e: Event) => ir((e as CustomEvent<{ id: string }>).detail.id)}></iswc-doc-index>`);
+const AvMenuLateral = crearComponente<AvMenuLateralProps>(
+  import.meta.url,
+  'av-menu-lateral',
+  { items: [], compacto: false },
+  (root, props, host) => {
+  root.append(html`<iswc-doc-index part="indice" flat placeholder="Buscar módulo…" oniswc-doc-index-select=${(e: Event) => ir((e as CustomEvent<{ id: string }>).detail.id)}></iswc-doc-index>`);
   const indice = root.querySelector('iswc-doc-index') as Indice;
   indice.textos = { placeholder: 'Buscar módulo…', sinResultados: 'Ningún módulo coincide.', resumen: '' };
   indice.items = props.items;
+  indice.toggleAttribute('compact', props.compacto);
   const marcar = () => (indice.current = rutaActual().vista);
   const fin = escuchar(() => (host.isConnected ? marcar() : fin()));
   marcar();
@@ -19,6 +24,12 @@ const AvMenuLateral = crearComponente<AvMenuLateralProps>(import.meta.url, 'av-m
     const id = (e.composedPath().find((n) => n instanceof HTMLElement && n.dataset['id']) as HTMLElement | undefined)?.dataset['id'];
     if (id) void precargar(id);
   });
-});
+  },
+  (root, props, previos) => {
+    if (props.items !== previos.items) return false;
+    root.querySelector('iswc-doc-index')?.toggleAttribute('compact', props.compacto);
+    return true;
+  },
+);
 
 define('av-menu-lateral', AvMenuLateral);

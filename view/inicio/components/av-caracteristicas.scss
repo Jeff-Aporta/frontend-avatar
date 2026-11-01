@@ -11,8 +11,7 @@ iswc-heading {
 }
 
 .seccion {
-  padding: t.esp(10) t.esp(5);
-  max-width: 76em;
+  padding: t.esp(10) var(--av-gutter);
   margin: 0 auto;
   box-sizing: border-box;
 }

@@ -1,4 +1,4 @@
-import{crearComponente as i,define as l,emitir as s,html as r}from"../../base/componente.js?v=m5nu5c";import"./av-perfiles-lista.js?v=1exu44";const n=i(import.meta.url,"av-perfiles-tabla",{abierto:!1},(a,e,t)=>{const o=()=>s(t,"av-perfiles-cerrar",{});a.append(r`
+import{crearComponente as i,define as l,emitir as s,html as r}from"../../base/componente.js?v=kpvpk6";import"./av-perfiles-lista.js?v=bjdd2j";const n=i(import.meta.url,"av-perfiles-tabla",{abierto:!1},(a,e,t)=>{const o=()=>s(t,"av-perfiles-cerrar",{});a.append(r`
       <iswc-dialog id="dialogo" label="Perfiles de prueba" backdrop-variant="basic" ?open=${e.abierto} oniswc-after-hide=${o}>
         <p class="nota">Cuentas de testing: el PIN es público hasta tener MVP.</p>
         ${e.abierto?r`<av-perfiles-lista modo="select" onav-perfil-usar=${o}></av-perfiles-lista>`:null}

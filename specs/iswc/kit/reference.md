@@ -1,4 +1,4 @@
-<!-- Copia de skills/iswc-root/reference.md del kit Jeff-Aporta/is-webcomponents@6c141b86cc2dd38a7e792382ccf773b0ead4fce9. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- Copia de skills/iswc-root/reference.md del kit Jeff-Aporta/is-webcomponents@94b6f8c00482e997c725521701c4bd14edfc64dd. No editar: se refresca con `deno task vendor:iswc`. -->
 <!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/reference.md -->
 # Intención → componente is-*
 

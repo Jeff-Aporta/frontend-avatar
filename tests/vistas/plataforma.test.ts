@@ -5,8 +5,8 @@
 //   W-PLAT-11  el vector de permisos de DER decide por acción y verbo: true, false, partido por verbo y comodín "*"
 import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
 
-const { urlDe, vistaDeUrl, resolver, VISTAS_PRIVADAS } = await import('../../dist/cdn/js/core/router.js');
-const { PAGINAS } = await import('../../dist/cdn/js/consts/paginas.js');
+const { rutaDeUrl, urlDe, vistaDeUrl, resolver, VISTAS_PRIVADAS } = await import('../../dist/cdn/js/core/router.js');
+const { columnasPie, PAGINAS } = await import('../../dist/cdn/js/consts/paginas.js');
 
 const RAIZ = 'https://jeff-aporta.github.io/frontend-avatar/';
 const { puede, rolDe, ACCION } = await import('../../dist/cdn/js/core/permisos.js');
@@ -24,6 +24,16 @@ export default definirPruebas([
       eq('index.html explícito', vistaDeUrl(`${RAIZ}crm/index.html`, RAIZ), 'crm');
       eq('raíz → inicio', vistaDeUrl(RAIZ, RAIZ), 'inicio');
       eq('desconocida → inicio', vistaDeUrl(`${RAIZ}loquesea/`, RAIZ), 'inicio');
+      eq('sección fija en el camino', urlDe('finanzas', RAIZ, 'facturas'), `${RAIZ}finanzas/facturas/`);
+      const entidad = urlDe('canales', RAIZ, 7);
+      expect('entidad en ?s=', entidad.startsWith(`${RAIZ}canales/?s=`));
+      eq('?s= determinista', entidad, urlDe('canales', RAIZ, '7'));
+      eq('ida y vuelta de ?s=', rutaDeUrl(entidad, RAIZ), { vista: 'canales', id: '7' });
+      eq('URL vieja por redirigir', rutaDeUrl(`${RAIZ}canales/7/`, RAIZ), { vista: 'canales', id: '7', vieja: true });
+      eq('?s= inválido', rutaDeUrl(`${RAIZ}canales/?s=@@`, RAIZ), { vista: 'canales', id: null });
+      eq('fuera de la tabla', rutaDeUrl(`${RAIZ}no/existe/aqui/`, RAIZ).vista, 'no-encontrada');
+      const pie = columnasPie(true).flatMap((c: { enlaces: { vista?: string; ruta?: string }[] }) => c.enlaces);
+      expect('todo el sitio en el pie', PAGINAS.every((p: { vista: string }) => pie.some((e: { vista?: string }) => e.vista === p.vista) && pie.some((e: { ruta?: string }) => e.ruta === `view/${p.vista}/demo/`)));
       expect('ninguna ruta con # ni ?', PAGINAS.every((p: { vista: string }) => !/[#?]/.test(urlDe(p.vista, RAIZ))));
       expect('ida y vuelta en todas', PAGINAS.every((p: { vista: string }) => vistaDeUrl(urlDe(p.vista, RAIZ), RAIZ) === p.vista));
       eq('sin sesión a privada → acceso', resolver({ vista: 'panel', id: null }, false), { vista: 'acceso', id: null });

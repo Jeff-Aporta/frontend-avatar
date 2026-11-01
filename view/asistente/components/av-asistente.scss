@@ -12,9 +12,8 @@
   flex-direction: column;
   box-sizing: border-box;
   height: 100%;
-  max-width: var(--av-pagina-ancho, 56em);
   margin: 0 auto;
-  padding: var(--av-pagina-relleno, t.esp(5) t.esp(5) 0);
+  padding: var(--av-pagina-relleno, 1em var(--av-gutter) 0);
   gap: t.esp(3);
 }
 

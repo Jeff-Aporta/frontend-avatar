@@ -15,9 +15,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: var(--av-pagina-ancho, 100em);
   margin: 0 auto;
-  padding: var(--av-pagina-relleno, t.esp(5) t.esp(5) t.esp(4));
+  padding: var(--av-pagina-relleno, 1em var(--av-gutter) t.esp(4));
   gap: t.esp(3);
   box-sizing: border-box;
 }

@@ -98,11 +98,30 @@ iswc-session-menu[hidden] {
   }
 }
 
+/* Vista completa en el área pública: la vista llena el alto y cada pieza hace su scroll; sin pie. */
+.publica:has(.vista[data-layout="completo"]) > .pie {
+  display: none;
+}
+
+.publica .vista[data-layout="completo"] {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+
+  > * {
+    height: 100%;
+  }
+}
+
+.privada .vista[data-layout="completo"] > [slot="pie"] {
+  display: none;
+}
+
 /* Modo de layout de la ruta (`layout` en `consts/paginas.ts`): `completo` quita ancho máximo y márgenes del contenido. */
 .vista[data-layout="completo"] {
   --av-pagina-ancho: none;
   --av-pagina-relleno: 0;
-  --av-cabecera-relleno: 0.75em;
+  --av-cabecera-relleno: var(--av-gutter);
 }
 
 .privada av-migas {
@@ -151,6 +170,13 @@ iswc-tenant-selector {
 }
 
 /* Pie: marca, lema y los selectores de paleta y tema. */
+.pie-mapa {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9em, 1fr));
+  gap: t.esp(3) t.esp(4);
+  font-size: 0.9em;
+}
+
 .pie {
   display: grid;
   grid-template-columns: minmax(12em, 1.4fr) repeat(auto-fit, minmax(10em, 1fr));

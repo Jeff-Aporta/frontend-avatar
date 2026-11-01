@@ -48,10 +48,9 @@ iswc-heading {
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   align-items: center;
   gap: t.esp(8);
-  max-width: 76em;
   width: 100%;
   margin: 0 auto;
-  padding: t.esp(10) t.esp(6);
+  padding: t.esp(10) var(--av-gutter);
   box-sizing: border-box;
 }
 

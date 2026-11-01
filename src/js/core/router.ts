@@ -4,7 +4,8 @@
  * `document.baseURI` es la raíz (en local y en GitHub Pages) y todas las URLs se resuelven igual desde cualquier página.
  *
  *   - Vista actual: el atributo `vista` de `<av-app>` (o la ruta del documento).
- *   - Parte o registro abierto: va en la URL (`/finanzas/facturas/`, `/canales/12/`), así que recargar y compartir funcionan.
+ *   - Sección fija en el camino (`/finanzas/facturas/`); entidad en `?s=` (`/canales/?s=…`), codificada en `consts/paginas.ts`.
+ *     Recargar y compartir funcionan; una URL vieja `/canales/12/` se reemplaza por la nueva sin recargar.
  *   - Con `<av-app>` montado (`activarSpa`) tampoco recarga cambiar de vista: los enlaces internos y `ir()` hacen
  *     `pushState`, se actualizan título y metadatos, y el shell reemplaza solo el contenido. Cada página HTML sigue
  *     existiendo para la entrada directa, la recarga y el SEO. Atrás/adelante llegan por `popstate`.
@@ -47,7 +48,7 @@ export function rutaDeUrl(url: string, raiz: string): Ruta {
   const base = new URL(raiz).pathname;
   const camino = new URL(url).pathname;
   const relativa = camino.startsWith(base) ? camino.slice(base.length) : camino;
-  return interpretar(relativa) ?? { vista: VISTA_404, id: null };
+  return interpretar(relativa, new URL(url).search) ?? { vista: VISTA_404, id: null };
 }
 
 /** Vista de una URL dada la raíz del sitio (pura); fuera de la tabla → inicio. */
@@ -136,8 +137,8 @@ function rutaInterna(a: HTMLAnchorElement, base: string): Ruta | null {
   if ((a.target && a.target !== '_self') || a.hasAttribute('download')) return null;
   const destino = new URL(a.href, base);
   const raizSitio = new URL(base);
-  if (destino.origin !== raizSitio.origin || !destino.pathname.startsWith(raizSitio.pathname) || destino.search || destino.hash) return null;
-  return interpretar(destino.pathname.slice(raizSitio.pathname.length));
+  if (destino.origin !== raizSitio.origin || !destino.pathname.startsWith(raizSitio.pathname) || destino.hash) return null;
+  return interpretar(destino.pathname.slice(raizSitio.pathname.length), destino.search);
 }
 
 const enlaceDe = (e: Event) => e.composedPath().find((n) => n instanceof HTMLAnchorElement) as HTMLAnchorElement | undefined;
@@ -146,7 +147,9 @@ const enlaceDe = (e: Event) => e.composedPath().find((n) => n instanceof HTMLAnc
 export function activarSpa(): void {
   if (spa || typeof document === 'undefined') return;
   spa = true;
+  const inicial = rutaDeUrl(location.href, raiz()) as Ruta & { vieja?: boolean };
   document.querySelector('base')?.setAttribute('href', document.baseURI);
+  if (inicial.vieja) reemplazar(inicial.vista, inicial.id);
   document.addEventListener('click', (e) => {
     const a = enlaceDe(e);
     const r = a ? rutaDelEnlace(e, a, raiz()) : null;

@@ -1,4 +1,4 @@
-// @vendor iswc-root@6c141b86cc2dd38a7e792382ccf773b0ead4fce9 dist/cdn/build/asset-url.ts
+// @vendor iswc-root@94b6f8c00482e997c725521701c4bd14edfc64dd dist/cdn/build/asset-url.ts
 // No editar: se cambia en el kit y se descarga con `deno task vendor:iswc`.
 /**
  * Cache busting por query string con el parametro convencional `v`

@@ -24,6 +24,7 @@ Menú lateral de módulos ligado a la URL.
 | Prop | Tipo | Default | Qué hace |
 | --- | --- | --- | --- |
 | `items` | `Modulo[]` | `[]` | Módulos del índice. |
+| `compacto` | `boolean` | `false` | Solo íconos (riel del layout). |
 
 ## Eventos
 

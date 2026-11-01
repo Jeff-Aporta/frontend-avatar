@@ -1,7 +1,8 @@
 /**
  * paginas.ts — la tabla única de rutas de Avatar (sin DOM): de aquí salen el router, el HTML estático, los metadatos por
- * URL (title, description, canonical, Open Graph, JSON-LD) y el sitemap. Una URL es determinista: `<vista>/` o
- * `<vista>/<id>/`, donde `id` es una `parte` declarada (pestaña, con HTML propio) o un registro (entra por `404.html`).
+ * URL (title, description, canonical, Open Graph, JSON-LD) y el sitemap. Una URL es determinista: `<vista>/`, `<vista>/<parte>/`
+ * para una sección fija (pestaña, con HTML propio) o `<vista>/?s=<estado>` para una entidad: `s` es `{ id }` en JSON y b64url,
+ * la misma forma de `doc-demo-estado` del kit, codificada solo aquí. Las URLs viejas `<vista>/<id>/` se redirigen.
  * Cada vista tiene una ruta real con su propio HTML
  * (`<ruta>/index.html`), generado por `scripts/build/paginas.ts` con los mismos metadatos, el mismo arranque y un cuerpo que
  * es solo `<av-app vista="…">`: nada de `#/` ni `?s=`. El router y el shell leen esta tabla; agregar una vista = una fila.
@@ -36,12 +37,6 @@ export const PAGINAS: Pagina[] = [
   { vista: 'admin', ruta: 'admin/', shell: 'av-admin', titulo: 'Administración', descripcion: 'Usuarios, roles y permisos.', privada: true, indexable: false },
 ];
 
-/** Columnas de enlaces del pie (`ruta` relativa a la raíz del sitio). */
-export const COLUMNAS_PIE: { titulo: string; enlaces: { ruta: string; titulo: string; vista?: string }[] }[] = [
-  { titulo: 'Avatar', enlaces: [{ ruta: '', titulo: 'Inicio', vista: 'inicio' }, { ruta: 'acceso/', titulo: 'Entrar', vista: 'acceso' }] },
-  { titulo: 'Demos', enlaces: [{ ruta: 'chat-demo/', titulo: 'Chat en vivo', vista: 'chat-demo' }, { ruta: 'view/demo/', titulo: 'Demos de componentes' }] },
-];
-
 const parte = (id: string, titulo: string, descripcion: string): Parte => ({ id, titulo, descripcion });
 const PARTES: Record<string, Parte[]> = {
   finanzas: [parte('general', 'General', 'Indicadores del mes, gráficas y conversor de monedas.'), parte('transacciones', 'Transacciones', 'Ingresos y gastos de la empresa.'), parte('facturas', 'Facturas', 'Facturas emitidas, pendientes y pagadas.'), parte('hoja', 'Hoja', 'Hoja de cálculo para cuadrar cifras.')],
@@ -53,30 +48,68 @@ const PARTES: Record<string, Parte[]> = {
 for (const p of PAGINAS) {
   const partes = PARTES[p.vista];
   if (partes) p.partes = partes;
-  if (p.vista === 'canales' || p.vista === 'proyectos' || p.vista === 'chat-demo') p.registros = true;
-  if (p.vista === 'canales' || p.vista === 'correos' || p.vista === 'asistente') p.layout = 'completo';
+  if (['canales', 'correos', 'proyectos', 'crm', 'finanzas', 'inventario', 'rrhh', 'chat-demo'].includes(p.vista)) p.registros = true;
+  if (['canales', 'correos', 'asistente', 'chat-demo'].includes(p.vista)) p.layout = 'completo';
   if (p.vista === 'inicio') p.jsonLd = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: SITIO, applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: URL_PUBLICA, description: p.descripcion };
+}
+
+/** Una columna del pie: `vista` (y `id`) navega por la SPA; `ruta` es una página fuera de la app (los demos). */
+export type EnlacePie = { titulo: string; vista?: string; id?: string; ruta?: string };
+export type ColumnaPie = { titulo: string; enlaces: EnlacePie[] };
+
+/** Pie generado de la tabla: ninguna página, sección o demo puede faltar. Privadas solo con sesión. */
+export function columnasPie(conSesion: boolean): ColumnaPie[] {
+  const visibles = PAGINAS.filter((p) => conSesion || !p.privada);
+  const enlace = (p: Pagina): EnlacePie => ({ titulo: p.titulo.split(' · ')[0]!, vista: p.vista });
+  const secciones = visibles.filter((p) => p.partes).map((p) => ({ titulo: p.titulo, enlaces: p.partes!.map((x) => ({ titulo: x.titulo, vista: p.vista, id: x.id })) }));
+  return [
+    { titulo: SITIO, enlaces: PAGINAS.filter((p) => !p.privada).map(enlace) },
+    ...(conSesion ? [{ titulo: 'Módulos', enlaces: PAGINAS.filter((p) => p.privada).map(enlace) }] : []),
+    ...secciones,
+    { titulo: 'Demos', enlaces: [{ titulo: 'Todos los componentes', ruta: 'view/demo/' }, ...PAGINAS.map((p) => ({ titulo: p.titulo.split(' · ')[0]!, ruta: `view/${p.vista}/demo/` }))] },
+  ];
 }
 
 /** Página de una vista (o undefined). */
 export const paginaDe = (vista: string): Pagina | undefined => PAGINAS.find((p) => p.vista === vista);
 
-/** Ruta relativa de una vista y su id (`finanzas/facturas/`). */
-export function rutaDe(vista: string, id?: string | number | null): string {
-  const base = paginaDe(vista)?.ruta ?? '';
-  return id == null || id === '' ? base : `${base}${encodeURIComponent(String(id))}/`;
+const b64url = (texto: string): string => btoa(String.fromCharCode(...new TextEncoder().encode(texto))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const deB64url = (s: string): string => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0)));
+
+/** Estado de entidad → valor de `?s=`: determinista, un solo lugar. */
+export const codificarEntidad = (id: string | number): string => b64url(JSON.stringify({ id: String(id) }));
+
+/** Valor de `?s=` → id, o null si no es válido. */
+export function leerEntidad(s: string | null): string | null {
+  if (!s) return null;
+  try {
+    const dato = JSON.parse(deB64url(s)) as { id?: unknown };
+    return typeof dato.id === 'string' ? dato.id : null;
+  } catch {
+    return null;
+  }
 }
 
-/** Interpreta una ruta relativa: `{ vista, id }`, o null si la tabla no la declara. */
-export function interpretar(relativa: string): { vista: string; id: string | null } | null {
+/** Ruta relativa de una vista: sección fija en el camino (`finanzas/facturas/`), entidad en `?s=`. */
+export function rutaDe(vista: string, id?: string | number | null): string {
+  const p = paginaDe(vista);
+  const base = p?.ruta ?? '';
+  if (id == null || id === '') return base;
+  if (p?.partes?.some((x) => x.id === String(id))) return `${base}${encodeURIComponent(String(id))}/`;
+  return `${base}?s=${codificarEntidad(id)}`;
+}
+
+/** Interpreta camino y `?s=`: `{ vista, id }`, o null si la tabla no lo declara. `vieja`: el id venía en el camino y hay que redirigir. */
+export function interpretar(relativa: string, busqueda = ''): { vista: string; id: string | null; vieja?: boolean } | null {
   const segmentos = relativa.replace(/index\.html$/, '').split('/').filter(Boolean);
   if (segmentos.length > 2) return null;
   const pagina = PAGINAS.find((p) => p.ruta === (segmentos[0] ? `${segmentos[0]}/` : ''));
   if (!pagina) return null;
   const crudo = segmentos[1];
-  if (crudo == null) return { vista: pagina.vista, id: null };
+  if (crudo == null) return { vista: pagina.vista, id: leerEntidad(new URLSearchParams(busqueda).get('s')) };
   const id = decodeURIComponent(crudo);
-  return pagina.registros || pagina.partes?.some((p) => p.id === id) ? { vista: pagina.vista, id } : null;
+  if (pagina.partes?.some((p) => p.id === id)) return { vista: pagina.vista, id };
+  return pagina.registros ? { vista: pagina.vista, id, vieja: true } : null;
 }
 
 /** Vista de una ruta relativa a la raíz (`canales/` o `canales/index.html` → canales); desconocida → null. */

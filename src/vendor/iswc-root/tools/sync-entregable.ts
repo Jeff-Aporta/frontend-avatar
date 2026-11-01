@@ -1,4 +1,4 @@
-// @vendor iswc-root@6c141b86cc2dd38a7e792382ccf773b0ead4fce9 dist/cdn/vendor-distributions/shared/tools/sync-entregable.ts
+// @vendor iswc-root@94b6f8c00482e997c725521701c4bd14edfc64dd dist/cdn/vendor-distributions/shared/tools/sync-entregable.ts
 // No editar: se cambia en el kit y se descarga con `deno task vendor:iswc`.
 // @vendor 2026-10-13T21:35:08.165Z Jeff-Aporta/is-webcomponents@main src/vendor-distributions/shared/tools/sync-entregable.ts
 // @doc https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@main/skills/iswc-foundation/references/08-sync-entregable.md

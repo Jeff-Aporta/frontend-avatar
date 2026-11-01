@@ -1,4 +1,4 @@
-<!-- Copia de skills/iswc-root/tools/runtime.md del kit Jeff-Aporta/is-webcomponents@6c141b86cc2dd38a7e792382ccf773b0ead4fce9. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- Copia de skills/iswc-root/tools/runtime.md del kit Jeff-Aporta/is-webcomponents@94b6f8c00482e997c725521701c4bd14edfc64dd. No editar: se refresca con `deno task vendor:iswc`. -->
 <!-- @vendor 2026-10-14T16:13:19.844Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/tools/runtime.md -->
 # `/iswc-root:runtime` — APIs sin custom element
 
@@ -12,7 +12,7 @@ Inventario: [`../catalog.md`](../catalog.md) § Módulos API.
 
 ## 1. `iswcLoader` — `core/loader.min.js`
 
-Guía larga: [`cdn/loader.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/cdn/loader.md).
+Guía larga: [`cdn/loader.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/src/cdn/loader.md).
 
 | API | Efecto |
 | --- | --- |
@@ -38,7 +38,7 @@ Pines de apps consumidoras: `deno task sync:pins` (`scripts/sync-pins.mjs`).
 
 ## 2. `IswcUi` / `Ui` — `helpers/ui.min.js`
 
-Guía: [`helpers/ui.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/components/helpers/ui.md).
+Guía: [`helpers/ui.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/src/components/helpers/ui.md).
 
 | Export | Uso |
 | --- | --- |
@@ -69,7 +69,7 @@ Guías: `helpers/utils/md-lite.md`, `md-iswc-fences.md`, `md-hydrate.md`, `md-ed
 ## 4. `response-cache` — `helpers/response-cache.min.js`
 
 SWR en IndexedDB (`createResponseCache`, `IswcResponseCache`, `canonico`).  
-Guía: [`helpers/utils/response-cache.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/components/helpers/utils/response-cache.md).
+Guía: [`helpers/utils/response-cache.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/src/components/helpers/utils/response-cache.md).
 
 ---
 
@@ -94,7 +94,7 @@ en el vendor de build del kit (Paty ya lo importa). El loader pega `?h=` con `L.
 
 ## 7. IA en el navegador — `lib/ai/`
 
-Guía: [`src/ai/ai.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/ai/ai.md). Tag con UI: `<iswc-ai-tool>`.
+Guía: [`src/ai/ai.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/src/ai/ai.md). Tag con UI: `<iswc-ai-tool>`.
 
 | Módulo CDN | Exports |
 | --- | --- |

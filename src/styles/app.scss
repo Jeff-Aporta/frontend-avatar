@@ -6,7 +6,22 @@
  *   - Los colores salen SIEMPRE de la paleta activa del kit (`data-palette`, `data-panda`): aquí solo se
  *     declaran tokens de la app que derivan de los del kit (`--av-*`).
  */
+/* Registrados: 0.72em se resuelve una vez en la raíz, así todo tag mide igual sin importar el `font-size` de su contexto. */
+@property --iswc-tag-size {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0.72em;
+}
+
+@property --iswc-status-pill-size {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0.72em;
+}
+
 :root {
+  /* Único hueco lateral del contenido: el guardián W-PLAT-30 mide que nadie lo supere. */
+  --av-gutter: 1em;
   --iswc-font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
   --iswc-sans: var(--iswc-font-sans);
   --av-font-marca: "Orbitron", "Exo 2", sans-serif;

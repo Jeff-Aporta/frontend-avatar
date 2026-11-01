@@ -133,6 +133,7 @@
   bottom: t.esp(4);
   z-index: 3;
   --iswc-button-glyph-size: 2.6em;
+  --iswc-button-border-radius: 50%;
   border: 0.07em solid var(--av-borde-seccion, var(--iswc-border-soft));
   border-radius: 50%;
   box-shadow: var(--av-sombra-tarjeta, var(--iswc-shadow));

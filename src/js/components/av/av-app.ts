@@ -20,7 +20,7 @@ import { alCambiar, empresaActiva, estado, fijar, haySesion } from '../../core/e
 import { ACCION, puede, rolDe } from '../../core/permisos.js';
 import { actualizarMetas, activarSpa, destinoTrasAcceso, escuchar, ir, precargar, recordarDestino, reemplazar, resolver, rutaActual, VISTA_SESION, VISTAS_PRIVADAS } from '../../core/router.js';
 import { MODULOS, type Modulo } from '../../consts/comandos.js';
-import { COLUMNAS_PIE } from '../../consts/paginas.js';
+import { columnasPie } from '../../consts/paginas.js';
 import { PAGINAS } from '../../consts/paginas.js';
 import { VIEW_TAGS } from '../../kit-tags.js';
 import './av-boton-enlace.js';
@@ -119,6 +119,20 @@ function propsSelector(): Record<string, unknown> {
  * comparar temas mientras se prueba; cambiarlos reescribe `<html>` y TODA la interfaz se re-tiñe. «Perfiles de prueba» es
  * una acción: abre el diálogo con la lista de perfiles.
  */
+/** Columnas de enlaces del pie, de la tabla de rutas. */
+function columnas(conSesion: boolean) {
+  return columnasPie(conSesion).map((c) => html`
+    <nav class="pie-col" aria-label=${c.titulo}>
+      <strong class="pie-titulo">${c.titulo}</strong>
+      ${c.enlaces.map((e) => (e.vista ? html`<av-link vista=${e.vista} registro=${e.id ?? ''}>${e.titulo}</av-link>` : html`<a href=${new URL(e.ruta!, raizSitio()).href}>${e.titulo}</a>`))}
+    </nav>`);
+}
+
+/** Mapa del sitio en un diálogo: en las vistas a alto completo el pie no cabe. */
+function abrirMapa(root: ShadowRoot): void {
+  (root.querySelector('#mapa') as HTMLElement & { open: boolean }).open = true;
+}
+
 function pie(slot: string | null) {
   return html`
     <footer class="pie" part="pie" slot=${slot}>
@@ -126,11 +140,7 @@ function pie(slot: string | null) {
         <span class="pie-marca"><av-logo wordmark></av-logo></span>
         <span class="pie-lema">Gestión digital y automatización · Odys</span>
       </div>
-      ${COLUMNAS_PIE.map((c) => html`
-        <nav class="pie-col" aria-label=${c.titulo}>
-          <strong class="pie-titulo">${c.titulo}</strong>
-          ${c.enlaces.map((e) => e.vista ? html`<av-link vista=${e.vista}>${e.titulo}</av-link>` : html`<a href=${new URL(e.ruta, raizSitio()).href}>${e.titulo}</a>`)}
-        </nav>`)}
+      ${columnas(haySesion())}
       <div class="pie-col">
         <strong class="pie-titulo">Pruebas</strong>
         <iswc-button class="pie-accion" variant="text compact" color="text" onclick=${abrirPerfiles}>Perfiles de prueba</iswc-button>
@@ -182,7 +192,7 @@ const raizSitio = (): string => new URL('./', document.baseURI).href;
 /** Acceso desde la barra: el kit pinta el login; la app autentica con DER. */
 function sesionMenu(conSesion: boolean) {
   return html`
-    <iswc-session-menu slot="actions" ?hidden=${enAcceso(conSesion)} ?logged=${conSesion} name=${estado.yo?.nombre ?? estado.yo?.iusuario ?? ''} subtitle=${rolDe(estado.perfil)} label="Entrar"
+    <iswc-session-menu slot="actions" extra-label="Entrar como…" ?hidden=${enAcceso(conSesion)} ?logged=${conSesion} name=${estado.yo?.nombre ?? estado.yo?.iusuario ?? ''} subtitle=${rolDe(estado.perfil)} label="Entrar"
       oniswc-login-submit=${async (e: Event) => {
         const sesion = e.currentTarget as SesionEl;
         const { username, password } = (e as CustomEvent<{ username: string; password: string }>).detail;
@@ -203,6 +213,7 @@ function sesionMenu(conSesion: boolean) {
         ir('inicio');
       }}>
       <iswc-dropdown-item value="asistente" oniswc-click=${() => ir('asistente')}>Preguntar a AVO</iswc-dropdown-item>
+      ${conSesion ? html`<iswc-dropdown-item value="mapa" oniswc-click=${(e: Event) => abrirMapa((e.currentTarget as HTMLElement).getRootNode() as ShadowRoot)}>Mapa del sitio</iswc-dropdown-item>` : null}
       ${conSesion
         ? html`<div slot="extra" class="menu-cuenta">
             <iswc-tenant-selector></iswc-tenant-selector>
@@ -265,7 +276,7 @@ const AvApp = crearComponente<AvAppProps>(
     }
     const admin = puede(estado.perfil, ACCION.seguridad, 'PUT');
     root.append(html`
-      <iswc-doc-layout class="privada" storage-key="avatar-app" toc="off" hide-end start-width="260">
+      <iswc-doc-layout class="privada" storage-key="avatar-app" toc="off" hide-end start-rail start-width="260">
         <av-link slot="brand" class="marca" vista="inicio" aria-label="Avatar, ir al inicio"><av-logo wordmark animado></av-logo></av-link>
         <iswc-semantic-search class="en-cajon" slot="actions"></iswc-semantic-search>
         ${sesionMenu(true)}
@@ -274,11 +285,15 @@ const AvApp = crearComponente<AvAppProps>(
           <av-menu-lateral id="indice"></av-menu-lateral>
         </div>
         <av-migas></av-migas>
-        <av-outlet class="vista" part="vista" role="main"></av-outlet>
+        <av-outlet class="vista" part="vista" role="main">${pie('pie')}</av-outlet>
       </iswc-doc-layout>
+      <iswc-dialog id="mapa" label="Mapa del sitio" backdrop-variant="basic"><div class="pie-mapa">${columnas(true)}</div></iswc-dialog>
       <iswc-toast placement="top-end"></iswc-toast>
     `);
-    (root.querySelector('#indice') as ConProps).props = { items: modulos(admin) };
+    const indice = root.querySelector('#indice') as ConProps;
+    const riel = root.querySelector('iswc-doc-layout') as HTMLElement & { rail?: boolean };
+    indice.props = { items: modulos(admin), compacto: riel.rail === true };
+    riel.addEventListener('iswc-doc-layout-rail', (e) => (indice.props = { compacto: (e as CustomEvent<{ rail: boolean }>).detail.rail }));
     conectarBuscador(root.querySelector('iswc-semantic-search') as ConProps, modulos(admin).map((m) => m.id), (accion) => void accionGlobal(accion, root));
     (root.querySelector('#perfil') as ConProps).props = { activo: estado.yo?.iusuario ?? '' };
     const selector = root.querySelector('iswc-tenant-selector') as ConProps;
