@@ -16,7 +16,7 @@
 
 .fila {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 7em minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) 7em minmax(0, 1fr) 2em;
   align-items: center;
   gap: 0.5em;
   padding: 0.25em 0;
@@ -46,7 +46,7 @@
 
 @media (max-width: 40em) {
   .fila {
-    grid-template-columns: minmax(0, 1fr) 7em auto;
+    grid-template-columns: minmax(0, 1fr) 7em 2em;
 
     .cargo {
       display: none;

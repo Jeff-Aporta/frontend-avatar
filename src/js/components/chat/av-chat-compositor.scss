@@ -71,8 +71,17 @@
 
 .barra {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: t.esp(1);
+}
+
+/* Redondos: el anillo de foco del kit sigue la forma del botón. */
+.barra iswc-button {
+  --iswc-button-border-radius: 50%;
+
+  &:focus-within {
+    background: var(--iswc-brand-soft);
+  }
 }
 
 .area {

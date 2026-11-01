@@ -53,6 +53,6 @@
   },
   "avatar": {
     "api": "https://api-avatar.jeffaporta.workers.dev/api",
-    "vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=d63bdada"
+    "vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=48f862be"
   }
 }
