@@ -29,7 +29,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
   gap: t.esp(4);
-  align-items: start;
 }
 
 .equipo {
@@ -53,6 +52,7 @@
   }
 
   .descripcion {
+    @include m.lineas(3);
     margin: 0 0 t.esp(3);
     color: var(--iswc-text-dim);
     font-size: 0.9em;
@@ -80,9 +80,10 @@
 
   .agregar {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
-    gap: t.esp(2);
-    align-items: end;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr) auto;
+    gap: 0.375em;
+    align-items: center;
+    font-size: 0.8em;
   }
 }
 

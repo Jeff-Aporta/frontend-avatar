@@ -1,0 +1,36 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-perfiles-lista",
+  "category": "transversal",
+  "navTitle": "Lista de perfiles",
+  "title": "&lt;av-perfiles-lista&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-perfiles-lista",
+  "styles": ".stage{padding:1rem;max-width:20em}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-perfiles-lista&gt;",
+      "lede": "Perfiles de prueba con su PIN público; el clic entra.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-perfiles-lista id=\"d\"></av-perfiles-lista></div>",
+          "target": "#d",
+          "props": {
+            "perfiles": [
+              { "iusuario": "ana", "nombre": "Ana Gestora", "pin": "1234", "rol": "Gestora", "descripcion": "Empresas, equipos y CRM." },
+              { "iusuario": "beto", "nombre": "Beto Desarrollador", "pin": "2345", "rol": "Usuario", "descripcion": "Chatea y mueve sus tareas." }
+            ],
+            "activo": "ana"
+          },
+          "controls": [
+            { "control": "text", "prop": "props:activo", "label": "activo", "default": "ana" },
+            { "control": "text", "prop": "props:ocupado", "label": "ocupado", "default": "" },
+            { "control": "text", "prop": "props:error", "label": "error", "default": "" }
+          ]
+        }
+      ]
+    }
+  ]
+}

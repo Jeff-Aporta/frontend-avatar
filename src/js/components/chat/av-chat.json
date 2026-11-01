@@ -40,12 +40,12 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Cualquier app que necesite chat en tiempo real: se le asigna un `backend` (API real o demo).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para un único hilo de comentarios sin tiempo real: basta una lista simple.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Cualquier app que necesite chat en tiempo real: se le asigna un `backend` (API real o demo).</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para un único hilo de comentarios sin tiempo real: basta una lista simple.</iswc-callout>"
         },
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat</strong>Chat genérico: textos en diccionario y backend por interfaz, sin dominio de Avatar. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat</strong>Chat genérico: textos en diccionario y backend por interfaz, sin dominio de Avatar. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

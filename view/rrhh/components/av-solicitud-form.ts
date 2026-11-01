@@ -47,8 +47,8 @@ const AvSolicitudForm = crearComponente<AvSolicitudFormProps>(
           <iswc-textarea name="motivo" label="Motivo" rows="3"></iswc-textarea>
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}><iswc-icon slot="start" icon="mdi:send"></iswc-icon>Registrar</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}><iswc-icon slot="start" icon="mdi:send"></iswc-icon>Registrar</iswc-button>
       </iswc-dialog>
     `);
     dias();

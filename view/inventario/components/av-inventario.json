@@ -11,7 +11,7 @@
     {
       "id": "intro",
       "title": "&lt;av-inventario&gt;",
-      "lede": "La vista de inventario completa (necesita sesión y empresa activa).",
+      "lede": "La vista de inventario completa. Sin sesión y empresa activa muestra su estado vacío; abajo, una pieza con datos de ejemplo.",
       "blocks": [
         {
           "kind": "demo",
@@ -39,7 +39,156 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta inventario (la monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta inventario (la monta av-app).</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    },
+    {
+      "id": "ejemplo",
+      "title": "Con datos de ejemplo",
+      "lede": "La pieza principal de la vista, sin API: los datos son fijos.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-tabla id=\"tabla-productos\"></av-tabla></div>",
+          "target": "#tabla-productos",
+          "props": {
+            "prefijo": "av-inventario",
+            "entidad": "productos",
+            "columnas": [
+              {
+                "field": "sku",
+                "headerName": "SKU",
+                "width": 120
+              },
+              {
+                "field": "nombre",
+                "headerName": "Producto",
+                "flex": 1.5,
+                "minWidth": 190
+              },
+              {
+                "field": "categoria",
+                "headerName": "Categoría",
+                "flex": 0.8,
+                "minWidth": 120
+              },
+              {
+                "field": "marca",
+                "headerName": "Marca",
+                "flex": 0.7,
+                "minWidth": 100
+              },
+              {
+                "field": "precioTexto",
+                "headerName": "Precio",
+                "width": 120
+              },
+              {
+                "field": "stock",
+                "headerName": "Stock",
+                "type": "number",
+                "width": 90
+              },
+              {
+                "field": "nivel",
+                "headerName": "Nivel",
+                "width": 175
+              },
+              {
+                "field": "ubicacion",
+                "headerName": "Ubicación",
+                "width": 110
+              },
+              {
+                "field": "proveedor",
+                "headerName": "Proveedor",
+                "flex": 0.9,
+                "minWidth": 130
+              },
+              {
+                "field": "acciones",
+                "headerName": "Mover",
+                "width": 100,
+                "acciones": [
+                  {
+                    "accion": "entrada",
+                    "label": "Registrar entrada",
+                    "icono": "mdi:tray-arrow-down"
+                  },
+                  {
+                    "accion": "salida",
+                    "label": "Registrar salida",
+                    "icono": "mdi:tray-arrow-up"
+                  }
+                ]
+              }
+            ],
+            "idCampo": "iproducto",
+            "buscador": "Buscar por SKU, nombre, marca, ubicación…",
+            "vacio": {
+              "icono": "mdi:package-variant",
+              "titulo": "Sin productos",
+              "texto": "Agrega productos al catálogo para controlar su stock."
+            },
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": [
+              {
+                "id": 1,
+                "iproducto": 1,
+                "sku": "PROD-00001",
+                "nombre": "Procesador i9-10900K",
+                "categoria": "Electrónicos",
+                "marca": "Intel",
+                "precio": 499.99,
+                "precioTexto": "$ 499,99",
+                "stock": 3,
+                "stock_minimo": 5,
+                "nivel": "Stock bajo · mín 5",
+                "nivelClave": "bajo",
+                "ubicacion": "A1-B2",
+                "proveedor": "TecnoSuministros"
+              },
+              {
+                "id": 2,
+                "iproducto": 2,
+                "sku": "PROD-00002",
+                "nombre": "Memoria RAM 16GB DDR4",
+                "categoria": "Electrónicos",
+                "marca": "Corsair",
+                "precio": 79.99,
+                "precioTexto": "$ 79,99",
+                "stock": 25,
+                "stock_minimo": 10,
+                "nivel": "Disponible · mín 10",
+                "nivelClave": "ok",
+                "ubicacion": "A2-C1",
+                "proveedor": "ElectroParts"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": ""
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
         }
       ]
     }

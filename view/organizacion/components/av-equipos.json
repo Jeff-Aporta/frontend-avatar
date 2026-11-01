@@ -86,7 +86,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Equipos de av-organizacion.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para miembros de la empresa: eso es av-miembros.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Pestaña Equipos de av-organizacion.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para miembros de la empresa: eso es av-miembros.</iswc-callout>"
         }
       ]
     }

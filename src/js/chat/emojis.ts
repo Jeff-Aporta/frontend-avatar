@@ -2,6 +2,9 @@
  * emojis.ts — catálogo compacto del selector de emojis (por categoría, con palabras clave en español para buscar) y
  * los recientes del usuario (localStorage con try/catch).
  */
+import { vectorLocal } from '../core/ia-local.js';
+import { calibracionDe } from '../core/calibracion.js';
+import { cargarAplanado, ordenarAplanado } from '../core/semantica.js';
 import { normalizar } from './formato.js';
 
 export type Emoji = { e: string; k: string };
@@ -334,12 +337,20 @@ export const CATEGORIAS_EMOJI: CategoriaEmoji[] = [
 ];
 
 /** Busca por palabra clave (sin tildes). */
-export function buscarEmojis(q: string, limite = 64): Emoji[] {
+
+/** Todo el catálogo con lo que coincide primero: buscar ordena, no oculta. */
+export function ordenarEmojis(q: string): Emoji[] {
   const t = normalizar(q.trim());
-  if (!t) return [];
-  const out: Emoji[] = [];
-  for (const c of CATEGORIAS_EMOJI) for (const e of c.emojis) if (normalizar(e.k).includes(t)) out.push(e);
-  return out.slice(0, limite);
+  const todos = CATEGORIAS_EMOJI.flatMap((c) => c.emojis);
+  return [...todos.filter((e) => normalizar(e.k).includes(t)), ...todos.filter((e) => !normalizar(e.k).includes(t))];
+}
+
+/** Todo el catálogo por significado («comida italiana» → 🍝🍕). Null si el modelo no está: queda el orden por palabra. */
+export async function ordenarEmojisPorSentido(q: string): Promise<Emoji[] | null> {
+  const [corpus, vector] = await Promise.all([cargarAplanado('emojis', document.baseURI), vectorLocal(q)]);
+  if (!vector) return null;
+  const claves = new Map(CATEGORIAS_EMOJI.flatMap((c) => c.emojis.map((e) => [e.e, e.k])));
+  return ordenarAplanado(corpus, q, vector, calibracionDe('emojis').orden).map((r) => ({ e: r.item.id, k: claves.get(r.item.id) ?? '' }));
 }
 
 const CLAVE_RECIENTES = 'av-chat:emojis-recientes';

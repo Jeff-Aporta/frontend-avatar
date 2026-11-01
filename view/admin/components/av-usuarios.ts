@@ -1,5 +1,5 @@
 /**
- * <av-usuarios> — tabla de usuarios (`iswc-data-grid`: usuario, nombre, correo, activo, rol) y, por fila seleccionada,
+ * <av-usuarios> — tabla de usuarios (`iswc-ag-grid`: usuario, nombre, correo, activo, rol) y, por fila seleccionada,
  * acciones: editar, eliminar (popconfirm) y asignar rol principal (select). Emite `av-usuario-nuevo`,
  * `av-usuario-editar { iusuario }`, `av-usuario-eliminar { iusuario }` y `av-usuario-rol { iusuario, irol }` (irol '' = quitar).
  */
@@ -29,21 +29,21 @@ const AvUsuarios = crearComponente<AvUsuariosProps>(import.meta.url, 'av-usuario
     <section class="usuarios" part="usuarios">
       <div class="barra">
         <strong class="titulo"><iswc-icon icon="mdi:account-multiple-outline"></iswc-icon> Usuarios <iswc-badge color="neutral" pill>${props.items.length}</iswc-badge></strong>
-        <iswc-button id="nuevo" color="brand" oniswc-click=${() => emitir(host, 'av-usuario-nuevo', {})}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo usuario</iswc-button>
+        <iswc-button variant="compact" id="nuevo" color="brand" oniswc-click=${() => emitir(host, 'av-usuario-nuevo', {})}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo usuario</iswc-button>
       </div>
       <div id="seleccion" class="seleccion" part="seleccion" hidden>
         <strong id="sel-nombre"></strong>
-        <iswc-select id="sel-rol" label="Rol principal" label-placement="start" placeholder="Rol base (Usuario)" clearable oniswc-change=${(e: Event) => elegido && emitir(host, 'av-usuario-rol', { iusuario: elegido, irol: (e.target as Campo).value ?? '' })}>
+        <iswc-select id="sel-rol" label="Rol principal" placeholder="Rol base (Usuario)" clearable oniswc-change=${(e: Event) => elegido && emitir(host, 'av-usuario-rol', { iusuario: elegido, irol: (e.target as Campo).value ?? '' })}>
           ${props.roles.filter((r) => r.irol !== 'USR').map((r) => html`<iswc-option value=${r.irol}>${etiquetaRol(r.irol)}</iswc-option>`)}
         </iswc-select>
-        <iswc-button variant="outlined" color="neutral" oniswc-click=${() => elegido && emitir(host, 'av-usuario-editar', { iusuario: elegido })}><iswc-icon slot="start" icon="mdi:pencil-outline"></iswc-icon>Editar</iswc-button>
-        <iswc-button id="eliminar" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button>
+        <iswc-button variant="outlined compact" color="neutral" oniswc-click=${() => elegido && emitir(host, 'av-usuario-editar', { iusuario: elegido })}><iswc-icon slot="start" icon="mdi:pencil-outline"></iswc-icon>Editar</iswc-button>
+        <iswc-button id="eliminar" variant="outlined compact" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button>
         <iswc-popconfirm for="eliminar" message="¿Eliminar el usuario seleccionado?" oniswc-popconfirm-confirm=${() => elegido && emitir(host, 'av-usuario-eliminar', { iusuario: elegido })}>
-          <iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button>
-          <iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button>
+          <iswc-button variant="compact" slot="confirm" color="danger">Sí, eliminar</iswc-button>
+          <iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button>
         </iswc-popconfirm>
       </div>
-      <iswc-data-grid id="grid" class="grid" part="grid" auto-height quick-filter show-toolbar ?loading=${props.cargando} oniswc-row-click=${seleccionar}></iswc-data-grid>
+      <iswc-ag-grid id="grid" class="grid" part="grid" density="compact" get-row-id="id" ?loading=${props.cargando} oniswc-cell-click=${seleccionar}></iswc-ag-grid>
     </section>
   `);
   const grid = root.querySelector('#grid') as Grid;

@@ -53,6 +53,95 @@ iswc-doc-layout::part(bar) {
   background: radial-gradient(60em 30em at 100% 0%, var(--av-velo), transparent 70%);
 }
 
+iswc-session-menu[hidden] {
+  display: none;
+}
+
+/* Empresa, perfil, paleta y tema van en el menú del avatar. */
+.menu-cuenta {
+  display: flex;
+  flex-direction: column;
+  gap: t.esp(2);
+  padding: t.esp(2);
+  min-inline-size: 15em;
+
+  iswc-tenant-selector {
+    max-width: none;
+  }
+}
+
+.menu-tema {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.esp(2);
+}
+
+/* Área privada a alto completo: la barra queda fija y cada vista hace su propio scroll, sin scroll de página. */
+.privada::part(content) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-block-size: 0;
+}
+
+.privada .vista {
+  flex: 1;
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  > * {
+    box-sizing: border-box;
+    min-block-size: 100%;
+  }
+}
+
+/* Modo de layout de la ruta (`layout` en `consts/paginas.ts`): `completo` quita ancho máximo y márgenes del contenido. */
+.vista[data-layout="completo"] {
+  --av-pagina-ancho: none;
+  --av-pagina-relleno: 0;
+  --av-cabecera-relleno: 0.75em;
+}
+
+.privada av-migas {
+  flex: none;
+}
+
+.lateral {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  min-block-size: 0;
+
+  av-menu-lateral {
+    flex: 1;
+    min-block-size: 0;
+  }
+}
+
+/* Buscador: en el cajón solo en celular (`adaptarBarra`). */
+.acciones-cajon {
+  display: none;
+  flex-direction: column;
+  gap: t.esp(3);
+  padding: t.esp(3);
+  border-bottom: 0.0625em solid var(--iswc-border);
+
+  iswc-tenant-selector,
+  iswc-semantic-search {
+    max-width: none;
+    inline-size: 100%;
+  }
+}
+
+@media (max-width: 47.5em) {
+  .acciones-cajon {
+    display: flex;
+  }
+}
+
 iswc-tenant-selector {
   max-width: 14em;
 }
@@ -66,7 +155,6 @@ iswc-tenant-selector {
   display: grid;
   grid-template-columns: minmax(12em, 1.4fr) repeat(auto-fit, minmax(10em, 1fr));
   gap: t.esp(4) t.esp(6);
-  align-items: start;
   padding: t.esp(5);
   border-top: 1px solid var(--iswc-border-soft);
   font-size: 0.92em;
@@ -85,13 +173,11 @@ iswc-tenant-selector {
   }
 }
 
-.pie-accion {
+.pie-accion::part(button) {
+  height: auto;
+  min-height: 0;
   padding: 0;
-  border: 0;
-  background: none;
-  font: inherit;
   text-decoration: underline;
-  cursor: pointer;
 }
 
 .pie-titulo {

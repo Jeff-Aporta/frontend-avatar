@@ -1,7 +1,7 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
-/* av-perfiles-tabla — tabla simple dentro del diálogo; en pantallas angostas se desplaza dentro de su marco. */
+/* av-perfiles-tabla — la lista de perfiles dentro del diálogo. */
 :host {
   display: contents;
 }
@@ -9,39 +9,4 @@
 .nota {
   margin: 0 0 t.esp(3);
   color: var(--iswc-text-soft);
-}
-
-.marco {
-  overflow-x: auto;
-}
-
-.tabla {
-  width: 100%;
-  border-collapse: collapse;
-
-  th,
-  td {
-    padding: t.esp(2);
-    text-align: left;
-    border-bottom: 1px solid var(--iswc-border-soft);
-    white-space: nowrap;
-  }
-
-  th {
-    font-size: 0.85em;
-    color: var(--iswc-text-soft);
-  }
-}
-
-.pin {
-  font-weight: 700;
-  letter-spacing: 0.15em;
-}
-
-.oculto {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
 }

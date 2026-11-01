@@ -91,12 +91,12 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de av-chat-mensajes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para avisos del sistema fuera del chat: iswc-callout.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Dentro de av-chat-mensajes.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para avisos del sistema fuera del chat: iswc-callout.</iswc-callout>"
         },
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-bubble</strong>Burbuja de chat genérica con formato ligero. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-bubble</strong>Burbuja de chat genérica con formato ligero. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

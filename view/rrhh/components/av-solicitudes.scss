@@ -19,7 +19,7 @@
 
 .lista {
   display: grid;
-  gap: t.esp(3);
+  gap: t.esp(2);
 }
 
 .esqueleto {
@@ -31,9 +31,9 @@
   --c: var(--iswc-color-warning);
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: t.esp(3);
-  align-items: start;
-  padding: t.esp(3) t.esp(4);
+  gap: 0.25em 0.75em;
+  align-items: center;
+  padding: 0.5em 0.75em;
   border: 1px solid var(--iswc-border-soft);
   border-radius: var(--av-radio);
   background: linear-gradient(110deg, color-mix(in srgb, var(--c) 9%, transparent), transparent 45%), var(--iswc-bg-elev);
@@ -50,18 +50,17 @@
 .icono {
   display: grid;
   place-items: center;
-  width: 2.6em;
-  height: 2.6em;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
   color: var(--c);
-  box-shadow: 0 0 0.9em color-mix(in srgb, var(--c) 30%, transparent);
-  font-size: 1.1em;
+  box-shadow: 0 0 0.6em color-mix(in srgb, var(--c) 30%, transparent);
 }
 
 .cuerpo {
   display: grid;
-  gap: t.esp(1);
+  gap: 0.125em;
   min-width: 0;
 }
 
@@ -72,7 +71,7 @@
   gap: t.esp(2);
 
   .avatar {
-    font-size: 1.9em;
+    font-size: 1.4em;
   }
 
   .empleado {
@@ -84,8 +83,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: t.esp(1) t.esp(4);
-  font-size: 0.85em;
+  gap: 0.125em 0.75em;
+  font-size: 0.8em;
   color: var(--iswc-text-dim);
 
   .tipo {
@@ -104,10 +103,15 @@
 .resolucion {
   margin: 0;
   font-size: 0.9em;
-  overflow-wrap: anywhere;
+}
+
+.motivo {
+  @include m.lineas(2);
+  font-size: 0.85em;
 }
 
 .resolucion {
+  @include m.lineas(2);
   font-size: 0.8em;
   color: var(--iswc-text-dim);
 }
@@ -115,7 +119,7 @@
 .acciones {
   display: flex;
   flex-wrap: wrap;
-  gap: t.esp(2);
+  gap: 0.375em;
   justify-content: flex-end;
 }
 

@@ -1,0 +1,582 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-tabla",
+  "category": "transversal",
+  "navTitle": "Tabla de catálogo",
+  "title": "&lt;av-tabla&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-tabla",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-tabla&gt;",
+      "lede": "Buscador, grid del kit y estado vacío, configurados por props.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-tabla id=\"tabla-empleados\"></av-tabla></div>",
+          "target": "#tabla-empleados",
+          "props": {
+            "prefijo": "av-rrhh",
+            "entidad": "empleados",
+            "columnas": [
+              {
+                "field": "nombre",
+                "headerName": "Empleado",
+                "flex": 1.3,
+                "minWidth": 180
+              },
+              {
+                "field": "email",
+                "headerName": "Correo",
+                "flex": 1.2,
+                "minWidth": 180
+              },
+              {
+                "field": "departamento",
+                "headerName": "Departamento",
+                "flex": 0.9,
+                "minWidth": 130
+              },
+              {
+                "field": "cargo",
+                "headerName": "Cargo",
+                "flex": 1.2,
+                "minWidth": 170
+              },
+              {
+                "field": "estado",
+                "headerName": "Estado",
+                "width": 120
+              },
+              {
+                "field": "salarioTexto",
+                "headerName": "Salario",
+                "width": 140
+              },
+              {
+                "field": "fingreso",
+                "headerName": "Ingreso",
+                "width": 110
+              }
+            ],
+            "idCampo": "iempleado",
+            "buscador": "Buscar por nombre, departamento, cargo…",
+            "vacio": {
+              "icono": "mdi:account-group-outline",
+              "titulo": "Sin empleados",
+              "texto": "Registra a las personas de la empresa."
+            },
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": [
+              {
+                "id": 1,
+                "iempleado": 1,
+                "nombre": "María Aguirre",
+                "email": "maria@avatar.test",
+                "departamento": "Diseño",
+                "cargo": "Diseñadora Senior",
+                "estado": "Activo",
+                "estadoClave": "activo",
+                "salario": 6500000,
+                "salarioTexto": "$ 6.500.000",
+                "fingreso": "2022-03-14"
+              },
+              {
+                "id": 2,
+                "iempleado": 2,
+                "nombre": "Juan Rodríguez",
+                "email": "juan@avatar.test",
+                "departamento": "Desarrollo",
+                "cargo": "Desarrollador Full-Stack",
+                "estado": "Vacaciones",
+                "estadoClave": "vacaciones",
+                "salario": 7200000,
+                "salarioTexto": "$ 7.200.000",
+                "fingreso": "2021-08-02"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": ""
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Para cualquier catálogo de una vista: su configuración vive en los utils de la vista.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No filtra por sí misma: la búsqueda la hace el shell. Las funciones de columna no viajan por JSON: aquí las celdas salen sin formato.</iswc-callout>"
+        }
+      ]
+    },
+    {
+      "id": "finanzas",
+      "title": "Finanzas",
+      "lede": "Transacciones.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-tabla id=\"d-finanzas\"></av-tabla></div>",
+          "target": "#d-finanzas",
+          "props": {
+            "prefijo": "av-finanzas",
+            "entidad": "transacciones",
+            "columnas": [
+              {
+                "field": "fecha",
+                "headerName": "Fecha",
+                "width": 110
+              },
+              {
+                "field": "tipo",
+                "headerName": "Tipo",
+                "width": 110
+              },
+              {
+                "field": "categoria",
+                "headerName": "Categoría",
+                "flex": 0.9,
+                "minWidth": 130
+              },
+              {
+                "field": "descripcion",
+                "headerName": "Descripción",
+                "flex": 1.4,
+                "minWidth": 180
+              },
+              {
+                "field": "montoTexto",
+                "headerName": "Monto",
+                "flex": 0.9,
+                "minWidth": 140
+              },
+              {
+                "field": "estado",
+                "headerName": "Estado",
+                "width": 130
+              }
+            ],
+            "idCampo": "itransaccion",
+            "buscador": "Buscar por categoría, descripción, estado…",
+            "vacio": {
+              "icono": "mdi:swap-vertical-circle-outline",
+              "titulo": "Sin transacciones",
+              "texto": "Registra ingresos y gastos para llevar la contabilidad."
+            },
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": [
+              {
+                "id": 5,
+                "itransaccion": 5,
+                "fecha": "2026-10-12",
+                "tipo": "Gasto",
+                "tipoClave": "gasto",
+                "categoria": "Marketing",
+                "descripcion": "Campaña redes sociales",
+                "monto": 2400000,
+                "montoTexto": "$ 2.400.000",
+                "estado": "Completada",
+                "estadoClave": "completada"
+              },
+              {
+                "id": 2,
+                "itransaccion": 2,
+                "fecha": "2026-10-05",
+                "tipo": "Ingreso",
+                "tipoClave": "ingreso",
+                "categoria": "Licencias",
+                "descripcion": "Licencias anuales",
+                "monto": 3200,
+                "montoTexto": "US$ 3.200,00",
+                "estado": "Completada",
+                "estadoClave": "completada"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": ""
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inventario",
+      "title": "Inventario",
+      "lede": "Productos, con Entrada y Salida por fila.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-tabla id=\"d-inventario\"></av-tabla></div>",
+          "target": "#d-inventario",
+          "props": {
+            "prefijo": "av-inventario",
+            "entidad": "productos",
+            "columnas": [
+              {
+                "field": "sku",
+                "headerName": "SKU",
+                "width": 120
+              },
+              {
+                "field": "nombre",
+                "headerName": "Producto",
+                "flex": 1.5,
+                "minWidth": 190
+              },
+              {
+                "field": "categoria",
+                "headerName": "Categoría",
+                "flex": 0.8,
+                "minWidth": 120
+              },
+              {
+                "field": "marca",
+                "headerName": "Marca",
+                "flex": 0.7,
+                "minWidth": 100
+              },
+              {
+                "field": "precioTexto",
+                "headerName": "Precio",
+                "width": 120
+              },
+              {
+                "field": "stock",
+                "headerName": "Stock",
+                "type": "number",
+                "width": 90
+              },
+              {
+                "field": "nivel",
+                "headerName": "Nivel",
+                "width": 175
+              },
+              {
+                "field": "ubicacion",
+                "headerName": "Ubicación",
+                "width": 110
+              },
+              {
+                "field": "proveedor",
+                "headerName": "Proveedor",
+                "flex": 0.9,
+                "minWidth": 130
+              },
+              {
+                "field": "acciones",
+                "headerName": "Mover",
+                "width": 100,
+                "acciones": [
+                  {
+                    "accion": "entrada",
+                    "label": "Registrar entrada",
+                    "icono": "mdi:tray-arrow-down"
+                  },
+                  {
+                    "accion": "salida",
+                    "label": "Registrar salida",
+                    "icono": "mdi:tray-arrow-up"
+                  }
+                ]
+              }
+            ],
+            "idCampo": "iproducto",
+            "buscador": "Buscar por SKU, nombre, marca, ubicación…",
+            "vacio": {
+              "icono": "mdi:package-variant",
+              "titulo": "Sin productos",
+              "texto": "Agrega productos al catálogo para controlar su stock."
+            },
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": [
+              {
+                "id": 1,
+                "iproducto": 1,
+                "sku": "PROD-00001",
+                "nombre": "Procesador i9-10900K",
+                "categoria": "Electrónicos",
+                "marca": "Intel",
+                "precio": 499.99,
+                "precioTexto": "$ 499,99",
+                "stock": 3,
+                "stock_minimo": 5,
+                "nivel": "Stock bajo · mín 5",
+                "nivelClave": "bajo",
+                "ubicacion": "A1-B2",
+                "proveedor": "TecnoSuministros"
+              },
+              {
+                "id": 2,
+                "iproducto": 2,
+                "sku": "PROD-00002",
+                "nombre": "Memoria RAM 16GB DDR4",
+                "categoria": "Electrónicos",
+                "marca": "Corsair",
+                "precio": 79.99,
+                "precioTexto": "$ 79,99",
+                "stock": 25,
+                "stock_minimo": 10,
+                "nivel": "Disponible · mín 10",
+                "nivelClave": "ok",
+                "ubicacion": "A2-C1",
+                "proveedor": "ElectroParts"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": ""
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crm",
+      "title": "CRM",
+      "lede": "Clientes, 25 por página.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-tabla id=\"d-crm\"></av-tabla></div>",
+          "target": "#d-crm",
+          "props": {
+            "prefijo": "av-crm",
+            "entidad": "clientes",
+            "columnas": [
+              {
+                "field": "nombre",
+                "headerName": "Nombre",
+                "flex": 1.2,
+                "minWidth": 160
+              },
+              {
+                "field": "organizacion",
+                "headerName": "Organización",
+                "flex": 1.2,
+                "minWidth": 160
+              },
+              {
+                "field": "email",
+                "headerName": "Correo",
+                "flex": 1.2,
+                "minWidth": 180
+              },
+              {
+                "field": "telefono",
+                "headerName": "Teléfono",
+                "flex": 0.8,
+                "minWidth": 120
+              },
+              {
+                "field": "etapa",
+                "headerName": "Etapa",
+                "flex": 0.8,
+                "minWidth": 120
+              },
+              {
+                "field": "valor",
+                "headerName": "Valor",
+                "type": "number",
+                "flex": 0.8,
+                "minWidth": 120
+              },
+              {
+                "field": "responsable",
+                "headerName": "Responsable",
+                "flex": 0.8,
+                "minWidth": 120
+              }
+            ],
+            "idCampo": "icliente",
+            "buscador": "Buscar por nombre, organización, correo…",
+            "vacio": {
+              "icono": "mdi:account-search-outline",
+              "titulo": "Sin clientes",
+              "texto": "No hay clientes para mostrar con este filtro."
+            },
+            "porPagina": 25,
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": false,
+            "filas": [
+              {
+                "icliente": 1,
+                "iempresa": 1,
+                "nombre": "Juan Pérez",
+                "organizacion": "Tech Titans S.A.",
+                "email": "juan@tech.test",
+                "etapa": "Contacto",
+                "valor": 5200,
+                "responsable": "carla",
+                "id": 1,
+                "etapaClave": "contacto"
+              },
+              {
+                "icliente": 2,
+                "iempresa": 1,
+                "nombre": "Pedro Sánchez",
+                "organizacion": "Global Finance",
+                "email": "pedro@global.test",
+                "etapa": "Propuesta",
+                "valor": 7500,
+                "responsable": "carla",
+                "id": 2,
+                "etapaClave": "propuesta"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": ""
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vacio",
+      "title": "Sin filas",
+      "lede": "El vacío lo declara cada tabla.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-tabla id=\"d-vacio\"></av-tabla></div>",
+          "target": "#d-vacio",
+          "props": {
+            "prefijo": "av-rrhh",
+            "entidad": "asistencias",
+            "columnas": [
+              {
+                "field": "fecha",
+                "headerName": "Fecha",
+                "width": 120
+              },
+              {
+                "field": "empleado",
+                "headerName": "Empleado",
+                "flex": 1.3,
+                "minWidth": 180
+              },
+              {
+                "field": "estado",
+                "headerName": "Estado",
+                "width": 130
+              },
+              {
+                "field": "entrada",
+                "headerName": "Entrada",
+                "width": 100
+              },
+              {
+                "field": "salida",
+                "headerName": "Salida",
+                "width": 100
+              }
+            ],
+            "idCampo": "clave",
+            "buscador": "Buscar por empleado, estado, fecha…",
+            "vacio": {
+              "icono": "mdi:calendar-blank-outline",
+              "titulo": "Sin asistencias",
+              "texto": "Las marcas de asistencia aparecen aquí."
+            },
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": []
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": ""
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

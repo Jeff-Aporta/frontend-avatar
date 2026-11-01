@@ -111,7 +111,6 @@ export const FacturaDatosSchema = z.object({
 export type FacturaDatos = z.infer<typeof FacturaDatosSchema>;
 
 /** Fila plana de una tabla de la vista. */
-const FilaSchema = z.record(z.string(), z.unknown());
 
 /** `<av-finanzas>` (shell): pestaña de la ruta y versión. */
 export const AvFinanzasPropsSchema = z.object({ id: z.string().nullable().default(null), version: z.number().default(0) });
@@ -120,6 +119,10 @@ export type AvFinanzasProps = z.infer<typeof AvFinanzasPropsSchema>;
 /** `<av-finanzas-grafica>`: resumen del mes (null = cargando). */
 export const AvFinanzasGraficaPropsSchema = z.object({ resumen: ResumenFinanzasSchema.nullable().default(null) });
 export type AvFinanzasGraficaProps = z.infer<typeof AvFinanzasGraficaPropsSchema>;
+
+/** `<av-finanzas-hoja>`: transacciones que se vuelcan en la hoja de cuadre. */
+export const AvFinanzasHojaPropsSchema = z.object({ transacciones: z.array(TransaccionSchema).default([]) });
+export type AvFinanzasHojaProps = z.infer<typeof AvFinanzasHojaPropsSchema>;
 
 /** `<av-conversor>`: tasas, entrada y resultado. */
 export const AvConversorPropsSchema = z.object({
@@ -132,16 +135,6 @@ export const AvConversorPropsSchema = z.object({
   error: z.string().default(''),
 });
 export type AvConversorProps = z.infer<typeof AvConversorPropsSchema>;
-
-/** `<av-finanzas-tabla>`: tabla de `transacciones` o `facturas`. */
-export const AvFinanzasTablaPropsSchema = z.object({
-  entidad: z.enum(['transacciones', 'facturas']).default('transacciones'),
-  filas: z.array(FilaSchema).default([]),
-  cargando: z.boolean().default(false),
-  texto: z.string().default(''),
-  puedeEscribir: z.boolean().default(false),
-});
-export type AvFinanzasTablaProps = z.infer<typeof AvFinanzasTablaPropsSchema>;
 
 /** `<av-transaccion-form>`: diálogo crear/editar/eliminar. */
 export const AvTransaccionFormPropsSchema = z.object({ abierto: z.boolean().default(false), transaccion: TransaccionSchema.nullable().default(null), categorias: z.array(z.string()).default([]), puedeEscribir: z.boolean().default(false), ocupado: z.boolean().default(false), error: z.string().default('') });
@@ -156,7 +149,7 @@ export const FINANZAS_PROPS = {
   'av-finanzas': AvFinanzasPropsSchema,
   'av-finanzas-grafica': AvFinanzasGraficaPropsSchema,
   'av-conversor': AvConversorPropsSchema,
-  'av-finanzas-tabla': AvFinanzasTablaPropsSchema,
+  'av-finanzas-hoja': AvFinanzasHojaPropsSchema,
   'av-transaccion-form': AvTransaccionFormPropsSchema,
   'av-factura-form': AvFacturaFormPropsSchema,
 } as const;

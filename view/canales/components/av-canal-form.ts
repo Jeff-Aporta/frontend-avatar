@@ -37,10 +37,10 @@ const AvCanalForm = crearComponente<AvCanalFormProps>(
             ${props.equipos.map((e) => html`<iswc-option value=${String(e.iequipo)}>${e.nombre}</iswc-option>`)}
           </iswc-select>
           <iswc-textarea id="descripcion" label="Descripción" rows="2" maxlength="500"></iswc-textarea>
-          ${props.error ? html`<iswc-callout tone="danger">${props.error}</iswc-callout>` : null}
+          ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.guardando} oniswc-click=${guardar}>Crear canal</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.guardando} oniswc-click=${guardar}>Crear canal</iswc-button>
       </iswc-dialog>
     `);
   },

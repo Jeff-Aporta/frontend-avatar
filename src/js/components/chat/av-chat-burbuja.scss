@@ -43,7 +43,8 @@
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 
   &:focus-visible {
-    box-shadow: 0 0 0 2px var(--iswc-focus, var(--iswc-accent));
+    outline: 2px solid var(--iswc-focus);
+    outline-offset: 1px;
   }
 
   &:hover .mas,
@@ -142,20 +143,23 @@
 }
 
 .cita {
-  display: flex;
-  align-items: stretch;
-  gap: t.esp(2);
-  width: 100%;
+  --iswc-button-row-gap: #{t.esp(2)};
+  --iswc-button-row-padding: 0.35em 0.5em;
+  --iswc-button-border-radius: 0.45em;
+  --iswc-button-font-weight: 400;
   margin: 0.15em 0 0.3em;
-  padding: 0.35em 0.5em;
-  border: 0;
   border-left: 0.22em solid currentColor;
   border-radius: 0.45em;
   background: color-mix(in srgb, var(--iswc-text) 6%, transparent);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
   @include c.color-persona;
+
+  &::part(button) {
+    color: inherit;
+  }
+
+  &::part(label) {
+    align-items: stretch;
+  }
 
   &:hover {
     background: color-mix(in srgb, var(--iswc-text) 10%, transparent);
@@ -333,16 +337,15 @@
 }
 
 .fallo {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
   margin-top: 0.2em;
-  border: 0;
-  background: transparent;
-  font: inherit;
   font-size: 0.78em;
-  color: var(--iswc-danger-text);
-  cursor: pointer;
+
+  &::part(button) {
+    gap: 0.3em;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+  }
 }
 
 .reacciones {

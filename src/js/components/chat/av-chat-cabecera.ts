@@ -19,8 +19,8 @@ const AvChatCabecera = crearComponente<AvChatCabeceraProps>(
     const info = () => emitir(host, 'av-chat-panel', { panel: 'info' });
     root.append(html`
       <header class="cabecera" part="cabecera" data-volver=${props.volver ? '1' : '0'}>
-        <iswc-button class="volver" variant="plain" color="neutral" title=${t.volverChats} aria-label=${t.volverChats} oniswc-click=${() => emitir(host, 'av-chat-volver')}><iswc-icon icon="mdi:arrow-left"></iswc-icon></iswc-button>
-        <button class="quien" type="button" onclick=${info} title=${props.tipo === 'directo' ? t.infoContacto : t.infoGrupo}>
+        <iswc-button class="volver" variant="plain compact" color="neutral" title=${t.volverChats} aria-label=${t.volverChats} oniswc-click=${() => emitir(host, 'av-chat-volver')}><iswc-icon icon="mdi:arrow-left"></iswc-icon></iswc-button>
+        <iswc-button class="quien" variant="row" color="neutral" onclick=${info} title=${props.tipo === 'directo' ? t.infoContacto : t.infoGrupo}>
           <span class="foto" data-color=${String(props.color)}>
             <iswc-avatar initials=${props.iniciales} image=${props.foto ?? ''} label=${props.nombre}></iswc-avatar>
           </span>
@@ -28,13 +28,13 @@ const AvChatCabecera = crearComponente<AvChatCabeceraProps>(
             <strong class="nombre">${props.nombre}</strong>
             <span class="estado" data-activo=${props.activo ? '1' : '0'} aria-live="polite">${props.estado}</span>
           </span>
-        </button>
+        </iswc-button>
         <span class="acciones">
           ${props.puedeLlamar ? html`
-            <iswc-button variant="plain" color="neutral" title=${t.videollamar} aria-label=${t.videollamar} oniswc-click=${() => emitir(host, 'av-chat-llamar', { tipo: 'video' })}><iswc-icon icon="mdi:video-outline"></iswc-icon></iswc-button>
-            <iswc-button variant="plain" color="neutral" title=${t.llamar} aria-label=${t.llamar} oniswc-click=${() => emitir(host, 'av-chat-llamar', { tipo: 'voz' })}><iswc-icon icon="mdi:phone-outline"></iswc-icon></iswc-button>` : null}
-          <iswc-button variant="plain" color="neutral" title=${t.buscarMensajes} aria-label=${t.buscarMensajes} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'busqueda' })}><iswc-icon icon="mdi:magnify"></iswc-icon></iswc-button>
-          <iswc-button variant="plain" color="neutral" title=${t.infoChat} aria-label=${t.infoChat} oniswc-click=${info}><iswc-icon icon="mdi:information-outline"></iswc-icon></iswc-button>
+            <iswc-button variant="plain compact" color="neutral" title=${t.videollamar} aria-label=${t.videollamar} oniswc-click=${() => emitir(host, 'av-chat-llamar', { tipo: 'video' })}><iswc-icon icon="mdi:video-outline"></iswc-icon></iswc-button>
+            <iswc-button variant="plain compact" color="neutral" title=${t.llamar} aria-label=${t.llamar} oniswc-click=${() => emitir(host, 'av-chat-llamar', { tipo: 'voz' })}><iswc-icon icon="mdi:phone-outline"></iswc-icon></iswc-button>` : null}
+          <iswc-button variant="plain compact" color="neutral" title=${t.buscarMensajes} aria-label=${t.buscarMensajes} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'busqueda' })}><iswc-icon icon="mdi:magnify"></iswc-icon></iswc-button>
+          <iswc-button variant="plain compact" color="neutral" title=${t.infoChat} aria-label=${t.infoChat} oniswc-click=${info}><iswc-icon icon="mdi:information-outline"></iswc-icon></iswc-button>
         </span>
       </header>
     `);

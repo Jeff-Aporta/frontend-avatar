@@ -13,8 +13,8 @@ Dona de la asistencia de hoy y barras de la plantilla por departamento; refresca
 <av-rrhh-grafica>
   #shadow-root
     <div part="rejilla">
-      <iswc-card part="tarjeta"><iswc-doughnut-chart id="asistencia"> | <iswc-empty-state></iswc-card>
-      <iswc-card part="tarjeta"><iswc-bar-chart id="departamentos"> | <iswc-empty-state></iswc-card>
+      <av-grafica> dona
+      <av-grafica> barras
 ```
 
 ## Atributos observados

@@ -3,5 +3,4 @@ import { setCssBase } from '../../../src/js/base/componente.js';
 
 setCssBase(new URL('../../../', import.meta.url).href);
 
-await import('./av-credenciales-demo.js');
 await import('./av-acceso.js');

@@ -3,10 +3,12 @@
  * (si no, «Sin permiso»; Mi cuenta sí la ve cualquiera). Habla con los plugins de identidad (`auth()`) y permisos
  * (`permisos()`) de DER y reparte props; los hijos solo pintan y emiten `av-*`.
  */
+import { soloPestana } from '../../../src/js/components/av/av-pestanas.js';
 import { crearComponente, define, html, avisar } from '../../../src/js/base/componente.js';
 import { z } from '../../../src/js/base/zod.js';
 import type { AvAdminProps, Rol, RolUsuario, Usuario, UsuarioForm } from '../../../src/js/consts/schemas/admin.schemas.js';
 import { AccionRolSchema, CatalogoEntradaSchema, RolSchema, RolUsuarioSchema, SesionSchema, UsuarioSchema } from '../../../src/js/consts/schemas/admin.schemas.js';
+import { sinPermiso as estadoSinPermiso } from '../../../src/js/consts/estados.js';
 import { auth, cerrarSesion, dominio, mensajeDe, permisos, refrescarPermisos } from '../../../src/js/core/api.js';
 import { estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
@@ -218,7 +220,7 @@ const AvAdmin = crearComponente<AvAdminProps>(import.meta.url, 'av-admin', { id:
     const { name } = (e as CustomEvent<{ name: string }>).detail;
     if (name === 'usuarios' || name === 'roles' || name === 'almacenamiento' || name === 'cuenta') h.props.pestana = name;
   };
-  const pestanaInicial = admin ? props.pestana : 'cuenta';
+  const pestanaInicial = admin ? props.id ?? props.pestana : 'cuenta';
 
   root.append(html`
     <div class="pagina" part="pagina"
@@ -227,10 +229,10 @@ const AvAdmin = crearComponente<AvAdminProps>(import.meta.url, 'av-admin', { id:
       onav-usuario-guardar=${guardarUsuario} onav-usuario-cerrar=${() => (q<ConProps>('#usuario-form')!.props = { abierto: false })}
       onav-almacenamiento-guardar=${guardarAlmacenamiento} onav-rol-crear=${crearRol} onav-accion-poner=${ponerAccion} onav-accion-quitar=${quitarAccion}>
       <iswc-page-header id="cabecera">
-        <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${() => (h.props = { version: (props.version ?? 0) + 1 })}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${() => (h.props = { version: (props.version ?? 0) + 1 })}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
       </iswc-page-header>
       ${admin ? null : html`<iswc-empty-state id="sin-permiso"></iswc-empty-state>`}
-      <iswc-tab-group active=${pestanaInicial} oniswc-tab-show=${cambiarPestana}>
+      <av-pestanas vista="admin"><iswc-tab-group active=${pestanaInicial} oniswc-tab-show=${cambiarPestana}>
         ${admin ? html`<iswc-tab slot="nav" panel="usuarios"><iswc-icon slot="start" icon="mdi:account-multiple-outline"></iswc-icon>Usuarios</iswc-tab>
           <iswc-tab slot="nav" panel="roles"><iswc-icon slot="start" icon="mdi:shield-key-outline"></iswc-icon>Roles y permisos</iswc-tab>
           <iswc-tab slot="nav" panel="almacenamiento"><iswc-icon slot="start" icon="mdi:database-cog-outline"></iswc-icon>Almacenamiento</iswc-tab>` : null}
@@ -247,32 +249,32 @@ const AvAdmin = crearComponente<AvAdminProps>(import.meta.url, 'av-admin', { id:
                 <iswc-input id="c-nueva" type="password" label="Nueva contraseña" password-toggle autocomplete="new-password" hint="Mínimo 8 caracteres"></iswc-input>
                 <iswc-input id="c-repetir" type="password" label="Repetir nueva" password-toggle autocomplete="new-password"></iswc-input>
               </div>
-              <iswc-button slot="footer" id="cambiar-clave" color="brand" oniswc-click=${cambiarClave}>Cambiar contraseña</iswc-button>
+              <iswc-button variant="compact" slot="footer" id="cambiar-clave" color="brand" oniswc-click=${cambiarClave}>Cambiar contraseña</iswc-button>
             </iswc-card>
             <iswc-card variant="outlined">
               <strong slot="header"><iswc-icon icon="mdi:devices"></iswc-icon> Sesiones activas</strong>
-              <iswc-button slot="header-actions" variant="plain" color="neutral" oniswc-click=${cargarSesiones}><iswc-icon icon="mdi:refresh"></iswc-icon></iswc-button>
+              <iswc-button slot="header-actions" variant="plain compact" color="neutral" oniswc-click=${cargarSesiones}><iswc-icon icon="mdi:refresh"></iswc-icon></iswc-button>
               <ul id="sesiones" class="sesiones"></ul>
-              <iswc-button slot="footer" id="cerrar-todas" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:logout"></iswc-icon>Cerrar todas las sesiones</iswc-button>
+              <iswc-button slot="footer" id="cerrar-todas" variant="outlined compact" color="danger"><iswc-icon slot="start" icon="mdi:logout"></iswc-icon>Cerrar todas las sesiones</iswc-button>
               <iswc-popconfirm for="cerrar-todas" message="Se cerrará tu sesión en todos los dispositivos, también en este." oniswc-popconfirm-confirm=${cerrarTodas}>
-                <iswc-button slot="confirm" color="danger">Cerrar todas</iswc-button>
-                <iswc-button slot="cancel" variant="outlined" color="neutral">Cancelar</iswc-button>
+                <iswc-button variant="compact" slot="confirm" color="danger">Cerrar todas</iswc-button>
+                <iswc-button slot="cancel" variant="outlined compact" color="neutral">Cancelar</iswc-button>
               </iswc-popconfirm>
             </iswc-card>
           </div>
         </iswc-tab-panel>
-      </iswc-tab-group>
+      </iswc-tab-group></av-pestanas>
       <av-usuario-form id="usuario-form"></av-usuario-form>
     </div>
   `);
   q<ConProps>('#cabecera')!.props = { titulo: 'Administración', subtitulo: admin ? 'Usuarios, roles y permisos de Avatar' : 'Tu cuenta y tus sesiones', icono: 'mdi:shield-account-outline' };
   const sinPermiso = q<ConProps>('#sin-permiso');
-  if (sinPermiso) sinPermiso.props = { icono: 'mdi:shield-lock-outline', titulo: 'Sin permiso de administración', texto: 'Solo un administrador gestiona usuarios y roles. Aquí puedes administrar tu cuenta.' };
+  if (sinPermiso) sinPermiso.props = estadoSinPermiso('administración', 'Solo un administrador gestiona usuarios y roles. Aquí puedes administrar tu cuenta.', 'mdi:shield-lock-outline');
   void cargarSesiones();
   if (!admin) return;
   void cargarUsuarios();
   void cargarRoles();
   void cargarAlmacenamiento();
-});
+}, soloPestana);
 
 define('av-admin', AvAdmin);

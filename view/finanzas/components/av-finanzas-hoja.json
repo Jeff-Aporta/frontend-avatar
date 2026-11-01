@@ -1,0 +1,39 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-finanzas-hoja",
+  "category": "finanzas",
+  "navTitle": "Hoja de cuadre",
+  "title": "&lt;av-finanzas-hoja&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-finanzas-hoja",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-finanzas-hoja&gt;",
+      "lede": "Transacciones en una hoja de cálculo, con totales por moneda.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-finanzas-hoja id=\"d\"></av-finanzas-hoja></div>",
+          "target": "#d",
+          "props": {
+            "transacciones": []
+          },
+          "controls": [
+            {
+              "control": "json",
+              "prop": "props:transacciones",
+              "label": "transacciones",
+              "default": []
+            }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>En la pestaña Hoja de finanzas.</iswc-callout>"
+        }
+      ]
+    }
+  ]
+}

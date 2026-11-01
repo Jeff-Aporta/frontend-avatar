@@ -21,7 +21,7 @@ function montar(root: ShadowRoot, inicial: AvChatReenviarProps, host: HTMLElemen
         <div class="chats" role="group" aria-label=${t.chats}></div>
       </div>
       <span slot="footer" class="cuenta"></span>
-      <iswc-button slot="footer" class="enviar" color="brand" disabled><iswc-icon slot="start" icon="mdi:share"></iswc-icon>${t.reenviar}</iswc-button>
+      <iswc-button variant="compact" slot="footer" class="enviar" color="brand" disabled><iswc-icon slot="start" icon="mdi:share"></iswc-icon>${t.reenviar}</iswc-button>
     </iswc-dialog>
   `);
   const dialogo = root.querySelector('.dialogo') as Dialogo;

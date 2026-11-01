@@ -26,7 +26,7 @@ function montar(root: ShadowRoot, inicial: AvChatNuevoProps, host: HTMLElement) 
     <iswc-dialog class="dialogo" label=${t.nuevoChat} backdrop-variant="basic">
       <div class="contenido">
         <iswc-input class="q" type="search" clearable placeholder=${t.buscarPersonas} aria-label=${t.buscarPersonas}><iswc-icon slot="start" icon="mdi:magnify"></iswc-icon></iswc-input>
-        <button class="fila grupo" type="button"><span class="foto icono"><iswc-icon icon="mdi:account-multiple-plus"></iswc-icon></span><span class="datos"><strong>${t.nuevoGrupo}</strong></span></button>
+        <iswc-button class="fila grupo" variant="row" color="neutral"><span class="foto icono"><iswc-icon icon="mdi:account-multiple-plus"></iswc-icon></span><span class="datos"><strong>${t.nuevoGrupo}</strong></span></iswc-button>
         <div class="personas" role="list"></div>
       </div>
     </iswc-dialog>
@@ -38,9 +38,10 @@ function montar(root: ShadowRoot, inicial: AvChatNuevoProps, host: HTMLElement) 
     const f = normalizar((q.value ?? '').trim());
     const visibles = p.personas.filter((x) => !f || normalizar(`${x.nombre} ${x.detalle}`).includes(f));
     lista.replaceChildren(...visibles.map((pe) => {
-      const b = document.createElement('button');
-      b.type = 'button';
+      const b = document.createElement('iswc-button');
       b.className = 'fila';
+      b.setAttribute('variant', 'row');
+      b.setAttribute('color', 'neutral');
       b.setAttribute('role', 'listitem');
       b.append(filaPersona(pe));
       b.addEventListener('click', () => emitir(host, 'av-chat-directo', { iusuario: pe.id }));

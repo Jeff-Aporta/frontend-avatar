@@ -11,7 +11,7 @@
     {
       "id": "intro",
       "title": "&lt;av-crm&gt;",
-      "lede": "La vista CRM completa (necesita sesión y empresa activa).",
+      "lede": "La vista CRM completa. Sin sesión y empresa activa muestra su estado vacío; abajo, una pieza con datos de ejemplo.",
       "blocks": [
         {
           "kind": "demo",
@@ -32,7 +32,125 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/crm (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/crm (lo monta av-app).</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    },
+    {
+      "id": "ejemplo",
+      "title": "Con datos de ejemplo",
+      "lede": "La pieza principal de la vista, sin API: los datos son fijos.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-tabla id=\"tabla-clientes\"></av-tabla></div>",
+          "target": "#tabla-clientes",
+          "props": {
+            "prefijo": "av-crm",
+            "entidad": "clientes",
+            "columnas": [
+              {
+                "field": "nombre",
+                "headerName": "Nombre",
+                "flex": 1.2,
+                "minWidth": 160
+              },
+              {
+                "field": "organizacion",
+                "headerName": "Organización",
+                "flex": 1.2,
+                "minWidth": 160
+              },
+              {
+                "field": "email",
+                "headerName": "Correo",
+                "flex": 1.2,
+                "minWidth": 180
+              },
+              {
+                "field": "telefono",
+                "headerName": "Teléfono",
+                "flex": 0.8,
+                "minWidth": 120
+              },
+              {
+                "field": "etapa",
+                "headerName": "Etapa",
+                "flex": 0.8,
+                "minWidth": 120
+              },
+              {
+                "field": "valor",
+                "headerName": "Valor",
+                "type": "number",
+                "flex": 0.8,
+                "minWidth": 120
+              },
+              {
+                "field": "responsable",
+                "headerName": "Responsable",
+                "flex": 0.8,
+                "minWidth": 120
+              }
+            ],
+            "idCampo": "icliente",
+            "buscador": "Buscar por nombre, organización, correo…",
+            "vacio": {
+              "icono": "mdi:account-search-outline",
+              "titulo": "Sin clientes",
+              "texto": "No hay clientes para mostrar con este filtro."
+            },
+            "porPagina": 25,
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": false,
+            "filas": [
+              {
+                "icliente": 1,
+                "iempresa": 1,
+                "nombre": "Juan Pérez",
+                "organizacion": "Tech Titans S.A.",
+                "email": "juan@tech.test",
+                "etapa": "Contacto",
+                "valor": 5200,
+                "responsable": "carla",
+                "id": 1,
+                "etapaClave": "contacto"
+              },
+              {
+                "icliente": 2,
+                "iempresa": 1,
+                "nombre": "Pedro Sánchez",
+                "organizacion": "Global Finance",
+                "email": "pedro@global.test",
+                "etapa": "Propuesta",
+                "valor": 7500,
+                "responsable": "carla",
+                "id": 2,
+                "etapaClave": "propuesta"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": ""
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
         }
       ]
     }

@@ -4,12 +4,40 @@
     "file": "../../src/js/components/av/av-app.json"
   },
   {
+    "tag": "av-link",
+    "file": "../../src/js/components/av/av-link.json"
+  },
+  {
+    "tag": "av-boton-enlace",
+    "file": "../../src/js/components/av/av-boton-enlace.json"
+  },
+  {
+    "tag": "av-menu-lateral",
+    "file": "../../src/js/components/av/av-menu-lateral.json"
+  },
+  {
+    "tag": "av-pestanas",
+    "file": "../../src/js/components/av/av-pestanas.json"
+  },
+  {
+    "tag": "av-migas",
+    "file": "../../src/js/components/av/av-migas.json"
+  },
+  {
+    "tag": "av-outlet",
+    "file": "../../src/js/components/av/av-outlet.json"
+  },
+  {
     "tag": "av-logo",
     "file": "../../src/js/components/av/av-logo.json"
   },
   {
     "tag": "av-escena",
     "file": "../../src/js/components/av/av-escena.json"
+  },
+  {
+    "tag": "av-grafica",
+    "file": "../../src/js/components/av/av-grafica.json"
   },
   {
     "tag": "av-hero",
@@ -34,10 +62,6 @@
   {
     "tag": "av-inicio",
     "file": "../inicio/components/av-inicio.json"
-  },
-  {
-    "tag": "av-credenciales-demo",
-    "file": "../acceso/components/av-credenciales-demo.json"
   },
   {
     "tag": "av-acceso",
@@ -172,10 +196,6 @@
     "file": "../crm/components/av-embudo.json"
   },
   {
-    "tag": "av-clientes-grid",
-    "file": "../crm/components/av-clientes-grid.json"
-  },
-  {
     "tag": "av-cliente-form",
     "file": "../crm/components/av-cliente-form.json"
   },
@@ -256,8 +276,8 @@
     "file": "../finanzas/components/av-conversor.json"
   },
   {
-    "tag": "av-finanzas-tabla",
-    "file": "../finanzas/components/av-finanzas-tabla.json"
+    "tag": "av-finanzas-hoja",
+    "file": "../finanzas/components/av-finanzas-hoja.json"
   },
   {
     "tag": "av-transaccion-form",
@@ -274,10 +294,6 @@
   {
     "tag": "av-stock-alertas",
     "file": "../inventario/components/av-stock-alertas.json"
-  },
-  {
-    "tag": "av-inventario-tabla",
-    "file": "../inventario/components/av-inventario-tabla.json"
   },
   {
     "tag": "av-producto-form",
@@ -308,10 +324,6 @@
     "file": "../rrhh/components/av-asistencia-dia.json"
   },
   {
-    "tag": "av-rrhh-tabla",
-    "file": "../rrhh/components/av-rrhh-tabla.json"
-  },
-  {
     "tag": "av-solicitudes",
     "file": "../rrhh/components/av-solicitudes.json"
   },
@@ -332,8 +344,16 @@
     "file": "../../src/js/components/av/av-perfil-selector.json"
   },
   {
+    "tag": "av-perfiles-lista",
+    "file": "../../src/js/components/av/av-perfiles-lista.json"
+  },
+  {
     "tag": "av-perfiles-tabla",
     "file": "../../src/js/components/av/av-perfiles-tabla.json"
+  },
+  {
+    "tag": "av-tabla",
+    "file": "../../src/js/components/av/av-tabla.json"
   },
   {
     "tag": "av-chat-tema",

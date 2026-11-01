@@ -9,7 +9,6 @@ import type { AvEquiposProps, Equipo } from '../../../src/js/consts/schemas/orga
 import { ROLES_EQUIPO } from '../../../src/js/consts/schemas/organizacion.schemas.js';
 import { candidatos, colorEquipo, etiquetaRol, nombreDe } from '../utils/organizacion.js';
 
-type ConProps = HTMLElement & { props: Record<string, unknown> };
 type Campo = HTMLElement & { value: string };
 type Dialogo = HTMLElement & { open: boolean; show(): void; hide(): void };
 
@@ -45,13 +44,13 @@ const AvEquipos = crearComponente<AvEquiposProps>(import.meta.url, 'av-equipos',
     <section class="equipos" part="equipos">
       <div class="barra">
         <strong class="titulo"><iswc-icon icon="mdi:account-multiple-outline"></iswc-icon> Equipos <iswc-badge color="neutral" pill>${props.items.length}</iswc-badge></strong>
-        ${props.puedeGestionar ? html`<iswc-button id="nuevo" color="brand" oniswc-click=${() => abrirForm(null)}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nuevo equipo</iswc-button>` : null}
+        ${props.puedeGestionar ? html`<iswc-button variant="compact" id="nuevo" color="brand" oniswc-click=${() => abrirForm(null)}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nuevo equipo</iswc-button>` : null}
       </div>
-      ${props.error ? html`<iswc-callout tone="danger">${props.error}</iswc-callout>` : null}
+      ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
       ${props.cargando
-        ? html`<iswc-empty-state id="cargando"></iswc-empty-state>`
+        ? html`<iswc-empty-state estado="cargando"></iswc-empty-state>`
         : props.items.length === 0
-        ? html`<iswc-empty-state id="vacio">${props.puedeGestionar ? html`<iswc-button color="brand" oniswc-click=${() => abrirForm(null)}>Crear el primero</iswc-button>` : null}</iswc-empty-state>`
+        ? html`<iswc-empty-state icono="mdi:account-multiple-outline" titulo="Sin equipos" texto="Crea equipos para agrupar canales y proyectos.">${props.puedeGestionar ? html`<iswc-button variant="compact" color="brand" oniswc-click=${() => abrirForm(null)}>Crear el primero</iswc-button>` : null}</iswc-empty-state>`
         : html`<div class="rejilla" part="rejilla">
             ${props.items.map((e, i) => {
               const libres = candidatos(props.miembros, e.integrantes);
@@ -60,11 +59,11 @@ const AvEquipos = crearComponente<AvEquiposProps>(import.meta.url, 'av-equipos',
                   <strong slot="header" class="cabeza"><span class="punto"></span>${e.nombre}</strong>
                   ${props.puedeGestionar
                     ? html`<span slot="header-actions" class="acciones">
-                        <iswc-button variant="plain" color="neutral" title="Editar" oniswc-click=${() => abrirForm(e)}><iswc-icon icon="mdi:pencil-outline"></iswc-icon></iswc-button>
-                        <iswc-button id=${`del-${i}`} variant="plain" color="danger" title="Eliminar"><iswc-icon icon="mdi:delete-outline"></iswc-icon></iswc-button>
+                        <iswc-button variant="plain compact" color="neutral" title="Editar" oniswc-click=${() => abrirForm(e)}><iswc-icon icon="mdi:pencil-outline"></iswc-icon></iswc-button>
+                        <iswc-button id=${`del-${i}`} variant="plain compact" color="danger" title="Eliminar"><iswc-icon icon="mdi:delete-outline"></iswc-icon></iswc-button>
                         <iswc-popconfirm for=${`del-${i}`} message=${`¿Eliminar el equipo ${e.nombre}?`} oniswc-popconfirm-confirm=${() => emitir(host, 'av-equipo-eliminar', { iequipo: e.iequipo })}>
-                          <iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button>
-                          <iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button>
+                          <iswc-button variant="compact" slot="confirm" color="danger">Sí, eliminar</iswc-button>
+                          <iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button>
                         </iswc-popconfirm>
                       </span>`
                     : null}
@@ -73,9 +72,9 @@ const AvEquipos = crearComponente<AvEquiposProps>(import.meta.url, 'av-equipos',
                     ${e.integrantes.length === 0 ? html`<li class="nadie">Sin integrantes</li>` : null}
                     ${e.integrantes.map((it) => html`
                       <li class="integrante">
-                        <iswc-person class="persona" data-iusuario=${it.iusuario}></iswc-person>
+                        <iswc-person class="persona" usuario=${it.iusuario} nombre=${it.usuario?.nombre ?? ''} detalle=${etiquetaRol(it.rol)}></iswc-person>
                         ${it.rol === 'lider' ? html`<iswc-tag color="brand" pill>${etiquetaRol('lider')}</iswc-tag>` : null}
-                        ${props.puedeGestionar ? html`<iswc-button variant="plain" color="neutral" class="quitar" title=${`Quitar a ${nombreDe(it)}`} oniswc-click=${() => emitir(host, 'av-integrante-quitar', { iequipo: e.iequipo, iusuario: it.iusuario })}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>` : null}
+                        ${props.puedeGestionar ? html`<iswc-button variant="plain compact" color="neutral" class="quitar" title=${`Quitar a ${nombreDe(it)}`} oniswc-click=${() => emitir(host, 'av-integrante-quitar', { iequipo: e.iequipo, iusuario: it.iusuario })}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>` : null}
                       </li>
                     `)}
                   </ul>
@@ -83,7 +82,7 @@ const AvEquipos = crearComponente<AvEquiposProps>(import.meta.url, 'av-equipos',
                     ? html`<div slot="footer" class="agregar">
                         <iswc-select id=${`cand-${i}`} placeholder="Agregar miembro" aria-label="Miembro a agregar">${libres.map((m) => html`<iswc-option value=${m.iusuario}>${nombreDe(m)}</iswc-option>`)}</iswc-select>
                         <iswc-select id=${`rolc-${i}`} value="integrante" aria-label="Rol en el equipo">${ROLES_EQUIPO.map((r) => html`<iswc-option value=${r}>${etiquetaRol(r)}</iswc-option>`)}</iswc-select>
-                        <iswc-button variant="outlined" color="brand" oniswc-click=${() => agregar(e, i)}><iswc-icon icon="mdi:plus"></iswc-icon></iswc-button>
+                        <iswc-button variant="outlined compact" color="brand" oniswc-click=${() => agregar(e, i)}><iswc-icon icon="mdi:plus"></iswc-icon></iswc-button>
                       </div>`
                     : null}
                 </iswc-card>
@@ -96,22 +95,13 @@ const AvEquipos = crearComponente<AvEquiposProps>(import.meta.url, 'av-equipos',
           <iswc-input id="f-nombre" label="Nombre" required maxlength="120"></iswc-input>
           <iswc-textarea id="f-descripcion" label="Descripción" rows="2"></iswc-textarea>
           <iswc-input id="f-color" type="color" label="Color" value="#2563eb"></iswc-input>
-          <iswc-callout id="f-aviso" tone="danger" hidden></iswc-callout>
+          <iswc-callout id="f-aviso" color="danger" hidden></iswc-callout>
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${() => (root.querySelector('#form') as Dialogo).hide()}>Cancelar</iswc-button>
-        <iswc-button slot="footer" id="f-guardar" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}>Guardar</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${() => (root.querySelector('#form') as Dialogo).hide()}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" id="f-guardar" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}>Guardar</iswc-button>
       </iswc-dialog>
     </section>
   `);
-  for (const p of root.querySelectorAll<ConProps>('iswc-person')) {
-    const iusuario = p.dataset['iusuario'] ?? '';
-    const it = props.items.flatMap((e) => e.integrantes).find((x) => x.iusuario === iusuario);
-    p.props = { usuario: iusuario, nombre: it?.usuario?.nombre ?? null, detalle: it ? etiquetaRol(it.rol) : '' };
-  }
-  const cargando = root.querySelector('#cargando') as ConProps | null;
-  if (cargando) cargando.props = { estado: 'cargando' };
-  const vacio = root.querySelector('#vacio') as ConProps | null;
-  if (vacio) vacio.props = { icono: 'mdi:account-multiple-outline', titulo: 'Sin equipos', texto: 'Crea equipos para agrupar canales y proyectos.' };
 });
 
 define('av-equipos', AvEquipos);

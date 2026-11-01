@@ -11,11 +11,11 @@ const AvChatReacciones = crearComponente<AvChatReaccionesProps>(import.meta.url,
   root.append(html`
     <div class="reacciones" part="reacciones" role="group" data-propio=${props.propio ? '1' : '0'}>
       ${props.reacciones.map((r) => html`
-        <button class="reaccion" type="button" data-mia=${r.mia ? '1' : '0'} aria-pressed=${r.mia ? 'true' : 'false'}
+        <iswc-button class="reaccion" variant="row" color=${r.mia ? 'brand' : 'neutral'} shape="pill" data-mia=${r.mia ? '1' : '0'} aria-pressed=${r.mia ? 'true' : 'false'}
           title=${r.nombres.join(', ')} aria-label=${`${r.emoji} ${r.n}: ${r.nombres.join(', ')}`}
           onclick=${() => emitir(host, 'av-chat-reaccionar', { imensaje: props.ref, emoji: r.mia ? null : r.emoji })}>
           <span class="emoji">${r.emoji}</span>${r.n > 1 ? html`<span class="n">${r.n}</span>` : null}
-        </button>`)}
+        </iswc-button>`)}
     </div>
   `);
 });

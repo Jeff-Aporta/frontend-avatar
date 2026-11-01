@@ -10,10 +10,11 @@
 .pagina {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   height: 100%;
-  max-width: 56em;
+  max-width: var(--av-pagina-ancho, 56em);
   margin: 0 auto;
-  padding: t.esp(5) t.esp(5) 0;
+  padding: var(--av-pagina-relleno, t.esp(5) t.esp(5) 0);
   gap: t.esp(3);
 }
 
@@ -73,4 +74,10 @@
   .pagina {
     padding: t.esp(3) t.esp(3) 0;
   }
+}
+
+/* En layout completo el contenido va al borde; los títulos conservan aire. */
+iswc-page-header,
+iswc-stat-group {
+  margin-inline: var(--av-cabecera-relleno, 0);
 }

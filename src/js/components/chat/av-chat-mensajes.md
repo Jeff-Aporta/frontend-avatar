@@ -12,7 +12,7 @@ Mensajes agrupados con burbujas reconciliadas (sin parpadeo).
 ```
 <av-chat-mensajes>
   #shadow-root
-    <section part="conversacion"><button class="fijado"> <div part="scroll"><div class="items" role="log"><div class="dia"> <div class="noleidos"> <av-chat-burbuja>…</div></div> <button class="bajar"> <div class="anuncio" aria-live> <iswc-dropdown class="menu"></section>
+    <section part="conversacion"><iswc-button class="fijado"> <div part="scroll"><div class="items" role="log"><div class="dia"> <div class="noleidos"> <av-chat-burbuja>…</div></div> <iswc-button class="bajar"> <div class="anuncio" aria-live> <iswc-dropdown class="menu"></section>
 ```
 
 ## Atributos observados

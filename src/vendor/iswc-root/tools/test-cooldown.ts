@@ -1,4 +1,4 @@
-// @vendor iswc-root@42322344cbaa25967d44361c99b78c963d0f8543 dist/cdn/vendor-distributions/shared/testing/test-cooldown.ts
+// @vendor iswc-root@6c141b86cc2dd38a7e792382ccf773b0ead4fce9 dist/cdn/vendor-distributions/shared/testing/test-cooldown.ts
 // No editar: se cambia en el kit y se descarga con `deno task vendor:iswc`.
 // @vendor 2026-10-14T01:16:34.698Z Jeff-Aporta/is-webcomponents@main src/vendor-distributions/shared/testing/test-cooldown.ts
 // @doc https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@main/skills/iswc-foundation/references/07-pruebas-y-gate.md

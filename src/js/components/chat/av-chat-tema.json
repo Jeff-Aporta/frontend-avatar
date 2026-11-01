@@ -35,7 +35,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la configuración de un chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para el tema de la app: eso es la paleta del pie.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>En la configuración de un chat.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para el tema de la app: eso es la paleta del pie.</iswc-callout>"
         }
       ]
     }

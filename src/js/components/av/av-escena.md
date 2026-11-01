@@ -31,3 +31,17 @@ Las piezas flotan, se mecen, giran o laten; con `prefers-reduced-motion` quedan 
 | --- | --- | --- | --- |
 | `escena` | `string` | `bienvenida` | bienvenida, acceso, chat, canales, asistente, proyectos, crm, finanzas, inventario, rrhh, correos, organizacion, logros, vacio. |
 | `etiqueta` | `string` | `''` | Texto alternativo; vacía, la escena es decorativa. |
+
+## Eventos
+
+<!-- exclude: Eventos -->
+
+## Slots
+
+<!-- exclude: Slots -->
+
+## Ejemplos
+
+```html
+<av-escena escena="acceso" etiqueta="Persona entrando a la app"></av-escena>
+```

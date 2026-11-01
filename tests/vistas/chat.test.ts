@@ -381,7 +381,7 @@ export default definirPruebas([
       await esperar();
       eq('no le llega nada de ese chat', vistos.filter((e) => e.chat === 'd-ana-beto' || e.mensaje?.chat === 'd-ana-beto').length, 0);
       eq('ni el historial', (await elena.historial('d-ana-beto')).mensajes.length, 0);
-      eq('ni la búsqueda', (await elena.buscar('privado', 'texto')).length, 0);
+      eq('ni la búsqueda', (await elena.buscar('privado')).length, 0);
       ana.cerrar();
       elena.cerrar();
     },
@@ -391,12 +391,12 @@ export default definirPruebas([
     categoria: 'what',
     async correr({ expect }) {
       const ana = crearBackendDemo({ yo: 'ana', vivo: false, almacen: null, crearCanal: () => null });
-      const texto = await ana.buscar('presupuesto', 'texto');
+      const texto = await ana.buscar('presupuesto');
       expect('por palabra', texto.some((r: { texto: string }) => r.texto.includes('presupuesto')));
-      const sem = await ana.buscar('reunión del lunes', 'semantica');
+      const sem = await ana.buscar('reunión del lunes');
       expect('por significado encuentra «nos vemos el lunes»', sem.some((r: { texto: string }) => /vemos el lunes/.test(r.texto)));
       expect('similitud: sinónimos suman', similitudLexica('reunión', 'nos vemos mañana') > 0 && similitudLexica('reunión', 'factura pagada') === 0);
-      const enChat = await ana.buscar('lunes', 'texto', 'p-general');
+      const enChat = await ana.buscar('lunes', 'p-general');
       expect('acotada a un chat', enChat.every((r: { chat: string }) => r.chat === 'p-general'));
       ana.cerrar();
     },

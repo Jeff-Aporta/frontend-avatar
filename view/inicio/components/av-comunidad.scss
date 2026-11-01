@@ -1,6 +1,10 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-comunidad — constelación de personas en órbita + texto y cifras. Todo en em: escala con el font-size del host. */
 :host {
   @include m.host-bloque;

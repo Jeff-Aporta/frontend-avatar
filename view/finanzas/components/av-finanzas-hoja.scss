@@ -1,0 +1,19 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-finanzas-hoja — nota y hoja de cálculo a todo el ancho. */
+:host {
+  @include m.host-bloque;
+}
+
+.nota {
+  @include m.rotulo(0.6);
+  margin: 0 0 t.esp(3);
+  font-size: 0.8em;
+}
+
+.hoja {
+  display: block;
+  block-size: 34em;
+  border-radius: var(--av-radio);
+}

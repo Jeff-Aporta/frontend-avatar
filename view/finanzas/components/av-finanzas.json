@@ -11,7 +11,7 @@
     {
       "id": "intro",
       "title": "&lt;av-finanzas&gt;",
-      "lede": "La vista de finanzas completa (necesita sesión y empresa activa).",
+      "lede": "La vista de finanzas completa. Sin sesión y empresa activa muestra su estado vacío; abajo, una pieza con datos de ejemplo.",
       "blocks": [
         {
           "kind": "demo",
@@ -38,7 +38,116 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta finanzas (la monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta finanzas (la monta av-app).</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    },
+    {
+      "id": "ejemplo",
+      "title": "Con datos de ejemplo",
+      "lede": "La pieza principal de la vista, sin API: los datos son fijos.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-tabla id=\"tabla-transacciones\"></av-tabla></div>",
+          "target": "#tabla-transacciones",
+          "props": {
+            "prefijo": "av-finanzas",
+            "entidad": "transacciones",
+            "columnas": [
+              {
+                "field": "fecha",
+                "headerName": "Fecha",
+                "width": 110
+              },
+              {
+                "field": "tipo",
+                "headerName": "Tipo",
+                "width": 110
+              },
+              {
+                "field": "categoria",
+                "headerName": "Categoría",
+                "flex": 0.9,
+                "minWidth": 130
+              },
+              {
+                "field": "descripcion",
+                "headerName": "Descripción",
+                "flex": 1.4,
+                "minWidth": 180
+              },
+              {
+                "field": "montoTexto",
+                "headerName": "Monto",
+                "flex": 0.9,
+                "minWidth": 140
+              },
+              {
+                "field": "estado",
+                "headerName": "Estado",
+                "width": 130
+              }
+            ],
+            "idCampo": "itransaccion",
+            "buscador": "Buscar por categoría, descripción, estado…",
+            "vacio": {
+              "icono": "mdi:swap-vertical-circle-outline",
+              "titulo": "Sin transacciones",
+              "texto": "Registra ingresos y gastos para llevar la contabilidad."
+            },
+            "cargando": false,
+            "texto": "",
+            "puedeEscribir": true,
+            "filas": [
+              {
+                "id": 5,
+                "itransaccion": 5,
+                "fecha": "2026-10-12",
+                "tipo": "Gasto",
+                "tipoClave": "gasto",
+                "categoria": "Marketing",
+                "descripcion": "Campaña redes sociales",
+                "monto": 2400000,
+                "montoTexto": "$ 2.400.000",
+                "estado": "Completada",
+                "estadoClave": "completada"
+              },
+              {
+                "id": 2,
+                "itransaccion": 2,
+                "fecha": "2026-10-05",
+                "tipo": "Ingreso",
+                "tipoClave": "ingreso",
+                "categoria": "Licencias",
+                "descripcion": "Licencias anuales",
+                "monto": 3200,
+                "montoTexto": "US$ 3.200,00",
+                "estado": "Completada",
+                "estadoClave": "completada"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "text",
+              "prop": "props:texto",
+              "label": "texto",
+              "default": ""
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeEscribir",
+              "label": "puedeEscribir",
+              "default": true
+            }
+          ]
         }
       ]
     }

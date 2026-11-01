@@ -31,12 +31,12 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En el redactor y en «más reacciones».</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para íconos de interfaz: iswc-icon.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>En el redactor y en «más reacciones».</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para íconos de interfaz: iswc-icon.</iswc-callout>"
         },
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-emoji-picker</strong>Selector de emojis sin dependencias. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-emoji-picker</strong>Selector de emojis sin dependencias. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

@@ -2,6 +2,7 @@
  * crm.ts — dominio de la vista `crm` (sin DOM): totales por etapa, filtro, columnas del grid, color por etapa y formato
  * de moneda. Los componentes solo pintan lo que esto devuelve.
  */
+import type { ColumnaTabla, ConfigTabla } from '../../../src/js/consts/schemas/componentes.schemas.js';
 import { type Cliente, ETAPAS_CRM, type EtapaTotal } from '../../../src/js/consts/schemas/crm.schemas.js';
 
 /** Etiquetas legibles por etapa. */
@@ -37,11 +38,8 @@ export function valorPipeline(clientes: Cliente[]): number {
   return clientes.filter((c) => c.etapa !== 'perdido').reduce((s, c) => s + Number(c.valor ?? 0), 0);
 }
 
-/** Columna del `iswc-data-grid` (lo que este grid usa del contrato del kit). */
-export type ColumnaGrid = { field: string; headerName: string; type?: string; flex?: number; minWidth?: number; valueFormatter?: (p: { value: unknown }) => string };
-
 /** Columnas del grid de clientes, en orden. */
-export function columnasClientes(): ColumnaGrid[] {
+export function columnasClientes(): ColumnaTabla[] {
   return [
     { field: 'nombre', headerName: 'Nombre', flex: 1.2, minWidth: 160 },
     { field: 'organizacion', headerName: 'Organización', flex: 1.2, minWidth: 160 },
@@ -51,6 +49,14 @@ export function columnasClientes(): ColumnaGrid[] {
     { field: 'valor', headerName: 'Valor', type: 'number', flex: 0.8, minWidth: 120, valueFormatter: (p) => moneda(Number(p.value ?? 0)) },
     { field: 'responsable', headerName: 'Responsable', flex: 0.8, minWidth: 120 },
   ];
+}
+
+/** Campos de búsqueda de un cliente. */
+export const camposCliente = (c: Cliente): unknown[] => [c.nombre, c.organizacion, c.email, c.telefono, ETAPA_LABEL[c.etapa], c.responsable];
+
+/** Configuración de `<av-tabla>` para los clientes. */
+export function tablaClientes(): ConfigTabla {
+  return { prefijo: 'av-crm', entidad: 'clientes', columnas: columnasClientes(), idCampo: 'icliente', buscador: 'Buscar por nombre, organización, correo…', vacio: { icono: 'mdi:account-search-outline', titulo: 'Sin clientes', texto: 'No hay clientes para mostrar con este filtro.' }, porPagina: 25 };
 }
 
 /** Filas del grid (JSON plano; etapa legible). */

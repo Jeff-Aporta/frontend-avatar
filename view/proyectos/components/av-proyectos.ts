@@ -8,10 +8,11 @@ import { z } from '../../../src/js/base/zod.js';
 import { crearComponente, define, html, avisar } from '../../../src/js/base/componente.js';
 import { TableroSchema, type TareaTablero } from '../../../src/js/consts/schemas/api.schemas.js';
 import { type AvProyectosProps, type Columna, ColumnaSchema, type Comentario, ComentarioSchema, type Equipo, EquipoSchema, type Miembro, MiembroSchema, type Proyecto, type ProyectoDatos, ProyectoSchema, type TareaDatos } from '../../../src/js/consts/schemas/proyectos.schemas.js';
+import { sinEmpresa } from '../../../src/js/consts/estados.js';
 import { controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
-import { ir, tomarIntencion } from '../../../src/js/core/router.js';
+import { ir, redirigir, tomarIntencion } from '../../../src/js/core/router.js';
 import { columnasPorDefecto } from '../utils/tareas.js';
 import './av-tablero.js';
 import './av-tarea-form.js';
@@ -169,9 +170,9 @@ const AvProyectos = crearComponente<AvProyectosProps>(import.meta.url, 'av-proye
       onav-proyecto-guardar=${alGuardarProyecto} onav-proyecto-form-cerrar=${() => ($('proyecto-form').props = { abierto: false })} onav-proyecto-form-error=${(e: Event) => avisar((e as CustomEvent<{ mensaje: string }>).detail.mensaje, 'warning')}>
       <iswc-page-header id="cabecera">
         <iswc-select slot="acciones" id="selector" class="selector" aria-label="Proyecto" placeholder="Elige un proyecto" oniswc-change=${alElegir}></iswc-select>
-        <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
-        ${puedeTareas && iproyecto ? html`<iswc-button slot="acciones" color="brand" oniswc-click=${() => ($('tarea-form').props = { abierto: true, tarea: null, icolumna: null, iproyecto, columnas, miembros, error: '' })}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nueva tarea</iswc-button>` : null}
-        ${puedeGestionar ? html`<iswc-button slot="acciones" variant="outlined" color="brand" oniswc-click=${() => ($('proyecto-form').props = { abierto: true, equipos, error: '' })}><iswc-icon slot="start" icon="mdi:folder-plus-outline"></iswc-icon>Nuevo proyecto</iswc-button>` : null}
+        <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
+        ${puedeTareas && iproyecto ? html`<iswc-button variant="compact" slot="acciones" color="brand" oniswc-click=${() => ($('tarea-form').props = { abierto: true, tarea: null, icolumna: null, iproyecto, columnas, miembros, error: '' })}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nueva tarea</iswc-button>` : null}
+        ${puedeGestionar ? html`<iswc-button slot="acciones" variant="outlined compact" color="brand" oniswc-click=${() => ($('proyecto-form').props = { abierto: true, equipos, error: '' })}><iswc-icon slot="start" icon="mdi:folder-plus-outline"></iswc-icon>Nuevo proyecto</iswc-button>` : null}
       </iswc-page-header>
       ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`<iswc-empty-state id="sin-proyectos" hidden></iswc-empty-state><av-tablero id="tablero"></av-tablero>`}
       <av-tarea-form id="tarea-form"></av-tarea-form>
@@ -180,9 +181,9 @@ const AvProyectos = crearComponente<AvProyectosProps>(import.meta.url, 'av-proye
     </div>
   `);
   $('cabecera').props = { titulo: 'Proyectos', subtitulo: 'Tableros kanban y tickets de la empresa', icono: 'mdi:view-column-outline' };
-  const sinEmpresa = root.querySelector('#sin-empresa') as ConProps | null;
-  if (sinEmpresa) {
-    sinEmpresa.props = { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Elige una empresa en la barra para ver sus proyectos.' };
+  const elSinEmpresa = root.querySelector('#sin-empresa') as ConProps | null;
+  if (elSinEmpresa) {
+    elSinEmpresa.props = sinEmpresa('sus proyectos');
     return;
   }
   $('sin-proyectos').props = { icono: 'mdi:view-column-outline', titulo: 'Aún no hay proyectos', texto: puedeGestionar ? 'Crea el primero con «Nuevo proyecto».' : 'Pide a un gestor que cree el primer proyecto.' };
@@ -216,7 +217,7 @@ const AvProyectos = crearComponente<AvProyectosProps>(import.meta.url, 'av-proye
       return;
     }
     if (!iproyecto || !proyectos.some((p) => p.iproyecto === iproyecto)) {
-      ir('proyectos', proyectos[0]!.iproyecto);
+      redirigir('proyectos', proyectos[0]!.iproyecto);
       return;
     }
     sel.value = String(iproyecto);

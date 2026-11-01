@@ -13,8 +13,8 @@ Barras del mes anterior contra el actual (ingresos, gastos, beneficio) y dona de
 <av-finanzas-grafica>
   #shadow-root
     <div part="rejilla">
-      <iswc-card part="tarjeta"><strong slot="header"> <iswc-bar-chart id="barras"> | <iswc-empty-state></iswc-card>
-      <iswc-card part="tarjeta"><strong slot="header"> <iswc-doughnut-chart id="dona"> | <iswc-empty-state></iswc-card>
+      <av-grafica> barras
+      <av-grafica> dona
 ```
 
 ## Atributos observados

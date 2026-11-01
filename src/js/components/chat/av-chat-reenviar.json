@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><av-chat-reenviar id=\"x\"></av-chat-reenviar>",
+          "html": "<iswc-callout color=\"brand\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><av-chat-reenviar id=\"x\"></av-chat-reenviar>",
           "target": "#x",
           "props": {
             "ref": "m1",
@@ -71,12 +71,12 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde el menú de un mensaje.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para compartir fuera de la app: iswc-share-button.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Desde el menú de un mensaje.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para compartir fuera de la app: iswc-share-button.</iswc-callout>"
         },
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-forward-dialog</strong>Diálogo de reenvío genérico. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-forward-dialog</strong>Diálogo de reenvío genérico. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

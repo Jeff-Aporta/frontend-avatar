@@ -1,0 +1,7 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-outlet — el contenido de la vista lo coloca `.vista` en av-app. */
+:host {
+  display: block;
+}

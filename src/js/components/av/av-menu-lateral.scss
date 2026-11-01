@@ -1,0 +1,13 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-menu-lateral — ocupa la columna del layout. */
+:host {
+  display: block;
+  block-size: 100%;
+  min-block-size: 0;
+}
+
+iswc-doc-index {
+  block-size: 100%;
+}

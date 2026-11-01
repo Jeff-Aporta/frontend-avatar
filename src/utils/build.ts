@@ -31,6 +31,7 @@ const VIEW = join(ROOT, 'view');
 const STAGING = join(ROOT, '.tmp-scss');
 const OUT = join(ROOT, 'dist', 'cdn');
 const ZOD = join(SRC_JS, 'base', 'zod.ts');
+const EMPAQUETADOS = new Set([ZOD]);
 const PLANOS = new Set([join(SRC_JS, 'boot.ts')]);
 const SELLO = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 const DEFINE = { __APP_BUILD__: JSON.stringify(SELLO) };
@@ -67,7 +68,7 @@ async function compilar(): Promise<number> {
     }
     const barril = basename(f) === 'all.ts';
     const r = await esbuild.build({
-      entryPoints: [f], bundle: barril || f === ZOD, write: false, format: 'esm', target: 'es2022', minify: true, define: DEFINE, ...(barril || f === ZOD ? { external: ['@avatar/vendor'] } : {}),
+      entryPoints: [f], bundle: barril || EMPAQUETADOS.has(f), write: false, format: 'esm', target: 'es2022', minify: true, define: DEFINE, ...(barril || EMPAQUETADOS.has(f) ? { external: ['@avatar/vendor'] } : {}),
     });
     // el barril de la app (components/<prefijo>/all.ts) es `all.min.js`; los de vistas y familias quedan junto a su carpeta
     const destino = barril && f === join(SRC_JS, 'components', PREFIJO, 'all.ts') ? join(OUT, 'all.min.js') : publicada(f, barril ? '.min.js' : '.js');

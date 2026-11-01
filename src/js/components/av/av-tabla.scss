@@ -1,0 +1,40 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-tabla — buscador con conteo y grid con alto mínimo. */
+:host {
+  @include m.host-bloque;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: t.esp(3);
+  margin-bottom: t.esp(3);
+
+  .buscador {
+    flex: 1;
+    max-width: 30em;
+  }
+
+  .conteo {
+    @include m.rotulo(0.6);
+    font-size: 0.7em;
+    white-space: nowrap;
+  }
+}
+
+.grid {
+  display: block;
+  min-height: 22em;
+  border-radius: var(--av-radio);
+}
+
+.vacio {
+  padding: t.esp(8) 0;
+}
+
+.vacio[hidden],
+.grid[hidden] {
+  display: none;
+}

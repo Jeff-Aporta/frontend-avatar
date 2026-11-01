@@ -38,7 +38,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Marca de la barra, del pie y de pantallas de bienvenida. Cambia de color con la paleta.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como favicon: ahí va assets/img/logo.svg.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Marca de la barra, del pie y de pantallas de bienvenida. Cambia de color con la paleta.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como favicon: ahí va assets/img/logo.svg.</iswc-callout>"
         }
       ]
     }

@@ -7,9 +7,9 @@
 }
 
 .pagina {
-  max-width: 80em;
+  max-width: var(--av-pagina-ancho, 80em);
   margin: 0 auto;
-  padding: t.esp(5);
+  padding: var(--av-pagina-relleno, t.esp(5));
   display: grid;
   gap: t.esp(5);
 }

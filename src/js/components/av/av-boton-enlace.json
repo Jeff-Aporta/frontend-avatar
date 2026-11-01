@@ -1,0 +1,35 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-boton-enlace",
+  "category": "transversal",
+  "navTitle": "Botón enlace",
+  "title": "&lt;av-boton-enlace&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-boton-enlace",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-boton-enlace&gt;",
+      "lede": "Botón del kit que navega con URL real y sin recarga.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-boton-enlace id=\"d\" vista=\"acceso\">Entrar</av-boton-enlace></div>",
+          "target": "#d",
+          "props": {
+            "vista": "acceso"
+          },
+          "controls": [
+            {
+              "control": "text",
+              "prop": "props:vista",
+              "label": "vista",
+              "default": "acceso"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

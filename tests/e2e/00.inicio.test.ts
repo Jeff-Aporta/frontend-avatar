@@ -31,12 +31,12 @@ export default definirPruebas([
     async correr({ eq }) {
       await esperar(s.page, () => {
         const v = document.querySelector('av-app')?.shadowRoot?.querySelector('.vista')?.firstElementChild;
-        return v?.localName === 'av-inicio' && !!v.shadowRoot?.querySelector('av-hero')?.shadowRoot?.querySelector('h1');
+        return v?.localName === 'av-inicio' && !!v.shadowRoot?.querySelector('av-hero')?.shadowRoot?.querySelector('iswc-heading');
       }, 20_000);
       const datos = await s.page.evaluate(() => {
         const v = document.querySelector('av-app')!.shadowRoot!.querySelector('.vista')!.firstElementChild!.shadowRoot!;
         return {
-          titulo: v.querySelector('av-hero')!.shadowRoot!.querySelector('h1')!.textContent!.trim(),
+          titulo: v.querySelector('av-hero')!.shadowRoot!.querySelector('iswc-heading')!.textContent!.trim(),
           caracteristicas: v.querySelector('#caracteristicas')!.shadowRoot!.querySelectorAll('.item').length,
           planes: v.querySelector('av-precios')!.shadowRoot!.querySelectorAll('iswc-card').length,
         };

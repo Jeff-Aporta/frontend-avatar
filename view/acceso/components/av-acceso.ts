@@ -1,18 +1,16 @@
 /**
- * <av-acceso> — shell del login: `<iswc-login>` del kit (no autentica: emite `iswc-login-submit`) + las cuentas de prueba.
+ * <av-acceso> — shell del login, dos pestañas del kit: «Entrar» con `<iswc-login compact>` (no autentica: emite
+ * `iswc-login-submit`) y «Entrar como…» con `<av-perfiles-lista>`, la misma lista de la barra.
  * Al enviar llama `iniciarSesion` (POST usuarios/login vía el plugin identity de DER) y navega al panel.
- * «Usar» en las credenciales demo rellena el formulario del kit a través de sus campos (`iswc-input` internos).
  */
 import { crearComponente, define, html } from '../../../src/js/base/componente.js';
 import type { AvAccesoProps } from '../../../src/js/consts/schemas/acceso.schemas.js';
 import { iniciarSesion, mensajeDe, perfilesPrueba } from '../../../src/js/core/api.js';
 import { ir, VISTA_SESION } from '../../../src/js/core/router.js';
-import { credencialesDe, mensajeAcceso } from '../utils/demo.js';
-import './av-credenciales-demo.js';
+import { mensajeAcceso } from '../utils/demo.js';
 
 type LoginEl = HTMLElement & { busy: boolean; reset(): void; focus(): void };
 type Host = HTMLElement & { props: Partial<AvAccesoProps> };
-type ConProps = HTMLElement & { props: Record<string, unknown> };
 
 /** Escribe usuario y contraseña en los campos internos del `<iswc-login>` (misma técnica que un gestor de contraseñas). */
 export function rellenar(login: HTMLElement, usuario: string, password: string): void {
@@ -45,20 +43,19 @@ const AvAcceso = crearComponente<AvAccesoProps>(
         h.props = { ocupado: false };
       }
     };
-    const usar = (e: Event) => {
-      const { usuario, password } = (e as CustomEvent<{ usuario: string; password: string }>).detail;
-      const login = root.querySelector('#login') as LoginEl | null;
-      if (login) {
-        rellenar(login, usuario, password);
-        login.focus();
-      }
-    };
     root.append(html`
       <div class="pagina" part="pagina">
-        <section class="panel" part="panel">
-          <iswc-login id="login" heading="Entrar a Avatar" provider="Avatar" password-toggle ?busy=${props.ocupado} error=${props.error} oniswc-login-submit=${enviar}></iswc-login>
-          <av-credenciales-demo id="demo" onav-credencial-elegida=${usar}></av-credenciales-demo>
-        </section>
+        <iswc-card class="panel" part="panel" variant="filled-outlined">
+          <strong slot="header">Entrar a Avatar</strong>
+          <iswc-tab-group active="entrar" without-scroll-controls>
+            <iswc-tab slot="nav" panel="entrar">Entrar</iswc-tab>
+            <iswc-tab slot="nav" panel="como">Entrar como…</iswc-tab>
+            <iswc-tab-panel name="entrar">
+              <iswc-login id="login" compact provider="Avatar" password-toggle ?busy=${props.ocupado} error=${props.error} oniswc-login-submit=${enviar}></iswc-login>
+            </iswc-tab-panel>
+            <iswc-tab-panel name="como"><av-perfiles-lista></av-perfiles-lista></iswc-tab-panel>
+          </iswc-tab-group>
+        </iswc-card>
         <aside class="lado" part="lado" aria-hidden="true">
           <av-escena class="ilustracion" escena="acceso"></av-escena>
         </aside>
@@ -67,11 +64,9 @@ const AvAcceso = crearComponente<AvAccesoProps>(
     // Provisional para las pruebas: el formulario arranca con el primer perfil que trabaja con la empresa.
     const login = root.querySelector('#login') as LoginEl;
     void perfilesPrueba().then(async (perfiles) => {
-      const items = credencialesDe(perfiles);
-      (root.querySelector('#demo') as ConProps).props = { items };
-      const primera = items.find((c) => c.usuario === 'ana') ?? items[0];
+      const primera = perfiles.find((p) => p.iusuario === 'ana') ?? perfiles[0];
       await customElements.whenDefined('iswc-login');
-      if (primera) rellenar(login, primera.usuario, primera.password);
+      if (primera) rellenar(login, primera.iusuario, primera.pin);
     }).catch(() => undefined);
   },
   // Repintado parcial: ocupado/error solo tocan atributos del login (el formulario conserva lo escrito).

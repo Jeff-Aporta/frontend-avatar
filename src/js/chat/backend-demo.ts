@@ -17,7 +17,7 @@ import { normalizar, resumenMensaje, tipoDeMime } from './formato.js';
 import { infoLectura } from './estado.js';
 import { TEXTOS_ES, textos } from './textos.js';
 import {
-  type Adjunto, type Borrador, type Chat, ChatSchema, coincide, type EventoChat, type InfoLectura, type MensajeChat, MensajeChatSchema, type ModoBusqueda,
+  type Adjunto, type Borrador, type Chat, ChatSchema, coincide, type EventoChat, type InfoLectura, type MensajeChat, MensajeChatSchema,
   type ModoEscritura, nuevaClave, type Preferencias, type RegistroLlamada, type ResultadoBusqueda, type SenalLlamada, SenalLlamadaSchema, type UsuarioChat,
   UsuarioChatSchema,
 } from './tipos.js';
@@ -709,7 +709,7 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
       for (const s of textosSistema) sistema(chat, s);
       operar({ op: 'chat', chat: { ...c, miembros } });
     },
-    async buscar(q, modo: ModoBusqueda, chat) {
+    async buscar(q, chat) {
       const consulta = q.trim();
       if (!consulta) return [];
       const visibles = new Set(A.chats.filter((c) => ve(c) && (!chat || c.id === chat)).map((c) => c.id));
@@ -719,12 +719,10 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
       for (const m of A.mensajes) {
         if (!visibles.has(m.chat) || ocultos.has(m.clave) || m.eliminado || m.tipo === 'sistema') continue;
         const texto = m.texto || resumenMensaje(m, textos());
-        let puntaje = 0;
-        if (modo === 'texto') {
-          const base = normalizar(`${texto} ${m.adjunto?.nombre ?? ''}`);
-          puntaje = palabras.every((p) => base.includes(p)) ? 1 : 0;
-        } else puntaje = similitudLexica(consulta, texto);
-        if (puntaje >= (modo === 'texto' ? 1 : 0.34)) out.push({ chat: m.chat, ref: m.clave, autor: m.autor, ts: m.ts, texto, puntaje });
+        const base = normalizar(`${texto} ${m.adjunto?.nombre ?? ''}`);
+        // La coincidencia siempre gana a lo parecido.
+        const puntaje = palabras.every((p) => base.includes(p)) ? 2 : similitudLexica(consulta, texto);
+        if (puntaje >= 0.34) out.push({ chat: m.chat, ref: m.clave, autor: m.autor, ts: m.ts, texto, puntaje });
       }
       return out.sort((a, b) => b.puntaje - a.puntaje || (a.ts < b.ts ? 1 : -1)).slice(0, 50);
     },

@@ -1,6 +1,10 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-caracteristicas — título centrado y rejilla; dos variantes: tarjetas con velo o íconos grandes. */
 :host {
   @include m.host-bloque;

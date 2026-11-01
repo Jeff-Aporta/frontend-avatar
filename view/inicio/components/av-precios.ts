@@ -7,7 +7,7 @@ import type { AvPreciosProps } from '../../../src/js/consts/schemas/inicio.schem
 const AvPrecios = crearComponente<AvPreciosProps>(import.meta.url, 'av-precios', { planes: [] }, (root, props, host) => {
   root.append(html`
     <section class="seccion" part="seccion" aria-labelledby="t">
-      <h2 id="t" class="titulo">Planes y precios</h2>
+      <iswc-heading level="2" id="t" class="titulo">Planes y precios</iswc-heading>
       <div class="rejilla" part="rejilla">
         ${props.planes.map((p) => html`
           <iswc-card variant=${p.destacado ? 'accent' : 'outlined'} class="plan" data-destacado=${p.destacado ? '1' : '0'}>

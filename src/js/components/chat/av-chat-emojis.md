@@ -12,7 +12,7 @@ Selector de emojis.
 ```
 <av-chat-emojis>
   #shadow-root
-    <div part="selector"><iswc-input class="buscar"> <nav class="categorias"> <div class="rejilla"><section><h3> <div class="grupo"><button class="emoji">…</div></section></div></div>
+    <div part="selector"><iswc-input class="buscar"> <nav class="categorias"> <div class="rejilla"><section><h3> <div class="grupo"><iswc-button class="emoji">…</div></section></div></div>
 ```
 
 ## Atributos observados

@@ -1,6 +1,6 @@
 ---
 name: av-embudo-grafica
-description: Tarjeta con barras de clientes por etapa del CRM (iswc-bar-chart) y el valor del pipeline.
+description: Traduce los clientes del resumen a barras por etapa en av-grafica, con el valor del pipeline en la cabecera.
 ---
 
 # `<av-embudo-grafica>`
@@ -12,7 +12,8 @@ Contacto → propuesta → negociación → cerrado / perdido.
 ```
 <av-embudo-grafica>
   #shadow-root
-    <iswc-card part="tarjeta"><iswc-tag slot="header-actions">pipeline</iswc-tag><iswc-bar-chart part="grafica"> | <iswc-empty-state></iswc-card>
+    <av-grafica>
+      <iswc-tag slot="acciones">pipeline</iswc-tag>
 ```
 
 ## Atributos observados

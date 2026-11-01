@@ -97,12 +97,12 @@ const AvChatLista = crearComponente<AvChatListaProps>(
     root.append(html`
       <nav class="lista" part="lista" aria-label=${t.chats}>
         <header class="cabeza" part="cabeza">
-          <iswc-button class="atras" variant="plain" color="neutral" title=${t.volverChats} aria-label=${t.volverChats} oniswc-click=${() => emitir(host, 'av-chat-lista-filtro', { archivados: false })}><iswc-icon icon="mdi:arrow-left"></iswc-icon></iswc-button>
-          <h2 class="titulo"></h2>
+          <iswc-button class="atras" variant="plain compact" color="neutral" title=${t.volverChats} aria-label=${t.volverChats} oniswc-click=${() => emitir(host, 'av-chat-lista-filtro', { archivados: false })}><iswc-icon icon="mdi:arrow-left"></iswc-icon></iswc-button>
+          <iswc-heading class="titulo" level="2"></iswc-heading>
           <span class="acciones">
-            <iswc-button variant="plain" color="neutral" title=${t.buscarMensajes} aria-label=${t.buscarMensajes} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'busqueda' })}><iswc-icon icon="mdi:text-search"></iswc-icon></iswc-button>
-            <iswc-button variant="plain" color="neutral" title=${t.nuevoGrupo} aria-label=${t.nuevoGrupo} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'grupo' })}><iswc-icon icon="mdi:account-multiple-plus-outline"></iswc-icon></iswc-button>
-            <iswc-button class="nuevo" variant="soft" color="brand" title=${t.nuevoChat} aria-label=${t.nuevoChat} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'nuevo' })}><iswc-icon icon="mdi:message-plus-outline"></iswc-icon></iswc-button>
+            <iswc-button variant="plain compact" color="neutral" title=${t.buscarMensajes} aria-label=${t.buscarMensajes} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'busqueda' })}><iswc-icon icon="mdi:text-search"></iswc-icon></iswc-button>
+            <iswc-button variant="plain compact" color="neutral" title=${t.nuevoGrupo} aria-label=${t.nuevoGrupo} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'grupo' })}><iswc-icon icon="mdi:account-multiple-plus-outline"></iswc-icon></iswc-button>
+            <iswc-button class="nuevo" variant="soft compact" color="brand" title=${t.nuevoChat} aria-label=${t.nuevoChat} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'nuevo' })}><iswc-icon icon="mdi:message-plus-outline"></iswc-icon></iswc-button>
           </span>
         </header>
         <div class="conexion" role="status" hidden><iswc-spinner></iswc-spinner><span></span></div>
@@ -112,12 +112,12 @@ const AvChatLista = crearComponente<AvChatListaProps>(
             <iswc-icon slot="start" icon="mdi:magnify"></iswc-icon>
           </iswc-input>
           <div class="filtros" role="group" aria-label=${t.todos}>
-            ${FILTROS.map((f) => html`<iswc-button pill data-filtro=${f} variant="plain" color="neutral" oniswc-click=${() => emitir(host, 'av-chat-lista-filtro', { filtro: f })}>${rotulos[f]}</iswc-button>`)}
+            ${FILTROS.map((f) => html`<iswc-button pill data-filtro=${f} variant="plain compact" color="neutral" oniswc-click=${() => emitir(host, 'av-chat-lista-filtro', { filtro: f })}>${rotulos[f]}</iswc-button>`)}
           </div>
         </div>
-        <button class="archivados" type="button" hidden onclick=${() => emitir(host, 'av-chat-lista-filtro', { archivados: true })}>
+        <iswc-button class="archivados" variant="row" color="neutral" hidden onclick=${() => emitir(host, 'av-chat-lista-filtro', { archivados: true })}>
           <iswc-icon icon="mdi:archive-outline"></iswc-icon><span class="archivados-t">${t.archivados}</span><span class="archivados-n"></span>
-        </button>
+        </iswc-button>
         <div class="filas" part="filas" role="listbox" aria-label=${t.chats} onkeydown=${teclas}></div>
         <div class="esqueletos" hidden>${[1, 2, 3, 4, 5].map(() => html`<iswc-skeleton class="esqueleto"></iswc-skeleton>`)}</div>
         <div class="vacio" hidden><iswc-icon icon="mdi:chat-processing-outline"></iswc-icon><strong></strong><span></span></div>

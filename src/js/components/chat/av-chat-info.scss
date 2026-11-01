@@ -28,7 +28,8 @@
   box-sizing: border-box;
   border-bottom: 1px solid var(--av-borde-seccion, var(--iswc-border-soft));
 
-  h3 {
+  iswc-heading {
+    @include m.heading-heredado;
     flex: 1;
     margin: 0;
     font-family: var(--av-font-titulo, inherit);
@@ -78,7 +79,8 @@
   gap: t.esp(1);
   text-align: center;
 
-  h2 {
+  iswc-heading {
+    @include m.heading-heredado;
     margin: t.esp(2) 0 0;
     font-family: var(--av-font-titulo, inherit);
     font-size: 1.35em;
@@ -121,14 +123,19 @@
   padding-top: t.esp(2);
 
   .mini {
-    position: relative;
+    --iswc-button-row-padding: 0;
+    --iswc-button-border-radius: #{t.radio(sm)};
     aspect-ratio: 1;
-    padding: 0;
-    border: 0;
-    border-radius: t.radio(sm);
     overflow: hidden;
-    cursor: zoom-in;
-    background: var(--iswc-bg-soft);
+
+    &::part(button) {
+      cursor: zoom-in;
+      background: var(--iswc-bg-soft);
+    }
+
+    &::part(label) {
+      align-self: stretch;
+    }
 
     img,
     video {
@@ -204,27 +211,16 @@
 
 .destacado,
 .persona {
-  display: flex;
-  align-items: center;
-  gap: t.esp(3);
+  --iswc-button-row-gap: #{t.esp(3)};
+  --iswc-button-row-padding: #{t.esp(1)};
+  --iswc-button-border-radius: #{t.radio(md)};
+  --iswc-button-font-weight: 400;
   flex: 1;
+  width: auto;
   min-width: 0;
-  padding: t.esp(1);
-  border: 0;
-  border-radius: t.radio(md);
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
 
-  &:hover:not(:disabled),
-  &:focus-visible {
-    background: var(--iswc-control-bg-hover, var(--av-velo));
-    outline: none;
-  }
-
-  &:disabled {
-    cursor: default;
+  &[disabled] {
+    opacity: 1;
   }
 }
 
@@ -232,7 +228,8 @@
   display: grid;
   gap: t.esp(1);
 
-  h4 {
+  iswc-heading {
+    @include m.heading-heredado;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -278,7 +275,8 @@
 }
 
 .bloque {
-  h4 {
+  iswc-heading {
+    @include m.heading-heredado;
     display: flex;
     align-items: center;
     gap: t.esp(2);
@@ -287,7 +285,7 @@
     @include m.rotulo(0.8);
   }
 
-  &.leidos h4 iswc-icon {
+  &.leidos iswc-heading iswc-icon {
     color: var(--iswc-brand-text);
   }
 }

@@ -1,0 +1,13 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-migas — una línea discreta sobre la vista. */
+:host {
+  display: block;
+  padding: t.esp(2) t.esp(4) 0;
+  font-size: 0.8em;
+}
+
+:host([hidden]) {
+  display: none;
+}

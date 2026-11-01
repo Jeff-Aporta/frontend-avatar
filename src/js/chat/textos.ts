@@ -98,8 +98,6 @@ export const TEXTOS_ES = {
   textoLargo: (n: number) => `Máximo ${n} caracteres.`,
   // búsqueda
   buscar: 'Buscar',
-  modoTexto: 'Texto',
-  modoSignificado: 'Significado',
   enEsteChat: 'En este chat',
   enTodos: 'En todos',
   buscarPlaceholder: 'Palabras o una idea…',

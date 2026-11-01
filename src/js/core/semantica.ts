@@ -10,6 +10,9 @@
  *     vector, el puntaje mezcla similitud coseno y un empujón léxico para que una palabra exacta siempre suba.
  */
 
+import { abrirCorpus, aplanar, type CorpusAplanado, type CorpusAplanadoJson, type ItemBuscable } from './aplanado.js';
+import type { AjusteOrden } from './calibracion.js';
+
 /** Un corpus horneado: textos con metadatos y sus vectores int8 (base64) con la escala de cuantización. */
 export type CorpusHorneado<M = Record<string, unknown>> = { modelo: string; dims: number; escala: number; items: (M & { id: string; texto: string })[]; vectores: string };
 /** Corpus listo para buscar: vectores ya decodificados a Float32. */
@@ -76,6 +79,105 @@ export function lexico(consulta: string, texto: string): number {
   return hits / palabras.length;
 }
 
+/** Palabras sin peso en español e inglés: solo cuentan si la consulta no trae otras. */
+const VACIAS_TOLERANTE = new Set(`${[...VACIAS].join(' ')} estoy tengo tienes este esta esto eso ese ser son fue algo the a an of to for on in at is are am i my your you and or it so very we`.split(' '));
+
+export const palabrasDe = (s: string): string[] => normalizar(s).split(/[^a-z0-9ñ]+/).filter(Boolean);
+
+/** Palabras útiles de una consulta. */
+export function palabrasConsulta(q: string): string[] {
+  const todas = palabrasDe(q);
+  const utiles = todas.filter((p) => !VACIAS_TOLERANTE.has(p));
+  return utiles.length ? utiles : todas;
+}
+
+/** Distancia de edición con transposición, cortada en `tope`. */
+function distancia(a: string, b: string, tope: number): number {
+  if (Math.abs(a.length - b.length) > tope) return tope + 1;
+  let previa2: number[] = [];
+  let previa = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const fila = [i];
+    for (let j = 1; j <= b.length; j++) {
+      const costo = a[i - 1] === b[j - 1] ? 0 : 1;
+      let d = Math.min(previa[j]! + 1, fila[j - 1]! + 1, previa[j - 1]! + costo);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d = Math.min(d, previa2[j - 2]! + 1);
+      fila.push(d);
+    }
+    previa2 = previa;
+    previa = fila;
+  }
+  return previa[b.length]!;
+}
+
+/** Cuánto se parece una palabra de la consulta a una del ítem: igual, prefijo, raíz o error de tecleo. */
+function parecido(q: string, w: string): number {
+  if (q === w) return 1;
+  if (q.length >= 3 && w.startsWith(q)) return 0.85;
+  if (q.length > 5 && w.length > 5 && q.slice(0, 5) === w.slice(0, 5)) return 0.75;
+  if (q.length < 4 || w.length < 4) return 0;
+  const tope = q.length >= 7 ? 2 : 1;
+  const d = distancia(q, w, tope);
+  return d > tope ? 0 : 1 - 0.2 * d;
+}
+
+const mejor = (q: string, palabras: string[]): number => palabras.reduce((m, w) => Math.max(m, parecido(q, w)), 0);
+
+/** Puntaje léxico 0..1 que aguanta errores: `clave` pesa 1 y el resto `pesoTexto`. */
+export function lexicoTolerante(consulta: string[], clave: string[], texto: string[], pesoTexto: number): number {
+  if (!consulta.length) return 0;
+  return consulta.reduce((s, q) => s + Math.max(mejor(q, clave), pesoTexto * mejor(q, texto)), 0) / consulta.length;
+}
+
+/** Palabras de cada ítem, calculadas una vez por corpus. */
+export type IndiceItem = { clave: string[]; texto: string[]; plano: string };
+const indices = new WeakMap<object, IndiceItem[]>();
+export function indiceDe(items: ItemBuscable[]): IndiceItem[] {
+  if (!indices.has(items)) indices.set(items, items.map((i) => ({ clave: palabrasDe(i.clave), texto: palabrasDe(i.texto), plano: normalizar(`${i.clave} ${i.texto}`) })));
+  return indices.get(items)!;
+}
+
+/** ¿La consulta aparece tal cual en el ítem? Lo exacto va primero, según `AjusteOrden.exacta`. */
+export function esExacta(consulta: string[], crudo: string, i: IndiceItem, modo: AjusteOrden['exacta'], minimo: number): boolean {
+  if (modo === 'ninguna' || crudo.length < minimo) return false;
+  if (modo === 'subcadena') return i.plano.includes(crudo);
+  const donde = modo === 'palabra-clave' ? i.clave : [...i.clave, ...i.texto];
+  return consulta.length > 0 && consulta.every((p) => donde.includes(p));
+}
+
+/** Un resultado de la búsqueda aplanada. `relevante`: pasa el umbral o coincide por palabra. */
+export type ResultadoAplanado<M> = { item: ItemBuscable<M>; exacta: boolean; lexico: number; sentido: number; puntaje: number; relevante: boolean };
+
+/** Une señales ya calculadas: exactas primero, luego coseno (tipificado por consulta si se pide) + empujón léxico. */
+export function combinar(sentido: ArrayLike<number>, lexicos: ArrayLike<number>, exactas: boolean[], a: AjusteOrden): { puntaje: number; relevante: boolean }[] {
+  const n = sentido.length;
+  let media = 0;
+  for (let i = 0; i < n; i++) media += sentido[i]! / n;
+  let varianza = 0;
+  for (let i = 0; i < n; i++) varianza += (sentido[i]! - media) ** 2 / n;
+  const desvio = Math.sqrt(varianza) || 1;
+  return Array.from({ length: n }, (_, i) => {
+    const z = (sentido[i]! - media) / desvio;
+    const base = a.tipificar ? z : sentido[i]!;
+    return { puntaje: (exactas[i] ? 1e3 : 0) + base + a.pesoLexico * lexicos[i]!, relevante: exactas[i]! || lexicos[i]! >= 0.75 || z >= a.umbral };
+  });
+}
+
+/** Busca en un corpus aplanado. `vector` es el de la consulta, completo; sin él ordena solo por palabra. Ordena, no oculta. */
+export function ordenarAplanado<M>(corpus: CorpusAplanado<M>, consulta: string, vector: ArrayLike<number> | null, a: AjusteOrden): ResultadoAplanado<M>[] {
+  const crudo = normalizar(consulta);
+  const palabras = palabrasConsulta(consulta);
+  const indice = indiceDe(corpus.items as ItemBuscable[]);
+  const plano = vector ? aplanar(vector, corpus.aplanado) : null;
+  const sentido = corpus.items.map((_, i) => (plano ? coseno(plano, corpus.vectores[i]!) : 0));
+  const lexicos = indice.map((x) => lexicoTolerante(palabras, x.clave, x.texto, a.pesoTexto));
+  const exactas = indice.map((x) => esExacta(palabras, crudo, x, a.exacta, a.minimoExacta));
+  const unidos = combinar(sentido, lexicos, exactas, a);
+  return corpus.items
+    .map((item, i) => ({ item, exacta: exactas[i]!, lexico: lexicos[i]!, sentido: sentido[i]!, ...unidos[i]! }))
+    .sort((x, y) => y.puntaje - x.puntaje);
+}
+
 let vectorizador: Vectorizador | null = null;
 const cache = new Map<string, Promise<number[] | null>>();
 
@@ -109,6 +211,18 @@ export async function buscar<M>(corpus: Corpus<M>, consulta: string, limite = 8)
 }
 
 const corpora = new Map<string, Promise<Corpus>>();
+const aplanados = new Map<string, Promise<CorpusAplanado>>();
+/** Carga (una vez) un corpus aplanado de `assets/ia/<nombre>.json` relativo a la raíz del sitio. */
+export function cargarAplanado<M = Record<string, unknown>>(nombre: string, base: string): Promise<CorpusAplanado<M>> {
+  if (!aplanados.has(nombre)) {
+    aplanados.set(nombre, fetch(new URL(`assets/ia/${nombre}.json`, base)).then((r) => {
+      if (!r.ok) throw new Error(`corpus ${nombre}: ${r.status}`);
+      return r.json();
+    }).then((j: CorpusAplanadoJson) => abrirCorpus(j)));
+  }
+  return aplanados.get(nombre)! as Promise<CorpusAplanado<M>>;
+}
+
 /** Carga (una vez) un corpus horneado de `assets/ia/<nombre>.json` relativo a la raíz del sitio. */
 export function cargarCorpus<M = Record<string, unknown>>(nombre: string, base: string): Promise<Corpus<M>> {
   if (!corpora.has(nombre)) {

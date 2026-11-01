@@ -1,6 +1,10 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-correo-lector — barra de acciones, asunto con presencia y cuerpo en columna legible. */
 :host {
   @include m.host-bloque;

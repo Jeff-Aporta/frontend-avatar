@@ -1,16 +1,6 @@
-@use "tokens" as t;
 @use "mixins" as m;
 
-/* av-embudo-grafica — tarjeta con barras por etapa. */
+/* av-embudo-grafica — la tarjeta es de av-grafica. */
 :host {
   @include m.host-bloque;
-}
-
-.grafica {
-  display: block;
-  height: 16em;
-}
-
-.vacio {
-  display: block;
 }

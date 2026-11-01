@@ -47,12 +47,12 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarla</strong>Hero, acceso, cabeceras de módulo y estados vacíos: da personalidad sin cargar el contenido.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de listas ni tablas: es decorativa y pesa unas decenas de KB.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarla</strong>Hero, acceso, cabeceras de módulo y estados vacíos: da personalidad sin cargar el contenido.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de listas ni tablas: es decorativa y pesa unas decenas de KB.</iswc-callout>"
         },
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-scene</strong>Ilustración por capas teñida con la paleta activa. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-scene</strong>Ilustración por capas teñida con la paleta activa. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

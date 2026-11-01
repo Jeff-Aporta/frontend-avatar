@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-factura-form id=\"d\"></av-factura-form></div>",
+          "html": "<iswc-callout color=\"brand\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-factura-form id=\"d\"></av-factura-form></div>",
           "target": "#d",
           "props": {
             "abierto": false,
@@ -69,7 +69,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Desde Nueva factura o al abrir una factura.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar una factura ya emitida: se cobra o se anula.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Desde Nueva factura o al abrir una factura.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para editar una factura ya emitida: se cobra o se anula.</iswc-callout>"
         }
       ]
     }

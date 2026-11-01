@@ -12,7 +12,7 @@ Panel de búsqueda de mensajes.
 ```
 <av-chat-busqueda>
   #shadow-root
-    <aside part="busqueda"><header> <iswc-input class="q"> <div class="opciones">modo · alcance</div> <ol class="resultados"><button class="resultado">…</ol></aside>
+    <aside part="busqueda"><header> <iswc-input class="q"> <div class="opciones">alcance</div> <ol class="resultados"><iswc-button class="resultado">…</ol></aside>
 ```
 
 ## Atributos observados
@@ -34,7 +34,7 @@ Panel de búsqueda de mensajes.
 
 | Evento | detail | Cuándo |
 | --- | --- | --- |
-| `av-chat-buscar` | `{ q, modo, icanal }` | Consulta. |
+| `av-chat-buscar` | `{ q, icanal }` | Consulta. |
 | `av-chat-abrir` | `{ icanal, imensaje }` | Abrir resultado. |
 | `av-chat-panel-cerrar` | `{ panel }` | Cerrar. |
 

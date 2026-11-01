@@ -18,15 +18,15 @@ const AvHero = crearComponente<AvHeroProps>(import.meta.url, 'av-hero', { sesion
       <div class="contenido">
         <div class="texto">
           <p class="kicker"><iswc-tag color="brand" pill>Avatar · Odys</iswc-tag></p>
-          <h1 id="titulo" class="titulo" part="titulo">${LEMA.titulo}</h1>
+          <iswc-heading level="1" id="titulo" class="titulo" part="titulo">${LEMA.titulo}</iswc-heading>
           <p class="lede">${LEMA.texto}</p>
           <div class="acciones">
-            <iswc-button id="empezar" color="brand" class="principal" oniswc-click=${() => ir(props.sesion ? 'panel' : 'acceso')}>
+            <iswc-button variant="compact" id="empezar" color="brand" class="principal" oniswc-click=${() => ir(props.sesion ? 'panel' : 'acceso')}>
               ${props.sesion ? 'Ir al panel' : 'Empieza ahora'}<iswc-icon slot="end" icon="mdi:arrow-right"></iswc-icon>
             </iswc-button>
-            <iswc-button variant="outlined" color="brand" oniswc-click=${() => ir('asistente')}><iswc-icon slot="start" icon="mdi:robot-outline"></iswc-icon>Conoce a AVO</iswc-button>
+            <iswc-button variant="outlined compact" color="brand" oniswc-click=${() => ir('asistente')}><iswc-icon slot="start" icon="mdi:robot-outline"></iswc-icon>Conoce a AVO</iswc-button>
           </div>
-          <iswc-button variant="text" color="brand" class="enlace" oniswc-click=${() => ir(props.sesion ? 'panel' : 'acceso')}>${LEMA.enlace} →</iswc-button>
+          <iswc-button variant="text compact" color="brand" class="enlace" oniswc-click=${() => ir(props.sesion ? 'panel' : 'acceso')}>${LEMA.enlace} →</iswc-button>
         </div>
         <av-escena class="ilustracion" part="ilustracion" escena="bienvenida" etiqueta="Equipo celebrando con Avatar"></av-escena>
       </div>

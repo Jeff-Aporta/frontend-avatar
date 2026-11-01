@@ -1,18 +1,17 @@
-import{crearComponente as p,define as u,emitir as d,html as i}from"../../base/componente.js?v=p6quri";import{coloresDe as b,degradado as h,TEMAS as s}from"../../chat/temas.js?v=w8y4js";const v=p(import.meta.url,"av-chat-tema",{tema:null},(l,o,n)=>{const c=o.tema?.id??"",e=b(o.tema)??s[0],t=a=>d(n,"av-chat-tema",{tema:a}),r=a=>l.querySelector(`#${a}`).value,m=()=>t({id:"propio",color1:r("color1"),color2:r("color2"),angulo:Number(r("angulo"))||135});l.append(i`
+import{crearComponente as m,define as u,emitir as d,html as r}from"../../base/componente.js?v=m5nu5c";import{coloresDe as v,degradado as h,TEMAS as s}from"../../chat/temas.js?v=w8y4js";const w=m(import.meta.url,"av-chat-tema",{tema:null},(t,o,n)=>{const c=o.tema?.id??"",e=v(o.tema)??s[0],l=a=>d(n,"av-chat-tema",{tema:a}),i=a=>t.querySelector(`#${a}`).value,p=()=>l({id:"propio",color1:i("color1"),color2:i("color2"),angulo:Number(i("angulo"))||135});t.append(r`
     <section class="tema" part="tema">
-      <h4 class="titulo">Tema del chat</h4>
-      <div class="muestras" role="radiogroup" aria-label="Tema del chat">
-        <button class="muestra app" type="button" role="radio" aria-checked=${String(!o.tema)} title="Tema de la app" onclick=${()=>t(null)}><span>App</span></button>
-        ${s.map(a=>i`<button class="muestra" type="button" role="radio" aria-checked=${String(c===a.id)} title=${a.nombre} aria-label=${a.nombre} style=${`background:${h(a)}`} onclick=${()=>t({id:a.id})}></button>`)}
+      <iswc-heading class="titulo" level="4">Tema del chat</iswc-heading>
+      <div class="muestras" role="group" aria-label="Tema del chat">
+        <iswc-button class="muestra app" variant="glyph" color="neutral" shape="pill" aria-pressed=${String(!o.tema)} title="Tema de la app" oniswc-click=${()=>l(null)}>App</iswc-button>
+        ${s.map(a=>r`<iswc-button class="muestra" variant="glyph" color="neutral" shape="pill" aria-pressed=${String(c===a.id)} title=${a.nombre} aria-label=${a.nombre} style=${`--fondo:${h(a)}`} oniswc-click=${()=>l({id:a.id})}></iswc-button>`)}
       </div>
-      <details class="propio" ?open=${c==="propio"}>
-        <summary>Personalizar</summary>
+      <iswc-details class="propio" variant="plain" summary="Personalizar" ?open=${c==="propio"}>
         <div class="campos">
           <iswc-color-picker id="color1" label="Color 1" value=${e.color1}></iswc-color-picker>
           <iswc-color-picker id="color2" label="Color 2" value=${e.color2}></iswc-color-picker>
           <iswc-input id="angulo" type="number" min="0" max="360" step="15" label="Ángulo" value=${String(e.angulo)}></iswc-input>
-          <iswc-button color="brand" oniswc-click=${m}>Aplicar</iswc-button>
+          <iswc-button variant="compact" color="brand" oniswc-click=${p}>Aplicar</iswc-button>
         </div>
-      </details>
+      </iswc-details>
     </section>
-  `)});u("av-chat-tema",v);
+  `)});u("av-chat-tema",w);

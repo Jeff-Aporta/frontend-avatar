@@ -33,6 +33,7 @@ export const SHELL_KIT_TAGS = [
   'iswc-palette-selector',
   'iswc-icon',
   'iswc-button',
+  'iswc-heading',
   'iswc-spinner',
   'iswc-skeleton',
   'iswc-toast',
@@ -46,6 +47,8 @@ export const SHELL_KIT_TAGS = [
   'iswc-stat',
   'iswc-grid-layout',
   'iswc-dialog',
+  'iswc-breadcrumb',
+  'iswc-breadcrumb-item',
   'iswc-input',
   'iswc-page-header',
   'iswc-empty-state',
@@ -58,23 +61,26 @@ export const SHELL_KIT_TAGS = [
 /** Hijos que registra su padre: nunca se piden al loader (lo rechaza y tumba la carga). */
 export const HIJOS_KIT = ['iswc-tab', 'iswc-tab-panel', 'iswc-kanban-column', 'iswc-kanban-card'] as const;
 
+/** El grid del kit: único lugar donde se nombra (el guardián W-PLAT-15 exige que toda vista con `av-tabla` lo declare). */
+export const GRID_TAG = 'iswc-ag-grid';
+
 /** Tags del kit propios de cada vista (además de los del shell). */
 export const VIEW_KIT_TAGS: Record<string, readonly string[]> = {
   inicio: [],
-  acceso: ['iswc-login'],
+  acceso: ['iswc-login', 'iswc-tab-group'],
   panel: ['iswc-stat', 'iswc-doughnut-chart', 'iswc-bar-chart', 'iswc-relative-time'],
-  canales: ['iswc-split-panel', 'iswc-dialog', 'iswc-input', 'iswc-textarea', 'iswc-tab-group', 'iswc-progress-bar', 'iswc-format-bytes', 'iswc-lightbox', 'iswc-checkbox', 'iswc-color-picker'],
-  'chat-demo': ['iswc-split-panel', 'iswc-dialog', 'iswc-input', 'iswc-textarea', 'iswc-tab-group', 'iswc-progress-bar', 'iswc-format-bytes', 'iswc-lightbox', 'iswc-checkbox', 'iswc-switch', 'iswc-color-picker'],
+  canales: ['iswc-split-panel', 'iswc-dialog', 'iswc-input', 'iswc-textarea', 'iswc-tab-group', 'iswc-progress-bar', 'iswc-format-bytes', 'iswc-lightbox', 'iswc-checkbox', 'iswc-color-picker', 'iswc-scrollspy', 'iswc-details'],
+  'chat-demo': ['iswc-split-panel', 'iswc-dialog', 'iswc-input', 'iswc-textarea', 'iswc-tab-group', 'iswc-progress-bar', 'iswc-format-bytes', 'iswc-lightbox', 'iswc-checkbox', 'iswc-switch', 'iswc-color-picker', 'iswc-scrollspy', 'iswc-details'],
   proyectos: ['iswc-kanban', 'iswc-dialog', 'iswc-drawer', 'iswc-input', 'iswc-textarea', 'iswc-popconfirm', 'iswc-divider', 'iswc-relative-time'],
-  crm: ['iswc-data-grid', 'iswc-dialog', 'iswc-input', 'iswc-textarea', 'iswc-popconfirm'],
+  crm: [GRID_TAG, 'iswc-dialog', 'iswc-input', 'iswc-textarea', 'iswc-popconfirm'],
   organizacion: ['iswc-tab-group', 'iswc-dialog', 'iswc-input', 'iswc-textarea', 'iswc-popconfirm'],
   asistente: ['iswc-textarea', 'iswc-relative-time'],
-  admin: ['iswc-tab-group', 'iswc-data-grid', 'iswc-dialog', 'iswc-input', 'iswc-switch', 'iswc-popconfirm', 'iswc-relative-time', 'iswc-format-bytes'],
+  admin: ['iswc-tab-group', GRID_TAG, 'iswc-dialog', 'iswc-input', 'iswc-switch', 'iswc-popconfirm', 'iswc-relative-time', 'iswc-format-bytes'],
   correos: ['iswc-split-panel', 'iswc-dialog', 'iswc-input', 'iswc-textarea', 'iswc-relative-time'],
-  finanzas: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-bar-chart', 'iswc-doughnut-chart'],
-  inventario: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-switch'],
-  rrhh: ['iswc-tab-group', 'iswc-data-grid', 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-bar-chart', 'iswc-doughnut-chart'],
-  demo: ['iswc-loading', 'iswc-status-pill', 'iswc-trace-log', 'iswc-pagination', 'iswc-json-dialog', 'iswc-stream-bubble', 'iswc-code', 'iswc-dialog'],
+  finanzas: ['iswc-tab-group', 'iswc-spreadsheet', GRID_TAG, 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-bar-chart', 'iswc-doughnut-chart'],
+  inventario: ['iswc-tab-group', GRID_TAG, 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-switch'],
+  rrhh: ['iswc-tab-group', GRID_TAG, 'iswc-input', 'iswc-dialog', 'iswc-textarea', 'iswc-popconfirm', 'iswc-bar-chart', 'iswc-doughnut-chart'],
+  demo: ['iswc-loading', 'iswc-status-pill', 'iswc-trace-log', 'iswc-pagination', 'iswc-json-dialog', 'iswc-stream-bubble', 'iswc-code', 'iswc-dialog', 'iswc-dropzone', 'iswc-media-recorder', 'iswc-progress-bar', 'iswc-copy-button', 'iswc-textarea'],
 };
 
 /** Todos los tags del kit de la app (shell + vistas), sin repetir: lo usa la galería. */
@@ -82,25 +88,25 @@ export const KIT_TAGS: readonly string[] = [...new Set([...SHELL_KIT_TAGS, ...Ob
 
 export const PREFIJO = 'av';
 
-/** Transversales (varias vistas): shell, logo, escena y selector de perfil. */
-export const APP_TAGS = ['av-logo', 'av-escena', 'av-perfil-selector', 'av-perfiles-tabla', 'av-app'] as const;
+/** Transversales (varias vistas): shell, logo, escena, gráfica en tarjeta, selector de perfil y tabla de catálogo. */
+export const APP_TAGS = ['av-link', 'av-boton-enlace', 'av-menu-lateral', 'av-pestanas', 'av-migas', 'av-outlet', 'av-logo', 'av-escena', 'av-grafica', 'av-perfil-selector', 'av-perfiles-lista', 'av-perfiles-tabla', 'av-tabla', 'av-app'] as const;
 
 /** Por vista: hijos antes que el shell (el último es el shell de la vista). */
 export const VIEW_TAGS = {
   inicio: ['av-hero', 'av-comunidad', 'av-caracteristicas', 'av-precios', 'av-abierto', 'av-inicio'],
-  acceso: ['av-credenciales-demo', 'av-acceso'],
+  acceso: ['av-acceso'],
   panel: ['av-kpis', 'av-tareas-grafica', 'av-embudo-grafica', 'av-notificaciones', 'av-panel'],
   canales: ['av-canal-form', 'av-canales'],
   'chat-demo': ['av-chat-demo'],
   proyectos: ['av-tarea-form', 'av-tarea-detalle', 'av-tablero', 'av-proyecto-form', 'av-proyectos'],
-  crm: ['av-embudo', 'av-clientes-grid', 'av-cliente-form', 'av-crm'],
+  crm: ['av-embudo', 'av-cliente-form', 'av-crm'],
   organizacion: ['av-empresa-form', 'av-invitar-form', 'av-miembros', 'av-equipos', 'av-organizacion'],
   asistente: ['av-avo-mensaje', 'av-asistente'],
   admin: ['av-usuario-form', 'av-usuarios', 'av-roles', 'av-almacenamiento', 'av-admin'],
   correos: ['av-correo-carpetas', 'av-correo-lista', 'av-correo-lector', 'av-correo-redactar', 'av-correos'],
-  finanzas: ['av-finanzas-grafica', 'av-conversor', 'av-finanzas-tabla', 'av-transaccion-form', 'av-factura-form', 'av-finanzas'],
-  inventario: ['av-stock-alertas', 'av-inventario-tabla', 'av-producto-form', 'av-movimiento-form', 'av-pedido-form', 'av-proveedor-form', 'av-inventario'],
-  rrhh: ['av-rrhh-grafica', 'av-asistencia-dia', 'av-rrhh-tabla', 'av-solicitudes', 'av-empleado-form', 'av-solicitud-form', 'av-rrhh'],
+  finanzas: ['av-finanzas-grafica', 'av-conversor', 'av-finanzas-hoja', 'av-transaccion-form', 'av-factura-form', 'av-finanzas'],
+  inventario: ['av-stock-alertas', 'av-producto-form', 'av-movimiento-form', 'av-pedido-form', 'av-proveedor-form', 'av-inventario'],
+  rrhh: ['av-rrhh-grafica', 'av-asistencia-dia', 'av-solicitudes', 'av-empleado-form', 'av-solicitud-form', 'av-rrhh'],
 } as const satisfies Record<string, readonly `av-${string}`[]>;
 
 /**

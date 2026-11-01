@@ -1,4 +1,4 @@
-<!-- Copia de skills/iswc-root/tools/runtime.md del kit Jeff-Aporta/is-webcomponents@42322344cbaa25967d44361c99b78c963d0f8543. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- Copia de skills/iswc-root/tools/runtime.md del kit Jeff-Aporta/is-webcomponents@6c141b86cc2dd38a7e792382ccf773b0ead4fce9. No editar: se refresca con `deno task vendor:iswc`. -->
 <!-- @vendor 2026-10-14T16:13:19.844Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/tools/runtime.md -->
 # `/iswc-root:runtime` — APIs sin custom element
 
@@ -12,7 +12,7 @@ Inventario: [`../catalog.md`](../catalog.md) § Módulos API.
 
 ## 1. `iswcLoader` — `core/loader.min.js`
 
-Guía larga: [`cdn/loader.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/cdn/loader.md).
+Guía larga: [`cdn/loader.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/cdn/loader.md).
 
 | API | Efecto |
 | --- | --- |
@@ -38,7 +38,7 @@ Pines de apps consumidoras: `deno task sync:pins` (`scripts/sync-pins.mjs`).
 
 ## 2. `IswcUi` / `Ui` — `helpers/ui.min.js`
 
-Guía: [`helpers/ui.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/components/helpers/ui.md).
+Guía: [`helpers/ui.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/components/helpers/ui.md).
 
 | Export | Uso |
 | --- | --- |
@@ -69,7 +69,7 @@ Guías: `helpers/utils/md-lite.md`, `md-iswc-fences.md`, `md-hydrate.md`, `md-ed
 ## 4. `response-cache` — `helpers/response-cache.min.js`
 
 SWR en IndexedDB (`createResponseCache`, `IswcResponseCache`, `canonico`).  
-Guía: [`helpers/utils/response-cache.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/42322344cbaa25967d44361c99b78c963d0f8543/src/components/helpers/utils/response-cache.md).
+Guía: [`helpers/utils/response-cache.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/components/helpers/utils/response-cache.md).
 
 ---
 
@@ -92,10 +92,35 @@ en el vendor de build del kit (Paty ya lo importa). El loader pega `?h=` con `L.
 
 ---
 
+## 7. IA en el navegador — `lib/ai/`
+
+Guía: [`src/ai/ai.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/ai/ai.md). Tag con UI: `<iswc-ai-tool>`.
+
+| Módulo CDN | Exports |
+| --- | --- |
+| `lib/ai/motores.min.js` | `ejecutar(herramienta, entrada, opciones, parcial)`, `motor` |
+| `lib/ai/descarga.min.js` | `conDescarga`, `pospuesta`, `medidor`, `LIMITE_MB` |
+| `lib/ai/vector-local.min.js` | `vectorLocal`, `cargarCorpus`, `ordenarPorSentido` |
+| `lib/ai/orden.min.js` | `ordenarAplanado`, `ORDEN_DEFECTO`, `coseno`, `normalizar`, `lexicoTolerante` |
+| `lib/ai/aplanado.min.js` · `aplanado-ajuste.min.js` | `aplanar`, `abrirCorpus`, `empacar`; `ajustar` (build) |
+| `lib/ai/herramientas.min.js` | `HERRAMIENTAS`, `herramienta`, `mbDe`, `pesoDe`, `MODELO_LOCAL` |
+
+Se importan con la URL sellada del loader, para compartir estado con `<iswc-ai-tool>`:
+
+```js
+const L = globalThis.iswcLoader;
+const { ejecutar } = await import(L.assetUrl(new URL('../lib/ai/motores.min.js', L.selfBase).href));
+```
+
+Reglas: nada de `runonweb` directo en una app ni en un componente; toda descarga pasa por `conDescarga` (hasta 20 MB toast; más, modal); el modelo de embeddings es `MODELO_LOCAL`, multilingüe.
+
+---
+
 ## Checklist agente
 
 - [ ] Arranque solo con loader + `loadCSS*` + `load` (no reinventar espejos).
 - [ ] Wrappers de dominio usan `IswcUi.adoptCss`, no CSS embebido gigante.
 - [ ] MD embebido: `md-lite` → `hydrateMdEmbeds`, no un markdown npm paralelo.
 - [ ] Lecturas remotas repetidas: `response-cache`, no un IndexedDB ad hoc.
+- [ ] IA en el navegador: `lib/ai/`, no `runonweb` directo ni descargas propias.
 - [ ] Tras commit del kit: `deno task sync:pins` en monorepo ContaPyme.

@@ -64,10 +64,10 @@ const AvEmpleadoForm = crearComponente<AvEmpleadoFormProps>(
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
           ${ro ? html`<iswc-callout color="brand">Solo quien tiene el permiso de recursos humanos (avatar.rrhh) modifica empleados.</iswc-callout>` : null}
         </div>
-        ${e && !ro ? html`<iswc-button slot="footer" id="eliminar" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este empleado? Mejor márcalo como retirado si tiene historial." oniswc-popconfirm-confirm=${() => emitir(host, 'av-empleado-eliminar', { iempleado: e.iempleado })}><iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
-        ${e && !ro && e.estado !== 'retirado' ? html`<iswc-button slot="footer" variant="outlined" color="brand" oniswc-click=${() => emitir(host, 'av-solicitud-nueva', { iempleado: e.iempleado })}><iswc-icon slot="start" icon="mdi:calendar-plus"></iswc-icon>Solicitud</iswc-button>` : null}
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
-        ${ro ? null : html`<iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${e ? 'Guardar' : 'Crear empleado'}</iswc-button>`}
+        ${e && !ro ? html`<iswc-button slot="footer" id="eliminar" variant="outlined compact" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este empleado? Mejor márcalo como retirado si tiene historial." oniswc-popconfirm-confirm=${() => emitir(host, 'av-empleado-eliminar', { iempleado: e.iempleado })}><iswc-button variant="compact" slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
+        ${e && !ro && e.estado !== 'retirado' ? html`<iswc-button slot="footer" variant="outlined compact" color="brand" oniswc-click=${() => emitir(host, 'av-solicitud-nueva', { iempleado: e.iempleado })}><iswc-icon slot="start" icon="mdi:calendar-plus"></iswc-icon>Solicitud</iswc-button>` : null}
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
+        ${ro ? null : html`<iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${e ? 'Guardar' : 'Crear empleado'}</iswc-button>`}
       </iswc-dialog>
     `);
   },

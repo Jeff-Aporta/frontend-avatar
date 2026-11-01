@@ -12,7 +12,7 @@ Estado en vivo y acciones del chat abierto.
 ```
 <av-chat-cabecera>
   #shadow-root
-    <header part="cabecera"><iswc-button class="volver"> <button class="quien"><iswc-avatar> nombre / estado</button> <span class="acciones">…</span></header>
+    <header part="cabecera"><iswc-button class="volver"> <iswc-button class="quien"><iswc-avatar> nombre / estado</iswc-button> <span class="acciones">…</span></header>
 ```
 
 ## Atributos observados

@@ -58,12 +58,12 @@ const AvClienteForm = crearComponente<AvClienteFormProps>(
             ${props.miembros.map((m) => html`<iswc-option value=${m.iusuario}>${m.usuario?.nombre || m.iusuario}</iswc-option>`)}
           </iswc-select>
           <iswc-textarea name="notas" label="Notas" rows="3" ?readonly=${ro} value=${c?.notas ?? ''}></iswc-textarea>
-          ${props.error ? html`<iswc-callout tone="danger">${props.error}</iswc-callout>` : null}
-          ${ro ? html`<iswc-callout tone="info">Solo un gestor puede modificar clientes.</iswc-callout>` : null}
+          ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
+          ${ro ? html`<iswc-callout color="brand">Solo un gestor puede modificar clientes.</iswc-callout>` : null}
         </div>
-        ${c && !ro ? html`<iswc-button slot="footer" id="eliminar" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este cliente?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-cliente-eliminar', { icliente: c.icliente })}><iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
-        ${ro ? null : html`<iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${c ? 'Guardar' : 'Crear'}</iswc-button>`}
+        ${c && !ro ? html`<iswc-button slot="footer" id="eliminar" variant="outlined compact" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este cliente?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-cliente-eliminar', { icliente: c.icliente })}><iswc-button variant="compact" slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
+        ${ro ? null : html`<iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${c ? 'Guardar' : 'Crear'}</iswc-button>`}
       </iswc-dialog>
     `);
   },

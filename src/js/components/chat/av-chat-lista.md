@@ -12,7 +12,7 @@ Lista con filtros Todos, No leídos, Grupos y Directos; flechas para recorrerla.
 ```
 <av-chat-lista>
   #shadow-root
-    <nav part="lista"><header part="cabeza"> <div class="conexion"> <iswc-input class="buscador"> <div class="filtros"> <button class="archivados"> <div part="filas" role="listbox"><av-chat-item>…</div></nav>
+    <nav part="lista"><header part="cabeza"> <div class="conexion"> <iswc-input class="buscador"> <div class="filtros"> <iswc-button class="archivados"> <div part="filas" role="listbox"><av-chat-item>…</div></nav>
 ```
 
 ## Atributos observados

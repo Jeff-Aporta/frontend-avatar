@@ -1,6 +1,10 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-hero — banner teñido por la paleta + velo degradado + texto e ilustración; apilado en móvil. */
 :host {
   @include m.host-bloque;

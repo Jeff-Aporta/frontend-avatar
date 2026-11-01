@@ -48,8 +48,8 @@ const AvCorreoRedactar = crearComponente<AvCorreoRedactarProps>(
           <iswc-textarea id="cuerpo" label="Mensaje" rows="9" required value=${b.cuerpo}></iswc-textarea>
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" color="brand" id="enviar" ?loading=${props.ocupado} oniswc-click=${enviar}><iswc-icon slot="start" icon="mdi:send"></iswc-icon>Enviar</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" color="brand" id="enviar" ?loading=${props.ocupado} oniswc-click=${enviar}><iswc-icon slot="start" icon="mdi:send"></iswc-icon>Enviar</iswc-button>
       </iswc-dialog>
     `);
   },

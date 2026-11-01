@@ -13,7 +13,7 @@ const AvAvoMensaje = crearComponente<AvAvoMensajeProps>(import.meta.url, 'av-avo
     <article class="turno" part="turno" data-quien=${t.quien}>
       ${avo
         ? html`<span class="avo" part="avatar" title="AVO"><iswc-icon icon="mdi:robot-outline"></iswc-icon></span>`
-        : html`<iswc-person id="persona" class="persona"></iswc-person>`}
+        : html`<iswc-person class="persona" compacto usuario=${props.nombre || 'yo'} nombre=${props.nombre}></iswc-person>`}
       <div class="burbuja" part="burbuja">
         ${avo ? html`<strong class="quien">AVO</strong>` : null}
         <p class="texto">${t.texto}</p>
@@ -21,8 +21,6 @@ const AvAvoMensaje = crearComponente<AvAvoMensajeProps>(import.meta.url, 'av-avo
       </div>
     </article>
   `);
-  const persona = root.querySelector('#persona') as (HTMLElement & { props: Record<string, unknown> }) | null;
-  if (persona) persona.props = { usuario: props.nombre || 'yo', nombre: props.nombre || null, compacto: true };
 });
 
 define('av-avo-mensaje', AvAvoMensaje);

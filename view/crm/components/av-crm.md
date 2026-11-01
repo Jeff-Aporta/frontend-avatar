@@ -12,7 +12,7 @@ Ruta `#/crm[/<icliente>]`. Carga `clientes` y `miembros` de la empresa activa; e
 ```
 <av-crm>
   #shadow-root
-    <div part="pagina"><iswc-page-header> <av-embudo id="embudo"> <av-clientes-grid id="grid"> <av-cliente-form id="form"></div>
+    <div part="pagina"><iswc-page-header> <av-embudo id="embudo"> <av-tabla id="grid"> <av-cliente-form id="form"></div>
 ```
 
 ## Atributos observados

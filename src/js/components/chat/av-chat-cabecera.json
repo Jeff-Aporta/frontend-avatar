@@ -42,12 +42,12 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de av-chat-mensajes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Como cabecera de página: iswc-page-header.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Arriba de av-chat-mensajes.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>Como cabecera de página: iswc-page-header.</iswc-callout>"
         },
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-header</strong>Cabecera genérica con presencia. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chat-header</strong>Cabecera genérica con presencia. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

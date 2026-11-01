@@ -11,6 +11,7 @@
 import { avisar, crearComponente, define, html } from '../../../src/js/base/componente.js';
 import { type AvCanalesProps, EquipoOpcionSchema } from '../../../src/js/consts/schemas/canales.schemas.js';
 import { z } from '../../../src/js/base/zod.js';
+import { sinEmpresa, sinPermiso } from '../../../src/js/consts/estados.js';
 import { controller, mensajeDe } from '../../../src/js/core/api.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
@@ -71,9 +72,9 @@ const AvCanales = crearComponente<AvCanalesProps>(
         onav-canal-crear=${crear}
         onav-chat-abierto=${(e: Event) => ir('canales', (e as CustomEvent<{ icanal: string | null }>).detail.icanal)}>
         <iswc-page-header id="cabecera">
-          ${puedeCrear && vista === 'listo' ? html`<iswc-button slot="acciones" variant="soft" color="brand" oniswc-click=${() => { h.props = { formulario: true }; void cargarEquipos(); }}><iswc-icon slot="start" icon="mdi:pound-box-outline"></iswc-icon>Nuevo canal</iswc-button>` : null}
+          ${puedeCrear && vista === 'listo' ? html`<iswc-button slot="acciones" variant="soft compact" color="brand" oniswc-click=${() => { h.props = { formulario: true }; void cargarEquipos(); }}><iswc-icon slot="start" icon="mdi:pound-box-outline"></iswc-icon>Nuevo canal</iswc-button>` : null}
         </iswc-page-header>
-        <iswc-callout class="aviso" tone="warning" color="warning" ?hidden=${!props.aviso}><strong slot="title">Chat</strong><span class="aviso-texto">${props.aviso}</span></iswc-callout>
+        <iswc-callout class="aviso" color="warning" ?hidden=${!props.aviso}><strong slot="title">Chat</strong><span class="aviso-texto">${props.aviso}</span></iswc-callout>
         ${vista === 'listo' ? html`<av-chat id="chat" class="chat"></av-chat>` : html`<iswc-empty-state id="vacio"></iswc-empty-state>`}
         <av-canal-form id="formulario"></av-canal-form>
       </div>
@@ -83,8 +84,8 @@ const AvCanales = crearComponente<AvCanalesProps>(
     const vacio = root.querySelector('#vacio') as ConProps | null;
     if (vacio) {
       vacio.props = vista === 'sin-empresa'
-        ? { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Únete a una empresa o elígela arriba para ver sus chats.' }
-        : { icono: 'mdi:lock-outline', titulo: 'Sin permiso de chat', texto: 'Tu rol no incluye el chat (avatar.chat). Pídeselo a un administrador.' };
+        ? { ...sinEmpresa('sus chats'), texto: 'Únete a una empresa o elígela arriba para ver sus chats.' }
+        : sinPermiso('chat', 'Tu rol no incluye el chat (avatar.chat). Pídeselo a un administrador.');
       return;
     }
     const c = chat();

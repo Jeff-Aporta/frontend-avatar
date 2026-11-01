@@ -104,9 +104,16 @@ export async function cerrarSesion(): Promise<void> {
   }
 }
 
+/** Una sola petición aunque varios componentes muestren los perfiles. */
+let listaPerfiles: Promise<PerfilPrueba[]> | null = null;
+
 /** Perfiles de prueba públicos (`perfiles/lista`): no pide sesión. */
-export async function perfilesPrueba(): Promise<PerfilPrueba[]> {
-  return z.array(PerfilPruebaSchema).parse(await dominio()['perfilesPrueba']!());
+export function perfilesPrueba(): Promise<PerfilPrueba[]> {
+  listaPerfiles ??= (async () => z.array(PerfilPruebaSchema).parse(await dominio()['perfilesPrueba']!()))().catch((err: unknown) => {
+    listaPerfiles = null;
+    throw err;
+  });
+  return listaPerfiles;
 }
 
 /** Cambia al perfil ya guardado en la bóveda: la página arranca de nuevo con su sesión. */

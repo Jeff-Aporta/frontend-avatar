@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><av-chat-visor id=\"x\"></av-chat-visor>",
+          "html": "<iswc-callout color=\"brand\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><av-chat-visor id=\"x\"></av-chat-visor>",
           "target": "#x",
           "props": {
             "abierto": false,
@@ -32,12 +32,12 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al tocar una imagen o video del chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para diagramas: iswc-diagram-lightbox.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Al tocar una imagen o video del chat.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para diagramas: iswc-diagram-lightbox.</iswc-callout>"
         },
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-media-viewer</strong>Visor de galería sobre iswc-lightbox. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-media-viewer</strong>Visor de galería sobre iswc-lightbox. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

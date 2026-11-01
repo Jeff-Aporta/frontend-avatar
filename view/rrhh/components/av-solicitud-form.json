@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-solicitud-form id=\"d\"></av-solicitud-form></div>",
+          "html": "<iswc-callout color=\"brand\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-solicitud-form id=\"d\"></av-solicitud-form></div>",
           "target": "#d",
           "props": {
             "abierto": false,
@@ -42,7 +42,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Con Nueva solicitud o desde la ficha de un empleado.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para aprobar: eso es av-solicitudes.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Con Nueva solicitud o desde la ficha de un empleado.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para aprobar: eso es av-solicitudes.</iswc-callout>"
         }
       ]
     }

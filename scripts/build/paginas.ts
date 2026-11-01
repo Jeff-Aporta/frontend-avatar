@@ -16,7 +16,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { type Pagina, PAGINAS, SITIO, tituloDe, URL_PUBLICA } from '../../src/js/consts/paginas.ts';
+import { metasDe, type Pagina, PAGINAS, SITIO, tituloDe, URL_PUBLICA } from '../../src/js/consts/paginas.ts';
 
 const ROOT = join(import.meta.dirname!, '..', '..');
 const deno = JSON.parse(readFileSync(join(ROOT, 'deno.json'), 'utf8')) as { imports: Record<string, string>; avatar: { vendor: string } };
@@ -34,7 +34,7 @@ const recurso = (archivo: string) => {
   return `dist/cdn/${archivo}?v=${h}`;
 };
 
-type Opciones = { base: string; vista: string; titulo: string; descripcion: string; canonical: string | null; indexable: boolean; cuerpo: string; atributos?: string; explorador?: boolean };
+type Opciones = { jsonLd?: Record<string, unknown> | null; base: string; vista: string; titulo: string; descripcion: string; canonical: string | null; indexable: boolean; cuerpo: string; atributos?: string; explorador?: boolean };
 
 function documento(o: Opciones): string {
   const robots = o.indexable ? 'index, follow' : 'noindex, nofollow';
@@ -63,7 +63,8 @@ function documento(o: Opciones): string {
 <title>${esc(o.titulo)}</title>
 <meta name="description" content="${esc(o.descripcion)}">
 <meta name="robots" content="${robots}">
-<meta name="application-name" content="${SITIO}">${og}
+<meta name="application-name" content="${SITIO}">${og}${o.jsonLd ? `
+<script type="application/ld+json">${JSON.stringify(o.jsonLd).replace(/</g, '\\u003c')}</script>` : ''}
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <link rel="alternate icon" href="assets/img/tabicon_256x256.png">
 <meta name="theme-color" content="#0a6cff">
@@ -98,16 +99,22 @@ const escribir = (rel: string, html: string) => {
 const profundidad = (rel: string) => rel.split('/').length - 1;
 const baseDe = (rel: string) => '../'.repeat(profundidad(rel)) || './';
 const app = (p: Pagina) => `<av-app vista="${p.vista}"></av-app>`;
+/** Página de una URL declarada, con los metadatos de `metasDe`. */
+const paginaDeUrl = (p: Pagina, id: string | null) => {
+  const m = metasDe(p.vista, id)!;
+  const rel = `${m.ruta}index.html`;
+  return escribir(rel, documento({ base: baseDe(rel), vista: p.vista, titulo: m.titulo, descripcion: m.descripcion, canonical: URL_PUBLICA + m.ruta, indexable: m.indexable, cuerpo: app(p), jsonLd: m.jsonLd }));
+};
 
 const hechas: string[] = [];
 for (const p of PAGINAS) {
-  const rel = `${p.ruta}index.html`;
-  hechas.push(escribir(rel, documento({ base: baseDe(rel), vista: p.vista, titulo: tituloDe(p), descripcion: p.descripcion, canonical: URL_PUBLICA + p.ruta, indexable: p.indexable, cuerpo: app(p) })));
+  hechas.push(paginaDeUrl(p, null));
+  for (const x of p.partes ?? []) hechas.push(paginaDeUrl(p, x.id));
 }
 
 // 404: GitHub Pages lo sirve en cualquier profundidad, así que su base es absoluta (la del sitio publicado).
 const portada = PAGINAS[0]!;
-hechas.push(escribir('404.html', documento({ base: URL_PUBLICA, vista: portada.vista, titulo: `Página no encontrada · ${SITIO}`, descripcion: portada.descripcion, canonical: null, indexable: false, cuerpo: app(portada) })));
+hechas.push(escribir('404.html', documento({ base: new URL(URL_PUBLICA).pathname, vista: portada.vista, titulo: `Página no encontrada · ${SITIO}`, descripcion: portada.descripcion, canonical: null, indexable: false, cuerpo: app(portada) })));
 
 for (const p of PAGINAS) {
   if (!p.shell || !existsSync(join(ROOT, 'view', p.vista))) continue;
@@ -125,7 +132,8 @@ const explorador = 'view/demo/index.html';
 hechas.push(escribir(explorador, documento({ base: baseDe(explorador), vista: 'demo', titulo: `Demos · ${SITIO}`, descripcion: 'Explorador de los componentes de Avatar.', canonical: null, indexable: false, explorador: true, cuerpo: `<iswc-doc-demo brand="${SITIO}" brand-icon="mdi:hexagon-outline" brand-href="./" nav-label="Componentes" sheets-cache="avatar-demos" storage-key-nav="avatar-demos-nav"></iswc-doc-demo>` })));
 
 // Mapa del sitio con las rutas indexables.
-const indexables = PAGINAS.filter((p) => p.indexable).map((p) => `  <url><loc>${URL_PUBLICA}${p.ruta}</loc></url>`).join('\n');
+const urls = PAGINAS.flatMap((p) => [null, ...(p.partes ?? []).map((x) => x.id)].map((id) => metasDe(p.vista, id)!));
+const indexables = urls.filter((m) => m.indexable).map((m) => `  <url><loc>${URL_PUBLICA}${m.ruta}</loc></url>`).join('\n');
 hechas.push(escribir('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexables}\n</urlset>\n`));
 
 console.log(`[paginas] ${hechas.length} archivos: ${hechas.join(', ')}`);

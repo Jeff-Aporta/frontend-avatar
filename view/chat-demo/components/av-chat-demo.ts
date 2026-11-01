@@ -27,14 +27,14 @@ function montar(root: ShadowRoot, props: AvChatDemoProps, hostEl: HTMLElement): 
   root.append(html`
     <div class="demo" part="demo">
       <header class="barra" part="barra">
-        <span class="marca"><av-logo></av-logo><span class="titulo">Chat <em>en vivo</em></span><iswc-tag class="etiqueta" color="brand" pill>demo</iswc-tag></span>
-        <span class="ayuda">Abre otra pestaña y habla como otra persona: todo llega al instante.</span>
+        <span class="marca"><span class="titulo">Chat <em>en vivo</em></span><iswc-tag class="etiqueta" color="brand" pill>demo</iswc-tag></span>
+        <span class="ayuda" title="Abre otra pestaña y habla como otra persona: todo llega al instante.">Abre otra pestaña y habla como otra persona: todo llega al instante.</span>
         <span class="acciones"><span class="rotulo">Hablar como</span>
           <iswc-select class="como" aria-label="Hablar como" title="Hablar como">
             ${personas.map((p) => html`<iswc-option value=${p.id}>${p.nombre}</iswc-option>`)}
           </iswc-select>
-          <iswc-button class="otra" variant="soft" color="brand" title="Abrir otra pestaña como otra persona"><iswc-icon slot="start" icon="mdi:tab-plus"></iswc-icon><span class="texto">Otra pestaña</span></iswc-button>
-          <iswc-button class="reiniciar" variant="plain" color="neutral" title="Volver a los datos de muestra"><iswc-icon slot="start" icon="mdi:restore"></iswc-icon><span class="texto">Reiniciar</span></iswc-button>
+          <iswc-button class="otra" variant="soft compact" color="brand" title="Abrir otra pestaña como otra persona"><iswc-icon slot="start" icon="mdi:tab-plus"></iswc-icon><span class="texto">Otra pestaña</span></iswc-button>
+          <iswc-button class="reiniciar" variant="plain compact" color="neutral" title="Volver a los datos de muestra"><iswc-icon slot="start" icon="mdi:restore"></iswc-icon><span class="texto">Reiniciar</span></iswc-button>
           ${conSesion ? html`<iswc-switch class="api" title="Conectar este chat al API real">API real</iswc-switch>` : null}
           <iswc-theme-toggle scope="root"></iswc-theme-toggle>
         </span>

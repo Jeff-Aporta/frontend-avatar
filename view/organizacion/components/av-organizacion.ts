@@ -4,10 +4,12 @@
  * plugin de identidad) y reparte `props` a sus hijos; ellos solo pintan y emiten eventos `av-*`.
  * Las escrituras exigen `avatar.gestionar` (el server manda; aquí solo se ocultan los botones).
  */
+import { soloPestana } from '../../../src/js/components/av/av-pestanas.js';
 import { crearComponente, define, html, avisar } from '../../../src/js/base/componente.js';
 import { z } from '../../../src/js/base/zod.js';
 import type { AvOrganizacionProps, Empresa, EmpresaForm, Equipo, InvitarForm, Miembro, UsuarioMin } from '../../../src/js/consts/schemas/organizacion.schemas.js';
 import { EmpresaSchema, EquipoSchema, IntegranteSchema, MiembroSchema, UsuarioMinSchema } from '../../../src/js/consts/schemas/organizacion.schemas.js';
+import { sinMembresia } from '../../../src/js/consts/estados.js';
 import { auth, cargarPerfil, controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
 import { empresaActiva, estado, fijar } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
@@ -212,20 +214,20 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
       onav-miembros-invitar=${abrirInvitar} onav-invitar-guardar=${invitar} onav-invitar-cerrar=${() => (q<ConProps>('#invitar-form')!.props = { abierto: false })} onav-miembro-quitar=${quitarMiembro}
       onav-equipo-guardar=${guardarEquipo} onav-equipo-eliminar=${eliminarEquipo} onav-integrante-agregar=${agregarIntegrante} onav-integrante-quitar=${quitarIntegrante}>
       <iswc-page-header id="cabecera">
-        ${gestiona ? html`<iswc-button slot="acciones" variant="outlined" color="neutral" id="nueva-empresa" oniswc-click=${() => abrirEmpresa({ iempresa: null, nombre: '', nit: '', sector: '', descripcion: '' })}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nueva empresa</iswc-button>` : null}
-        <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
+        ${gestiona ? html`<iswc-button slot="acciones" variant="outlined compact" color="neutral" id="nueva-empresa" oniswc-click=${() => abrirEmpresa({ iempresa: null, nombre: '', nit: '', sector: '', descripcion: '' })}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nueva empresa</iswc-button>` : null}
+        <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
       </iswc-page-header>
       ${!iempresa
-        ? html`<iswc-empty-state id="sin-empresa">${gestiona ? html`<iswc-button color="brand" oniswc-click=${() => abrirEmpresa({ iempresa: null, nombre: '', nit: '', sector: '', descripcion: '' })}>Crear mi empresa</iswc-button>` : null}</iswc-empty-state>`
+        ? html`<iswc-empty-state id="sin-empresa">${gestiona ? html`<iswc-button variant="compact" color="brand" oniswc-click=${() => abrirEmpresa({ iempresa: null, nombre: '', nit: '', sector: '', descripcion: '' })}>Crear mi empresa</iswc-button>` : null}</iswc-empty-state>`
         : html`
-          <iswc-tab-group active=${props.pestana} oniswc-tab-show=${cambiarPestana}>
+          <av-pestanas vista="organizacion"><iswc-tab-group active=${props.id ?? props.pestana} oniswc-tab-show=${cambiarPestana}>
             <iswc-tab slot="nav" panel="empresa"><iswc-icon slot="start" icon="mdi:domain"></iswc-icon>Empresa</iswc-tab>
             <iswc-tab slot="nav" panel="miembros"><iswc-icon slot="start" icon="mdi:account-group-outline"></iswc-icon>Miembros</iswc-tab>
             <iswc-tab slot="nav" panel="equipos"><iswc-icon slot="start" icon="mdi:account-multiple-outline"></iswc-icon>Equipos</iswc-tab>
             <iswc-tab-panel name="empresa">
               <iswc-card variant="outlined" id="ficha" hidden>
                 <strong slot="header"><iswc-icon icon="mdi:domain"></iswc-icon> <span id="e-nombre"></span></strong>
-                ${gestiona ? html`<iswc-button slot="header-actions" variant="outlined" color="neutral" id="editar-empresa" oniswc-click=${() => empresa && abrirEmpresa({ iempresa: empresa.iempresa, nombre: empresa.nombre, nit: empresa.nit ?? '', sector: empresa.sector ?? '', descripcion: empresa.descripcion ?? '' })}><iswc-icon slot="start" icon="mdi:pencil-outline"></iswc-icon>Editar</iswc-button>` : null}
+                ${gestiona ? html`<iswc-button slot="header-actions" variant="outlined compact" color="neutral" id="editar-empresa" oniswc-click=${() => empresa && abrirEmpresa({ iempresa: empresa.iempresa, nombre: empresa.nombre, nit: empresa.nit ?? '', sector: empresa.sector ?? '', descripcion: empresa.descripcion ?? '' })}><iswc-icon slot="start" icon="mdi:pencil-outline"></iswc-icon>Editar</iswc-button>` : null}
                 <dl class="datos">
                   <dt>NIT</dt><dd id="e-nit"></dd>
                   <dt>Sector</dt><dd id="e-sector"></dd>
@@ -236,7 +238,7 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
             </iswc-tab-panel>
             <iswc-tab-panel name="miembros"><av-miembros id="miembros"></av-miembros></iswc-tab-panel>
             <iswc-tab-panel name="equipos"><av-equipos id="equipos"></av-equipos></iswc-tab-panel>
-          </iswc-tab-group>
+          </iswc-tab-group></av-pestanas>
         `}
       <av-empresa-form id="empresa-form"></av-empresa-form>
       <av-invitar-form id="invitar-form"></av-invitar-form>
@@ -245,7 +247,7 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
   const nombreEmpresa = estado.yo?.empresas.find((e) => e.iempresa === iempresa)?.nombre ?? 'Sin empresa';
   q<ConProps>('#cabecera')!.props = { titulo: 'Organización', subtitulo: `${nombreEmpresa} · empresa, miembros y equipos`, icono: 'mdi:domain' };
   const sinEmpresa = q<ConProps>('#sin-empresa');
-  if (sinEmpresa) sinEmpresa.props = { icono: 'mdi:domain', titulo: 'Aún no perteneces a una empresa', texto: gestiona ? 'Crea la tuya o pide que te inviten.' : 'Pide a un gestor que te invite.' };
+  if (sinEmpresa) sinEmpresa.props = sinMembresia(gestiona ? 'Crea la tuya o pide que te inviten.' : 'Pide a un gestor que te invite.');
   const fichaVacia = q<ConProps>('#ficha-vacia');
   if (fichaVacia) fichaVacia.props = { estado: 'cargando' };
   if (!iempresa) return;
@@ -256,6 +258,6 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
     // Paleta global (Ctrl+K) → «Invitar a alguien a la empresa».
     if (tomarIntencion('organizacion') === 'invitar' && gestiona) await abrirInvitar();
   })();
-});
+}, soloPestana);
 
 define('av-organizacion', AvOrganizacion);

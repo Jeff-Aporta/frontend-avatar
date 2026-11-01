@@ -9,11 +9,11 @@ const AvAbierto = crearComponente<AvAbiertoProps>(import.meta.url, 'av-abierto',
   root.append(html`
     <section class="banda" part="banda" aria-labelledby="t">
       <div class="interior">
-        <h2 id="t" class="titulo">${props.titulo}</h2>
+        <iswc-heading level="2" id="t" class="titulo">${props.titulo}</iswc-heading>
         <div class="rejilla" part="rejilla">
           ${props.pilares.map((p) => html`
             <article class="pilar">
-              <h3 class="nombre"><iswc-icon icon=${p.icono}></iswc-icon><span>${p.titulo}</span></h3>
+              <iswc-heading level="3" class="nombre"><iswc-icon icon=${p.icono}></iswc-icon><span>${p.titulo}</span></iswc-heading>
               <p class="texto">${p.texto}</p>
             </article>
           `)}

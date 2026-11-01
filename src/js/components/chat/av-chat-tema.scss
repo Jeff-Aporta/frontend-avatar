@@ -12,6 +12,10 @@
   padding: t.esp(3) t.esp(4);
 }
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 .titulo {
   margin: 0;
   font-size: 0.9em;
@@ -24,30 +28,18 @@
 }
 
 .muestra {
-  aspect-ratio: 1;
-  padding: 0;
-  border: 1px solid var(--iswc-border);
-  border-radius: 50%;
-  background: var(--iswc-bg-soft);
-  color: var(--iswc-text);
-  font: inherit;
+  width: 100%;
   font-size: 0.7em;
-  cursor: pointer;
 
-  &[aria-checked="true"] {
+  &::part(button) {
+    border: 0.07em solid var(--iswc-border);
+    background: var(--fondo, var(--iswc-bg-soft));
+  }
+
+  &[aria-pressed="true"]::part(button) {
     outline: 0.15em solid var(--iswc-text);
     outline-offset: 0.12em;
   }
-
-  &:focus-visible {
-    outline: 0.15em solid var(--iswc-focus, var(--iswc-accent));
-    outline-offset: 0.12em;
-  }
-}
-
-.propio summary {
-  cursor: pointer;
-  color: var(--iswc-text-soft);
 }
 
 .campos {

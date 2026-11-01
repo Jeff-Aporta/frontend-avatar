@@ -40,19 +40,19 @@ const AvChatAdjunto = crearComponente<AvChatAdjuntoProps>(
     const cuerpo = !a.url
       ? html`<div class="no-disponible"><iswc-icon icon="mdi:file-hidden"></iswc-icon><span>${a.nombre}</span></div>`
       : tipo === 'imagen'
-      ? html`<button class="miniatura" type="button" onclick=${ver} aria-label=${`${t.abrir} ${a.nombre}`}><img src=${a.url} alt=${a.nombre} loading="lazy" decoding="async" style=${proporcion}></button>`
+      ? html`<iswc-button class="miniatura" variant="row" color="neutral" onclick=${ver} aria-label=${`${t.abrir} ${a.nombre}`}><img src=${a.url} alt=${a.nombre} loading="lazy" decoding="async" style=${proporcion}></iswc-button>`
       : tipo === 'video'
-      ? html`<button class="miniatura video" type="button" onclick=${ver} aria-label=${`${t.reproducir} ${a.nombre}`}><video src=${a.url} preload="metadata" muted playsinline style=${proporcion}></video><span class="play"><iswc-icon icon="mdi:play"></iswc-icon></span></button>`
+      ? html`<iswc-button class="miniatura video" variant="row" color="neutral" onclick=${ver} aria-label=${`${t.reproducir} ${a.nombre}`}><video src=${a.url} preload="metadata" muted playsinline style=${proporcion}></video><span class="play"><iswc-icon icon="mdi:play"></iswc-icon></span></iswc-button>`
       : html`
         <div class="documento" part="documento">
           <span class="icono" data-ext=${ext}><iswc-icon icon=${iconoArchivo(a.nombre, a.mime)}></iswc-icon></span>
           <span class="datos"><strong class="nombre" title=${a.nombre}>${a.nombre}</strong><span class="detalle"><iswc-format-bytes value=${String(a.bytes)} autofit></iswc-format-bytes>${ext ? ` · ${ext}` : ''}</span></span>
-          ${props.modo === 'burbuja' ? html`<iswc-button class="bajar" variant="soft" color="neutral" href=${a.url} download=${a.nombre} title=${t.descargar} aria-label=${t.descargar}><iswc-icon icon="mdi:download"></iswc-icon></iswc-button>` : null}
+          ${props.modo === 'burbuja' ? html`<iswc-button class="bajar" variant="soft compact" color="neutral" href=${a.url} download=${a.nombre} title=${t.descargar} aria-label=${t.descargar}><iswc-icon icon="mdi:download"></iswc-icon></iswc-button>` : null}
         </div>`;
     root.append(html`
       <div class="adjunto" part="adjunto" data-modo=${props.modo} data-tipo=${tipo} data-error=${props.error ? '1' : '0'}>
         ${cuerpo}
-        ${props.modo === 'previa' ? html`<iswc-button class="quitar" variant="filled" color="neutral" pill title=${t.quitar} aria-label=${`${t.quitar} ${a.nombre}`} oniswc-click=${quitar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>` : null}
+        ${props.modo === 'previa' ? html`<iswc-button class="quitar" variant="filled compact" color="neutral" pill title=${t.quitar} aria-label=${`${t.quitar} ${a.nombre}`} oniswc-click=${quitar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>` : null}
         ${props.modo === 'previa' && props.progreso != null ? html`<iswc-progress-bar class="progreso" value=${String(Math.round(props.progreso * 100))}></iswc-progress-bar>` : null}
         ${props.error ? html`<span class="error" role="alert">${props.error}</span>` : null}
       </div>

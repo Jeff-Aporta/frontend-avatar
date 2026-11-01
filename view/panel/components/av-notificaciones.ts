@@ -12,11 +12,11 @@ const AvNotificaciones = crearComponente<AvNotificacionesProps>(import.meta.url,
   root.append(html`
     <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
       <strong slot="header"><iswc-icon icon="mdi:bell-outline"></iswc-icon> Notificaciones ${sinLeer.length ? html`<iswc-badge color="danger" pill>${sinLeer.length}</iswc-badge>` : null}</strong>
-      ${sinLeer.length ? html`<iswc-button slot="header-actions" variant="plain" color="neutral" class="leer" oniswc-click=${() => emitir(host, 'av-notificaciones-leer', { ids: [] })}>Marcar leídas</iswc-button>` : null}
+      ${sinLeer.length ? html`<iswc-button slot="header-actions" variant="plain compact" color="neutral" class="leer" oniswc-click=${() => emitir(host, 'av-notificaciones-leer', { ids: [] })}>Marcar leídas</iswc-button>` : null}
       ${props.cargando
-        ? html`<iswc-empty-state class="vacio" id="cargando"></iswc-empty-state>`
+        ? html`<iswc-empty-state class="vacio" estado="cargando"></iswc-empty-state>`
         : props.items.length === 0
-        ? html`<iswc-empty-state class="vacio" id="vacio"></iswc-empty-state>`
+        ? html`<iswc-empty-state class="vacio" icono="mdi:bell-check-outline" titulo="Al día" texto="No tienes notificaciones."></iswc-empty-state>`
         : html`<ul class="lista" part="lista">
             ${props.items.slice(0, 8).map((n) => html`
               <li class="item" data-leida=${n.leida ? '1' : '0'}>
@@ -28,10 +28,6 @@ const AvNotificaciones = crearComponente<AvNotificacionesProps>(import.meta.url,
           </ul>`}
     </iswc-card>
   `);
-  const cargando = root.querySelector('#cargando') as (HTMLElement & { props: Record<string, unknown> }) | null;
-  if (cargando) cargando.props = { estado: 'cargando' };
-  const vacio = root.querySelector('#vacio') as (HTMLElement & { props: Record<string, unknown> }) | null;
-  if (vacio) vacio.props = { icono: 'mdi:bell-check-outline', titulo: 'Al día', texto: 'No tienes notificaciones.' };
 });
 
 define('av-notificaciones', AvNotificaciones);

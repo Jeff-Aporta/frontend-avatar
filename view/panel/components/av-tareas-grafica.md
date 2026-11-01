@@ -1,6 +1,6 @@
 ---
 name: av-tareas-grafica
-description: Tarjeta con la dona de tareas por estado (iswc-doughnut-chart) del resumen de la empresa.
+description: Traduce las tareas del resumen de la empresa a una dona en av-grafica.
 ---
 
 # `<av-tareas-grafica>`
@@ -12,7 +12,7 @@ Abiertas / en progreso / en revisión / cerradas, en una dona del kit.
 ```
 <av-tareas-grafica>
   #shadow-root
-    <iswc-card part="tarjeta"><iswc-doughnut-chart part="grafica"><script type="application/json"> | <iswc-empty-state></iswc-card>
+    <av-grafica>
 ```
 
 ## Atributos observados

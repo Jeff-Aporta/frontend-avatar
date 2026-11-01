@@ -1,4 +1,4 @@
-<!-- Copia de skills/iswc-root/reference.md del kit Jeff-Aporta/is-webcomponents@42322344cbaa25967d44361c99b78c963d0f8543. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- Copia de skills/iswc-root/reference.md del kit Jeff-Aporta/is-webcomponents@6c141b86cc2dd38a7e792382ccf773b0ead4fce9. No editar: se refresca con `deno task vendor:iswc`. -->
 <!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/reference.md -->
 # Intención → componente is-*
 
@@ -23,6 +23,9 @@ Usar este mapa al elegir tag. API exacta: MD del módulo en el repo.
 | Persona: avatar, nombre, detalle | `iswc-person` | `iswc-avatar` + spans |
 | Fila de indicadores | `iswc-stat-group` | rejilla propia de `iswc-stat` |
 | Cliente activo (multi-tenant) | `iswc-tenant-selector` | `iswc-select` en cada app |
+| OCR, voz a texto, traducción u otra IA con su pantalla | `iswc-ai-tool` | `runonweb` a mano |
+| IA dentro de otro componente, sin UI | `ejecutar` de `lib/ai/motores.min.js` | importar `runonweb` o bajar modelos a mano |
+| Buscar por significado en el navegador | `vectorLocal` + `ordenarPorSentido` de `lib/ai/vector-local.min.js` | modelo por defecto de `runonweb/embed` (inglés) |
 | Búsqueda global con orden por significado | `iswc-semantic-search` | paleta + botón a mano |
 | Carga en línea con texto | `iswc-loading` | spinner + span |
 | Paso de un proceso (pendiente, hecho, error) | `iswc-status-pill` | etiqueta con spinner a mano |

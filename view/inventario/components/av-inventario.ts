@@ -8,17 +8,19 @@
  * Búsqueda: `buscarCatalogo` centraliza la búsqueda de cada tabla (hoy por texto sobre lo cargado) y
  * `relacionadosProducto` el hueco «Productos relacionados»: ahí se enchufa la búsqueda semántica sin tocar los hijos.
  */
+import { soloPestana } from '../../../src/js/components/av/av-pestanas.js';
 import { crearComponente, define, html, avisar } from '../../../src/js/base/componente.js';
 import { escucharIntencion } from '../../../src/js/base/intencion.js';
 import { z } from '../../../src/js/base/zod.js';
 import { AlertaStockSchema, type AvInventarioProps, type ClientePedido, ClientePedidoSchema, type ItemPedido, ItemPedidoSchema, type Movimiento, type MovimientoDatos, MovimientoSchema, type Pedido, type PedidoDatos, PedidoSchema, type Producto, type ProductoDatos, ProductoSchema, type Proveedor, type ProveedorDatos, ProveedorSchema, ResumenInventarioSchema } from '../../../src/js/consts/schemas/inventario.schemas.js';
+import { sinEmpresa } from '../../../src/js/consts/estados.js';
 import { controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
 import { filas, filtrarTexto } from '../../../src/js/core/datos.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
-import { camposMovimiento, camposPedido, camposProducto, camposProveedor, filasMovimientos, filasPedidos, filasProductos, filasProveedores, indicadoresInventario, relacionadosDe, totalPedido } from '../utils/inventario.js';
+import { camposMovimiento, camposPedido, camposProducto, camposProveedor, filasMovimientos, filasPedidos, filasProductos, filasProveedores, indicadoresInventario, relacionadosDe, tablaInventario, totalPedido } from '../utils/inventario.js';
 import './av-stock-alertas.js';
-import './av-inventario-tabla.js';
+import '../../../src/js/components/av/av-tabla.js';
 import './av-producto-form.js';
 import './av-movimiento-form.js';
 import './av-pedido-form.js';
@@ -262,26 +264,26 @@ const AvInventario = crearComponente<AvInventarioProps>(import.meta.url, 'av-inv
       onav-pedido-guardar=${guardarPedido} onav-pedido-eliminar=${eliminarPedido} onav-pedido-form-cerrar=${cerrar('form-pedido')} onav-pedido-form-error=${aviso}
       onav-proveedor-guardar=${guardarProveedor} onav-proveedor-eliminar=${eliminarProveedor} onav-proveedor-form-cerrar=${cerrar('form-proveedor')} onav-proveedor-form-error=${aviso}>
       <iswc-page-header id="cabecera">
-        <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
-        <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirMovimiento(null, 'entrada')}><iswc-icon slot="start" icon="mdi:swap-vertical-bold"></iswc-icon>Movimiento</iswc-button>
-        <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => void abrirPedido(null)}><iswc-icon slot="start" icon="mdi:truck-plus-outline"></iswc-icon>Pedido</iswc-button>
-        <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirProveedor(null)}><iswc-icon slot="start" icon="mdi:factory"></iswc-icon>Proveedor</iswc-button>
-        <iswc-button slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => void abrirProducto(null)}><iswc-icon slot="start" icon="mdi:package-variant-plus"></iswc-icon>Nuevo producto</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirMovimiento(null, 'entrada')}><iswc-icon slot="start" icon="mdi:swap-vertical-bold"></iswc-icon>Movimiento</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => void abrirPedido(null)}><iswc-icon slot="start" icon="mdi:truck-plus-outline"></iswc-icon>Pedido</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirProveedor(null)}><iswc-icon slot="start" icon="mdi:factory"></iswc-icon>Proveedor</iswc-button>
+        <iswc-button variant="compact" slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => void abrirProducto(null)}><iswc-icon slot="start" icon="mdi:package-variant-plus"></iswc-icon>Nuevo producto</iswc-button>
       </iswc-page-header>
       ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`
         ${puedeEscribir ? null : html`<iswc-callout color="warning"><strong>Solo lectura.</strong> Tu rol no incluye el permiso de inventario (avatar.inventario): puedes consultar stock, kardex y pedidos, pero no mover stock ni editar el catálogo.</iswc-callout>`}
         <iswc-stat-group id="kpis"></iswc-stat-group>
         <av-stock-alertas id="alertas"></av-stock-alertas>
-        <iswc-tab-group active=${pestana}>
+        <av-pestanas vista="inventario"><iswc-tab-group active=${pestana}>
           <iswc-tab slot="nav" panel="productos"><iswc-icon slot="start" icon="mdi:package-variant-closed"></iswc-icon>Productos</iswc-tab>
           <iswc-tab slot="nav" panel="movimientos"><iswc-icon slot="start" icon="mdi:swap-vertical"></iswc-icon>Movimientos</iswc-tab>
           <iswc-tab slot="nav" panel="pedidos"><iswc-icon slot="start" icon="mdi:truck-outline"></iswc-icon>Pedidos</iswc-tab>
           <iswc-tab slot="nav" panel="proveedores"><iswc-icon slot="start" icon="mdi:factory"></iswc-icon>Proveedores</iswc-tab>
-          <iswc-tab-panel name="productos"><av-inventario-tabla id="tabla-productos"></av-inventario-tabla></iswc-tab-panel>
-          <iswc-tab-panel name="movimientos"><av-inventario-tabla id="tabla-movimientos"></av-inventario-tabla></iswc-tab-panel>
-          <iswc-tab-panel name="pedidos"><av-inventario-tabla id="tabla-pedidos"></av-inventario-tabla></iswc-tab-panel>
-          <iswc-tab-panel name="proveedores"><av-inventario-tabla id="tabla-proveedores"></av-inventario-tabla></iswc-tab-panel>
-        </iswc-tab-group>
+          <iswc-tab-panel name="productos"><av-tabla id="tabla-productos"></av-tabla></iswc-tab-panel>
+          <iswc-tab-panel name="movimientos"><av-tabla id="tabla-movimientos"></av-tabla></iswc-tab-panel>
+          <iswc-tab-panel name="pedidos"><av-tabla id="tabla-pedidos"></av-tabla></iswc-tab-panel>
+          <iswc-tab-panel name="proveedores"><av-tabla id="tabla-proveedores"></av-tabla></iswc-tab-panel>
+        </iswc-tab-group></av-pestanas>
       `}
       <av-producto-form id="form-producto"></av-producto-form>
       <av-movimiento-form id="form-movimiento"></av-movimiento-form>
@@ -292,15 +294,15 @@ const AvInventario = crearComponente<AvInventarioProps>(import.meta.url, 'av-inv
   const nombreEmpresa = estado.yo?.empresas.find((e) => e.iempresa === iempresa)?.nombre ?? 'Avatar';
   $('cabecera').props = { titulo: 'Inventario', subtitulo: `Productos, stock, pedidos y proveedores · ${nombreEmpresa}`, icono: 'mdi:warehouse' };
   if (!iempresa) {
-    $('sin-empresa').props = { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Elige una empresa en la barra para ver su inventario.' };
+    $('sin-empresa').props = sinEmpresa('su inventario');
     return;
   }
-  for (const e of PESTANAS) $(`tabla-${e}`).props = { entidad: e, cargando: true, puedeEscribir };
+  for (const e of PESTANAS) $(`tabla-${e}`).props = { ...tablaInventario(e), cargando: true, puedeEscribir };
   recargar();
   escucharIntencion(host, 'inventario', (intencion) => {
     pendiente = intencion;
     atender();
   });
-});
+}, soloPestana);
 
 define('av-inventario', AvInventario);

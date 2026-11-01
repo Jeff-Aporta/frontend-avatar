@@ -29,17 +29,10 @@
 }
 
 .fijado {
-  display: flex;
-  align-items: center;
-  gap: t.esp(3);
-  margin: 0;
-  padding: t.esp(2) t.esp(4);
-  border: 0;
-  border-bottom: 1px solid var(--iswc-border-soft);
-  font: inherit;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
+  --iswc-button-row-gap: #{t.esp(3)};
+  --iswc-button-row-padding: #{t.esp(2)} #{t.esp(4)};
+  --iswc-button-font-weight: 400;
+  border-bottom: 0.07em solid var(--iswc-border-soft);
   @include c.vidrio;
   @include c.entrada(-0.3em);
 
@@ -139,15 +132,9 @@
   right: t.esp(4);
   bottom: t.esp(4);
   z-index: 3;
-  display: grid;
-  place-items: center;
-  width: 2.6em;
-  height: 2.6em;
-  border: 1px solid var(--av-borde-seccion, var(--iswc-border-soft));
+  --iswc-button-glyph-size: 2.6em;
+  border: 0.07em solid var(--av-borde-seccion, var(--iswc-border-soft));
   border-radius: 50%;
-  color: var(--iswc-text);
-  font-size: 1em;
-  cursor: pointer;
   box-shadow: var(--av-sombra-tarjeta, var(--iswc-shadow));
   @include c.vidrio;
   @include c.entrada(0.6em);
@@ -155,7 +142,8 @@
   &:hover,
   &:focus-visible {
     color: var(--iswc-brand-text);
-    outline: none;
+    outline: 2px solid var(--iswc-focus);
+    outline-offset: 1px;
     @include c.neon;
   }
 
@@ -224,27 +212,17 @@
   }
 
   .rapida {
+    --iswc-button-glyph-size: 1.75em;
     flex: none;
-    display: grid;
-    place-items: center;
-    width: 1.75em;
-    height: 1.75em;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
     font-size: 1.15em;
-    cursor: pointer;
     transition: transform 0.12s ease;
     pointer-events: auto;
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       transform: scale(1.25);
-      background: var(--iswc-brand-soft);
-      outline: none;
     }
 
-    &[data-mia="1"] {
+    &[data-mia="1"]::part(button) {
       background: var(--iswc-brand-soft-active, var(--iswc-brand-soft));
     }
 

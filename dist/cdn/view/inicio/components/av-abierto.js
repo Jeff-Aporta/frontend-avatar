@@ -1,15 +1,15 @@
-import{crearComponente as o,define as e,html as t}from"../../../js/base/componente.js?v=p6quri";const r=o(import.meta.url,"av-abierto",{titulo:"",pilares:[]},(s,a)=>{s.append(t`
+import{crearComponente as t,define as o,html as e}from"../../../js/base/componente.js?v=m5nu5c";const l=t(import.meta.url,"av-abierto",{titulo:"",pilares:[]},(s,a)=>{s.append(e`
     <section class="banda" part="banda" aria-labelledby="t">
       <div class="interior">
-        <h2 id="t" class="titulo">${a.titulo}</h2>
+        <iswc-heading level="2" id="t" class="titulo">${a.titulo}</iswc-heading>
         <div class="rejilla" part="rejilla">
-          ${a.pilares.map(i=>t`
+          ${a.pilares.map(i=>e`
             <article class="pilar">
-              <h3 class="nombre"><iswc-icon icon=${i.icono}></iswc-icon><span>${i.titulo}</span></h3>
+              <iswc-heading level="3" class="nombre"><iswc-icon icon=${i.icono}></iswc-icon><span>${i.titulo}</span></iswc-heading>
               <p class="texto">${i.texto}</p>
             </article>
           `)}
         </div>
       </div>
     </section>
-  `)});e("av-abierto",r);
+  `)});o("av-abierto",l);

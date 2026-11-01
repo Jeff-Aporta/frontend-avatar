@@ -1,10 +1,10 @@
-import{crearComponente as t,define as c,html as o}from"../../../js/base/componente.js?v=p6quri";const i=t(import.meta.url,"av-avo-mensaje",{turno:null,nombre:""},(a,s)=>{const e=s.turno;if(!e)return;const n=e.quien==="avo";a.append(o`
-    <article class="turno" part="turno" data-quien=${e.quien}>
-      ${n?o`<span class="avo" part="avatar" title="AVO"><iswc-icon icon="mdi:robot-outline"></iswc-icon></span>`:o`<iswc-person id="persona" class="persona"></iswc-person>`}
+import{crearComponente as n,define as r,html as e}from"../../../js/base/componente.js?v=m5nu5c";const c=n(import.meta.url,"av-avo-mensaje",{turno:null,nombre:""},(t,o)=>{const a=o.turno;if(!a)return;const s=a.quien==="avo";t.append(e`
+    <article class="turno" part="turno" data-quien=${a.quien}>
+      ${s?e`<span class="avo" part="avatar" title="AVO"><iswc-icon icon="mdi:robot-outline"></iswc-icon></span>`:e`<iswc-person class="persona" compacto usuario=${o.nombre||"yo"} nombre=${o.nombre}></iswc-person>`}
       <div class="burbuja" part="burbuja">
-        ${n?o`<strong class="quien">AVO</strong>`:null}
-        <p class="texto">${e.texto}</p>
-        ${e.creado?o`<iswc-relative-time class="cuando" date=${e.creado} format="short"></iswc-relative-time>`:null}
+        ${s?e`<strong class="quien">AVO</strong>`:null}
+        <p class="texto">${a.texto}</p>
+        ${a.creado?e`<iswc-relative-time class="cuando" date=${a.creado} format="short"></iswc-relative-time>`:null}
       </div>
     </article>
-  `);const r=a.querySelector("#persona");r&&(r.props={usuario:s.nombre||"yo",nombre:s.nombre||null,compacto:!0})});c("av-avo-mensaje",i);
+  `)});r("av-avo-mensaje",c);

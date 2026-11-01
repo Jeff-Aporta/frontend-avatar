@@ -32,14 +32,14 @@ const AvChatAudio = crearComponente<AvChatAudioProps>(import.meta.url, 'av-chat-
   const barras = ondaDe(props.onda, BARRAS, props.url.slice(-64));
   root.append(html`
     <div class="audio" part="audio" data-propio=${props.propio ? '1' : '0'}>
-      <iswc-button class="play" variant="soft" color="brand" pill title=${t.reproducir} aria-label=${t.reproducir}><iswc-icon icon="mdi:play"></iswc-icon></iswc-button>
+      <iswc-button class="play" variant="soft compact" color="brand" pill title=${t.reproducir} aria-label=${t.reproducir}><iswc-icon icon="mdi:play"></iswc-icon></iswc-button>
       <div class="pista">
         <div class="onda" role="slider" tabindex="0" aria-label=${t.notaDeVoz} aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           ${barras.map((b) => html`<span class="barra" style=${`--h:${b.toFixed(2)}`}></span>`)}
         </div>
         <span class="tiempos"><span class="tiempo">${duracionTexto(props.duracion ?? 0)}</span></span>
       </div>
-      <button class="velocidad" type="button" title=${t.velocidad}>1×</button>
+      <iswc-button class="velocidad" variant="outlined compact" color="neutral" shape="pill" title=${t.velocidad}>1×</iswc-button>
       <iswc-icon class="mic" icon="mdi:microphone"></iswc-icon>
     </div>
   `);
@@ -48,7 +48,7 @@ const AvChatAudio = crearComponente<AvChatAudioProps>(import.meta.url, 'av-chat-
   const icono = boton.querySelector('iswc-icon') as HTMLElement;
   const onda = root.querySelector('.onda') as HTMLElement;
   const tiempo = root.querySelector('.tiempo') as HTMLElement;
-  const vel = root.querySelector('.velocidad') as HTMLButtonElement;
+  const vel = root.querySelector('.velocidad') as HTMLElement;
   const listaBarras = [...root.querySelectorAll<HTMLElement>('.barra')];
   const pintar = () => {
     const d = total();
@@ -100,11 +100,11 @@ const AvChatAudio = crearComponente<AvChatAudioProps>(import.meta.url, 'av-chat-
     else return;
     e.preventDefault();
   });
-  vel.addEventListener('click', () => {
+  vel.addEventListener('iswc-click', () => {
     velocidad = (velocidad + 1) % VELOCIDADES.length;
     audio.playbackRate = VELOCIDADES[velocidad]!;
     vel.textContent = `${VELOCIDADES[velocidad]}×`;
-    vel.dataset['activa'] = velocidad ? '1' : '0';
+    vel.setAttribute('color', velocidad ? 'brand' : 'neutral');
   });
   pintar();
 });

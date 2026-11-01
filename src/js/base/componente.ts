@@ -253,6 +253,15 @@ export function crearComponente<P extends object>(
   };
 }
 
+type ToastEstatico = { promise?(p: Promise<unknown>, mensajes: object): Promise<unknown> };
+
+/** Un solo toast que acompaña a una promesa: `cargando` mientras corre y `exito` o `error` al terminar, en el mismo aviso. */
+export function avisarPromesa<T>(p: Promise<T>, mensajes: { cargando: string; exito: string; error: string }): Promise<T> {
+  const toast = customElements.get('iswc-toast') as unknown as ToastEstatico | undefined;
+  toast?.promise?.(p, { loading: mensajes.cargando, success: mensajes.exito, error: mensajes.error }).catch(() => {});
+  return p;
+}
+
 /**
  * Notificación con el toast del kit: el de `<iswc-app-shell toast>` (área pública), el `<iswc-toast>` del shell privado
  * (`iswc-doc-layout`) o, en una vista aislada o demo, el primer `<iswc-toast>` del documento; sin ninguno, a consola. Los errores duran más.

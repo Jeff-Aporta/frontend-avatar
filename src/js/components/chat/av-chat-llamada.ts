@@ -34,13 +34,13 @@ function montar(root: ShadowRoot, inicial: AvChatLlamadaProps, hostEl: HTMLEleme
         <video class="propio" muted playsinline autoplay></video>
         <p class="aviso" role="status" hidden></p>
         <div class="controles">
-          <iswc-button class="c-rechazar" color="danger" pill title=${t.rechazar} aria-label=${t.rechazar}><iswc-icon icon="mdi:phone-hangup"></iswc-icon></iswc-button>
-          <iswc-button class="c-aceptar" color="success" pill title=${t.aceptar} aria-label=${t.aceptar}><iswc-icon icon="mdi:phone"></iswc-icon></iswc-button>
-          <iswc-button class="c-mic" variant="soft" color="neutral" pill></iswc-button>
-          <iswc-button class="c-cam" variant="soft" color="neutral" pill></iswc-button>
-          <iswc-button class="c-pantalla" variant="soft" color="neutral" pill></iswc-button>
-          <iswc-button class="c-video" variant="soft" color="neutral" pill title=${t.cambiarAVideo} aria-label=${t.cambiarAVideo}><iswc-icon icon="mdi:video-plus-outline"></iswc-icon></iswc-button>
-          <iswc-button class="c-colgar" color="danger" pill title=${t.colgar} aria-label=${t.colgar}><iswc-icon icon="mdi:phone-hangup"></iswc-icon></iswc-button>
+          <iswc-button variant="compact" class="c-rechazar" color="danger" pill title=${t.rechazar} aria-label=${t.rechazar}><iswc-icon icon="mdi:phone-hangup"></iswc-icon></iswc-button>
+          <iswc-button variant="compact" class="c-aceptar" color="success" pill title=${t.aceptar} aria-label=${t.aceptar}><iswc-icon icon="mdi:phone"></iswc-icon></iswc-button>
+          <iswc-button class="c-mic" variant="soft compact" color="neutral" pill></iswc-button>
+          <iswc-button class="c-cam" variant="soft compact" color="neutral" pill></iswc-button>
+          <iswc-button class="c-pantalla" variant="soft compact" color="neutral" pill></iswc-button>
+          <iswc-button class="c-video" variant="soft compact" color="neutral" pill title=${t.cambiarAVideo} aria-label=${t.cambiarAVideo}><iswc-icon icon="mdi:video-plus-outline"></iswc-icon></iswc-button>
+          <iswc-button variant="compact" class="c-colgar" color="danger" pill title=${t.colgar} aria-label=${t.colgar}><iswc-icon icon="mdi:phone-hangup"></iswc-icon></iswc-button>
         </div>
       </div>
     </div>

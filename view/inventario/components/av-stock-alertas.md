@@ -14,7 +14,7 @@ Franja de alertas de stock (agotados primero) con stock, mínimo, ubicación y R
   #shadow-root
     <section part="alertas"><h2 class="rotulo"> <iswc-badge>
       <div part="franja"><article part="alerta" data-agotado><iswc-tag> sku <iswc-button class="nombre"> cifras <iswc-button class="reponer"></article>×N</div></section>
-    | <iswc-callout tone="success"> | <iswc-skeleton>×3
+    | <iswc-callout color="success"> | <iswc-skeleton>×3
 ```
 
 ## Atributos observados

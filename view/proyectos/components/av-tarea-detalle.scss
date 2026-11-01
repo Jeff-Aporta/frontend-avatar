@@ -1,6 +1,10 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-tarea-detalle — cajón lateral con la tarea y sus comentarios. */
 :host {
   display: contents;

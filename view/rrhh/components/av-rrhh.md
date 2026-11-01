@@ -14,8 +14,8 @@ Shell de RRHH: KPIs, gráficas, empleados, control de asistencia con historial y
   #shadow-root
     <div part="pagina"><iswc-page-header> <iswc-callout> (sin permiso) <iswc-stat-group id="kpis">
       <iswc-tab-group><iswc-tab>×4
-        general: <av-rrhh-grafica> <av-solicitudes compacto> · empleados: <av-rrhh-tabla>
-        asistencia: <av-asistencia-dia> <av-rrhh-tabla> · solicitudes: <av-solicitudes></iswc-tab-group>
+        general: <av-rrhh-grafica> <av-solicitudes compacto> · empleados: <av-tabla>
+        asistencia: <av-asistencia-dia> <av-tabla> · solicitudes: <av-solicitudes></iswc-tab-group>
       <av-empleado-form> <av-solicitud-form></div>
 ```
 

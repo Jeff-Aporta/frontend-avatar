@@ -15,9 +15,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 100em;
+  max-width: var(--av-pagina-ancho, 100em);
   margin: 0 auto;
-  padding: t.esp(5) t.esp(5) t.esp(4);
+  padding: var(--av-pagina-relleno, t.esp(5) t.esp(5) t.esp(4));
   gap: t.esp(3);
   box-sizing: border-box;
 }
@@ -25,7 +25,7 @@
 .chat {
   flex: 1;
   min-height: 30em;
-  height: calc(100dvh - 11em);
+  height: 100%;
   border: 1px solid var(--av-borde-seccion, var(--iswc-border-soft));
   border-radius: t.radio(lg);
   overflow: hidden;
@@ -38,8 +38,14 @@
   }
 
   .chat {
-    height: calc(100dvh - 8em);
+    height: 100%;
     min-height: 24em;
     border-radius: t.radio(md);
   }
+}
+
+/* En layout completo el contenido va al borde; los títulos conservan aire. */
+iswc-page-header,
+iswc-stat-group {
+  margin-inline: var(--av-cabecera-relleno, 0);
 }

@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-pedido-form id=\"d\"></av-pedido-form></div>",
+          "html": "<iswc-callout color=\"brand\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-pedido-form id=\"d\"></av-pedido-form></div>",
           "target": "#d",
           "props": {
             "abierto": false,
@@ -61,7 +61,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Con Pedido o al abrir un pedido.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No mueve stock: la recepción se registra como movimiento.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Con Pedido o al abrir un pedido.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No mueve stock: la recepción se registra como movimiento.</iswc-callout>"
         }
       ]
     }

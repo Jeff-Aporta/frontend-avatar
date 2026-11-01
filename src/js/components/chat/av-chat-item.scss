@@ -6,11 +6,11 @@
 :host {
   @include m.host-bloque;
   outline: none;
-  border-radius: t.radio(lg);
 }
 
 :host(:focus-visible) .fila {
-  box-shadow: inset 0 0 0 1px var(--iswc-focus, var(--iswc-accent));
+  outline: 2px solid var(--iswc-focus);
+  outline-offset: -2px;
 }
 
 .fila {
@@ -20,7 +20,6 @@
   align-items: center;
   gap: t.esp(3);
   padding: t.esp(2) t.esp(3);
-  border-radius: t.radio(lg);
   cursor: pointer;
   transition: background 0.16s ease;
 

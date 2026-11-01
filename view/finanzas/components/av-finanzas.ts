@@ -7,17 +7,20 @@
  * Búsqueda: `buscarCatalogo` centraliza la búsqueda de cada tabla (hoy por texto sobre lo cargado). Es el punto donde
  * se enchufa la búsqueda semántica del API sin tocar los hijos.
  */
+import { soloPestana } from '../../../src/js/components/av/av-pestanas.js';
 import { crearComponente, define, html, avisar } from '../../../src/js/base/componente.js';
 import { escucharIntencion } from '../../../src/js/base/intencion.js';
 import { type AvFinanzasProps, type ClienteRef, ClienteRefSchema, ConversionSchema, type Factura, type FacturaDatos, FacturaSchema, ResumenFinanzasSchema, type Tasa, TasaSchema, type Transaccion, type TransaccionDatos, TransaccionSchema } from '../../../src/js/consts/schemas/finanzas.schemas.js';
+import { sinEmpresa } from '../../../src/js/consts/estados.js';
 import { controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
 import { filas, filtrarTexto } from '../../../src/js/core/datos.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
-import { camposFactura, camposTransaccion, categoriasDe, filasFacturas, filasTransacciones, indicadoresFinanzas } from '../utils/finanzas.js';
+import { camposFactura, camposTransaccion, categoriasDe, filasFacturas, filasTransacciones, indicadoresFinanzas, tablaFinanzas } from '../utils/finanzas.js';
 import './av-finanzas-grafica.js';
 import './av-conversor.js';
-import './av-finanzas-tabla.js';
+import './av-finanzas-hoja.js';
+import '../../../src/js/components/av/av-tabla.js';
 import './av-transaccion-form.js';
 import './av-factura-form.js';
 
@@ -25,7 +28,7 @@ type ConProps = HTMLElement & { props: Record<string, unknown> };
 type Detalle<T> = CustomEvent<T>;
 type Entidad = 'transacciones' | 'facturas';
 
-const PESTANAS = ['general', 'transacciones', 'facturas'] as const;
+const PESTANAS = ['general', 'transacciones', 'facturas', 'hoja'] as const;
 
 /** Búsqueda de catálogo de la vista: hoy por texto sobre lo cargado. Aquí se enchufa la búsqueda semántica. */
 async function buscarCatalogo<T>(_entidad: Entidad, texto: string, items: T[], campos: (x: T) => unknown[]): Promise<T[]> {
@@ -72,6 +75,7 @@ const AvFinanzas = crearComponente<AvFinanzasProps>(import.meta.url, 'av-finanza
       avisar(mensajeDe(err), 'danger');
     }
     cargado.transacciones = true;
+    $('hoja').props = { transacciones };
     await pintarTabla('transacciones');
   };
   const cargarFacturas = async () => {
@@ -218,23 +222,25 @@ const AvFinanzas = crearComponente<AvFinanzasProps>(import.meta.url, 'av-finanza
       onav-factura-form-cerrar=${() => ($('form-factura').props = { abierto: false })}
       onav-factura-form-error=${(e: Event) => avisar((e as Detalle<{ mensaje: string }>).detail.mensaje, 'warning')}>
       <iswc-page-header id="cabecera">
-        <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
-        <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirFactura(null)}><iswc-icon slot="start" icon="mdi:file-document-plus-outline"></iswc-icon>Nueva factura</iswc-button>
-        <iswc-button slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirTransaccion(null)}><iswc-icon slot="start" icon="mdi:plus-circle-outline"></iswc-icon>Nueva transacción</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirFactura(null)}><iswc-icon slot="start" icon="mdi:file-document-plus-outline"></iswc-icon>Nueva factura</iswc-button>
+        <iswc-button variant="compact" slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirTransaccion(null)}><iswc-icon slot="start" icon="mdi:plus-circle-outline"></iswc-icon>Nueva transacción</iswc-button>
       </iswc-page-header>
       ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`
         ${puedeEscribir ? null : html`<iswc-callout color="warning"><strong>Solo lectura.</strong> Tu rol no incluye el permiso de finanzas (avatar.finanzas): puedes consultar cifras, transacciones y facturas, pero no registrar, emitir ni cobrar.</iswc-callout>`}
         <iswc-stat-group id="kpis"></iswc-stat-group>
-        <iswc-tab-group active=${pestana}>
+        <av-pestanas vista="finanzas"><iswc-tab-group active=${pestana}>
           <iswc-tab slot="nav" panel="general"><iswc-icon slot="start" icon="mdi:view-dashboard-variant-outline"></iswc-icon>General</iswc-tab>
           <iswc-tab slot="nav" panel="transacciones"><iswc-icon slot="start" icon="mdi:swap-vertical"></iswc-icon>Transacciones</iswc-tab>
           <iswc-tab slot="nav" panel="facturas"><iswc-icon slot="start" icon="mdi:file-document-multiple-outline"></iswc-icon>Facturas</iswc-tab>
+          <iswc-tab slot="nav" panel="hoja"><iswc-icon slot="start" icon="mdi:table-large"></iswc-icon>Hoja</iswc-tab>
           <iswc-tab-panel name="general">
             <div class="general"><av-finanzas-grafica id="grafica"></av-finanzas-grafica><av-conversor id="conversor"></av-conversor></div>
           </iswc-tab-panel>
-          <iswc-tab-panel name="transacciones"><av-finanzas-tabla id="tabla-transacciones"></av-finanzas-tabla></iswc-tab-panel>
-          <iswc-tab-panel name="facturas"><av-finanzas-tabla id="tabla-facturas"></av-finanzas-tabla></iswc-tab-panel>
-        </iswc-tab-group>
+          <iswc-tab-panel name="transacciones"><av-tabla id="tabla-transacciones"></av-tabla></iswc-tab-panel>
+          <iswc-tab-panel name="facturas"><av-tabla id="tabla-facturas"></av-tabla></iswc-tab-panel>
+          <iswc-tab-panel name="hoja"><av-finanzas-hoja id="hoja"></av-finanzas-hoja></iswc-tab-panel>
+        </iswc-tab-group></av-pestanas>
       `}
       <av-transaccion-form id="form-transaccion"></av-transaccion-form>
       <av-factura-form id="form-factura"></av-factura-form>
@@ -243,11 +249,11 @@ const AvFinanzas = crearComponente<AvFinanzasProps>(import.meta.url, 'av-finanza
   const nombreEmpresa = estado.yo?.empresas.find((e) => e.iempresa === iempresa)?.nombre ?? 'Avatar';
   $('cabecera').props = { titulo: 'Finanzas', subtitulo: `Contabilidad, facturas y monedas · ${nombreEmpresa}`, icono: 'mdi:finance' };
   if (!iempresa) {
-    $('sin-empresa').props = { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Elige una empresa en la barra para ver sus finanzas.' };
+    $('sin-empresa').props = sinEmpresa('sus finanzas');
     return;
   }
-  $('tabla-transacciones').props = { entidad: 'transacciones', cargando: true, puedeEscribir };
-  $('tabla-facturas').props = { entidad: 'facturas', cargando: true, puedeEscribir };
+  $('tabla-transacciones').props = { ...tablaFinanzas('transacciones'), cargando: true, puedeEscribir };
+  $('tabla-facturas').props = { ...tablaFinanzas('facturas'), cargando: true, puedeEscribir };
   $('conversor').props = { ...conversion };
   void cargarResumen();
   void cargarTransacciones();
@@ -274,6 +280,6 @@ const AvFinanzas = crearComponente<AvFinanzasProps>(import.meta.url, 'av-finanza
       setTimeout(() => (conversor.shadowRoot?.querySelector('#monto') as HTMLElement | null)?.focus(), 300);
     }
   });
-});
+}, soloPestana);
 
 define('av-finanzas', AvFinanzas);

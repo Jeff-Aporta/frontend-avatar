@@ -25,7 +25,7 @@ del pipeline de la empresa.
 
 ## 4. Contratos HOW STRONG
 
-- [HS-CRM-01] Tags: `av-crm` (shell), `av-embudo`, `av-clientes-grid`, `av-cliente-form`.
+- [HS-CRM-01] Tags: `av-crm` (shell), `av-embudo`, `av-tabla` (transversal, prefijo `av-crm`), `av-cliente-form`.
 - [HS-CRM-02] Eventos: `av-crm-filtrar { etapa | null }`, `av-cliente-abrir { icliente }`, `av-cliente-guardar { datos }`, `av-cliente-eliminar { icliente }`, `av-cliente-form-cerrar`, `av-cliente-form-error { mensaje }`.
 - [HS-CRM-03] API: controllers DER `clientes` y `miembros`; escritura con `avatar.gestionar`.
 

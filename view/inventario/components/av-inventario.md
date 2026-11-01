@@ -13,7 +13,7 @@ Shell de inventario: KPIs, alertas de stock, productos, kardex, pedidos y provee
 <av-inventario>
   #shadow-root
     <div part="pagina"><iswc-page-header> <iswc-callout> (sin permiso) <iswc-stat-group id="kpis"> <av-stock-alertas id="alertas">
-      <iswc-tab-group><iswc-tab>×4 <iswc-tab-panel><av-inventario-tabla>×4</iswc-tab-group>
+      <iswc-tab-group><iswc-tab>×4 <iswc-tab-panel><av-tabla>×4</iswc-tab-group>
       <av-producto-form> <av-movimiento-form> <av-pedido-form> <av-proveedor-form></div>
 ```
 

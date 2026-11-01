@@ -1,6 +1,6 @@
 ---
 name: av-usuarios
-description: Tabla de usuarios (iswc-data-grid) con acciones sobre la fila elegida: editar, eliminar y asignar rol principal.
+description: Tabla de usuarios (iswc-ag-grid) con acciones sobre la fila elegida: editar, eliminar y asignar rol principal.
 ---
 
 # `<av-usuarios>`

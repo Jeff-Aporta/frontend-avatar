@@ -23,7 +23,7 @@ import {
 } from '../../chat/formato.js';
 import { crearTono, type EstadoLlamada, GestorLlamadas } from '../../chat/llamadas.js';
 import { textos } from '../../chat/textos.js';
-import { type Adjunto, type Borrador, type Chat, type EstadoChat, type EventoChat, type InfoLectura, type MensajeChat, type ModoBusqueda, nuevaClave, type Preferencias, type ResultadoBusqueda } from '../../chat/tipos.js';
+import { type Adjunto, type Borrador, type Chat, type EstadoChat, type EventoChat, type InfoLectura, type MensajeChat, nuevaClave, type Preferencias, type ResultadoBusqueda } from '../../chat/tipos.js';
 import './av-chat-lista.js';
 import './av-chat-cabecera.js';
 import './av-chat-mensajes.js';
@@ -628,7 +628,7 @@ class AvChat extends HTMLElement {
     this.#programar();
   }
 
-  async #buscar(q: string, modo: ModoBusqueda, chat: string | null): Promise<void> {
+  async #buscar(q: string, chat: string | null): Promise<void> {
     const b = this.#backend;
     if (!b) return;
     if (!q.trim()) {
@@ -639,7 +639,7 @@ class AvChat extends HTMLElement {
     this.#ui.buscando = true;
     this.#programar();
     try {
-      this.#ui.resultados = await b.buscar(q, modo, chat);
+      this.#ui.resultados = await b.buscar(q, chat);
       this.#ui.buscado = q;
     } catch (err) {
       avisar(err instanceof Error ? err.message : String(err), 'danger');
@@ -803,7 +803,7 @@ class AvChat extends HTMLElement {
       if (this.#e.activo) void this.#marcarLeido(this.#e.activo);
     });
     on<{ archivos: File[] }>('av-chat-soltar', (d) => (this.#root.querySelector('#compositor') as Compositor | null)?.agregar?.(d.archivos));
-    on<{ q: string; modo: ModoBusqueda; icanal: string | null }>('av-chat-buscar', (d) => void this.#buscar(d.q, d.modo, d.icanal));
+    on<{ q: string; icanal: string | null }>('av-chat-buscar', (d) => void this.#buscar(d.q, d.icanal));
     on<{ iusuario: string }>('av-chat-directo', (d) => void this.#directo(d.iusuario));
     on<DatosGrupo>('av-chat-grupo-crear', (d) => void this.#grupo(d));
     on<{ nombre: string; descripcion: string; foto: string | null }>('av-chat-grupo-editar', async (d) => {

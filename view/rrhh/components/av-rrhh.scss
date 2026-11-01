@@ -1,15 +1,19 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-rrhh — cabecera, KPIs y pestañas; General con gráficas y pendientes; Asistencia con control del día e historial. */
 :host {
   @include m.host-bloque;
 }
 
 .pagina {
-  max-width: 96em;
+  max-width: var(--av-pagina-ancho, 96em);
   margin: 0 auto;
-  padding: t.esp(5);
+  padding: var(--av-pagina-relleno, t.esp(5));
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: t.esp(4);

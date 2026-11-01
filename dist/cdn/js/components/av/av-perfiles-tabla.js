@@ -1,21 +1,7 @@
-import{crearComponente as s,define as l,emitir as r,html as i}from"../../base/componente.js?v=p6quri";const c=s(import.meta.url,"av-perfiles-tabla",{abierto:!1,perfiles:[]},(o,e,t)=>{o.append(i`
-      <iswc-dialog id="dialogo" label="Perfiles de prueba" backdrop-variant="basic" ?open=${e.abierto} oniswc-after-hide=${()=>r(t,"av-perfiles-cerrar",{})}>
+import{crearComponente as i,define as l,emitir as s,html as r}from"../../base/componente.js?v=m5nu5c";import"./av-perfiles-lista.js?v=1exu44";const n=i(import.meta.url,"av-perfiles-tabla",{abierto:!1},(a,e,t)=>{const o=()=>s(t,"av-perfiles-cerrar",{});a.append(r`
+      <iswc-dialog id="dialogo" label="Perfiles de prueba" backdrop-variant="basic" ?open=${e.abierto} oniswc-after-hide=${o}>
         <p class="nota">Cuentas de testing: el PIN es público hasta tener MVP.</p>
-        <div class="marco">
-          <table class="tabla" part="tabla">
-            <thead><tr><th scope="col">Usuario</th><th scope="col">Nombre</th><th scope="col">Rol</th><th scope="col">PIN</th><th scope="col"><span class="oculto">Acción</span></th></tr></thead>
-            <tbody>
-              ${e.perfiles.map(a=>i`
-                <tr>
-                  <td><code>${a.iusuario}</code></td>
-                  <td>${a.nombre}</td>
-                  <td>${a.rol}</td>
-                  <td><code class="pin">${a.pin}</code></td>
-                  <td><iswc-button variant="outlined" color="neutral" size="sm" oniswc-click=${()=>r(t,"av-perfil-usar",{usuario:a.iusuario})}>Usar</iswc-button></td>
-                </tr>`)}
-            </tbody>
-          </table>
-        </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${()=>r(t,"av-perfiles-cerrar",{})}>Cerrar</iswc-button>
+        ${e.abierto?r`<av-perfiles-lista modo="select" onav-perfil-usar=${o}></av-perfiles-lista>`:null}
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${o}>Cerrar</iswc-button>
       </iswc-dialog>
-    `)},(o,e,t)=>e.perfiles!==t.perfiles?!1:(o.querySelector("#dialogo").open=e.abierto,!0));l("av-perfiles-tabla",c);
+    `)},(a,e)=>e.abierto?!1:(a.querySelector("#dialogo").open=!1,!0));l("av-perfiles-tabla",n);

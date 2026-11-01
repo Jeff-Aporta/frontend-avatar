@@ -67,7 +67,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>A la izquierda del buzón de DUO eMail.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como menú general de la app: eso es el menú lateral.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>A la izquierda del buzón de DUO eMail.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como menú general de la app: eso es el menú lateral.</iswc-callout>"
         }
       ]
     }

@@ -28,7 +28,8 @@
   border-bottom: 1px solid var(--av-borde-seccion, var(--iswc-border-soft));
   box-sizing: border-box;
 
-  h3 {
+  iswc-heading {
+    @include m.heading-heredado;
     margin: 0;
     font-family: var(--av-font-titulo, inherit);
     font-size: 1em;
@@ -81,24 +82,20 @@
 }
 
 .resultado {
-  display: grid;
-  gap: 0.15em;
-  width: 100%;
-  padding: t.esp(2) t.esp(3);
-  border: 0;
-  border-bottom: 1px solid var(--iswc-border-soft);
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  border-radius: t.radio(md);
+  --iswc-button-row-padding: #{t.esp(2)} #{t.esp(3)};
+  --iswc-button-border-radius: #{t.radio(md)};
+  --iswc-button-font-weight: 400;
   @include c.entrada(0.2em);
 
-  &:hover,
-  &:focus-visible {
-    background: var(--iswc-control-bg-hover, var(--av-velo));
-    outline: none;
+  &::part(button) {
+    border-bottom: 0.07em solid var(--iswc-border-soft);
+  }
+
+  .contenido {
+    flex: 1;
+    display: grid;
+    gap: 0.15em;
+    min-width: 0;
   }
 
   .linea {

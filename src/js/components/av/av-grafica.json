@@ -1,0 +1,52 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-grafica",
+  "category": "propuestas",
+  "navTitle": "Gráfica en tarjeta",
+  "title": "&lt;av-grafica&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-grafica",
+  "styles": ".stage{padding:1rem;max-width:30em}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-grafica&gt;",
+      "lede": "Tarjeta con una gráfica del kit, su título y sus estados de carga y vacío.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-grafica id=\"g\"></av-grafica></div>",
+          "target": "#g",
+          "props": {
+            "tipo": "dona",
+            "titulo": "Tareas por estado",
+            "icono": "mdi:chart-donut",
+            "detalle": "Octubre",
+            "config": { "data": { "labels": ["Abiertas", "En progreso", "Cerradas"], "datasets": [{ "label": "Tareas", "data": [4, 3, 9] }] } }
+          },
+          "controls": [
+            { "control": "select", "prop": "props:tipo", "label": "tipo", "options": ["barras", "dona"], "default": "dona" },
+            { "control": "text", "prop": "props:titulo", "label": "titulo", "default": "Tareas por estado" },
+            { "control": "text", "prop": "props:detalle", "label": "detalle", "default": "Octubre" },
+            { "control": "boolean", "prop": "props:leyenda", "label": "leyenda", "default": true },
+            { "control": "boolean", "prop": "props:cargando", "label": "cargando", "default": false }
+          ]
+        },
+        {
+          "kind": "html",
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarla</strong>Para toda gráfica en tarjeta de una vista: la vista traduce sus datos a config y no repite la tarjeta ni sus estados.</iswc-callout>"
+        },
+        {
+          "kind": "html",
+          "propuesta": true,
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-chart-card</strong>Tarjeta con gráfica y estados de carga y vacío. Pendiente de aprobación.</iswc-callout>"
+        }
+      ]
+    }
+  ],
+  "reuso": {
+    "candidato": "iswc-root",
+    "propuesta": "iswc-chart-card",
+    "motivo": "Tarjeta con gráfica y estados de carga y vacío, sin dominio de la app."
+  }
+}

@@ -1,0 +1,1 @@
+const s=o=>({icono:"mdi:domain",titulo:"Sin empresa activa",texto:`Elige una empresa en la barra para ver ${o}.`}),t=o=>({icono:"mdi:domain",titulo:"A\xFAn no perteneces a una empresa",texto:o}),a=(o,i,e="mdi:lock-outline")=>({icono:e,titulo:`Sin permiso de ${o}`,texto:i});export{s as sinEmpresa,t as sinMembresia,a as sinPermiso};

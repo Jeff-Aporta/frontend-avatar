@@ -38,7 +38,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Página /chat-demo/ (o view/chat-demo/).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Dentro de otra vista: usa av-chat.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Página /chat-demo/ (o view/chat-demo/).</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>Dentro de otra vista: usa av-chat.</iswc-callout>"
         }
       ]
     }

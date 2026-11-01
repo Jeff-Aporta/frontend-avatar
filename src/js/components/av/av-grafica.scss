@@ -1,0 +1,49 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-grafica — tarjeta de altura fija para que dos gráficas vecinas alineen ejes y leyendas. */
+:host {
+  @include m.host-bloque;
+  height: 100%;
+}
+
+.tarjeta {
+  height: 100%;
+  border-radius: var(--av-radio);
+  box-shadow: var(--av-sombra-tarjeta);
+
+  &::part(base) {
+    box-sizing: border-box;
+    height: 100%;
+    border-color: var(--av-borde-seccion);
+  }
+}
+
+.titulo {
+  @include m.titulo;
+  display: flex;
+  align-items: center;
+  gap: t.esp(2);
+  min-width: 0;
+
+  iswc-icon {
+    color: var(--iswc-brand-text);
+  }
+
+  .detalle {
+    @include m.una-linea;
+    margin-left: auto;
+    font-size: 0.8em;
+    font-weight: 500;
+    color: var(--iswc-text-dim);
+  }
+}
+
+.grafica {
+  display: block;
+  height: 17em;
+}
+
+.vacio {
+  min-height: 17em;
+}

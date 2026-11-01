@@ -7,8 +7,15 @@ import { setCssBase } from '../../base/componente.js';
 
 setCssBase(new URL('./', import.meta.url).href);
 
+await import('./av-link.js');
+await import('./av-boton-enlace.js');
+await import('./av-menu-lateral.js');
+await import('./av-pestanas.js');
+await import('./av-migas.js');
+await import('./av-outlet.js');
 await import('./av-logo.js');
 await import('./av-escena.js');
+await import('./av-grafica.js');
 await import('../../../../view/inicio/components/all.js');
 await import('../../../../view/acceso/components/all.js');
 await import('../../../../view/panel/components/all.js');

@@ -50,17 +50,17 @@ function montar(root: ShadowRoot, inicial: AvChatGrupoFormProps, host: HTMLEleme
         <div class="personas" role="group" aria-label=${t.eligeIntegrantes}></div>
       </div>
       <div class="paso dos">
-        <label class="foto-campo">
+        <iswc-button class="foto-campo" variant="row" color="neutral">
           <span class="foto-vista"><iswc-avatar class="foto-avatar" initials="" label=${t.fotoGrupo}><iswc-icon slot="icon" icon="mdi:camera-plus-outline"></iswc-icon></iswc-avatar></span>
           <span class="foto-rotulo">${t.fotoGrupo}</span>
-          <input class="foto-archivo" type="file" accept="image/*" hidden>
-        </label>
+        </iswc-button>
+        <input class="foto-archivo" type="file" accept="image/*" hidden>
         <iswc-input class="nombre" label=${t.nombreGrupo} required maxlength="80"></iswc-input>
         <iswc-textarea class="descripcion" label=${t.descripcion} rows="2" maxlength="500"></iswc-textarea>
       </div>
       <p class="error" role="alert" hidden></p>
-      <iswc-button slot="footer" class="cancelar" variant="outlined" color="neutral">${t.cancelar}</iswc-button>
-      <iswc-button slot="footer" class="seguir" color="brand"></iswc-button>
+      <iswc-button slot="footer" class="cancelar" variant="outlined compact" color="neutral">${t.cancelar}</iswc-button>
+      <iswc-button variant="compact" slot="footer" class="seguir" color="brand"></iswc-button>
     </iswc-dialog>
   `);
   const dialogo = root.querySelector('.dialogo') as Dialogo;
@@ -105,13 +105,15 @@ function montar(root: ShadowRoot, inicial: AvChatGrupoFormProps, host: HTMLEleme
   const pintarFichas = () => {
     fichas.replaceChildren(...[...elegidos].map((id) => {
       const pe = p.personas.find((x) => x.id === id);
-      const b = document.createElement('button');
-      b.type = 'button';
+      const b = document.createElement('iswc-button');
       b.className = 'ficha';
+      b.setAttribute('variant', 'plain');
+      b.setAttribute('color', 'neutral');
+      b.setAttribute('shape', 'pill');
       b.dataset['color'] = String(pe?.color ?? 0);
       b.textContent = pe?.nombre ?? id;
       b.title = t.quitar;
-      b.append(Object.assign(document.createElement('iswc-icon'), {}));
+      b.append(Object.assign(document.createElement('iswc-icon'), { slot: 'end' }));
       b.lastElementChild?.setAttribute('icon', 'mdi:close');
       b.addEventListener('click', () => {
         elegidos.delete(id);
@@ -138,6 +140,7 @@ function montar(root: ShadowRoot, inicial: AvChatGrupoFormProps, host: HTMLEleme
     nombre.removeAttribute('error');
     pintarFoto();
   });
+  root.querySelector('.foto-campo')?.addEventListener('iswc-click', () => (root.querySelector('.foto-archivo') as HTMLInputElement).click());
   root.querySelector('.foto-archivo')?.addEventListener('change', async (e) => {
     const f = (e.target as HTMLInputElement).files?.[0];
     if (!f || !f.type.startsWith('image/')) return;

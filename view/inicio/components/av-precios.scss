@@ -1,6 +1,10 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-precios — tres planes; el destacado un poco más alto. */
 :host {
   @include m.host-bloque;

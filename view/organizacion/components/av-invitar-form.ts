@@ -37,10 +37,10 @@ const AvInvitarForm = crearComponente<AvInvitarFormProps>(
             : html`<iswc-input id="usuario" label="Usuario" required placeholder="id del usuario" hint="Debe existir: lo crea un administrador."></iswc-input>`}
           <iswc-select id="rol" label="Rol" value="miembro">${ROLES_EMPRESA.map((r) => html`<iswc-option value=${r}>${etiquetaRol(r)}</iswc-option>`)}</iswc-select>
           <iswc-input id="cargo" label="Cargo" maxlength="120" placeholder="Opcional"></iswc-input>
-          <iswc-callout id="aviso" tone="danger" ?hidden=${!props.error}>${props.error}</iswc-callout>
+          <iswc-callout id="aviso" color="danger" ?hidden=${!props.error}>${props.error}</iswc-callout>
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" id="guardar" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Invitar</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" id="guardar" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Invitar</iswc-button>
       </iswc-dialog>
     `);
   },

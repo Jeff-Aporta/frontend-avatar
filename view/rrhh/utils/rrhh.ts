@@ -3,8 +3,7 @@
  * por departamento), filas del control de asistencia de un día, columnas y filas de empleados y asistencias,
  * solicitudes con nombre, conteos y filtros, días de una solicitud y campos de búsqueda.
  */
-import type { ColumnaGrilla, Fila } from '../../../src/js/base/grilla.js';
-import type { Indicador } from '../../../src/js/consts/schemas/componentes.schemas.js';
+import type { ColumnaTabla, ConfigTabla, EstadoVacio, FilaTabla, Indicador } from '../../../src/js/consts/schemas/componentes.schemas.js';
 import type { Asistencia, Empleado, FilaAsistencia, ResumenRrhh, Solicitud, SolicitudVista } from '../../../src/js/consts/schemas/rrhh.schemas.js';
 import { celdaTag, diasEntre, fechaISO, formatoMoneda, formatoNumero } from '../../../src/js/core/datos.js';
 
@@ -86,7 +85,7 @@ export function horaActual(d = new Date()): string {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
-function columnasEmpleados(): ColumnaGrilla[] {
+function columnasEmpleados(): ColumnaTabla[] {
   return [
     { field: 'nombre', headerName: 'Empleado', flex: 1.3, minWidth: 180 },
     { field: 'email', headerName: 'Correo', flex: 1.2, minWidth: 180 },
@@ -98,7 +97,7 @@ function columnasEmpleados(): ColumnaGrilla[] {
   ];
 }
 
-function columnasAsistencias(): ColumnaGrilla[] {
+function columnasAsistencias(): ColumnaTabla[] {
   return [
     { field: 'fecha', headerName: 'Fecha', width: 120 },
     { field: 'empleado', headerName: 'Empleado', flex: 1.3, minWidth: 180 },
@@ -109,15 +108,15 @@ function columnasAsistencias(): ColumnaGrilla[] {
 }
 
 /** Columnas por entidad de la vista. */
-export const columnasRrhh = (entidad: string): ColumnaGrilla[] => (entidad === 'asistencias' ? columnasAsistencias() : columnasEmpleados());
+export const columnasRrhh = (entidad: string): ColumnaTabla[] => (entidad === 'asistencias' ? columnasAsistencias() : columnasEmpleados());
 
 /** Filas planas de empleados. */
-export function filasEmpleados(es: Empleado[]): Fila[] {
+export function filasEmpleados(es: Empleado[]): FilaTabla[] {
   return es.map((e) => ({ id: e.iempleado, iempleado: e.iempleado, nombre: e.nombre, email: e.email ?? '', departamento: e.departamento ?? '', cargo: e.cargo ?? '', estado: ETIQUETA[e.estado] ?? e.estado, estadoClave: e.estado, salario: Number(e.salario ?? 0), salarioTexto: formatoMoneda(Number(e.salario ?? 0)), fingreso: fechaISO(e.fingreso) }));
 }
 
 /** Filas planas del historial de asistencias (id compuesto empleado-fecha). */
-export function filasAsistencias(as: Asistencia[], empleados: Empleado[]): Fila[] {
+export function filasAsistencias(as: Asistencia[], empleados: Empleado[]): FilaTabla[] {
   const nombres = new Map(empleados.map((e) => [e.iempleado, e.nombre]));
   return as.map((a) => ({ id: `${a.iempleado}-${fechaISO(a.fecha)}`, clave: `${a.iempleado}-${fechaISO(a.fecha)}`, iempleado: a.iempleado, fecha: fechaISO(a.fecha), empleado: nombres.get(a.iempleado) ?? `#${a.iempleado}`, estado: ETIQUETA[a.estado] ?? a.estado, estadoClave: a.estado, entrada: a.entrada ?? '', salida: a.salida ?? '' }));
 }
@@ -157,7 +156,12 @@ export function diasSolicitud(s: Pick<Solicitud, 'desde' | 'hasta'>): number {
 export const camposSolicitud = (s: SolicitudVista): unknown[] => [s.empleado, s.tipo, ETIQUETA[s.tipo], s.estado, ETIQUETA[s.estado], s.motivo, s.comentario];
 
 /** Configuración de cada tabla. */
-export const TABLAS_RRHH: Record<string, { idCampo: string; buscador: string; vacio: { icono: string; titulo: string; texto: string } }> = {
+export const TABLAS_RRHH: Record<string, { idCampo: string; buscador: string; vacio: EstadoVacio }> = {
   empleados: { idCampo: 'iempleado', buscador: 'Buscar por nombre, departamento, cargo…', vacio: { icono: 'mdi:account-group-outline', titulo: 'Sin empleados', texto: 'Registra a las personas de la empresa.' } },
   asistencias: { idCampo: 'clave', buscador: 'Buscar por empleado, estado, fecha…', vacio: { icono: 'mdi:calendar-blank-outline', titulo: 'Sin asistencias', texto: 'Las marcas de asistencia aparecen aquí.' } },
 };
+
+/** Configuración de `<av-tabla>` para una entidad de la vista. */
+export function tablaRrhh(entidad: string): ConfigTabla {
+  return { prefijo: 'av-rrhh', entidad, columnas: columnasRrhh(entidad), ...TABLAS_RRHH[entidad]! };
+}

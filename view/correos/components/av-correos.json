@@ -11,7 +11,7 @@
     {
       "id": "intro",
       "title": "&lt;av-correos&gt;",
-      "lede": "La vista de correo completa (necesita sesión y empresa activa).",
+      "lede": "La vista de correo completa. Sin sesión y empresa activa muestra su estado vacío; abajo, una pieza con datos de ejemplo.",
       "blocks": [
         {
           "kind": "demo",
@@ -39,7 +39,84 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta correos (la monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta correos (la monta av-app).</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    },
+    {
+      "id": "ejemplo",
+      "title": "Con datos de ejemplo",
+      "lede": "La pieza principal de la vista, sin API: los datos son fijos.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-correo-lista id=\"d\"></av-correo-lista></div>",
+          "target": "#d",
+          "props": {
+            "carpeta": "entrada",
+            "activo": 8,
+            "puedeMarcar": true,
+            "texto": "",
+            "cargando": false,
+            "nombres": {
+              "carla": "Carla Ventas",
+              "admin": "Administrador"
+            },
+            "correos": [
+              {
+                "ibuzon": 8,
+                "icorreo": 3,
+                "carpeta": "entrada",
+                "leido": false,
+                "destacado": true,
+                "remitente": "carla",
+                "destinatarios": [
+                  "ana"
+                ],
+                "cc": [],
+                "asunto": "Propuesta Global Finance",
+                "cuerpo": "Te comparto la propuesta para Global Finance; necesito tu visto bueno.",
+                "etiquetas": [
+                  "crm",
+                  "urgente"
+                ],
+                "respuesta_a": null,
+                "creado": "2026-10-30T22:26:20.699Z"
+              },
+              {
+                "ibuzon": 2,
+                "icorreo": 1,
+                "carpeta": "entrada",
+                "leido": true,
+                "destacado": false,
+                "remitente": "admin",
+                "destinatarios": [
+                  "ana",
+                  "beto"
+                ],
+                "cc": [],
+                "asunto": "Bienvenidos a DUO eMail",
+                "cuerpo": "Desde hoy usamos el correo interno de Avatar.",
+                "etiquetas": [],
+                "respuesta_a": null,
+                "creado": "2026-10-29T15:00:00.000Z"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            },
+            {
+              "control": "boolean",
+              "prop": "props:puedeMarcar",
+              "label": "puedeMarcar",
+              "default": true
+            }
+          ]
         }
       ]
     }

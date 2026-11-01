@@ -53,10 +53,6 @@ export type AvCrmProps = z.infer<typeof AvCrmPropsSchema>;
 export const AvEmbudoPropsSchema = z.object({ etapas: z.array(EtapaTotalSchema).default([]), activa: z.string().nullable().default(null) });
 export type AvEmbudoProps = z.infer<typeof AvEmbudoPropsSchema>;
 
-/** `<av-clientes-grid>`: filas y estado. */
-export const AvClientesGridPropsSchema = z.object({ clientes: z.array(ClienteSchema).default([]), cargando: z.boolean().default(false) });
-export type AvClientesGridProps = z.infer<typeof AvClientesGridPropsSchema>;
-
 /** `<av-cliente-form>`: diálogo crear/editar. */
 export const AvClienteFormPropsSchema = z.object({ abierto: z.boolean().default(false), cliente: ClienteSchema.nullable().default(null), miembros: z.array(MiembroCrmSchema).default([]), puedeEscribir: z.boolean().default(false), ocupado: z.boolean().default(false), error: z.string().default('') });
 export type AvClienteFormProps = z.infer<typeof AvClienteFormPropsSchema>;
@@ -65,6 +61,5 @@ export type AvClienteFormProps = z.infer<typeof AvClienteFormPropsSchema>;
 export const CRM_PROPS = {
   'av-crm': AvCrmPropsSchema,
   'av-embudo': AvEmbudoPropsSchema,
-  'av-clientes-grid': AvClientesGridPropsSchema,
   'av-cliente-form': AvClienteFormPropsSchema,
 } as const;

@@ -100,7 +100,6 @@ export type PedidoDatos = z.infer<typeof PedidoDatosSchema>;
 export const ProveedorDatosSchema = z.object({ iproveedor: z.number().nullable().default(null), nombre: z.string().trim().min(1).max(160), contacto: z.string().max(120).nullable().default(null), email: z.string().email().max(160).nullable().default(null), telefono: z.string().max(40).nullable().default(null) });
 export type ProveedorDatos = z.infer<typeof ProveedorDatosSchema>;
 
-const FilaSchema = z.record(z.string(), z.unknown());
 
 /** `<av-inventario>` (shell). */
 export const AvInventarioPropsSchema = z.object({ id: z.string().nullable().default(null), version: z.number().default(0) });
@@ -109,16 +108,6 @@ export type AvInventarioProps = z.infer<typeof AvInventarioPropsSchema>;
 /** `<av-stock-alertas>`: productos en o bajo el mínimo. */
 export const AvStockAlertasPropsSchema = z.object({ alertas: z.array(AlertaStockSchema).nullable().default(null), puedeMover: z.boolean().default(false) });
 export type AvStockAlertasProps = z.infer<typeof AvStockAlertasPropsSchema>;
-
-/** `<av-inventario-tabla>`: tabla de productos, movimientos, pedidos o proveedores. */
-export const AvInventarioTablaPropsSchema = z.object({
-  entidad: z.enum(['productos', 'movimientos', 'pedidos', 'proveedores']).default('productos'),
-  filas: z.array(FilaSchema).default([]),
-  cargando: z.boolean().default(false),
-  texto: z.string().default(''),
-  puedeEscribir: z.boolean().default(false),
-});
-export type AvInventarioTablaProps = z.infer<typeof AvInventarioTablaPropsSchema>;
 
 /** `<av-producto-form>`: diálogo de producto con relacionados (se ocultan si no hay). */
 export const AvProductoFormPropsSchema = z.object({ abierto: z.boolean().default(false), producto: ProductoSchema.nullable().default(null), proveedores: z.array(ProveedorSchema).default([]), relacionados: z.array(ProductoSchema).default([]), puedeEscribir: z.boolean().default(false), ocupado: z.boolean().default(false), error: z.string().default('') });
@@ -140,7 +129,6 @@ export type AvProveedorFormProps = z.infer<typeof AvProveedorFormPropsSchema>;
 export const INVENTARIO_PROPS = {
   'av-inventario': AvInventarioPropsSchema,
   'av-stock-alertas': AvStockAlertasPropsSchema,
-  'av-inventario-tabla': AvInventarioTablaPropsSchema,
   'av-producto-form': AvProductoFormPropsSchema,
   'av-movimiento-form': AvMovimientoFormPropsSchema,
   'av-pedido-form': AvPedidoFormPropsSchema,

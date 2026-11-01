@@ -25,12 +25,12 @@
     "zod": "npm:zod@4.6.7",
     "sass": "npm:sass@^1.105.0",
     "@std/http/file-server": "jsr:@std/http@1/file-server",
-    "@iswc/component-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/42322344cbaa25967d44361c99b78c963d0f8543/src/previews/_kit/schemas/component.schemas.ts",
-    "@iswc/loader-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/42322344cbaa25967d44361c99b78c963d0f8543/src/cdn/schemas/loader.schemas.ts",
+    "@iswc/component-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/previews/_kit/schemas/component.schemas.ts",
+    "@iswc/loader-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/cdn/schemas/loader.schemas.ts",
     "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/src/vendor.ts",
     "@Jeff-Aporta/DER/": "https://cdn.jsdelivr.net/gh/Jeff-Aporta/DER@2c2ebdc0ed09290aca3264bbfe727477cd677d9c/",
-    "@Jeff-Aporta/wc-base/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/42322344cbaa25967d44361c99b78c963d0f8543/src/vendor-distributions/shared/",
-    "@Jeff-Aporta/wc-diagrams/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/42322344cbaa25967d44361c99b78c963d0f8543/src/components/diagrams/schemas/"
+    "@Jeff-Aporta/wc-base/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/vendor-distributions/shared/",
+    "@Jeff-Aporta/wc-diagrams/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/6c141b86cc2dd38a7e792382ccf773b0ead4fce9/src/components/diagrams/schemas/"
   },
   "tasks": {
     "build:scss": "deno run -A scripts/build/build-scss.mjs",
@@ -38,8 +38,9 @@
     "build": "deno task icons ; deno task build:scss && deno run -A src/utils/build.ts && deno task paginas",
     "paginas": "deno run -A scripts/build/paginas.ts",
     "embeddings": "deno run -A scripts/build/embeddings.ts",
+    "bench:embeddings": "deno run -A scripts/bench/embeddings-bench.ts",
     "dev": "deno run -A src/utils/build.ts --watch",
-    "serve": "deno run -A jsr:@std/http@1/file-server -p 4300 --host 127.0.0.1",
+    "serve": "deno run -A scripts/build/servir.ts",
     "check": "deno check --allow-import=api-avatar.jeffaporta.workers.dev:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,jsr.io:443,deno.land:443,esm.sh:443 src/js/ view/ tests/vistas/",
     "pin": "deno run -A src/vendor/iswc-root/tools/pin-update.mjs --repo=Jeff-Aporta/is-webcomponents --raices=index.html,assets/dl.js,src,view,deno.json",
     "vendor:iswc": "deno run -A scripts/vendor/vendor-iswc-tools.mjs",

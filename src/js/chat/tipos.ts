@@ -182,8 +182,6 @@ export const SenalLlamadaSchema = z.object({
 });
 export type SenalLlamada = z.infer<typeof SenalLlamadaSchema>;
 
-export const ModoBusquedaSchema = z.enum(['texto', 'semantica']);
-export type ModoBusqueda = z.infer<typeof ModoBusquedaSchema>;
 
 export const ResultadoBusquedaSchema = z.object({
   chat: z.string(),

@@ -1,5 +1,5 @@
-import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
-`).map(e=>{const[r,...i]=e.trim().split(" ");return{e:r,k:i.join(" ")}}),l=[{id:"caras",nombre:"Caras",icono:"mdi:emoticon-happy-outline",emojis:o(`
+import{vectorLocal as m}from"../core/ia-local.js?v=p0qojq";import{calibracionDe as d}from"../core/calibracion.js?v=dm8e3v";import{cargarAplanado as u,ordenarAplanado as p}from"../core/semantica.js?v=3lu6p8";import{normalizar as t}from"./formato.js?v=xzgyvo";const r=a=>a.trim().split(`
+`).map(o=>{const[i,...e]=o.trim().split(" ");return{e:i,k:e.join(" ")}}),s=[{id:"caras",nombre:"Caras",icono:"mdi:emoticon-happy-outline",emojis:r(`
 \u{1F600} feliz sonrisa
 \u{1F603} alegre contento
 \u{1F604} risa ojos
@@ -58,7 +58,7 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u{1F47B} fantasma
 \u{1F47D} alien
 \u{1F4A9} caca
-`)},{id:"gestos",nombre:"Gestos",icono:"mdi:hand-wave-outline",emojis:o(`
+`)},{id:"gestos",nombre:"Gestos",icono:"mdi:hand-wave-outline",emojis:r(`
 \u{1F44D} pulgar arriba ok bien si
 \u{1F44E} pulgar abajo mal no
 \u{1F44C} perfecto ok
@@ -91,7 +91,7 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u{1F64B} levantar mano
 \u{1F647} reverencia
 \u{1F481} informacion
-`)},{id:"corazones",nombre:"Corazones",icono:"mdi:heart-outline",emojis:o(`
+`)},{id:"corazones",nombre:"Corazones",icono:"mdi:heart-outline",emojis:r(`
 \u2764\uFE0F corazon rojo amor
 \u{1F9E1} corazon naranja
 \u{1F49B} corazon amarillo
@@ -116,7 +116,7 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u{1F525} fuego genial
 \u{1F4A5} explosion
 \u{1F4AB} mareo estrella
-`)},{id:"naturaleza",nombre:"Naturaleza",icono:"mdi:paw",emojis:o(`
+`)},{id:"naturaleza",nombre:"Naturaleza",icono:"mdi:paw",emojis:r(`
 \u{1F436} perro
 \u{1F431} gato
 \u{1F42D} raton
@@ -151,7 +151,7 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u26A1 rayo
 \u2744\uFE0F nieve
 \u2614 lluvia
-`)},{id:"comida",nombre:"Comida",icono:"mdi:food-apple-outline",emojis:o(`
+`)},{id:"comida",nombre:"Comida",icono:"mdi:food-apple-outline",emojis:r(`
 \u{1F34E} manzana
 \u{1F34C} banano
 \u{1F353} fresa
@@ -182,7 +182,7 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u{1F377} vino
 \u{1F942} brindis
 \u{1F9C3} jugo
-`)},{id:"actividades",nombre:"Actividades",icono:"mdi:soccer",emojis:o(`
+`)},{id:"actividades",nombre:"Actividades",icono:"mdi:soccer",emojis:r(`
 \u26BD futbol
 \u{1F3C0} baloncesto
 \u{1F3C8} americano
@@ -206,7 +206,7 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u{1F38A} confeti
 \u{1F381} regalo
 \u{1F388} globo
-`)},{id:"viajes",nombre:"Viajes",icono:"mdi:airplane",emojis:o(`
+`)},{id:"viajes",nombre:"Viajes",icono:"mdi:airplane",emojis:r(`
 \u{1F697} carro
 \u{1F695} taxi
 \u{1F68C} bus
@@ -226,7 +226,7 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u23F0 alarma
 \u231B arena tiempo
 \u{1F4C5} calendario fecha
-`)},{id:"objetos",nombre:"Objetos",icono:"mdi:lightbulb-outline",emojis:o(`
+`)},{id:"objetos",nombre:"Objetos",icono:"mdi:lightbulb-outline",emojis:r(`
 \u{1F4A1} idea bombillo
 \u{1F4F1} celular
 \u{1F4BB} computador portatil
@@ -257,7 +257,7 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u{1F4DA} libros
 \u{1F5C2}\uFE0F carpetas
 \u{1F5D1}\uFE0F basura
-`)},{id:"simbolos",nombre:"S\xEDmbolos",icono:"mdi:check-circle-outline",emojis:o(`
+`)},{id:"simbolos",nombre:"S\xEDmbolos",icono:"mdi:check-circle-outline",emojis:r(`
 \u2705 hecho listo check
 \u2611\uFE0F casilla
 \u2714\uFE0F visto
@@ -289,4 +289,4 @@ import{normalizar as t}from"./formato.js?v=xzgyvo";const o=a=>a.trim().split(`
 \u{1F501} repetir
 \u{1F514} campana notificacion
 \u{1F515} silencio
-`)}];function u(a,e=64){const r=t(a.trim());if(!r)return[];const i=[];for(const s of l)for(const n of s.emojis)t(n.k).includes(r)&&i.push(n);return i.slice(0,e)}const c="av-chat:emojis-recientes";function m(){try{const a=JSON.parse(localStorage.getItem(c)??"[]");return Array.isArray(a)?a.filter(e=>typeof e=="string").slice(0,24):[]}catch{return[]}}function b(a){try{localStorage.setItem(c,JSON.stringify([a,...m().filter(e=>e!==a)].slice(0,24)))}catch{}}export{l as CATEGORIAS_EMOJI,u as buscarEmojis,m as recientes,b as usarEmoji};
+`)}];function v(a){const o=t(a.trim()),i=s.flatMap(e=>e.emojis);return[...i.filter(e=>t(e.k).includes(o)),...i.filter(e=>!t(e.k).includes(o))]}async function h(a){const[o,i]=await Promise.all([u("emojis",document.baseURI),m(a)]);if(!i)return null;const e=new Map(s.flatMap(n=>n.emojis.map(c=>[c.e,c.k])));return p(o,a,i,d("emojis").orden).map(n=>({e:n.item.id,k:e.get(n.item.id)??""}))}const l="av-chat:emojis-recientes";function b(){try{const a=JSON.parse(localStorage.getItem(l)??"[]");return Array.isArray(a)?a.filter(o=>typeof o=="string").slice(0,24):[]}catch{return[]}}function E(a){try{localStorage.setItem(l,JSON.stringify([a,...b().filter(o=>o!==a)].slice(0,24)))}catch{}}export{s as CATEGORIAS_EMOJI,v as ordenarEmojis,h as ordenarEmojisPorSentido,b as recientes,E as usarEmoji};

@@ -36,18 +36,19 @@
 }
 
 .ficha {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
-  padding: 0.2em 0.35em 0.2em 0.7em;
-  border: 1px solid currentColor;
-  border-radius: 1em;
-  background: color-mix(in srgb, currentColor 12%, transparent);
-  font: inherit;
   font-size: 0.82em;
-  cursor: pointer;
   @include c.color-persona;
   @include c.entrada(0.15em);
+
+  &::part(button) {
+    gap: 0.3em;
+    height: auto;
+    min-height: 0;
+    padding: 0.2em 0.35em 0.2em 0.7em;
+    border: 0.07em solid currentColor;
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    color: inherit;
+  }
 }
 
 .personas {
@@ -100,10 +101,12 @@
 }
 
 .foto-campo {
-  display: grid;
-  justify-items: center;
-  gap: t.esp(1);
-  cursor: pointer;
+  --iswc-button-row-gap: #{t.esp(1)};
+  --iswc-button-font-weight: 400;
+
+  &::part(label) {
+    flex-direction: column;
+  }
 
   .foto-vista {
     font-size: 5em;

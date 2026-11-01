@@ -5,7 +5,7 @@
 import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
 
 const { caracteristicas, planes, LEMA } = await import('../../dist/cdn/view/inicio/utils/landing.js');
-const { credencialesDe, mensajeAcceso } = await import('../../dist/cdn/view/acceso/utils/demo.js');
+const { mensajeAcceso } = await import('../../dist/cdn/view/acceso/utils/demo.js');
 
 export default definirPruebas([
   {
@@ -22,11 +22,9 @@ export default definirPruebas([
     },
   },
   {
-    nombre: 'acceso W-PUB-05 cuentas de prueba y mensajes de error legibles',
+    nombre: 'acceso W-PUB-05 mensajes de error legibles',
     categoria: 'what',
     correr({ eq, expect }) {
-      const items = credencialesDe([{ iusuario: 'ana', nombre: 'Ana', pin: '1234', rol: 'Gestora', descripcion: 'x' }]);
-      eq('el PIN hace de contraseña', items, [{ usuario: 'ana', password: '1234', rol: 'Gestora', descripcion: 'x' }]);
       eq('401', mensajeAcceso('Usuario o contraseña inválidos'), 'Usuario o contraseña inválidos.');
       eq('429', mensajeAcceso('429 Demasiados intentos'), 'Demasiados intentos: espera unos minutos.');
       eq('red', mensajeAcceso('Failed to fetch'), 'No se pudo contactar el API. Revisa la conexión.');

@@ -10,6 +10,7 @@
 import { crearComponente, define, html, avisar } from '../../../src/js/base/componente.js';
 import { escucharIntencion } from '../../../src/js/base/intencion.js';
 import { type AvCorreosProps, type Bandeja, BandejaSchema, type CorreoBandeja, type CorreoDatos, type CorreoRelacionado, type MiembroCorreo, MiembroCorreoSchema, ResumenCorreoSchema } from '../../../src/js/consts/schemas/correos.schemas.js';
+import { sinEmpresa } from '../../../src/js/consts/estados.js';
 import { controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
 import { filas, filtrarTexto } from '../../../src/js/core/datos.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
@@ -184,8 +185,8 @@ const AvCorreos = crearComponente<AvCorreosProps>(import.meta.url, 'av-correos',
       onav-correo-redactar-cerrar=${() => ($('redactar').props = { abierto: false })}
       onav-correo-redactar-error=${(e: Event) => avisar((e as Detalle<{ mensaje: string }>).detail.mensaje, 'warning')}>
       <iswc-page-header id="cabecera">
-        <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${() => { void cargarResumen(); void cargarBandeja(); }}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
-        <iswc-button slot="acciones" color="brand" ?disabled=${!puedeMarcar || !iempresa} oniswc-click=${() => redactar()}><iswc-icon slot="start" icon="mdi:email-edit-outline"></iswc-icon>Redactar</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${() => { void cargarResumen(); void cargarBandeja(); }}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
+        <iswc-button variant="compact" slot="acciones" color="brand" ?disabled=${!puedeMarcar || !iempresa} oniswc-click=${() => redactar()}><iswc-icon slot="start" icon="mdi:email-edit-outline"></iswc-icon>Redactar</iswc-button>
       </iswc-page-header>
       ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`
         ${puedeMarcar ? null : html`<iswc-callout color="warning" class="permiso"><strong>Solo lectura.</strong> Tu rol no incluye el permiso de correo (avatar.correo). Puedes leer tu buzón, pero no redactar, responder ni moverlo de carpeta.</iswc-callout>`}
@@ -204,7 +205,7 @@ const AvCorreos = crearComponente<AvCorreosProps>(import.meta.url, 'av-correos',
   const nombreEmpresa = estado.yo?.empresas.find((e) => e.iempresa === iempresa)?.nombre ?? 'Avatar';
   $('cabecera').props = { titulo: 'Correos', subtitulo: `DUO eMail · ${nombreEmpresa}`, icono: 'mdi:email-fast-outline' };
   if (!iempresa) {
-    $('sin-empresa').props = { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Elige una empresa en la barra para ver tu correo.' };
+    $('sin-empresa').props = sinEmpresa('tu correo');
     return;
   }
   const mq = matchMedia(ANGOSTO);

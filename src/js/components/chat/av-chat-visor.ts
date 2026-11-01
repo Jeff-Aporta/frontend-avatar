@@ -20,10 +20,10 @@ function montar(root: ShadowRoot, inicial: AvChatVisorProps, host: HTMLElement) 
       <div slot="toolbar" class="barra">
         <span class="quien"><strong class="autor"></strong><span class="fecha"></span></span>
         <span class="contador"></span>
-        <iswc-button class="ant" variant="plain" color="neutral" title=${t.anterior} aria-label=${t.anterior}><iswc-icon icon="mdi:chevron-left"></iswc-icon></iswc-button>
-        <iswc-button class="sig" variant="plain" color="neutral" title=${t.siguiente} aria-label=${t.siguiente}><iswc-icon icon="mdi:chevron-right"></iswc-icon></iswc-button>
-        <iswc-button class="bajar" variant="plain" color="neutral" title=${t.descargar} aria-label=${t.descargar}><iswc-icon icon="mdi:download"></iswc-icon></iswc-button>
-        <iswc-button class="cerrar" variant="plain" color="neutral" title=${t.cerrar} aria-label=${t.cerrar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>
+        <iswc-button class="ant" variant="plain compact" color="neutral" title=${t.anterior} aria-label=${t.anterior}><iswc-icon icon="mdi:chevron-left"></iswc-icon></iswc-button>
+        <iswc-button class="sig" variant="plain compact" color="neutral" title=${t.siguiente} aria-label=${t.siguiente}><iswc-icon icon="mdi:chevron-right"></iswc-icon></iswc-button>
+        <iswc-button class="bajar" variant="plain compact" color="neutral" title=${t.descargar} aria-label=${t.descargar}><iswc-icon icon="mdi:download"></iswc-icon></iswc-button>
+        <iswc-button class="cerrar" variant="plain compact" color="neutral" title=${t.cerrar} aria-label=${t.cerrar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>
       </div>
     </iswc-lightbox>
   `);

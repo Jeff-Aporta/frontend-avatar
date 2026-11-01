@@ -1,0 +1,15 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-link — hereda el aspecto de donde se ponga. */
+:host {
+  display: inline-flex;
+}
+
+a {
+  display: inherit;
+  align-items: center;
+  color: inherit;
+  text-decoration: inherit;
+}
+

@@ -1,0 +1,57 @@
+/* av-perfiles-lista — filas compactas: persona a la izquierda, PIN a la derecha. Todo en em. */
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
+.fila {
+  display: flex;
+  width: 100%;
+
+  &::part(button) {
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    min-height: 2.5em;
+    padding-block: 0.25em;
+  }
+
+  &::part(label) {
+    flex: 1;
+    min-width: 0;
+    text-align: start;
+  }
+}
+
+.persona {
+  max-width: 100%;
+  color: var(--iswc-text);
+}
+
+.pin {
+  color: var(--iswc-text-dim);
+  font-size: 0.9em;
+  letter-spacing: 0.08em;
+}
+
+.carga {
+  display: block;
+  margin: 1em auto;
+}
+
+.elegir {
+  display: grid;
+  gap: 0.5em;
+  min-width: 0;
+}
+
+.cuenta,
+.entrar {
+  width: 100%;
+}

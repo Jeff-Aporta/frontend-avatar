@@ -3,8 +3,7 @@
  * filas de las tablas, totales de factura, estado efectivo (vencida), categorías y equivalencias de tasas. Los
  * componentes solo pintan lo que esto devuelve.
  */
-import type { ColumnaGrilla, Fila } from '../../../src/js/base/grilla.js';
-import type { Indicador } from '../../../src/js/consts/schemas/componentes.schemas.js';
+import type { ColumnaTabla, ConfigTabla, EstadoVacio, FilaTabla, Indicador } from '../../../src/js/consts/schemas/componentes.schemas.js';
 import type { ClienteRef, Factura, ItemFactura, ResumenFinanzas, Tasa, Transaccion } from '../../../src/js/consts/schemas/finanzas.schemas.js';
 import { celdaTag, fechaISO, formatoMoneda, hoyISO, tendencia } from '../../../src/js/core/datos.js';
 
@@ -14,6 +13,16 @@ export const ETIQUETA: Record<string, string> = {
   completada: 'Completada', pendiente: 'Pendiente', anulada: 'Anulada',
   borrador: 'Borrador', emitida: 'Emitida', pagada: 'Pagada', vencida: 'Vencida',
 };
+
+/** Matriz de la hoja de cuadre: transacciones en A:F y, en H:K, ingresos, gastos y balance por moneda con fórmulas. */
+export function filasHoja(ts: Transaccion[]): (string | number)[][] {
+  const fin = Math.max(ts.length + 1, 2);
+  const suma = (tipo: string, fila: number) => `=SUMIFS($E$2:$E$${fin},$B$2:$B$${fin},"${tipo}",$F$2:$F$${fin},H${fila})`;
+  const resumen = [...new Set(ts.map((t) => t.moneda))].sort().map((m, i) => [m, suma('Ingreso', i + 2), suma('Gasto', i + 2), `=I${i + 2}-J${i + 2}`]);
+  const filas = ts.map((t) => [fechaISO(t.fecha), ETIQUETA[t.tipo] ?? t.tipo, t.categoria, t.descripcion ?? '', t.monto, t.moneda]);
+  const cuerpo = Array.from({ length: Math.max(filas.length, resumen.length) }, (_, i) => [...(filas[i] ?? ['', '', '', '', '', '']), '', ...(resumen[i] ?? [])]);
+  return [['Fecha', 'Tipo', 'Categoría', 'Descripción', 'Monto', 'Moneda', '', 'Moneda', 'Ingresos', 'Gastos', 'Balance'], ...cuerpo];
+}
 
 /** Color del kit por estado de factura o transacción. */
 export function colorEstado(estado: string): 'neutral' | 'brand' | 'success' | 'warning' | 'danger' {
@@ -70,7 +79,7 @@ export function serieCategorias(r: ResumenFinanzas): { data: { labels: string[];
 }
 
 /** Columnas de la tabla de transacciones. */
-function columnasTransacciones(): ColumnaGrilla[] {
+function columnasTransacciones(): ColumnaTabla[] {
   return [
     { field: 'fecha', headerName: 'Fecha', width: 110 },
     { field: 'tipo', headerName: 'Tipo', width: 110, renderCell: ({ row }) => celdaTag(ETIQUETA[String(row['tipoClave'])] ?? String(row['tipoClave']), colorEstado(String(row['tipoClave'])), 'outlined') },
@@ -82,7 +91,7 @@ function columnasTransacciones(): ColumnaGrilla[] {
 }
 
 /** Columnas de la tabla de facturas (con acciones Emitir / Pagar según el estado). */
-function columnasFacturas(): ColumnaGrilla[] {
+function columnasFacturas(): ColumnaTabla[] {
   return [
     { field: 'numero', headerName: 'Número', width: 130 },
     { field: 'cliente', headerName: 'Cliente', flex: 1.2, minWidth: 170 },
@@ -103,12 +112,12 @@ function columnasFacturas(): ColumnaGrilla[] {
 }
 
 /** Columnas por entidad de la vista. */
-export function columnasFinanzas(entidad: string): ColumnaGrilla[] {
+export function columnasFinanzas(entidad: string): ColumnaTabla[] {
   return entidad === 'facturas' ? columnasFacturas() : columnasTransacciones();
 }
 
 /** Filas planas de transacciones. */
-export function filasTransacciones(ts: Transaccion[]): Fila[] {
+export function filasTransacciones(ts: Transaccion[]): FilaTabla[] {
   return ts.map((t) => ({
     id: t.itransaccion,
     itransaccion: t.itransaccion,
@@ -128,7 +137,7 @@ export function filasTransacciones(ts: Transaccion[]): Fila[] {
 export const nombreCliente = (c: ClienteRef | undefined): string => (c ? (c.organizacion ? `${c.organizacion} · ${c.nombre}` : c.nombre) : 'Sin cliente');
 
 /** Filas planas de facturas (con estado efectivo). */
-export function filasFacturas(fs: Factura[], clientes: ClienteRef[], hoy = hoyISO()): Fila[] {
+export function filasFacturas(fs: Factura[], clientes: ClienteRef[], hoy = hoyISO()): FilaTabla[] {
   const porId = new Map(clientes.map((c) => [c.icliente, c]));
   return fs.map((f) => {
     const estado = estadoFactura(f, hoy);
@@ -182,7 +191,12 @@ export function equivalencias(tasas: Tasa[]): { moneda: string; texto: string; a
 }
 
 /** Configuración de cada tabla de la vista: id, texto del buscador y estado vacío. */
-export const TABLAS_FINANZAS: Record<string, { idCampo: string; buscador: string; vacio: { icono: string; titulo: string; texto: string } }> = {
+export const TABLAS_FINANZAS: Record<string, { idCampo: string; buscador: string; vacio: EstadoVacio }> = {
   transacciones: { idCampo: 'itransaccion', buscador: 'Buscar por categoría, descripción, estado…', vacio: { icono: 'mdi:swap-vertical-circle-outline', titulo: 'Sin transacciones', texto: 'Registra ingresos y gastos para llevar la contabilidad.' } },
   facturas: { idCampo: 'ifactura', buscador: 'Buscar por número, cliente, ítem…', vacio: { icono: 'mdi:file-document-outline', titulo: 'Sin facturas', texto: 'Crea una factura en borrador y emítela cuando esté lista.' } },
 };
+
+/** Configuración de `<av-tabla>` para una entidad de la vista. */
+export function tablaFinanzas(entidad: string): ConfigTabla {
+  return { prefijo: 'av-finanzas', entidad, columnas: columnasFinanzas(entidad), ...TABLAS_FINANZAS[entidad]! };
+}

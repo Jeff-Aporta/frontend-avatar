@@ -48,22 +48,22 @@ function montar(root: ShadowRoot, props: AvChatCompositorProps, host: Host): voi
       <div class="contexto" hidden>
         <iswc-icon class="contexto-icono" icon="mdi:reply"></iswc-icon>
         <div class="contexto-texto" data-color="0"><strong></strong><span></span></div>
-        <iswc-button class="contexto-cerrar" variant="plain" color="neutral" title=${t.cancelar} aria-label=${t.cancelar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>
+        <iswc-button class="contexto-cerrar" variant="plain compact" color="neutral" title=${t.cancelar} aria-label=${t.cancelar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>
       </div>
       <div class="adjuntos" hidden></div>
       <div class="barra">
-        <iswc-button class="b-emoji" variant="plain" color="neutral" title=${t.emojis} aria-label=${t.emojis} aria-expanded="false"><iswc-icon icon="mdi:emoticon-outline"></iswc-icon></iswc-button>
-        <iswc-button class="b-adjuntar" variant="plain" color="neutral" title=${t.adjuntar} aria-label=${t.adjuntar}><iswc-icon icon="mdi:paperclip"></iswc-icon></iswc-button>
+        <iswc-button class="b-emoji" variant="plain compact" color="neutral" title=${t.emojis} aria-label=${t.emojis} aria-expanded="false"><iswc-icon icon="mdi:emoticon-outline"></iswc-icon></iswc-button>
+        <iswc-button class="b-adjuntar" variant="plain compact" color="neutral" title=${t.adjuntar} aria-label=${t.adjuntar}><iswc-icon icon="mdi:paperclip"></iswc-icon></iswc-button>
         <input class="archivo" type="file" multiple hidden>
         <iswc-textarea class="area" resize="auto" autosize rows="1" min-rows="1" max-rows="6" placeholder=${t.escribeMensaje} aria-label=${t.escribeMensaje}></iswc-textarea>
-        <iswc-button class="b-accion" color="brand" pill title=${t.grabarNota} aria-label=${t.grabarNota}><iswc-icon icon="mdi:microphone"></iswc-icon></iswc-button>
+        <iswc-button variant="compact" class="b-accion" color="brand" pill title=${t.grabarNota} aria-label=${t.grabarNota}><iswc-icon icon="mdi:microphone"></iswc-icon></iswc-button>
       </div>
       <div class="grabacion" hidden role="status">
-        <iswc-button class="g-cancelar" variant="plain" color="danger" title=${t.cancelarGrabacion} aria-label=${t.cancelarGrabacion}><iswc-icon icon="mdi:delete-outline"></iswc-icon></iswc-button>
+        <iswc-button class="g-cancelar" variant="plain compact" color="danger" title=${t.cancelarGrabacion} aria-label=${t.cancelarGrabacion}><iswc-icon icon="mdi:delete-outline"></iswc-icon></iswc-button>
         <span class="g-punto"></span>
         <span class="g-tiempo">0:00</span>
         <canvas class="g-onda" width="600" height="60"></canvas>
-        <iswc-button class="g-enviar" color="brand" pill title=${t.detenerYEnviar} aria-label=${t.detenerYEnviar}><iswc-icon icon="mdi:send"></iswc-icon></iswc-button>
+        <iswc-button variant="compact" class="g-enviar" color="brand" pill title=${t.detenerYEnviar} aria-label=${t.detenerYEnviar}><iswc-icon icon="mdi:send"></iswc-icon></iswc-button>
       </div>
       <p class="aviso" role="alert" hidden></p>
       <span class="cuenta" hidden></span>
@@ -286,7 +286,7 @@ function montar(root: ShadowRoot, props: AvChatCompositorProps, host: Host): voi
   bEmoji.addEventListener('iswc-click', () => {
     panel.hidden = !panel.hidden;
     bEmoji.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
-    if (!panel.hidden) (root.querySelector('#emojis') as HTMLElement).shadowRoot?.querySelector<HTMLElement>('.emoji[tabindex="0"]')?.focus();
+    if (!panel.hidden) (root.querySelector('#emojis') as HTMLElement & { enfocar?: () => void }).enfocar?.();
   });
   root.querySelector('#emojis')?.addEventListener('av-chat-emoji', (e) => {
     e.stopPropagation();

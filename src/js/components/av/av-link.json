@@ -1,0 +1,35 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-link",
+  "category": "transversal",
+  "navTitle": "Enlace interno",
+  "title": "&lt;av-link&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-link",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-link&gt;",
+      "lede": "Enlace interno sin recarga: href real, precarga al pasar por encima y estado activo.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-link id=\"d\" vista=\"acceso\">Entrar</av-link></div>",
+          "target": "#d",
+          "props": {
+            "vista": "acceso"
+          },
+          "controls": [
+            {
+              "control": "text",
+              "prop": "props:vista",
+              "label": "vista",
+              "default": "acceso"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

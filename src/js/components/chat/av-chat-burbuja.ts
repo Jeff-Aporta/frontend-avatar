@@ -88,10 +88,10 @@ const AvChatBurbuja = crearComponente<AvChatBurbujaProps>(
           ${props.autor && props.primero ? html`<span class="autor" data-color=${String(props.autor.color)}>${props.autor.nombre}</span>` : null}
           ${m.reenviado && !m.eliminado ? html`<span class="reenviado"><iswc-icon icon="mdi:share-outline"></iswc-icon>${t.reenviado}</span>` : null}
           ${props.cita && !m.eliminado ? html`
-            <button class="cita" type="button" data-color=${String(props.cita.color)} onclick=${(e: Event) => { e.stopPropagation(); emitir(host, 'av-chat-accion', { accion: 'ir', imensaje: props.cita!.ref }); }}>
+            <iswc-button class="cita" variant="row" color="neutral" data-color=${String(props.cita.color)} onclick=${(e: Event) => { e.stopPropagation(); emitir(host, 'av-chat-accion', { accion: 'ir', imensaje: props.cita!.ref }); }}>
               <span class="cita-texto"><strong>${props.cita.autor}</strong><span>${props.cita.texto}</span></span>
               ${props.cita.miniatura ? html`<img class="cita-mini" src=${props.cita.miniatura} alt="">` : null}
-            </button>` : null}
+            </iswc-button>` : null}
           ${m.adjunto && !m.eliminado ? (audio ? html`<av-chat-audio class="medio" id="medio"></av-chat-audio>` : html`<av-chat-adjunto class="medio" id="medio"></av-chat-adjunto>`) : null}
           ${m.eliminado
             ? html`<p class="texto eliminado"><iswc-icon icon="mdi:cancel"></iswc-icon>${props.propio ? t.eliminadoPorMi : t.eliminado}${meta}</p>`
@@ -100,11 +100,11 @@ const AvChatBurbuja = crearComponente<AvChatBurbujaProps>(
             : html`<div class="texto vacio">${meta}</div>`}
           ${m.estado === 'pendiente' && m.progreso != null ? html`
             <div class="subida"><iswc-progress-bar id="progreso" value=${String(Math.round(m.progreso * 100))} label=${t.adjuntar}></iswc-progress-bar>
-            <iswc-button variant="plain" color="neutral" title=${t.cancelar} aria-label=${t.cancelar} oniswc-click=${() => accion('cancelar-subida')}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button></div>` : null}
-          <iswc-button class="mas" variant="plain" color="neutral" title=${t.menu} aria-label=${t.menu} tabindex="-1"
+            <iswc-button variant="plain compact" color="neutral" title=${t.cancelar} aria-label=${t.cancelar} oniswc-click=${() => accion('cancelar-subida')}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button></div>` : null}
+          <iswc-button class="mas" variant="plain compact" color="neutral" title=${t.menu} aria-label=${t.menu} tabindex="-1"
             oniswc-click=${(e: Event) => { e.stopPropagation(); const r = (e.currentTarget as HTMLElement).getBoundingClientRect(); menu(r.left, r.bottom); }}><iswc-icon icon="mdi:chevron-down"></iswc-icon></iswc-button>
         </div>
-        ${m.estado === 'fallido' ? html`<button class="fallo" type="button" onclick=${() => accion('reintentar')}><iswc-icon icon="mdi:alert-circle-outline"></iswc-icon>${t.noEnviado} · <u>${t.reintentar}</u></button>` : null}
+        ${m.estado === 'fallido' ? html`<iswc-button class="fallo" variant="text compact" color="danger" onclick=${() => accion('reintentar')}><iswc-icon slot="start" icon="mdi:alert-circle-outline"></iswc-icon>${t.noEnviado} · <u>${t.reintentar}</u></iswc-button>` : null}
         <av-chat-reacciones id="reacciones" class="reacciones"></av-chat-reacciones>
       </div>
     `);

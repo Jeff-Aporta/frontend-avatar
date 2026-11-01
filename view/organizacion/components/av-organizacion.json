@@ -11,7 +11,7 @@
     {
       "id": "intro",
       "title": "&lt;av-organizacion&gt;",
-      "lede": "Empresa, miembros y equipos (necesita sesión para cargar datos reales).",
+      "lede": "Empresa, miembros y equipos. Sin sesión y empresa activa muestra su estado vacío; abajo, una pieza con datos de ejemplo.",
       "blocks": [
         {
           "kind": "demo",
@@ -36,7 +36,70 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/organizacion (lo monta av-app).</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Ruta #/organizacion (lo monta av-app).</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No dentro de otra vista.</iswc-callout>"
+        }
+      ]
+    },
+    {
+      "id": "ejemplo",
+      "title": "Con datos de ejemplo",
+      "lede": "La pieza principal de la vista, sin API: los datos son fijos.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-miembros id=\"m\"></av-miembros></div>",
+          "target": "#m",
+          "props": {
+            "items": [
+              {
+                "iempresa": 1,
+                "iusuario": "admin",
+                "rol": "propietario",
+                "cargo": null,
+                "usuario": {
+                  "iusuario": "admin",
+                  "nombre": "Administrador"
+                }
+              },
+              {
+                "iempresa": 1,
+                "iusuario": "ana",
+                "rol": "admin",
+                "cargo": "Gestora",
+                "usuario": {
+                  "iusuario": "ana",
+                  "nombre": "Ana Gestora",
+                  "email": "ana@avatar.test"
+                }
+              },
+              {
+                "iempresa": 1,
+                "iusuario": "beto",
+                "rol": "miembro",
+                "cargo": "Desarrollador",
+                "usuario": {
+                  "iusuario": "beto",
+                  "nombre": "Beto Desarrollador"
+                }
+              }
+            ],
+            "puedeGestionar": true,
+            "cargando": false
+          },
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "props:puedeGestionar",
+              "label": "puedeGestionar",
+              "default": true
+            },
+            {
+              "control": "boolean",
+              "prop": "props:cargando",
+              "label": "cargando",
+              "default": false
+            }
+          ]
         }
       ]
     }

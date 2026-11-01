@@ -12,7 +12,7 @@ Píldoras de reacciones.
 ```
 <av-chat-reacciones>
   #shadow-root
-    <div part="reacciones"><button class="reaccion">emoji n</button>…</div>
+    <div part="reacciones"><iswc-button class="reaccion">emoji n</iswc-button>…</div>
 ```
 
 ## Atributos observados

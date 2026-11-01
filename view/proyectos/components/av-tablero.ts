@@ -8,12 +8,11 @@ import { crearComponente, define, emitir, html } from '../../../src/js/base/comp
 import type { AvTableroProps } from '../../../src/js/consts/schemas/proyectos.schemas.js';
 import { colorPrioridad, encabezado, estaVencida, etiquetasDe, fechaCorta, ordenarTareas, ordenEnColumna, PRIORIDAD_LABEL } from '../utils/tareas.js';
 
-type ConProps = HTMLElement & { props: Record<string, unknown> };
-
 const AvTablero = crearComponente<AvTableroProps>(import.meta.url, 'av-tablero', { tablero: null, cargando: false, puedeMover: false }, (root, props, host) => {
   if (props.cargando || !props.tablero) {
-    root.append(html`<iswc-empty-state id="estado"></iswc-empty-state>`);
-    (root.querySelector('#estado') as ConProps).props = props.cargando ? { estado: 'cargando' } : { icono: 'mdi:view-column-outline', titulo: 'Sin tablero', texto: 'Elige un proyecto para ver su tablero.' };
+    root.append(props.cargando
+      ? html`<iswc-empty-state estado="cargando"></iswc-empty-state>`
+      : html`<iswc-empty-state icono="mdi:view-column-outline" titulo="Sin tablero" texto="Elige un proyecto para ver su tablero."></iswc-empty-state>`);
     return;
   }
   const mover = (e: Event) => {
@@ -32,14 +31,14 @@ const AvTablero = crearComponente<AvTableroProps>(import.meta.url, 'av-tablero',
     <iswc-kanban class="tablero" part="tablero" oniswc-kanban-move=${mover} oniswc-kanban-card-click=${abrir}>
       ${props.tablero.columnas.map((col) => html`
         <iswc-kanban-column title=${col.nombre} accent=${col.color ?? 'var(--iswc-accent)'} data-icolumna=${String(col.icolumna)} badge=${col.limite != null ? `${col.tareas.length}/${col.limite}` : String(col.tareas.length)}>
-          ${props.puedeMover ? html`<iswc-button slot="header-actions" variant="plain" color="neutral" class="nueva" title="Nueva tarea" oniswc-click=${() => emitir(host, 'av-tarea-nueva', { icolumna: col.icolumna })}><iswc-icon icon="mdi:plus"></iswc-icon></iswc-button>` : null}
+          ${props.puedeMover ? html`<iswc-button slot="header-actions" variant="plain compact" color="neutral" class="nueva" title="Nueva tarea" oniswc-click=${() => emitir(host, 'av-tarea-nueva', { icolumna: col.icolumna })}><iswc-icon icon="mdi:plus"></iswc-icon></iswc-button>` : null}
           ${ordenarTareas(col.tareas).map((t) => html`
             <iswc-kanban-card class="tarjeta" heading=${encabezado(t)} tag=${PRIORIDAD_LABEL[t.prioridad] ?? t.prioridad} tag-color=${colorPrioridad(t.prioridad)} data-itarea=${String(t.itarea)} data-vencida=${estaVencida(t) ? '1' : '0'}>
               ${t.descripcion ? html`<span class="descripcion">${t.descripcion}</span>` : null}
               ${etiquetasDe(t.etiquetas).length ? html`<span class="etiquetas">${etiquetasDe(t.etiquetas).map((e) => html`<iswc-tag color="neutral" variant="outlined">${e}</iswc-tag>`)}</span>` : null}
               <span slot="footer" class="pie">
                 ${t.fvence ? html`<span class="vence" data-vencida=${estaVencida(t) ? '1' : '0'}><iswc-icon icon=${estaVencida(t) ? 'mdi:alarm' : 'mdi:calendar-outline'}></iswc-icon>${fechaCorta(t.fvence)}</span>` : html`<span></span>`}
-                ${t.asignado_a ? html`<iswc-person class="asignado" data-iusuario=${t.asignado_a} data-nombre=${t.asignado?.nombre ?? ''}></iswc-person>` : null}
+                ${t.asignado_a ? html`<iswc-person class="asignado" compacto usuario=${t.asignado_a} nombre=${t.asignado?.nombre ?? ''}></iswc-person>` : null}
               </span>
             </iswc-kanban-card>
           `)}
@@ -47,7 +46,6 @@ const AvTablero = crearComponente<AvTableroProps>(import.meta.url, 'av-tablero',
       `)}
     </iswc-kanban>
   `);
-  for (const p of root.querySelectorAll<ConProps>('iswc-person')) p.props = { usuario: p.dataset['iusuario'], nombre: p.dataset['nombre'] || null, compacto: true };
 });
 
 define('av-tablero', AvTablero);

@@ -1,18 +1,6 @@
-@use "tokens" as t;
 @use "mixins" as m;
 
-/* av-kpis — rejilla responsive de iswc-stat. */
+/* av-kpis — la rejilla es de iswc-stat-group; su aspecto, de los tokens --iswc-stat-group-* de app.scss. */
 :host {
   @include m.host-bloque;
-}
-
-.rejilla {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
-  gap: t.esp(3);
-}
-
-.esqueleto {
-  height: 6.5em;
-  border-radius: t.radio(md);
 }

@@ -48,7 +48,7 @@ const AvConversor = crearComponente<AvConversorProps>(
         <div class="fila" part="fila">
           <iswc-input id="monto" class="monto" type="number" min="0" step="any" label="Monto" value=${String(props.monto)} oniswc-input=${avisar}></iswc-input>
           <iswc-select id="de" class="moneda" label="De" value=${props.de} oniswc-change=${avisar}>${monedas.map((m) => html`<iswc-option value=${m}>${m}</iswc-option>`)}</iswc-select>
-          <iswc-button class="invertir" variant="soft" color="brand" aria-label="Intercambiar monedas" title="Intercambiar" oniswc-click=${invertir}><iswc-icon icon="mdi:swap-horizontal"></iswc-icon></iswc-button>
+          <iswc-button class="invertir" variant="soft compact" color="brand" aria-label="Intercambiar monedas" title="Intercambiar" oniswc-click=${invertir}><iswc-icon icon="mdi:swap-horizontal"></iswc-icon></iswc-button>
           <iswc-select id="a" class="moneda" label="A" value=${props.a} oniswc-change=${avisar}>${monedas.map((m) => html`<iswc-option value=${m}>${m}</iswc-option>`)}</iswc-select>
         </div>
         <div class="resultado" part="resultado" aria-live="polite"></div>

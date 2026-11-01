@@ -25,6 +25,16 @@
   white-space: nowrap;
 }
 
+/// Texto largo limitado a `$n` líneas con elipsis (descripciones, motivos, vistas previas).
+@mixin lineas($n: 2) {
+  display: -webkit-box;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $n;
+  line-clamp: $n;
+}
+
 /// Rótulo de sección en versalitas (PARÁMETROS, CUERPO, RESPUESTAS…). `$opacidad` atenúa el texto.
 @mixin rotulo($opacidad: 0.8) {
   font-weight: 650;
@@ -78,4 +88,25 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-shadow: var(--av-neon-texto, none);
+}
+
+/* iswc-heading que conserva el aspecto del título que reemplaza: sin tinte ni escala por nivel, tamaño y tipografía los pone la regla de su clase. */
+@mixin heading-heredado {
+  --iswc-heading-color: currentColor;
+  --iswc-heading-mix: 0%;
+  --iswc-heading-size: 1em;
+  font-weight: 700;
+
+  &::part(heading) {
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    gap: inherit;
+    flex: 1;
+    min-width: 0;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-align: inherit;
+  }
 }

@@ -1,0 +1,33 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-migas",
+  "category": "transversal",
+  "navTitle": "Migas",
+  "title": "&lt;av-migas&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-migas",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-migas&gt;",
+      "lede": "Migas de pan de la ruta actual.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-migas id=\"d\"></av-migas></div>",
+          "target": "#d",
+          "props": {},
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "attr:hidden",
+              "label": "oculto",
+              "default": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

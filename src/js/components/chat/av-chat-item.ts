@@ -49,7 +49,7 @@ const AvChatItem = crearComponente<AvChatItemProps>(import.meta.url, 'av-chat-it
         </span>
       </span>
       <iswc-dropdown class="menu" placement="bottom-end" oniswc-select=${pref} onclick=${(e: Event) => e.stopPropagation()}>
-        <iswc-button slot="trigger" class="menu-boton" variant="plain" color="neutral" title=${t.menu} aria-label=${t.menu} tabindex="-1"><iswc-icon icon="mdi:chevron-down"></iswc-icon></iswc-button>
+        <iswc-button slot="trigger" class="menu-boton" variant="plain compact" color="neutral" title=${t.menu} aria-label=${t.menu} tabindex="-1"><iswc-icon icon="mdi:chevron-down"></iswc-icon></iswc-button>
         <iswc-dropdown-item value="fijar"><iswc-icon slot="icon" icon=${c.fijado ? 'mdi:pin-off-outline' : 'mdi:pin-outline'}></iswc-icon>${c.fijado ? t.desfijarChat : t.fijarChat}</iswc-dropdown-item>
         <iswc-dropdown-item value="silenciar"><iswc-icon slot="icon" icon=${c.silenciado ? 'mdi:bell-outline' : 'mdi:bell-off-outline'}></iswc-icon>${c.silenciado ? t.activarSonido : t.silenciar}</iswc-dropdown-item>
         <iswc-dropdown-item value="archivar"><iswc-icon slot="icon" icon=${c.archivado ? 'mdi:archive-arrow-up-outline' : 'mdi:archive-arrow-down-outline'}></iswc-icon>${c.archivado ? t.desarchivar : t.archivar}</iswc-dropdown-item>

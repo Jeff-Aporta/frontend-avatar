@@ -18,7 +18,7 @@ const AvStockAlertas = crearComponente<AvStockAlertasProps>(import.meta.url, 'av
   }
   root.append(html`
     <section class="alertas" part="alertas" aria-label="Alertas de stock">
-      <h2 class="rotulo"><iswc-icon icon="mdi:alert-decagram-outline"></iswc-icon> Alertas de stock <iswc-badge color="danger" pill>${a.length}</iswc-badge></h2>
+      <iswc-heading level="2" class="rotulo"><iswc-icon icon="mdi:alert-decagram-outline"></iswc-icon> Alertas de stock <iswc-badge color="danger" pill>${a.length}</iswc-badge></iswc-heading>
       <div class="franja" part="franja">
         ${a.map((p) => html`
           <article class="alerta" part="alerta" data-agotado=${p.agotado ? 'si' : 'no'}>
@@ -26,9 +26,9 @@ const AvStockAlertas = crearComponente<AvStockAlertasProps>(import.meta.url, 'av
               <iswc-tag color=${p.agotado ? 'danger' : 'warning'} pill>${p.agotado ? 'Agotado' : 'Bajo mínimo'}</iswc-tag>
               <span class="sku">${p.sku}</span>
             </div>
-            <iswc-button class="nombre" variant="text" color="neutral" oniswc-click=${() => emitir(host, 'av-inventario-abrir', { entidad: 'productos', id: p.iproducto })}>${p.nombre}</iswc-button>
+            <iswc-button class="nombre" variant="text compact" color="neutral" oniswc-click=${() => emitir(host, 'av-inventario-abrir', { entidad: 'productos', id: p.iproducto })}>${p.nombre}</iswc-button>
             <div class="cifras"><strong class="stock">${p.stock}</strong><span>/ mín ${p.stock_minimo}</span>${p.ubicacion ? html`<span class="ubicacion"><iswc-icon icon="mdi:map-marker-outline"></iswc-icon>${p.ubicacion}</span>` : null}</div>
-            ${props.puedeMover ? html`<iswc-button class="reponer" size="small" variant="soft" color=${p.agotado ? 'danger' : 'warning'} oniswc-click=${() => emitir(host, 'av-producto-mover', { iproducto: p.iproducto, tipo: 'entrada' })}><iswc-icon slot="start" icon="mdi:tray-arrow-down"></iswc-icon>Reponer</iswc-button>` : null}
+            ${props.puedeMover ? html`<iswc-button class="reponer" variant="soft compact" color=${p.agotado ? 'danger' : 'warning'} oniswc-click=${() => emitir(host, 'av-producto-mover', { iproducto: p.iproducto, tipo: 'entrada' })}><iswc-icon slot="start" icon="mdi:tray-arrow-down"></iswc-icon>Reponer</iswc-button>` : null}
           </article>
         `)}
       </div>

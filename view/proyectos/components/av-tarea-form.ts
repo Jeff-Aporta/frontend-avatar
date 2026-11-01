@@ -58,10 +58,10 @@ const AvTareaForm = crearComponente<AvTareaFormProps>(
             <iswc-input name="fvence" type="date" label="Vence" value=${t?.fvence ? String(t.fvence).slice(0, 10) : ''}></iswc-input>
           </div>
           <iswc-input name="etiquetas" label="Etiquetas" hint="Separadas por comas" value=${etiquetasDe(t?.etiquetas).join(', ')}></iswc-input>
-          ${props.error ? html`<iswc-callout tone="danger">${props.error}</iswc-callout>` : null}
+          ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${t ? 'Guardar' : 'Crear'}</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${t ? 'Guardar' : 'Crear'}</iswc-button>
       </iswc-dialog>
     `);
   },

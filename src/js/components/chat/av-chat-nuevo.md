@@ -12,7 +12,7 @@ Diálogo para empezar un chat.
 ```
 <av-chat-nuevo>
   #shadow-root
-    <iswc-dialog><iswc-input class="q"> <button class="fila grupo"> <div class="personas"><button class="fila">…</div></iswc-dialog>
+    <iswc-dialog><iswc-input class="q"> <iswc-button class="fila grupo"> <div class="personas"><iswc-button class="fila">…</div></iswc-dialog>
 ```
 
 ## Atributos observados

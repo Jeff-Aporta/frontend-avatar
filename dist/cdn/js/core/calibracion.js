@@ -1,0 +1,1 @@
+const i={aplanado:{metodo:"lda",dims:64,blanqueo:0,regularizacion:1,sinteticas:!1,bitsMatriz:8,cuantizacion:{tipo:"int8"}},orden:{exacta:"palabra",minimoExacta:2,pesoLexico:.8,pesoTexto:.5,tipificar:!1,umbral:3}},n={},o=a=>({...i,...n[a]});export{i as CALIBRACION,o as calibracionDe};

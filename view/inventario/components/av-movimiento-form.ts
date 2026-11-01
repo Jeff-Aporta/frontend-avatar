@@ -61,8 +61,8 @@ const AvMovimientoForm = crearComponente<AvMovimientoFormProps>(
           <iswc-input name="motivo" label="Motivo" maxlength="300" placeholder="Compra, venta, conteo…"></iswc-input>
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}><iswc-icon slot="start" icon="mdi:check"></iswc-icon>Registrar</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}><iswc-icon slot="start" icon="mdi:check"></iswc-icon>Registrar</iswc-button>
       </iswc-dialog>
     `);
     previa();

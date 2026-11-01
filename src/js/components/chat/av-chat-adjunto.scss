@@ -13,14 +13,14 @@
 }
 
 .miniatura {
-  position: relative;
-  display: block;
-  padding: 0;
-  border: 0;
-  border-radius: 0.7em;
+  --iswc-button-row-padding: 0;
+  --iswc-button-border-radius: 0.7em;
   overflow: hidden;
-  background: var(--iswc-bg-soft);
-  cursor: zoom-in;
+
+  &::part(button) {
+    background: var(--iswc-bg-soft);
+    cursor: zoom-in;
+  }
 
   img,
   video {
@@ -37,11 +37,6 @@
   &:hover video {
     transform: scale(1.03);
     filter: saturate(1.15);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--iswc-focus, var(--iswc-accent));
-    outline-offset: 2px;
   }
 
   .play {

@@ -6,13 +6,15 @@
 import type { z } from '../../../src/js/base/zod.js';
 import { crearComponente, define, html, avisar } from '../../../src/js/base/componente.js';
 import { type AvCrmProps, type Cliente, type ClienteDatos, ClienteSchema, type MiembroCrm, MiembroCrmSchema } from '../../../src/js/consts/schemas/crm.schemas.js';
+import { sinEmpresa } from '../../../src/js/consts/estados.js';
 import { controller, mensajeDe } from '../../../src/js/core/api.js';
+import { filtrarTexto } from '../../../src/js/core/datos.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
 import { ir, tomarIntencion } from '../../../src/js/core/router.js';
-import { filtrarPorEtapa, moneda, totalesPorEtapa, valorPipeline } from '../utils/crm.js';
+import { camposCliente, filasClientes, filtrarPorEtapa, moneda, tablaClientes, totalesPorEtapa, valorPipeline } from '../utils/crm.js';
 import './av-embudo.js';
-import './av-clientes-grid.js';
+import '../../../src/js/components/av/av-tabla.js';
 import './av-cliente-form.js';
 
 type ConProps = HTMLElement & { props: Record<string, unknown> };
@@ -35,11 +37,12 @@ const AvCrm = crearComponente<AvCrmProps>(import.meta.url, 'av-crm', { id: null,
   let clientes: Cliente[] = [];
   let miembros: MiembroCrm[] = [];
   let etapa: string | null = null;
+  let texto = '';
   const $ = (id: string) => root.querySelector(`#${id}`) as ConProps;
 
   const pintar = () => {
     $('embudo').props = { etapas: totalesPorEtapa(clientes), activa: etapa };
-    $('grid').props = { clientes: filtrarPorEtapa(clientes, etapa), cargando: false };
+    $('grid').props = { filas: filasClientes(filtrarTexto(filtrarPorEtapa(clientes, etapa), texto, camposCliente)), cargando: false, texto };
     $('cabecera').props = { subtitulo: `${clientes.length} cliente${clientes.length === 1 ? '' : 's'} · pipeline ${moneda(valorPipeline(clientes))}` };
   };
   const cargar = async () => {
@@ -88,23 +91,25 @@ const AvCrm = crearComponente<AvCrmProps>(import.meta.url, 'av-crm', { id: null,
   root.append(html`
     <div class="pagina" part="pagina"
       onav-crm-filtrar=${(e: Event) => { etapa = (e as CustomEvent<{ etapa: string | null }>).detail.etapa; pintar(); }}
-      onav-cliente-abrir=${(e: Event) => abrir(clientes.find((c) => c.icliente === (e as CustomEvent<{ icliente: number }>).detail.icliente) ?? null)}
+      onav-crm-buscar=${(e: Event) => { texto = (e as CustomEvent<{ texto: string }>).detail.texto; pintar(); }}
+      onav-crm-abrir=${(e: Event) => abrir(clientes.find((c) => c.icliente === Number((e as CustomEvent<{ id: unknown }>).detail.id)) ?? null)}
       onav-cliente-guardar=${alGuardar} onav-cliente-eliminar=${alEliminar}
       onav-cliente-form-cerrar=${() => { $('form').props = { abierto: false }; if (props.id) ir('crm'); }}
       onav-cliente-form-error=${(e: Event) => avisar((e as CustomEvent<{ mensaje: string }>).detail.mensaje, 'warning')}>
       <iswc-page-header id="cabecera">
-        <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${() => (h.props = { version: (props.version ?? 0) + 1 })}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
-        ${puedeEscribir ? html`<iswc-button slot="acciones" color="brand" oniswc-click=${() => abrir(null)}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo cliente</iswc-button>` : null}
+        <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${() => (h.props = { version: (props.version ?? 0) + 1 })}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
+        ${puedeEscribir ? html`<iswc-button variant="compact" slot="acciones" color="brand" oniswc-click=${() => abrir(null)}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo cliente</iswc-button>` : null}
       </iswc-page-header>
-      ${iempresa ? html`<av-embudo id="embudo"></av-embudo><av-clientes-grid id="grid"></av-clientes-grid>` : html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>`}
+      ${iempresa ? html`<av-embudo id="embudo"></av-embudo><av-tabla id="grid"></av-tabla>` : html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>`}
       <av-cliente-form id="form"></av-cliente-form>
     </div>
   `);
   $('cabecera').props = { titulo: 'CRM', subtitulo: 'Clientes y embudo de ventas', icono: 'mdi:account-heart-outline' };
   if (!iempresa) {
-    $('sin-empresa').props = { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Elige una empresa en la barra para ver su CRM.' };
+    $('sin-empresa').props = sinEmpresa('su CRM');
     return;
   }
+  $('grid').props = { ...tablaClientes(), cargando: true };
   void (async () => {
     try {
       miembros = filas(MiembroCrmSchema, await controller('miembros').query({ where: { iempresa }, include: { usuario: true }, pageSize: 200 }));

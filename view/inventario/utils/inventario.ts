@@ -3,8 +3,7 @@
  * cuatro tablas (productos, movimientos, pedidos, proveedores), campos de búsqueda, stock resultante de un movimiento,
  * total de un pedido y productos relacionados por defecto. Los componentes solo pintan lo que esto devuelve.
  */
-import type { ColumnaGrilla, Fila } from '../../../src/js/base/grilla.js';
-import type { Indicador } from '../../../src/js/consts/schemas/componentes.schemas.js';
+import type { ColumnaTabla, ConfigTabla, EstadoVacio, FilaTabla, Indicador } from '../../../src/js/consts/schemas/componentes.schemas.js';
 import type { ClientePedido, Movimiento, Pedido, Producto, Proveedor, ResumenInventario } from '../../../src/js/consts/schemas/inventario.schemas.js';
 import { celdaTag, fechaISO, formatoNumero, normalizar } from '../../../src/js/core/datos.js';
 
@@ -48,7 +47,7 @@ export function indicadoresInventario(r: ResumenInventario): Indicador[] {
 const nombreDe = <T extends { nombre: string }>(lista: T[], id: unknown, clave: keyof T): string => lista.find((x) => x[clave] === id)?.nombre ?? '';
 
 /** Columnas de productos (con acciones de entrada / salida). */
-function columnasProductos(): ColumnaGrilla[] {
+function columnasProductos(): ColumnaTabla[] {
   return [
     { field: 'sku', headerName: 'SKU', width: 120 },
     { field: 'nombre', headerName: 'Producto', flex: 1.5, minWidth: 190 },
@@ -71,7 +70,7 @@ function columnasProductos(): ColumnaGrilla[] {
   ];
 }
 
-function columnasMovimientos(): ColumnaGrilla[] {
+function columnasMovimientos(): ColumnaTabla[] {
   return [
     { field: 'fecha', headerName: 'Fecha', width: 150 },
     { field: 'producto', headerName: 'Producto', flex: 1.4, minWidth: 180 },
@@ -83,7 +82,7 @@ function columnasMovimientos(): ColumnaGrilla[] {
   ];
 }
 
-function columnasPedidos(): ColumnaGrilla[] {
+function columnasPedidos(): ColumnaTabla[] {
   return [
     { field: 'codigo', headerName: 'Código', width: 130 },
     { field: 'tipo', headerName: 'Tipo', width: 120 },
@@ -96,7 +95,7 @@ function columnasPedidos(): ColumnaGrilla[] {
   ];
 }
 
-function columnasProveedores(): ColumnaGrilla[] {
+function columnasProveedores(): ColumnaTabla[] {
   return [
     { field: 'nombre', headerName: 'Proveedor', flex: 1.2, minWidth: 170 },
     { field: 'contacto', headerName: 'Contacto', flex: 1, minWidth: 140 },
@@ -107,7 +106,7 @@ function columnasProveedores(): ColumnaGrilla[] {
 }
 
 /** Columnas por entidad de la vista. */
-export function columnasInventario(entidad: string): ColumnaGrilla[] {
+export function columnasInventario(entidad: string): ColumnaTabla[] {
   if (entidad === 'movimientos') return columnasMovimientos();
   if (entidad === 'pedidos') return columnasPedidos();
   if (entidad === 'proveedores') return columnasProveedores();
@@ -115,7 +114,7 @@ export function columnasInventario(entidad: string): ColumnaGrilla[] {
 }
 
 /** Filas planas de productos. */
-export function filasProductos(ps: Producto[], proveedores: Proveedor[]): Fila[] {
+export function filasProductos(ps: Producto[], proveedores: Proveedor[]): FilaTabla[] {
   return ps.map((p) => {
     const nivel = nivelStock(p);
     return {
@@ -135,7 +134,7 @@ function fechaHora(v: unknown): string {
 }
 
 /** Filas planas del kardex. */
-export function filasMovimientos(ms: Movimiento[], productos: Producto[]): Fila[] {
+export function filasMovimientos(ms: Movimiento[], productos: Producto[]): FilaTabla[] {
   return ms.map((m) => ({
     id: m.imovimiento, imovimiento: m.imovimiento, fecha: fechaHora(m.creado), producto: nombreDe(productos, m.iproducto, 'iproducto') || `#${m.iproducto}`,
     tipo: ETIQUETA[m.tipo] ?? m.tipo, tipoClave: m.tipo,
@@ -149,7 +148,7 @@ export function filasMovimientos(ms: Movimiento[], productos: Producto[]): Fila[
 const nombreCliente = (c: ClientePedido | undefined): string => (c ? c.organizacion || c.nombre : '');
 
 /** Filas planas de pedidos. */
-export function filasPedidos(ps: Pedido[], proveedores: Proveedor[], clientes: ClientePedido[]): Fila[] {
+export function filasPedidos(ps: Pedido[], proveedores: Proveedor[], clientes: ClientePedido[]): FilaTabla[] {
   return ps.map((p) => ({
     id: p.ipedido, ipedido: p.ipedido, codigo: p.codigo ?? `#${p.ipedido}`, tipo: ETIQUETA[p.tipo] ?? p.tipo, tipoClave: p.tipo,
     contraparte: p.tipo === 'proveedor' ? nombreDe(proveedores, p.iproveedor, 'iproveedor') : nombreCliente(clientes.find((c) => c.icliente === p.icliente)),
@@ -160,7 +159,7 @@ export function filasPedidos(ps: Pedido[], proveedores: Proveedor[], clientes: C
 }
 
 /** Filas planas de proveedores (con cuántos productos surten). */
-export function filasProveedores(ps: Proveedor[], productos: Producto[]): Fila[] {
+export function filasProveedores(ps: Proveedor[], productos: Producto[]): FilaTabla[] {
   return ps.map((p) => ({ id: p.iproveedor, iproveedor: p.iproveedor, nombre: p.nombre, contacto: p.contacto ?? '', email: p.email ?? '', telefono: p.telefono ?? '', productos: productos.filter((x) => x.iproveedor === p.iproveedor).length }));
 }
 
@@ -188,9 +187,14 @@ export function relacionadosDe(p: Producto, todos: Producto[]): Producto[] {
 }
 
 /** Configuración de cada tabla: id, buscador y vacío. */
-export const TABLAS_INVENTARIO: Record<string, { idCampo: string; buscador: string; vacio: { icono: string; titulo: string; texto: string } }> = {
+export const TABLAS_INVENTARIO: Record<string, { idCampo: string; buscador: string; vacio: EstadoVacio }> = {
   productos: { idCampo: 'iproducto', buscador: 'Buscar por SKU, nombre, marca, ubicación…', vacio: { icono: 'mdi:package-variant', titulo: 'Sin productos', texto: 'Agrega productos al catálogo para controlar su stock.' } },
   movimientos: { idCampo: 'imovimiento', buscador: 'Buscar por producto, tipo, motivo…', vacio: { icono: 'mdi:swap-vertical', titulo: 'Sin movimientos', texto: 'Las entradas, salidas y ajustes quedan aquí como kardex.' } },
   pedidos: { idCampo: 'ipedido', buscador: 'Buscar por código, proveedor, cliente, estado…', vacio: { icono: 'mdi:truck-outline', titulo: 'Sin pedidos', texto: 'Registra pedidos a proveedores o de clientes.' } },
   proveedores: { idCampo: 'iproveedor', buscador: 'Buscar proveedor, contacto, correo…', vacio: { icono: 'mdi:factory', titulo: 'Sin proveedores', texto: 'Agrega a quienes te surten productos.' } },
 };
+
+/** Configuración de `<av-tabla>` para una entidad de la vista. */
+export function tablaInventario(entidad: string): ConfigTabla {
+  return { prefijo: 'av-inventario', entidad, columnas: columnasInventario(entidad), ...TABLAS_INVENTARIO[entidad]! };
+}

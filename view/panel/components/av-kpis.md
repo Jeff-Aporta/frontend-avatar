@@ -1,6 +1,6 @@
 ---
 name: av-kpis
-description: Rejilla de tarjetas KPI (iswc-stat) del resumen de la empresa: miembros, mensajes, proyectos, pendientes, vencidas y pipeline.
+description: Traduce el resumen de la empresa a iswc-stat-group: miembros, mensajes, proyectos, pendientes, vencidas y pipeline.
 ---
 
 # `<av-kpis>`
@@ -12,7 +12,7 @@ Las seis cifras de arriba del panel. Sin resumen pinta esqueletos.
 ```
 <av-kpis>
   #shadow-root
-    <div part="rejilla"><iswc-stat data-id="miembros">…×6</div>
+    <iswc-stat-group part="grupo" esqueletos="6">
 ```
 
 ## Atributos observados

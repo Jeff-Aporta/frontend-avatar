@@ -71,7 +71,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Encima de la tabla de clientes.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como gráfica: para eso está av-embudo-grafica del panel.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Encima de la tabla de clientes.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como gráfica: para eso está av-embudo-grafica del panel.</iswc-callout>"
         }
       ]
     }

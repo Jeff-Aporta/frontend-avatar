@@ -42,6 +42,10 @@
   }
 }
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 .titulo {
   flex: 1;
   margin: 0;
@@ -98,25 +102,12 @@
 }
 
 .archivados {
-  display: flex;
-  align-items: center;
-  gap: t.esp(3);
+  --iswc-button-row-gap: #{t.esp(3)};
+  --iswc-button-row-padding: #{t.esp(2)} #{t.esp(4)};
+  --iswc-button-border-radius: #{t.radio(lg)};
+  --iswc-button-font-weight: 600;
+  width: auto;
   margin: 0 t.esp(2);
-  padding: t.esp(2) t.esp(4);
-  border: 0;
-  border-radius: t.radio(lg);
-  background: transparent;
-  color: var(--iswc-text);
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-
-  &:hover,
-  &:focus-visible {
-    background: var(--iswc-control-bg-hover, var(--av-velo));
-    outline: none;
-  }
 
   iswc-icon {
     font-size: 1.3em;
@@ -143,7 +134,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.1em;
-  padding: t.esp(1) t.esp(2) t.esp(4);
+  padding: 0 0 t.esp(4);
   @include c.scroll;
 
   > av-chat-item {

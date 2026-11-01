@@ -26,7 +26,7 @@ const AvSolicitudes = crearComponente<AvSolicitudesProps>(import.meta.url, 'av-s
     <section class="solicitudes" part="solicitudes">
       ${props.compacto ? null : html`
         <div class="filtros" part="filtros" role="group" aria-label="Filtrar solicitudes">
-          ${FILTROS.map((f) => html`<iswc-button size="small" variant=${filtro === f ? 'soft' : 'plain'} color=${filtro === f ? 'brand' : 'neutral'} aria-pressed=${filtro === f ? 'true' : 'false'} oniswc-click=${() => emitir(host, 'av-solicitudes-filtro', { filtro: f })}>${f === 'todas' ? 'Todas' : `${ETIQUETA[f]}s`}<iswc-badge slot="end" color=${f === 'pendiente' && conteo[f] ? 'warning' : 'neutral'} pill>${conteo[f] ?? 0}</iswc-badge></iswc-button>`)}
+          ${FILTROS.map((f) => html`<iswc-button variant=${filtro === f ? 'soft' : 'plain'} color=${filtro === f ? 'brand' : 'neutral'} aria-pressed=${filtro === f ? 'true' : 'false'} oniswc-click=${() => emitir(host, 'av-solicitudes-filtro', { filtro: f })}>${f === 'todas' ? 'Todas' : `${ETIQUETA[f]}s`}<iswc-badge slot="end" color=${f === 'pendiente' && conteo[f] ? 'warning' : 'neutral'} pill>${conteo[f] ?? 0}</iswc-badge></iswc-button>`)}
         </div>`}
       <div class="lista" part="lista">
         ${visibles.length ? visibles.map((s) => {
@@ -52,9 +52,9 @@ const AvSolicitudes = crearComponente<AvSolicitudesProps>(import.meta.url, 'av-s
               </div>
               ${s.estado === 'pendiente' && props.puedeResolver ? html`
                 <div class="acciones">
-                  <iswc-button size="small" color="success" ?disabled=${ocupado} oniswc-click=${() => emitir(host, 'av-solicitud-resolver', { isolicitud: s.isolicitud, accion: 'aprobar' })}><iswc-icon slot="start" icon="mdi:check"></iswc-icon>Aprobar</iswc-button>
-                  <iswc-button size="small" variant="outlined" color="danger" id=${`rechazar-${s.isolicitud}`} ?disabled=${ocupado}><iswc-icon slot="start" icon="mdi:close"></iswc-icon>Rechazar</iswc-button>
-                  <iswc-popconfirm for=${`rechazar-${s.isolicitud}`} message=${`¿Rechazar la solicitud de ${s.empleado}?`} oniswc-popconfirm-confirm=${() => emitir(host, 'av-solicitud-resolver', { isolicitud: s.isolicitud, accion: 'rechazar' })}><iswc-button slot="confirm" color="danger">Sí, rechazar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>
+                  <iswc-button variant="compact" color="success" ?disabled=${ocupado} oniswc-click=${() => emitir(host, 'av-solicitud-resolver', { isolicitud: s.isolicitud, accion: 'aprobar' })}><iswc-icon slot="start" icon="mdi:check"></iswc-icon>Aprobar</iswc-button>
+                  <iswc-button variant="outlined compact" color="danger" id=${`rechazar-${s.isolicitud}`} ?disabled=${ocupado}><iswc-icon slot="start" icon="mdi:close"></iswc-icon>Rechazar</iswc-button>
+                  <iswc-popconfirm for=${`rechazar-${s.isolicitud}`} message=${`¿Rechazar la solicitud de ${s.empleado}?`} oniswc-popconfirm-confirm=${() => emitir(host, 'av-solicitud-resolver', { isolicitud: s.isolicitud, accion: 'rechazar' })}><iswc-button variant="compact" slot="confirm" color="danger">Sí, rechazar</iswc-button><iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button></iswc-popconfirm>
                 </div>` : null}
             </article>`;
         }) : html`<iswc-empty-state class="vacio"></iswc-empty-state>`}

@@ -16,31 +16,25 @@
 }
 
 .reaccion {
+  --iswc-button-row-padding: 0.1em 0.45em;
+  --iswc-button-row-gap: 0.2em;
   display: inline-flex;
-  align-items: center;
-  gap: 0.2em;
-  padding: 0.1em 0.45em;
-  border-radius: 1em;
-  border: 1px solid var(--iswc-border-soft);
-  background: var(--iswc-bg-elev);
-  color: var(--iswc-text);
-  font: inherit;
+  width: auto;
   font-size: 0.85em;
-  cursor: pointer;
-  box-shadow: 0 0.1em 0.3em color-mix(in srgb, var(--iswc-text) 10%, transparent);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.15s ease;
   @include c.entrada(0.15em);
+
+  &::part(button) {
+    border: 0.07em solid var(--iswc-border-soft);
+    background: var(--iswc-bg-elev);
+    box-shadow: 0 0.1em 0.3em color-mix(in srgb, var(--iswc-text) 10%, transparent);
+  }
 
   &:hover {
     transform: translateY(-0.08em) scale(1.06);
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--iswc-focus, var(--iswc-accent));
-    outline-offset: 1px;
-  }
-
-  &[data-mia="1"] {
+  &[data-mia="1"]::part(button) {
     border-color: color-mix(in srgb, var(--iswc-accent) 70%, transparent);
     background: var(--iswc-brand-soft);
     box-shadow: 0 0 0.5em color-mix(in srgb, var(--iswc-accent) 30%, transparent);

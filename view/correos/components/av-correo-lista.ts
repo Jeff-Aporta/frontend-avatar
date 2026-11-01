@@ -64,7 +64,7 @@ function pintarFilas(root: ShadowRoot, props: AvCorreoListaProps, host: HTMLElem
           <div class="previa">${vistaPrevia(c.cuerpo)}</div>
           ${c.etiquetas.length ? html`<div class="etiquetas">${c.etiquetas.map((t) => html`<iswc-tag color=${t === 'urgente' ? 'danger' : 'brand'} variant="outlined" pill>${t}</iswc-tag>`)}</div>` : null}
         </div>
-        <iswc-button class="estrella" variant="plain" color=${c.destacado ? 'warning' : 'neutral'} size="small" aria-label=${c.destacado ? 'Quitar destacado' : 'Destacar'} aria-pressed=${c.destacado ? 'true' : 'false'} ?disabled=${!props.puedeMarcar} oniswc-click=${estrella(c)}>
+        <iswc-button class="estrella" variant="plain compact" color=${c.destacado ? 'warning' : 'neutral'} aria-label=${c.destacado ? 'Quitar destacado' : 'Destacar'} aria-pressed=${c.destacado ? 'true' : 'false'} ?disabled=${!props.puedeMarcar} oniswc-click=${estrella(c)}>
           <iswc-icon icon=${c.destacado ? 'mdi:star' : 'mdi:star-outline'}></iswc-icon>
         </iswc-button>
       </div>`;

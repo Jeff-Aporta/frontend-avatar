@@ -1,15 +1,15 @@
-import{crearComponente as l,define as r,emitir as d,html as e}from"../../../js/base/componente.js?v=p6quri";const m={invitacion:"mdi:account-plus-outline",tarea:"mdi:checkbox-marked-circle-outline",mensaje:"mdi:forum-outline"},u=l(import.meta.url,"av-notificaciones",{items:[],cargando:!1},(a,t,n)=>{const c=t.items.filter(i=>!i.leida);a.append(e`
+import{crearComponente as o,define as l,emitir as n,html as t}from"../../../js/base/componente.js?v=m5nu5c";const r={invitacion:"mdi:account-plus-outline",tarea:"mdi:checkbox-marked-circle-outline",mensaje:"mdi:forum-outline"},d=o(import.meta.url,"av-notificaciones",{items:[],cargando:!1},(c,e,s)=>{const a=e.items.filter(i=>!i.leida);c.append(t`
     <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
-      <strong slot="header"><iswc-icon icon="mdi:bell-outline"></iswc-icon> Notificaciones ${c.length?e`<iswc-badge color="danger" pill>${c.length}</iswc-badge>`:null}</strong>
-      ${c.length?e`<iswc-button slot="header-actions" variant="plain" color="neutral" class="leer" oniswc-click=${()=>d(n,"av-notificaciones-leer",{ids:[]})}>Marcar leídas</iswc-button>`:null}
-      ${t.cargando?e`<iswc-empty-state class="vacio" id="cargando"></iswc-empty-state>`:t.items.length===0?e`<iswc-empty-state class="vacio" id="vacio"></iswc-empty-state>`:e`<ul class="lista" part="lista">
-            ${t.items.slice(0,8).map(i=>e`
+      <strong slot="header"><iswc-icon icon="mdi:bell-outline"></iswc-icon> Notificaciones ${a.length?t`<iswc-badge color="danger" pill>${a.length}</iswc-badge>`:null}</strong>
+      ${a.length?t`<iswc-button slot="header-actions" variant="plain compact" color="neutral" class="leer" oniswc-click=${()=>n(s,"av-notificaciones-leer",{ids:[]})}>Marcar leídas</iswc-button>`:null}
+      ${e.cargando?t`<iswc-empty-state class="vacio" estado="cargando"></iswc-empty-state>`:e.items.length===0?t`<iswc-empty-state class="vacio" icono="mdi:bell-check-outline" titulo="Al día" texto="No tienes notificaciones."></iswc-empty-state>`:t`<ul class="lista" part="lista">
+            ${e.items.slice(0,8).map(i=>t`
               <li class="item" data-leida=${i.leida?"1":"0"}>
-                <iswc-icon class="icono" icon=${m[i.tipo]??"mdi:information-outline"}></iswc-icon>
-                <span class="texto"><strong class="titulo">${i.titulo}</strong>${i.cuerpo?e`<span class="cuerpo">${i.cuerpo}</span>`:null}</span>
-                ${i.creado?e`<iswc-relative-time class="cuando" date=${typeof i.creado=="string"?i.creado:i.creado.toISOString()} format="short"></iswc-relative-time>`:null}
+                <iswc-icon class="icono" icon=${r[i.tipo]??"mdi:information-outline"}></iswc-icon>
+                <span class="texto"><strong class="titulo">${i.titulo}</strong>${i.cuerpo?t`<span class="cuerpo">${i.cuerpo}</span>`:null}</span>
+                ${i.creado?t`<iswc-relative-time class="cuando" date=${typeof i.creado=="string"?i.creado:i.creado.toISOString()} format="short"></iswc-relative-time>`:null}
               </li>
             `)}
           </ul>`}
     </iswc-card>
-  `);const o=a.querySelector("#cargando");o&&(o.props={estado:"cargando"});const s=a.querySelector("#vacio");s&&(s.props={icono:"mdi:bell-check-outline",titulo:"Al d\xEDa",texto:"No tienes notificaciones."})});r("av-notificaciones",u);
+  `)});l("av-notificaciones",d);

@@ -43,7 +43,7 @@ const AvPedidoForm = crearComponente<AvPedidoFormProps>(
           </iswc-select>
           <iswc-input class="i-cant" type="number" min="1" step="1" label=${i === 0 ? 'Cant.' : ''} aria-label="Cantidad" ?readonly=${ro} value=${String(it.cantidad)}></iswc-input>
           <iswc-input class="i-precio" type="number" min="0" step="any" label=${i === 0 ? 'Precio' : ''} aria-label="Precio unitario" ?readonly=${ro} value=${String(it.precio)}></iswc-input>
-          ${ro ? null : html`<iswc-button variant="plain" color="danger" size="small" aria-label="Quitar ítem" ?disabled=${items.length === 1} oniswc-click=${() => { items = leerItems(); items.splice(i, 1); pintarItems(); }}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>`}
+          ${ro ? null : html`<iswc-button variant="plain compact" color="danger" aria-label="Quitar ítem" ?disabled=${items.length === 1} oniswc-click=${() => { items = leerItems(); items.splice(i, 1); pintarItems(); }}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>`}
         </div>`)}`);
       pintarTotal();
     };
@@ -91,16 +91,16 @@ const AvPedidoForm = crearComponente<AvPedidoFormProps>(
           </div>
           <div class="items" part="items" oniswc-input=${pintarTotal}></div>
           <div class="pie">
-            ${ro ? null : html`<iswc-button variant="outlined" color="brand" size="small" oniswc-click=${() => { items = [...leerItems(), { iproducto: 0, cantidad: 1, precio: 0 }]; pintarItems(); }}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Agregar ítem</iswc-button>`}
+            ${ro ? null : html`<iswc-button variant="outlined compact" color="brand" oniswc-click=${() => { items = [...leerItems(), { iproducto: 0, cantidad: 1, precio: 0 }]; pintarItems(); }}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Agregar ítem</iswc-button>`}
             <span class="etiqueta-total">Total</span><strong class="total" part="total"></strong>
           </div>
           <iswc-textarea id="notas" label="Notas" rows="2" ?readonly=${ro} value=${p?.notas ?? ''}></iswc-textarea>
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
           ${ro ? html`<iswc-callout color="brand">Solo quien tiene el permiso de inventario (avatar.inventario) crea o modifica pedidos.</iswc-callout>` : null}
         </div>
-        ${p && !ro ? html`<iswc-button slot="footer" id="eliminar" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este pedido y sus ítems?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-pedido-eliminar', { ipedido: p.ipedido })}><iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
-        ${ro ? null : html`<iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${p ? 'Guardar' : 'Crear pedido'}</iswc-button>`}
+        ${p && !ro ? html`<iswc-button slot="footer" id="eliminar" variant="outlined compact" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este pedido y sus ítems?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-pedido-eliminar', { ipedido: p.ipedido })}><iswc-button variant="compact" slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
+        ${ro ? null : html`<iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${p ? 'Guardar' : 'Crear pedido'}</iswc-button>`}
       </iswc-dialog>
     `);
     pintarItems();

@@ -24,14 +24,14 @@ const AvRoles = crearComponente<AvRolesProps>(import.meta.url, 'av-roles', { rol
   };
   root.append(html`
     <section class="roles" part="roles">
-      ${props.error ? html`<iswc-callout tone="danger">${props.error}</iswc-callout>` : null}
+      ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
       <div class="formularios">
         <iswc-card variant="filled-outlined">
           <strong slot="header"><iswc-icon icon="mdi:shield-plus-outline"></iswc-icon> Nuevo rol</strong>
           <div class="fila">
             <iswc-input id="nuevo-irol" label="Id" placeholder="SOPORTE" maxlength="30" hint="Mayúsculas, sin espacios"></iswc-input>
             <iswc-input id="nuevo-nombre" label="Nombre" maxlength="120"></iswc-input>
-            <iswc-button id="crear" color="brand" ?loading=${props.ocupado} oniswc-click=${crear}>Crear</iswc-button>
+            <iswc-button variant="compact" id="crear" color="brand" ?loading=${props.ocupado} oniswc-click=${crear}>Crear</iswc-button>
           </div>
         </iswc-card>
         <iswc-card variant="filled-outlined">
@@ -43,7 +43,7 @@ const AvRoles = crearComponente<AvRolesProps>(import.meta.url, 'av-roles', { rol
               ${props.catalogo.map((c) => html`<iswc-option value=${c.id}>${c.id}</iswc-option>`)}
             </iswc-select>
             <iswc-select id="p-valor" label="Valor" value="permite"><iswc-option value="permite">Permite</iswc-option><iswc-option value="niega">Niega</iswc-option></iswc-select>
-            <iswc-button id="poner" color="brand" ?loading=${props.ocupado} oniswc-click=${poner}>Aplicar</iswc-button>
+            <iswc-button variant="compact" id="poner" color="brand" ?loading=${props.ocupado} oniswc-click=${poner}>Aplicar</iswc-button>
           </div>
         </iswc-card>
       </div>
@@ -60,7 +60,7 @@ const AvRoles = crearComponente<AvRolesProps>(import.meta.url, 'av-roles', { rol
                     <li class="accion">
                       <code class="id">${a.iaccion}</code>
                       <iswc-tag color=${colorValor(a.valor)}>${valorLegible(a.valor)}</iswc-tag>
-                      <iswc-button variant="plain" color="neutral" class="quitar" title="Quitar acción" oniswc-click=${() => emitir(host, 'av-accion-quitar', { irol: r.irol, iaccion: a.iaccion })}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>
+                      <iswc-button variant="plain compact" color="neutral" class="quitar" title="Quitar acción" oniswc-click=${() => emitir(host, 'av-accion-quitar', { irol: r.irol, iaccion: a.iaccion })}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>
                     </li>
                   `)}
                 </ul>

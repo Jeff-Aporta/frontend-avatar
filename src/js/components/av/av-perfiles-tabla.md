@@ -7,9 +7,40 @@ description: Diálogo con usuario, nombre, rol y PIN sin hash de los perfiles de
 
 Se abre desde el pie. Los PIN son públicos a propósito hasta tener MVP.
 
+Muestra `<av-perfiles-lista>` (una sola lista en toda la app, sin grilla). Emite `av-perfiles-cerrar`.
+
+## Anatomía
+
+```
+<av-perfiles-tabla>
+  #shadow-root
+    <iswc-dialog>
+      <av-perfiles-lista>
+      <iswc-button slot="footer">Cerrar
+```
+
+## Atributos observados
+
+<!-- exclude: Atributos observados -->
+
+## Props
+
 | Prop | Tipo | Defecto | Notas |
 | --- | --- | --- | --- |
 | `abierto` | `boolean` | `false` | Abre el diálogo. |
-| `perfiles` | `PerfilPrueba[]` | `[]` | Filas de la tabla. |
 
-Emite `av-perfil-usar { usuario }` y `av-perfiles-cerrar`.
+## Eventos
+
+| Evento | Detalle |
+| --- | --- |
+| `av-perfiles-cerrar` | `{}` |
+
+## Slots
+
+<!-- exclude: Slots -->
+
+## Ejemplos
+
+```ts
+tabla.props = { abierto: true };
+```

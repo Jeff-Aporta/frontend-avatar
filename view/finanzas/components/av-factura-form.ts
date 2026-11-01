@@ -50,7 +50,7 @@ const AvFacturaForm = crearComponente<AvFacturaFormProps>(
           <iswc-input class="i-desc" label=${i === 0 ? 'Descripción' : ''} aria-label="Descripción" placeholder="Servicio o producto" ?readonly=${!editable} value=${it.descripcion}></iswc-input>
           <iswc-input class="i-cant" type="number" min="0" step="any" label=${i === 0 ? 'Cant.' : ''} aria-label="Cantidad" ?readonly=${!editable} value=${String(it.cantidad)}></iswc-input>
           <iswc-input class="i-precio" type="number" min="0" step="any" label=${i === 0 ? 'Precio' : ''} aria-label="Precio unitario" ?readonly=${!editable} value=${String(it.precio)}></iswc-input>
-          ${editable ? html`<iswc-button class="quitar" variant="plain" color="danger" size="small" aria-label="Quitar ítem" ?disabled=${items.length === 1} oniswc-click=${() => { items = leerItems(); items.splice(i, 1); pintarItems(); }}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>` : null}
+          ${editable ? html`<iswc-button class="quitar" variant="plain compact" color="danger" aria-label="Quitar ítem" ?disabled=${items.length === 1} oniswc-click=${() => { items = leerItems(); items.splice(i, 1); pintarItems(); }}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>` : null}
         </div>`)}`);
       pintarTotales();
     };
@@ -87,17 +87,17 @@ const AvFacturaForm = crearComponente<AvFacturaFormProps>(
             <iswc-input id="impuesto" type="number" min="0" max="100" step="any" label="IVA %" ?readonly=${!editable} value=${String(f?.impuesto ?? 19)} oniswc-input=${pintarTotales}></iswc-input>
           </div>
           <div class="items" part="items" oniswc-input=${pintarTotales}></div>
-          ${editable ? html`<iswc-button class="agregar" variant="outlined" color="brand" size="small" oniswc-click=${() => { items = [...leerItems(), { descripcion: '', cantidad: 1, precio: 0 }]; pintarItems(); }}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Agregar ítem</iswc-button>` : null}
+          ${editable ? html`<iswc-button class="agregar" variant="outlined compact" color="brand" oniswc-click=${() => { items = [...leerItems(), { descripcion: '', cantidad: 1, precio: 0 }]; pintarItems(); }}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Agregar ítem</iswc-button>` : null}
           <dl class="totales" part="totales"></dl>
           <iswc-textarea id="notas" label="Notas" rows="2" ?readonly=${!editable} value=${f?.notas ?? ''}></iswc-textarea>
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
           ${!props.puedeEscribir ? html`<iswc-callout color="brand">Solo quien tiene el permiso de finanzas (avatar.finanzas) crea, emite o cobra facturas.</iswc-callout>` : !editable ? html`<iswc-callout color="brand">Una factura emitida ya no se edita: se cobra o se anula.</iswc-callout>` : null}
         </div>
-        ${f && editable ? html`<iswc-button slot="footer" id="eliminar" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este borrador?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-factura-eliminar', { ifactura: f.ifactura })}><iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>${editable ? 'Cancelar' : 'Cerrar'}</iswc-button>
-        ${f && editable ? html`<iswc-button slot="footer" variant="soft" color="brand" ?disabled=${props.ocupado} oniswc-click=${() => accion('emitir')}><iswc-icon slot="start" icon="mdi:send-check-outline"></iswc-icon>Emitir</iswc-button>` : null}
-        ${f && props.puedeEscribir && (estado === 'emitida' || estado === 'vencida') ? html`<iswc-button slot="footer" color="success" ?loading=${props.ocupado} oniswc-click=${() => accion('pagar')}><iswc-icon slot="start" icon="mdi:cash-check"></iswc-icon>Registrar pago</iswc-button>` : null}
-        ${editable ? html`<iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${f ? 'Guardar' : 'Crear borrador'}</iswc-button>` : null}
+        ${f && editable ? html`<iswc-button slot="footer" id="eliminar" variant="outlined compact" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este borrador?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-factura-eliminar', { ifactura: f.ifactura })}><iswc-button variant="compact" slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>${editable ? 'Cancelar' : 'Cerrar'}</iswc-button>
+        ${f && editable ? html`<iswc-button slot="footer" variant="soft compact" color="brand" ?disabled=${props.ocupado} oniswc-click=${() => accion('emitir')}><iswc-icon slot="start" icon="mdi:send-check-outline"></iswc-icon>Emitir</iswc-button>` : null}
+        ${f && props.puedeEscribir && (estado === 'emitida' || estado === 'vencida') ? html`<iswc-button variant="compact" slot="footer" color="success" ?loading=${props.ocupado} oniswc-click=${() => accion('pagar')}><iswc-icon slot="start" icon="mdi:cash-check"></iswc-icon>Registrar pago</iswc-button>` : null}
+        ${editable ? html`<iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${f ? 'Guardar' : 'Crear borrador'}</iswc-button>` : null}
       </iswc-dialog>
     `);
     pintarItems();

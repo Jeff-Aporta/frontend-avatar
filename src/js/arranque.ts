@@ -3,8 +3,8 @@
  * línea). Lee la vista de `<html data-vista>`, carga los estilos del kit y, por el loader pineado, solo lo que esa
  * página necesita: kit del armazón + transversales + la vista. En una página aislada de QA (`data-aislada`) además
  * conecta el API y restaura la sesión (ahí no hay `<av-app>`). Marca `data-app-ready` al terminar (watchdog de 6 s).
- * Por último pide al navegador precargar en reposo las otras páginas (Speculation Rules): navegar entre rutas reales
- * es casi instantáneo, y `@view-transition` (en `app.scss`) funde una página con la siguiente.
+ * Por último pide al navegador precargar en reposo las otras páginas (Speculation Rules), para los saltos que sí cargan
+ * documento (fuera de `<av-app>`), que `@view-transition` (en `app.scss`) funde con la página siguiente.
  */
 import { PAGINAS } from './consts/paginas.js';
 import { APP_TAGS, SHELL_KIT_TAGS, tagsDeVista, VIEW_TAGS } from './kit-tags.js';

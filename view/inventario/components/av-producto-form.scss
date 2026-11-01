@@ -1,6 +1,10 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-producto-form — panel de stock arriba (cifra neón + atajos), campos en filas y relacionados como chips. */
 :host {
   display: contents;

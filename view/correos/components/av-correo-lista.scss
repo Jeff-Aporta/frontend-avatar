@@ -68,7 +68,7 @@
   }
 
   &:focus-visible {
-    outline: 1px solid var(--iswc-accent);
+    outline: 2px solid var(--iswc-focus);
     outline-offset: 1px;
   }
 
@@ -151,7 +151,6 @@
   }
 }
 
-.vacio[hidden],
-.grid[hidden] {
+.vacio[hidden] {
   display: none;
 }

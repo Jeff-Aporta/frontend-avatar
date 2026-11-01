@@ -46,8 +46,8 @@ function pintarFilas(root: ShadowRoot, props: AvAsistenciaDiaProps, host: HTMLEl
           ${f.entrada || f.salida ? html`<span class="horas"><iswc-icon icon="mdi:clock-outline"></iswc-icon>${f.entrada ?? '—'} – ${f.salida ?? '…'}</span>` : null}
         </div>
         <div class="botones" role="group" aria-label=${`Marcar a ${f.nombre}`}>
-          ${ESTADOS_ASISTENCIA.map((e) => html`<iswc-button size="small" variant=${f.estado === e ? 'soft' : 'plain'} color=${f.estado === e ? colorDe(e) : 'neutral'} aria-label=${ETIQUETA[e]} title=${ETIQUETA[e]} aria-pressed=${f.estado === e ? 'true' : 'false'} ?disabled=${!props.puedeMarcar || ocupado} oniswc-click=${marcar(f, e)}><iswc-icon icon=${ICONO[e]}></iswc-icon></iswc-button>`)}
-          ${dentro ? html`<iswc-button size="small" variant="outlined" color="brand" ?disabled=${!props.puedeMarcar || ocupado || !esHoy} oniswc-click=${salida(f)}><iswc-icon slot="start" icon="mdi:logout-variant"></iswc-icon>Salida</iswc-button>` : null}
+          ${ESTADOS_ASISTENCIA.map((e) => html`<iswc-button variant=${f.estado === e ? 'soft' : 'plain'} color=${f.estado === e ? colorDe(e) : 'neutral'} aria-label=${ETIQUETA[e]} title=${ETIQUETA[e]} aria-pressed=${f.estado === e ? 'true' : 'false'} ?disabled=${!props.puedeMarcar || ocupado} oniswc-click=${marcar(f, e)}><iswc-icon icon=${ICONO[e]}></iswc-icon></iswc-button>`)}
+          ${dentro ? html`<iswc-button variant="outlined compact" color="brand" ?disabled=${!props.puedeMarcar || ocupado || !esHoy} oniswc-click=${salida(f)}><iswc-icon slot="start" icon="mdi:logout-variant"></iswc-icon>Salida</iswc-button>` : null}
         </div>
       </div>`;
   })}`);

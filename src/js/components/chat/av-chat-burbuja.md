@@ -12,7 +12,7 @@ Burbuja de mensaje (propia o ajena).
 ```
 <av-chat-burbuja>
   #shadow-root
-    <div part="fila"><div part="burbuja"><span class="autor"> <button class="cita"> <av-chat-adjunto|av-chat-audio> <div class="texto">…<span part="meta"></span></div></div> <av-chat-reacciones></div>
+    <div part="fila"><div part="burbuja"><span class="autor"> <iswc-button class="cita"> <av-chat-adjunto|av-chat-audio> <div class="texto">…<span part="meta"></span></div></div> <av-chat-reacciones></div>
     | <div part="sistema"><span class="pildora"></span></div>
 ```
 

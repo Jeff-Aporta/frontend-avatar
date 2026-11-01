@@ -26,6 +26,7 @@
 
 .categorias {
   display: flex;
+  flex-direction: row;
   gap: 0.1em;
   overflow-x: auto;
   scrollbar-width: none;
@@ -34,6 +35,7 @@
     flex: none;
     display: grid;
     place-items: center;
+    padding: 0;
     width: 2.2em;
     height: 2.2em;
     border: 0;
@@ -44,7 +46,8 @@
     cursor: pointer;
 
     &:hover,
-    &:focus-visible {
+    &:focus-visible,
+    &[aria-current] {
       color: var(--iswc-brand-text);
       background: var(--iswc-brand-soft);
       outline: none;
@@ -55,9 +58,11 @@
 .rejilla {
   min-height: 0;
   @include c.scroll;
+  overflow-x: hidden;
 }
 
-h3 {
+iswc-heading {
+  @include m.heading-heredado;
   position: sticky;
   top: 0;
   margin: 0;
@@ -68,37 +73,34 @@ h3 {
   z-index: 1;
 }
 
+/* El alto mínimo reserva el alto del grupo antes de que lleguen sus botones: el scroll no salta al llenarse por tramos. */
 .grupo {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 0.1em;
-  padding-bottom: t.esp(2);
+  grid-template-columns: repeat(10, 1fr);
+  grid-auto-rows: 1.9em;
+  align-content: start;
+  gap: 0;
+  min-block-size: calc(var(--filas, 1) * 1.9em);
+  margin-bottom: t.esp(1);
 }
 
 .emoji {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1;
-  border: 0;
-  border-radius: t.radio(md);
-  background: transparent;
+  --iswc-button-border-radius: #{t.radio(md)};
+  --iswc-button-glyph-size: 1.3em;
+  width: 100%;
+  height: 100%;
+  padding: 0;
   font-size: 1.45em;
-  line-height: 1;
-  cursor: pointer;
-  transition: transform 0.12s ease, background 0.12s ease;
+  transition: transform 0.12s ease;
 
-  &:hover,
-  &:focus-visible {
-    background: var(--iswc-brand-soft);
+  &:hover {
     transform: scale(1.18);
-    outline: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       transform: none;
     }
   }

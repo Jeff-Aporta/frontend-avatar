@@ -50,6 +50,11 @@
 }
 
 .ayuda {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   flex: 1;
   min-width: 12em;
   font-size: 0.82em;

@@ -12,7 +12,7 @@ Adjunto de un mensaje o en vista previa.
 ```
 <av-chat-adjunto>
   #shadow-root
-    <div part="adjunto"><button class="miniatura"><img|video></button> | <div part="documento"><iswc-icon> nombre <iswc-format-bytes> <iswc-button descargar></div> <iswc-button class="quitar"></div>
+    <div part="adjunto"><iswc-button class="miniatura"><img|video></iswc-button> | <div part="documento"><iswc-icon> nombre <iswc-format-bytes> <iswc-button descargar></div> <iswc-button class="quitar"></div>
 ```
 
 ## Atributos observados

@@ -38,6 +38,7 @@
   }
 
   .cuerpo {
+    @include m.lineas(2);
     color: var(--iswc-text-dim);
     font-size: 0.88em;
   }

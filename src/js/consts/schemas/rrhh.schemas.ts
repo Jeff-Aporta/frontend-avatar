@@ -92,7 +92,6 @@ export type MiembroRrhh = z.infer<typeof MiembroRrhhSchema>;
 export const FilaAsistenciaSchema = z.object({ iempleado: z.number(), nombre: z.string(), cargo: z.string(), departamento: z.string(), estadoEmpleado: z.string(), estado: z.string().nullable(), entrada: z.string().nullable(), salida: z.string().nullable() });
 export type FilaAsistencia = z.infer<typeof FilaAsistenciaSchema>;
 
-const FilaSchema = z.record(z.string(), z.unknown());
 
 /** `<av-rrhh>` (shell). */
 export const AvRrhhPropsSchema = z.object({ id: z.string().nullable().default(null), version: z.number().default(0) });
@@ -105,10 +104,6 @@ export type AvRrhhGraficaProps = z.infer<typeof AvRrhhGraficaPropsSchema>;
 /** `<av-asistencia-dia>`: control de asistencia de una fecha. */
 export const AvAsistenciaDiaPropsSchema = z.object({ fecha: z.string().default(''), filas: z.array(FilaAsistenciaSchema).default([]), cargando: z.boolean().default(false), puedeMarcar: z.boolean().default(false), ocupados: z.array(z.number()).default([]) });
 export type AvAsistenciaDiaProps = z.infer<typeof AvAsistenciaDiaPropsSchema>;
-
-/** `<av-rrhh-tabla>`: tabla de empleados o asistencias. */
-export const AvRrhhTablaPropsSchema = z.object({ entidad: z.enum(['empleados', 'asistencias']).default('empleados'), filas: z.array(FilaSchema).default([]), cargando: z.boolean().default(false), texto: z.string().default(''), puedeEscribir: z.boolean().default(false) });
-export type AvRrhhTablaProps = z.infer<typeof AvRrhhTablaPropsSchema>;
 
 /** Solicitud lista para pintar (con el nombre del empleado). */
 export const SolicitudVistaSchema = SolicitudSchema.extend({ empleado: z.string() });
@@ -131,7 +126,6 @@ export const RRHH_PROPS = {
   'av-rrhh': AvRrhhPropsSchema,
   'av-rrhh-grafica': AvRrhhGraficaPropsSchema,
   'av-asistencia-dia': AvAsistenciaDiaPropsSchema,
-  'av-rrhh-tabla': AvRrhhTablaPropsSchema,
   'av-solicitudes': AvSolicitudesPropsSchema,
   'av-empleado-form': AvEmpleadoFormPropsSchema,
   'av-solicitud-form': AvSolicitudFormPropsSchema,

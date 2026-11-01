@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<iswc-callout tone=\"info\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-tarea-detalle id=\"d\"></av-tarea-detalle></div>",
+          "html": "<iswc-callout color=\"brand\">Se abre sobre la página: activa <strong>abierto</strong> en el panel de atributos.</iswc-callout><div class=\"stage\"><av-tarea-detalle id=\"d\"></av-tarea-detalle></div>",
           "target": "#d",
           "props": {
             "abierto": false,
@@ -73,7 +73,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Al hacer clic en una tarjeta del tablero.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para crear tareas: eso es av-tarea-form.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Al hacer clic en una tarjeta del tablero.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para crear tareas: eso es av-tarea-form.</iswc-callout>"
         }
       ]
     }

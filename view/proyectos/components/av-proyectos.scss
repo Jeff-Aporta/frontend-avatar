@@ -4,13 +4,17 @@
 /* av-proyectos — página con cabecera (selector + acciones) y el tablero a lo ancho. */
 :host {
   @include m.host-bloque;
+  height: 100%;
 }
 
 .pagina {
-  max-width: 96em;
+  box-sizing: border-box;
+  height: 100%;
+  max-width: var(--av-pagina-ancho, 96em);
   margin: 0 auto;
-  padding: t.esp(5);
+  padding: var(--av-pagina-relleno, t.esp(5));
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: t.esp(4);
 }
 

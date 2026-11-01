@@ -31,3 +31,17 @@ Todas las medidas en em: escala con el font-size del contexto.
 | --- | --- | --- | --- |
 | `wordmark` | `boolean` | `false` | Agrega el nombre «Avatar» en Orbitron. |
 | `animado` | `boolean` | `false` | El satélite orbita (respeta `prefers-reduced-motion`). |
+
+## Eventos
+
+<!-- exclude: Eventos -->
+
+## Slots
+
+<!-- exclude: Slots -->
+
+## Ejemplos
+
+```html
+<av-logo wordmark animado></av-logo>
+```

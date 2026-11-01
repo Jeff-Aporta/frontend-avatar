@@ -13,13 +13,13 @@ const AvCaracteristicas = crearComponente<AvCaracteristicasProps>(
   (root, props) => {
     root.append(html`
       <section class="seccion" part="seccion" data-variante=${props.variante} aria-labelledby="t">
-        <h2 id="t" class="titulo">${props.titulo}</h2>
+        <iswc-heading level="2" id="t" class="titulo">${props.titulo}</iswc-heading>
         ${props.subtitulo ? html`<p class="subtitulo">${props.subtitulo}</p>` : null}
         <div class="rejilla" part="rejilla">
           ${props.items.map((c, i) => html`
             <article class="item" style=${`--i:${i}`}>
               <span class="icono" aria-hidden="true"><iswc-icon icon=${c.icono}></iswc-icon></span>
-              <h3 class="nombre">${c.titulo}</h3>
+              <iswc-heading level="3" class="nombre">${c.titulo}</iswc-heading>
               <p class="texto">${c.texto}</p>
             </article>
           `)}

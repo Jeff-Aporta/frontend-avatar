@@ -58,9 +58,9 @@ const AvTransaccionForm = crearComponente<AvTransaccionFormProps>(
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
           ${t?.ifactura ? html`<iswc-callout color="brand">Esta transacción la registró el pago de una factura: se gestiona desde la factura.</iswc-callout>` : !props.puedeEscribir ? html`<iswc-callout color="brand">Solo quien tiene el permiso de finanzas (avatar.finanzas) registra o modifica transacciones.</iswc-callout>` : null}
         </div>
-        ${t && !ro ? html`<iswc-button slot="footer" id="eliminar" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar esta transacción?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-transaccion-eliminar', { itransaccion: t.itransaccion })}><iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
-        ${ro ? null : html`<iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${t ? 'Guardar' : 'Registrar'}</iswc-button>`}
+        ${t && !ro ? html`<iswc-button slot="footer" id="eliminar" variant="outlined compact" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar esta transacción?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-transaccion-eliminar', { itransaccion: t.itransaccion })}><iswc-button variant="compact" slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
+        ${ro ? null : html`<iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${t ? 'Guardar' : 'Registrar'}</iswc-button>`}
       </iswc-dialog>
     `);
   },

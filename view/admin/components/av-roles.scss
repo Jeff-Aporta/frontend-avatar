@@ -33,11 +33,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
   gap: t.esp(4);
-  align-items: start;
 }
 
 .rol {
   .descripcion {
+    @include m.lineas(2);
     margin: 0 0 t.esp(2);
     color: var(--iswc-text-dim);
     font-size: 0.9em;

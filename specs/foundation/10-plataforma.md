@@ -29,7 +29,7 @@ con el kit iswc-root (`iswc-*`) y componentes propios `av-*`.
 ## 4. Contratos HOW STRONG
 
 - [HS-PLAT-01] Runtime Deno; dependencias de build en `deno.json` `imports`: `esbuild@0.28.1`, `sass@^1.105.0`, `zod@4.4.3`, `jsdom@29.1.1`, `@browserbasehq/stagehand@4.1.0`; schemas del kit (`@iswc/component-schemas`, `@iswc/loader-schemas`) por SHA de 40 hex.
-- [HS-PLAT-02] Tareas: `build:scss`, `build`, `paginas`, `embeddings`, `dev`, `serve`, `check`, `pin`, `vendor:iswc`, `test`, `test:health`, `test:e2e`, `test:all`, `test:all:halt`, `sync:entregable`.
+- [HS-PLAT-02] Tareas: `build:scss`, `build`, `paginas`, `embeddings`, `bench:embeddings` (ver `15-busqueda-semantica.md`), `dev`, `serve`, `check`, `pin`, `vendor:iswc`, `test`, `test:health`, `test:e2e`, `test:all`, `test:all:halt`, `sync:entregable`.
 - [HS-PLAT-03] Build: `src/js/<x>.ts` → `dist/cdn/js/<x>.js`, `view/<v>/<x>.ts` → `dist/cdn/view/<v>/<x>.js` (sin bundle); bundles solo para `js/base/zod.ts` y los barriles `all.ts`; `js/boot.ts` → `dist/cdn/boot.js` (IIFE). Hojas `.scss` → `.css` hermana del módulo.
 - [HS-PLAT-04] Cache busting `?v=<6 caracteres del hash de contenido>` con `stampDirectory` del kit; `dist/cdn/asset-hashes.json`; `dist/cdn/avLoader.min.js` llama `L.registerApp({tag: url?v=…}, { installSheets: false })`; `dist/cdn/build-stamp.json`.
 - [HS-PLAT-05] Pin único: `https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@<sha40>/dist/cdn/core/loader.min.js` (`src/js/iswc.ts`). Prohibido `@main`, `@latest`, SHA corto, GitHub Pages o ramas en raw. `deno task pin` audita; `--nuevo=<sha40|ultimo>` actualiza tras verificar en jsDelivr; luego `deno task vendor:iswc` al mismo SHA.

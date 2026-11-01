@@ -1,6 +1,10 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
+iswc-heading {
+  @include m.heading-heredado;
+}
+
 /* av-abierto — banda a todo lo ancho con el degradado de la paleta y pilares en vidrio esmerilado. */
 :host {
   @include m.host-bloque;

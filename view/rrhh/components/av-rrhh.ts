@@ -8,17 +8,19 @@
  * Búsqueda: `buscarCatalogo` centraliza la búsqueda de cada tabla (hoy por texto sobre lo cargado): ahí se enchufa la
  * búsqueda semántica sin tocar los hijos.
  */
+import { soloPestana } from '../../../src/js/components/av/av-pestanas.js';
 import { crearComponente, define, html, avisar } from '../../../src/js/base/componente.js';
 import { escucharIntencion } from '../../../src/js/base/intencion.js';
 import { type Asistencia, AsistenciaSchema, type AvRrhhProps, type Empleado, type EmpleadoDatos, EmpleadoSchema, type MarcaAsistencia, type MiembroRrhh, MiembroRrhhSchema, ResumenRrhhSchema, type Solicitud, type SolicitudDatos, SolicitudSchema } from '../../../src/js/consts/schemas/rrhh.schemas.js';
+import { sinEmpresa } from '../../../src/js/consts/estados.js';
 import { controller, dominio, mensajeDe } from '../../../src/js/core/api.js';
 import { fechaISO, filas, filtrarTexto, hoyISO } from '../../../src/js/core/datos.js';
 import { empresaActiva, estado } from '../../../src/js/core/estado.js';
 import { ACCION, puede } from '../../../src/js/core/permisos.js';
-import { camposAsistencia, camposEmpleado, departamentosDe, ETIQUETA, filasAsistenciaDia, filasAsistencias, filasEmpleados, indicadoresRrhh, solicitudesVista } from '../utils/rrhh.js';
+import { camposAsistencia, camposEmpleado, departamentosDe, ETIQUETA, filasAsistenciaDia, filasAsistencias, filasEmpleados, indicadoresRrhh, solicitudesVista, tablaRrhh } from '../utils/rrhh.js';
 import './av-rrhh-grafica.js';
 import './av-asistencia-dia.js';
-import './av-rrhh-tabla.js';
+import '../../../src/js/components/av/av-tabla.js';
 import './av-solicitudes.js';
 import './av-empleado-form.js';
 import './av-solicitud-form.js';
@@ -247,14 +249,14 @@ const AvRrhh = crearComponente<AvRrhhProps>(import.meta.url, 'av-rrhh', { id: nu
       onav-solicitud-guardar=${guardarSolicitud} onav-solicitud-form-cerrar=${() => ($('form-solicitud').props = { abierto: false })} onav-solicitud-form-error=${aviso}
       onav-empleado-guardar=${guardarEmpleado} onav-empleado-eliminar=${eliminarEmpleado} onav-empleado-form-cerrar=${() => ($('form-empleado').props = { abierto: false })} onav-empleado-form-error=${aviso}>
       <iswc-page-header id="cabecera">
-        <iswc-button slot="acciones" variant="outlined" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
-        <iswc-button slot="acciones" variant="outlined" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirSolicitud(null)}><iswc-icon slot="start" icon="mdi:calendar-plus"></iswc-icon>Nueva solicitud</iswc-button>
-        <iswc-button slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirEmpleado(null)}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo empleado</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
+        <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirSolicitud(null)}><iswc-icon slot="start" icon="mdi:calendar-plus"></iswc-icon>Nueva solicitud</iswc-button>
+        <iswc-button variant="compact" slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirEmpleado(null)}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo empleado</iswc-button>
       </iswc-page-header>
       ${!iempresa ? html`<iswc-empty-state id="sin-empresa"></iswc-empty-state>` : html`
         ${puedeEscribir ? null : html`<iswc-callout color="warning"><strong>Solo lectura.</strong> Tu rol no incluye el permiso de recursos humanos (avatar.rrhh): puedes consultar la plantilla, la asistencia y las solicitudes, pero no marcar asistencia, registrar o aprobar solicitudes ni editar empleados.</iswc-callout>`}
         <iswc-stat-group id="kpis"></iswc-stat-group>
-        <iswc-tab-group active=${pestana}>
+        <av-pestanas vista="rrhh"><iswc-tab-group active=${pestana}>
           <iswc-tab slot="nav" panel="general"><iswc-icon slot="start" icon="mdi:view-dashboard-variant-outline"></iswc-icon>General</iswc-tab>
           <iswc-tab slot="nav" panel="empleados"><iswc-icon slot="start" icon="mdi:account-group-outline"></iswc-icon>Empleados</iswc-tab>
           <iswc-tab slot="nav" panel="asistencia"><iswc-icon slot="start" icon="mdi:calendar-check-outline"></iswc-icon>Asistencia</iswc-tab>
@@ -262,18 +264,18 @@ const AvRrhh = crearComponente<AvRrhhProps>(import.meta.url, 'av-rrhh', { id: nu
           <iswc-tab-panel name="general">
             <div class="general">
               <av-rrhh-grafica id="grafica"></av-rrhh-grafica>
-              <section class="bloque" aria-label="Solicitudes pendientes"><h2 class="rotulo"><iswc-icon icon="mdi:timer-sand"></iswc-icon> Pendientes de aprobación</h2><av-solicitudes id="pendientes"></av-solicitudes></section>
+              <section class="bloque" aria-label="Solicitudes pendientes"><iswc-heading level="2" class="rotulo"><iswc-icon icon="mdi:timer-sand"></iswc-icon> Pendientes de aprobación</iswc-heading><av-solicitudes id="pendientes"></av-solicitudes></section>
             </div>
           </iswc-tab-panel>
-          <iswc-tab-panel name="empleados"><av-rrhh-tabla id="tabla-empleados"></av-rrhh-tabla></iswc-tab-panel>
+          <iswc-tab-panel name="empleados"><av-tabla id="tabla-empleados"></av-tabla></iswc-tab-panel>
           <iswc-tab-panel name="asistencia">
             <div class="asistencia">
               <av-asistencia-dia id="dia"></av-asistencia-dia>
-              <section class="bloque" aria-label="Historial de asistencia"><h2 class="rotulo"><iswc-icon icon="mdi:history"></iswc-icon> Historial</h2><av-rrhh-tabla id="tabla-asistencias"></av-rrhh-tabla></section>
+              <section class="bloque" aria-label="Historial de asistencia"><iswc-heading level="2" class="rotulo"><iswc-icon icon="mdi:history"></iswc-icon> Historial</iswc-heading><av-tabla id="tabla-asistencias"></av-tabla></section>
             </div>
           </iswc-tab-panel>
           <iswc-tab-panel name="solicitudes"><av-solicitudes id="solicitudes"></av-solicitudes></iswc-tab-panel>
-        </iswc-tab-group>
+        </iswc-tab-group></av-pestanas>
       `}
       <av-empleado-form id="form-empleado"></av-empleado-form>
       <av-solicitud-form id="form-solicitud"></av-solicitud-form>
@@ -282,9 +284,10 @@ const AvRrhh = crearComponente<AvRrhhProps>(import.meta.url, 'av-rrhh', { id: nu
   const nombreEmpresa = estado.yo?.empresas.find((x) => x.iempresa === iempresa)?.nombre ?? 'Avatar';
   $('cabecera').props = { titulo: 'Recursos Humanos', subtitulo: `Personas, asistencia y solicitudes · ${nombreEmpresa}`, icono: 'mdi:account-tie-outline' };
   if (!iempresa) {
-    $('sin-empresa').props = { icono: 'mdi:domain', titulo: 'Sin empresa activa', texto: 'Elige una empresa en la barra para ver su gente.' };
+    $('sin-empresa').props = sinEmpresa('su gente');
     return;
   }
+  for (const e of ['empleados', 'asistencias'] as const) $(`tabla-${e}`).props = { ...tablaRrhh(e), cargando: true, puedeEscribir };
   pintarTodo();
   recargar();
   escucharIntencion(host, 'rrhh', (intencion) => {
@@ -298,6 +301,6 @@ const AvRrhh = crearComponente<AvRrhhProps>(import.meta.url, 'av-rrhh', { id: nu
       miembros = [];
     }
   })();
-});
+}, soloPestana);
 
 define('av-rrhh', AvRrhh);

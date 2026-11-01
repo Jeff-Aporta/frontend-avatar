@@ -1,16 +1,6 @@
-@use "tokens" as t;
 @use "mixins" as m;
 
-/* av-tareas-grafica — tarjeta con la dona. */
+/* av-tareas-grafica — la tarjeta es de av-grafica. */
 :host {
   @include m.host-bloque;
-}
-
-.grafica {
-  display: block;
-  height: 16em;
-}
-
-.vacio {
-  display: block;
 }

@@ -56,7 +56,7 @@ const AvAsistente = crearComponente<AvAsistenteProps>(
     root.append(html`
       <div class="pagina" part="pagina">
         <iswc-page-header id="cabecera"></iswc-page-header>
-        ${props.error ? html`<iswc-callout tone="danger"><strong slot="title">AVO no pudo responder</strong>${props.error}</iswc-callout>` : null}
+        ${props.error ? html`<iswc-callout color="danger"><strong slot="title">AVO no pudo responder</strong>${props.error}</iswc-callout>` : null}
         <section class="chat" part="chat">
           <div class="turnos" id="turnos" part="turnos">
             ${props.cargando
@@ -71,11 +71,11 @@ const AvAsistente = crearComponente<AvAsistenteProps>(
             ${props.pensando ? html`<div class="pensando"><iswc-spinner></iswc-spinner><span>AVO está pensando…</span></div>` : null}
           </div>
           <div class="sugerencias" part="sugerencias">
-            ${sugerencias.map((s) => html`<iswc-button class="sugerencia" variant="outlined" color="neutral" pill ?disabled=${props.pensando} oniswc-click=${() => void preguntar(s)}>${s}</iswc-button>`)}
+            ${sugerencias.map((s) => html`<iswc-button class="sugerencia" variant="outlined compact" color="neutral" pill ?disabled=${props.pensando} oniswc-click=${() => void preguntar(s)}>${s}</iswc-button>`)}
           </div>
           <div class="redactor" part="redactor">
             <iswc-textarea id="pregunta" class="area" autosize min-rows="1" max-rows="5" placeholder="Pregúntale a AVO… (Enter envía)" ?disabled=${props.pensando} onkeydown=${teclas}></iswc-textarea>
-            <iswc-button id="enviar" color="brand" ?loading=${props.pensando} oniswc-click=${enviar} title="Preguntar"><iswc-icon icon="mdi:send"></iswc-icon></iswc-button>
+            <iswc-button variant="compact" id="enviar" color="brand" ?loading=${props.pensando} oniswc-click=${enviar} title="Preguntar"><iswc-icon icon="mdi:send"></iswc-icon></iswc-button>
           </div>
         </section>
       </div>

@@ -36,12 +36,12 @@ const AvChatInfo = crearComponente<AvChatInfoProps>(
       const pendientes = m.filas.filter((f) => !f.leido && !f.entregado);
       const bloque = (titulo: string, icono: string, filas: typeof m.filas, campo: 'leido' | 'entregado' | null, clase: string) => filas.length ? html`
         <section class="bloque ${clase}">
-          <h4><iswc-icon icon=${icono}></iswc-icon>${titulo}</h4>
+          <iswc-heading level="4"><iswc-icon icon=${icono}></iswc-icon>${titulo}</iswc-heading>
           <ul class="gente">${filas.map((f) => html`<li><span class="foto" data-color=${String(f.color)}><iswc-avatar initials=${iniciales(f.nombre)} label=${f.nombre}></iswc-avatar></span><span class="datos"><strong>${f.nombre}</strong>${campo ? html`<span>${fecha(f[campo])}</span>` : null}</span></li>`)}</ul>
         </section>` : null;
       root.append(html`
         <aside class="info" part="info">
-          <header class="cabeza"><iswc-button variant="plain" color="neutral" title=${t.cerrar} aria-label=${t.cerrar} oniswc-click=${cerrar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button><h3>${t.infoMensaje}</h3></header>
+          <header class="cabeza"><iswc-button variant="plain compact" color="neutral" title=${t.cerrar} aria-label=${t.cerrar} oniswc-click=${cerrar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button><iswc-heading level="3">${t.infoMensaje}</iswc-heading></header>
           <div class="cuerpo">
             <blockquote class="previa"><p>${m.texto}</p><span>${fecha(m.ts)}</span></blockquote>
             ${bloque(t.leidoPor, 'mdi:check-all', leidos, 'leido', 'leidos')}
@@ -55,22 +55,22 @@ const AvChatInfo = crearComponente<AvChatInfoProps>(
     const grupal = props.tipo !== 'directo';
     const pref = (p: Record<string, boolean>) => emitir(host, 'av-chat-preferencias', { icanal: props.id, ...p });
     const vacio = () => html`<p class="nada">${t.sinElementos}</p>`;
-    const multimedia = (xs: ElementoInfo[]) => xs.length ? html`<div class="mosaico">${xs.map((x) => html`<button class="mini" type="button" title=${x.titulo} onclick=${() => emitir(host, 'av-chat-accion', { accion: 'ver', imensaje: x.ref })}>${x.tipo === 'video' ? html`<video src=${x.url} preload="metadata" muted></video><iswc-icon class="play" icon="mdi:play-circle"></iswc-icon>` : html`<img src=${x.url} alt=${x.titulo} loading="lazy">`}</button>`)}</div>` : vacio();
-    const archivos = (xs: ElementoInfo[]) => xs.length ? html`<ul class="filas">${xs.map((x) => html`<li><iswc-icon class="ico" icon=${iconoArchivo(x.titulo, x.tipo)}></iswc-icon><span class="datos"><strong>${x.titulo}</strong><span><iswc-format-bytes value=${String(x.bytes)} autofit></iswc-format-bytes> · ${x.detalle}</span></span><iswc-button variant="plain" color="neutral" href=${x.url} download=${x.titulo} title=${t.descargar} aria-label=${t.descargar}><iswc-icon icon="mdi:download"></iswc-icon></iswc-button></li>`)}</ul>` : vacio();
+    const multimedia = (xs: ElementoInfo[]) => xs.length ? html`<div class="mosaico">${xs.map((x) => html`<iswc-button class="mini" variant="row" color="neutral" title=${x.titulo} onclick=${() => emitir(host, 'av-chat-accion', { accion: 'ver', imensaje: x.ref })}>${x.tipo === 'video' ? html`<video src=${x.url} preload="metadata" muted></video><iswc-icon class="play" icon="mdi:play-circle"></iswc-icon>` : html`<img src=${x.url} alt=${x.titulo} loading="lazy">`}</iswc-button>`)}</div>` : vacio();
+    const archivos = (xs: ElementoInfo[]) => xs.length ? html`<ul class="filas">${xs.map((x) => html`<li><iswc-icon class="ico" icon=${iconoArchivo(x.titulo, x.tipo)}></iswc-icon><span class="datos"><strong>${x.titulo}</strong><span><iswc-format-bytes value=${String(x.bytes)} autofit></iswc-format-bytes> · ${x.detalle}</span></span><iswc-button variant="plain compact" color="neutral" href=${x.url} download=${x.titulo} title=${t.descargar} aria-label=${t.descargar}><iswc-icon icon="mdi:download"></iswc-icon></iswc-button></li>`)}</ul>` : vacio();
     const enlaces = (xs: ElementoInfo[]) => xs.length ? html`<ul class="filas">${xs.map((x) => html`<li><iswc-icon class="ico" icon="mdi:link-variant"></iswc-icon><span class="datos"><a href=${x.url} target="_blank" rel="noopener noreferrer">${x.url}</a><span>${x.detalle}</span></span></li>`)}</ul>` : vacio();
-    const destacados = (xs: ElementoInfo[]) => xs.length ? html`<ul class="filas">${xs.map((x) => html`<li><button class="destacado" type="button" onclick=${() => emitir(host, 'av-chat-abrir', { icanal: props.id, imensaje: x.ref })}><iswc-icon class="ico estrella" icon="mdi:star"></iswc-icon><span class="datos"><strong data-color=${String(x.color)}>${x.titulo}</strong><span>${x.detalle}</span></span></button></li>`)}</ul>` : vacio();
+    const destacados = (xs: ElementoInfo[]) => xs.length ? html`<ul class="filas">${xs.map((x) => html`<li><iswc-button class="destacado" variant="row" color="neutral" onclick=${() => emitir(host, 'av-chat-abrir', { icanal: props.id, imensaje: x.ref })}><iswc-icon class="ico estrella" icon="mdi:star"></iswc-icon><span class="datos"><strong data-color=${String(x.color)}>${x.titulo}</strong><span>${x.detalle}</span></span></iswc-button></li>`)}</ul>` : vacio();
     const tab = host.__tab ?? 'multimedia';
     root.append(html`
       <aside class="info" part="info">
         <header class="cabeza">
-          <iswc-button variant="plain" color="neutral" title=${t.cerrar} aria-label=${t.cerrar} oniswc-click=${cerrar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>
-          <h3>${grupal ? t.infoGrupo : t.infoContacto}</h3>
-          ${grupal && props.soyAdmin ? html`<iswc-button variant="plain" color="neutral" title=${t.editarGrupo} aria-label=${t.editarGrupo} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'grupo-editar' })}><iswc-icon icon="mdi:pencil-outline"></iswc-icon></iswc-button>` : null}
+          <iswc-button variant="plain compact" color="neutral" title=${t.cerrar} aria-label=${t.cerrar} oniswc-click=${cerrar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>
+          <iswc-heading level="3">${grupal ? t.infoGrupo : t.infoContacto}</iswc-heading>
+          ${grupal && props.soyAdmin ? html`<iswc-button variant="plain compact" color="neutral" title=${t.editarGrupo} aria-label=${t.editarGrupo} oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'grupo-editar' })}><iswc-icon icon="mdi:pencil-outline"></iswc-icon></iswc-button>` : null}
         </header>
         <div class="cuerpo">
           <section class="heroe">
             <span class="foto grande" data-color=${String(props.color)}><iswc-avatar initials=${props.iniciales} image=${props.foto ?? ''} label=${props.nombre}></iswc-avatar></span>
-            <h2>${props.nombre}</h2>
+            <iswc-heading level="2">${props.nombre}</iswc-heading>
             <p class="estado">${grupal ? `${props.miembros.length} ${t.integrantes}` : props.estado}</p>
             ${props.descripcion ? html`<p class="descripcion">${props.descripcion}</p>` : null}
           </section>
@@ -92,23 +92,23 @@ const AvChatInfo = crearComponente<AvChatInfoProps>(
           </iswc-tab-group>
           ${grupal ? html`
             <section class="integrantes">
-              <h4><span>${props.miembros.length} ${t.integrantes}</span>
-                ${props.soyAdmin ? html`<iswc-button variant="soft" color="brand" pill oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'grupo-agregar' })}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>${t.agregarIntegrantes}</iswc-button>` : null}
-              </h4>
+              <iswc-heading level="4"><span>${props.miembros.length} ${t.integrantes}</span>
+                ${props.soyAdmin ? html`<iswc-button variant="soft compact" color="brand" pill oniswc-click=${() => emitir(host, 'av-chat-panel', { panel: 'grupo-agregar' })}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>${t.agregarIntegrantes}</iswc-button>` : null}
+              </iswc-heading>
               <ul class="gente">
                 ${props.miembros.map((mi) => html`
                   <li>
-                    <button class="persona" type="button" ?disabled=${mi.id === props.yo} onclick=${() => emitir(host, 'av-chat-directo', { iusuario: mi.id })}>
+                    <iswc-button class="persona" variant="row" color="neutral" ?disabled=${mi.id === props.yo} onclick=${() => emitir(host, 'av-chat-directo', { iusuario: mi.id })}>
                       <span class="foto" data-color=${String(mi.color)}><iswc-avatar initials=${iniciales(mi.nombre)} image=${mi.foto ?? ''} label=${mi.nombre}></iswc-avatar>${mi.enLinea ? html`<span class="presencia"></span>` : null}</span>
                       <span class="datos"><strong>${mi.id === props.yo ? `${mi.nombre} (${t.tu})` : mi.nombre}</strong><span>${mi.detalle}</span></span>
                       ${mi.rol === 'admin' ? html`<iswc-tag class="rol" color="brand" pill>${t.admin}</iswc-tag>` : null}
-                    </button>
+                    </iswc-button>
                     ${props.soyAdmin && mi.id !== props.yo ? html`
                       <iswc-dropdown placement="bottom-end" oniswc-select=${(e: Event) => {
                         const v = (e as CustomEvent<{ item?: { value?: string } }>).detail?.item?.value;
                         if (v) emitir(host, 'av-chat-miembros', { accion: v, usuarios: [mi.id] });
                       }}>
-                        <iswc-button slot="trigger" variant="plain" color="neutral" title=${t.menu} aria-label=${t.menu}><iswc-icon icon="mdi:dots-vertical"></iswc-icon></iswc-button>
+                        <iswc-button slot="trigger" variant="plain compact" color="neutral" title=${t.menu} aria-label=${t.menu}><iswc-icon icon="mdi:dots-vertical"></iswc-icon></iswc-button>
                         ${mi.rol === 'admin'
                           ? html`<iswc-dropdown-item value="miembro"><iswc-icon slot="icon" icon="mdi:shield-off-outline"></iswc-icon>${t.quitarAdmin}</iswc-dropdown-item>`
                           : html`<iswc-dropdown-item value="admin"><iswc-icon slot="icon" icon="mdi:shield-account-outline"></iswc-icon>${t.hacerAdmin}</iswc-dropdown-item>`}
@@ -116,7 +116,7 @@ const AvChatInfo = crearComponente<AvChatInfoProps>(
                       </iswc-dropdown>` : null}
                   </li>`)}
               </ul>
-              <iswc-button class="salir" variant="soft" color="danger" oniswc-click=${() => emitir(host, 'av-chat-miembros', { accion: 'salir', usuarios: [] })}><iswc-icon slot="start" icon="mdi:exit-run"></iswc-icon>${t.salirDelGrupo}</iswc-button>
+              <iswc-button class="salir" variant="soft compact" color="danger" oniswc-click=${() => emitir(host, 'av-chat-miembros', { accion: 'salir', usuarios: [] })}><iswc-icon slot="start" icon="mdi:exit-run"></iswc-icon>${t.salirDelGrupo}</iswc-button>
             </section>` : null}
         </div>
       </aside>

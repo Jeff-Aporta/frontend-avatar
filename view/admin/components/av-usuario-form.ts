@@ -44,10 +44,10 @@ const AvUsuarioForm = crearComponente<AvUsuarioFormProps>(
           <iswc-input id="email" type="email" label="Correo" maxlength="200" value=${props.datos.email}></iswc-input>
           <iswc-input id="password" type="password" label=${nuevo ? 'Contraseña' : 'Nueva contraseña'} password-toggle autocomplete="new-password" hint=${nuevo ? 'Mínimo 8 caracteres' : 'Déjala vacía para no cambiarla'} ?required=${nuevo}></iswc-input>
           <iswc-switch id="bactivo" ?checked=${props.datos.bactivo}>Activo</iswc-switch>
-          <iswc-callout id="aviso" tone="danger" ?hidden=${!props.error}>${props.error}</iswc-callout>
+          <iswc-callout id="aviso" color="danger" ?hidden=${!props.error}>${props.error}</iswc-callout>
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" id="guardar" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}>${nuevo ? 'Crear' : 'Guardar'}</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" id="guardar" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}>${nuevo ? 'Crear' : 'Guardar'}</iswc-button>
       </iswc-dialog>
     `);
   },

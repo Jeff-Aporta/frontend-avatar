@@ -16,14 +16,25 @@
 
 .fila {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) 7em minmax(0, 1fr) auto;
   align-items: center;
-  gap: t.esp(3);
-  padding: t.esp(2) 0;
+  gap: 0.5em;
+  padding: 0.25em 0;
   border-bottom: 1px solid var(--iswc-border-soft);
 
   &:last-child {
     border-bottom: 0;
+  }
+
+  /* Columna de ancho fijo: todos los roles miden igual, centrados y sin truncar. */
+  iswc-tag {
+    --iswc-tag-size: 0.72em;
+    inline-size: 100%;
+
+    &::part(tag) {
+      inline-size: 100%;
+      justify-content: center;
+    }
   }
 
   .cargo {
@@ -35,7 +46,7 @@
 
 @media (max-width: 40em) {
   .fila {
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) 7em auto;
 
     .cargo {
       display: none;

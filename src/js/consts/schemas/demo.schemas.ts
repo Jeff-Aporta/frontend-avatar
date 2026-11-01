@@ -54,4 +54,7 @@ export type ManifestDemo = z.infer<typeof ManifestDemoSchema>;
 
 /** Lo que la galería usa del loader del kit. */
 export type LoaderGaleria = { load: (...t: string[]) => Promise<unknown>; selfBase: string; catalog?: { tags?: Record<string, unknown> } };
+/** Lo que `core/ia-local.ts` usa del loader y de `lib/ai/vector-local.min.js` del kit. */
+export type LoaderIa = { selfBase: string; assetUrl: (href: string) => string };
+export type IaKit = { vectorLocal: (texto: string) => Promise<Float32Array | null> };
 export type ConProps = HTMLElement & { props?: Record<string, unknown> };

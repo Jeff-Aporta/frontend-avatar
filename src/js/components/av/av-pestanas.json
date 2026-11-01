@@ -1,0 +1,35 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-pestanas",
+  "category": "transversal",
+  "navTitle": "Pestañas con URL",
+  "title": "&lt;av-pestanas&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-pestanas",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-pestanas&gt;",
+      "lede": "Pestañas del kit ligadas a la URL.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-pestanas id=\"d\" vista=\"finanzas\"></av-pestanas></div>",
+          "target": "#d",
+          "props": {
+            "vista": "finanzas"
+          },
+          "controls": [
+            {
+              "control": "text",
+              "prop": "props:vista",
+              "label": "vista",
+              "default": "finanzas"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,15 +1,24 @@
 /**
- * <av-chat-emojis> — selector de emojis (W-CHAT-19/24): recientes, categorías con atajos, búsqueda por palabra (en
- * español, sin tildes) y cuadrícula navegable con flechas. Emite `av-chat-emoji { emoji, destino }`.
+ * <av-chat-emojis> — selector de emojis (W-CHAT-19/24): recientes, categorías con atajos y scrollspy, búsqueda que reordena
+ * por significado y cuadrícula navegable con flechas. Emite `av-chat-emoji { emoji, destino }`.
  */
 import { crearComponente, define, emitir, html } from '../../base/componente.js';
 import type { AvChatEmojisProps } from '../../consts/schemas/chat.schemas.js';
-import { buscarEmojis, CATEGORIAS_EMOJI, recientes, usarEmoji } from '../../chat/emojis.js';
+import { CATEGORIAS_EMOJI, type Emoji, ordenarEmojis, ordenarEmojisPorSentido, recientes, usarEmoji } from '../../chat/emojis.js';
 import { textos } from '../../chat/textos.js';
 
 type Campo = HTMLElement & { value: string; focus(): void };
+type Signo = { e: string; k: string };
+type Pendiente = { grupo: HTMLElement; signos: Signo[] };
+type Host = HTMLElement & { enfocar?: () => void };
 
-const COLUMNAS = 8;
+const COLUMNAS = 10;
+const ESPERA_MS = 250;
+/** Botones por tramo: la rejilla completa son 281 `iswc-button` y pintarlos de un golpe bloquea el hilo principal. */
+const TRAMO = 48;
+/** En reposo van menos por vuelta: cada tramo de fondo debe caber en unos pocos cuadros. */
+const TRAMO_FONDO = 24;
+const filas = (n: number) => `--filas:${Math.ceil(n / COLUMNAS)}`;
 
 const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-chat-emojis', { destino: '' }, (root, props, host) => {
   const t = textos();
@@ -17,20 +26,20 @@ const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-cha
     usarEmoji(e);
     emitir(host, 'av-chat-emoji', { emoji: e, destino: props.destino });
   };
-  const boton = (e: string, k = '') => html`<button class="emoji" type="button" tabindex="-1" title=${k} aria-label=${k || e} data-e=${e}>${e}</button>`;
-  const rec = recientes();
+  const boton = ({ e, k }: Signo) => html`<iswc-button class="emoji" variant="glyph" tabindex="-1" title=${k} aria-label=${k || e} data-e=${e}>${e}</iswc-button>`;
+  const rec = recientes().map((e) => ({ e, k: '' }));
   root.append(html`
     <div class="selector" part="selector" role="dialog" aria-label=${t.emojis}>
       <iswc-input class="buscar" type="search" clearable placeholder=${t.buscar} aria-label=${t.buscar}><iswc-icon slot="start" icon="mdi:magnify"></iswc-icon></iswc-input>
-      <nav class="categorias" aria-label=${t.emojis}>
-        ${rec.length ? html`<button type="button" class="cat" data-ir="recientes" title="Recientes" aria-label="Recientes"><iswc-icon icon="mdi:clock-outline"></iswc-icon></button>` : null}
-        ${CATEGORIAS_EMOJI.map((c) => html`<button type="button" class="cat" data-ir=${c.id} title=${c.nombre} aria-label=${c.nombre}><iswc-icon icon=${c.icono}></iswc-icon></button>`)}
-      </nav>
+      <iswc-scrollspy class="categorias" target=".rejilla" root-margin="-5% 0px -80% 0px" aria-label=${t.emojis}>
+        ${rec.length ? html`<a class="cat" href="#recientes" title="Recientes" aria-label="Recientes"><iswc-icon icon="mdi:clock-outline"></iswc-icon></a>` : null}
+        ${CATEGORIAS_EMOJI.map((c) => html`<a class="cat" href=${`#${c.id}`} title=${c.nombre} aria-label=${c.nombre}><iswc-icon icon=${c.icono}></iswc-icon></a>`)}
+      </iswc-scrollspy>
       <div class="rejilla" role="grid">
         <div class="resultados" hidden></div>
         <div class="secciones">
-          ${rec.length ? html`<section data-cat="recientes"><h3>Recientes</h3><div class="grupo">${rec.map((e) => boton(e))}</div></section>` : null}
-          ${CATEGORIAS_EMOJI.map((c) => html`<section data-cat=${c.id}><h3>${c.nombre}</h3><div class="grupo">${c.emojis.map((e) => boton(e.e, e.k))}</div></section>`)}
+          ${rec.length ? html`<section id="recientes"><iswc-heading level="3">Recientes</iswc-heading><div class="grupo" style=${filas(rec.length)}></div></section>` : null}
+          ${CATEGORIAS_EMOJI.map((c) => html`<section id=${c.id}><iswc-heading level="3">${c.nombre}</iswc-heading><div class="grupo" style=${filas(c.emojis.length)}></div></section>`)}
         </div>
       </div>
     </div>
@@ -39,16 +48,64 @@ const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-cha
   const resultados = root.querySelector('.resultados') as HTMLElement;
   const secciones = root.querySelector('.secciones') as HTMLElement;
   const visibles = () => [...(resultados.hidden ? secciones : resultados).querySelectorAll<HTMLElement>('.emoji')];
-  const primero = visibles()[0];
-  if (primero) primero.tabIndex = 0;
+  const grupos = [...secciones.querySelectorAll<HTMLElement>('.grupo')];
+  const pendientes: Pendiente[] = [...(rec.length ? [rec] : []), ...CATEGORIAS_EMOJI.map((c) => c.emojis)].map((lista, i) => ({ grupo: grupos[i]!, signos: [...lista] }));
+  const itinerante = () => {
+    const lista = visibles();
+    if (lista[0] && !lista.some((b) => b.tabIndex === 0)) lista[0].tabIndex = 0;
+  };
+  const llenar = (tope = TRAMO) => {
+    let queda = tope;
+    while (queda > 0 && pendientes[0]) {
+      const p = pendientes[0];
+      const trozo = p.signos.splice(0, queda);
+      p.grupo.append(html`${trozo.map(boton)}`);
+      queda -= trozo.length;
+      if (!p.signos.length) pendientes.shift();
+    }
+    itinerante();
+  };
+  let programado = false;
+  const seguir = () => {
+    if (programado || !pendientes.length) return;
+    programado = true;
+    const siguiente = () => {
+      programado = false;
+      llenar(TRAMO_FONDO);
+      seguir();
+    };
+    if (typeof requestIdleCallback === 'function') requestIdleCallback(siguiente, { timeout: 120 });
+    else setTimeout(siguiente, 16);
+  };
+  const empezar = () => {
+    if (!visibles().length) llenar();
+    seguir();
+  };
+  // Mientras el panel está oculto no se crea ningún botón: montar el chat no paga la rejilla.
+  if (typeof IntersectionObserver === 'function') {
+    const vigia = new IntersectionObserver((visto) => {
+      if (!visto.some((v) => v.isIntersecting)) return;
+      vigia.disconnect();
+      empezar();
+    });
+    vigia.observe(rejilla);
+  } else empezar();
+  (host as Host).enfocar = () => {
+    empezar();
+    visibles().find((b) => b.tabIndex === 0)?.focus();
+  };
   rejilla.addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLElement>('.emoji');
     if (b?.dataset['e']) elegir(b.dataset['e']);
   });
   rejilla.addEventListener('keydown', (e) => {
-    const lista = visibles();
+    let lista = visibles();
     const i = lista.indexOf(root.activeElement as HTMLElement);
     if (i < 0) return;
+    if (i + COLUMNAS >= lista.length && pendientes.length) {
+      llenar();
+      lista = visibles();
+    }
     const pasos: Record<string, number> = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: COLUMNAS, ArrowUp: -COLUMNAS };
     const paso = pasos[e.key];
     if (paso === undefined) return;
@@ -59,20 +116,42 @@ const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-cha
     d.tabIndex = 0;
     d.focus();
   });
-  for (const c of root.querySelectorAll<HTMLElement>('.cat')) {
-    c.addEventListener('click', () => {
-      const s = secciones.querySelector(`[data-cat="${c.dataset['ir']}"]`) as HTMLElement | null;
-      s?.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    });
-  }
   const buscar = root.querySelector('.buscar') as Campo;
+  let busqueda: Pendiente | null = null;
+  const soltarBusqueda = () => {
+    const i = busqueda ? pendientes.indexOf(busqueda) : -1;
+    if (i >= 0) pendientes.splice(i, 1);
+    busqueda = null;
+  };
+  const pintar = (lista: Emoji[]) => {
+    soltarBusqueda();
+    const grupo = document.createElement('div');
+    grupo.className = 'grupo';
+    grupo.setAttribute('style', filas(lista.length));
+    resultados.replaceChildren(grupo);
+    busqueda = { grupo, signos: lista.map(({ e, k }) => ({ e, k })) };
+    pendientes.unshift(busqueda);
+    rejilla.scrollTop = 0;
+    llenar();
+    seguir();
+  };
+  let turno = 0;
   buscar.addEventListener('iswc-input', () => {
-    const q = buscar.value ?? '';
-    resultados.hidden = !q.trim();
-    secciones.hidden = !!q.trim();
-    resultados.replaceChildren(...(q.trim() ? [html`<div class="grupo">${buscarEmojis(q).map((e) => boton(e.e, e.k))}</div>`] : []));
-    const p = visibles()[0];
-    if (p) p.tabIndex = 0;
+    const q = (buscar.value ?? '').trim();
+    const este = ++turno;
+    resultados.hidden = !q;
+    secciones.hidden = !!q;
+    if (!q) {
+      soltarBusqueda();
+      return resultados.replaceChildren();
+    }
+    // Buscar ordena, nunca oculta: la palabra responde al instante y el significado reordena si sigue siendo la misma búsqueda.
+    pintar(ordenarEmojis(q));
+    setTimeout(async () => {
+      if (este !== turno) return;
+      const lista = await ordenarEmojisPorSentido(q).catch(() => null);
+      if (lista && este === turno) pintar(lista);
+    }, ESPERA_MS);
   });
 });
 

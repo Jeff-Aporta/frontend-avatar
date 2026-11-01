@@ -25,12 +25,12 @@ function montar(root: ShadowRoot, inicial: AvChatMensajesProps, host: HTMLElemen
   const t = textos();
   root.append(html`
     <section class="conversacion" part="conversacion">
-      <button class="fijado" type="button" hidden><iswc-icon icon="mdi:pin"></iswc-icon><span class="fijado-texto"><strong>${t.fijadoArriba}</strong><span></span></span></button>
+      <iswc-button class="fijado" variant="row" color="neutral" shape="rect" hidden><iswc-icon icon="mdi:pin"></iswc-icon><span class="fijado-texto"><strong>${t.fijadoArriba}</strong><span></span></span></iswc-button>
       <div class="scroll" part="scroll" tabindex="-1">
         <div class="inicio"><iswc-spinner class="cargando" hidden></iswc-spinner><span class="tope" hidden>${t.inicioConversacion}</span></div>
         <div class="items" role="log" aria-label=${t.chats} aria-live="off"></div>
       </div>
-      <button class="bajar" type="button" hidden title=${t.bajar} aria-label=${t.bajar}><iswc-icon icon="mdi:chevron-double-down"></iswc-icon><span class="nuevos" hidden></span></button>
+      <iswc-button class="bajar" variant="glyph" color="neutral" shape="pill" hidden title=${t.bajar} aria-label=${t.bajar}><iswc-icon icon="mdi:chevron-double-down"></iswc-icon><span class="nuevos" hidden></span></iswc-button>
       <div class="anuncio" aria-live="polite" aria-atomic="true"></div>
       <div class="soltar" hidden><iswc-icon icon="mdi:tray-arrow-down"></iswc-icon><span>${t.soltarAqui}</span></div>
       <iswc-dropdown class="menu" placement="bottom-start">
@@ -121,7 +121,7 @@ function montar(root: ShadowRoot, inicial: AvChatMensajesProps, host: HTMLElemen
     const mia = m.reacciones.find((x) => x.usuario === p.yo)?.emoji ?? null;
     const items: Node[] = [];
     if (!m.eliminado && m.estado === 'enviado') {
-      items.push(html`<div class="rapidas" role="group" aria-label=${t.reaccionar}>${REACCIONES_RAPIDAS.map((emo) => html`<button type="button" class="rapida" data-mia=${mia === emo ? '1' : '0'} aria-label=${emo} data-emoji=${emo}>${emo}</button>`)}<button type="button" class="rapida mas" data-emoji="+" aria-label=${t.masReacciones} title=${t.masReacciones}><iswc-icon icon="mdi:plus"></iswc-icon></button></div>`);
+      items.push(html`<div class="rapidas" role="group" aria-label=${t.reaccionar}>${REACCIONES_RAPIDAS.map((emo) => html`<iswc-button class="rapida" variant="glyph" shape="pill" data-mia=${mia === emo ? '1' : '0'} aria-label=${emo} data-emoji=${emo}>${emo}</iswc-button>`)}<iswc-button class="rapida mas" variant="glyph" color="neutral" shape="pill" data-emoji="+" aria-label=${t.masReacciones} title=${t.masReacciones}><iswc-icon icon="mdi:plus"></iswc-icon></iswc-button></div>`);
     }
     const item = (valor: string, icono: string, texto: string, color = '') => html`<iswc-dropdown-item value=${valor} color=${color || null}><iswc-icon slot="icon" icon=${icono}></iswc-icon>${texto}</iswc-dropdown-item>`;
     if (!m.eliminado && m.estado === 'enviado') {

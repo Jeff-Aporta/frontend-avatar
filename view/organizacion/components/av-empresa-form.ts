@@ -42,10 +42,10 @@ const AvEmpresaForm = crearComponente<AvEmpresaFormProps>(
           <iswc-input id="nit" label="NIT" maxlength="30" value=${props.datos.nit} hint="Identificación tributaria (opcional)"></iswc-input>
           <iswc-input id="sector" label="Sector" maxlength="80" value=${props.datos.sector}></iswc-input>
           <iswc-textarea id="descripcion" label="Descripción" rows="3" value=${props.datos.descripcion}></iswc-textarea>
-          <iswc-callout id="aviso" tone="danger" ?hidden=${!props.error}>${props.error}</iswc-callout>
+          <iswc-callout id="aviso" color="danger" ?hidden=${!props.error}>${props.error}</iswc-callout>
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" id="guardar" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}>${nueva ? 'Crear' : 'Guardar'}</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" id="guardar" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}>${nueva ? 'Crear' : 'Guardar'}</iswc-button>
       </iswc-dialog>
     `);
   },

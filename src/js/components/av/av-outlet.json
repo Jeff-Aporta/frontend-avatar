@@ -1,0 +1,33 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-outlet",
+  "category": "transversal",
+  "navTitle": "Outlet de vista",
+  "title": "&lt;av-outlet&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-outlet",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-outlet&gt;",
+      "lede": "Punto de montaje de la vista de la ruta actual.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-outlet id=\"d\"></av-outlet></div>",
+          "target": "#d",
+          "props": {},
+          "controls": [
+            {
+              "control": "text",
+              "prop": "props:vista",
+              "label": "vista",
+              "default": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

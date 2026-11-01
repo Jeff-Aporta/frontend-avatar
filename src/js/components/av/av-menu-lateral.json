@@ -1,0 +1,35 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-menu-lateral",
+  "category": "transversal",
+  "navTitle": "Menú lateral",
+  "title": "&lt;av-menu-lateral&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-menu-lateral",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-menu-lateral&gt;",
+      "lede": "Menú lateral de módulos ligado a la URL.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-menu-lateral id=\"d\"></av-menu-lateral></div>",
+          "target": "#d",
+          "props": {
+            "items": []
+          },
+          "controls": [
+            {
+              "control": "json",
+              "prop": "props:items",
+              "label": "items",
+              "default": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -40,9 +40,9 @@ const AvProveedorForm = crearComponente<AvProveedorFormProps>(
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
           ${ro ? html`<iswc-callout color="brand">Solo quien tiene el permiso de inventario (avatar.inventario) modifica proveedores.</iswc-callout>` : null}
         </div>
-        ${p && !ro && props.productos === 0 ? html`<iswc-button slot="footer" id="eliminar" variant="outlined" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este proveedor?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-proveedor-eliminar', { iproveedor: p.iproveedor })}><iswc-button slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
-        ${ro ? null : html`<iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${p ? 'Guardar' : 'Crear proveedor'}</iswc-button>`}
+        ${p && !ro && props.productos === 0 ? html`<iswc-button slot="footer" id="eliminar" variant="outlined compact" color="danger"><iswc-icon slot="start" icon="mdi:delete-outline"></iswc-icon>Eliminar</iswc-button><iswc-popconfirm slot="footer" for="eliminar" message="¿Eliminar este proveedor?" oniswc-popconfirm-confirm=${() => emitir(host, 'av-proveedor-eliminar', { iproveedor: p.iproveedor })}><iswc-button variant="compact" slot="confirm" color="danger">Sí, eliminar</iswc-button><iswc-button slot="cancel" variant="outlined compact" color="neutral">No</iswc-button></iswc-popconfirm>` : null}
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
+        ${ro ? null : html`<iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${p ? 'Guardar' : 'Crear proveedor'}</iswc-button>`}
       </iswc-dialog>
     `);
   },

@@ -1,7 +1,7 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
-/* av-rrhh-grafica — dos tarjetas de gráfica lado a lado (una columna en angosto). */
+/* av-rrhh-grafica — dos av-grafica lado a lado (una columna en angosto). */
 :host {
   @include m.host-bloque;
 }
@@ -10,35 +10,4 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 22em), 1fr));
   gap: t.esp(4);
-}
-
-.tarjeta {
-  border-radius: var(--av-radio);
-  box-shadow: var(--av-sombra-tarjeta);
-
-  &::part(base) {
-    box-sizing: border-box;
-    height: 100%;
-    border-color: var(--av-borde-seccion);
-  }
-}
-
-.titulo {
-  @include m.titulo;
-  display: flex;
-  align-items: center;
-  gap: t.esp(2);
-
-  iswc-icon {
-    color: var(--iswc-brand-text);
-  }
-}
-
-.grafica {
-  display: block;
-  height: 17em;
-}
-
-.vacio {
-  min-height: 17em;
 }

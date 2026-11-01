@@ -16,7 +16,7 @@ const AvComunidad = crearComponente<AvComunidadProps>(import.meta.url, 'av-comun
         <span class="nucleo"><iswc-icon icon="mdi:account-group"></iswc-icon></span>
       </div>
       <div class="texto">
-        <h2 id="t" class="titulo">${props.titulo}</h2>
+        <iswc-heading level="2" id="t" class="titulo">${props.titulo}</iswc-heading>
         <p class="lede">${props.texto}</p>
         <div class="cifras">
           ${props.cifras.map((c) => html`<div class="cifra"><strong class="valor">${c.valor}</strong><span class="etiqueta">${c.etiqueta}</span></div>`)}

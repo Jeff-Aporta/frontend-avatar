@@ -38,11 +38,11 @@ const AvProyectoForm = crearComponente<AvProyectoFormProps>(
             <iswc-input name="finicio" type="date" label="Inicio"></iswc-input>
             <iswc-input name="ffin" type="date" label="Fin"></iswc-input>
           </div>
-          <iswc-callout tone="info">Se crean las columnas Por hacer, En progreso, En revisión y Hecho.</iswc-callout>
-          ${props.error ? html`<iswc-callout tone="danger">${props.error}</iswc-callout>` : null}
+          <iswc-callout color="brand">Se crean las columnas Por hacer, En progreso, En revisión y Hecho.</iswc-callout>
+          ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
-        <iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>Crear proyecto</iswc-button>
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>Cancelar</iswc-button>
+        <iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>Crear proyecto</iswc-button>
       </iswc-dialog>
     `);
   },

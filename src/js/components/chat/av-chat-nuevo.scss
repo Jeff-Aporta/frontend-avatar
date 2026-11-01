@@ -29,24 +29,10 @@
 }
 
 .fila {
-  display: flex;
-  align-items: center;
-  gap: t.esp(3);
-  width: 100%;
-  padding: t.esp(2) t.esp(3);
-  border: 0;
-  border-radius: t.radio(lg);
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-
-  &:hover,
-  &:focus-visible {
-    background: var(--iswc-control-bg-hover, var(--av-velo));
-    outline: none;
-  }
+  --iswc-button-row-gap: #{t.esp(3)};
+  --iswc-button-row-padding: #{t.esp(2)} #{t.esp(3)};
+  --iswc-button-border-radius: #{t.radio(lg)};
+  --iswc-button-font-weight: 400;
 
   &.grupo .datos strong {
     color: var(--iswc-brand-text);

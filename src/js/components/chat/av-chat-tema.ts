@@ -16,20 +16,19 @@ const AvChatTema = crearComponente<AvChatTemaProps>(import.meta.url, 'av-chat-te
   const aplicarPropio = () => elegir({ id: 'propio', color1: leer('color1'), color2: leer('color2'), angulo: Number(leer('angulo')) || 135 });
   root.append(html`
     <section class="tema" part="tema">
-      <h4 class="titulo">Tema del chat</h4>
-      <div class="muestras" role="radiogroup" aria-label="Tema del chat">
-        <button class="muestra app" type="button" role="radio" aria-checked=${String(!props.tema)} title="Tema de la app" onclick=${() => elegir(null)}><span>App</span></button>
-        ${TEMAS.map((t) => html`<button class="muestra" type="button" role="radio" aria-checked=${String(actual === t.id)} title=${t.nombre} aria-label=${t.nombre} style=${`background:${degradado(t)}`} onclick=${() => elegir({ id: t.id })}></button>`)}
+      <iswc-heading class="titulo" level="4">Tema del chat</iswc-heading>
+      <div class="muestras" role="group" aria-label="Tema del chat">
+        <iswc-button class="muestra app" variant="glyph" color="neutral" shape="pill" aria-pressed=${String(!props.tema)} title="Tema de la app" oniswc-click=${() => elegir(null)}>App</iswc-button>
+        ${TEMAS.map((t) => html`<iswc-button class="muestra" variant="glyph" color="neutral" shape="pill" aria-pressed=${String(actual === t.id)} title=${t.nombre} aria-label=${t.nombre} style=${`--fondo:${degradado(t)}`} oniswc-click=${() => elegir({ id: t.id })}></iswc-button>`)}
       </div>
-      <details class="propio" ?open=${actual === 'propio'}>
-        <summary>Personalizar</summary>
+      <iswc-details class="propio" variant="plain" summary="Personalizar" ?open=${actual === 'propio'}>
         <div class="campos">
           <iswc-color-picker id="color1" label="Color 1" value=${propio.color1}></iswc-color-picker>
           <iswc-color-picker id="color2" label="Color 2" value=${propio.color2}></iswc-color-picker>
           <iswc-input id="angulo" type="number" min="0" max="360" step="15" label="Ángulo" value=${String(propio.angulo)}></iswc-input>
-          <iswc-button color="brand" oniswc-click=${aplicarPropio}>Aplicar</iswc-button>
+          <iswc-button variant="compact" color="brand" oniswc-click=${aplicarPropio}>Aplicar</iswc-button>
         </div>
-      </details>
+      </iswc-details>
     </section>
   `);
 });

@@ -51,9 +51,9 @@ const AvProductoForm = crearComponente<AvProductoFormProps>(
             <div class="stock" part="stock" data-nivel=${nivel}>
               <div class="cifra"><span class="rotulo">Stock</span><strong>${p.stock}</strong><iswc-tag color=${colorDe(nivel)} pill>${ETIQUETA[nivel]} · mín ${p.stock_minimo}</iswc-tag></div>
               ${ro ? null : html`<div class="mover">
-                <iswc-button size="small" variant="soft" color="success" oniswc-click=${() => emitir(host, 'av-producto-mover', { iproducto: p.iproducto, tipo: 'entrada' })}><iswc-icon slot="start" icon="mdi:tray-arrow-down"></iswc-icon>Entrada</iswc-button>
-                <iswc-button size="small" variant="soft" color="danger" ?disabled=${p.stock <= 0} oniswc-click=${() => emitir(host, 'av-producto-mover', { iproducto: p.iproducto, tipo: 'salida' })}><iswc-icon slot="start" icon="mdi:tray-arrow-up"></iswc-icon>Salida</iswc-button>
-                <iswc-button size="small" variant="outlined" color="neutral" oniswc-click=${() => emitir(host, 'av-producto-mover', { iproducto: p.iproducto, tipo: 'ajuste' })}><iswc-icon slot="start" icon="mdi:counter"></iswc-icon>Ajuste</iswc-button>
+                <iswc-button variant="soft compact" color="success" oniswc-click=${() => emitir(host, 'av-producto-mover', { iproducto: p.iproducto, tipo: 'entrada' })}><iswc-icon slot="start" icon="mdi:tray-arrow-down"></iswc-icon>Entrada</iswc-button>
+                <iswc-button variant="soft compact" color="danger" ?disabled=${p.stock <= 0} oniswc-click=${() => emitir(host, 'av-producto-mover', { iproducto: p.iproducto, tipo: 'salida' })}><iswc-icon slot="start" icon="mdi:tray-arrow-up"></iswc-icon>Salida</iswc-button>
+                <iswc-button variant="outlined compact" color="neutral" oniswc-click=${() => emitir(host, 'av-producto-mover', { iproducto: p.iproducto, tipo: 'ajuste' })}><iswc-icon slot="start" icon="mdi:counter"></iswc-icon>Ajuste</iswc-button>
               </div>`}
               ${p.sku ? html`<span class="sku">${p.sku}</span>` : null}
             </div>` : null}
@@ -78,14 +78,14 @@ const AvProductoForm = crearComponente<AvProductoFormProps>(
           ${p && p.precio != null && p.costo != null && Number(p.precio) > 0 ? html`<p class="margen">Margen: ${formatoPrecio(Number(p.precio) - Number(p.costo))} por unidad (${Math.round(((Number(p.precio) - Number(p.costo)) / Number(p.precio)) * 100)} %)</p>` : null}
           ${props.relacionados.length ? html`
             <section class="relacionados" part="relacionados" aria-label="Productos relacionados">
-              <h3 class="rotulo"><iswc-icon icon="mdi:vector-link"></iswc-icon> Productos relacionados</h3>
-              <div class="chips">${props.relacionados.map((r) => html`<iswc-button size="small" variant="outlined" color=${colorDe(nivelStock(r))} oniswc-click=${() => emitir(host, 'av-inventario-abrir', { entidad: 'productos', id: r.iproducto })}>${r.nombre}<span slot="end" class="r-stock">${r.stock}</span></iswc-button>`)}</div>
+              <iswc-heading level="3" class="rotulo"><iswc-icon icon="mdi:vector-link"></iswc-icon> Productos relacionados</iswc-heading>
+              <div class="chips">${props.relacionados.map((r) => html`<iswc-button variant="outlined compact" color=${colorDe(nivelStock(r))} oniswc-click=${() => emitir(host, 'av-inventario-abrir', { entidad: 'productos', id: r.iproducto })}>${r.nombre}<span slot="end" class="r-stock">${r.stock}</span></iswc-button>`)}</div>
             </section>` : null}
           ${props.error ? html`<iswc-callout color="danger">${props.error}</iswc-callout>` : null}
           ${ro ? html`<iswc-callout color="brand">Solo quien tiene el permiso de inventario (avatar.inventario) modifica el catálogo o mueve stock.</iswc-callout>` : null}
         </div>
-        <iswc-button slot="footer" variant="outlined" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
-        ${ro ? null : html`<iswc-button slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${p ? 'Guardar' : 'Crear producto'}</iswc-button>`}
+        <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${cerrar}>${ro ? 'Cerrar' : 'Cancelar'}</iswc-button>
+        ${ro ? null : html`<iswc-button variant="compact" slot="footer" color="brand" id="guardar" ?loading=${props.ocupado} oniswc-click=${guardar}>${p ? 'Guardar' : 'Crear producto'}</iswc-button>`}
       </iswc-dialog>
     `);
   },

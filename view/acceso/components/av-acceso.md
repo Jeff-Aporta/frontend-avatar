@@ -13,7 +13,7 @@ La pantalla de entrada (`#/acceso`). `<iswc-login>` no autentica: emite el enví
 ```
 <av-acceso>
   #shadow-root
-    <div part="pagina"><section part="panel"><iswc-login id="login"> <av-credenciales-demo id="demo"></section><aside part="lado"><img></aside></div>
+    <div part="pagina"><section part="panel"><iswc-tab-group><iswc-login id="login" compact><av-perfiles-lista></iswc-tab-group></section><aside part="lado"><img></aside></div>
 ```
 
 ## Atributos observados

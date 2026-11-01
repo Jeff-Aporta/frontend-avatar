@@ -15,7 +15,7 @@
       "blocks": [
         {
           "kind": "demo",
-          "html": "<iswc-callout tone=\"info\">Se abre sobre la página desde la vista que lo usa.</iswc-callout><av-chat-llamada id=\"x\"></av-chat-llamada>",
+          "html": "<iswc-callout color=\"brand\">Se abre sobre la página desde la vista que lo usa.</iswc-callout><av-chat-llamada id=\"x\"></av-chat-llamada>",
           "target": "#x",
           "props": {
             "fase": null,
@@ -42,12 +42,12 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>Lo monta av-chat.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para videoconferencias grandes (más de 6): un SFU.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Lo monta av-chat.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>Para videoconferencias grandes (más de 6): un SFU.</iswc-callout>"
         },
         {
           "kind": "html",
           "propuesta": true,
-          "html": "<iswc-callout tone=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-call</strong>Interfaz de llamada WebRTC genérica. Pendiente de aprobación.</iswc-callout>"
+          "html": "<iswc-callout color=\"warning\"><strong slot=\"title\">Propuesto para iswc: iswc-call</strong>Interfaz de llamada WebRTC genérica. Pendiente de aprobación.</iswc-callout>"
         }
       ]
     }

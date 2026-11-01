@@ -36,7 +36,8 @@
   border-radius: 0.3em;
 
   &:focus-visible {
-    box-shadow: 0 0 0 1px var(--iswc-focus, var(--iswc-accent));
+    outline: 2px solid var(--iswc-focus);
+    outline-offset: 1px;
   }
 
   .barra {
@@ -63,19 +64,13 @@
 .velocidad {
   flex: none;
   min-width: 2.6em;
-  padding: 0.2em 0.45em;
-  border: 1px solid var(--iswc-border-soft);
-  border-radius: 1em;
-  background: transparent;
-  color: var(--iswc-text-dim);
-  font: inherit;
   font-size: 0.75em;
-  font-weight: 700;
-  cursor: pointer;
+  --iswc-button-font-weight: 700;
 
-  &[data-activa="1"] {
-    color: var(--iswc-brand-text);
-    border-color: var(--iswc-accent);
+  &::part(button) {
+    height: auto;
+    min-height: 0;
+    padding: 0.2em 0.45em;
   }
 }
 

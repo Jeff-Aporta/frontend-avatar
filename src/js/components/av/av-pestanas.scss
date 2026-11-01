@@ -1,0 +1,7 @@
+@use "tokens" as t;
+@use "mixins" as m;
+
+/* av-pestanas — no aporta caja: el grupo del kit manda. */
+:host {
+  display: contents;
+}

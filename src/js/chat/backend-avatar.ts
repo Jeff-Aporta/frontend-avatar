@@ -16,7 +16,7 @@ import type { AccionMiembros, ChatBackend, DatosGrupo, OpcionesSubida } from './
 import { STUN_CLOUDFLARE } from './backend.js';
 import { Sala } from './sala.js';
 import {
-  type Adjunto, type Borrador, type Chat, type EventoChat, type InfoLectura, type Lectura, type MensajeChat, type ModoBusqueda, type ModoEscritura, nuevaClave,
+  type Adjunto, type Borrador, type Chat, type EventoChat, type InfoLectura, type Lectura, type MensajeChat, type ModoEscritura, nuevaClave,
   type Preferencias, type RegistroLlamada, type ResultadoBusqueda, type SenalLlamada, SenalLlamadaSchema, type UsuarioChat,
 } from './tipos.js';
 import { TemaChatSchema } from './tipos.js';
@@ -495,8 +495,8 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
         emitir({ tipo: 'chat', chat: { id: chat, miembros: r.data.integrantes.map((i) => ({ id: i.iusuario, rol: i.rol === 'admin' ? 'admin' : 'miembro' })) } });
       }
     },
-    async buscar(q, modo: ModoBusqueda, chat) {
-      const r = BusquedaApi.safeParse(await op('buscarMensajes', { q, modo, iempresa: o.iempresa, ...(chat ? { icanal: Number(chat) } : {}), limite: 50 }));
+    async buscar(q, chat) {
+      const r = BusquedaApi.safeParse(await op('buscarMensajes', { q, iempresa: o.iempresa, ...(chat ? { icanal: Number(chat) } : {}), limite: 50 }));
       if (!r.success) return [];
       return r.data.resultados.map((x): ResultadoBusqueda => {
         conocer(x.iusuario, x.autor);

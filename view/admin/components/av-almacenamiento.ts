@@ -20,7 +20,7 @@ const AvAlmacenamiento = crearComponente<AvAlmacenamientoProps>(
           <iswc-input id="limite" type="number" min="1" max=${String(props.topeMb)} step="1" label="Tamaño máximo por archivo (MB)" hint=${`Hasta ${props.topeMb} MB por petición en Cloudflare.`} value=${String(props.maxMb)}></iswc-input>
           <p class="uso">${props.archivos == null ? 'Calculando uso…' : html`${String(props.archivos)} archivos · <iswc-format-bytes value=${String(props.bytes ?? 0)} autofit></iswc-format-bytes> guardados en R2`}</p>
         </div>
-        <iswc-button slot="footer" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}>Guardar límite</iswc-button>
+        <iswc-button variant="compact" slot="footer" color="brand" ?loading=${props.ocupado} oniswc-click=${guardar}>Guardar límite</iswc-button>
       </iswc-card>
     `);
   },

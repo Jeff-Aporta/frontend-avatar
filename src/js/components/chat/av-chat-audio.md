@@ -12,7 +12,7 @@ Reproductor de notas de voz.
 ```
 <av-chat-audio>
   #shadow-root
-    <div part="audio"><iswc-button class="play"> <div class="onda" role="slider"><span class="barra">…</span></div> <span class="tiempo"> <button class="velocidad"></div>
+    <div part="audio"><iswc-button class="play"> <div class="onda" role="slider"><span class="barra">…</span></div> <span class="tiempo"> <iswc-button class="velocidad"></div>
 ```
 
 ## Atributos observados

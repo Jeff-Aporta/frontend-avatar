@@ -71,7 +71,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout tone=\"info\"><strong slot=\"title\">Cuándo usarlo</strong>En la pestaña Solicitudes y, compacto, en General.</iswc-callout><iswc-callout tone=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para crear solicitudes: eso es av-solicitud-form.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>En la pestaña Solicitudes y, compacto, en General.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No para crear solicitudes: eso es av-solicitud-form.</iswc-callout>"
         }
       ]
     }
