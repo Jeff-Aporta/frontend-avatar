@@ -1,4 +1,4 @@
-import{crearComponente as l,define as r,emitir as t,html as c}from"../../../js/base/componente.js?v=kpvpk6";const n=l(import.meta.url,"av-precios",{planes:[]},(a,i,e)=>{a.append(c`
+import{crearComponente as l,define as r,emitir as t,html as c}from"../../../js/base/componente.js?v=49yoqc";const n=l(import.meta.url,"av-precios",{planes:[]},(a,i,e)=>{a.append(c`
     <section class="seccion" part="seccion" aria-labelledby="t">
       <iswc-heading level="2" id="t" class="titulo">Planes y precios</iswc-heading>
       <div class="rejilla" part="rejilla">

@@ -5,7 +5,8 @@
  *   - Si el socket se cae: «conectando», reintento a 0.5 s, 1 s, 2 s… hasta 15 s (con algo de azar para no llegar
  *     todos a la vez); al volver la red (`online`) o la pestaña al frente, reintenta en el acto.
  *   - Lo que se envía sin conexión queda en cola y sale al reconectar (lo efímero, como «escribiendo», no se encola).
- *   - Latido cada 25 s para que proxies no corten el socket ocioso.
+ *   - Latido cada 25 s para que proxies no corten el socket ocioso; si dejan de llegar respuestas, el socket se da por muerto y
+ *     se reconecta (un corte de red no siempre dispara `onclose`).
  *
  * Protocolo de la sala: JSON `{ tipo, para?, icanal?, … }`; el servidor sella `de` y `ts` y difunde. El latido es el texto
  * plano `ping` (la sala responde `pong` sin despertarse ni difundirlo).
@@ -53,6 +54,10 @@ export class Sala {
   #cerrada = false;
   #yaConecto = false;
   #estado: Conexion = 'desconectado';
+  #ultimaRespuesta = 0;
+  #alVolver = () => {
+    if (typeof document === 'undefined' || document.visibilityState === 'visible') this.#reanudar();
+  };
   #reanudar = () => {
     if (this.#estado !== 'conectado' && !this.#cerrada) this.#reintentarYa();
   };
@@ -76,6 +81,7 @@ export class Sala {
       addEventListener('online', this.#reanudar);
       addEventListener('focus', this.#reanudar);
     }
+    if (typeof document !== 'undefined') document.addEventListener('visibilitychange', this.#alVolver);
     void this.#abrir();
   }
 
@@ -99,6 +105,7 @@ export class Sala {
       removeEventListener('online', this.#reanudar);
       removeEventListener('focus', this.#reanudar);
     }
+    if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', this.#alVolver);
     if (this.#temporizador) clearTimeout(this.#temporizador);
     if (this.#latido) clearInterval(this.#latido);
     const ws = this.#ws;
@@ -145,17 +152,22 @@ export class Sala {
       const cola = this.#cola.splice(0);
       for (const t of cola) ws.send(t);
       if (this.#latido) clearInterval(this.#latido);
+      const latidoMs = this.#o.latidoMs ?? 25000;
+      this.#ultimaRespuesta = Date.now();
       this.#latido = setInterval(() => {
+        if (this.#ws !== ws) return;
+        if (Date.now() - this.#ultimaRespuesta > latidoMs * 2.5) return this.#caido(ws);
         try {
           if (ws.readyState === ABIERTO) ws.send('ping');
         } catch {
           /* el cierre llega por onclose */
         }
-      }, this.#o.latidoMs ?? 25000);
+      }, latidoMs);
       if (reconexion) this.#o.alReconectar?.();
     };
     ws.onmessage = (ev) => {
       if (this.#ws !== ws) return;
+      this.#ultimaRespuesta = Date.now();
       try {
         if (ev.data === 'pong') return;
         const datos = typeof ev.data === 'string' ? JSON.parse(ev.data) : ev.data;
@@ -165,15 +177,23 @@ export class Sala {
         /* mensaje ilegible: se ignora */
       }
     };
-    ws.onclose = () => {
-      if (this.#ws !== ws) return;
-      this.#ws = null;
-      if (this.#latido) clearInterval(this.#latido);
-      if (!this.#cerrada) this.#programar();
-    };
+    ws.onclose = () => this.#caido(ws);
     ws.onerror = () => {
       /* el cierre llega después por onclose */
     };
+  }
+
+  /** Socket perdido (cierre o sin respuesta al latido): se suelta y se reintenta. */
+  #caido(ws: SocketLike): void {
+    if (this.#ws !== ws) return;
+    this.#ws = null;
+    if (this.#latido) clearInterval(this.#latido);
+    try {
+      ws.close();
+    } catch {
+      /* ya estaba cerrado */
+    }
+    if (!this.#cerrada) this.#programar();
   }
 
   #programar(): void {

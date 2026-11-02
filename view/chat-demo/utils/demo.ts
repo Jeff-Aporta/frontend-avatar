@@ -4,6 +4,31 @@
  */
 import { CANAL_DEMO, personasDemo } from '../../../src/js/chat/backend-demo.js';
 
+const CLAVE_PERSONA = 'av-chat-demo:como';
+
+/** Persona pedida: `?como=` y, sin él, la que esta pestaña ya venía usando (recargar o volver por la SPA no la cambia). */
+export function personaPedida(busqueda: string = typeof location === 'undefined' ? '' : location.search): string | null {
+  const q = new URLSearchParams(busqueda).get('como');
+  if (q) return q;
+  try {
+    return sessionStorage.getItem(CLAVE_PERSONA);
+  } catch {
+    return null;
+  }
+}
+
+/** Recuerda la persona de esta pestaña. */
+export function recordarPersona(id: string): void {
+  try {
+    sessionStorage.setItem(CLAVE_PERSONA, id);
+  } catch {
+    /* sin almacenamiento */
+  }
+}
+
+/** Raíz `ws(s)://` del servidor a partir de la URL del API. */
+export const raizSala = (api: string): string => new URL(api).origin.replace(/^http/, 'ws');
+
 /** Primera persona libre (no está en `ocupadas`); si todas lo están, la primera. */
 export function primeraLibre(personas: string[], ocupadas: Iterable<string>): string {
   const o = new Set(ocupadas);

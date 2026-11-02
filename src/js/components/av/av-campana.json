@@ -1,0 +1,33 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-campana",
+  "category": "transversal",
+  "navTitle": "Campana",
+  "title": "&lt;av-campana&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-campana",
+  "styles": ".stage{padding:1rem}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-campana&gt;",
+      "lede": "Campana con contador y centro de notificaciones.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-campana id=\"d\"></av-campana></div>",
+          "target": "#d",
+          "props": {},
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "attr:hidden",
+              "label": "oculto",
+              "default": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

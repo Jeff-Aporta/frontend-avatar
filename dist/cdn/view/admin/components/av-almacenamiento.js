@@ -1,4 +1,4 @@
-import{crearComponente as n,define as c,emitir as s,html as e}from"../../../js/base/componente.js?v=kpvpk6";const m=n(import.meta.url,"av-almacenamiento",{maxMb:30,topeMb:95,archivos:null,bytes:null,ocupado:!1},(t,a,i)=>{const o=()=>s(i,"av-almacenamiento-guardar",{max_mb:Number(t.querySelector("#limite").value)});t.append(e`
+import{crearComponente as n,define as c,emitir as s,html as e}from"../../../js/base/componente.js?v=49yoqc";const m=n(import.meta.url,"av-almacenamiento",{maxMb:30,topeMb:95,archivos:null,bytes:null,ocupado:!1},(t,a,i)=>{const o=()=>s(i,"av-almacenamiento-guardar",{max_mb:Number(t.querySelector("#limite").value)});t.append(e`
       <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
         <strong slot="header"><iswc-icon icon="mdi:database-cog-outline"></iswc-icon> Archivos</strong>
         <div class="campos">

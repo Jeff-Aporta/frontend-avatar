@@ -52,6 +52,9 @@ export const SHELL_KIT_TAGS = [
   'iswc-input',
   'iswc-page-header',
   'iswc-empty-state',
+  'iswc-drawer',
+  'iswc-switch',
+  'iswc-relative-time',
   'iswc-person',
   'iswc-stat-group',
   'iswc-tenant-selector',
@@ -89,7 +92,7 @@ export const KIT_TAGS: readonly string[] = [...new Set([...SHELL_KIT_TAGS, ...Ob
 export const PREFIJO = 'av';
 
 /** Transversales (varias vistas): shell, logo, escena, gráfica en tarjeta, selector de perfil y tabla de catálogo. */
-export const APP_TAGS = ['av-link', 'av-boton-enlace', 'av-menu-lateral', 'av-pestanas', 'av-migas', 'av-outlet', 'av-logo', 'av-escena', 'av-grafica', 'av-perfil-selector', 'av-perfiles-lista', 'av-perfiles-tabla', 'av-tabla', 'av-app'] as const;
+export const APP_TAGS = ['av-link', 'av-boton-enlace', 'av-campana', 'av-menu-lateral', 'av-pestanas', 'av-migas', 'av-outlet', 'av-logo', 'av-escena', 'av-grafica', 'av-perfil-selector', 'av-perfiles-lista', 'av-perfiles-tabla', 'av-tabla', 'av-app'] as const;
 
 /** Por vista: hijos antes que el shell (el último es el shell de la vista). */
 export const VIEW_TAGS = {

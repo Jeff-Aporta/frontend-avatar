@@ -143,7 +143,7 @@ const ChatParcialSchema = ChatSchema.partial().extend({ id: z.string() });
 
 /** Eventos que aplica el reductor: los producen por igual las respuestas del backend, la sala y el propio front. */
 export const EventoChatSchema = z.discriminatedUnion('tipo', [
-  z.object({ tipo: z.literal('inicio'), yo: z.string(), usuarios: z.array(UsuarioChatSchema), chats: z.array(ChatSchema) }),
+  z.object({ tipo: z.literal('inicio'), yo: z.string(), usuarios: z.array(UsuarioChatSchema), chats: z.array(ChatSchema), reinicio: z.boolean().optional() }),
   z.object({ tipo: z.literal('usuarios'), usuarios: z.array(UsuarioChatSchema) }),
   z.object({ tipo: z.literal('chat'), chat: ChatParcialSchema }),
   z.object({ tipo: z.literal('chat.quitado'), chat: z.string() }),
@@ -167,6 +167,18 @@ export const EventoChatSchema = z.discriminatedUnion('tipo', [
   z.object({ tipo: z.literal('activo'), chat: z.string().nullable() }),
 ]);
 export type EventoChat = z.infer<typeof EventoChatSchema>;
+
+/** Aviso persistente para una persona (mención, reacción, llamada, tarea, correo, solicitud). `referencia`: a qué se refiere. */
+export const AvisoSchema = z.object({
+  id: z.string(),
+  tipo: z.string(),
+  titulo: z.string(),
+  cuerpo: z.string().default(''),
+  ts: z.string(),
+  leida: z.boolean().default(false),
+  referencia: z.record(z.string(), z.unknown()).default({}),
+});
+export type Aviso = z.infer<typeof AvisoSchema>;
 
 /** Señales de llamada (WebRTC en malla): viajan por la sala; `front` identifica la pestaña emisora. */
 export const SenalLlamadaSchema = z.object({

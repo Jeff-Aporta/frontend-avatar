@@ -1,4 +1,4 @@
-import{crearComponente as h,define as w,emitir as m,html as v}from"../../base/componente.js?v=kpvpk6";import{iniciales as g,normalizar as b}from"../../chat/formato.js?v=xzgyvo";import{textos as C}from"../../chat/textos.js?v=cthyvo";function $(a,e=null){return v`
+import{crearComponente as h,define as w,emitir as m,html as v}from"../../base/componente.js?v=49yoqc";import{iniciales as g,normalizar as b}from"../../chat/formato.js?v=xzgyvo";import{textos as C}from"../../chat/textos.js?v=cthyvo";function $(a,e=null){return v`
     <span class="foto" data-color=${String(a.color)}><iswc-avatar initials=${g(a.nombre)} image=${a.foto??""} label=${a.nombre}></iswc-avatar>${a.enLinea?v`<span class="presencia"></span>`:null}</span>
     <span class="datos"><strong>${a.nombre}</strong><span>${a.detalle}</span></span>
     ${e}`}function N(a,e,t){const n=C();let i=e;a.append(v`

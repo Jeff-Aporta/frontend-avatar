@@ -24,6 +24,7 @@ import { columnasPie } from '../../consts/paginas.js';
 import { PAGINAS } from '../../consts/paginas.js';
 import { VIEW_TAGS } from '../../kit-tags.js';
 import './av-boton-enlace.js';
+import './av-campana.js';
 import './av-link.js';
 import './av-menu-lateral.js';
 import './av-migas.js';
@@ -264,6 +265,7 @@ const AvApp = crearComponente<AvAppProps>(
         <iswc-app-shell class="publica" brand="Avatar" brand-href=${raizSitio()} home-label="Ir al inicio" toast="top-end">
           <av-logo slot="brand" class="marca" wordmark animado></av-logo>
           ${conSesion ? html`<iswc-button slot="actions" variant="outlined compact" color="brand" oniswc-click=${() => ir(VISTA_SESION)}><iswc-icon slot="start" icon="mdi:view-dashboard-outline"></iswc-icon>Ir al panel</iswc-button>` : null}
+          <av-campana slot="actions"></av-campana>
           <av-perfil-selector slot="actions" id="perfil"></av-perfil-selector>
           ${sesionMenu(conSesion)}
           <av-outlet class="vista" part="vista" role="main"></av-outlet>
@@ -279,6 +281,7 @@ const AvApp = crearComponente<AvAppProps>(
       <iswc-doc-layout class="privada" storage-key="avatar-app" toc="off" hide-end start-rail start-width="260">
         <av-link slot="brand" class="marca" vista="inicio" aria-label="Avatar, ir al inicio"><av-logo wordmark animado></av-logo></av-link>
         <iswc-semantic-search class="en-cajon" slot="actions"></iswc-semantic-search>
+        <av-campana slot="actions"></av-campana>
         ${sesionMenu(true)}
         <div slot="start" class="lateral">
           <div class="acciones-cajon"></div>

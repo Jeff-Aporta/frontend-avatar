@@ -31,6 +31,8 @@ export const AvMenuLateralPropsSchema = z.object({ items: z.array(z.unknown()).d
 export type AvMenuLateralProps = z.infer<typeof AvMenuLateralPropsSchema>;
 export const AvPestanasPropsSchema = z.object({ vista: z.string().default('') });
 export type AvPestanasProps = z.infer<typeof AvPestanasPropsSchema>;
+export const AvCampanaPropsSchema = z.object({});
+export type AvCampanaProps = z.infer<typeof AvCampanaPropsSchema>;
 export const AvMigasPropsSchema = z.object({});
 export type AvMigasProps = z.infer<typeof AvMigasPropsSchema>;
 export const AvOutletPropsSchema = z.object({ vista: z.string().default(''), id: z.string().nullable().default(null), sesion: z.boolean().default(false), version: z.number().default(0) });
@@ -141,6 +143,7 @@ export const APP_PROPS = {
   'av-menu-lateral': AvMenuLateralPropsSchema,
   'av-pestanas': AvPestanasPropsSchema,
   'av-migas': AvMigasPropsSchema,
+  'av-campana': AvCampanaPropsSchema,
   'av-outlet': AvOutletPropsSchema,
   'av-escena': AvEscenaPropsSchema,
   'av-grafica': AvGraficaPropsSchema,

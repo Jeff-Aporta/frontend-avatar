@@ -6,7 +6,7 @@
  * que el usuario puede ver (W-CHAT-45), y aparte las señales de llamada (`alSenal`).
  */
 import type {
-  Adjunto, Borrador, Chat, EventoChat, InfoLectura, MensajeChat, ModoEscritura, Preferencias, RegistroLlamada, ResultadoBusqueda, SenalLlamada, TemaChat,
+  Adjunto, Aviso, Borrador, Chat, EventoChat, InfoLectura, MensajeChat, ModoEscritura, Preferencias, RegistroLlamada, ResultadoBusqueda, SenalLlamada, TemaChat,
   UsuarioChat,
 } from './tipos.js';
 
@@ -16,6 +16,17 @@ export type AccionMiembros = 'agregar' | 'quitar' | 'admin' | 'miembro' | 'salir
 export type OpcionesSubida = { progreso?: (fraccion: number) => void; senal?: AbortSignal };
 
 export type DatosGrupo = { nombre: string; descripcion?: string; miembros: string[]; foto?: string | null };
+
+/** Avisos persistentes de la persona (los pinta el centro de notificaciones). */
+export interface FuenteAvisos {
+  listar(): Promise<Aviso[]>;
+  /** Marca leídos (`null` = todos). */
+  leer(ids: string[] | null): Promise<void>;
+  /** Aviso nuevo en tiempo real. */
+  alAviso(fn: (a: Aviso) => void): () => void;
+  /** Otra pestaña o dispositivo marcó leídos. */
+  alLeidas(fn: (ids: string[] | null) => void): () => void;
+}
 
 export interface ChatBackend {
   /** Usuario de la sesión. */
@@ -59,6 +70,10 @@ export interface ChatBackend {
   iniciarLlamada?(chat: string, medio: 'voz' | 'video'): Promise<string | null>;
   /** Deja el mensaje de la llamada en el chat (W-CHAT-38). */
   registrarLlamada(r: RegistroLlamada): Promise<void>;
+  /** Avisos persistentes (mención, tarea, correo…), si el backend los lleva. */
+  readonly avisos?: FuenteAvisos;
+  /** ¿Está reponiendo lo que faltó? (lo que llega así no se avisa uno por uno). */
+  reproduciendo?(): boolean;
   /** Cierra la sala y libera recursos. */
   cerrar(): void;
 }

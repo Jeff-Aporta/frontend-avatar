@@ -1,11 +1,11 @@
 ---
 name: av-chat-demo
-description: Shell de la vista chat-demo: el chat con el backend de memoria, «hablar como», otra pestaña, reiniciar y (con sesión) API real.
+description: Shell de la vista chat-demo: el chat sobre la sala pública del demo, «hablar como», otra pestaña, simular aviso, reiniciar y (con sesión) API real.
 ---
 
 # `<av-chat-demo>`
 
-El demo en vivo del chat (abre otra pestaña para conversar en tiempo real).
+El demo en vivo del chat: abre otra pestaña, perfil o navegador para conversar en tiempo real. La conversación vive en la sala pública `/rt/demo`, así que sobrevive a recargar.
 
 ## Anatomía
 

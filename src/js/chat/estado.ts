@@ -84,7 +84,7 @@ export function reducir(e: EstadoChat, ev: EventoChat): EstadoChat {
     case 'inicio': {
       const usuarios = Object.fromEntries(ev.usuarios.map((u) => [u.id, u]));
       const chats = Object.fromEntries(ev.chats.map((c) => [c.id, c]));
-      return { ...e, yo: ev.yo, usuarios, chats };
+      return ev.reinicio ? { ...e, yo: ev.yo, usuarios, chats, mensajes: {}, hayMas: {}, escribiendo: {} } : { ...e, yo: ev.yo, usuarios, chats };
     }
     case 'usuarios': {
       if (!ev.usuarios.length) return e;

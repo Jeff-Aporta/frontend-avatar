@@ -1,8 +1,13 @@
 /**
- * backend-demo.ts — `ChatBackend` sin API (W-CHAT-39): un almacén en memoria compartido entre pestañas del mismo
- * navegador por `BroadcastChannel` y guardado en `localStorage` (sobrevive a recargar). Dos pestañas del demo, cada una
- * «hablando como» una persona distinta, conversan en tiempo real: mensajes, ediciones, borrados, reacciones,
- * entregas y lecturas, «escribiendo», presencia y llamadas (las señales WebRTC viajan por el mismo canal).
+ * backend-demo.ts — `ChatBackend` sin sesión (W-CHAT-39): un almacén compartido por operaciones. Dos pestañas, perfiles o
+ * navegadores, cada uno «hablando como» una persona distinta, conversan en tiempo real: mensajes, ediciones, borrados,
+ * reacciones, entregas y lecturas, «escribiendo», presencia, llamadas (las señales WebRTC viajan por el mismo canal) y avisos.
+ *
+ * Dos transportes, con `oid` para no aplicar dos veces lo que llega por ambos:
+ *   - La sala pública del API (`sala`, WebSocket a `/rt/demo`): es la fuente de verdad. Guarda las operaciones numeradas, así
+ *     que todo sobrevive a recargar y cruza perfiles y navegadores; al entrar repone lo que falta desde `A.seq`.
+ *   - `BroadcastChannel` + `localStorage`: entrega instantánea en el mismo navegador y caché local. Si la sala no responde, el
+ *     demo sigue funcionando así y lo no confirmado se reenvía al volver (`pendientes`).
  *
  * Cada operación que cambia el almacén se aplica igual en todas las pestañas (`aplicar`), y cada pestaña traduce el
  * cambio a eventos del reductor filtrados por lo que ve su usuario (W-CHAT-45).
@@ -11,13 +16,14 @@
  * resuelve el API (`mensajes/buscar?modo=semantica`). Sin modelos en el navegador.
  */
 import { z } from '../base/zod.js';
-import type { AccionMiembros, ChatBackend, DatosGrupo, OpcionesSubida } from './backend.js';
+import type { AccionMiembros, ChatBackend, DatosGrupo, FuenteAvisos, OpcionesSubida } from './backend.js';
+import { Sala } from './sala.js';
 import { STUN_CLOUDFLARE } from './backend.js';
 import { normalizar, resumenMensaje, tipoDeMime } from './formato.js';
 import { infoLectura } from './estado.js';
 import { TEXTOS_ES, textos } from './textos.js';
 import {
-  type Adjunto, type Borrador, type Chat, ChatSchema, coincide, type EventoChat, type InfoLectura, type MensajeChat, MensajeChatSchema,
+  type Adjunto, type Aviso, AvisoSchema, type Borrador, type Chat, ChatSchema, coincide, type EventoChat, type InfoLectura, type MensajeChat, MensajeChatSchema,
   type ModoEscritura, nuevaClave, type Preferencias, type RegistroLlamada, type ResultadoBusqueda, type SenalLlamada, SenalLlamadaSchema, type UsuarioChat,
   UsuarioChatSchema,
 } from './tipos.js';
@@ -34,8 +40,16 @@ type ChatDemo = z.infer<typeof ChatDemoSchema>;
 const MensajeDemoSchema = MensajeChatSchema.omit({ destacado: true, oculto: true, progreso: true });
 type MensajeDemo = z.infer<typeof MensajeDemoSchema>;
 
+/** Aviso del demo: como los del API, con su destinatario. */
+const AvisoDemoSchema = AvisoSchema.extend({ para: z.string() });
+type AvisoDemo = z.infer<typeof AvisoDemoSchema>;
+
 const AlmacenSchema = z.object({
-  version: z.literal(3),
+  version: z.literal(4),
+  /** Fecha de la semilla (la fija la sala) y última operación de la sala aplicada. */
+  origen: z.number(),
+  seq: z.number(),
+  avisos: z.array(AvisoDemoSchema),
   usuarios: z.array(UsuarioChatSchema),
   chats: z.array(ChatDemoSchema),
   mensajes: z.array(MensajeDemoSchema),
@@ -58,13 +72,21 @@ type Op =
   | { op: 'chat'; chat: ChatDemo }
   | { op: 'prefs'; usuario: string; chat: string; p: Preferencias }
   | { op: 'escribiendo'; chat: string; usuario: string; modo: ModoEscritura | null }
-  | { op: 'presencia'; usuario: string; front: string; enLinea: boolean; ts: string }
+  | { op: 'presencia'; usuario: string; front: string; enLinea: boolean; ts: string; fijo?: boolean }
+  | { op: 'notif'; n: AvisoDemo }
+  | { op: 'notif.leer'; usuario: string; ids: string[] | null }
   | { op: 'hola'; front: string }
   | { op: 'senal'; s: SenalLlamada }
   | { op: 'reiniciar' };
 
 export const CLAVE_ALMACEN = 'av-chat-demo:almacen';
 export const CANAL_DEMO = 'av-chat-demo';
+/** Lo que la sala guarda y lo que solo reenvía. */
+const OPS_SALA = new Set<Op['op']>(['mensaje', 'editar', 'eliminar', 'reaccion', 'destacar', 'fijar', 'lectura', 'chat', 'prefs', 'notif', 'notif.leer']);
+const OPS_EFIMERAS = new Set<Op['op']>(['escribiendo', 'senal']);
+/** Un adjunto más pesado no cabe en un evento de la sala: viaja solo entre pestañas del mismo navegador. */
+const MAX_ADJUNTO_SALA = 40 * 1024;
+const TOPE_AVISOS = 300;
 const LATIDO_MS = 4000;
 const AUSENTE_MS = 11000;
 const MAX_DATAURL = 700 * 1024;
@@ -163,7 +185,7 @@ export function semilla(ahora = Date.now()): Almacen {
   for (const id of ['ana', 'carla', 'dario']) odys.lecturas[id] = { entregado: { hasta: odysUlt[2]!.ts, cuando: odysUlt[2]!.ts }, leido: { hasta: odysUlt[0]!.ts, cuando: odysUlt[0]!.ts } };
   const usuarios = USUARIOS_DEMO.map((u, i) => ({ ...u, ultimaVez: u.id === BOT ? null : hace(15 + i * 37) }));
   return {
-    version: 3, usuarios, chats, mensajes, prefs: { ana: { 'g-odys': { fijado: true, silenciado: false, archivado: false, marcadoNoLeido: false } } },
+    version: 4, origen: ahora, seq: 0, avisos: [], usuarios, chats, mensajes, prefs: { ana: { 'g-odys': { fijado: true, silenciado: false, archivado: false, marcadoNoLeido: false } } },
     destacados: { ana: [buscar('Les dejo el checklist').clave] }, ocultos: {}, secuencia: n,
   };
 }
@@ -227,10 +249,14 @@ export type OpcionesDemo = {
   crearCanal?: (nombre: string) => Canal | null;
   /** Bot y presencia periódica (en pruebas se apagan). */
   vivo?: boolean;
+  /** Raíz `ws(s)://` del API para usar la sala pública; sin ella, solo el mismo navegador. */
+  sala?: string;
+  /** Socket propio (pruebas). */
+  crearSocket?: ConstructorParameters<typeof Sala>[0]['crearSocket'];
   ahora?: () => number;
 };
 
-export type BackendDemo = ChatBackend & { reiniciar(): void; personas(): UsuarioChat[]; enLinea(): string[] };
+export type BackendDemo = ChatBackend & { reiniciar(): void; personas(): UsuarioChat[]; enLinea(): string[]; simular(tipo: 'tarea' | 'correo' | 'solicitud', para: string): void };
 
 function almacenLocal(): Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> | null {
   try {
@@ -259,6 +285,15 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
   const vivo = o.vivo ?? true;
   const oyentes = new Set<(e: EventoChat) => void>();
   const senales = new Set<(s: SenalLlamada) => void>();
+  const oyentesAviso = new Set<(a: Aviso) => void>();
+  const oyentesLeidas = new Set<(ids: string[] | null) => void>();
+  /** Operaciones ya aplicadas (llegan por los dos transportes). */
+  const vistos = new Set<string>();
+  const clavePendientes = `${CLAVE_ALMACEN}:pendientes:${yo}`;
+  let sala: Sala | null = null;
+  let conectada = false;
+  let reproduciendo = false;
+  let rehacer = false;
   const blobs = new Map<string, string>();
   const archivos = new Map<string, Blob>();
   /** front → { usuario, ts } de los latidos de presencia. */
@@ -278,6 +313,23 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
     return semilla(ahora());
   };
   let A = cargar();
+
+  /** Operaciones que la sala aún no confirmó: sobreviven a recargar y se reenvían al volver. */
+  const leerPendientes = (): { oid: string; op: Op }[] => {
+    try {
+      return JSON.parse(persistencia?.getItem(clavePendientes) ?? '[]') as { oid: string; op: Op }[];
+    } catch {
+      return [];
+    }
+  };
+  let pendientes = leerPendientes();
+  const guardarPendientes = () => {
+    try {
+      persistencia?.setItem(clavePendientes, JSON.stringify(pendientes));
+    } catch {
+      /* sin cupo: quedan en memoria */
+    }
+  };
 
   const guardar = () => {
     if (!persistencia) return;
@@ -300,12 +352,31 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
   const emitir = (e: EventoChat) => {
     for (const fn of oyentes) fn(e);
   };
+  /** Copia para la sala: sin Blob y sin adjuntos que no caben en un evento. */
+  const paraSala = (op: Op): Op => {
+    if (op.op !== 'mensaje') return op;
+    const { blob: _blob, ...resto } = op;
+    const url = op.m.adjunto?.url ?? '';
+    if (url.startsWith('blob:') || url.length > MAX_ADJUNTO_SALA) return { ...resto, m: { ...op.m, adjunto: { ...op.m.adjunto!, url: '' } } };
+    return resto;
+  };
   const difundir = (op: Op) => {
+    const oid = nuevaClave('o');
+    if (vistos.size > 5000) vistos.clear();
+    vistos.add(oid);
     try {
-      canal?.postMessage(op);
+      canal?.postMessage({ ...op, oid });
     } catch {
       // un Blob que no se puede clonar: se manda sin él
-      if (op.op === 'mensaje') canal?.postMessage({ ...op, blob: null });
+      if (op.op === 'mensaje') canal?.postMessage({ ...op, blob: null, oid });
+    }
+    if (!sala) return;
+    if (OPS_EFIMERAS.has(op.op)) sala.enviar({ tipo: 'demo.op', oid, op }, false);
+    else if (OPS_SALA.has(op.op)) {
+      const copia = paraSala(op);
+      pendientes.push({ oid, op: copia });
+      guardarPendientes();
+      sala.enviar({ tipo: 'demo.op', oid, op: copia }, false);
     }
   };
 
@@ -447,8 +518,10 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
         return;
       }
       case 'presencia': {
-        if (op.enLinea) latidos.set(op.front, { usuario: op.usuario, ts: ahora() });
-        else latidos.delete(op.front);
+        // lo que informa la sala no vence; el latido local no lo pisa
+        if (op.enLinea) {
+          if (op.fijo || latidos.get(op.front)?.ts !== Infinity) latidos.set(op.front, { usuario: op.usuario, ts: op.fijo ? Infinity : ahora() });
+        } else latidos.delete(op.front);
         const u = A.usuarios.find((x) => x.id === op.usuario);
         if (u && !op.enLinea) {
           u.ultimaVez = op.ts;
@@ -468,10 +541,26 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
         for (const fn of senales) fn(op.s);
         return;
       }
+      case 'notif': {
+        if (A.avisos.some((a) => a.id === op.n.id)) return;
+        A.avisos = [...A.avisos, op.n].slice(-TOPE_AVISOS);
+        guardar();
+        if (op.n.para === yo && !reproduciendo) {
+          const { para: _para, ...aviso } = op.n;
+          for (const fn of oyentesAviso) fn(aviso);
+        }
+        return;
+      }
+      case 'notif.leer': {
+        A.avisos = A.avisos.map((a) => (a.para === op.usuario && (!op.ids || op.ids.includes(a.id)) ? { ...a, leida: true } : a));
+        guardar();
+        if (op.usuario === yo) for (const fn of oyentesLeidas) fn(op.ids);
+        return;
+      }
       case 'reiniciar':
         A = semilla(ahora());
         guardar();
-        void inicio().then((d) => emitir({ tipo: 'inicio', yo, usuarios: d.usuarios, chats: d.chats }));
+        void inicio().then((d) => emitir({ tipo: 'inicio', yo, usuarios: d.usuarios, chats: d.chats, reinicio: true }));
         return;
     }
   };
@@ -482,24 +571,115 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
     difundir(op);
   };
 
-  if (canal) {
-    canal.onmessage = (ev) => {
-      const op = ev.data as Op;
-      if (!op || typeof op !== 'object' || typeof (op as { op?: unknown }).op !== 'string') return;
-      if (op.op === 'senal') {
-        const r = SenalLlamadaSchema.safeParse(op.s);
-        if (!r.success) return;
-        aplicar({ op: 'senal', s: r.data });
-        return;
-      }
-      if (op.op === 'mensaje') {
-        const r = MensajeDemoSchema.safeParse(op.m);
-        if (!r.success) return;
-        aplicar({ op: 'mensaje', m: r.data, blob: op.blob ?? null });
-        return;
-      }
+  /** Operación que viene de fuera (otra pestaña o la sala): se valida y se aplica una sola vez. */
+  const aplicarRemota = (datos: unknown, oid: string | undefined) => {
+    const op = datos as Op;
+    if (!op || typeof op !== 'object' || typeof (op as { op?: unknown }).op !== 'string') return;
+    if (oid) {
+      if (vistos.has(oid)) return;
+      vistos.add(oid);
+    }
+    if (op.op === 'senal') {
+      const r = SenalLlamadaSchema.safeParse(op.s);
+      if (r.success) aplicar({ op: 'senal', s: r.data });
+      return;
+    }
+    if (op.op === 'mensaje') {
+      const r = MensajeDemoSchema.safeParse(op.m);
+      if (r.success) aplicar({ op: 'mensaje', m: r.data, blob: op.blob ?? null });
+      return;
+    }
+    if (op.op === 'notif') {
+      const r = AvisoDemoSchema.safeParse(op.n);
+      if (r.success) aplicar({ op: 'notif', n: r.data });
+      return;
+    }
+    try {
       aplicar(op);
-    };
+    } catch {
+      /* operación ajena con otra forma: se ignora */
+    }
+  };
+
+  if (canal) canal.onmessage = (ev) => aplicarRemota(ev.data, (ev.data as { oid?: string } | null)?.oid);
+
+  /** Vuelve a la semilla de `origen` (la sala se reinició o esta caché es de otra época). */
+  const restablecer = (origen: number) => {
+    A = semilla(origen);
+    vistos.clear();
+    guardar();
+  };
+
+  /** Lo que llega de la sala del demo. */
+  const recibirSala = (datos: unknown) => {
+    const d = datos as Record<string, unknown> & { tipo?: string };
+    switch (d.tipo) {
+      case 'demo.estado':
+        reproduciendo = true;
+        rehacer = d['reinicio'] === true;
+        if (rehacer) restablecer(Number(d['origen']));
+        for (const [f, l] of [...latidos]) if (l.ts === Infinity) latidos.delete(f);
+        for (const c of (d['conectados'] ?? []) as { usuario: string; front: string }[]) aplicar({ op: 'presencia', usuario: c.usuario, front: c.front, enLinea: true, ts: iso(), fijo: true });
+        return;
+      case 'demo.lote':
+        for (const fila of (d['ops'] ?? []) as { seq: number; oid: string; op: Op }[]) {
+          A.seq = Math.max(A.seq, fila.seq);
+          aplicarRemota(fila.op, fila.oid);
+        }
+        guardar();
+        return;
+      case 'demo.listo': {
+        reproduciendo = false;
+        const hubo = rehacer;
+        rehacer = false;
+        A.seq = Math.max(A.seq, Number(d['seq']) || 0);
+        guardar();
+        // lo que la sala no llegó a confirmar: otra vez (y aquí, si se reconstruyó sin ello)
+        for (const p of pendientes) {
+          if (hubo) aplicar(p.op);
+          sala?.enviar({ tipo: 'demo.op', oid: p.oid, op: p.op }, false);
+        }
+        void inicio().then((x) => {
+          emitir({ tipo: 'inicio', yo, usuarios: x.usuarios, chats: x.chats, ...(hubo ? { reinicio: true } : {}) });
+          emitir({ tipo: 'conexion', estado: 'conectado' });
+        });
+        return;
+      }
+      case 'demo.op':
+        if (typeof d['seq'] === 'number') A.seq = Math.max(A.seq, d['seq']);
+        aplicarRemota(d['op'], d['oid'] as string | undefined);
+        return;
+      case 'demo.ack':
+        A.seq = Math.max(A.seq, Number(d['seq']) || 0);
+        pendientes = pendientes.filter((p) => p.oid !== d['oid']);
+        guardarPendientes();
+        guardar();
+        return;
+      case 'demo.reinicio':
+        restablecer(Number(d['origen']));
+        pendientes = [];
+        guardarPendientes();
+        void inicio().then((x) => emitir({ tipo: 'inicio', yo, usuarios: x.usuarios, chats: x.chats, reinicio: true }));
+        return;
+      case 'presencia':
+        aplicar({ op: 'presencia', usuario: String(d['iusuario']), front: String(d['front']), enLinea: d['en_linea'] === true, ts: typeof d['ts'] === 'string' ? d['ts'] : iso(), fijo: true });
+        return;
+      case 'sala.error':
+        console.warn('[chat-demo] sala:', d['motivo']);
+        return;
+    }
+  };
+
+  if (o.sala) {
+    sala = new Sala({
+      url: () => Promise.resolve(`${o.sala}/rt/demo?como=${encodeURIComponent(yo)}&front=${front}&desde=${A.seq}&origen=${A.origen}`),
+      alMensaje: recibirSala,
+      // «conectado» se avisa al terminar de reponer (`demo.listo`)
+      alEstado: (e) => {
+        if (e !== 'conectado') emitir({ tipo: 'conexion', estado: e });
+      },
+      ...(o.crearSocket ? { crearSocket: o.crearSocket } : {}),
+    });
   }
 
   const latir = () => difundir({ op: 'presencia', usuario: yo, front, enLinea: true, ts: iso() });
@@ -539,20 +719,63 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
       operar({ op: 'escribiendo', chat: c.id, usuario: BOT, modo: null });
       A.secuencia++;
       const texto = m.tipo === 'texto' ? respuestaBot(m.texto) : m.tipo === 'audio' ? '¡Qué buena nota de voz! 🎧' : '¡Gracias por el archivo! 📎';
-      operar({ op: 'mensaje', m: { clave: nuevaClave('b'), id: String(A.secuencia), chat: c.id, autor: BOT, tipo: 'texto', texto, ts: iso(), editado: null, eliminado: false, reenviado: false, respuestaA: null, adjunto: null, reacciones: [], estado: 'enviado', meta: {} } });
+      const clave = nuevaClave('b');
+      operar({ op: 'mensaje', m: { clave, id: clave, chat: c.id, autor: BOT, tipo: 'texto', texto, ts: iso(), editado: null, eliminado: false, reenviado: false, respuestaA: null, adjunto: null, reacciones: [], estado: 'enviado', meta: {} } });
     });
   };
 
   const sistema = (chat: string, texto: string) => {
     A.secuencia++;
-    operar({ op: 'mensaje', m: { clave: nuevaClave('y'), id: String(A.secuencia), chat, autor: yo, tipo: 'sistema', texto, ts: iso(), editado: null, eliminado: false, reenviado: false, respuestaA: null, adjunto: null, reacciones: [], estado: 'enviado', meta: {} } });
+    const clave = nuevaClave('y');
+    operar({ op: 'mensaje', m: { clave, id: clave, chat, autor: yo, tipo: 'sistema', texto, ts: iso(), editado: null, eliminado: false, reenviado: false, respuestaA: null, adjunto: null, reacciones: [], estado: 'enviado', meta: {} } });
   };
   const nombre = (id: string) => A.usuarios.find((u) => u.id === id)?.nombre ?? id;
+
+  /** Guarda un aviso para `para` (llega a sus pestañas por la misma vía que todo lo demás). */
+  const avisarA = (para: string, tipo: string, titulo: string, cuerpo: string, referencia: Record<string, unknown>) => {
+    if (para === yo || para === BOT) return;
+    operar({ op: 'notif', n: { id: nuevaClave('n'), para, tipo, titulo, cuerpo, ts: iso(), leida: false, referencia: { demo: true, ...referencia } } });
+  };
+
+  /** A quién menciona un texto en un chat: `@Nombre`, sin distinguir tildes ni mayúsculas. */
+  const mencionadosEn = (c: ChatDemo, texto: string): string[] => {
+    if (!texto.includes('@')) return [];
+    const t = normalizar(texto);
+    const gente = c.tipo === 'publico' ? A.usuarios.map((u) => u.id) : c.miembros.map((m) => m.id);
+    return gente.filter((id) => {
+      const u = A.usuarios.find((x) => x.id === id);
+      return id !== yo && id !== BOT && !!u && new RegExp(`(^|\\s)@${normalizar(u.nombre.split(/\s+/)[0]!)}(?![a-z0-9])`).test(t);
+    });
+  };
+
+  const avisos: FuenteAvisos = {
+    listar: () => Promise.resolve(A.avisos.filter((a) => a.para === yo).map(({ para: _para, ...a }) => a).reverse()),
+    leer(ids) {
+      operar({ op: 'notif.leer', usuario: yo, ids });
+      return Promise.resolve();
+    },
+    alAviso(fn) {
+      oyentesAviso.add(fn);
+      return () => oyentesAviso.delete(fn);
+    },
+    alLeidas(fn) {
+      oyentesLeidas.add(fn);
+      return () => oyentesLeidas.delete(fn);
+    },
+  };
 
   const backend: BackendDemo = {
     yo,
     front,
-    iniciar: inicio,
+    avisos,
+    reproduciendo: () => reproduciendo,
+    iniciar() {
+      if (sala && !conectada) {
+        conectada = true;
+        sala.conectar();
+      }
+      return inicio();
+    },
     suscribir(fn) {
       oyentes.add(fn);
       return () => oyentes.delete(fn);
@@ -573,14 +796,17 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
       if (!c || !ve(c)) throw new Error('Chat no disponible');
       const ya = A.mensajes.find((m) => m.clave === b.clave);
       if (ya) return { id: ya.id ?? '', ts: ya.ts };
+      // el id es la clave: dos navegadores numerarían igual
       A.secuencia++;
+      const mencionados = mencionadosEn(c, b.texto);
       const m: MensajeDemo = {
-        clave: b.clave, id: String(A.secuencia), chat: b.chat, autor: yo, tipo: b.tipo, texto: b.texto, ts: iso(), editado: null, eliminado: false, reenviado: b.reenviado,
-        respuestaA: b.respuestaA, adjunto: b.adjunto, reacciones: [], estado: 'enviado', meta: b.meta,
+        clave: b.clave, id: b.clave, chat: b.chat, autor: yo, tipo: b.tipo, texto: b.texto, ts: iso(), editado: null, eliminado: false, reenviado: b.reenviado,
+        respuestaA: b.respuestaA, adjunto: b.adjunto, reacciones: [], estado: 'enviado', meta: mencionados.length ? { ...b.meta, menciones: mencionados } : b.meta,
       };
       const blob = b.adjunto ? archivos.get(b.adjunto.id) ?? null : null;
       aplicar({ op: 'mensaje', m });
       difundir({ op: 'mensaje', m, blob });
+      for (const u of mencionados) avisarA(u, 'mencion', `${nombre(yo)} te mencionó`, b.texto.slice(0, 140), { chat: b.chat });
       bot(m);
       return { id: m.id!, ts: m.ts };
     },
@@ -631,6 +857,8 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
     },
     async reaccionar(chat, ref, emoji) {
       operar({ op: 'reaccion', chat, ref, usuario: yo, emoji });
+      const m = A.mensajes.find((x) => x.chat === chat && coincide(x, ref));
+      if (emoji && m) avisarA(m.autor, 'reaccion', `${nombre(yo)} reaccionó ${emoji}`, m.texto.slice(0, 140), { chat });
     },
     async destacar(chat, ref, valor) {
       operar({ op: 'destacar', chat, ref, usuario: yo, valor });
@@ -734,13 +962,16 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
     },
     async registrarLlamada(r: RegistroLlamada) {
       A.secuencia++;
+      const clave = nuevaClave('l');
       const m: MensajeDemo = {
-        clave: nuevaClave('l'), id: String(A.secuencia), chat: r.chat, autor: r.iniciador, tipo: 'llamada', texto: '', ts: r.fin, editado: null, eliminado: false, reenviado: false,
+        clave, id: clave, chat: r.chat, autor: r.iniciador, tipo: 'llamada', texto: '', ts: r.fin, editado: null, eliminado: false, reenviado: false,
         respuestaA: null, adjunto: null, reacciones: [], estado: 'enviado', meta: { medio: r.medio, duracion: r.duracion, perdida: r.perdida, participantes: r.participantes },
       };
       operar({ op: 'mensaje', m });
+      if (r.perdida) for (const u of chatDemo(r.chat)?.miembros ?? []) if (u.id !== r.iniciador) avisarA(u.id, 'llamada', `${r.medio === 'video' ? 'Videollamada' : 'Llamada'} perdida de ${nombre(r.iniciador)}`, '', { chat: r.chat });
     },
     cerrar() {
+      sala?.cerrar();
       if (intervalo) clearInterval(intervalo);
       for (const t of temporizadores) clearTimeout(t);
       if (vivo) despedir();
@@ -752,9 +983,16 @@ export function crearBackendDemo(o: OpcionesDemo): BackendDemo {
       }
       oyentes.clear();
       senales.clear();
+      oyentesAviso.clear();
+      oyentesLeidas.clear();
     },
     reiniciar() {
-      operar({ op: 'reiniciar' });
+      if (sala?.estado === 'conectado') sala.enviar({ tipo: 'demo.op', oid: nuevaClave('o'), op: { op: 'reiniciar' } }, false);
+      else operar({ op: 'reiniciar' });
+    },
+    simular(tipo, para) {
+      const t = { tarea: `${nombre(yo)} te asignó una tarea`, correo: `Correo de ${nombre(yo)}`, solicitud: `Nueva solicitud de ${nombre(yo)}` }[tipo];
+      avisarA(para, tipo, t, 'Aviso de muestra del demo', {});
     },
     personas: () => usuariosVistos(),
     enLinea: () => usuariosVistos().filter((u) => u.enLinea).map((u) => u.id),

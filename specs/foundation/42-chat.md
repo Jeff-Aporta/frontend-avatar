@@ -73,6 +73,18 @@ lectura, no leídos, búsqueda precisa (por texto y por significado) y llamadas 
 - [W-CHAT-39] `view/chat-demo/` monta el chat completo sin API (backend de memoria): dos pestañas del demo conversan en tiempo real entre sí, con usuarios de muestra y un selector «hablar como». Con sesión, un interruptor lo conecta al API real.
 - [W-CHAT-40] Todo se usa con teclado (flechas en la lista, Esc cierra menús y cancela respuesta/edición); los mensajes nuevos se anuncian con `aria-live`; todo escala con el font-size (em) y se tiñe con la paleta activa.
 
+### Notificaciones
+
+Un solo sistema (`src/js/notificaciones/`), vivo mientras dure la pestaña, en cualquier vista.
+
+- W-NOTI-01: Mensajes, menciones, reacciones, llamadas, tareas asignadas, correos y solicitudes llegan al instante en cualquier vista; navegar no los pierde.
+- W-NOTI-02: Cada aviso nuevo muestra un toast con «Abrir»; lo que la persona está mirando no se repite, y lo silenciado no avisa.
+- W-NOTI-03: La campana, el menú y el título de la pestaña muestran cuánto falta por leer; el centro lista todo y permite marcarlo leído.
+- W-NOTI-04: Lo leído queda leído al recargar y en los demás dispositivos.
+- W-NOTI-05: Al reconectar se repone lo que faltó y se resume en un solo aviso.
+- W-NOTI-06: Sonido y avisos del navegador son opcionales: los activa la persona.
+- W-NOTI-07: El demo conversa entre pestañas, perfiles y navegadores, conserva todo al recargar y avisa igual que la app. Es una sala pública.
+
 ## 3. Guía HOW WEAK
 
 - [HW-CHAT-01] Componentes pequeños que solo pintan y emiten; el shell `av-chat` habla con un `ChatBackend` (interfaz), nunca con `fetch` directo.
@@ -116,6 +128,8 @@ lectura, no leídos, búsqueda precisa (por texto y por significado) y llamadas 
 - Cobertura automática (`tests/vistas/chat.test.ts`, `tests/vistas/canales.test.ts`, guardián `tests/vistas/registro.test.ts`): W-CHAT-03, 04, 08, 09, 10, 15, 16, 17, 18, 24, 25, 26, 30, 32, 33, 38, 39, 41, 42, 43, 45.
 - Verificados en el navegador con el demo en dos pestañas (claro, oscuro y 375 px) y pendientes de prueba e2e (Stagehand): W-CHAT-01, 02, 05, 06, 07, 11, 12, 13, 14, 19, 20, 21 (sin micrófono en el panel de pruebas: se comprobó el aviso de W-CHAT-44), 22, 23, 27, 28, 29, 31, 34, 35, 36, 37 (videollamada real entre pestañas con medio simulado), 40.
 - W-CHAT-47 es del repo `api-avatar`.
+- Notificaciones: `centro.ts` es dueño del backend de la sesión y del único socket de la pestaña; `<av-chat>` lo toma prestado. Los mensajes no crean filas (cada chat con no leídos es una entrada); el resto son filas de `avatar_notificaciones`, que además son la cola de lo ocurrido sin conexión.
+- Demo: la sala pública `/rt/demo` guarda operaciones numeradas y es la fuente de verdad; `BroadcastChannel` y `localStorage` quedan como entrega inmediata y caché. Un adjunto de más de 40 KB no cruza navegadores (el evento de la sala tope 64 KB): viaja solo entre pestañas del mismo navegador.
 - La búsqueda «por significado» del demo es léxica (raíces + sinónimos); la semántica real es del API (bge-m3 + Vectorize). El front no carga modelos.
 - Sin cámara o micrófono, el demo usa un medio simulado (lienzo animado + pista muda) para poder probar llamadas entre pestañas; con el API real el botón lo explica.
 - Una pestaña en segundo plano aplica los eventos al estado pero no pinta (requestAnimationFrame en pausa) ni marca leído: al volver al frente pinta y lee.

@@ -263,20 +263,18 @@ export function avisarPromesa<T>(p: Promise<T>, mensajes: { cargando: string; ex
 }
 
 /**
- * Notificación con el toast del kit: el de `<iswc-app-shell toast>` (área pública), el `<iswc-toast>` del shell privado
+ * Notificación con el toast del kit (devuelve el ítem, para agregarle una acción): el de `<iswc-app-shell toast>` (área pública), el `<iswc-toast>` del shell privado
  * (`iswc-doc-layout`) o, en una vista aislada o demo, el primer `<iswc-toast>` del documento; sin ninguno, a consola. Los errores duran más.
  */
-export function avisar(mensaje: string, color: 'brand' | 'success' | 'warning' | 'danger' | 'neutral' = 'brand'): void {
-  const opciones = { color, duration: color === 'danger' ? 8000 : 4000 };
+export async function avisar(mensaje: string, color: 'brand' | 'success' | 'warning' | 'danger' | 'neutral' = 'brand', extra: { caption?: string; duration?: number; icon?: string } = {}): Promise<HTMLElement | null> {
+  const opciones = { color, duration: color === 'danger' ? 8000 : 4000, ...extra };
   const app = document.querySelector('[data-app-shell]') ?? document.querySelector('av-app');
-  const shell = app?.shadowRoot?.querySelector('iswc-app-shell') as (HTMLElement & { toast?(m: string, o?: object): unknown }) | null;
-  if (shell?.toast) {
-    void shell.toast(mensaje, opciones);
-    return;
-  }
-  const t = (app?.shadowRoot?.querySelector('iswc-toast') ?? document.querySelector('iswc-toast')) as (HTMLElement & { create?(m: string, o?: object): unknown }) | null;
-  if (t?.create) void t.create(mensaje, opciones);
-  else console.info(`[av] ${color}: ${mensaje}`);
+  const shell = app?.shadowRoot?.querySelector('iswc-app-shell') as (HTMLElement & { toast?(m: string, o?: object): Promise<HTMLElement> | null }) | null;
+  if (shell?.toast) return (await shell.toast(mensaje, opciones)) ?? null;
+  const t = (app?.shadowRoot?.querySelector('iswc-toast') ?? document.querySelector('iswc-toast')) as (HTMLElement & { create?(m: string, o?: object): Promise<HTMLElement> }) | null;
+  if (t?.create) return await t.create(mensaje, opciones);
+  console.info(`[av] ${color}: ${mensaje}`);
+  return null;
 }
 
 // Aquí NO van formateadores de fecha/número/bytes: el kit trae iswc-format-date/-number/-bytes.

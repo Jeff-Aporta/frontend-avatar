@@ -12,11 +12,11 @@
 import { z } from '../base/zod.js';
 import { controller, dominio } from '../core/api.js';
 import { estado } from '../core/estado.js';
-import type { AccionMiembros, ChatBackend, DatosGrupo, OpcionesSubida } from './backend.js';
+import type { AccionMiembros, ChatBackend, DatosGrupo, FuenteAvisos, OpcionesSubida } from './backend.js';
 import { STUN_CLOUDFLARE } from './backend.js';
 import { Sala } from './sala.js';
 import {
-  type Adjunto, type Borrador, type Chat, type EventoChat, type InfoLectura, type Lectura, type MensajeChat, type ModoEscritura, nuevaClave,
+  type Adjunto, type Aviso, type Borrador, type Chat, type EventoChat, type InfoLectura, type Lectura, type MensajeChat, type ModoEscritura, nuevaClave,
   type Preferencias, type RegistroLlamada, type ResultadoBusqueda, type SenalLlamada, SenalLlamadaSchema, type UsuarioChat,
 } from './tipos.js';
 import { TemaChatSchema } from './tipos.js';
@@ -85,6 +85,9 @@ const ReaccionesApi = z.object({ imensaje: n, reacciones: z.record(z.string(), z
 const LlamadaApi = z.object({ illamada: n });
 const MiembroEmpresaApi = z.object({ iusuario: z.string(), cargo: z.string().nullable().optional(), rol: z.string().nullable().optional(), usuario: UsuarioApi.nullable().optional() }).passthrough();
 
+/** Fila de `notificaciones/mias` (y del evento `notificacion` de la sala). */
+const AvisoApi = z.object({ inotificacion: n, tipo: z.string(), titulo: z.string(), cuerpo: z.string().nullable().optional(), leida: z.boolean().nullable().optional(), referencia: z.record(z.string(), z.unknown()).nullable().optional(), creado: fecha }).passthrough();
+
 /** Evento de la sala (el servidor sella `de` y `ts`). */
 const EventoSalaApi = z.object({ tipo: z.string(), de: z.string().optional(), ts: z.string().optional(), icanal: z.union([z.number(), z.string()]).optional() }).passthrough();
 
@@ -141,6 +144,11 @@ function lecturasDe(l: z.infer<typeof LecturasApi>): { miembros: Chat['miembros'
   };
 }
 
+/** Aviso del API → aviso del centro. */
+export function avisoDe(a: z.infer<typeof AvisoApi>): Aviso {
+  return { id: a.inotificacion, tipo: a.tipo, titulo: a.titulo, cuerpo: a.cuerpo ?? '', ts: a.creado ?? new Date().toISOString(), leida: !!a.leida, referencia: a.referencia ?? {} };
+}
+
 /* ── backend ─────────────────────────────────────────────────── */
 
 type Op = (...args: unknown[]) => Promise<unknown>;
@@ -162,6 +170,10 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
   };
   const oyentes = new Set<(e: EventoChat) => void>();
   const senales = new Set<(s: SenalLlamada) => void>();
+  const oyentesAviso = new Set<(a: Aviso) => void>();
+  const oyentesLeidas = new Set<(ids: string[] | null) => void>();
+  /** Los avisos sin empresa (globales) se ven en todas. */
+  const deEstaEmpresa = (a: Aviso) => a.referencia['iempresa'] == null || Number(a.referencia['iempresa']) === o.iempresa;
   const emitir = (e: EventoChat) => {
     for (const fn of oyentes) fn(e);
   };
@@ -269,6 +281,18 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
       return;
     }
     switch (d.tipo) {
+      case 'notificacion': {
+        const a = AvisoApi.safeParse(d['notificacion']);
+        if (!a.success) return;
+        const aviso = avisoDe(a.data);
+        if (deEstaEmpresa(aviso)) for (const fn of oyentesAviso) fn(aviso);
+        return;
+      }
+      case 'notificacion.leida': {
+        const ids = Array.isArray(d['ids']) ? (d['ids'] as unknown[]).map(String) : null;
+        for (const fn of oyentesLeidas) fn(ids);
+        return;
+      }
       case 'sala.estado': {
         const conectados = Array.isArray(d['conectados']) ? (d['conectados'] as unknown[]).map(String) : [];
         const vistos = (d['vistos'] ?? {}) as Record<string, string>;
@@ -358,18 +382,37 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
   /** Publica en la sala lo que solo conocen los fronts (escribiendo, llamadas): efímero, no se encola. */
   const publicar = (ev: Record<string, unknown>) => sala.enviar(ev, false);
 
+  const avisos: FuenteAvisos = {
+    async listar() {
+      const r = z.array(AvisoApi).safeParse(await op('mias'));
+      return r.success ? r.data.map(avisoDe).filter(deEstaEmpresa) : [];
+    },
+    async leer(ids) {
+      await op('leer', ids ? { ids: ids.map(Number) } : {});
+    },
+    alAviso(fn) {
+      oyentesAviso.add(fn);
+      return () => oyentesAviso.delete(fn);
+    },
+    alLeidas(fn) {
+      oyentesLeidas.add(fn);
+      return () => oyentesLeidas.delete(fn);
+    },
+  };
+
   let conectada = false;
   const be: ChatBackend = {
     yo,
     front,
+    avisos,
     async iniciar() {
       void op('ajustesArchivos').then((a: unknown) => fijarLimiteMb(Number((a as { max_mb?: number }).max_mb))).catch(() => undefined);
-      const d = await iniciar();
+      // primero el socket: lo que llegue mientras se carga la lista no se pierde
       if (!conectada) {
         conectada = true;
         sala.conectar();
       }
-      return d;
+      return await iniciar();
     },
     suscribir(fn) {
       oyentes.add(fn);
@@ -526,6 +569,8 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
       sala.cerrar();
       oyentes.clear();
       senales.clear();
+      oyentesAviso.clear();
+      oyentesLeidas.clear();
     },
   };
   return be;

@@ -1,4 +1,4 @@
-import{crearComponente as n,define as l,emitir as e,html as o}from"../../../js/base/componente.js?v=kpvpk6";import{colorRol as u,etiquetaRol as m,nombreDe as p,ordenarMiembros as d}from"../utils/organizacion.js?v=bn0ies";const w=n(import.meta.url,"av-miembros",{items:[],cargando:!1,puedeGestionar:!1},(c,a,s)=>{const t=d(a.items);c.append(o`
+import{crearComponente as n,define as l,emitir as e,html as o}from"../../../js/base/componente.js?v=49yoqc";import{colorRol as u,etiquetaRol as m,nombreDe as p,ordenarMiembros as d}from"../utils/organizacion.js?v=bn0ies";const w=n(import.meta.url,"av-miembros",{items:[],cargando:!1,puedeGestionar:!1},(c,a,s)=>{const t=d(a.items);c.append(o`
     <iswc-card variant="outlined" class="tarjeta" part="tarjeta">
       <strong slot="header"><iswc-icon icon="mdi:account-group-outline"></iswc-icon> Miembros <iswc-badge color="neutral" pill>${t.length}</iswc-badge></strong>
       ${a.puedeGestionar?o`<iswc-button variant="compact" slot="header-actions" color="brand" id="invitar" oniswc-click=${()=>e(s,"av-miembros-invitar",{})}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Invitar</iswc-button>`:null}

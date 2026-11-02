@@ -19,6 +19,7 @@ import { ir, tomarIntencion } from '../../../src/js/core/router.js';
 import type { ChatBackend } from '../../../src/js/chat/backend.js';
 import { crearBackendAvatar } from '../../../src/js/chat/backend-avatar.js';
 import { crearBackendDemo } from '../../../src/js/chat/backend-demo.js';
+import { detener, fuenteDe } from '../../../src/js/notificaciones/centro.js';
 import { apiChatPendiente, chatDeRuta, estadoCanales } from '../utils/canales.js';
 import './av-canal-form.js';
 
@@ -91,12 +92,9 @@ const AvCanales = crearComponente<AvCanalesProps>(
     const c = chat();
     if (!c || !iempresa) return;
     c.props = { titulo: 'Chats', clave: `av-canales-${iempresa}`, chat: chatDeRuta(props.id) };
-    // un backend por empresa (sobrevive a repintados del shell)
-    if (!h.__backend || h.__empresa !== iempresa) {
-      h.__backend?.cerrar();
-      h.__empresa = iempresa;
-      h.__backend = crearBackendAvatar({ iempresa });
-    }
+    // un backend por empresa: es del centro de notificaciones, que lo mantiene vivo fuera de esta vista
+    h.__empresa = iempresa;
+    h.__backend = fuenteDe(`empresa-${iempresa}`, 'canales', () => crearBackendAvatar({ iempresa }));
     c.addEventListener('av-chat-error', (e) => {
       const msg = (e as CustomEvent<{ mensaje: string }>).detail.mensaje;
       if (!apiChatPendiente(msg)) {
@@ -104,7 +102,7 @@ const AvCanales = crearComponente<AvCanalesProps>(
         return;
       }
       // el API aún no publica el chat: demo local, sin perder la vista
-      h.__backend?.cerrar();
+      detener();
       h.__backend = crearBackendDemo({ yo: 'ana' });
       c.backend = h.__backend;
       h.props = { aviso: 'El API del chat aún no está publicado: estás viendo el demo local (hablas como Ana Torres).' };

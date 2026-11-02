@@ -23,6 +23,7 @@ import {
 } from '../../chat/formato.js';
 import { crearTono, type EstadoLlamada, GestorLlamadas } from '../../chat/llamadas.js';
 import { textos } from '../../chat/textos.js';
+import { fijarAbierto, fijarMontado, llamadaPendiente } from '../../notificaciones/centro.js';
 import { type Adjunto, type Borrador, type Chat, type EstadoChat, type EventoChat, type InfoLectura, type MensajeChat, nuevaClave, type Preferencias, type ResultadoBusqueda } from '../../chat/tipos.js';
 import './av-chat-lista.js';
 import './av-chat-cabecera.js';
@@ -66,6 +67,7 @@ type Ui = {
   cargandoAnteriores: boolean;
   resaltar: string | null;
   estrecho: boolean;
+  listaOculta: boolean;
   cargando: boolean;
   guardando: boolean;
 };
@@ -97,7 +99,7 @@ class AvChat extends HTMLElement {
   /** Envíos en orden por chat: lo que se escribe después sale después. */
   #cadenas = new Map<string, Promise<void>>();
   #ui: Ui = {
-    filtro: 'todos', q: '', archivados: false, panel: null, infoMensaje: null, infoFilas: [], dialogo: null, grupoModo: 'crear', reenviarRef: null, reaccionRef: null,
+    listaOculta: false, filtro: 'todos', q: '', archivados: false, panel: null, infoMensaje: null, infoFilas: [], dialogo: null, grupoModo: 'crear', reenviarRef: null, reaccionRef: null,
     respuesta: null, edicion: null, visor: null, noLeido: null, resultados: [], buscando: false, buscado: '', cargandoAnteriores: false, resaltar: null, estrecho: false,
     cargando: true, guardando: false,
   };
@@ -140,6 +142,11 @@ class AvChat extends HTMLElement {
   }
 
   /** Abre un diálogo desde fuera (atajos del host): `nuevo` (buscador de personas) o `grupo` (nuevo grupo). */
+  /** Llave del colapso de la lista, por instancia del chat. */
+  #claveLista(): string {
+    return `${this.#props.clave || 'av-chat'}:lista-oculta`;
+  }
+
   abrirPanel(panel: 'nuevo' | 'grupo' | 'busqueda'): void {
     if (panel === 'busqueda') this.#ui.panel = 'busqueda';
     else {
@@ -186,6 +193,15 @@ class AvChat extends HTMLElement {
     document.removeEventListener('visibilitychange', this.#visible);
     this.#llamadas?.destruir();
     this.#tono.detener();
+    fijarAbierto(null);
+    fijarMontado(false);
+    // Fuera del documento (navegar por la SPA) deja de escuchar; un backend propio se cierra, el de la sesión sigue vivo en el centro.
+    queueMicrotask(() => {
+      if (this.isConnected) return;
+      const propio = this.#demoPropio ? this.#backend : null;
+      this.#desconectar();
+      propio?.cerrar();
+    });
   }
 
   /* ── conexión con el backend ── */
@@ -215,10 +231,14 @@ class AvChat extends HTMLElement {
       ...(b.iniciarLlamada ? { iniciar: (chat: string, medio: 'voz' | 'video') => b.iniciarLlamada!(chat, medio) } : {}),
     });
     this.#bajas.push(b.alSenal((s) => void this.#llamadas?.recibir(s)));
+    fijarMontado(true);
     try {
       const d = await b.iniciar();
       if (this.#backend !== b) return;
       this.#aplicar({ tipo: 'inicio', yo: b.yo, usuarios: d.usuarios, chats: d.chats });
+      // una llamada que entró en otra vista timbra aquí
+      const entrante = llamadaPendiente();
+      if (entrante) void this.#llamadas?.recibir(entrante);
       if (this.#e.conexion === 'conectando') this.#aplicar({ tipo: 'conexion', estado: 'conectado' });
       this.#ui.cargando = false;
       // lo que llegó mientras no estaba: entregado (✓✓ gris en el otro lado)
@@ -241,17 +261,20 @@ class AvChat extends HTMLElement {
       const m = ev.mensaje;
       const ya = (this.#e.mensajes[m.chat] ?? []).some((x) => x.clave === m.clave || (!!m.id && x.id === m.id));
       this.#aplicar(ev);
-      if (!ya && m.autor !== b.yo && m.tipo !== 'sistema') {
+      if (!ya && m.autor !== b.yo && m.tipo !== 'sistema' && !b.reproduciendo?.()) {
         void b.entregado(m.chat, m.ts).catch(() => undefined);
         if (m.chat === this.#e.activo) void this.#marcarLeido(m.chat);
       }
       return;
     }
     this.#aplicar(ev);
+    // el almacén volvió a empezar: se vuelve a pedir la conversación abierta
+    if (ev.tipo === 'inicio' && ev.reinicio && this.#e.activo) void this.#abrir(this.#e.activo);
   }
 
   #aplicar(ev: EventoChat): void {
     this.#e = reducir(this.#e, ev);
+    if (ev.tipo === 'activo') fijarAbierto(ev.chat);
     if (ev.tipo === 'escribiendo' && ev.modo && !this.#relojEscribiendo) {
       this.#relojEscribiendo = setInterval(() => {
         const hay = Object.values(this.#e.escribiendo).some((x) => Object.values(x).some((v) => v.hasta > Date.now()));
@@ -703,6 +726,9 @@ class AvChat extends HTMLElement {
     this.#montado = true;
     const t = textos();
     const clave = this.#props.clave || 'av-chat';
+    try {
+      this.#ui.listaOculta = localStorage.getItem(this.#claveLista()) === '1';
+    } catch { /* sin almacenamiento, visible */ }
     const on = <T>(nombre: string, fn: (d: T, e: CustomEvent<T>) => void) => this.#root.addEventListener(nombre, (e) => fn((e as CustomEvent<T>).detail, e as CustomEvent<T>));
     this.#root.append(html`
       <div class="chat" part="chat">
@@ -760,6 +786,13 @@ class AvChat extends HTMLElement {
         if (this.#ui.panel === d.panel) this.#ui.panel = null;
         this.#ui.infoMensaje = null;
       } else if (this.#ui.dialogo === d.panel) this.#ui.dialogo = null;
+      this.#programar();
+    });
+    on('av-chat-lista-alternar', () => {
+      this.#ui.listaOculta = !this.#ui.listaOculta;
+      try {
+        localStorage.setItem(this.#claveLista(), this.#ui.listaOculta ? '1' : '0');
+      } catch { /* sin almacenamiento solo no se recuerda */ }
       this.#programar();
     });
     on('av-chat-volver', () => {
@@ -996,7 +1029,7 @@ tema: activo.tema,
     this.dataset['estrecho'] = ui.estrecho ? '1' : '0';
     const exterior = this.#root.querySelector('.exterior') as HTMLElement;
     const interior = this.#root.querySelector('.interior') as HTMLElement;
-    const colapsoExt = ui.estrecho ? (activo ? 'start' : 'end') : null;
+    const colapsoExt = ui.estrecho ? (activo ? 'start' : 'end') : ui.listaOculta && activo ? 'start' : null;
     const colapsoInt = !ui.panel ? 'end' : ui.estrecho ? 'start' : null;
     if (colapsoExt) exterior.setAttribute('collapse', colapsoExt);
     else exterior.removeAttribute('collapse');
