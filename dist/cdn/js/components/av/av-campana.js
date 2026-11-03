@@ -1,4 +1,4 @@
-import{crearComponente as r,define as l,html as c}from"../../base/componente.js?v=3wyanc";import{abrir as d,alCambio as p,fijarPreferencia as s,marcarLeida as m,marcarTodas as u,pedirPermisoNavegador as w}from"../../notificaciones/centro.js?v=qd5ddy";import{arrancar as h}from"../../notificaciones/arranque.js?v=h4uqwy";import{TIPOS_AVISO as b}from"../../notificaciones/avisos.js?v=nkmjbz";const f=a=>c`
+import{crearComponente as r,define as l,html as c}from"../../base/componente.js?v=uz3s44";import{abrir as d,alCambio as p,fijarPreferencia as s,marcarLeida as m,marcarTodas as u,pedirPermisoNavegador as w}from"../../notificaciones/centro.js?v=sbg4u8";import{arrancar as h}from"../../notificaciones/arranque.js?v=nlnox4";import{TIPOS_AVISO as b}from"../../notificaciones/avisos.js?v=nkmjbz";const f=a=>c`
   <li class="entrada" data-id=${a.id} data-leida=${a.leida?"1":"0"} data-tipo=${a.tipo}>
     <button class="abrir" type="button" onclick=${()=>d(a)}>
       <iswc-icon class="icono" icon=${b[a.tipo].icono} aria-hidden="true"></iswc-icon>

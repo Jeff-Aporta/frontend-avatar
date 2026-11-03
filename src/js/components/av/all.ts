@@ -10,6 +10,7 @@ setCssBase(new URL('./', import.meta.url).href);
 await import('./av-link.js');
 await import('./av-boton-enlace.js');
 await import('./av-campana.js');
+await import('./av-reporte.js');
 await import('./av-menu-lateral.js');
 await import('./av-pestanas.js');
 await import('./av-migas.js');

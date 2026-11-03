@@ -10,7 +10,7 @@
  *   - Todo lo que llega del API o de la sala se parsea con Zod (`safeParse`) y se traduce a `tipos.ts`.
  */
 import { z } from '../base/zod.js';
-import { controller, dominio } from '../core/api.js';
+import { archivos, controller, dominio } from '../core/api.js';
 import { estado } from '../core/estado.js';
 import type { AccionMiembros, ChatBackend, DatosGrupo, FuenteAvisos, OpcionesSubida } from './backend.js';
 import { STUN_CLOUDFLARE } from './backend.js';
@@ -450,7 +450,7 @@ export function crearBackendAvatar(o: OpcionesAvatar): ChatBackend {
     },
     async subir(archivo, opciones?: OpcionesSubida) {
       opciones?.progreso?.(0.05);
-      const subida = op('subirArchivo', o.iempresa, archivo, { nombre: archivo.name ?? 'archivo' });
+      const subida = archivos()['subirArchivo']!(archivo, { iempresa: o.iempresa, nombre: archivo.name ?? 'archivo' });
       const cancelada = new Promise<never>((_, mal) => opciones?.senal?.addEventListener('abort', () => mal(new DOMException('Cancelado', 'AbortError'))));
       // la op no expone progreso: avance suave hasta que responde
       let f = 0.05;

@@ -1,0 +1,33 @@
+{
+  "$schema": "iswc-preview/v1",
+  "tag": "av-reporte",
+  "category": "transversal",
+  "navTitle": "Reporte de errores",
+  "title": "&lt;av-reporte&gt;",
+  "titleHtml": false,
+  "storageKey": "docs-av-reporte",
+  "styles": ".stage{padding:1rem;min-height:12em}",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "&lt;av-reporte&gt;",
+      "lede": "Botón flotante para reportar un error con texto, imágenes y notas de voz.",
+      "blocks": [
+        {
+          "kind": "demo",
+          "html": "<div class=\"stage\"><av-reporte id=\"d\"></av-reporte></div>",
+          "target": "#d",
+          "props": {},
+          "controls": [
+            {
+              "control": "boolean",
+              "prop": "attr:hidden",
+              "label": "oculto",
+              "default": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import{crearComponente as p,define as b,emitir as v,html as w}from"../../base/componente.js?v=3wyanc";import{horaCorta as f,claveDia as g,rotuloDia as y}from"../../chat/formato.js?v=xzgyvo";import{textos as C}from"../../chat/textos.js?v=iqk9yi";function E(t,s,c){const a=C();let r=s,i=s.indice;t.append(w`
+import{crearComponente as p,define as b,emitir as v,html as w}from"../../base/componente.js?v=uz3s44";import{horaCorta as f,claveDia as g,rotuloDia as y}from"../../chat/formato.js?v=xzgyvo";import{textos as C}from"../../chat/textos.js?v=iqk9yi";function E(t,s,c){const a=C();let r=s,i=s.indice;t.append(w`
     <iswc-lightbox class="caja" toolbar="default" no-default-actions>
       <div class="medio" part="medio"></div>
       <div slot="toolbar" class="barra">

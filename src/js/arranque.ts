@@ -8,7 +8,10 @@
  */
 import { PAGINAS } from './consts/paginas.js';
 import { APP_TAGS, SHELL_DIFERIDO, shellInicial, tagsDeVista, VIEW_TAGS } from './kit-tags.js';
+import { iniciarBitacora } from './core/bitacora.js';
 import { iniciarParalaje } from './core/paralaje.js';
+
+iniciarBitacora();
 
 type Loader = { loadPageStyles(n: string[]): Promise<unknown>; load(...tags: string[]): Promise<unknown> };
 
@@ -39,6 +42,8 @@ try {
   await L.load(...shellInicial(vista), ...APP_TAGS, ...tagsDeVista(vista));
   const diferir = (globalThis as { requestIdleCallback?: (fn: () => void, o?: { timeout: number }) => void }).requestIdleCallback ?? ((fn: () => void) => setTimeout(fn, 400));
   diferir(() => void L.load(...SHELL_DIFERIDO, ...shellInicial('resto')), { timeout: 3000 });
+  // el botón de reporte vive fuera de <av-app>: sobrevive a sus repintados
+  if (!raiz.hasAttribute('data-aislada')) document.body.append(document.createElement('av-reporte'));
   if (raiz.hasAttribute('data-aislada')) {
     const { conectar, cargarPerfil } = await import('./core/api.js');
     conectar();

@@ -1,4 +1,4 @@
-import{crearComponente as c,define as l,html as i}from"../../../js/base/componente.js?v=3wyanc";const n=c(import.meta.url,"av-caracteristicas",{titulo:"Caracter\xEDsticas principales",subtitulo:"",items:[],variante:"tarjetas",escena:"",lado:"izquierda"},(e,a)=>{e.append(i`
+import{crearComponente as c,define as l,html as i}from"../../../js/base/componente.js?v=uz3s44";const n=c(import.meta.url,"av-caracteristicas",{titulo:"Caracter\xEDsticas principales",subtitulo:"",items:[],variante:"tarjetas",escena:"",lado:"izquierda"},(e,a)=>{e.append(i`
       <section class="seccion" part="seccion" data-variante=${a.variante} data-escena=${a.escena?a.lado:"no"} aria-labelledby="t">
         ${a.escena?i`<av-escena class="ilustracion" part="ilustracion" escena=${a.escena}></av-escena>`:null}
         <div class="cuerpo">

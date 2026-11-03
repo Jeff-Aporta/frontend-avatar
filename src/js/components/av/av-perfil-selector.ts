@@ -1,6 +1,6 @@
 /**
  * <av-perfil-selector> — dueño de entrar como otro perfil. Con sesión guardada lo activa al instante; si no, entra con el
- * PIN público del perfil y, si no sirve, abre un diálogo para escribirlo. El JWT queda guardado. Cualquier parte de la app
+ * PIN público del perfil y, si no sirve, abre un diálogo para escribirlo; un usuario real no tiene PIN: escribe su contraseña. El JWT queda guardado. Cualquier parte de la app
  * lo pide con el evento `av-perfil-elegir { usuario, fin? }` en `window`. Con sesión muestra además el menú de cambio
  * rápido; sin sesión no pinta botón: los perfiles están en la pestaña «Entrar como…» del acceso.
  */
@@ -26,7 +26,7 @@ async function entrarCon(usuario: string, pin: string): Promise<void> {
   ir(destino.vista, destino.id);
 }
 
-const textoFallo = (err: unknown) => (/429|intentos|bloque/i.test(mensajeDe(err)) ? 'Demasiados intentos: espera unos minutos.' : 'PIN incorrecto.');
+const textoFallo = (err: unknown, conClave = false) => (/429|intentos|bloque/i.test(mensajeDe(err)) ? 'Demasiados intentos: espera unos minutos.' : conClave ? 'Contraseña incorrecta.' : 'PIN incorrecto.');
 
 /** El render se repite con cada cambio de props: solo el último escucha. */
 let oyente: EventListener | null = null;
@@ -34,6 +34,8 @@ let oyente: EventListener | null = null;
 const AvPerfilSelector = crearComponente<AvPerfilSelectorProps>(import.meta.url, 'av-perfil-selector', { perfiles: [], activo: '' }, (root, props, host) => {
   const h = host as Host;
   let pedido = '';
+  // los perfiles de prueba entran con PIN; los usuarios reales escriben su contraseña
+  let conClave = false;
   const q = <T extends Element>(s: string) => root.querySelector(s) as T;
   const activo = props.perfiles.find((p) => p.iusuario === props.activo);
   const fallo = (texto: string) => {
@@ -43,21 +45,33 @@ const AvPerfilSelector = crearComponente<AvPerfilSelectorProps>(import.meta.url,
   };
   const entrar = async () => {
     const campo = q<Campo>('#pin');
-    if (!/^\d{4}$/.test(campo.value)) return fallo('Escribe los 4 dígitos.');
+    if (!conClave && !/^\d{4}$/.test(campo.value)) return fallo('Escribe los 4 dígitos.');
+    if (conClave && !campo.value) return fallo('Escribe tu contraseña.');
     q('#entrar').toggleAttribute('loading', true);
     try {
       await entrarCon(pedido, campo.value);
       q<Dialogo>('#dialogo').open = false;
     } catch (err) {
-      fallo(textoFallo(err));
+      fallo(textoFallo(err, conClave));
       campo.value = '';
       campo.focus();
     } finally {
       q('#entrar').toggleAttribute('loading', false);
     }
   };
-  const pedirPin = (usuario: string, nombre: string, aviso: string) => {
+  const pedirPin = (usuario: string, nombre: string, aviso: string, clave = false) => {
     pedido = usuario;
+    conClave = clave;
+    const campo = q<Campo & { label: string; maxlength?: number }>('#pin');
+    campo.setAttribute('label', clave ? 'Contraseña' : 'PIN de 4 dígitos');
+    if (clave) {
+      campo.removeAttribute('maxlength');
+      campo.removeAttribute('inputmode');
+    } else {
+      campo.setAttribute('maxlength', '4');
+      campo.setAttribute('inputmode', 'numeric');
+    }
+    q<Dialogo>('#dialogo').setAttribute('label', clave ? 'Entrar con contraseña' : 'Entrar con PIN');
     q('.para').textContent = nombre;
     fallo(aviso);
     q<Campo>('#pin').value = '';
@@ -69,6 +83,10 @@ const AvPerfilSelector = crearComponente<AvPerfilSelectorProps>(import.meta.url,
     if (tieneCuenta(usuario)) return cambiarPerfil(usuario);
     const perfiles = props.perfiles.length ? props.perfiles : await perfilesPrueba().catch(() => []);
     const perfil = perfiles.find((p) => p.iusuario === usuario);
+    if (perfil && !perfil.pin) {
+      pedirPin(usuario, perfil.nombre, '', true);
+      return fin?.();
+    }
     try {
       if (!/^\d{4}$/.test(perfil?.pin ?? '')) throw new Error('sin PIN público');
       await entrarCon(usuario, perfil!.pin);
@@ -93,7 +111,7 @@ const AvPerfilSelector = crearComponente<AvPerfilSelectorProps>(import.meta.url,
       <div class="campos" part="campos">
         <p class="texto">Perfil: <strong class="para"></strong></p>
         <iswc-input id="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" label="PIN de 4 dígitos"
-          oniswc-input=${(e: Event) => { if ((e.currentTarget as Campo).value.length === 4) void entrar(); }}></iswc-input>
+          oniswc-input=${(e: Event) => { if (!conClave && (e.currentTarget as Campo).value.length === 4) void entrar(); }}></iswc-input>
         <p class="error" role="alert" hidden></p>
       </div>
       <iswc-button slot="footer" variant="outlined compact" color="neutral" oniswc-click=${() => (q<Dialogo>('#dialogo').open = false)}>Cancelar</iswc-button>

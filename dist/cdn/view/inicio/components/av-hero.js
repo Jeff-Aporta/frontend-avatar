@@ -1,4 +1,4 @@
-import{crearComponente as n,define as r,emitir as l,html as d}from"../../../js/base/componente.js?v=3wyanc";import{LEMA as c}from"../utils/landing.js?v=tf2alu";const p=n(import.meta.url,"av-hero",{sesion:!1},(o,i,e)=>{const a=s=>l(e,"av-inicio-ir",{vista:s}),t=s=>new URL(s,document.baseURI).href;o.append(d`
+import{crearComponente as n,define as r,emitir as l,html as d}from"../../../js/base/componente.js?v=uz3s44";import{LEMA as c}from"../utils/landing.js?v=tf2alu";const p=n(import.meta.url,"av-hero",{sesion:!1},(o,i,e)=>{const a=s=>l(e,"av-inicio-ir",{vista:s}),t=s=>new URL(s,document.baseURI).href;o.append(d`
     <section class="hero" part="hero" aria-labelledby="titulo">
       <img class="banner" part="banner" src=${t("assets/img/bgbanner.svg")} alt="" aria-hidden="true" fetchpriority="high" decoding="async">
       <div class="velo" aria-hidden="true"></div>

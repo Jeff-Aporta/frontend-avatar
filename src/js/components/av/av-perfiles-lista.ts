@@ -32,8 +32,8 @@ const AvPerfilesLista = crearComponente<AvPerfilesListaProps>(
     if ((host.getAttribute('modo') ?? props.modo) === 'select') {
       root.append(html`
         <div class="elegir" part="elegir">
-          <iswc-select class="cuenta" label="Cuenta de prueba" placeholder="Elige una cuenta" density="compact">
-            ${props.perfiles.map((p) => html`<iswc-option value=${p.iusuario} ?disabled=${p.iusuario === props.activo}>${p.nombre} · ${p.rol} · PIN ${p.pin}</iswc-option>`)}
+          <iswc-select class="cuenta" label="Cuenta" placeholder="Elige una cuenta" density="compact">
+            ${props.perfiles.map((p) => html`<iswc-option value=${p.iusuario} ?disabled=${p.iusuario === props.activo}>${p.pin ? `${p.nombre} · ${p.rol} · PIN ${p.pin}` : `${p.nombre} · pide contraseña`}</iswc-option>`)}
           </iswc-select>
           <iswc-button variant="compact" class="entrar" color="brand" ?loading=${Boolean(props.ocupado)}>Entrar con esta cuenta</iswc-button>
         </div>
@@ -50,7 +50,7 @@ const AvPerfilesLista = crearComponente<AvPerfilesListaProps>(
           <iswc-button class="fila" part="fila" variant="plain compact" color="neutral" title=${p.descripcion} data-usuario=${p.iusuario}
             ?loading=${props.ocupado === p.iusuario} ?disabled=${Boolean(props.ocupado) || p.iusuario === props.activo} oniswc-click=${() => usar(p.iusuario)}>
             <iswc-person class="persona" usuario=${p.iusuario} nombre=${p.nombre} detalle=${p.rol}></iswc-person>
-            <code slot="end" class="pin" title="PIN de prueba">${p.pin}</code>
+            ${p.pin ? html`<code slot="end" class="pin" title="PIN de prueba">${p.pin}</code>` : html`<iswc-icon slot="end" icon="mdi:lock-outline" title="Pide contraseña"></iswc-icon>`}
           </iswc-button>`)}
       </div>
     `);

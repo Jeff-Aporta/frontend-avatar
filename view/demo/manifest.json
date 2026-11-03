@@ -20,6 +20,10 @@
     "file": "../../src/js/components/av/av-pestanas.json"
   },
   {
+    "tag": "av-reporte",
+    "file": "../../src/js/components/av/av-reporte.json"
+  },
+  {
     "tag": "av-campana",
     "file": "../../src/js/components/av/av-campana.json"
   },

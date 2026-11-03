@@ -64,7 +64,7 @@ const AvAcceso = crearComponente<AvAccesoProps>(
     // Provisional para las pruebas: el formulario arranca con el primer perfil que trabaja con la empresa.
     const login = root.querySelector('#login') as LoginEl;
     void perfilesPrueba().then(async (perfiles) => {
-      const primera = perfiles.find((p) => p.iusuario === 'ana') ?? perfiles[0];
+      const primera = perfiles.find((p) => p.iusuario === 'ana') ?? perfiles.find((p) => p.pin);
       await customElements.whenDefined('iswc-login');
       if (primera) rellenar(login, primera.iusuario, primera.pin);
     }).catch(() => undefined);

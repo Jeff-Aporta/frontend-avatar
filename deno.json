@@ -27,7 +27,7 @@
     "@iswc/component-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/0674814b6b7bc983046a8fb7bea78cde721ca1e9/src/previews/_kit/schemas/component.schemas.ts",
     "@iswc/loader-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/0674814b6b7bc983046a8fb7bea78cde721ca1e9/src/cdn/schemas/loader.schemas.ts",
     "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/src/vendor.ts",
-    "@Jeff-Aporta/DER/": "https://cdn.jsdelivr.net/gh/Jeff-Aporta/DER@fd2c5ac35a7f2de7f4d1d73d6adc239bb4f44e3e/",
+    "@Jeff-Aporta/DER/": "https://cdn.jsdelivr.net/gh/Jeff-Aporta/DER@22eaf81a711394008e53ec97c3b9af3c525ff625/",
     "sharp": "npm:sharp@0.34.4"
   },
   "tasks": {
@@ -39,7 +39,7 @@
     "bench:embeddings": "deno run -A scripts/bench/embeddings-bench.ts",
     "dev": "deno run -A src/utils/build.ts --watch",
     "serve": "deno run -A scripts/build/servir.ts",
-    "check": "deno check --allow-import=api-avatar.jeffaporta.workers.dev:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,jsr.io:443,deno.land:443,esm.sh:443 src/js/ view/ tests/vistas/",
+    "check": "deno run -A scripts/gate/check.mjs",
     "pin": "deno run -A src/vendor/iswc-root/tools/pin-update.mjs --repo=Jeff-Aporta/is-webcomponents --raices=index.html,assets/dl.js,src,view,deno.json",
     "vendor:iswc": "deno run -A scripts/vendor/vendor-iswc-tools.mjs",
     "test": "deno task build && deno run -A scripts/gate/test-health.mjs",
@@ -54,6 +54,6 @@
   },
   "avatar": {
     "api": "https://api-avatar.jeffaporta.workers.dev/api",
-    "vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=48f862be"
+    "vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=3a8185c3"
   }
 }

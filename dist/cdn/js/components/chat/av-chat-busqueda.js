@@ -1,4 +1,4 @@
-import{crearComponente as q,define as w,emitir as u,html as v,raw as E}from"../../base/componente.js?v=3wyanc";import{claveDia as A,horaCorta as y,rotuloDia as $}from"../../chat/formato.js?v=xzgyvo";import{textos as C}from"../../chat/textos.js?v=iqk9yi";function L(s,r,c){const t=C();let l=r,n=r.chat?"chat":"todos",d=null;s.append(v`
+import{crearComponente as q,define as w,emitir as u,html as v,raw as E}from"../../base/componente.js?v=uz3s44";import{claveDia as A,horaCorta as y,rotuloDia as $}from"../../chat/formato.js?v=xzgyvo";import{textos as C}from"../../chat/textos.js?v=iqk9yi";function L(s,r,c){const t=C();let l=r,n=r.chat?"chat":"todos",d=null;s.append(v`
     <aside class="busqueda" part="busqueda" aria-label=${t.buscarMensajes}>
       <header class="cabeza">
         <iswc-button variant="plain compact" color="neutral" class="cerrar" title=${t.cerrar} aria-label=${t.cerrar}><iswc-icon icon="mdi:close"></iswc-icon></iswc-button>

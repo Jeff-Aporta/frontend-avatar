@@ -1,9 +1,9 @@
 /**
- * api.ts — el cliente DER del front: plugins `avatar` (las catorce entidades + sus paths), `identity` (login JWT,
- * usuarios) y `permissions` (roles) armados con `createClient` contra el API. Los tokens viven en la bóveda
+ * api.ts — el cliente DER del front: plugins `avatar` (las entidades + sus paths), `identity` (login JWT,
+ * usuarios), `permissions` (roles), `archivos` y `errores` armados con `createClient` contra el API. Los tokens viven en la bóveda
  * de cuentas (`core/cuentas.ts`) y el del perfil activo viaja en todas las peticiones. Nada de fetch suelto: todo pasa por los controllers y las `ops`.
  */
-import { avatar, type ClientController, type ClientPlugin, createClient, identity, passwordDePin, permissions, registry } from '@avatar/vendor';
+import { archivosPlugin, avatar, type ClientController, type ClientPlugin, createClient, erroresPlugin, identity, passwordDePin, permissions, registry } from '@avatar/vendor';
 import { apiUrl } from '../consts/config.js';
 import { z } from '../base/zod.js';
 import { type Perfil, type PerfilPrueba, PerfilPruebaSchema, PerfilSchema, type Yo, YoSchema } from '../consts/schemas/api.schemas.js';
@@ -18,7 +18,7 @@ function guardarToken(t: string | null): void {
   fijar({ token: t });
 }
 
-let plugins: { dominio: ClientPlugin; auth: ClientPlugin; permisos: ClientPlugin } | null = null;
+let plugins: { dominio: ClientPlugin; auth: ClientPlugin; permisos: ClientPlugin; archivos: ClientPlugin; errores: ClientPlugin } | null = null;
 
 /** Cabeceras de toda petición: el token si lo hay. */
 function cabeceras(): HeadersInit {
@@ -34,6 +34,8 @@ export function conectar(baseUrl = apiUrl()): void {
     auth: createClient(identity, { baseUrl, token, onToken: guardarToken }),
     dominio: createClient(avatar, { baseUrl, headers: cabeceras }),
     permisos: createClient(permissions, { baseUrl, headers: cabeceras }),
+    archivos: createClient(archivosPlugin, { baseUrl, headers: cabeceras }),
+    errores: createClient(erroresPlugin, { baseUrl, headers: cabeceras }),
   };
   // Búsqueda por significado: las consultas las vectoriza el API (`ia/embeber`, bge-m3); sin sesión, búsqueda léxica.
   usarVectorizador(async (textos) => {
@@ -54,6 +56,11 @@ export const dominio = (): ClientPlugin => armados().dominio;
 export const auth = (): ClientPlugin => armados().auth;
 /** Plugin de permisos (`profile`, `load`, `catalog`, `controllers.roles`…). */
 export const permisos = (): ClientPlugin => armados().permisos;
+
+/** Plugin de gestión de archivos (`subirArchivo`, `urlArchivo`, `arbolArchivos`…). */
+export const archivos = (): ClientPlugin => armados().archivos;
+/** Plugin de reportes de error (`reportarError`, `adjuntarError`, `errorListo`, `seguimientoError`). */
+export const reportes = (): ClientPlugin => armados().errores;
 
 /** ClientController de una entidad del dominio por su clave de plugin (`tareas`, `canales`, …). */
 export function controller(clave: string): ClientController<any> {

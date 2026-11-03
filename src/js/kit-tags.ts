@@ -60,10 +60,11 @@ export const SHELL_KIT_TAGS = [
   'iswc-stat-group',
   'iswc-tenant-selector',
   'iswc-semantic-search',
+  'iswc-textarea',
 ] as const;
 
 /** Del armazón, nunca bloquean el primer pintado: se piden en reposo (paleta de comandos, búsqueda, selectores, panel lateral). */
-export const SHELL_DIFERIDO = ['iswc-command-palette', 'iswc-palette-selector', 'iswc-semantic-search', 'iswc-tenant-selector', 'iswc-drawer'] as const;
+export const SHELL_DIFERIDO = ['iswc-command-palette', 'iswc-palette-selector', 'iswc-semantic-search', 'iswc-tenant-selector', 'iswc-drawer', 'iswc-textarea'] as const;
 /** Lo mínimo para pintar una vista pública ligera (la portada): barra, tema y piezas de la propia vista. */
 const SHELL_CRITICO = ['iswc-app-shell', 'iswc-doc-layout', 'iswc-doc-index', 'iswc-theme-toggle', 'iswc-icon', 'iswc-button', 'iswc-heading', 'iswc-spinner', 'iswc-skeleton', 'iswc-toast', 'iswc-avatar', 'iswc-tag', 'iswc-badge', 'iswc-card', 'iswc-dropdown', 'iswc-dropdown-item', 'iswc-session-menu'] as const;
 /** Vistas que arrancan solo con lo crítico. */
@@ -107,7 +108,7 @@ export const KIT_TAGS: readonly string[] = [...new Set([...SHELL_KIT_TAGS, ...Ob
 export const PREFIJO = 'av';
 
 /** Transversales (varias vistas): shell, logo, escena, gráfica en tarjeta, selector de perfil y tabla de catálogo. */
-export const APP_TAGS = ['av-link', 'av-boton-enlace', 'av-campana', 'av-menu-lateral', 'av-pestanas', 'av-migas', 'av-outlet', 'av-logo', 'av-escena', 'av-grafica', 'av-perfil-selector', 'av-perfiles-lista', 'av-perfiles-tabla', 'av-tabla', 'av-app'] as const;
+export const APP_TAGS = ['av-reporte', 'av-link', 'av-boton-enlace', 'av-campana', 'av-menu-lateral', 'av-pestanas', 'av-migas', 'av-outlet', 'av-logo', 'av-escena', 'av-grafica', 'av-perfil-selector', 'av-perfiles-lista', 'av-perfiles-tabla', 'av-tabla', 'av-app'] as const;
 
 /** Por vista: hijos antes que el shell (el último es el shell de la vista). */
 export const VIEW_TAGS = {
