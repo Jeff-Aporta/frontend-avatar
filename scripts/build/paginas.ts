@@ -17,6 +17,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { metasDe, type Pagina, PAGINAS, SITIO, tituloDe, URL_PUBLICA } from '../../src/js/consts/paginas.ts';
+import { APP_TAGS, rutaComponente, tagsDeVista } from '../../src/js/kit-tags.ts';
 
 const ROOT = join(import.meta.dirname!, '..', '..');
 const deno = JSON.parse(readFileSync(join(ROOT, 'deno.json'), 'utf8')) as { imports: Record<string, string>; avatar: { vendor: string } };
@@ -37,6 +38,31 @@ const FUENTES = [
   '<link rel="preload" href="assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>',
   `<style>${CARAS.map((c) => `@font-face{font-family:'${c.familia}';font-style:${c.estilo};font-weight:${c.peso};font-display:swap;src:url(assets/fonts/${c.archivo}) format('woff2');unicode-range:${c.rango}}`).join('')}</style>`,
 ].join('\n');
+
+/**
+ * Precarga de la cadena crítica de una vista: el arranque, los componentes de la app y los de la vista con todo lo que importan. Sin
+ * esto el navegador los descubre uno tras otro y la página espera segundos; así salen en paralelo desde el HTML. Módulos con el mismo
+ * `?v=` con que se importan (misma URL = sin descarga doble) y la hoja de cada componente, que `base/componente.ts` pide con `fetch`.
+ */
+function precargas(vista: string): string {
+  const CDN = join(ROOT, 'dist', 'cdn');
+  const raices = ['js/arranque.js', ...[...APP_TAGS, ...tagsDeVista(vista)].flatMap((tag) => {
+    const ruta = tag.startsWith('av-') ? rutaComponente(tag) : null;
+    return ruta ? [`${ruta}${tag}.js`] : [];
+  })];
+  const vistos = new Set<string>();
+  const pendientes = [...raices];
+  for (let f = pendientes.shift(); f !== undefined; f = pendientes.shift()) {
+    if (vistos.has(f) || !existsSync(join(CDN, f))) continue;
+    vistos.add(f);
+    const codigo = readFileSync(join(CDN, f), 'utf8');
+    for (const m of codigo.matchAll(/(?:from|import)\s*"(\.{1,2}\/[^"?]+\.js)(?:\?v=\w+)?"/g)) pendientes.push(new URL(m[1]!, `http://x/${f}`).pathname.slice(1));
+  }
+  vistos.delete('js/arranque.js');
+  const modulos = [...vistos].filter((f) => hashes[f]).map((f) => `<link rel="modulepreload" href="${recurso(f)}">`);
+  const hojas = [...vistos].filter((f) => f.includes('/components/') && existsSync(join(CDN, f.replace(/\.js$/, '.css')))).map((f) => `<link rel="preload" as="fetch" crossorigin href="dist/cdn/${f.replace(/\.js$/, '.css')}">`);
+  return [...modulos, ...hojas].join('');
+}
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 /** Recurso del build con su hash de contenido (relativo a la raíz: lo resuelve `<base href>`). */
@@ -89,6 +115,7 @@ ${o.explorador ? '' : ESQUELETO}${o.vista === 'inicio' ? '<link rel="preload" hr
 <script src="${recurso('boot.js')}"></script>${o.explorador ? '' : `
 <link rel="stylesheet" href="${recurso('styles/app.css')}">`}
 <script type="module" src="${KIT}"></script>
+${o.explorador ? '' : precargas(o.vista)}
 <script type="module" src="${recurso('avLoader.min.js')}"></script>
 ${o.explorador
     ? `<script type="module" src="${KIT.replace('core/loader.min.js', 'preview/doc-demo-host.min.js')}"></script>
