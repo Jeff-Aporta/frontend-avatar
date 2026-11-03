@@ -20,6 +20,7 @@ const AvChatCabecera = crearComponente<AvChatCabeceraProps>(
     root.append(html`
       <header class="cabecera" part="cabecera" data-volver=${props.volver ? '1' : '0'}>
         <iswc-button class="volver" variant="plain compact" color="neutral" title=${t.volverChats} aria-label=${t.volverChats} oniswc-click=${() => emitir(host, 'av-chat-volver')}><iswc-icon icon="mdi:arrow-left"></iswc-icon></iswc-button>
+        <iswc-button class="alternar" variant="plain compact" color="neutral" title=${t.alternarLista} aria-label=${t.alternarLista} oniswc-click=${() => emitir(host, 'av-chat-lista-alternar')}><iswc-icon icon="mdi:menu"></iswc-icon></iswc-button>
         <iswc-button class="quien" variant="row" color="neutral" onclick=${info} title=${props.tipo === 'directo' ? t.infoContacto : t.infoGrupo}>
           <span class="foto" data-color=${String(props.color)}>
             <iswc-avatar initials=${props.iniciales} image=${props.foto ?? ''} label=${props.nombre}></iswc-avatar>

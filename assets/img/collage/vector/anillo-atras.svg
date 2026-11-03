@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-240 -150 480 300">
+  <!-- Anillo del collage «crecimiento», mitad de atras: la A queda entre las dos mitades (la cinta la abraza). -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#5eeadc"/>
+      <stop offset="0.45" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#14c4b6"/>
+    </linearGradient>
+  </defs>
+  <g transform="rotate(-16)">
+    <path d="M-205 0A205 88 0 0 1 205 0" fill="none" stroke="url(#g)" stroke-width="30" stroke-linecap="round"/>
+    <path d="M-205 0A205 88 0 0 1 205 0" fill="none" stroke="#0b8d86" stroke-opacity=".18" stroke-width="30" stroke-linecap="round" transform="translate(0 6)"/>
+  </g>
+</svg>

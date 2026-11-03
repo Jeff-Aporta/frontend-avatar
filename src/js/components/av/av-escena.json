@@ -11,14 +11,14 @@
     {
       "id": "intro",
       "title": "&lt;av-escena&gt;",
-      "lede": "Ilustración Corporate Memphis por capas, teñida con la paleta.",
+      "lede": "Ilustración por capas: collages de la identidad recompuestos por retazos con parallax, o escenas Corporate Memphis; todo teñido con la paleta.",
       "blocks": [
         {
           "kind": "demo",
           "html": "<div class=\"stage\"><av-escena id=\"e\"></av-escena></div>",
           "target": "#e",
           "props": {
-            "escena": "bienvenida"
+            "escena": "crecimiento"
           },
           "controls": [
             {
@@ -26,22 +26,36 @@
               "prop": "props:escena",
               "label": "escena",
               "options": [
+                "crecimiento",
+                "marca",
+                "modulos",
+                "red",
+                "tablero-rombos",
+                "tablero-circulos",
+                "empresa",
+                "capas",
+                "rejilla",
+                "reporte",
+                "equipo-tablero",
+                "atencion",
+                "negocios",
+                "comunidad",
+                "panel",
+                "finanzas",
+                "crm",
+                "organizacion",
+                "proyectos",
+                "canales",
+                "rrhh",
+                "inventario",
+                "asistente",
+                "correos",
                 "bienvenida",
                 "acceso",
-                "chat",
-                "canales",
-                "asistente",
-                "proyectos",
-                "crm",
-                "finanzas",
-                "inventario",
-                "rrhh",
-                "correos",
-                "organizacion",
                 "logros",
                 "vacio"
               ],
-              "default": "bienvenida"
+              "default": "crecimiento"
             }
           ]
         },

@@ -1,0 +1,282 @@
+[
+ {
+  "id": "tarjeta-fondo",
+  "caja": [
+   203,
+   288,
+   520,
+   640
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\8-capas\\piezas\\teal-square-icon\\teal-square-icon-2.png",
+   "x": 203,
+   "y": 288,
+   "w": 317,
+   "h": 352
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    268,
+    565,
+    1
+   ],
+   [
+    234,
+    317,
+    1
+   ],
+   [
+    470,
+    611,
+    1
+   ],
+   [
+    230,
+    443,
+    1
+   ],
+   [
+    364,
+    611,
+    1
+   ],
+   [
+    232,
+    509,
+    1
+   ],
+   [
+    197,
+    282,
+    0
+   ],
+   [
+    526,
+    282,
+    0
+   ],
+   [
+    197,
+    646,
+    0
+   ],
+   [
+    526,
+    646,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "tarjeta-media",
+  "caja": [
+   262,
+   210,
+   480,
+   566
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\8-capas\\piezas\\teal-square-icon\\teal-square-icon-3.png",
+   "x": 262,
+   "y": 210,
+   "w": 218,
+   "h": 356
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    299,
+    425,
+    1
+   ],
+   [
+    303,
+    229,
+    1
+   ],
+   [
+    455,
+    543,
+    1
+   ],
+   [
+    331,
+    543,
+    1
+   ],
+   [
+    283,
+    327,
+    1
+   ],
+   [
+    283,
+    493,
+    1
+   ],
+   [
+    256,
+    204,
+    0
+   ],
+   [
+    486,
+    204,
+    0
+   ],
+   [
+    256,
+    572,
+    0
+   ],
+   [
+    486,
+    572,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "tarjeta-frente",
+  "caja": [
+   316,
+   206,
+   651,
+   523
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\8-capas\\piezas\\teal-square-icon\\teal-square-icon-1.png",
+   "x": 316,
+   "y": 206,
+   "w": 335,
+   "h": 317
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    471,
+    349,
+    1
+   ],
+   [
+    345,
+    489,
+    1
+   ],
+   [
+    621,
+    237,
+    1
+   ],
+   [
+    347,
+    233,
+    1
+   ],
+   [
+    621,
+    421,
+    1
+   ],
+   [
+    475,
+    479,
+    1
+   ],
+   [
+    310,
+    200,
+    0
+   ],
+   [
+    657,
+    200,
+    0
+   ],
+   [
+    310,
+    529,
+    0
+   ],
+   [
+    657,
+    529,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "diana",
+  "caja": [
+   479,
+   443,
+   684,
+   650
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\8-capas\\piezas\\target-circle.png",
+   "x": 479,
+   "y": 443,
+   "w": 205,
+   "h": 207
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    581,
+    547,
+    1
+   ],
+   [
+    525,
+    479,
+    1
+   ],
+   [
+    637,
+    479,
+    1
+   ],
+   [
+    635,
+    615,
+    1
+   ],
+   [
+    515,
+    603,
+    1
+   ],
+   [
+    663,
+    547,
+    1
+   ],
+   [
+    473,
+    437,
+    0
+   ],
+   [
+    690,
+    437,
+    0
+   ],
+   [
+    473,
+    656,
+    0
+   ],
+   [
+    690,
+    656,
+    0
+   ]
+  ]
+ }
+]

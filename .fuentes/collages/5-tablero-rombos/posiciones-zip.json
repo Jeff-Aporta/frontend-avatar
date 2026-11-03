@@ -1,0 +1,387 @@
+{
+ "original": {
+  "w": 736,
+  "h": 774
+ },
+ "escala": 0.7600000000000002,
+ "piezas": [
+  {
+   "pieza": "bar-chart.png",
+   "x": 421,
+   "y": 397,
+   "w": 113,
+   "h": 129,
+   "escala": 0.79,
+   "error": 97
+  },
+  {
+   "pieza": "circle-icon/circle-icon-1.png",
+   "x": 549,
+   "y": 163,
+   "w": 65,
+   "h": 66,
+   "escala": 0.79,
+   "error": 111
+  },
+  {
+   "pieza": "circle-icon/circle-icon-10.png",
+   "x": 195,
+   "y": 256,
+   "w": 19,
+   "h": 19,
+   "escala": 0.775,
+   "error": 51
+  },
+  {
+   "pieza": "circle-icon/circle-icon-2.png",
+   "x": 262,
+   "y": 372,
+   "w": 44,
+   "h": 44,
+   "escala": 0.79,
+   "error": 56
+  },
+  {
+   "pieza": "circle-icon/circle-icon-3.png",
+   "x": 125,
+   "y": 154,
+   "w": 26,
+   "h": 26,
+   "escala": 0.775,
+   "error": 54
+  },
+  {
+   "pieza": "circle-icon/circle-icon-4.png",
+   "x": 261,
+   "y": 139,
+   "w": 18,
+   "h": 18,
+   "escala": 0.73,
+   "error": 61
+  },
+  {
+   "pieza": "circle-icon/circle-icon-5.png",
+   "x": 260,
+   "y": 138,
+   "w": 21,
+   "h": 21,
+   "escala": 0.79,
+   "error": 38
+  },
+  {
+   "pieza": "circle-icon/circle-icon-6.png",
+   "x": 129,
+   "y": 160,
+   "w": 22,
+   "h": 22,
+   "escala": 0.745,
+   "error": 33
+  },
+  {
+   "pieza": "circle-icon/circle-icon-8.png",
+   "x": 247,
+   "y": 256,
+   "w": 18,
+   "h": 19,
+   "escala": 0.775,
+   "error": 47
+  },
+  {
+   "pieza": "circle-icon/circle-icon-9.png",
+   "x": 247,
+   "y": 256,
+   "w": 18,
+   "h": 19,
+   "escala": 0.775,
+   "error": 52
+  },
+  {
+   "pieza": "dark-triangle.png",
+   "x": 456,
+   "y": 138,
+   "w": 47,
+   "h": 79,
+   "escala": 0.745,
+   "error": 35
+  },
+  {
+   "pieza": "dotted-circle/dotted-circle-1.png",
+   "x": 486,
+   "y": 442,
+   "w": 118,
+   "h": 155,
+   "escala": 0.73,
+   "error": 163
+  },
+  {
+   "pieza": "dotted-circle/dotted-circle-2.png",
+   "x": 123,
+   "y": 587,
+   "w": 148,
+   "h": 145,
+   "escala": 0.73,
+   "error": 111
+  },
+  {
+   "pieza": "dotted-circle/dotted-circle-3.png",
+   "x": 505,
+   "y": 63,
+   "w": 143,
+   "h": 149,
+   "escala": 0.73,
+   "error": 19
+  },
+  {
+   "pieza": "dotted-circle/dotted-circle-5.png",
+   "x": 260,
+   "y": 139,
+   "w": 21,
+   "h": 21,
+   "escala": 0.79,
+   "error": 35
+  },
+  {
+   "pieza": "dotted-circle/dotted-circle-6.png",
+   "x": 261,
+   "y": 139,
+   "w": 19,
+   "h": 19,
+   "escala": 0.775,
+   "error": 57
+  },
+  {
+   "pieza": "dotted-circle/dotted-circle-7.png",
+   "x": 125,
+   "y": 154,
+   "w": 26,
+   "h": 26,
+   "escala": 0.775,
+   "error": 56
+  },
+  {
+   "pieza": "gray-background.png",
+   "x": 6,
+   "y": 25,
+   "w": 715,
+   "h": 714,
+   "escala": 0.745,
+   "error": 71
+  },
+  {
+   "pieza": "halftone-circle.png",
+   "x": 93,
+   "y": 576,
+   "w": 148,
+   "h": 145,
+   "escala": 0.73,
+   "error": 109
+  },
+  {
+   "pieza": "horizontal-bars/horizontal-bars-1.png",
+   "x": 435,
+   "y": 314,
+   "w": 103,
+   "h": 23,
+   "escala": 0.73,
+   "error": 46
+  },
+  {
+   "pieza": "horizontal-bars/horizontal-bars-2.png",
+   "x": 199,
+   "y": 496,
+   "w": 152,
+   "h": 25,
+   "escala": 0.79,
+   "error": 39
+  },
+  {
+   "pieza": "illegible.png",
+   "x": 201,
+   "y": 362,
+   "w": 172,
+   "h": 125,
+   "escala": 0.79,
+   "error": 129
+  },
+  {
+   "pieza": "object.png",
+   "x": 563,
+   "y": 179,
+   "w": 32,
+   "h": 32,
+   "escala": 0.79,
+   "error": 73
+  },
+  {
+   "pieza": "plus-icon.png",
+   "x": 325,
+   "y": 348,
+   "w": 41,
+   "h": 40,
+   "escala": 0.76,
+   "error": 64
+  },
+  {
+   "pieza": "progress-bar/progress-bar-1.png",
+   "x": 228,
+   "y": 498,
+   "w": 141,
+   "h": 23,
+   "escala": 0.73,
+   "error": 50
+  },
+  {
+   "pieza": "progress-bar/progress-bar-2.png",
+   "x": 436,
+   "y": 314,
+   "w": 103,
+   "h": 23,
+   "escala": 0.73,
+   "error": 46
+  },
+  {
+   "pieza": "progress-bar/progress-bar-3.png",
+   "x": 455,
+   "y": 349,
+   "w": 53,
+   "h": 12,
+   "escala": 0.73,
+   "error": 46
+  },
+  {
+   "pieza": "progress-bar/progress-bar-4.png",
+   "x": 461,
+   "y": 414,
+   "w": 30,
+   "h": 92,
+   "escala": 0.745,
+   "error": 42
+  },
+  {
+   "pieza": "progress-bar/progress-bar-5.png",
+   "x": 506,
+   "y": 400,
+   "w": 30,
+   "h": 122,
+   "escala": 0.76,
+   "error": 38
+  },
+  {
+   "pieza": "shadow.png",
+   "x": 148,
+   "y": 678,
+   "w": 474,
+   "h": 19,
+   "escala": 0.775,
+   "error": 10
+  },
+  {
+   "pieza": "small-dots/small-dots-1.png",
+   "x": 260,
+   "y": 139,
+   "w": 21,
+   "h": 20,
+   "escala": 0.79,
+   "error": 34
+  },
+  {
+   "pieza": "small-dots/small-dots-2.png",
+   "x": 261,
+   "y": 139,
+   "w": 18,
+   "h": 19,
+   "escala": 0.745,
+   "error": 62
+  },
+  {
+   "pieza": "small-dots/small-dots-3.png",
+   "x": 125,
+   "y": 154,
+   "w": 26,
+   "h": 26,
+   "escala": 0.775,
+   "error": 54
+  },
+  {
+   "pieza": "small-dots/small-dots-5.png",
+   "x": 414,
+   "y": 345,
+   "w": 23,
+   "h": 24,
+   "escala": 0.79,
+   "error": 33
+  },
+  {
+   "pieza": "small-dots/small-dots-6.png",
+   "x": 481,
+   "y": 438,
+   "w": 118,
+   "h": 153,
+   "escala": 0.73,
+   "error": 165
+  },
+  {
+   "pieza": "small-dots/small-dots-8.png",
+   "x": 247,
+   "y": 256,
+   "w": 18,
+   "h": 19,
+   "escala": 0.775,
+   "error": 50
+  },
+  {
+   "pieza": "teal-triangle/teal-triangle-1.png",
+   "x": 304,
+   "y": 585,
+   "w": 163,
+   "h": 85,
+   "escala": 0.79,
+   "error": 6
+  },
+  {
+   "pieza": "teal-triangle/teal-triangle-2.png",
+   "x": 270,
+   "y": 123,
+   "w": 196,
+   "h": 102,
+   "escala": 0.775,
+   "error": 13
+  },
+  {
+   "pieza": "teal-triangle/teal-triangle-3.png",
+   "x": 91,
+   "y": 344,
+   "w": 60,
+   "h": 110,
+   "escala": 0.745,
+   "error": 20
+  },
+  {
+   "pieza": "teal-triangle/teal-triangle-4.png",
+   "x": 181,
+   "y": 157,
+   "w": 74,
+   "h": 71,
+   "escala": 0.775,
+   "error": 25
+  },
+  {
+   "pieza": "teal-triangle/teal-triangle-5.png",
+   "x": 598,
+   "y": 357,
+   "w": 53,
+   "h": 96,
+   "escala": 0.775,
+   "error": 13
+  },
+  {
+   "pieza": "teal-triangle/teal-triangle-6.png",
+   "x": 454,
+   "y": 137,
+   "w": 49,
+   "h": 83,
+   "escala": 0.775,
+   "error": 37
+  }
+ ]
+}

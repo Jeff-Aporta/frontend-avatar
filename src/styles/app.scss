@@ -40,6 +40,7 @@
   --av-radio: 0.9em;
   /* El aire de Avatar en los componentes del kit. */
   --iswc-page-header-title-font: var(--av-font-titulo);
+  --iswc-page-header-ilustracion-size: 8em;
   --iswc-tag-size: 0.72em;
   --iswc-status-pill-size: 0.72em;
   --iswc-stat-group-radius: var(--av-radio);
@@ -51,9 +52,15 @@
   --iswc-stat-group-value-glow: var(--av-neon-texto);
 }
 
+/* Bandera numérica del tema (0 claro · 1 oscuro): la usan opacidades y contornos que light-dark() no cubre. */
+[data-theme="dark"] {
+  --av-oscuro: 1;
+}
+
 /* Las figuras del banner apenas se insinúan en claro; en oscuro pueden verse más. */
 [data-theme="light"] {
-  --av-banner-opacidad: 0.07;
+  --av-banner-opacidad: 0.16;
+  --av-velo-claro: 55%;
 } 
 
 html,

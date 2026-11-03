@@ -22,6 +22,7 @@ import { MODELO_LOCAL } from '../../src/js/core/ia-local.ts';
 import { codificar } from '../../src/js/core/semantica.ts';
 import { cargarConsultas, cargarEmojis, Vectores } from '../bench/datos.ts';
 import { ajustar, type Receta } from './aplanado-ajuste.ts';
+import { catalogoServido } from './catalogo-emojis.ts';
 import { frasesDe, nombreDe, palabrasDe, vectorDeFrases } from './corpus-emojis.ts';
 
 const ROOT = join(import.meta.dirname!, '..', '..');
@@ -62,6 +63,7 @@ if (faltan.length) {
 
 // Corpus de consulta en el navegador: su vector es el centroide de frases cortas y viaja aplanado con la transformación.
 const emojis = await cargarEmojis();
+writeFileSync(join(ROOT, 'assets', 'ia', 'emojis-catalogo.json'), JSON.stringify(catalogoServido(emojis)));
 const local = new Vectores();
 const frases: Float32Array[][] = [];
 for (const e of emojis) frases.push(await local.de(frasesDe(e)));

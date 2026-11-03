@@ -24,7 +24,12 @@ const hashes = (JSON.parse(readFileSync(join(ROOT, 'dist', 'cdn', 'asset-hashes.
 const SHA = /is-webcomponents\/([0-9a-f]{40})\//.exec(deno.imports['@iswc/component-schemas'] ?? '')?.[1];
 if (!SHA) throw new Error('paginas: no encuentro el SHA del kit en deno.json');
 const KIT = `https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@${SHA}/dist/cdn/core/loader.min.js`;
-const FUENTES = 'https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Orbitron:wght@500;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap';
+// Fuentes propias (`deno task fuentes`): @font-face en línea (sin hoja que bloquee ni orígenes ajenos) y precarga del texto base.
+const CARAS = JSON.parse(readFileSync(join(ROOT, 'assets', 'fonts', 'fuentes.json'), 'utf8')) as { familia: string; peso: string; estilo: string; rango: string; archivo: string }[];
+const FUENTES = [
+  '<link rel="preload" href="assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>',
+  `<style>${CARAS.map((c) => `@font-face{font-family:'${c.familia}';font-style:${c.estilo};font-weight:${c.peso};font-display:swap;src:url(assets/fonts/${c.archivo}) format('woff2');unicode-range:${c.rango}}`).join('')}</style>`,
+].join('\n');
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 /** Recurso del build con su hash de contenido (relativo a la raíz: lo resuelve `<base href>`). */
@@ -47,7 +52,7 @@ function documento(o: Opciones): string {
 <meta property="og:title" content="${esc(o.titulo)}">
 <meta property="og:description" content="${esc(o.descripcion)}">
 <meta property="og:url" content="${o.canonical}">
-<meta property="og:image" content="${URL_PUBLICA}assets/img/thumb.png">
+<meta property="og:image" content="${URL_PUBLICA}assets/img/thumb.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(o.titulo)}">
 <meta name="twitter:description" content="${esc(o.descripcion)}">`
@@ -67,12 +72,11 @@ function documento(o: Opciones): string {
 <script type="application/ld+json">${JSON.stringify(o.jsonLd).replace(/</g, '\\u003c')}</script>` : ''}
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <link rel="alternate icon" href="assets/img/tabicon_256x256.png">
-<meta name="theme-color" content="#0a6cff">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#14b8a6">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://api-avatar.jeffaporta.workers.dev" crossorigin>
-<link rel="stylesheet" href="${FUENTES}">
+${FUENTES}
 <script type="importmap">{ "imports": { "@avatar/vendor": "${deno.avatar.vendor}" } }</script>
 <script src="${recurso('boot.js')}"></script>${o.explorador ? '' : `
 <link rel="stylesheet" href="${recurso('styles/app.css')}">`}

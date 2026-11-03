@@ -1,0 +1,59 @@
+{
+ "original": {
+  "w": 851,
+  "h": 853
+ },
+ "escala": 1,
+ "metodo": "fondo+sam",
+ "piezas": [
+  {
+   "pieza": "fondo.png",
+   "x": 0,
+   "y": 0,
+   "w": 851,
+   "h": 853,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "sam/tarjeta-fondo.png",
+   "x": 199,
+   "y": 284,
+   "w": 326,
+   "h": 361,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.962
+  },
+  {
+   "pieza": "sam/tarjeta-media.png",
+   "x": 258,
+   "y": 206,
+   "w": 227,
+   "h": 365,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.944
+  },
+  {
+   "pieza": "sam/tarjeta-frente.png",
+   "x": 312,
+   "y": 202,
+   "w": 344,
+   "h": 326,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.982
+  },
+  {
+   "pieza": "sam/diana.png",
+   "x": 475,
+   "y": 439,
+   "w": 214,
+   "h": 216,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.991
+  }
+ ]
+}

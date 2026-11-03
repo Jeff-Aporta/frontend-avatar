@@ -1,7 +1,8 @@
 /**
  * <av-caracteristicas> — sección de la landing con título y una rejilla de características (ícono, título, texto).
  * Sirve para Features, Productivity y Technology del React original: `variante="tarjetas"` las pinta en tarjetas con
- * velo de la paleta; `variante="iconos"` como en el original, con el ícono grande centrado y sin caja.
+ * velo de la paleta; `variante="iconos"` como en el original, con el ícono grande centrado y sin caja. Con `escena`, un
+ * collage de la identidad (`av-escena`) acompaña a la rejilla del `lado` indicado; en celular va arriba.
  */
 import { crearComponente, define, html } from '../../../src/js/base/componente.js';
 import type { AvCaracteristicasProps } from '../../../src/js/consts/schemas/inicio.schemas.js';
@@ -9,10 +10,12 @@ import type { AvCaracteristicasProps } from '../../../src/js/consts/schemas/inic
 const AvCaracteristicas = crearComponente<AvCaracteristicasProps>(
   import.meta.url,
   'av-caracteristicas',
-  { titulo: 'Características principales', subtitulo: '', items: [], variante: 'tarjetas' },
+  { titulo: 'Características principales', subtitulo: '', items: [], variante: 'tarjetas', escena: '', lado: 'izquierda' },
   (root, props) => {
     root.append(html`
-      <section class="seccion" part="seccion" data-variante=${props.variante} aria-labelledby="t">
+      <section class="seccion" part="seccion" data-variante=${props.variante} data-escena=${props.escena ? props.lado : 'no'} aria-labelledby="t">
+        ${props.escena ? html`<av-escena class="ilustracion" part="ilustracion" escena=${props.escena}></av-escena>` : null}
+        <div class="cuerpo">
         <iswc-heading level="2" id="t" class="titulo">${props.titulo}</iswc-heading>
         ${props.subtitulo ? html`<p class="subtitulo">${props.subtitulo}</p>` : null}
         <div class="rejilla" part="rejilla">
@@ -23,6 +26,7 @@ const AvCaracteristicas = crearComponente<AvCaracteristicasProps>(
               <p class="texto">${c.texto}</p>
             </article>
           `)}
+        </div>
         </div>
       </section>
     `);

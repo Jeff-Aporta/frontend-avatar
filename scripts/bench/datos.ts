@@ -5,16 +5,14 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { env, pipeline } from 'npm:@huggingface/transformers@3.7.6';
-import { CATEGORIAS_EMOJI } from '../../src/js/chat/emojis.ts';
 import { MODELO_LOCAL } from '../../src/js/core/ia-local.ts';
+import { armarCatalogo, type EmojiCatalogo, type Emojibase } from '../build/catalogo-emojis.ts';
 
 export const ROOT = join(import.meta.dirname!, '..', '..');
 const BENCH = join(ROOT, '.tmp', 'bench');
 env.cacheDir = join(ROOT, '.tmp', 'modelos');
 
 export type Consulta = { q: string; idioma: 'es' | 'en'; tipo: string; parte: 'ajuste' | 'prueba'; muy: string[]; algo: string[] };
-export type EmojiDatos = { id: string; k: string; grupo: string; es: string; en: string; tagsEs: string[]; tagsEn: string[] };
-type Emojibase = { emoji: string; label: string; tags?: string[] };
 
 const sinVs = (e: string): string => e.replace('️', '');
 
@@ -25,23 +23,17 @@ export function cargarConsultas(): Consulta[] {
   return crudo.map((c) => ({ ...c, muy: partir(c.muy), algo: partir(c.algo) }));
 }
 
-async function nombres(idioma: string): Promise<Map<string, Emojibase>> {
+async function nombres(idioma: string): Promise<Emojibase[]> {
   mkdirSync(BENCH, { recursive: true });
   const ruta = join(BENCH, `emojibase-18-${idioma}.json`);
   if (!existsSync(ruta)) writeFileSync(ruta, await (await fetch(`https://cdn.jsdelivr.net/npm/emojibase-data@18.0.0/${idioma}/data.json`)).text());
-  const lista = JSON.parse(readFileSync(ruta, 'utf8')) as Emojibase[];
-  return new Map(lista.map((e) => [sinVs(e.emoji), e]));
+  return JSON.parse(readFileSync(ruta, 'utf8')) as Emojibase[];
 }
 
-/** Catálogo con todo lo que se puede embeber o comparar por palabra. */
-export async function cargarEmojis(): Promise<EmojiDatos[]> {
+/** Catálogo completo con todo lo que se puede embeber o comparar por palabra. */
+export async function cargarEmojis(): Promise<EmojiCatalogo[]> {
   const [es, en] = await Promise.all([nombres('es'), nombres('en')]);
-  return CATEGORIAS_EMOJI.flatMap((c) => c.emojis.map((e) => {
-    const clave = sinVs(e.e);
-    const a = es.get(clave);
-    const b = en.get(clave);
-    return { id: e.e, k: e.k, grupo: c.nombre, es: a?.label ?? '', en: b?.label ?? '', tagsEs: a?.tags ?? [], tagsEn: b?.tags ?? [] };
-  }));
+  return armarCatalogo(es, en);
 }
 
 type Extractor = (t: string, o: object) => Promise<{ data: Float32Array }>;
@@ -68,6 +60,7 @@ export class Vectores {
         const r = await this.#extraer(t, { pooling: 'mean', normalize: true });
         this.#mapa.set(t, Float32Array.from(r.data));
         this.#nuevos++;
+        if (this.#nuevos >= 1000) this.guardar();
       }
     }
     return textos.map((t) => this.#mapa.get(t)!);

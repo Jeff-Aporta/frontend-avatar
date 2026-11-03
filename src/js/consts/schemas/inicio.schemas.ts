@@ -33,6 +33,9 @@ export const AvCaracteristicasPropsSchema = z.object({
   subtitulo: z.string().default(''),
   items: z.array(CaracteristicaSchema).default([]),
   variante: z.enum(['tarjetas', 'iconos']).default('tarjetas'),
+  /** Collage o escena de `<av-escena>` junto a la rejilla ('' = sin ilustración) y de qué lado va. */
+  escena: z.string().default(''),
+  lado: z.enum(['izquierda', 'derecha']).default('izquierda'),
 });
 export type AvCaracteristicasProps = z.infer<typeof AvCaracteristicasPropsSchema>;
 

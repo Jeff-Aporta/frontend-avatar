@@ -1,0 +1,81 @@
+{
+ "original": {
+  "w": 851,
+  "h": 853
+ },
+ "escala": 0.8800000000000003,
+ "piezas": [
+  {
+   "pieza": "gradient-background.png",
+   "x": 3,
+   "y": 6,
+   "w": 844,
+   "h": 845,
+   "escala": 0.88,
+   "error": 8
+  },
+  {
+   "pieza": "illegible/illegible-1.png",
+   "x": 357,
+   "y": 239,
+   "w": 245,
+   "h": 65,
+   "escala": 0.88,
+   "error": 25
+  },
+  {
+   "pieza": "illegible/illegible-2.png",
+   "x": 352,
+   "y": 383,
+   "w": 241,
+   "h": 105,
+   "escala": 0.895,
+   "error": 14
+  },
+  {
+   "pieza": "line-graph.png",
+   "x": 247,
+   "y": 541,
+   "w": 239,
+   "h": 72,
+   "escala": 0.895,
+   "error": 37
+  },
+  {
+   "pieza": "target-circle.png",
+   "x": 479,
+   "y": 443,
+   "w": 205,
+   "h": 207,
+   "escala": 0.88,
+   "error": 30
+  },
+  {
+   "pieza": "teal-square-icon/teal-square-icon-1.png",
+   "x": 316,
+   "y": 206,
+   "w": 335,
+   "h": 317,
+   "escala": 0.895,
+   "error": 9
+  },
+  {
+   "pieza": "teal-square-icon/teal-square-icon-2.png",
+   "x": 203,
+   "y": 288,
+   "w": 317,
+   "h": 352,
+   "escala": 0.865,
+   "error": 29
+  },
+  {
+   "pieza": "teal-square-icon/teal-square-icon-3.png",
+   "x": 262,
+   "y": 210,
+   "w": 218,
+   "h": 356,
+   "escala": 0.88,
+   "error": 13
+  }
+ ]
+}

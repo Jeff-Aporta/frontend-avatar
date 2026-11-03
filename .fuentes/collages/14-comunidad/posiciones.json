@@ -1,0 +1,99 @@
+{
+ "original": {
+  "w": 790,
+  "h": 739
+ },
+ "escala": 1,
+ "metodo": "fondo+sam",
+ "piezas": [
+  {
+   "pieza": "fondo.png",
+   "x": 0,
+   "y": 0,
+   "w": 790,
+   "h": 739,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "sam/persona-1.png",
+   "x": 161,
+   "y": 219,
+   "w": 160,
+   "h": 240,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.904
+  },
+  {
+   "pieza": "sam/persona-2.png",
+   "x": 450,
+   "y": 222,
+   "w": 158,
+   "h": 236,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.952
+  },
+  {
+   "pieza": "sam/persona-3.png",
+   "x": 436,
+   "y": 354,
+   "w": 148,
+   "h": 219,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.933
+  },
+  {
+   "pieza": "sam/persona-4.png",
+   "x": 186,
+   "y": 354,
+   "w": 149,
+   "h": 217,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.98
+  },
+  {
+   "pieza": "sam/persona-centro.png",
+   "x": 296,
+   "y": 182,
+   "w": 153,
+   "h": 195,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.956
+  },
+  {
+   "pieza": "sam/persona-abajo.png",
+   "x": 296,
+   "y": 384,
+   "w": 153,
+   "h": 213,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.903
+  },
+  {
+   "pieza": "sam/rombo-rosa.png",
+   "x": 88,
+   "y": 88,
+   "w": 121,
+   "h": 115,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.02
+  },
+  {
+   "pieza": "sam/rombo-morado.png",
+   "x": 562,
+   "y": 582,
+   "w": 107,
+   "h": 107,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.998
+  }
+ ]
+}

@@ -77,10 +77,11 @@ iswc-heading {
 .grupo {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  grid-auto-rows: 1.9em;
+  grid-auto-rows: 1.5em;
   align-content: start;
   gap: 0;
-  min-block-size: calc(var(--filas, 1) * 1.9em);
+  min-block-size: calc(var(--filas, 1) * 1.5em);
+  margin-top: 1.25em;
   margin-bottom: t.esp(1);
 }
 
@@ -90,7 +91,7 @@ iswc-heading {
   width: 100%;
   height: 100%;
   padding: 0;
-  font-size: 1.45em;
+  font-size: 1.05em;
   transition: transform 0.12s ease;
 
   &:hover {

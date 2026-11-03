@@ -21,16 +21,14 @@
     "@browserbasehq/stagehand": "npm:@browserbasehq/stagehand@4.1.0",
     "@types/node": "npm:@types/node@^22.20.5",
     "esbuild": "npm:esbuild@0.28.1",
-    "jsdom": "npm:jsdom@29.1.1",
     "zod": "npm:zod@4.6.7",
     "sass": "npm:sass@^1.105.0",
     "@std/http/file-server": "jsr:@std/http@1/file-server",
-    "@iswc/component-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/94b6f8c00482e997c725521701c4bd14edfc64dd/src/previews/_kit/schemas/component.schemas.ts",
-    "@iswc/loader-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/94b6f8c00482e997c725521701c4bd14edfc64dd/src/cdn/schemas/loader.schemas.ts",
+    "@iswc/component-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/0674814b6b7bc983046a8fb7bea78cde721ca1e9/src/previews/_kit/schemas/component.schemas.ts",
+    "@iswc/loader-schemas": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/0674814b6b7bc983046a8fb7bea78cde721ca1e9/src/cdn/schemas/loader.schemas.ts",
     "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/src/vendor.ts",
-    "@Jeff-Aporta/DER/": "https://cdn.jsdelivr.net/gh/Jeff-Aporta/DER@2c2ebdc0ed09290aca3264bbfe727477cd677d9c/",
-    "@Jeff-Aporta/wc-base/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/94b6f8c00482e997c725521701c4bd14edfc64dd/src/vendor-distributions/shared/",
-    "@Jeff-Aporta/wc-diagrams/": "https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/94b6f8c00482e997c725521701c4bd14edfc64dd/src/components/diagrams/schemas/"
+    "@Jeff-Aporta/DER/": "https://cdn.jsdelivr.net/gh/Jeff-Aporta/DER@fd2c5ac35a7f2de7f4d1d73d6adc239bb4f44e3e/",
+    "sharp": "npm:sharp@0.34.4"
   },
   "tasks": {
     "build:scss": "deno run -A scripts/build/build-scss.mjs",
@@ -49,7 +47,10 @@
     "test:e2e": "deno run -A scripts/gate/e2e/run.ts",
     "test:all": "deno run -A scripts/gate/run-test-all.mjs",
     "test:all:halt": "deno run -A scripts/gate/run-test-all.mjs --halt",
-    "sync:entregable": "deno run -A scripts/gate/sync-to-entregable.mjs"
+    "sync:entregable": "deno run -A scripts/gate/sync-to-entregable.mjs",
+    "collages": "deno run -A scripts/assets/collages.ts",
+    "marca": "deno run -A scripts/assets/marca.ts",
+    "fuentes": "deno run -A scripts/assets/fuentes.ts"
   },
   "avatar": {
     "api": "https://api-avatar.jeffaporta.workers.dev/api",

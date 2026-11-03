@@ -1,15 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Favicon de Avatar: el mismo hexágono de neón de <av-logo>, con los colores de la paleta por defecto (turquesa). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="11 9 42 48">
+  <!-- Marca de Avatar: la «A» de cinta. Misma geometría que <av-logo> y el favicon; turquesa (las vistas la giran de tono por paleta). -->
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0a6cff"/>
-      <stop offset="1" stop-color="#14d6c2"/>
+    <linearGradient id="izq" x1="0" y1="1" x2="0.4" y2="0">
+      <stop offset="0" stop-color="#0fb3a6"/>
+      <stop offset="1" stop-color="#5eeadc"/>
+    </linearGradient>
+    <linearGradient id="der" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#22d3c5"/>
+      <stop offset="1" stop-color="#0b8d86"/>
+    </linearGradient>
+    <linearGradient id="plie" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0c5f63"/>
+      <stop offset="1" stop-color="#083c44"/>
     </linearGradient>
   </defs>
-  <path d="M32 4 56 18v28L32 60 8 46V18Z" fill="url(#g)"/>
-  <path d="M32 7.5 53 19.8v24.4L32 56.5 11 44.2V19.8Z" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.2"/>
-  <path d="M21 45 32 17l11 28M25.5 36h13" fill="none" stroke="#fff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="32" cy="36" r="2.6" fill="#14d6c2" stroke="#fff" stroke-width="1.6"/>
-  <ellipse cx="32" cy="32" rx="27" ry="9.5" transform="rotate(-24 32 32)" fill="none" stroke="#bff6ef" stroke-width="1.6" stroke-dasharray="3 3.5"/>
-  <circle cx="54.5" cy="22" r="3" fill="#fff"/>
+  <path d="M17 51 31 15" stroke="url(#izq)" stroke-width="11" stroke-linecap="round" fill="none"/>
+  <path d="M20.6 47.5C25.5 40.5 33 37.2 41.6 38.4L38.6 30.6C30.4 30.4 24.4 35 21.4 41Z" fill="url(#plie)"/>
+  <path d="M33 15 47 51" stroke="url(#der)" stroke-width="11" stroke-linecap="round" fill="none"/>
 </svg>

@@ -1,0 +1,69 @@
+{
+ "original": {
+  "w": 853,
+  "h": 854
+ },
+ "escala": 1,
+ "metodo": "fondo+sam",
+ "piezas": [
+  {
+   "pieza": "fondo.png",
+   "x": 0,
+   "y": 0,
+   "w": 853,
+   "h": 854,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "sam/persona-sentada.png",
+   "x": 476,
+   "y": 113,
+   "w": 208,
+   "h": 314,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.966
+  },
+  {
+   "pieza": "sam/tablero-barras.png",
+   "x": 215,
+   "y": 136,
+   "w": 235,
+   "h": 166,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.004
+  },
+  {
+   "pieza": "sam/torta.png",
+   "x": 480,
+   "y": 342,
+   "w": 117,
+   "h": 118,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.015
+  },
+  {
+   "pieza": "sam/persona-izq.png",
+   "x": 114,
+   "y": 352,
+   "w": 193,
+   "h": 375,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.899
+  },
+  {
+   "pieza": "sam/persona-agachada.png",
+   "x": 568,
+   "y": 452,
+   "w": 181,
+   "h": 277,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.902
+  }
+ ]
+}

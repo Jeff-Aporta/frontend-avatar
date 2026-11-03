@@ -92,7 +92,7 @@ iswc-session-menu[hidden] {
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 
-  > * {
+  > :not([slot="pie"]) {
     box-sizing: border-box;
     min-block-size: 100%;
   }
@@ -169,7 +169,7 @@ iswc-tenant-selector {
   margin: t.esp(5);
 }
 
-/* Pie: marca, lema y los selectores de paleta y tema. */
+/* Mapa del sitio (diálogo). */
 .pie-mapa {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(9em, 1fr));
@@ -177,25 +177,69 @@ iswc-tenant-selector {
   font-size: 0.9em;
 }
 
+/* Pie en rejilla alineada arriba: marca | columnas de enlaces | pruebas | tema. Cada columna apila sus enlaces
+   desde arriba (sin estirarse al alto de la más larga) y las listas largas (Demos) se reparten en dos columnas. */
 .pie {
   display: grid;
-  grid-template-columns: minmax(12em, 1.4fr) repeat(auto-fit, minmax(10em, 1fr));
-  gap: t.esp(4) t.esp(6);
-  padding: t.esp(5);
+  grid-template-columns: minmax(13em, 1.3fr) repeat(auto-fill, minmax(10em, 1fr));
+  align-items: start;
+  gap: t.esp(6) t.esp(8);
+  padding: t.esp(8) var(--av-gutter, t.esp(5)) t.esp(6);
   border-top: 1px solid var(--iswc-border-soft);
   font-size: 0.92em;
 }
 
 .pie-col {
-  display: grid;
-  gap: t.esp(1);
-  justify-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: t.esp(2);
   min-width: 0;
 
   a,
-  .pie-accion {
-    color: inherit;
+  .pie-accion,
+  av-link {
+    color: color-mix(in srgb, var(--iswc-text) 78%, transparent);
+    text-decoration: none;
+    line-height: 1.35;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--iswc-brand-text);
+    text-decoration: underline;
     text-underline-offset: 0.2em;
+  }
+}
+
+/* Marca: logo arriba y el lema debajo, en una sola columna fija. */
+.pie-col-marca {
+  gap: t.esp(3);
+}
+
+.pie-lema {
+  max-width: 16em;
+  color: color-mix(in srgb, var(--iswc-text) 70%, transparent);
+  line-height: 1.4;
+}
+
+/* Listas largas: dos columnas de texto dentro de una celda doble. */
+.pie-col-larga {
+  grid-column: span 2;
+  display: block;
+  columns: 2;
+  column-gap: t.esp(6);
+
+  .pie-titulo {
+    display: block;
+    column-span: all;
+    margin-bottom: t.esp(2);
+  }
+
+  a {
+    display: block;
+    break-inside: avoid;
+    padding-block: 0.15em;
   }
 }
 
@@ -203,7 +247,7 @@ iswc-tenant-selector {
   height: auto;
   min-height: 0;
   padding: 0;
-  text-decoration: underline;
+  color: inherit;
 }
 
 .pie-titulo {
@@ -221,7 +265,25 @@ iswc-tenant-selector {
 
 .pie-tema {
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: t.esp(2);
+}
+
+/* Celular: la lista larga vuelve a una columna. */
+@media (max-width: 40em) {
+  .pie-col-larga {
+    grid-column: auto;
+    columns: 1;
+  }
+}
+
+/* Táctil: enlaces del pie y la marca con 44 px de área (única medida en px a propósito). */
+@media (pointer: coarse) {
+  .pie-col a,
+  .marca {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+  }
 }

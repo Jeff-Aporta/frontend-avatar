@@ -1,0 +1,81 @@
+{
+ "original": {
+  "w": 814,
+  "h": 849
+ },
+ "escala": 0.8800000000000003,
+ "piezas": [
+  {
+   "pieza": "a.png",
+   "x": 313,
+   "y": 313,
+   "w": 192,
+   "h": 156,
+   "escala": 0.895,
+   "error": 7
+  },
+  {
+   "pieza": "bar-chart/bar-chart-1.png",
+   "x": 56,
+   "y": 134,
+   "w": 311,
+   "h": 271,
+   "escala": 0.895,
+   "error": 10
+  },
+  {
+   "pieza": "bar-chart/bar-chart-2.png",
+   "x": 450,
+   "y": 453,
+   "w": 319,
+   "h": 272,
+   "escala": 0.895,
+   "error": 6
+  },
+  {
+   "pieza": "bar-chart/bar-chart-3.png",
+   "x": 189,
+   "y": 214,
+   "w": 66,
+   "h": 109,
+   "escala": 0.85,
+   "error": 37
+  },
+  {
+   "pieza": "central-logo.png",
+   "x": 250,
+   "y": 264,
+   "w": 319,
+   "h": 322,
+   "escala": 0.91,
+   "error": 17
+  },
+  {
+   "pieza": "gear-icon.png",
+   "x": 423,
+   "y": 649,
+   "w": 127,
+   "h": 128,
+   "escala": 0.895,
+   "error": 15
+  },
+  {
+   "pieza": "play-button.png",
+   "x": 171,
+   "y": 586,
+   "w": 70,
+   "h": 74,
+   "escala": 0.88,
+   "error": 16
+  },
+  {
+   "pieza": "upward-arrow.png",
+   "x": 509,
+   "y": 492,
+   "w": 222,
+   "h": 153,
+   "escala": 0.88,
+   "error": 30
+  }
+ ]
+}

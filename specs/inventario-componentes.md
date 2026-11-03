@@ -82,7 +82,7 @@ Generado de los `.json` de demos. Total: 84.
 | `av-solicitud-form` | Nueva solicitud. | abierto | `view/rrhh/components/av-solicitud-form.json` |
 | `av-solicitudes` | Solicitudes por estado. | filtro, compacto | `view/rrhh/components/av-solicitudes.json` |
 | `av-app` | Shell de la app: barra, navegación por permisos, sesión y la vista activa. | vista | `src/js/components/av/av-app.json` |
-| `av-logo` | Logo de Avatar: hexágono de neón con los colores de la paleta activa. | wordmark, animado | `src/js/components/av/av-logo.json` |
+| `av-logo` | Logo de Avatar: la «A» de cinta de la identidad, con los colores de la paleta activa. | wordmark, animado | `src/js/components/av/av-logo.json` |
 | `av-perfil-selector` | Cambia de perfil de prueba con PIN. | activo, perfiles | `src/js/components/av/av-perfil-selector.json` |
 | `av-perfiles-lista` | Perfiles de prueba con su PIN público; el clic entra. |  | `src/js/components/av/av-perfiles-lista.json` |
 | `av-perfiles-tabla` | Usuarios, nombres, roles y PIN de prueba. | abierto | `src/js/components/av/av-perfiles-tabla.json` |

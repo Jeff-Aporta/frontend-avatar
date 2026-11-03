@@ -20,7 +20,8 @@ const MINIMO_BUSQUEDA = 0.5;
 const CERCA_DEL_MEJOR = 0.9;
 const MINIMO_SIMILAR = 0.55;
 const TTL_MS = 60_000;
-const CACHE = new Map<string, { hasta: number; ids: string[] | null }>();
+// guarda la promesa, no el resultado: dos búsquedas iguales a la vez comparten una sola petición
+const CACHE = new Map<string, { hasta: number; ids: Promise<string[] | null> }>();
 
 const indexada = (entidad: string): boolean => (ENTIDADES_IA as readonly string[]).includes(entidad);
 
@@ -32,10 +33,10 @@ export function idsFuertes(hallazgos: Hallazgo[], entidad: string, minimo: numbe
   return propios.filter((h) => (h.score as number) >= corte).sort((a, b) => (b.score as number) - (a.score as number)).map((h) => h.id);
 }
 
-async function enCache(clave: string, pedir: () => Promise<string[] | null>): Promise<string[] | null> {
+function enCache(clave: string, pedir: () => Promise<string[] | null>): Promise<string[] | null> {
   const hit = CACHE.get(clave);
   if (hit && hit.hasta > Date.now()) return hit.ids;
-  const ids = await pedir().catch(() => null);
+  const ids = pedir().catch(() => null);
   CACHE.set(clave, { hasta: Date.now() + TTL_MS, ids });
   return ids;
 }

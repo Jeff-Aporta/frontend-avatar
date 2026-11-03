@@ -1,0 +1,109 @@
+{
+ "original": {
+  "w": 632,
+  "h": 633
+ },
+ "escala": 1,
+ "metodo": "fondo+sam",
+ "piezas": [
+  {
+   "pieza": "fondo.png",
+   "x": 0,
+   "y": 0,
+   "w": 632,
+   "h": 633,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "sam/circulo-grande.png",
+   "x": 432,
+   "y": 78,
+   "w": 157,
+   "h": 155,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.997
+  },
+  {
+   "pieza": "sam/circulo-oscuro.png",
+   "x": 278,
+   "y": 58,
+   "w": 65,
+   "h": 65,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.994
+  },
+  {
+   "pieza": "sam/circulito.png",
+   "x": 178,
+   "y": 93,
+   "w": 39,
+   "h": 39,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.989
+  },
+  {
+   "pieza": "sam/rombo-izq.png",
+   "x": 18,
+   "y": 258,
+   "w": 121,
+   "h": 119,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.989
+  },
+  {
+   "pieza": "sam/rombo-der.png",
+   "x": 528,
+   "y": 248,
+   "w": 81,
+   "h": 81,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.98
+  },
+  {
+   "pieza": "sam/triangulo.png",
+   "x": 448,
+   "y": 448,
+   "w": 135,
+   "h": 115,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.958
+  },
+  {
+   "pieza": "sam/diana.png",
+   "x": 348,
+   "y": 358,
+   "w": 135,
+   "h": 129,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.895
+  },
+  {
+   "pieza": "sam/barras.png",
+   "x": 134,
+   "y": 224,
+   "w": 163,
+   "h": 153,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.97
+  },
+  {
+   "pieza": "sam/montana.png",
+   "x": 334,
+   "y": 224,
+   "w": 143,
+   "h": 119,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.965
+  }
+ ]
+}

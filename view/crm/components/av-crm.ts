@@ -97,6 +97,7 @@ const AvCrm = crearComponente<AvCrmProps>(import.meta.url, 'av-crm', { id: null,
       onav-cliente-form-cerrar=${() => { $('form').props = { abierto: false }; if (props.id) ir('crm'); }}
       onav-cliente-form-error=${(e: Event) => avisar((e as CustomEvent<{ mensaje: string }>).detail.mensaje, 'warning')}>
       <iswc-page-header id="cabecera">
+        <av-escena slot="ilustracion" escena="crm"></av-escena>
         <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${() => (h.props = { version: (props.version ?? 0) + 1 })}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         ${puedeEscribir ? html`<iswc-button variant="compact" slot="acciones" color="brand" oniswc-click=${() => abrir(null)}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo cliente</iswc-button>` : null}
       </iswc-page-header>
@@ -111,13 +112,16 @@ const AvCrm = crearComponente<AvCrmProps>(import.meta.url, 'av-crm', { id: null,
   }
   $('grid').props = { ...tablaClientes(), cargando: true };
   void (async () => {
-    try {
-      miembros = filas(MiembroCrmSchema, await controller('miembros').query({ where: { iempresa }, include: { usuario: true }, pageSize: 200 }));
-    } catch {
-      miembros = [];
-    }
-    $('form').props = { miembros };
-    await cargar();
+    // miembros (para el formulario) y clientes no dependen entre sí: en paralelo
+    const cargarMiembros = async () => {
+      try {
+        miembros = filas(MiembroCrmSchema, await controller('miembros').query({ where: { iempresa }, include: { usuario: true }, pageSize: 200 }));
+      } catch {
+        miembros = [];
+      }
+      $('form').props = { miembros };
+    };
+    await Promise.all([cargarMiembros(), cargar()]);
     if (props.id) {
       const c = clientes.find((x) => x.icliente === Number(props.id));
       if (c) abrir(c);

@@ -1,6 +1,6 @@
-import{crearComponente as n,define as r,emitir as l,html as d}from"../../../js/base/componente.js?v=49yoqc";import{LEMA as c}from"../utils/landing.js?v=h4f8yf";const p=n(import.meta.url,"av-hero",{sesion:!1},(o,i,e)=>{const a=s=>l(e,"av-inicio-ir",{vista:s}),t=s=>new URL(s,document.baseURI).href;o.append(d`
+import{crearComponente as n,define as r,emitir as l,html as d}from"../../../js/base/componente.js?v=ykdqqm";import{LEMA as c}from"../utils/landing.js?v=tf2alu";const p=n(import.meta.url,"av-hero",{sesion:!1},(o,i,e)=>{const a=s=>l(e,"av-inicio-ir",{vista:s}),t=s=>new URL(s,document.baseURI).href;o.append(d`
     <section class="hero" part="hero" aria-labelledby="titulo">
-      <img class="banner" part="banner" src=${t("assets/img/bgbanner.svg")} alt="" aria-hidden="true">
+      <img class="banner" part="banner" src=${t("assets/img/bgbanner.svg")} alt="" aria-hidden="true" fetchpriority="high" decoding="async">
       <div class="velo" aria-hidden="true"></div>
       <div class="contenido">
         <div class="texto">
@@ -15,7 +15,7 @@ import{crearComponente as n,define as r,emitir as l,html as d}from"../../../js/b
           </div>
           <iswc-button variant="text compact" color="brand" class="enlace" oniswc-click=${()=>a(i.sesion?"panel":"acceso")}>${c.enlace} →</iswc-button>
         </div>
-        <av-escena class="ilustracion" part="ilustracion" escena="bienvenida" etiqueta="Equipo celebrando con Avatar"></av-escena>
+        <av-escena class="ilustracion" part="ilustracion" escena="crecimiento" etiqueta="La A de Avatar rodeada por su anillo, métricas en alza y un equipo validado"></av-escena>
       </div>
     </section>
   `)});r("av-hero",p);

@@ -1,0 +1,45 @@
+{
+ "original": {
+  "w": 695,
+  "h": 770
+ },
+ "escala": 0.7100000000000002,
+ "piezas": [
+  {
+   "pieza": "illegible/illegible-1.png",
+   "x": 171,
+   "y": 117,
+   "w": 405,
+   "h": 261,
+   "escala": 0.725,
+   "error": 107
+  },
+  {
+   "pieza": "illegible/illegible-2.png",
+   "x": 360,
+   "y": 501,
+   "w": 143,
+   "h": 145,
+   "escala": 0.68,
+   "error": 146
+  },
+  {
+   "pieza": "person-icon.png",
+   "x": 391,
+   "y": 286,
+   "w": 84,
+   "h": 81,
+   "escala": 0.74,
+   "error": 34
+  },
+  {
+   "pieza": "white-background.png",
+   "x": 0,
+   "y": 48,
+   "w": 682,
+   "h": 682,
+   "escala": 0.71,
+   "error": 100
+  }
+ ]
+}

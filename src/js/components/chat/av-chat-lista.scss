@@ -49,6 +49,8 @@ iswc-heading {
 .titulo {
   flex: 1;
   margin: 0;
+  /* Contraste: el título usa el texto de marca, legible en claro y oscuro. */
+  color: var(--iswc-brand-text);
   font-family: var(--av-font-marca, inherit);
   font-size: 1.15em;
   font-weight: 700;

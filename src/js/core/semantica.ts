@@ -121,7 +121,19 @@ function parecido(q: string, w: string): number {
   return d > tope ? 0 : 1 - 0.2 * d;
 }
 
-const mejor = (q: string, palabras: string[]): number => palabras.reduce((m, w) => Math.max(m, parecido(q, w)), 0);
+/** El vocabulario se repite entre ítems: cada par se compara una vez. Con tope, para que escribir no lo haga crecer sin fin. */
+const parecidos = new Map<string, number>();
+function parecidoRecordado(q: string, w: string): number {
+  const clave = `${q}\0${w}`;
+  const ya = parecidos.get(clave);
+  if (ya !== undefined) return ya;
+  if (parecidos.size > 200_000) parecidos.clear();
+  const p = parecido(q, w);
+  parecidos.set(clave, p);
+  return p;
+}
+
+const mejor = (q: string, palabras: string[]): number => palabras.reduce((m, w) => Math.max(m, parecidoRecordado(q, w)), 0);
 
 /** Puntaje léxico 0..1 que aguanta errores: `clave` pesa 1 y el resto `pesoTexto`. */
 export function lexicoTolerante(consulta: string[], clave: string[], texto: string[], pesoTexto: number): number {
@@ -215,10 +227,13 @@ const aplanados = new Map<string, Promise<CorpusAplanado>>();
 /** Carga (una vez) un corpus aplanado de `assets/ia/<nombre>.json` relativo a la raíz del sitio. */
 export function cargarAplanado<M = Record<string, unknown>>(nombre: string, base: string): Promise<CorpusAplanado<M>> {
   if (!aplanados.has(nombre)) {
-    aplanados.set(nombre, fetch(new URL(`assets/ia/${nombre}.json`, base)).then((r) => {
+    aplanados.set(nombre, fetch(new URL(`assets/ia/${nombre}.json`, base), { signal: AbortSignal.timeout(20000) }).then((r) => {
       if (!r.ok) throw new Error(`corpus ${nombre}: ${r.status}`);
       return r.json();
-    }).then((j: CorpusAplanadoJson) => abrirCorpus(j)));
+    }).then((j: CorpusAplanadoJson) => abrirCorpus(j)).catch((e) => {
+      aplanados.delete(nombre); // falla o timeout: el siguiente intento vuelve a pedirlo
+      throw e;
+    }));
   }
   return aplanados.get(nombre)! as Promise<CorpusAplanado<M>>;
 }
@@ -226,10 +241,13 @@ export function cargarAplanado<M = Record<string, unknown>>(nombre: string, base
 /** Carga (una vez) un corpus horneado de `assets/ia/<nombre>.json` relativo a la raíz del sitio. */
 export function cargarCorpus<M = Record<string, unknown>>(nombre: string, base: string): Promise<Corpus<M>> {
   if (!corpora.has(nombre)) {
-    corpora.set(nombre, fetch(new URL(`assets/ia/${nombre}.json`, base)).then((r) => {
+    corpora.set(nombre, fetch(new URL(`assets/ia/${nombre}.json`, base), { signal: AbortSignal.timeout(20000) }).then((r) => {
       if (!r.ok) throw new Error(`corpus ${nombre}: ${r.status}`);
       return r.json();
-    }).then((c: CorpusHorneado) => decodificar(c)));
+    }).then((c: CorpusHorneado) => decodificar(c)).catch((e) => {
+      corpora.delete(nombre); // falla o timeout: el siguiente intento vuelve a pedirlo
+      throw e;
+    }));
   }
   return corpora.get(nombre)! as Promise<Corpus<M>>;
 }

@@ -25,6 +25,7 @@ iswc-heading {
   aspect-ratio: 1;
   width: min(100%, 26em);
   justify-self: center;
+  isolation: isolate;
   border-radius: 50%;
   background:
     radial-gradient(circle, var(--av-velo-fuerte) 0 28%, transparent 29%),
@@ -32,7 +33,7 @@ iswc-heading {
     radial-gradient(circle, transparent 0 88%, var(--av-borde-seccion) 88.4%, transparent 89%);
 }
 
-/* Cada persona se ubica en un anillo según su índice y aparece/desaparece en turnos (como animationAvatars). */
+/* Cada persona se ubica en un anillo según su índice y late en ola (ver pulso, abajo). */
 .persona {
   --angulo: calc(360deg / var(--n) * var(--i));
   /* Anillo interior o exterior según la paridad del índice; en em del contenedor, divididos por su font-size (2.6). */
@@ -47,18 +48,43 @@ iswc-heading {
   box-shadow: 0 0 0 0.08em var(--iswc-bg), 0 0.2em 0.6em var(--av-velo-fuerte);
 }
 
+/* Núcleo: el ícono de la comunidad, grande, con un radar de dos ondas que crecen y se desvanecen en loop. */
 .nucleo {
+  /* Un pulso = dos ondas de 3 s (la segunda 0.8 s detrás) + 4 s de pausa: ciclo de 7.8 s. */
+  --radar: 7.8s;
   position: absolute;
   inset: 50% auto auto 50%;
   translate: -50% -50%;
   display: grid;
   place-items: center;
-  width: 4.4em;
-  height: 4.4em;
+  width: 4.6em;
+  height: 4.6em;
   border-radius: 50%;
   background: var(--av-degradado-marca);
   color: var(--iswc-on-brand, #fff);
-  font-size: 1.3em;
+  font-size: 1.9em;
+  box-shadow: 0 0.3em 1.1em color-mix(in srgb, var(--iswc-accent) 40%, transparent);
+
+  iswc-icon {
+    font-size: 2.1em;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 50%;
+    border: 0.12em solid color-mix(in srgb, var(--iswc-accent) 70%, transparent);
+    background: color-mix(in srgb, var(--iswc-accent) 14%, transparent);
+    animation: radar var(--radar) cubic-bezier(0.2, 0.6, 0.35, 1) infinite both;
+    pointer-events: none;
+  }
+
+  &::after {
+    animation-delay: 0.8s;
+  }
 }
 
 .titulo {
@@ -99,24 +125,37 @@ iswc-heading {
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .persona {
-    animation: turno 20s infinite alternate;
-    animation-delay: calc(var(--i) * -1.7s);
+/* Pulso de alpha 0.7 ↔ 1 en ola: cada persona va desfasada según su ángulo (i / n de la vuelta), así la
+   ola recorre la órbita en sentido horario y el patrón se lee claro en cada vuelta. Sin depender de
+   prefers-reduced-motion: es solo opacidad (Windows con animaciones apagadas activaba esa preferencia). */
+.persona {
+  --pulso: 6s;
+  animation: pulso var(--pulso) ease-in-out infinite;
+  animation-delay: calc(var(--pulso) * var(--i) / var(--n) - var(--pulso));
+}
+
+@keyframes pulso {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
   }
 }
 
-@keyframes turno {
-  0%,
-  45% {
-    opacity: 0.25;
-    filter: grayscale(1);
+/* Onda activa el 38.5 % del ciclo (3 s de 7.8 s); el resto queda apagada: esa es la pausa entre pulsos. */
+@keyframes radar {
+  0% {
+    scale: 1;
+    opacity: 0.85;
   }
 
-  10%,
-  30% {
-    opacity: 1;
-    filter: none;
+  38.5%,
+  100% {
+    scale: 2.6;
+    opacity: 0;
   }
 }
 

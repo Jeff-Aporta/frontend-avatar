@@ -1,0 +1,207 @@
+{
+ "original": {
+  "w": 768,
+  "h": 751
+ },
+ "escala": 0.6300000000000001,
+ "piezas": [
+  {
+   "pieza": "arrow.png",
+   "x": 171,
+   "y": 585,
+   "w": 104,
+   "h": 75,
+   "escala": 0.6,
+   "error": 102
+  },
+  {
+   "pieza": "background.png",
+   "x": 12,
+   "y": 20,
+   "w": 590,
+   "h": 590,
+   "escala": 0.615,
+   "error": 112
+  },
+  {
+   "pieza": "bar-chart.png",
+   "x": 388,
+   "y": 573,
+   "w": 125,
+   "h": 58,
+   "escala": 0.615,
+   "error": 85
+  },
+  {
+   "pieza": "checkmark-badge/checkmark-badge-1.png",
+   "x": 606,
+   "y": 402,
+   "w": 47,
+   "h": 36,
+   "escala": 0.6,
+   "error": 49
+  },
+  {
+   "pieza": "checkmark-badge/checkmark-badge-2.png",
+   "x": 459,
+   "y": 114,
+   "w": 95,
+   "h": 96,
+   "escala": 0.645,
+   "error": 87
+  },
+  {
+   "pieza": "dashed-line/dashed-line-1.png",
+   "x": 144,
+   "y": 422,
+   "w": 17,
+   "h": 17,
+   "escala": 0.645,
+   "error": 37
+  },
+  {
+   "pieza": "dashed-line/dashed-line-2.png",
+   "x": 74,
+   "y": 425,
+   "w": 19,
+   "h": 17,
+   "escala": 0.645,
+   "error": 43
+  },
+  {
+   "pieza": "dashed-line/dashed-line-3.png",
+   "x": 54,
+   "y": 401,
+   "w": 14,
+   "h": 18,
+   "escala": 0.615,
+   "error": 43
+  },
+  {
+   "pieza": "dashed-line/dashed-line-4.png",
+   "x": 50,
+   "y": 360,
+   "w": 11,
+   "h": 26,
+   "escala": 0.645,
+   "error": 23
+  },
+  {
+   "pieza": "minus-icon/minus-icon-1.png",
+   "x": 415,
+   "y": 143,
+   "w": 28,
+   "h": 11,
+   "escala": 0.63,
+   "error": 25
+  },
+  {
+   "pieza": "minus-icon/minus-icon-2.png",
+   "x": 647,
+   "y": 636,
+   "w": 27,
+   "h": 10,
+   "escala": 0.6,
+   "error": 20
+  },
+  {
+   "pieza": "object-2.png",
+   "x": 626,
+   "y": 538,
+   "w": 33,
+   "h": 29,
+   "escala": 0.645,
+   "error": 110
+  },
+  {
+   "pieza": "object.png",
+   "x": 600,
+   "y": 393,
+   "w": 59,
+   "h": 46,
+   "escala": 0.66,
+   "error": 83
+  },
+  {
+   "pieza": "pie-chart.png",
+   "x": 68,
+   "y": 207,
+   "w": 129,
+   "h": 131,
+   "escala": 0.66,
+   "error": 87
+  },
+  {
+   "pieza": "plus-icon/plus-icon-1.png",
+   "x": 96,
+   "y": 432,
+   "w": 40,
+   "h": 42,
+   "escala": 0.63,
+   "error": 24
+  },
+  {
+   "pieza": "plus-icon/plus-icon-2.png",
+   "x": 198,
+   "y": 138,
+   "w": 36,
+   "h": 36,
+   "escala": 0.66,
+   "error": 41
+  },
+  {
+   "pieza": "plus-icon/plus-icon-3.png",
+   "x": 716,
+   "y": 487,
+   "w": 29,
+   "h": 30,
+   "escala": 0.63,
+   "error": 57
+  },
+  {
+   "pieza": "plus-icon/plus-icon-4.png",
+   "x": 347,
+   "y": 132,
+   "w": 30,
+   "h": 32,
+   "escala": 0.63,
+   "error": 42
+  },
+  {
+   "pieza": "plus-icon/plus-icon-5.png",
+   "x": 630,
+   "y": 542,
+   "w": 29,
+   "h": 28,
+   "escala": 0.6,
+   "error": 65
+  },
+  {
+   "pieza": "plus-icon/plus-icon-6.png",
+   "x": 52,
+   "y": 54,
+   "w": 30,
+   "h": 30,
+   "escala": 0.63,
+   "error": 7
+  },
+  {
+   "pieza": "plus-icon/plus-icon-7.png",
+   "x": 721,
+   "y": 492,
+   "w": 18,
+   "h": 19,
+   "escala": 0.645,
+   "error": 7
+  },
+  {
+   "pieza": "plus-icon/plus-icon-8.png",
+   "x": 722,
+   "y": 493,
+   "w": 17,
+   "h": 17,
+   "escala": 0.645,
+   "error": 11
+  }
+ ]
+}

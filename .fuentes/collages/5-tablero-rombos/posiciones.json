@@ -1,0 +1,119 @@
+{
+ "original": {
+  "w": 736,
+  "h": 774
+ },
+ "escala": 1,
+ "metodo": "fondo+sam",
+ "piezas": [
+  {
+   "pieza": "fondo.png",
+   "x": 0,
+   "y": 0,
+   "w": 736,
+   "h": 774,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "sam/triangulo-arriba.png",
+   "x": 266,
+   "y": 119,
+   "w": 205,
+   "h": 111,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.976
+  },
+  {
+   "pieza": "sam/triangulo-abajo.png",
+   "x": 300,
+   "y": 581,
+   "w": 172,
+   "h": 94,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.005
+  },
+  {
+   "pieza": "sam/triangulo-izq.png",
+   "x": 87,
+   "y": 340,
+   "w": 69,
+   "h": 119,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.966
+  },
+  {
+   "pieza": "sam/triangulo-der.png",
+   "x": 594,
+   "y": 353,
+   "w": 62,
+   "h": 105,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.971
+  },
+  {
+   "pieza": "sam/triangulo-sup.png",
+   "x": 177,
+   "y": 153,
+   "w": 83,
+   "h": 80,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.961
+  },
+  {
+   "pieza": "sam/dona.png",
+   "x": 192,
+   "y": 296,
+   "w": 185,
+   "h": 161,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.97
+  },
+  {
+   "pieza": "sam/barras.png",
+   "x": 401,
+   "y": 376,
+   "w": 144,
+   "h": 159,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.968
+  },
+  {
+   "pieza": "sam/circulo-mas.png",
+   "x": 536,
+   "y": 146,
+   "w": 89,
+   "h": 91,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.944
+  },
+  {
+   "pieza": "sam/bolita-teal.png",
+   "x": 116,
+   "y": 141,
+   "w": 44,
+   "h": 46,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.998
+  },
+  {
+   "pieza": "sam/bolita-oscura.png",
+   "x": 254,
+   "y": 132,
+   "w": 35,
+   "h": 35,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.991
+  }
+ ]
+}

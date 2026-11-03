@@ -24,6 +24,11 @@
   &[data-volver="1"] .volver {
     display: inline-flex;
   }
+
+  /* En una columna la lista se alcanza con «volver»; el colapso es para el ancho. */
+  &[data-volver="1"] .alternar {
+    display: none;
+  }
 }
 
 .quien {

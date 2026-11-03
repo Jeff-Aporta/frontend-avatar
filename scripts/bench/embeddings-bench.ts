@@ -188,7 +188,7 @@ if (fase('3')) {
   ];
   const filas: Medida[] = [];
   for (const [f, receta, mu, sinMatriz] of familias) {
-    for (const d of [8, 10, 12, 16, 24, 32, 48, 64, 96, 128, 192]) {
+    for (const d of JSON.parse(Deno.env.get('BENCH_DIMS') ?? '[8, 10, 12, 16, 24, 32, 48, 64, 96, 128, 192]') as number[]) {
       filas.push(medirPunto({ nombre: `${f} ${d}`, receta: receta(d), muestras: mu, bitsMatriz: 16, sinMatriz }, ajuste, CALIBRACION.orden));
     }
     console.error(`[bench] ${f} listo`);

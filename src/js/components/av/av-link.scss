@@ -13,3 +13,9 @@ a {
   text-decoration: inherit;
 }
 
+/* Táctil: 44 px de área en punteros gruesos (única medida en px a propósito). */
+@media (pointer: coarse) {
+  a {
+    min-block-size: 44px;
+  }
+}

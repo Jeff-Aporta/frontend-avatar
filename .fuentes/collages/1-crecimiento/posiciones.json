@@ -1,0 +1,69 @@
+{
+ "original": {
+  "w": 840,
+  "h": 842
+ },
+ "escala": 1,
+ "metodo": "fondo+sam",
+ "piezas": [
+  {
+   "pieza": "fondo.png",
+   "x": 0,
+   "y": 0,
+   "w": 840,
+   "h": 842,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "sam/persona-1.png",
+   "x": 481,
+   "y": 407,
+   "w": 91,
+   "h": 92,
+   "escala": 1,
+   "error": 0,
+   "iou": 1
+  },
+  {
+   "pieza": "sam/persona-2.png",
+   "x": 566,
+   "y": 405,
+   "w": 93,
+   "h": 94,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.003
+  },
+  {
+   "pieza": "sam/persona-3.png",
+   "x": 650,
+   "y": 405,
+   "w": 93,
+   "h": 95,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.003
+  },
+  {
+   "pieza": "sam/sello.png",
+   "x": 509,
+   "y": 499,
+   "w": 156,
+   "h": 157,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.982
+  },
+  {
+   "pieza": "sam/engranaje.png",
+   "x": 289,
+   "y": 458,
+   "w": 103,
+   "h": 105,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.985
+  }
+ ]
+}

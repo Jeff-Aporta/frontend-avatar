@@ -4,7 +4,7 @@
  */
 import { crearComponente, define, emitir, html } from '../../base/componente.js';
 import type { AvChatEmojisProps } from '../../consts/schemas/chat.schemas.js';
-import { CATEGORIAS_EMOJI, type Emoji, ordenarEmojis, ordenarEmojisPorSentido, recientes, usarEmoji } from '../../chat/emojis.js';
+import { cargarCatalogoEmojis, CATEGORIAS_EMOJI, type Emoji, ordenarEmojis, ordenarEmojisPorSentido, ordenarEmojisTolerante, recientes, usarEmoji } from '../../chat/emojis.js';
 import { textos } from '../../chat/textos.js';
 
 type Campo = HTMLElement & { value: string; focus(): void };
@@ -14,10 +14,10 @@ type Host = HTMLElement & { enfocar?: () => void };
 
 const COLUMNAS = 10;
 const ESPERA_MS = 250;
-/** Botones por tramo: la rejilla completa son 281 `iswc-button` y pintarlos de un golpe bloquea el hilo principal. */
+/** Botones por tramo: la rejilla completa son casi 2000 `iswc-button` y pintarlos de un golpe bloquea el hilo principal. */
 const TRAMO = 48;
-/** En reposo van menos por vuelta: cada tramo de fondo debe caber en unos pocos cuadros. */
-const TRAMO_FONDO = 24;
+/** En reposo van menos por vuelta: 8 `iswc-button` caben en un cuadro; con 24 cada vuelta era una tarea larga (>50 ms). */
+const TRAMO_FONDO = 8;
 const filas = (n: number) => `--filas:${Math.ceil(n / COLUMNAS)}`;
 
 const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-chat-emojis', { destino: '' }, (root, props, host) => {
@@ -39,7 +39,7 @@ const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-cha
         <div class="resultados" hidden></div>
         <div class="secciones">
           ${rec.length ? html`<section id="recientes"><iswc-heading level="3">Recientes</iswc-heading><div class="grupo" style=${filas(rec.length)}></div></section>` : null}
-          ${CATEGORIAS_EMOJI.map((c) => html`<section id=${c.id}><iswc-heading level="3">${c.nombre}</iswc-heading><div class="grupo" style=${filas(c.emojis.length)}></div></section>`)}
+          ${CATEGORIAS_EMOJI.map((c) => html`<section id=${c.id}><iswc-heading level="3">${c.nombre}</iswc-heading><div class="grupo"></div></section>`)}
         </div>
       </div>
     </div>
@@ -49,7 +49,8 @@ const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-cha
   const secciones = root.querySelector('.secciones') as HTMLElement;
   const visibles = () => [...(resultados.hidden ? secciones : resultados).querySelectorAll<HTMLElement>('.emoji')];
   const grupos = [...secciones.querySelectorAll<HTMLElement>('.grupo')];
-  const pendientes: Pendiente[] = [...(rec.length ? [rec] : []), ...CATEGORIAS_EMOJI.map((c) => c.emojis)].map((lista, i) => ({ grupo: grupos[i]!, signos: [...lista] }));
+  const pendientes: Pendiente[] = rec.length ? [{ grupo: grupos[0]!, signos: rec }] : [];
+  const gruposCategoria = grupos.slice(rec.length ? 1 : 0);
   const itinerante = () => {
     const lista = visibles();
     if (lista[0] && !lista.some((b) => b.tabIndex === 0)) lista[0].tabIndex = 0;
@@ -69,17 +70,44 @@ const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-cha
   const seguir = () => {
     if (programado || !pendientes.length) return;
     programado = true;
-    const siguiente = () => {
+    // Con tiempo ocioso de sobra se meten varios tramos chicos en la misma vuelta; cada tramo es corto, así nunca se bloquea.
+    const siguiente = (ocio?: IdleDeadline) => {
       programado = false;
-      llenar(TRAMO_FONDO);
+      do llenar(TRAMO_FONDO); while (ocio && !ocio.didTimeout && ocio.timeRemaining() > 4 && pendientes.length);
       seguir();
     };
     if (typeof requestIdleCallback === 'function') requestIdleCallback(siguiente, { timeout: 120 });
     else setTimeout(siguiente, 16);
   };
+  let carga: Promise<void> | null = null;
+  // El catálogo solo se pide al abrir: la altura de cada grupo se fija al llegar, para que el scroll no salte al irse llenando.
+  // La sección que entra en vista pasa al frente de la cola: saltar a Símbolos no espera a que se llenen las anteriores.
+  const adelantar = (grupo: HTMLElement) => {
+    const i = pendientes.findIndex((p) => p.grupo === grupo);
+    if (i > 0) pendientes.unshift(...pendientes.splice(i, 1));
+    if (i >= 0) {
+      llenar();
+      seguir();
+    }
+  };
+  const vigiaSecciones = typeof IntersectionObserver === 'function'
+    ? new IntersectionObserver((vistos) => vistos.filter((v) => v.isIntersecting).forEach((v) => adelantar(v.target as HTMLElement)), { root: rejilla, rootMargin: '50% 0px' })
+    : null;
+  const cargar = () => carga ??= cargarCatalogoEmojis().then((c) => {
+    CATEGORIAS_EMOJI.forEach((cat, i) => {
+      const signos = c[cat.id] ?? [];
+      gruposCategoria[i]!.setAttribute('style', filas(signos.length));
+      pendientes.push({ grupo: gruposCategoria[i]!, signos: [...signos] });
+      vigiaSecciones?.observe(gruposCategoria[i]!);
+    });
+  }).catch(() => {
+    carga = null;
+  });
   const empezar = () => {
-    if (!visibles().length) llenar();
-    seguir();
+    void cargar().then(() => {
+      if (!visibles().length) llenar();
+      seguir();
+    });
   };
   // Mientras el panel está oculto no se crea ningún botón: montar el chat no paga la rejilla.
   if (typeof IntersectionObserver === 'function') {
@@ -145,10 +173,15 @@ const AvChatEmojis = crearComponente<AvChatEmojisProps>(import.meta.url, 'av-cha
       soltarBusqueda();
       return resultados.replaceChildren();
     }
-    // Buscar ordena, nunca oculta: la palabra responde al instante y el significado reordena si sigue siendo la misma búsqueda.
-    pintar(ordenarEmojis(q));
+    // Buscar ordena, nunca oculta: la palabra responde al instante, la pasada tolerante (errores, inglés) sigue sin esperar
+    // al modelo, y el significado reordena al final solo si llega el vector y sigue siendo la misma búsqueda.
+    void cargar().then(() => {
+      if (este === turno) pintar(ordenarEmojis(q));
+    });
     setTimeout(async () => {
       if (este !== turno) return;
+      const tolerante = await ordenarEmojisTolerante(q).catch(() => null);
+      if (tolerante && este === turno) pintar(tolerante);
       const lista = await ordenarEmojisPorSentido(q).catch(() => null);
       if (lista && este === turno) pintar(lista);
     }, ESPERA_MS);

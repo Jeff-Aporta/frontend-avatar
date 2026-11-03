@@ -11,7 +11,7 @@
     {
       "id": "intro",
       "title": "&lt;av-logo&gt;",
-      "lede": "Logo de Avatar: hexágono de neón con los colores de la paleta activa.",
+      "lede": "Logo de Avatar: la «A» de cinta de la identidad, con los colores de la paleta activa.",
       "blocks": [
         {
           "kind": "demo",
@@ -38,7 +38,7 @@
         },
         {
           "kind": "html",
-          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Marca de la barra, del pie y de pantallas de bienvenida. Cambia de color con la paleta.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como favicon: ahí va assets/img/logo.svg.</iswc-callout>"
+          "html": "<iswc-callout color=\"brand\"><strong slot=\"title\">Cuándo usarlo</strong>Marca de la barra, del pie y de pantallas de bienvenida. Cambia de color con la paleta.</iswc-callout><iswc-callout color=\"warning\"><strong slot=\"title\">Cuándo no</strong>No como favicon ni ícono de app: ahí van los archivos estáticos de assets/img/marca/ (misma «A», en turquesa).</iswc-callout>"
         }
       ]
     }

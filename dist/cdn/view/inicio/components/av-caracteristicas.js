@@ -1,15 +1,18 @@
-import{crearComponente as c,define as l,html as t}from"../../../js/base/componente.js?v=49yoqc";const r=c(import.meta.url,"av-caracteristicas",{titulo:"Caracter\xEDsticas principales",subtitulo:"",items:[],variante:"tarjetas"},(s,i)=>{s.append(t`
-      <section class="seccion" part="seccion" data-variante=${i.variante} aria-labelledby="t">
-        <iswc-heading level="2" id="t" class="titulo">${i.titulo}</iswc-heading>
-        ${i.subtitulo?t`<p class="subtitulo">${i.subtitulo}</p>`:null}
+import{crearComponente as c,define as l,html as i}from"../../../js/base/componente.js?v=ykdqqm";const n=c(import.meta.url,"av-caracteristicas",{titulo:"Caracter\xEDsticas principales",subtitulo:"",items:[],variante:"tarjetas",escena:"",lado:"izquierda"},(e,a)=>{e.append(i`
+      <section class="seccion" part="seccion" data-variante=${a.variante} data-escena=${a.escena?a.lado:"no"} aria-labelledby="t">
+        ${a.escena?i`<av-escena class="ilustracion" part="ilustracion" escena=${a.escena}></av-escena>`:null}
+        <div class="cuerpo">
+        <iswc-heading level="2" id="t" class="titulo">${a.titulo}</iswc-heading>
+        ${a.subtitulo?i`<p class="subtitulo">${a.subtitulo}</p>`:null}
         <div class="rejilla" part="rejilla">
-          ${i.items.map((a,e)=>t`
-            <article class="item" style=${`--i:${e}`}>
-              <span class="icono" aria-hidden="true"><iswc-icon icon=${a.icono}></iswc-icon></span>
-              <iswc-heading level="3" class="nombre">${a.titulo}</iswc-heading>
-              <p class="texto">${a.texto}</p>
+          ${a.items.map((s,t)=>i`
+            <article class="item" style=${`--i:${t}`}>
+              <span class="icono" aria-hidden="true"><iswc-icon icon=${s.icono}></iswc-icon></span>
+              <iswc-heading level="3" class="nombre">${s.titulo}</iswc-heading>
+              <p class="texto">${s.texto}</p>
             </article>
           `)}
         </div>
+        </div>
       </section>
-    `)});l("av-caracteristicas",r);
+    `)});l("av-caracteristicas",n);

@@ -11,6 +11,7 @@ export const TEXTOS_ES = {
   directos: 'Directos',
   archivados: 'Archivados',
   volverChats: 'Volver a los chats',
+  alternarLista: 'Mostrar u ocultar la lista de chats',
   nuevoChat: 'Nuevo chat',
   nuevoGrupo: 'Nuevo grupo',
   buscarMensajes: 'Buscar mensajes',

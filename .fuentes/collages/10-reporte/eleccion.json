@@ -1,0 +1,37 @@
+[
+ {
+  "id": "torta",
+  "caja": [
+   122,
+   190,
+   272,
+   334
+  ],
+  "puntos": [
+   [
+    180,
+    280
+   ],
+   [
+    235,
+    225
+   ]
+  ]
+ },
+ {
+  "id": "flecha",
+  "src": "upward-arrow/upward-arrow-1.png"
+ },
+ {
+  "id": "documento",
+  "src": "document-icon.png"
+ },
+ {
+  "id": "barras-der",
+  "src": "bar-chart/bar-chart-2.png"
+ },
+ {
+  "id": "barras-izq",
+  "src": "bar-chart/bar-chart-1.png"
+ }
+]

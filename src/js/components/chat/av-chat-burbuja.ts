@@ -90,7 +90,7 @@ const AvChatBurbuja = crearComponente<AvChatBurbujaProps>(
           ${props.cita && !m.eliminado ? html`
             <iswc-button class="cita" variant="row" color="neutral" data-color=${String(props.cita.color)} onclick=${(e: Event) => { e.stopPropagation(); emitir(host, 'av-chat-accion', { accion: 'ir', imensaje: props.cita!.ref }); }}>
               <span class="cita-texto"><strong>${props.cita.autor}</strong><span>${props.cita.texto}</span></span>
-              ${props.cita.miniatura ? html`<img class="cita-mini" src=${props.cita.miniatura} alt="">` : null}
+              ${props.cita.miniatura ? html`<img class="cita-mini" src=${props.cita.miniatura} alt="" loading="lazy" decoding="async">` : null}
             </iswc-button>` : null}
           ${m.adjunto && !m.eliminado ? (audio ? html`<av-chat-audio class="medio" id="medio"></av-chat-audio>` : html`<av-chat-adjunto class="medio" id="medio"></av-chat-adjunto>`) : null}
           ${m.eliminado

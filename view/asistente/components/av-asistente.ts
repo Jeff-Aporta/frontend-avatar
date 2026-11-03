@@ -55,7 +55,7 @@ const AvAsistente = crearComponente<AvAsistenteProps>(
     const sugerencias = props.sugerencias.length ? props.sugerencias : SUGERENCIAS_INICIALES;
     root.append(html`
       <div class="pagina" part="pagina">
-        <iswc-page-header id="cabecera"></iswc-page-header>
+        <iswc-page-header id="cabecera"><av-escena slot="ilustracion" escena="asistente"></av-escena></iswc-page-header>
         ${props.error ? html`<iswc-callout color="danger"><strong slot="title">AVO no pudo responder</strong>${props.error}</iswc-callout>` : null}
         <section class="chat" part="chat">
           <div class="turnos" id="turnos" part="turnos">

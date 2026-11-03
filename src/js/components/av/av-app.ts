@@ -123,7 +123,7 @@ function propsSelector(): Record<string, unknown> {
 /** Columnas de enlaces del pie, de la tabla de rutas. */
 function columnas(conSesion: boolean) {
   return columnasPie(conSesion).map((c) => html`
-    <nav class="pie-col" aria-label=${c.titulo}>
+    <nav class=${c.enlaces.length > 8 ? 'pie-col pie-col-larga' : 'pie-col'} aria-label=${c.titulo}>
       <strong class="pie-titulo">${c.titulo}</strong>
       ${c.enlaces.map((e) => (e.vista ? html`<av-link vista=${e.vista} registro=${e.id ?? ''}>${e.titulo}</av-link>` : html`<a href=${new URL(e.ruta!, raizSitio()).href}>${e.titulo}</a>`))}
     </nav>`);

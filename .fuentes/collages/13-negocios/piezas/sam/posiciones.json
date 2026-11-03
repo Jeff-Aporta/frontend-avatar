@@ -1,0 +1,81 @@
+{
+ "original": {
+  "w": 854,
+  "h": 855
+ },
+ "escala": 1,
+ "metodo": "sam",
+ "modelo": "Xenova/slimsam-77-uniform",
+ "piezas": [
+  {
+   "pieza": "ventana-clara.png",
+   "x": 238,
+   "y": 242,
+   "w": 315,
+   "h": 221,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.959
+  },
+  {
+   "pieza": "ventana-oscura.png",
+   "x": 442,
+   "y": 332,
+   "w": 267,
+   "h": 231,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.952
+  },
+  {
+   "pieza": "persona-arriba.png",
+   "x": 568,
+   "y": 172,
+   "w": 91,
+   "h": 177,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.894
+  },
+  {
+   "pieza": "grupo-izq.png",
+   "x": 152,
+   "y": 512,
+   "w": 173,
+   "h": 157,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.799
+  },
+  {
+   "pieza": "grupo-der.png",
+   "x": 436,
+   "y": 512,
+   "w": 179,
+   "h": 157,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.77
+  },
+  {
+   "pieza": "circulo-der.png",
+   "x": 638,
+   "y": 158,
+   "w": 107,
+   "h": 91,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.998
+  },
+  {
+   "pieza": "circulo-izq.png",
+   "x": 142,
+   "y": 142,
+   "w": 97,
+   "h": 101,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.963
+  }
+ ]
+}

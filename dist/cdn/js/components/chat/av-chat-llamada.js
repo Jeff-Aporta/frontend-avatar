@@ -1,4 +1,4 @@
-import{crearComponente as M,define as E,emitir as q,html as S}from"../../base/componente.js?v=49yoqc";import{duracionTexto as A}from"../../chat/formato.js?v=xzgyvo";import{textos as _}from"../../chat/textos.js?v=cthyvo";function b(e,l){e.srcObject!==(l??null)&&(e.srcObject=l??null,l&&e.play().catch(()=>{}))}function H(e,l,d){const c=d,i=_(),g=a=>q(c,"av-chat-llamada-accion",{accion:a});e.append(S`
+import{crearComponente as M,define as E,emitir as q,html as S}from"../../base/componente.js?v=ykdqqm";import{duracionTexto as A}from"../../chat/formato.js?v=xzgyvo";import{textos as _}from"../../chat/textos.js?v=iqk9yi";function b(e,l){e.srcObject!==(l??null)&&(e.srcObject=l??null,l&&e.play().catch(()=>{}))}function H(e,l,d){const c=d,i=_(),g=a=>q(c,"av-chat-llamada-accion",{accion:a});e.append(S`
     <div class="capa" part="capa" hidden>
       <div class="tarjeta" role="dialog" aria-modal="true">
         <div class="aviso-llamada"><span class="foto" data-color="0"><iswc-avatar class="avatar" initials=""></iswc-avatar><span class="onda"></span><span class="onda dos"></span></span>

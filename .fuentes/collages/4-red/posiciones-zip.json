@@ -1,0 +1,324 @@
+{
+ "original": {
+  "w": 776,
+  "h": 701
+ },
+ "escala": 0.8900000000000003,
+ "piezas": [
+  {
+   "pieza": "a-logo.png",
+   "x": 223,
+   "y": 227,
+   "w": 295,
+   "h": 298,
+   "escala": 0.89,
+   "error": 23
+  },
+  {
+   "pieza": "a.png",
+   "x": 287,
+   "y": 269,
+   "w": 175,
+   "h": 146,
+   "escala": 0.905,
+   "error": 15
+  },
+  {
+   "pieza": "bar-chart.png",
+   "x": 44,
+   "y": 492,
+   "w": 222,
+   "h": 149,
+   "escala": 0.89,
+   "error": 35
+  },
+  {
+   "pieza": "circles/circles-1.png",
+   "x": 450,
+   "y": 95,
+   "w": 53,
+   "h": 53,
+   "escala": 0.86,
+   "error": 52
+  },
+  {
+   "pieza": "circles/circles-10.png",
+   "x": 644,
+   "y": 420,
+   "w": 22,
+   "h": 21,
+   "escala": 0.86,
+   "error": 31
+  },
+  {
+   "pieza": "circles/circles-11.png",
+   "x": 655,
+   "y": 504,
+   "w": 25,
+   "h": 26,
+   "escala": 0.86,
+   "error": 38
+  },
+  {
+   "pieza": "circles/circles-12.png",
+   "x": 521,
+   "y": 505,
+   "w": 27,
+   "h": 25,
+   "escala": 0.86,
+   "error": 35
+  },
+  {
+   "pieza": "circles/circles-13.png",
+   "x": 632,
+   "y": 567,
+   "w": 44,
+   "h": 41,
+   "escala": 0.86,
+   "error": 49
+  },
+  {
+   "pieza": "circles/circles-14.png",
+   "x": 90,
+   "y": 457,
+   "w": 17,
+   "h": 18,
+   "escala": 0.875,
+   "error": 58
+  },
+  {
+   "pieza": "circles/circles-15.png",
+   "x": 590,
+   "y": 597,
+   "w": 22,
+   "h": 21,
+   "escala": 0.86,
+   "error": 33
+  },
+  {
+   "pieza": "circles/circles-16.png",
+   "x": 75,
+   "y": 182,
+   "w": 16,
+   "h": 16,
+   "escala": 0.92,
+   "error": 51
+  },
+  {
+   "pieza": "circles/circles-17.png",
+   "x": 589,
+   "y": 463,
+   "w": 23,
+   "h": 23,
+   "escala": 0.875,
+   "error": 38
+  },
+  {
+   "pieza": "circles/circles-18.png",
+   "x": 79,
+   "y": 366,
+   "w": 36,
+   "h": 36,
+   "escala": 0.89,
+   "error": 15
+  },
+  {
+   "pieza": "circles/circles-19.png",
+   "x": 210,
+   "y": 109,
+   "w": 13,
+   "h": 13,
+   "escala": 0.86,
+   "error": 62
+  },
+  {
+   "pieza": "circles/circles-2.png",
+   "x": 664,
+   "y": 287,
+   "w": 39,
+   "h": 40,
+   "escala": 0.89,
+   "error": 29
+  },
+  {
+   "pieza": "circles/circles-20.png",
+   "x": 83,
+   "y": 498,
+   "w": 14,
+   "h": 14,
+   "escala": 0.905,
+   "error": 45
+  },
+  {
+   "pieza": "circles/circles-21.png",
+   "x": 82,
+   "y": 498,
+   "w": 15,
+   "h": 14,
+   "escala": 0.92,
+   "error": 38
+  },
+  {
+   "pieza": "circles/circles-22.png",
+   "x": 83,
+   "y": 498,
+   "w": 14,
+   "h": 14,
+   "escala": 0.905,
+   "error": 46
+  },
+  {
+   "pieza": "circles/circles-3.png",
+   "x": 663,
+   "y": 203,
+   "w": 35,
+   "h": 35,
+   "escala": 0.92,
+   "error": 27
+  },
+  {
+   "pieza": "circles/circles-4.png",
+   "x": 50,
+   "y": 338,
+   "w": 92,
+   "h": 93,
+   "escala": 0.89,
+   "error": 25
+  },
+  {
+   "pieza": "circles/circles-5.png",
+   "x": 195,
+   "y": 131,
+   "w": 163,
+   "h": 158,
+   "escala": 0.875,
+   "error": 7
+  },
+  {
+   "pieza": "circles/circles-6.png",
+   "x": 525,
+   "y": 566,
+   "w": 44,
+   "h": 41,
+   "escala": 0.89,
+   "error": 35
+  },
+  {
+   "pieza": "circles/circles-7.png",
+   "x": 525,
+   "y": 566,
+   "w": 44,
+   "h": 42,
+   "escala": 0.89,
+   "error": 37
+  },
+  {
+   "pieza": "circles/circles-8.png",
+   "x": 117,
+   "y": 186,
+   "w": 22,
+   "h": 22,
+   "escala": 0.905,
+   "error": 25
+  },
+  {
+   "pieza": "circles/circles-9.png",
+   "x": 223,
+   "y": 225,
+   "w": 295,
+   "h": 300,
+   "escala": 0.89,
+   "error": 17
+  },
+  {
+   "pieza": "dashed-orbit-lines/dashed-orbit-lines-1.png",
+   "x": 268,
+   "y": 101,
+   "w": 271,
+   "h": 70,
+   "escala": 0.89,
+   "error": 59
+  },
+  {
+   "pieza": "dashed-orbit-lines/dashed-orbit-lines-2.png",
+   "x": 109,
+   "y": 172,
+   "w": 92,
+   "h": 317,
+   "escala": 0.905,
+   "error": 100
+  },
+  {
+   "pieza": "dashed-orbit-lines/dashed-orbit-lines-3.png",
+   "x": 165,
+   "y": 261,
+   "w": 42,
+   "h": 180,
+   "escala": 0.905,
+   "error": 92
+  },
+  {
+   "pieza": "diamond-shape.png",
+   "x": 646,
+   "y": 111,
+   "w": 25,
+   "h": 26,
+   "escala": 0.86,
+   "error": 33
+  },
+  {
+   "pieza": "network-diagram.png",
+   "x": 18,
+   "y": 89,
+   "w": 708,
+   "h": 560,
+   "escala": 0.89,
+   "error": 41
+  },
+  {
+   "pieza": "pie-chart.png",
+   "x": 51,
+   "y": 340,
+   "w": 89,
+   "h": 89,
+   "escala": 0.86,
+   "error": 69
+  },
+  {
+   "pieza": "triangles/triangles-1.png",
+   "x": 44,
+   "y": 238,
+   "w": 62,
+   "h": 57,
+   "escala": 0.86,
+   "error": 15
+  },
+  {
+   "pieza": "triangles/triangles-2.png",
+   "x": 96,
+   "y": 91,
+   "w": 69,
+   "h": 81,
+   "escala": 0.86,
+   "error": 16
+  },
+  {
+   "pieza": "triangles/triangles-3.png",
+   "x": 665,
+   "y": 362,
+   "w": 43,
+   "h": 40,
+   "escala": 0.86,
+   "error": 36
+  },
+  {
+   "pieza": "upward-arrow.png",
+   "x": 477,
+   "y": 128,
+   "w": 147,
+   "h": 141,
+   "escala": 0.86,
+   "error": 29
+  }
+ ]
+}

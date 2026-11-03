@@ -1,0 +1,71 @@
+{
+ "original": {
+  "w": 768,
+  "h": 751
+ },
+ "escala": 1,
+ "metodo": "sam",
+ "modelo": "Xenova/slimsam-77-uniform",
+ "piezas": [
+  {
+   "pieza": "torta.png",
+   "x": 38,
+   "y": 218,
+   "w": 185,
+   "h": 149,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.961
+  },
+  {
+   "pieza": "check.png",
+   "x": 558,
+   "y": 338,
+   "w": 141,
+   "h": 141,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.96
+  },
+  {
+   "pieza": "grafica.png",
+   "x": 498,
+   "y": 152,
+   "w": 201,
+   "h": 171,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.953
+  },
+  {
+   "pieza": "mas-1.png",
+   "x": 178,
+   "y": 118,
+   "w": 75,
+   "h": 75,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.979
+  },
+  {
+   "pieza": "mas-2.png",
+   "x": 462,
+   "y": 118,
+   "w": 91,
+   "h": 75,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.964
+  },
+  {
+   "pieza": "mas-3.png",
+   "x": 602,
+   "y": 518,
+   "w": 87,
+   "h": 85,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.98
+  }
+ ]
+}

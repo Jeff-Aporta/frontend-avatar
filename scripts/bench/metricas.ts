@@ -1,12 +1,16 @@
-/** metricas.ts — recall@5, MRR y nDCG@10 con relevancia graduada, más acuerdo con el vector completo. */
-import type { Consulta } from './datos.ts';
+/**
+ * metricas.ts — recall@5, MRR y nDCG@10 con relevancia graduada, más acuerdo con el vector completo. Sin imports: lo
+ * usa también `tests/vistas/emojis-calidad.test.ts`, que debe correr sin modelo ni paquetes npm.
+ */
 
+/** Lo mínimo de una consulta marcada: emojis muy relevantes y algo relevantes. */
+export type Marcada = { muy: string[]; algo: string[] };
 export type Metricas = { recall: number; mrr: number; ndcg: number };
 const sinVs = (e: string): string => e.replace('️', '');
 const GANANCIA = { muy: 3, algo: 1 };
 
 /** `ranking`: ids de mejor a peor. El recall se divide por min(5, relevantes) para que 5/5 sea alcanzable. */
-export function medir(c: Consulta, ranking: string[]): Metricas {
+export function medir(c: Marcada, ranking: string[]): Metricas {
   const ids = ranking.map(sinVs);
   const rel = new Map<string, number>([...c.algo.map((e) => [e, GANANCIA.algo] as const), ...c.muy.map((e) => [e, GANANCIA.muy] as const)]);
   const hits = ids.slice(0, 5).filter((e) => rel.has(e)).length;

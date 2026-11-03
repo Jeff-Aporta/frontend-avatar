@@ -1,6 +1,7 @@
 /**
- * emojis.ts — catálogo compacto del selector de emojis (por categoría, con palabras clave en español para buscar) y
- * los recientes del usuario (localStorage con try/catch).
+ * emojis.ts — categorías del selector, catálogo completo y recientes del usuario (localStorage con try/catch). El
+ * catálogo no vive aquí: se genera con `deno task embeddings` en `assets/ia/emojis-catalogo.json` y se carga una vez al
+ * abrir el selector, para no engordar este módulo.
  */
 import { vectorLocal } from '../core/ia-local.js';
 import { calibracionDe } from '../core/calibracion.js';
@@ -8,350 +9,62 @@ import { cargarAplanado, ordenarAplanado } from '../core/semantica.js';
 import { normalizar } from './formato.js';
 
 export type Emoji = { e: string; k: string };
-export type CategoriaEmoji = { id: string; nombre: string; icono: string; emojis: Emoji[] };
-
-const lista = (s: string): Emoji[] =>
-  s.trim().split('\n').map((l) => {
-    const [e, ...k] = l.trim().split(' ');
-    return { e: e!, k: k.join(' ') };
-  });
+export type CategoriaEmoji = { id: string; nombre: string; icono: string };
+/** Emojis de cada categoría, por id. */
+export type CatalogoEmojis = Record<string, Emoji[]>;
 
 export const CATEGORIAS_EMOJI: CategoriaEmoji[] = [
-  {
-    id: 'caras', nombre: 'Caras', icono: 'mdi:emoticon-happy-outline', emojis: lista(`
-😀 feliz sonrisa
-😃 alegre contento
-😄 risa ojos
-😁 sonrisa dientes
-😆 carcajada
-😅 sudor nervios risa
-🤣 revolcarse risa
-😂 llorar de risa jaja
-🙂 leve sonrisa
-😉 guiño
-😊 sonrojo amable
-😇 angel inocente
-🥰 enamorado corazones
-😍 ojos corazon amor
-🤩 estrellas asombro
-😘 beso
-😋 delicioso
-😜 lengua guiño
-🤪 loco
-🤗 abrazo
-🤭 risita
-🤫 silencio secreto
-🤔 pensar duda
-🤐 callado
-😐 neutral
-😑 sin expresion
-😏 picaro
-😒 aburrido
-🙄 ojos en blanco
-😬 mueca incomodo
-😌 aliviado
-😔 pensativo triste
-😪 sueño
-😴 dormir
-😷 enfermo mascarilla
-🤒 fiebre
-🤯 explota cabeza
-🥳 fiesta celebrar
-😎 gafas genial
-🤓 nerd
-🧐 monoculo analizar
-😕 confundido
-😟 preocupado
-😮 sorpresa asombro
-😲 asombrado
-🥺 suplicar ojitos
-😢 llorar triste
-😭 llanto
-😱 grito miedo
-😖 frustrado
-😤 resoplar
-😡 enojo furia
-🤬 maldecir
-💀 calavera muerto de risa
-🤖 robot bot
-👻 fantasma
-👽 alien
-💩 caca
-`),
-  },
-  {
-    id: 'gestos', nombre: 'Gestos', icono: 'mdi:hand-wave-outline', emojis: lista(`
-👍 pulgar arriba ok bien si
-👎 pulgar abajo mal no
-👌 perfecto ok
-✌️ paz victoria
-🤞 dedos cruzados suerte
-🤟 te quiero
-🤘 rock
-🤙 llamame
-👈 izquierda
-👉 derecha
-👆 arriba
-👇 abajo
-☝️ indice uno
-✋ mano alto
-🖐️ mano abierta
-👋 hola adios saludo
-👏 aplausos bravo
-🙌 celebrar manos arriba
-👐 manos abiertas
-🤝 acuerdo trato
-🙏 gracias por favor rezar
-✍️ escribir
-💪 fuerza musculo
-🧠 cerebro idea
-👀 ojos mirar
-👂 oreja escuchar
-🫶 corazon manos
-🤷 no se encoger
-🤦 facepalm
-🙋 levantar mano
-🙇 reverencia
-💁 informacion
-`),
-  },
-  {
-    id: 'corazones', nombre: 'Corazones', icono: 'mdi:heart-outline', emojis: lista(`
-❤️ corazon rojo amor
-🧡 corazon naranja
-💛 corazon amarillo
-💚 corazon verde
-💙 corazon azul
-💜 corazon morado
-🖤 corazon negro
-🤍 corazon blanco
-💔 corazon roto
-❣️ exclamacion corazon
-💕 dos corazones
-💞 corazones girando
-💓 latido
-💗 corazon creciendo
-💖 corazon brillante
-💘 flechado
-💝 regalo corazon
-💯 cien perfecto
-✨ brillos magia
-⭐ estrella
-🌟 estrella brillante
-🔥 fuego genial
-💥 explosion
-💫 mareo estrella
-`),
-  },
-  {
-    id: 'naturaleza', nombre: 'Naturaleza', icono: 'mdi:paw', emojis: lista(`
-🐶 perro
-🐱 gato
-🐭 raton
-🦊 zorro
-🐻 oso
-🐼 panda
-🐨 koala
-🐯 tigre
-🦁 leon
-🐮 vaca
-🐷 cerdo
-🐸 rana
-🐵 mono
-🐔 gallina
-🐧 pinguino
-🦄 unicornio
-🐝 abeja
-🦋 mariposa
-🐢 tortuga
-🐙 pulpo
-🐬 delfin
-🌵 cactus
-🌴 palmera
-🌱 brote planta
-🍀 trebol suerte
-🌸 flor cerezo
-🌹 rosa
-🌻 girasol
-🌈 arcoiris
-☀️ sol
-🌙 luna
-⚡ rayo
-❄️ nieve
-☔ lluvia
-`),
-  },
-  {
-    id: 'comida', nombre: 'Comida', icono: 'mdi:food-apple-outline', emojis: lista(`
-🍎 manzana
-🍌 banano
-🍓 fresa
-🍉 sandia
-🍇 uvas
-🥑 aguacate
-🌽 maiz
-🌶️ aji picante
-🍞 pan
-🧀 queso
-🍔 hamburguesa
-🍟 papas fritas
-🍕 pizza
-🌮 taco
-🌯 burrito
-🥗 ensalada
-🍝 pasta
-🍣 sushi
-🍩 dona
-🍪 galleta
-🎂 torta cumpleanos
-🍰 pastel
-🍫 chocolate
-🍿 palomitas
-☕ cafe tinto
-🍵 te
-🍺 cerveza
-🍷 vino
-🥂 brindis
-🧃 jugo
-`),
-  },
-  {
-    id: 'actividades', nombre: 'Actividades', icono: 'mdi:soccer', emojis: lista(`
-⚽ futbol
-🏀 baloncesto
-🏈 americano
-⚾ beisbol
-🎾 tenis
-🏐 voleibol
-🏓 ping pong
-🎯 diana objetivo meta
-🎮 videojuego
-🎲 dado
-🧩 rompecabezas
-🎨 arte pintura
-🎬 cine
-🎤 microfono cantar
-🎧 audifonos musica
-🎸 guitarra
-🎹 piano
-🏆 trofeo ganar
-🥇 medalla oro
-🎉 fiesta celebracion
-🎊 confeti
-🎁 regalo
-🎈 globo
-`),
-  },
-  {
-    id: 'viajes', nombre: 'Viajes', icono: 'mdi:airplane', emojis: lista(`
-🚗 carro
-🚕 taxi
-🚌 bus
-🚲 bicicleta
-🏍️ moto
-🚀 cohete lanzamiento
-✈️ avion viaje
-🚢 barco
-🏠 casa
-🏢 oficina edificio
-🏖️ playa vacaciones
-🏔️ montana
-🗺️ mapa
-📍 ubicacion pin
-🌎 mundo
-🕐 hora reloj
-⏰ alarma
-⌛ arena tiempo
-📅 calendario fecha
-`),
-  },
-  {
-    id: 'objetos', nombre: 'Objetos', icono: 'mdi:lightbulb-outline', emojis: lista(`
-💡 idea bombillo
-📱 celular
-💻 computador portatil
-⌨️ teclado
-🖥️ pantalla
-🖨️ impresora
-📷 camara foto
-🎥 video
-📞 telefono llamada
-📧 correo email
-✉️ sobre carta
-📦 paquete caja
-📝 nota escribir
-📎 clip adjunto
-📌 chincheta fijar
-✂️ tijeras
-🔒 candado seguro
-🔑 llave
-🔧 llave herramienta
-⚙️ engranaje ajustes
-🧪 prueba laboratorio
-📊 grafica barras
-📈 tendencia sube
-📉 tendencia baja
-💰 dinero bolsa
-💳 tarjeta
-🧾 recibo factura
-📚 libros
-🗂️ carpetas
-🗑️ basura
-`),
-  },
-  {
-    id: 'simbolos', nombre: 'Símbolos', icono: 'mdi:check-circle-outline', emojis: lista(`
-✅ hecho listo check
-☑️ casilla
-✔️ visto
-❌ error no
-❎ cruz
-⚠️ advertencia
-🚫 prohibido
-⛔ alto
-❓ pregunta
-❗ exclamacion
-‼️ doble exclamacion
-💤 dormir zzz
-🆗 ok
-🆕 nuevo
-🆒 cool
-🔝 top
-🔴 rojo
-🟠 naranja
-🟡 amarillo
-🟢 verde
-🔵 azul
-🟣 morado
-⚫ negro
-⚪ blanco
-➕ mas
-➖ menos
-➡️ flecha derecha
-⬅️ flecha izquierda
-🔁 repetir
-🔔 campana notificacion
-🔕 silencio
-`),
-  },
+  { id: 'caras', nombre: 'Caras', icono: 'mdi:emoticon-happy-outline' },
+  { id: 'gestos', nombre: 'Gestos', icono: 'mdi:hand-wave-outline' },
+  { id: 'corazones', nombre: 'Corazones', icono: 'mdi:heart-outline' },
+  { id: 'naturaleza', nombre: 'Naturaleza', icono: 'mdi:paw' },
+  { id: 'comida', nombre: 'Comida', icono: 'mdi:food-apple-outline' },
+  { id: 'actividades', nombre: 'Actividades', icono: 'mdi:soccer' },
+  { id: 'viajes', nombre: 'Viajes', icono: 'mdi:airplane' },
+  { id: 'objetos', nombre: 'Objetos', icono: 'mdi:lightbulb-outline' },
+  { id: 'simbolos', nombre: 'Símbolos', icono: 'mdi:check-circle-outline' },
 ];
 
-/** Busca por palabra clave (sin tildes). */
+let catalogo: Promise<CatalogoEmojis> | null = null;
+let listos: Emoji[] = [];
 
-/** Todo el catálogo con lo que coincide primero: buscar ordena, no oculta. */
+/** Carga el catálogo una vez; si falla se puede reintentar al volver a abrir. */
+export function cargarCatalogoEmojis(): Promise<CatalogoEmojis> {
+  catalogo ??= fetch(new URL('assets/ia/emojis-catalogo.json', document.baseURI), { signal: AbortSignal.timeout(15000) }).then((r) => {
+    if (!r.ok) throw new Error(`catálogo de emojis: ${r.status}`);
+    return r.json() as Promise<CatalogoEmojis>;
+  }).then((c) => {
+    listos = Object.values(c).flat();
+    return c;
+  }).catch((e) => {
+    catalogo = null;
+    throw e;
+  });
+  return catalogo;
+}
+
+/** Todo el catálogo cargado con lo que coincide primero: buscar ordena, no oculta. */
 export function ordenarEmojis(q: string): Emoji[] {
   const t = normalizar(q.trim());
-  const todos = CATEGORIAS_EMOJI.flatMap((c) => c.emojis);
-  return [...todos.filter((e) => normalizar(e.k).includes(t)), ...todos.filter((e) => !normalizar(e.k).includes(t))];
+  return [...listos.filter((e) => normalizar(e.k).includes(t)), ...listos.filter((e) => !normalizar(e.k).includes(t))];
 }
 
-/** Todo el catálogo por significado («comida italiana» → 🍝🍕). Null si el modelo no está: queda el orden por palabra. */
+/** Todo el catálogo por significado («comida italiana» → 🍝🍕). Null si el modelo no está o el usuario lo dejó para después. */
 export async function ordenarEmojisPorSentido(q: string): Promise<Emoji[] | null> {
   const [corpus, vector] = await Promise.all([cargarAplanado('emojis', document.baseURI), vectorLocal(q)]);
-  if (!vector) return null;
-  const claves = new Map(CATEGORIAS_EMOJI.flatMap((c) => c.emojis.map((e) => [e.e, e.k])));
-  return ordenarAplanado(corpus, q, vector, calibracionDe('emojis').orden).map((r) => ({ e: r.item.id, k: claves.get(r.item.id) ?? '' }));
+  return vector ? conClaves(ordenarAplanado(corpus, q, vector, calibracionDe('emojis').orden)) : null;
 }
+
+/** Todo el catálogo por palabra tolerante (errores de tecleo, prefijos, español e inglés): no espera ni pide el modelo. */
+export async function ordenarEmojisTolerante(q: string): Promise<Emoji[]> {
+  const corpus = await cargarAplanado('emojis', document.baseURI);
+  return conClaves(ordenarAplanado(corpus, q, null, calibracionDe('emojis').orden));
+}
+
+const conClaves = (r: { item: { id: string } }[]): Emoji[] => {
+  const claves = new Map(listos.map((e) => [e.e, e.k]));
+  return r.map((x) => ({ e: x.item.id, k: claves.get(x.item.id) ?? '' }));
+};
 
 const CLAVE_RECIENTES = 'av-chat:emojis-recientes';
 

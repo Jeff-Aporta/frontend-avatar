@@ -3,14 +3,19 @@
 //   W-SEM-04  la partición de prueba no baja de los umbrales medidos en `deno task bench:embeddings`
 //   W-SEM-05  el corpus se regenera: lo publicado aplicado a vectores completos da los vectores servidos
 //   W-SEM-06  lo exacto va primero y lo mal escrito se encuentra
-//   W-SEM-07  el JSON servido respeta su presupuesto de tamaño
+//   W-SEM-07  el catálogo trae todo emojibase, cada emoji tiene vector y el JSON respeta su presupuesto
+//
+// Solo lee `dist/`, `assets/` y fixtures: sin modelo, sin red y sin paquetes npm.
 import { readFileSync, statSync } from 'node:fs';
 import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
 import { medir, promedio } from '../../scripts/bench/metricas.ts';
 
-/** Bajo esto la prueba falla. Medido: 0,733 / 0,836 / 0,779; el margen absorbe cambios del catálogo, no retrocesos. */
-const MINIMOS = { recall: 0.7, mrr: 0.8, ndcg: 0.75 };
-const MAXIMO_BYTES = 110 * 1024;
+/** Bajo esto la prueba falla. Medido con 1923 emojis: 0,610 / 0,791 / 0,665; el margen absorbe ruido, no retrocesos. */
+const MINIMOS = { recall: 0.58, mrr: 0.76, ndcg: 0.63 };
+const MAXIMO_BYTES = 450 * 1024;
+const MAXIMO_CATALOGO_BYTES = 90 * 1024;
+/** emojibase 18 sin componentes (tonos, pelo) ni indicadores regionales sueltos. */
+const MINIMO_EMOJIS = 1900;
 
 type Marcada = { q: string; idioma: 'es' | 'en'; tipo: string; parte: 'ajuste' | 'prueba'; muy: string; algo: string };
 const leer = (ruta: string): string => readFileSync(new URL(ruta, import.meta.url), 'utf8');
@@ -24,7 +29,10 @@ const vectores = a.desempacar(fijos.consultas, corpus.aplanado.media.length) as 
 const orden = c.calibracionDe('emojis').orden;
 const partir = (t: string): string[] => t.split(' ').filter(Boolean).map((e) => e.replace('️', ''));
 const buscar = (i: number): string[] => s.ordenarAplanado(corpus, marcadas[i]!.q, vectores[i]!, orden).map((r: { item: { id: string } }) => r.item.id);
-const primero = (q: string): string => buscar(marcadas.findIndex((m) => m.q === q))[0]!.replace('️', '');
+const limpio = (e: string): string => e.replace(/️/g, '');
+const primero = (q: string): string => limpio(buscar(marcadas.findIndex((m) => m.q === q))[0]!);
+/** El primero debe ser uno de los «muy relevantes» marcados: cuando dos nombres empatan, cualquiera vale. */
+const primeroEsMuy = (q: string): boolean => partir(marcadas.find((m) => m.q === q)!.muy).includes(primero(q));
 
 export default definirPruebas([
   {
@@ -52,18 +60,29 @@ export default definirPruebas([
   {
     nombre: 'semantica W-SEM-06 lo exacto va primero y lo mal escrito se encuentra',
     categoria: 'what',
-    correr({ eq }) {
-      eq('palabra exacta', primero('perro'), '🐶');
+    correr({ eq, expect }) {
+      expect(`palabra exacta (${primero('perro')})`, primeroEsMuy('perro'));
       eq('en inglés', primero('coffee'), '☕');
       eq('con error de tecleo', primero('hamburgesa'), '🍔');
       eq('por prefijo', primero('celu'), '📱');
+      eq('bandera por país', primero('colombia'), '🇨🇴');
+      expect(`profesión (${primero('médico')})`, primeroEsMuy('médico'));
     },
   },
   {
-    nombre: 'semantica W-SEM-07 el corpus servido respeta su presupuesto',
+    nombre: 'semantica W-SEM-07 el catálogo es completo y el corpus respeta su presupuesto',
     categoria: 'how',
-    correr({ expect }) {
+    correr({ expect, eq }) {
+      const catalogo = JSON.parse(leer('../../assets/ia/emojis-catalogo.json')) as Record<string, { e: string; k: string }[]>;
+      const todos = Object.values(catalogo).flat();
+      const conVector = new Set(corpus.items.map((i: { id: string }) => i.id));
+      expect(`al menos ${MINIMO_EMOJIS} emojis (${todos.length})`, todos.length >= MINIMO_EMOJIS);
+      eq('sin repetidos', new Set(todos.map((x) => x.e)).size, todos.length);
+      eq('todos con nombre', todos.filter((x) => !x.k).length, 0);
+      eq('todos con vector', todos.filter((x) => !conVector.has(x.e)).length, 0);
+      eq('las 9 categorías del selector', Object.keys(catalogo).length, 9);
       expect('peso de emojis.json', statSync(new URL('../../assets/ia/emojis.json', import.meta.url)).size <= MAXIMO_BYTES);
+      expect('peso de emojis-catalogo.json', statSync(new URL('../../assets/ia/emojis-catalogo.json', import.meta.url)).size <= MAXIMO_CATALOGO_BYTES);
       expect('al menos 150 consultas marcadas', marcadas.length >= 150);
     },
   },

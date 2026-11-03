@@ -169,6 +169,7 @@ const AvProyectos = crearComponente<AvProyectosProps>(import.meta.url, 'av-proye
       onav-tarea-comentar=${alComentar} onav-tarea-editar=${alEditar} onav-tarea-eliminar=${alEliminar} onav-tarea-detalle-cerrar=${() => ($('detalle').props = { abierto: false })}
       onav-proyecto-guardar=${alGuardarProyecto} onav-proyecto-form-cerrar=${() => ($('proyecto-form').props = { abierto: false })} onav-proyecto-form-error=${(e: Event) => avisar((e as CustomEvent<{ mensaje: string }>).detail.mensaje, 'warning')}>
       <iswc-page-header id="cabecera">
+        <av-escena slot="ilustracion" escena="proyectos"></av-escena>
         <iswc-select slot="acciones" id="selector" class="selector" aria-label="Proyecto" placeholder="Elige un proyecto" oniswc-change=${alElegir}></iswc-select>
         <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         ${puedeTareas && iproyecto ? html`<iswc-button variant="compact" slot="acciones" color="brand" oniswc-click=${() => ($('tarea-form').props = { abierto: true, tarea: null, icolumna: null, iproyecto, columnas, miembros, error: '' })}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nueva tarea</iswc-button>` : null}

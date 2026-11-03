@@ -1,6 +1,7 @@
-import{crearComponente as r,define as s,emitir as o,html as l}from"../../base/componente.js?v=49yoqc";import{textos as v}from"../../chat/textos.js?v=cthyvo";const u=r(import.meta.url,"av-chat-cabecera",{id:null,tipo:"directo",nombre:"",foto:null,iniciales:"",color:0,estado:"",activo:!1,integrantes:0,puedeLlamar:!0,volver:!1},(n,a,i)=>{if(!a.id)return;const t=v(),c=()=>o(i,"av-chat-panel",{panel:"info"});n.append(l`
+import{crearComponente as r,define as s,emitir as o,html as l}from"../../base/componente.js?v=ykdqqm";import{textos as v}from"../../chat/textos.js?v=iqk9yi";const u=r(import.meta.url,"av-chat-cabecera",{id:null,tipo:"directo",nombre:"",foto:null,iniciales:"",color:0,estado:"",activo:!1,integrantes:0,puedeLlamar:!0,volver:!1},(e,a,i)=>{if(!a.id)return;const t=v(),c=()=>o(i,"av-chat-panel",{panel:"info"});e.append(l`
       <header class="cabecera" part="cabecera" data-volver=${a.volver?"1":"0"}>
         <iswc-button class="volver" variant="plain compact" color="neutral" title=${t.volverChats} aria-label=${t.volverChats} oniswc-click=${()=>o(i,"av-chat-volver")}><iswc-icon icon="mdi:arrow-left"></iswc-icon></iswc-button>
+        <iswc-button class="alternar" variant="plain compact" color="neutral" title=${t.alternarLista} aria-label=${t.alternarLista} oniswc-click=${()=>o(i,"av-chat-lista-alternar")}><iswc-icon icon="mdi:menu"></iswc-icon></iswc-button>
         <iswc-button class="quien" variant="row" color="neutral" onclick=${c} title=${a.tipo==="directo"?t.infoContacto:t.infoGrupo}>
           <span class="foto" data-color=${String(a.color)}>
             <iswc-avatar initials=${a.iniciales} image=${a.foto??""} label=${a.nombre}></iswc-avatar>
@@ -18,4 +19,4 @@ import{crearComponente as r,define as s,emitir as o,html as l}from"../../base/co
           <iswc-button variant="plain compact" color="neutral" title=${t.infoChat} aria-label=${t.infoChat} oniswc-click=${c}><iswc-icon icon="mdi:information-outline"></iswc-icon></iswc-button>
         </span>
       </header>
-    `)},(n,a,i)=>{const t=Object.keys(a).every(e=>e==="estado"||e==="activo"||a[e]===i[e]),c=n.querySelector(".estado");return!t||!c?!1:(c.textContent=a.estado,c.dataset.activo=a.activo?"1":"0",!0)});s("av-chat-cabecera",u);
+    `)},(e,a,i)=>{const t=Object.keys(a).every(n=>n==="estado"||n==="activo"||a[n]===i[n]),c=e.querySelector(".estado");return!t||!c?!1:(c.textContent=a.estado,c.dataset.activo=a.activo?"1":"0",!0)});s("av-chat-cabecera",u);

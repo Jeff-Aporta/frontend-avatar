@@ -1,0 +1,139 @@
+{
+ "original": {
+  "w": 776,
+  "h": 701
+ },
+ "escala": 1,
+ "metodo": "fondo+sam",
+ "piezas": [
+  {
+   "pieza": "fondo.png",
+   "x": 0,
+   "y": 0,
+   "w": 776,
+   "h": 701,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "sam/mancha.png",
+   "x": 191,
+   "y": 127,
+   "w": 172,
+   "h": 167,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.002
+  },
+  {
+   "pieza": "sam/hoja.png",
+   "x": 40,
+   "y": 488,
+   "w": 231,
+   "h": 158,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.991
+  },
+  {
+   "pieza": "sam/torta.png",
+   "x": 46,
+   "y": 334,
+   "w": 101,
+   "h": 102,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.979
+  },
+  {
+   "pieza": "sam/flecha.png",
+   "x": 473,
+   "y": 124,
+   "w": 156,
+   "h": 150,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.957
+  },
+  {
+   "pieza": "sam/triangulo-1.png",
+   "x": 40,
+   "y": 234,
+   "w": 71,
+   "h": 66,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.007
+  },
+  {
+   "pieza": "sam/triangulo-2.png",
+   "x": 92,
+   "y": 87,
+   "w": 78,
+   "h": 90,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.001
+  },
+  {
+   "pieza": "sam/triangulo-3.png",
+   "x": 661,
+   "y": 358,
+   "w": 52,
+   "h": 49,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.994
+  },
+  {
+   "pieza": "sam/circulo-1.png",
+   "x": 446,
+   "y": 91,
+   "w": 62,
+   "h": 62,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.976
+  },
+  {
+   "pieza": "sam/circulo-2.png",
+   "x": 660,
+   "y": 283,
+   "w": 48,
+   "h": 49,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.97
+  },
+  {
+   "pieza": "sam/circulo-3.png",
+   "x": 659,
+   "y": 199,
+   "w": 44,
+   "h": 44,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.978
+  },
+  {
+   "pieza": "sam/rombo.png",
+   "x": 642,
+   "y": 107,
+   "w": 34,
+   "h": 35,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.968
+  },
+  {
+   "pieza": "sam/logo.png",
+   "x": 219,
+   "y": 221,
+   "w": 304,
+   "h": 309,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.984
+  }
+ ]
+}

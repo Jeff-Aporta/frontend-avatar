@@ -57,7 +57,7 @@ const AvAcceso = crearComponente<AvAccesoProps>(
           </iswc-tab-group>
         </iswc-card>
         <aside class="lado" part="lado" aria-hidden="true">
-          <av-escena class="ilustracion" escena="acceso"></av-escena>
+          <av-escena class="ilustracion" escena="marca"></av-escena>
         </aside>
       </div>
     `);

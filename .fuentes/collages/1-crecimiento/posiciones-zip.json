@@ -1,0 +1,288 @@
+{
+ "original": {
+  "w": 840,
+  "h": 842
+ },
+ "escala": 0.8700000000000003,
+ "piezas": [
+  {
+   "pieza": "1.png",
+   "x": 798,
+   "y": 19,
+   "w": 29,
+   "h": 75,
+   "escala": 0.885,
+   "error": 10
+  },
+  {
+   "pieza": "bar-chart.png",
+   "x": 482,
+   "y": 173,
+   "w": 249,
+   "h": 220,
+   "escala": 0.9,
+   "error": 34
+  },
+  {
+   "pieza": "check-mark-badge.png",
+   "x": 549,
+   "y": 544,
+   "w": 77,
+   "h": 65,
+   "escala": 0.84,
+   "error": 36
+  },
+  {
+   "pieza": "dotted-pattern/dotted-pattern-1.png",
+   "x": 625,
+   "y": 530,
+   "w": 80,
+   "h": 114,
+   "escala": 0.9,
+   "error": 24
+  },
+  {
+   "pieza": "dotted-pattern/dotted-pattern-2.png",
+   "x": 384,
+   "y": 620,
+   "w": 244,
+   "h": 68,
+   "escala": 0.9,
+   "error": 17
+  },
+  {
+   "pieza": "dotted-pattern/dotted-pattern-3.png",
+   "x": 387,
+   "y": 529,
+   "w": 318,
+   "h": 157,
+   "escala": 0.885,
+   "error": 31
+  },
+  {
+   "pieza": "gear-icon.png",
+   "x": 293,
+   "y": 462,
+   "w": 94,
+   "h": 96,
+   "escala": 0.885,
+   "error": 17
+  },
+  {
+   "pieza": "line-graph/line-graph-1.png",
+   "x": 481,
+   "y": 171,
+   "w": 252,
+   "h": 222,
+   "escala": 0.9,
+   "error": 40
+  },
+  {
+   "pieza": "line-graph/line-graph-2.png",
+   "x": 500,
+   "y": 175,
+   "w": 168,
+   "h": 140,
+   "escala": 0.885,
+   "error": 61
+  },
+  {
+   "pieza": "minus-sign.png",
+   "x": 18,
+   "y": 818,
+   "w": 22,
+   "h": 11,
+   "escala": 0.885,
+   "error": 38
+  },
+  {
+   "pieza": "object-2-3.png",
+   "x": 14,
+   "y": 816,
+   "w": 26,
+   "h": 15,
+   "escala": 0.885,
+   "error": 16
+  },
+  {
+   "pieza": "object-2.png",
+   "x": 770,
+   "y": 814,
+   "w": 17,
+   "h": 17,
+   "escala": 0.87,
+   "error": 16
+  },
+  {
+   "pieza": "object.png",
+   "x": 799,
+   "y": 760,
+   "w": 28,
+   "h": 75,
+   "escala": 0.9,
+   "error": 11
+  },
+  {
+   "pieza": "small-circles/small-circles-1.png",
+   "x": 109,
+   "y": 526,
+   "w": 24,
+   "h": 24,
+   "escala": 0.885,
+   "error": 29
+  },
+  {
+   "pieza": "small-circles/small-circles-10.png",
+   "x": 21,
+   "y": 63,
+   "w": 12,
+   "h": 12,
+   "escala": 0.885,
+   "error": 31
+  },
+  {
+   "pieza": "small-circles/small-circles-11.png",
+   "x": 21,
+   "y": 63,
+   "w": 12,
+   "h": 12,
+   "escala": 0.885,
+   "error": 38
+  },
+  {
+   "pieza": "small-circles/small-circles-12.png",
+   "x": 22,
+   "y": 129,
+   "w": 11,
+   "h": 12,
+   "escala": 0.885,
+   "error": 30
+  },
+  {
+   "pieza": "small-circles/small-circles-2.png",
+   "x": 245,
+   "y": 239,
+   "w": 22,
+   "h": 22,
+   "escala": 0.9,
+   "error": 33
+  },
+  {
+   "pieza": "small-circles/small-circles-3.png",
+   "x": 442,
+   "y": 329,
+   "w": 21,
+   "h": 20,
+   "escala": 0.9,
+   "error": 41
+  },
+  {
+   "pieza": "small-circles/small-circles-4.png",
+   "x": 713,
+   "y": 522,
+   "w": 16,
+   "h": 17,
+   "escala": 0.87,
+   "error": 31
+  },
+  {
+   "pieza": "small-circles/small-circles-5.png",
+   "x": 774,
+   "y": 24,
+   "w": 13,
+   "h": 14,
+   "escala": 0.9,
+   "error": 31
+  },
+  {
+   "pieza": "small-circles/small-circles-6.png",
+   "x": 707,
+   "y": 25,
+   "w": 12,
+   "h": 13,
+   "escala": 0.84,
+   "error": 31
+  },
+  {
+   "pieza": "small-circles/small-circles-7.png",
+   "x": 774,
+   "y": 25,
+   "w": 13,
+   "h": 13,
+   "escala": 0.84,
+   "error": 30
+  },
+  {
+   "pieza": "small-circles/small-circles-8.png",
+   "x": 21,
+   "y": 108,
+   "w": 12,
+   "h": 11,
+   "escala": 0.885,
+   "error": 32
+  },
+  {
+   "pieza": "small-circles/small-circles-9.png",
+   "x": 22,
+   "y": 130,
+   "w": 11,
+   "h": 11,
+   "escala": 0.885,
+   "error": 32
+  },
+  {
+   "pieza": "upward-arrow.png",
+   "x": 500,
+   "y": 175,
+   "w": 169,
+   "h": 140,
+   "escala": 0.885,
+   "error": 60
+  },
+  {
+   "pieza": "user-icons/user-icons-1.png",
+   "x": 485,
+   "y": 411,
+   "w": 82,
+   "h": 83,
+   "escala": 0.885,
+   "error": 19
+  },
+  {
+   "pieza": "user-icons/user-icons-2.png",
+   "x": 654,
+   "y": 409,
+   "w": 84,
+   "h": 86,
+   "escala": 0.9,
+   "error": 29
+  },
+  {
+   "pieza": "user-icons/user-icons-3.png",
+   "x": 570,
+   "y": 409,
+   "w": 84,
+   "h": 85,
+   "escala": 0.9,
+   "error": 26
+  },
+  {
+   "pieza": "user-icons/user-icons-4.png",
+   "x": 513,
+   "y": 503,
+   "w": 147,
+   "h": 148,
+   "escala": 0.9,
+   "error": 14
+  },
+  {
+   "pieza": "x.png",
+   "x": 13,
+   "y": 21,
+   "w": 29,
+   "h": 29,
+   "escala": 0.9,
+   "error": 13
+  }
+ ]
+}

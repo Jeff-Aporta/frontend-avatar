@@ -1,0 +1,95 @@
+[
+ {
+  "id": "triangulo-arriba",
+  "src": "teal-triangle/teal-triangle-2.png"
+ },
+ {
+  "id": "triangulo-abajo",
+  "src": "teal-triangle/teal-triangle-1.png"
+ },
+ {
+  "id": "triangulo-izq",
+  "src": "teal-triangle/teal-triangle-3.png"
+ },
+ {
+  "id": "triangulo-der",
+  "src": "teal-triangle/teal-triangle-5.png"
+ },
+ {
+  "id": "triangulo-sup",
+  "src": "teal-triangle/teal-triangle-4.png"
+ },
+ {
+  "id": "dona",
+  "caja": [
+   196,
+   300,
+   372,
+   452
+  ],
+  "puntos": [
+   [
+    285,
+    340
+   ],
+   [
+    230,
+    380
+   ],
+   [
+    285,
+    425
+   ]
+  ]
+ },
+ {
+  "id": "barras",
+  "caja": [
+   405,
+   380,
+   540,
+   530
+  ],
+  "puntos": [
+   [
+    432,
+    480
+   ],
+   [
+    478,
+    460
+   ],
+   [
+    520,
+    445
+   ]
+  ]
+ },
+ {
+  "id": "circulo-mas",
+  "caja": [
+   540,
+   150,
+   620,
+   232
+  ]
+ },
+ {
+  "id": "bolita-teal",
+  "caja": [
+   120,
+   145,
+   155,
+   182
+  ]
+ },
+ {
+  "id": "bolita-oscura",
+  "caja": [
+   258,
+   136,
+   284,
+   162
+  ]
+ }
+]

@@ -1,0 +1,255 @@
+[
+ {
+  "id": "tarjeta-barras",
+  "caja": [
+   375,
+   167,
+   598,
+   397
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\9-rejilla\\piezas\\bar-chart\\bar-chart-1.png",
+   "x": 375,
+   "y": 167,
+   "w": 223,
+   "h": 230
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    485,
+    281,
+    1
+   ],
+   [
+    575,
+    373,
+    1
+   ],
+   [
+    397,
+    189,
+    1
+   ],
+   [
+    573,
+    189,
+    1
+   ],
+   [
+    397,
+    373,
+    1
+   ],
+   [
+    395,
+    279,
+    1
+   ],
+   [
+    369,
+    161,
+    0
+   ],
+   [
+    604,
+    161,
+    0
+   ],
+   [
+    369,
+    403,
+    0
+   ],
+   [
+    604,
+    403,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "tarjeta-barras-2",
+  "caja": [
+   117,
+   451,
+   289,
+   647
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\9-rejilla\\piezas\\illegible\\illegible-2.png",
+   "x": 117,
+   "y": 451,
+   "w": 172,
+   "h": 196
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    201,
+    547,
+    1
+   ],
+   [
+    271,
+    629,
+    1
+   ],
+   [
+    133,
+    629,
+    1
+   ],
+   [
+    271,
+    467,
+    1
+   ],
+   [
+    133,
+    467,
+    1
+   ],
+   [
+    271,
+    557,
+    1
+   ],
+   [
+    111,
+    445,
+    0
+   ],
+   [
+    295,
+    445,
+    0
+   ],
+   [
+    111,
+    653,
+    0
+   ],
+   [
+    295,
+    653,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "tarjeta-area",
+  "caja": [
+   544,
+   384,
+   732,
+   509
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\9-rejilla\\piezas\\illegible\\illegible-1.png",
+   "x": 544,
+   "y": 384,
+   "w": 188,
+   "h": 125
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    636,
+    446,
+    1
+   ],
+   [
+    718,
+    396,
+    1
+   ],
+   [
+    718,
+    496,
+    1
+   ],
+   [
+    556,
+    396,
+    1
+   ],
+   [
+    556,
+    496,
+    1
+   ],
+   [
+    662,
+    396,
+    1
+   ],
+   [
+    538,
+    378,
+    0
+   ],
+   [
+    738,
+    378,
+    0
+   ],
+   [
+    538,
+    515,
+    0
+   ],
+   [
+    738,
+    515,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "tarjeta-torta",
+  "caja": [
+   148,
+   182,
+   334,
+   368
+  ],
+  "puntos": [
+   [
+    241,
+    275,
+    1
+   ],
+   [
+    175,
+    210,
+    1
+   ],
+   [
+    142,
+    176,
+    0
+   ],
+   [
+    340,
+    176,
+    0
+   ],
+   [
+    142,
+    374,
+    0
+   ],
+   [
+    340,
+    374,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ }
+]

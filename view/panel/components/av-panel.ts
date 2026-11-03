@@ -42,6 +42,7 @@ const AvPanel = crearComponente<AvPanelProps>(import.meta.url, 'av-panel', { res
   root.append(html`
     <div class="pagina" part="pagina" onav-notificaciones-leer=${leer}>
       <iswc-page-header id="cabecera">
+        <av-escena slot="ilustracion" escena="panel"></av-escena>
         <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${() => { h.props = { resumen: null, error: '', version: (props.version ?? 0) + 1 }; }}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button variant="compact" slot="acciones" color="brand" oniswc-click=${() => ir('proyectos')}><iswc-icon slot="start" icon="mdi:view-column-outline"></iswc-icon>Ir a proyectos</iswc-button>
       </iswc-page-header>

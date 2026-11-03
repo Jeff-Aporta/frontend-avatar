@@ -40,7 +40,8 @@ iswc-heading {
   z-index: -1;
   background:
     radial-gradient(60em 30em at 85% 20%, var(--av-velo-fuerte), transparent 70%),
-    linear-gradient(to right top, color-mix(in srgb, var(--iswc-bg) 82%, transparent), transparent 75%);
+    /* En claro el velo es más leve (--av-velo-claro) para que el patrón del banner se lea. */
+    linear-gradient(to right top, color-mix(in srgb, var(--iswc-bg) var(--av-velo-claro, 82%), transparent), transparent 75%);
 }
 
 .contenido {

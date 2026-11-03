@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 220">
+  <!-- Gráfica del collage «crecimiento», redibujada en vector: el retazo original (baja resolución) se veía granulado.
+       Trazos en turquesa medio para leerse sobre claro y oscuro; las vistas la giran de tono por paleta. -->
+  <defs>
+    <linearGradient id="barra" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2ee6d6"/>
+      <stop offset="1" stop-color="#0b8d86"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#barra)">
+    <rect x="34" y="128" width="38" height="68" rx="19"/>
+    <rect x="98" y="88" width="38" height="108" rx="19"/>
+    <rect x="166" y="34" width="38" height="162" rx="19"/>
+  </g>
+  <g fill="none" stroke="#3a9aa0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 6V202M6 196H246"/>
+    <path d="M22 118 76 66 112 92 200 22"/>
+    <path d="M182 20H202V40"/>
+  </g>
+</svg>

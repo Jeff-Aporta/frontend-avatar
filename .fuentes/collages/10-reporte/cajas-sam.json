@@ -1,0 +1,300 @@
+[
+ {
+  "id": "flecha",
+  "caja": [
+   292,
+   334,
+   558,
+   522
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\10-reporte\\piezas\\upward-arrow\\upward-arrow-1.png",
+   "x": 292,
+   "y": 334,
+   "w": 266,
+   "h": 188
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    425,
+    428,
+    1
+   ],
+   [
+    286,
+    328,
+    0
+   ],
+   [
+    564,
+    328,
+    0
+   ],
+   [
+    286,
+    528,
+    0
+   ],
+   [
+    564,
+    528,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "documento",
+  "caja": [
+   574,
+   483,
+   704,
+   657
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\10-reporte\\piezas\\document-icon.png",
+   "x": 574,
+   "y": 483,
+   "w": 130,
+   "h": 174
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    638,
+    571,
+    1
+   ],
+   [
+    588,
+    497,
+    1
+   ],
+   [
+    588,
+    643,
+    1
+   ],
+   [
+    688,
+    643,
+    1
+   ],
+   [
+    668,
+    497,
+    1
+   ],
+   [
+    688,
+    549,
+    1
+   ],
+   [
+    568,
+    477,
+    0
+   ],
+   [
+    710,
+    477,
+    0
+   ],
+   [
+    568,
+    663,
+    0
+   ],
+   [
+    710,
+    663,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "barras-der",
+  "caja": [
+   615,
+   196,
+   745,
+   360
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\10-reporte\\piezas\\bar-chart\\bar-chart-2.png",
+   "x": 615,
+   "y": 196,
+   "w": 130,
+   "h": 164
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    701,
+    286,
+    1
+   ],
+   [
+    627,
+    338,
+    1
+   ],
+   [
+    715,
+    210,
+    1
+   ],
+   [
+    657,
+    244,
+    1
+   ],
+   [
+    715,
+    344,
+    1
+   ],
+   [
+    657,
+    302,
+    1
+   ],
+   [
+    609,
+    190,
+    0
+   ],
+   [
+    751,
+    190,
+    0
+   ],
+   [
+    609,
+    366,
+    0
+   ],
+   [
+    751,
+    366,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "barras-izq",
+  "caja": [
+   145,
+   523,
+   253,
+   625
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\10-reporte\\piezas\\bar-chart\\bar-chart-1.png",
+   "x": 145,
+   "y": 523,
+   "w": 108,
+   "h": 102
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    203,
+    583,
+    1
+   ],
+   [
+    241,
+    535,
+    1
+   ],
+   [
+    157,
+    615,
+    1
+   ],
+   [
+    239,
+    611,
+    1
+   ],
+   [
+    241,
+    573,
+    1
+   ],
+   [
+    191,
+    615,
+    1
+   ],
+   [
+    139,
+    517,
+    0
+   ],
+   [
+    259,
+    517,
+    0
+   ],
+   [
+    139,
+    631,
+    0
+   ],
+   [
+    259,
+    631,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "torta",
+  "caja": [
+   122,
+   190,
+   272,
+   334
+  ],
+  "puntos": [
+   [
+    180,
+    280,
+    1
+   ],
+   [
+    235,
+    225,
+    1
+   ],
+   [
+    116,
+    184,
+    0
+   ],
+   [
+    278,
+    184,
+    0
+   ],
+   [
+    116,
+    340,
+    0
+   ],
+   [
+    278,
+    340,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ }
+]

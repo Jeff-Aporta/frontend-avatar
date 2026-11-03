@@ -1,6 +1,6 @@
 /**
  * <av-comunidad> — «Únete a nuestra comunidad», como en el React original: una constelación de personas (`iswc-avatar`
- * con foto) que aparecen y se desvanecen en ciclo, el título, un texto y tres cifras. Las fotos se cargan perezosas.
+ * con foto) que laten en ola (alpha 0.7 ↔ 1) alrededor de un núcleo con radar, el título, un texto y tres cifras. Las fotos se cargan perezosas.
  */
 import { crearComponente, define, html } from '../../../src/js/base/componente.js';
 import type { AvComunidadProps } from '../../../src/js/consts/schemas/inicio.schemas.js';

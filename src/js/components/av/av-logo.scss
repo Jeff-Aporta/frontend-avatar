@@ -1,15 +1,18 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
-/* av-logo — hexágono de neón con los colores de la paleta. Todo en em: escala con el font-size del contexto. */
+/* av-logo — la «A» de cinta con los colores de la paleta. Todo en em: escala con el font-size del contexto. */
 :host {
   display: inline-block;
   line-height: 1;
 }
 
 .logo {
-  --_c1: var(--iswc-color-brand-stronger, var(--iswc-accent));
-  --_c2: var(--iswc-color-contrast, var(--iswc-accent));
+  /* Claro, medio y profundo del acento: en turquesa coinciden con el favicon (#5eeadc, #22d3c5, #0b8d86). */
+  --_c1: color-mix(in oklch, var(--iswc-accent) 62%, #fff);
+  --_c2: var(--iswc-accent);
+  --_c3: color-mix(in oklch, var(--iswc-accent) 70%, #000);
+  --_pliegue: color-mix(in oklch, var(--iswc-accent) 38%, #031418);
   display: inline-flex;
   align-items: center;
   gap: 0.45em;
@@ -19,38 +22,27 @@
   width: 1.9em;
   height: 1.9em;
   overflow: visible;
-  filter: drop-shadow(0 0 0.18em color-mix(in srgb, var(--iswc-accent) 65%, transparent));
+  filter: drop-shadow(0 0.08em 0.16em color-mix(in srgb, var(--iswc-accent) 45%, transparent));
 }
 
-.hex-borde {
-  stroke: rgb(255 255 255 / 35%);
-  stroke-width: 1.2;
+.pierna {
+  fill: none;
+  stroke-width: 11;
+  stroke-linecap: round;
 }
 
-.monograma,
-.barra {
-  stroke: #fff;
-  stroke-width: 4.6;
+.pliegue {
+  fill: var(--_pliegue);
+}
+
+.brillo {
+  fill: none;
+  stroke: rgb(255 255 255 / 70%);
+  stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.nodo {
-  fill: var(--_c2);
-  stroke: #fff;
-  stroke-width: 1.6;
-}
-
-.orbita {
-  stroke: color-mix(in srgb, var(--_c2) 80%, #fff);
-  stroke-width: 1.6;
-  stroke-dasharray: 3 3.5;
-  opacity: 0.9;
-}
-
-.satelite {
-  fill: #fff;
-  filter: drop-shadow(0 0 1.6px var(--_c2));
+  stroke-dasharray: 0 100;
+  opacity: 0;
 }
 
 .nombre {
@@ -65,15 +57,26 @@
   color: transparent;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  [data-animado="1"] .satelite {
-    transform-origin: 32px 32px;
-    animation: orbitar 9s linear infinite;
-  }
+/* Brillo: un destello corto recorre la cinta cada 6 s. */
+[data-animado="1"] .brillo {
+  opacity: 1;
+  animation: brillo 6s ease-in-out infinite;
 }
 
-@keyframes orbitar {
-  to {
-    transform: rotate(360deg);
+@keyframes brillo {
+  0% {
+    stroke-dasharray: 0 100;
+    stroke-dashoffset: 0;
+  }
+
+  25% {
+    stroke-dasharray: 14 100;
+    stroke-dashoffset: -50;
+  }
+
+  40%,
+  100% {
+    stroke-dasharray: 0 100;
+    stroke-dashoffset: -100;
   }
 }

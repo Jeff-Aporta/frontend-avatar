@@ -185,6 +185,7 @@ const AvCorreos = crearComponente<AvCorreosProps>(import.meta.url, 'av-correos',
       onav-correo-redactar-cerrar=${() => ($('redactar').props = { abierto: false })}
       onav-correo-redactar-error=${(e: Event) => avisar((e as Detalle<{ mensaje: string }>).detail.mensaje, 'warning')}>
       <iswc-page-header id="cabecera">
+        <av-escena slot="ilustracion" escena="correos"></av-escena>
         <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${() => { void cargarResumen(); void cargarBandeja(); }}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button variant="compact" slot="acciones" color="brand" ?disabled=${!puedeMarcar || !iempresa} oniswc-click=${() => redactar()}><iswc-icon slot="start" icon="mdi:email-edit-outline"></iswc-icon>Redactar</iswc-button>
       </iswc-page-header>

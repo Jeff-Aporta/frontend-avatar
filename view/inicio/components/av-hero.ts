@@ -1,8 +1,8 @@
 /**
  * <av-hero> — portada de la landing, como la del React original: banner de fondo (`bgbanner.svg`) teñido al tono de la
  * paleta activa (`hue-rotate` del kit) y velado con un degradado del fondo, lema grande con la tipografía de marca,
- * botón principal («Empieza ahora», o «Ir al panel» con sesión), enlace de información y la escena Memphis
- * `bienvenida` (`av-escena`) con relieve al pasar el mouse. Emite `av-inicio-ir { vista }`; el shell enruta.
+ * botón principal («Empieza ahora», o «Ir al panel» con sesión), enlace de información y el collage
+ * `crecimiento` (`av-escena`, por retazos con parallax). Emite `av-inicio-ir { vista }`; el shell enruta.
  */
 import { crearComponente, define, emitir, html } from '../../../src/js/base/componente.js';
 import type { AvHeroProps } from '../../../src/js/consts/schemas/inicio.schemas.js';
@@ -13,7 +13,7 @@ const AvHero = crearComponente<AvHeroProps>(import.meta.url, 'av-hero', { sesion
   const recurso = (ruta: string) => new URL(ruta, document.baseURI).href;
   root.append(html`
     <section class="hero" part="hero" aria-labelledby="titulo">
-      <img class="banner" part="banner" src=${recurso('assets/img/bgbanner.svg')} alt="" aria-hidden="true">
+      <img class="banner" part="banner" src=${recurso('assets/img/bgbanner.svg')} alt="" aria-hidden="true" fetchpriority="high" decoding="async">
       <div class="velo" aria-hidden="true"></div>
       <div class="contenido">
         <div class="texto">
@@ -28,7 +28,7 @@ const AvHero = crearComponente<AvHeroProps>(import.meta.url, 'av-hero', { sesion
           </div>
           <iswc-button variant="text compact" color="brand" class="enlace" oniswc-click=${() => ir(props.sesion ? 'panel' : 'acceso')}>${LEMA.enlace} →</iswc-button>
         </div>
-        <av-escena class="ilustracion" part="ilustracion" escena="bienvenida" etiqueta="Equipo celebrando con Avatar"></av-escena>
+        <av-escena class="ilustracion" part="ilustracion" escena="crecimiento" etiqueta="La A de Avatar rodeada por su anillo, métricas en alza y un equipo validado"></av-escena>
       </div>
     </section>
   `);

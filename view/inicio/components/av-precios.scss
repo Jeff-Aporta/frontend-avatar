@@ -35,6 +35,11 @@ iswc-heading {
     align-items: center;
     justify-content: space-between;
     gap: t.esp(2);
+
+    /* «Recomendado» a la mitad del tamaño: el badge del kit escala con su font-size (em). */
+    iswc-badge {
+      font-size: 0.5em;
+    }
   }
 
   .precio {

@@ -1,0 +1,60 @@
+[
+ {
+  "id": "persona-sentada",
+  "src": "sitting-person-with-laptop.png"
+ },
+ {
+  "id": "tablero-barras",
+  "src": "bar-chart.png"
+ },
+ {
+  "id": "torta",
+  "src": "pie-chart.png"
+ },
+ {
+  "id": "persona-izq",
+  "caja": [
+   118,
+   356,
+   302,
+   722
+  ],
+  "puntos": [
+   [
+    205,
+    420
+   ],
+   [
+    190,
+    560
+   ],
+   [
+    230,
+    650
+   ]
+  ]
+ },
+ {
+  "id": "persona-agachada",
+  "caja": [
+   572,
+   456,
+   744,
+   724
+  ],
+  "puntos": [
+   [
+    650,
+    500
+   ],
+   [
+    660,
+    600
+   ],
+   [
+    700,
+    690
+   ]
+  ]
+ }
+]

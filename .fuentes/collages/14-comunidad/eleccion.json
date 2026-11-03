@@ -1,0 +1,74 @@
+[
+ {
+  "id": "persona-1",
+  "src": "person-with-short-hair/person-with-short-hair-2.png"
+ },
+ {
+  "id": "persona-2",
+  "src": "person-with-short-hair/person-with-short-hair-5.png"
+ },
+ {
+  "id": "persona-3",
+  "src": "person-with-short-hair/person-with-short-hair-6.png"
+ },
+ {
+  "id": "persona-4",
+  "src": "person-with-long-hair/person-with-long-hair-1.png"
+ },
+ {
+  "id": "persona-centro",
+  "caja": [
+   300,
+   186,
+   444,
+   372
+  ],
+  "puntos": [
+   [
+    372,
+    230
+   ],
+   [
+    372,
+    330
+   ]
+  ]
+ },
+ {
+  "id": "persona-abajo",
+  "caja": [
+   300,
+   388,
+   444,
+   592
+  ],
+  "puntos": [
+   [
+    372,
+    430
+   ],
+   [
+    372,
+    540
+   ]
+  ]
+ },
+ {
+  "id": "rombo-rosa",
+  "caja": [
+   92,
+   92,
+   204,
+   198
+  ]
+ },
+ {
+  "id": "rombo-morado",
+  "caja": [
+   566,
+   586,
+   664,
+   684
+  ]
+ }
+]

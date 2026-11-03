@@ -8,6 +8,7 @@
  */
 import { PAGINAS } from './consts/paginas.js';
 import { APP_TAGS, SHELL_KIT_TAGS, tagsDeVista, VIEW_TAGS } from './kit-tags.js';
+import { iniciarParalaje } from './core/paralaje.js';
 
 type Loader = { loadPageStyles(n: string[]): Promise<unknown>; load(...tags: string[]): Promise<unknown> };
 

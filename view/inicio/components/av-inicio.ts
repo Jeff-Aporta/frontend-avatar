@@ -34,8 +34,8 @@ const AvInicio = crearComponente<AvInicioProps>(import.meta.url, 'av-inicio', { 
   const de = (id: string) => root.querySelector(`#${id}`) as ConProps;
   de('hero').props = { sesion: props.sesion };
   de('comunidad').props = { ...COMUNIDAD, personas: personas(12) };
-  de('caracteristicas').props = { titulo: 'Características principales', items: caracteristicas(), variante: 'tarjetas' };
-  de('productividad').props = { titulo: 'Productividad para tu equipo', items: productividad(), variante: 'iconos' };
+  de('caracteristicas').props = { titulo: 'Características principales', items: caracteristicas(), variante: 'tarjetas', escena: 'modulos', lado: 'izquierda' };
+  de('productividad').props = { titulo: 'Productividad para tu equipo', items: productividad(), variante: 'iconos', escena: 'marca', lado: 'derecha' };
   de('precios').props = { planes: planes() };
   de('tecnologia').props = { titulo: 'Tecnología que te respalda', items: tecnologia(), variante: 'iconos' };
   de('abierto').props = { titulo: ABIERTO_TITULO, pilares: pilares() };

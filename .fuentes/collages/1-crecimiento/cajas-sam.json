@@ -1,0 +1,355 @@
+[
+ {
+  "id": "persona-1",
+  "caja": [
+   485,
+   411,
+   567,
+   494
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\1-crecimiento\\piezas\\user-icons\\user-icons-1.png",
+   "x": 485,
+   "y": 411,
+   "w": 82,
+   "h": 83
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    526,
+    452,
+    1
+   ],
+   [
+    506,
+    426,
+    1
+   ],
+   [
+    546,
+    426,
+    1
+   ],
+   [
+    500,
+    472,
+    1
+   ],
+   [
+    550,
+    474,
+    1
+   ],
+   [
+    524,
+    484,
+    1
+   ],
+   [
+    479,
+    405,
+    0
+   ],
+   [
+    573,
+    405,
+    0
+   ],
+   [
+    479,
+    500,
+    0
+   ],
+   [
+    573,
+    500,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "persona-2",
+  "caja": [
+   570,
+   409,
+   654,
+   494
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\1-crecimiento\\piezas\\user-icons\\user-icons-3.png",
+   "x": 570,
+   "y": 409,
+   "w": 84,
+   "h": 85
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    611,
+    450,
+    1
+   ],
+   [
+    591,
+    478,
+    1
+   ],
+   [
+    637,
+    428,
+    1
+   ],
+   [
+    637,
+    472,
+    1
+   ],
+   [
+    591,
+    424,
+    1
+   ],
+   [
+    579,
+    450,
+    1
+   ],
+   [
+    564,
+    403,
+    0
+   ],
+   [
+    660,
+    403,
+    0
+   ],
+   [
+    564,
+    500,
+    0
+   ],
+   [
+    660,
+    500,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "persona-3",
+  "caja": [
+   654,
+   409,
+   738,
+   495
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\1-crecimiento\\piezas\\user-icons\\user-icons-2.png",
+   "x": 654,
+   "y": 409,
+   "w": 84,
+   "h": 86
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    695,
+    452,
+    1
+   ],
+   [
+    719,
+    426,
+    1
+   ],
+   [
+    673,
+    426,
+    1
+   ],
+   [
+    721,
+    474,
+    1
+   ],
+   [
+    669,
+    472,
+    1
+   ],
+   [
+    695,
+    484,
+    1
+   ],
+   [
+    648,
+    403,
+    0
+   ],
+   [
+    744,
+    403,
+    0
+   ],
+   [
+    648,
+    501,
+    0
+   ],
+   [
+    744,
+    501,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "sello",
+  "caja": [
+   513,
+   503,
+   660,
+   651
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\1-crecimiento\\piezas\\user-icons\\user-icons-4.png",
+   "x": 513,
+   "y": 503,
+   "w": 147,
+   "h": 148
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    585,
+    577,
+    1
+   ],
+   [
+    629,
+    535,
+    1
+   ],
+   [
+    629,
+    619,
+    1
+   ],
+   [
+    543,
+    535,
+    1
+   ],
+   [
+    543,
+    619,
+    1
+   ],
+   [
+    585,
+    519,
+    1
+   ],
+   [
+    507,
+    497,
+    0
+   ],
+   [
+    666,
+    497,
+    0
+   ],
+   [
+    507,
+    657,
+    0
+   ],
+   [
+    666,
+    657,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "engranaje",
+  "caja": [
+   293,
+   462,
+   387,
+   558
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\1-crecimiento\\piezas\\gear-icon.png",
+   "x": 293,
+   "y": 462,
+   "w": 94,
+   "h": 96
+  },
+  "huecos": false,
+  "semillaHueco": [
+   340,
+   510
+  ],
+  "puntos": [
+   [
+    355,
+    494,
+    1
+   ],
+   [
+    313,
+    534,
+    1
+   ],
+   [
+    365,
+    536,
+    1
+   ],
+   [
+    315,
+    484,
+    1
+   ],
+   [
+    339,
+    546,
+    1
+   ],
+   [
+    305,
+    508,
+    1
+   ],
+   [
+    287,
+    456,
+    0
+   ],
+   [
+    393,
+    456,
+    0
+   ],
+   [
+    287,
+    564,
+    0
+   ],
+   [
+    393,
+    564,
+    0
+   ]
+  ]
+ }
+]

@@ -222,6 +222,7 @@ const AvFinanzas = crearComponente<AvFinanzasProps>(import.meta.url, 'av-finanza
       onav-factura-form-cerrar=${() => ($('form-factura').props = { abierto: false })}
       onav-factura-form-error=${(e: Event) => avisar((e as Detalle<{ mensaje: string }>).detail.mensaje, 'warning')}>
       <iswc-page-header id="cabecera">
+        <av-escena slot="ilustracion" escena="finanzas"></av-escena>
         <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirFactura(null)}><iswc-icon slot="start" icon="mdi:file-document-plus-outline"></iswc-icon>Nueva factura</iswc-button>
         <iswc-button variant="compact" slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirTransaccion(null)}><iswc-icon slot="start" icon="mdi:plus-circle-outline"></iswc-icon>Nueva transacción</iswc-button>

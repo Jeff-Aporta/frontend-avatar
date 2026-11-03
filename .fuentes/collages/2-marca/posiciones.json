@@ -1,0 +1,64 @@
+{
+ "original": {
+  "w": 695,
+  "h": 770
+ },
+ "escala": 1,
+ "metodo": "croma",
+ "piezas": [
+  {
+   "pieza": "color/figura-1.png",
+   "x": 151,
+   "y": 139,
+   "w": 435,
+   "h": 441,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "color/figura-2.png",
+   "x": 540,
+   "y": 307,
+   "w": 77,
+   "h": 313,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "color/figura-3.png",
+   "x": 90,
+   "y": 460,
+   "w": 162,
+   "h": 166,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "color/figura-4.png",
+   "x": 445,
+   "y": 417,
+   "w": 77,
+   "h": 203,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "color/figura-5.png",
+   "x": 351,
+   "y": 506,
+   "w": 77,
+   "h": 114,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "color/figura-6.png",
+   "x": 487,
+   "y": 159,
+   "w": 104,
+   "h": 102,
+   "escala": 1,
+   "error": 0
+  }
+ ]
+}

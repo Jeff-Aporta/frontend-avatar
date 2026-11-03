@@ -15,7 +15,7 @@ Todas las medidas en em: escala con el font-size del contexto.
 <av-logo>
   #shadow-root
     <span part="logo" role="img" aria-label="Avatar">
-      <svg part="marca"> hexágono · monograma · órbita · satélite
+      <svg part="marca"> pierna izquierda · pliegue · pierna derecha · brillo
       <span part="nombre">Avatar</span>   (con wordmark)
 ```
 

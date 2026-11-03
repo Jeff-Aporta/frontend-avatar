@@ -1,0 +1,99 @@
+{
+ "original": {
+  "w": 849,
+  "h": 855
+ },
+ "escala": 0.8800000000000003,
+ "piezas": [
+  {
+   "pieza": "background.png",
+   "x": 30,
+   "y": 26,
+   "w": 816,
+   "h": 815,
+   "escala": 0.85,
+   "error": 27
+  },
+  {
+   "pieza": "bar-chart/bar-chart-1.png",
+   "x": 145,
+   "y": 523,
+   "w": 108,
+   "h": 102,
+   "escala": 0.895,
+   "error": 22
+  },
+  {
+   "pieza": "bar-chart/bar-chart-2.png",
+   "x": 615,
+   "y": 196,
+   "w": 130,
+   "h": 164,
+   "escala": 0.91,
+   "error": 35
+  },
+  {
+   "pieza": "bar-chart/bar-chart-3.png",
+   "x": 287,
+   "y": 401,
+   "w": 281,
+   "h": 156,
+   "escala": 0.88,
+   "error": 34
+  },
+  {
+   "pieza": "check-mark.png",
+   "x": 603,
+   "y": 561,
+   "w": 73,
+   "h": 59,
+   "escala": 0.85,
+   "error": 38
+  },
+  {
+   "pieza": "document-icon.png",
+   "x": 574,
+   "y": 483,
+   "w": 130,
+   "h": 174,
+   "escala": 0.88,
+   "error": 41
+  },
+  {
+   "pieza": "ii.png",
+   "x": 595,
+   "y": 500,
+   "w": 93,
+   "h": 55,
+   "escala": 0.91,
+   "error": 43
+  },
+  {
+   "pieza": "object.png",
+   "x": 297,
+   "y": 273,
+   "w": 74,
+   "h": 23,
+   "escala": 0.865,
+   "error": 48
+  },
+  {
+   "pieza": "upward-arrow/upward-arrow-1.png",
+   "x": 292,
+   "y": 334,
+   "w": 266,
+   "h": 188,
+   "escala": 0.88,
+   "error": 34
+  },
+  {
+   "pieza": "upward-arrow/upward-arrow-2.png",
+   "x": 658,
+   "y": 379,
+   "w": 77,
+   "h": 59,
+   "escala": 0.85,
+   "error": 56
+  }
+ ]
+}

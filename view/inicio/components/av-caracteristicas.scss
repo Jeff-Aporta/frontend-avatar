@@ -16,6 +16,44 @@ iswc-heading {
   box-sizing: border-box;
 }
 
+/* Con escena: ilustración a un lado (≈ 2/5) y título + rejilla al otro; en celular, la ilustración arriba. */
+.seccion:not([data-escena="no"]) {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  align-items: center;
+  gap: t.esp(8);
+
+  .rejilla {
+    grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+  }
+}
+
+.seccion[data-escena="derecha"] {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+
+  .ilustracion {
+    order: 2;
+  }
+}
+
+.ilustracion {
+  justify-self: center;
+  width: 100%;
+  max-width: 30em;
+}
+
+@media (max-width: 52em) {
+  .seccion:not([data-escena="no"]),
+  .seccion[data-escena="derecha"] {
+    grid-template-columns: 1fr;
+
+    .ilustracion {
+      order: 0;
+      max-width: 22em;
+    }
+  }
+}
+
 .titulo {
   color: inherit;
   @include m.titulo;

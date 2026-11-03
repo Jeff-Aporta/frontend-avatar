@@ -1,0 +1,562 @@
+[
+ {
+  "id": "triangulo-arriba",
+  "caja": [
+   270,
+   123,
+   466,
+   225
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\5-tablero-rombos\\piezas\\teal-triangle\\teal-triangle-2.png",
+   "x": 270,
+   "y": 123,
+   "w": 196,
+   "h": 102
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    366,
+    187,
+    1
+   ],
+   [
+    446,
+    213,
+    1
+   ],
+   [
+    288,
+    213,
+    1
+   ],
+   [
+    368,
+    135,
+    1
+   ],
+   [
+    412,
+    179,
+    1
+   ],
+   [
+    320,
+    181,
+    1
+   ],
+   [
+    264,
+    117,
+    0
+   ],
+   [
+    472,
+    117,
+    0
+   ],
+   [
+    264,
+    231,
+    0
+   ],
+   [
+    472,
+    231,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "triangulo-abajo",
+  "caja": [
+   304,
+   585,
+   467,
+   670
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\5-tablero-rombos\\piezas\\teal-triangle\\teal-triangle-1.png",
+   "x": 304,
+   "y": 585,
+   "w": 163,
+   "h": 85
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    385,
+    618,
+    1
+   ],
+   [
+    319,
+    596,
+    1
+   ],
+   [
+    449,
+    596,
+    1
+   ],
+   [
+    383,
+    658,
+    1
+   ],
+   [
+    347,
+    624,
+    1
+   ],
+   [
+    423,
+    622,
+    1
+   ],
+   [
+    298,
+    579,
+    0
+   ],
+   [
+    473,
+    579,
+    0
+   ],
+   [
+    298,
+    676,
+    0
+   ],
+   [
+    473,
+    676,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "triangulo-izq",
+  "caja": [
+   91,
+   344,
+   151,
+   454
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\5-tablero-rombos\\piezas\\teal-triangle\\teal-triangle-3.png",
+   "x": 91,
+   "y": 344,
+   "w": 60,
+   "h": 110
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    128,
+    399,
+    1
+   ],
+   [
+    142,
+    355,
+    1
+   ],
+   [
+    142,
+    443,
+    1
+   ],
+   [
+    98,
+    399,
+    1
+   ],
+   [
+    124,
+    373,
+    1
+   ],
+   [
+    124,
+    425,
+    1
+   ],
+   [
+    85,
+    338,
+    0
+   ],
+   [
+    157,
+    338,
+    0
+   ],
+   [
+    85,
+    460,
+    0
+   ],
+   [
+    157,
+    460,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "triangulo-der",
+  "caja": [
+   598,
+   357,
+   651,
+   453
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\5-tablero-rombos\\piezas\\teal-triangle\\teal-triangle-5.png",
+   "x": 598,
+   "y": 357,
+   "w": 53,
+   "h": 96
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    618,
+    405,
+    1
+   ],
+   [
+    604,
+    367,
+    1
+   ],
+   [
+    604,
+    443,
+    1
+   ],
+   [
+    642,
+    403,
+    1
+   ],
+   [
+    624,
+    427,
+    1
+   ],
+   [
+    622,
+    383,
+    1
+   ],
+   [
+    592,
+    351,
+    0
+   ],
+   [
+    657,
+    351,
+    0
+   ],
+   [
+    592,
+    459,
+    0
+   ],
+   [
+    657,
+    459,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "triangulo-sup",
+  "caja": [
+   181,
+   157,
+   255,
+   228
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\5-tablero-rombos\\piezas\\teal-triangle\\teal-triangle-4.png",
+   "x": 181,
+   "y": 157,
+   "w": 74,
+   "h": 71
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    217,
+    199,
+    1
+   ],
+   [
+    243,
+    215,
+    1
+   ],
+   [
+    193,
+    217,
+    1
+   ],
+   [
+    219,
+    171,
+    1
+   ],
+   [
+    213,
+    215,
+    1
+   ],
+   [
+    227,
+    185,
+    1
+   ],
+   [
+    175,
+    151,
+    0
+   ],
+   [
+    261,
+    151,
+    0
+   ],
+   [
+    175,
+    234,
+    0
+   ],
+   [
+    261,
+    234,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "dona",
+  "caja": [
+   196,
+   300,
+   372,
+   452
+  ],
+  "puntos": [
+   [
+    285,
+    340,
+    1
+   ],
+   [
+    230,
+    380,
+    1
+   ],
+   [
+    285,
+    425,
+    1
+   ],
+   [
+    190,
+    294,
+    0
+   ],
+   [
+    378,
+    294,
+    0
+   ],
+   [
+    190,
+    458,
+    0
+   ],
+   [
+    378,
+    458,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ },
+ {
+  "id": "barras",
+  "caja": [
+   405,
+   380,
+   540,
+   530
+  ],
+  "puntos": [
+   [
+    432,
+    480,
+    1
+   ],
+   [
+    478,
+    460,
+    1
+   ],
+   [
+    520,
+    445,
+    1
+   ],
+   [
+    399,
+    374,
+    0
+   ],
+   [
+    546,
+    374,
+    0
+   ],
+   [
+    399,
+    536,
+    0
+   ],
+   [
+    546,
+    536,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ },
+ {
+  "id": "circulo-mas",
+  "caja": [
+   540,
+   150,
+   620,
+   232
+  ],
+  "puntos": [
+   [
+    580,
+    191,
+    1
+   ],
+   [
+    534,
+    144,
+    0
+   ],
+   [
+    626,
+    144,
+    0
+   ],
+   [
+    534,
+    238,
+    0
+   ],
+   [
+    626,
+    238,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ },
+ {
+  "id": "bolita-teal",
+  "caja": [
+   120,
+   145,
+   155,
+   182
+  ],
+  "puntos": [
+   [
+    137.5,
+    163.5,
+    1
+   ],
+   [
+    114,
+    139,
+    0
+   ],
+   [
+    161,
+    139,
+    0
+   ],
+   [
+    114,
+    188,
+    0
+   ],
+   [
+    161,
+    188,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ },
+ {
+  "id": "bolita-oscura",
+  "caja": [
+   258,
+   136,
+   284,
+   162
+  ],
+  "puntos": [
+   [
+    271,
+    149,
+    1
+   ],
+   [
+    252,
+    130,
+    0
+   ],
+   [
+    290,
+    130,
+    0
+   ],
+   [
+    252,
+    168,
+    0
+   ],
+   [
+    290,
+    168,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ }
+]

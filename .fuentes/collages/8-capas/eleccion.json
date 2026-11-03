@@ -1,0 +1,18 @@
+[
+ {
+  "id": "tarjeta-fondo",
+  "src": "teal-square-icon/teal-square-icon-2.png"
+ },
+ {
+  "id": "tarjeta-media",
+  "src": "teal-square-icon/teal-square-icon-3.png"
+ },
+ {
+  "id": "tarjeta-frente",
+  "src": "teal-square-icon/teal-square-icon-1.png"
+ },
+ {
+  "id": "diana",
+  "src": "target-circle.png"
+ }
+]

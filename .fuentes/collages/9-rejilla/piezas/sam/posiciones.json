@@ -1,0 +1,51 @@
+{
+ "original": {
+  "w": 853,
+  "h": 855
+ },
+ "escala": 1,
+ "metodo": "sam",
+ "modelo": "Xenova/slimsam-77-uniform",
+ "piezas": [
+  {
+   "pieza": "tarjeta-barras.png",
+   "x": 371,
+   "y": 163,
+   "w": 232,
+   "h": 239,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.99
+  },
+  {
+   "pieza": "tarjeta-barras-2.png",
+   "x": 113,
+   "y": 447,
+   "w": 181,
+   "h": 205,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.004
+  },
+  {
+   "pieza": "tarjeta-area.png",
+   "x": 540,
+   "y": 380,
+   "w": 197,
+   "h": 134,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.993
+  },
+  {
+   "pieza": "tarjeta-torta.png",
+   "x": 144,
+   "y": 178,
+   "w": 195,
+   "h": 195,
+   "escala": 1,
+   "error": 0,
+   "iou": 1.003
+  }
+ ]
+}

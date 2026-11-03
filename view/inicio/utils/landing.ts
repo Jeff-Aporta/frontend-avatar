@@ -72,7 +72,7 @@ export function pilares(): Pilar[] {
   ];
 }
 
-/** Fotos de la franja de comunidad (assets/img/personas). */
+/** Avatares Corporate Memphis de la comunidad (assets/img/personas-memphis, 128 px: nítidos hasta 2.5× de densidad; hay 256 px). Salen de las fotos de assets/img/personas por img2img (MiniMax). */
 export function personas(cantidad = 12): string[] {
-  return Array.from({ length: cantidad }, (_, i) => `assets/img/personas/persona_${i + 1}.jpg`);
+  return Array.from({ length: cantidad }, (_, i) => `assets/img/personas-memphis/persona_${i + 1}-128.webp`);
 }

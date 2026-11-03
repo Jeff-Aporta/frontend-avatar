@@ -1,0 +1,89 @@
+{
+ "original": {
+  "w": 854,
+  "h": 855
+ },
+ "escala": 1,
+ "metodo": "fondo+sam",
+ "piezas": [
+  {
+   "pieza": "fondo.png",
+   "x": 0,
+   "y": 0,
+   "w": 854,
+   "h": 855,
+   "escala": 1,
+   "error": 0
+  },
+  {
+   "pieza": "sam/ventana-clara.png",
+   "x": 238,
+   "y": 242,
+   "w": 315,
+   "h": 221,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.959
+  },
+  {
+   "pieza": "sam/ventana-oscura.png",
+   "x": 442,
+   "y": 332,
+   "w": 267,
+   "h": 231,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.952
+  },
+  {
+   "pieza": "sam/persona-arriba.png",
+   "x": 568,
+   "y": 172,
+   "w": 91,
+   "h": 177,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.894
+  },
+  {
+   "pieza": "sam/grupo-izq.png",
+   "x": 152,
+   "y": 512,
+   "w": 173,
+   "h": 157,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.799
+  },
+  {
+   "pieza": "sam/grupo-der.png",
+   "x": 436,
+   "y": 512,
+   "w": 179,
+   "h": 157,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.77
+  },
+  {
+   "pieza": "sam/circulo-der.png",
+   "x": 638,
+   "y": 158,
+   "w": 107,
+   "h": 91,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.998
+  },
+  {
+   "pieza": "sam/circulo-izq.png",
+   "x": 142,
+   "y": 142,
+   "w": 97,
+   "h": 101,
+   "escala": 1,
+   "error": 0,
+   "iou": 0.963
+  }
+ ]
+}

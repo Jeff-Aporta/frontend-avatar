@@ -264,6 +264,7 @@ const AvInventario = crearComponente<AvInventarioProps>(import.meta.url, 'av-inv
       onav-pedido-guardar=${guardarPedido} onav-pedido-eliminar=${eliminarPedido} onav-pedido-form-cerrar=${cerrar('form-pedido')} onav-pedido-form-error=${aviso}
       onav-proveedor-guardar=${guardarProveedor} onav-proveedor-eliminar=${eliminarProveedor} onav-proveedor-form-cerrar=${cerrar('form-proveedor')} onav-proveedor-form-error=${aviso}>
       <iswc-page-header id="cabecera">
+        <av-escena slot="ilustracion" escena="inventario"></av-escena>
         <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirMovimiento(null, 'entrada')}><iswc-icon slot="start" icon="mdi:swap-vertical-bold"></iswc-icon>Movimiento</iswc-button>
         <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => void abrirPedido(null)}><iswc-icon slot="start" icon="mdi:truck-plus-outline"></iswc-icon>Pedido</iswc-button>

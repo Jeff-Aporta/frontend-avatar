@@ -1,0 +1,444 @@
+[
+ {
+  "id": "persona-1",
+  "caja": [
+   165,
+   223,
+   316,
+   454
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\14-comunidad\\piezas\\person-with-short-hair\\person-with-short-hair-2.png",
+   "x": 165,
+   "y": 223,
+   "w": 151,
+   "h": 231
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    255,
+    321,
+    1
+   ],
+   [
+    299,
+    429,
+    1
+   ],
+   [
+    181,
+    241,
+    1
+   ],
+   [
+    225,
+    427,
+    1
+   ],
+   [
+    183,
+    315,
+    1
+   ],
+   [
+    299,
+    365,
+    1
+   ],
+   [
+    159,
+    217,
+    0
+   ],
+   [
+    322,
+    217,
+    0
+   ],
+   [
+    159,
+    460,
+    0
+   ],
+   [
+    322,
+    460,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "persona-2",
+  "caja": [
+   454,
+   226,
+   603,
+   453
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\14-comunidad\\piezas\\person-with-short-hair\\person-with-short-hair-5.png",
+   "x": 454,
+   "y": 226,
+   "w": 149,
+   "h": 227
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    512,
+    318,
+    1
+   ],
+   [
+    588,
+    242,
+    1
+   ],
+   [
+    584,
+    314,
+    1
+   ],
+   [
+    520,
+    250,
+    1
+   ],
+   [
+    544,
+    376,
+    1
+   ],
+   [
+    472,
+    366,
+    1
+   ],
+   [
+    448,
+    220,
+    0
+   ],
+   [
+    609,
+    220,
+    0
+   ],
+   [
+    448,
+    459,
+    0
+   ],
+   [
+    609,
+    459,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "persona-3",
+  "caja": [
+   440,
+   358,
+   579,
+   568
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\14-comunidad\\piezas\\person-with-short-hair\\person-with-short-hair-6.png",
+   "x": 440,
+   "y": 358,
+   "w": 139,
+   "h": 210
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    505,
+    469,
+    1
+   ],
+   [
+    499,
+    371,
+    1
+   ],
+   [
+    477,
+    547,
+    1
+   ],
+   [
+    563,
+    513,
+    1
+   ],
+   [
+    453,
+    493,
+    1
+   ],
+   [
+    521,
+    419,
+    1
+   ],
+   [
+    434,
+    352,
+    0
+   ],
+   [
+    585,
+    352,
+    0
+   ],
+   [
+    434,
+    574,
+    0
+   ],
+   [
+    585,
+    574,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "persona-4",
+  "caja": [
+   190,
+   358,
+   330,
+   566
+  ],
+  "segmento": {
+   "src": "D:\\Dev\\avatar\\frontend-avatar\\.fuentes\\collages\\14-comunidad\\piezas\\person-with-long-hair\\person-with-long-hair-1.png",
+   "x": 190,
+   "y": 358,
+   "w": 140,
+   "h": 208
+  },
+  "huecos": false,
+  "semillaHueco": null,
+  "puntos": [
+   [
+    265,
+    471,
+    1
+   ],
+   [
+    259,
+    371,
+    1
+   ],
+   [
+    291,
+    545,
+    1
+   ],
+   [
+    205,
+    511,
+    1
+   ],
+   [
+    315,
+    495,
+    1
+   ],
+   [
+    277,
+    421,
+    1
+   ],
+   [
+    184,
+    352,
+    0
+   ],
+   [
+    336,
+    352,
+    0
+   ],
+   [
+    184,
+    572,
+    0
+   ],
+   [
+    336,
+    572,
+    0
+   ]
+  ]
+ },
+ {
+  "id": "persona-centro",
+  "caja": [
+   300,
+   186,
+   444,
+   372
+  ],
+  "puntos": [
+   [
+    372,
+    230,
+    1
+   ],
+   [
+    372,
+    330,
+    1
+   ],
+   [
+    294,
+    180,
+    0
+   ],
+   [
+    450,
+    180,
+    0
+   ],
+   [
+    294,
+    378,
+    0
+   ],
+   [
+    450,
+    378,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ },
+ {
+  "id": "persona-abajo",
+  "caja": [
+   300,
+   388,
+   444,
+   592
+  ],
+  "puntos": [
+   [
+    372,
+    430,
+    1
+   ],
+   [
+    372,
+    540,
+    1
+   ],
+   [
+    294,
+    382,
+    0
+   ],
+   [
+    450,
+    382,
+    0
+   ],
+   [
+    294,
+    598,
+    0
+   ],
+   [
+    450,
+    598,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ },
+ {
+  "id": "rombo-rosa",
+  "caja": [
+   92,
+   92,
+   204,
+   198
+  ],
+  "puntos": [
+   [
+    148,
+    145,
+    1
+   ],
+   [
+    86,
+    86,
+    0
+   ],
+   [
+    210,
+    86,
+    0
+   ],
+   [
+    86,
+    204,
+    0
+   ],
+   [
+    210,
+    204,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ },
+ {
+  "id": "rombo-morado",
+  "caja": [
+   566,
+   586,
+   664,
+   684
+  ],
+  "puntos": [
+   [
+    615,
+    635,
+    1
+   ],
+   [
+    560,
+    580,
+    0
+   ],
+   [
+    670,
+    580,
+    0
+   ],
+   [
+    560,
+    690,
+    0
+   ],
+   [
+    670,
+    690,
+    0
+   ]
+  ],
+  "huecos": false,
+  "semillaHueco": null
+ }
+]

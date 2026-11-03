@@ -214,6 +214,7 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
       onav-miembros-invitar=${abrirInvitar} onav-invitar-guardar=${invitar} onav-invitar-cerrar=${() => (q<ConProps>('#invitar-form')!.props = { abierto: false })} onav-miembro-quitar=${quitarMiembro}
       onav-equipo-guardar=${guardarEquipo} onav-equipo-eliminar=${eliminarEquipo} onav-integrante-agregar=${agregarIntegrante} onav-integrante-quitar=${quitarIntegrante}>
       <iswc-page-header id="cabecera">
+        <av-escena slot="ilustracion" escena="organizacion"></av-escena>
         ${gestiona ? html`<iswc-button slot="acciones" variant="outlined compact" color="neutral" id="nueva-empresa" oniswc-click=${() => abrirEmpresa({ iempresa: null, nombre: '', nit: '', sector: '', descripcion: '' })}><iswc-icon slot="start" icon="mdi:plus"></iswc-icon>Nueva empresa</iswc-button>` : null}
         <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
       </iswc-page-header>
@@ -252,9 +253,8 @@ const AvOrganizacion = crearComponente<AvOrganizacionProps>(import.meta.url, 'av
   if (fichaVacia) fichaVacia.props = { estado: 'cargando' };
   if (!iempresa) return;
   void (async () => {
-    await cargarEmpresa();
-    await cargarMiembros();
-    await cargarEquipos();
+    // tres consultas independientes: en paralelo, no en cascada
+    await Promise.all([cargarEmpresa(), cargarMiembros(), cargarEquipos()]);
     // Paleta global (Ctrl+K) → «Invitar a alguien a la empresa».
     if (tomarIntencion('organizacion') === 'invitar' && gestiona) await abrirInvitar();
   })();

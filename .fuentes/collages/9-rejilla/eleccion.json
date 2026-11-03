@@ -1,0 +1,33 @@
+[
+ {
+  "id": "tarjeta-torta",
+  "caja": [
+   148,
+   182,
+   334,
+   368
+  ],
+  "puntos": [
+   [
+    241,
+    275
+   ],
+   [
+    175,
+    210
+   ]
+  ]
+ },
+ {
+  "id": "tarjeta-barras",
+  "src": "bar-chart/bar-chart-1.png"
+ },
+ {
+  "id": "tarjeta-barras-2",
+  "src": "illegible/illegible-2.png"
+ },
+ {
+  "id": "tarjeta-area",
+  "src": "illegible/illegible-1.png"
+ }
+]

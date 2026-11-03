@@ -73,6 +73,7 @@ const AvCanales = crearComponente<AvCanalesProps>(
         onav-canal-crear=${crear}
         onav-chat-abierto=${(e: Event) => ir('canales', (e as CustomEvent<{ icanal: string | null }>).detail.icanal)}>
         <iswc-page-header id="cabecera">
+          <av-escena slot="ilustracion" escena="canales"></av-escena>
           ${puedeCrear && vista === 'listo' ? html`<iswc-button slot="acciones" variant="soft compact" color="brand" oniswc-click=${() => { h.props = { formulario: true }; void cargarEquipos(); }}><iswc-icon slot="start" icon="mdi:pound-box-outline"></iswc-icon>Nuevo canal</iswc-button>` : null}
         </iswc-page-header>
         <iswc-callout class="aviso" color="warning" ?hidden=${!props.aviso}><strong slot="title">Chat</strong><span class="aviso-texto">${props.aviso}</span></iswc-callout>

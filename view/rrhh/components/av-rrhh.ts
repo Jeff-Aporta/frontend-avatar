@@ -249,6 +249,7 @@ const AvRrhh = crearComponente<AvRrhhProps>(import.meta.url, 'av-rrhh', { id: nu
       onav-solicitud-guardar=${guardarSolicitud} onav-solicitud-form-cerrar=${() => ($('form-solicitud').props = { abierto: false })} onav-solicitud-form-error=${aviso}
       onav-empleado-guardar=${guardarEmpleado} onav-empleado-eliminar=${eliminarEmpleado} onav-empleado-form-cerrar=${() => ($('form-empleado').props = { abierto: false })} onav-empleado-form-error=${aviso}>
       <iswc-page-header id="cabecera">
+        <av-escena slot="ilustracion" escena="rrhh"></av-escena>
         <iswc-button slot="acciones" variant="outlined compact" color="neutral" oniswc-click=${recargar}><iswc-icon slot="start" icon="mdi:refresh"></iswc-icon>Actualizar</iswc-button>
         <iswc-button slot="acciones" variant="outlined compact" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirSolicitud(null)}><iswc-icon slot="start" icon="mdi:calendar-plus"></iswc-icon>Nueva solicitud</iswc-button>
         <iswc-button variant="compact" slot="acciones" color="brand" ?disabled=${!puedeEscribir || !iempresa} oniswc-click=${() => abrirEmpleado(null)}><iswc-icon slot="start" icon="mdi:account-plus-outline"></iswc-icon>Nuevo empleado</iswc-button>

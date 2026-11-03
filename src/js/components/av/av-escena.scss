@@ -1,19 +1,29 @@
 @use "tokens" as t;
 @use "mixins" as m;
 
-/* av-escena — lienzo con proporción fija; las capas se ubican por su centro en % y escalan con el ancho. */
+/* av-escena — lienzo con proporción fija; cada capa = contenedor (posición + parallax) > .mov (loop). */
 :host {
   display: block;
   width: 100%;
   max-width: 34em;
+  /* Tono de origen de retazos y vectores (turquesa de los collages): se giran a la paleta activa. */
+  --_tono: calc((var(--iswc-brand-h, 180) - 180) * 1deg);
 }
 
+/* La escena entera se inclina hacia el cursor (--px/--py de core/paralaje.ts); al pasarle encima, las capas se acercan
+   según su profundidad. */
 .lienzo {
   position: relative;
   margin: 0;
   width: 100%;
   aspect-ratio: 1 / var(--proporcion, 1);
   isolation: isolate;
+  transform: perspective(70em) rotateY(calc(var(--px, 0) * 4deg)) rotateX(calc(var(--py, 0) * -3deg));
+  transform-style: preserve-3d;
+
+  &:hover .capa {
+    scale: calc(1 + var(--prof, 0.5) * 0.03);
+  }
 }
 
 .halo {
@@ -27,20 +37,114 @@
   filter: blur(1.4em);
 }
 
+/* En los collages el halo es más tenue: el original ya trae su luz y sus sombras. */
+[data-collage="1"] .halo {
+  opacity: 0.55;
+}
+
+/* Contenedor: esquina superior izquierda en % del lienzo (o centro con .centro) + parallax por profundidad. */
 .capa {
+  --_dx: calc(var(--px, 0) * var(--prof, 0.5) * 1.4em);
+  --_dy: calc(var(--py, 0) * var(--prof, 0.5) * 0.9em);
   position: absolute;
   left: var(--x);
   top: var(--y);
   width: var(--ancho);
+  height: var(--alto, auto);
   z-index: var(--z);
-  translate: -50% -50%;
-  rotate: var(--giro);
+  translate: var(--_dx) var(--_dy);
   user-select: none;
+  pointer-events: none;
+  /* Halar (av-escena.ts): desplazamiento aparte del parallax; al soltar vuelve con rebote elástico. */
+  transform: translate(var(--_hx, 0px), var(--_hy, 0px));
+  transition: scale 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &[data-arrastrable] {
+    pointer-events: auto;
+    cursor: grab;
+  }
+
+  /* Al tomarla no sube de capa: sigue en su z original. */
+  &[data-arrastrando] {
+    cursor: grabbing;
+    transition: scale 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &.centro {
+    translate: calc(-50% + var(--_dx)) calc(-50% + var(--_dy));
+  }
 }
 
-.pieza {
+.mov {
+  position: relative;
+  display: block;
+  width: 100%;
   height: auto;
-  filter: drop-shadow(0 0.5em 0.9em color-mix(in srgb, var(--iswc-accent) 22%, rgb(0 0 0 / 18%)));
+  rotate: var(--giro);
+}
+
+/* Radar / ondas: detrás del contenido, centrados en la capa, en el acento de la paleta. */
+.radar {
+  position: absolute;
+  inset: 8%;
+  z-index: -1;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 0.1em solid color-mix(in srgb, var(--iswc-accent) 45%, transparent);
+    background: color-mix(in srgb, var(--iswc-accent) 7%, transparent);
+    animation: av-radar 9s cubic-bezier(0.2, 0.6, 0.35, 1) infinite both;
+  }
+
+  &::after {
+    animation-delay: 0.8s;
+  }
+
+  /* Ondas: tres anillos finos continuos (el tercero es la sombra del contenedor). */
+  &[data-radar="ondas"] {
+    border-radius: 50%;
+    border: 0.08em solid color-mix(in srgb, var(--iswc-accent) 60%, transparent);
+    animation: av-onda 7.5s ease-out infinite both;
+    animation-delay: 5s;
+
+    &::before,
+    &::after {
+      background: none;
+      border-width: 0.08em;
+      animation: av-onda 7.5s ease-out infinite both;
+    }
+
+    &::after {
+      animation-delay: 2.5s;
+    }
+  }
+}
+
+img.mov {
+  filter: drop-shadow(0 0.5em 0.9em color-mix(in srgb, var(--iswc-accent) 18%, rgb(0 0 0 / 12%)));
+}
+
+/* Retazos y vectores: pintados en turquesa; se giran al tono de la paleta (como el banner del hero). */
+img.tenido {
+  filter: hue-rotate(var(--_tono)) drop-shadow(0 0.35em 0.6em rgb(0 0 0 / 8%));
+}
+
+[data-tipo="retazo"] img.tenido {
+  filter: hue-rotate(var(--_tono));
+}
+
+/* Tema oscuro: piezas pensadas para fondo claro se ocultan; los trazos azul marino ganan un contorno claro fino. */
+.capa[data-oscuro="ocultar"] {
+  opacity: calc(1 - var(--av-oscuro, 0));
+}
+
+.capa[data-oscuro="contorno"] img.tenido {
+  filter: hue-rotate(var(--_tono)) drop-shadow(0 0 0.03em rgb(255 255 255 / calc(var(--av-oscuro, 0) * 85%)));
 }
 
 /* Formas Memphis en los colores de la paleta: siguen al tema y a la paleta sin tocar las piezas. */
@@ -91,45 +195,208 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  [data-anim="flotar"] {
-    animation: flotar 6s ease-in-out var(--retraso) infinite;
+/* Dibujos de los collages, con los tokens de la paleta (ocupan toda su caja). */
+.dibujo {
+  --c: var(--iswc-accent);
+  box-sizing: border-box;
+  height: 100%;
+
+  /* Triángulos de contorno: el color recorta un triángulo hueco (máscara SVG en línea). */
+  &[data-dibujo^="triangulo-linea"] {
+    background: var(--c);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M50 8 94 92H6Z' fill='none' stroke='%23000' stroke-width='9' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   }
 
-  [data-anim="mecer"] {
-    animation: mecer 7s ease-in-out var(--retraso) infinite;
+  &[data-dibujo="triangulo-linea-abajo"] {
+    scale: 1 -1;
   }
 
-  [data-anim="girar"] {
-    animation: girar 18s linear var(--retraso) infinite;
+  &[data-dibujo="triangulo-abajo"] {
+    background: linear-gradient(color-mix(in srgb, var(--c) 35%, transparent), color-mix(in srgb, var(--c) 12%, transparent));
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
   }
 
-  [data-anim="latir"] {
-    animation: latir 4s ease-in-out var(--retraso) infinite;
+  /* Nube punteada (halftone) en el acento, con borde orgánico por máscara. */
+  &[data-dibujo="punteado"] {
+    background: radial-gradient(circle, color-mix(in srgb, var(--c) 55%, transparent) 0.11em, transparent 0.13em) 0 0 / 0.42em 0.42em;
+    mask: radial-gradient(60% 70% at 62% 55%, #000 55%, transparent 72%), radial-gradient(40% 55% at 22% 70%, #000 40%, transparent 70%);
+  }
+
+  &[data-dibujo="reticula"] {
+    background:
+      repeating-linear-gradient(90deg, color-mix(in srgb, var(--iswc-text) 12%, transparent) 0 0.06em, transparent 0.06em 18%),
+      repeating-linear-gradient(color-mix(in srgb, var(--iswc-text) 12%, transparent) 0 0.06em, transparent 0.06em 22%);
+    mask: radial-gradient(closest-side, #000 55%, transparent);
+  }
+
+  &[data-dibujo="aro"] {
+    border-radius: 50%;
+    border: 0.16em solid var(--c);
+    aspect-ratio: 1;
+    height: auto;
+  }
+
+  &[data-dibujo="sombra"] {
+    border-radius: 50%;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--iswc-text) 14%, transparent), transparent);
+  }
+
+  &[data-dibujo="linea-h"],
+  &[data-dibujo="linea-v"] {
+    background: color-mix(in srgb, var(--c) 75%, transparent);
+    border-radius: 1em;
+  }
+
+  /* Tarjeta redonda de comunidad: disco claro con retícula y el grupo de personas en el acento. */
+  &[data-dibujo="tarjeta-comunidad"] {
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 0.6em solid var(--iswc-surface, #fff);
+    background:
+      linear-gradient(90deg, transparent calc(50% - 0.04em), color-mix(in srgb, var(--iswc-text) 18%, transparent) 0 calc(50% + 0.04em), transparent 0),
+      linear-gradient(transparent calc(50% - 0.04em), color-mix(in srgb, var(--iswc-text) 18%, transparent) 0 calc(50% + 0.04em), transparent 0),
+      color-mix(in srgb, var(--iswc-surface, #fff) 92%, var(--c));
+    box-shadow: 0 0.8em 1.6em rgb(0 0 0 / 12%);
+    color: var(--c);
+
+    iswc-icon {
+      font-size: 4.2em;
+    }
+  }
+
+  /* Tarjeta de video: ventana con barra de tres puntos y pantalla gris (el play es un retazo encima). */
+  &[data-dibujo="tarjeta-video"] {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0.4em;
+    padding: 0.5em 0.6em 0.7em;
+    border-radius: 0.9em;
+    background: var(--iswc-surface, #fff);
+    box-shadow: 0 0.8em 1.6em rgb(0 0 0 / 12%);
+
+    .barra {
+      height: 0.5em;
+      background: radial-gradient(circle, color-mix(in srgb, var(--iswc-text) 45%, transparent) 0.18em, transparent 0.2em) 0 50% / 0.55em 100% repeat-x;
+      width: 1.6em;
+    }
+
+    .pantalla {
+      border-radius: 0.4em;
+      border: 0.12em solid color-mix(in srgb, var(--iswc-text) 55%, transparent);
+      background: color-mix(in srgb, var(--iswc-text) 14%, var(--iswc-surface, #fff));
+    }
   }
 }
 
-@keyframes flotar {
+/* Loops (los combina core/escenas.ts → animacionCss, en el style de .mov). Sin depender de prefers-reduced-motion,
+   como el parallax de la hoja de vida: Windows con las animaciones apagadas activa esa preferencia y todo quedaba quieto.
+   Cada grupo anima una sola propiedad: translate (flotar, marea, deriva), rotate (mecer, oscilar, girar),
+   scale (latir, rebote) y opacity (alfa). */
+@keyframes av-flotar {
   50% {
-    translate: -50% -58%;
+    translate: 0 -3%;
   }
 }
 
-@keyframes mecer {
+@keyframes av-marea {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  25% {
+    translate: 1.2% -1%;
+  }
+
   50% {
-    rotate: calc(var(--giro) + 8deg);
-    translate: -46% -52%;
+    translate: 0 -1.8%;
+  }
+
+  75% {
+    translate: -1.2% -0.8%;
   }
 }
 
-@keyframes girar {
+@keyframes av-deriva {
+  50% {
+    translate: 2% 0;
+  }
+}
+
+@keyframes av-mecer {
+  50% {
+    rotate: calc(var(--giro) + 4deg);
+  }
+}
+
+@keyframes av-oscilar {
+  25% {
+    rotate: calc(var(--giro) + 3deg);
+  }
+
+  75% {
+    rotate: calc(var(--giro) - 3deg);
+  }
+}
+
+@keyframes av-girar {
   to {
     rotate: calc(var(--giro) + 360deg);
   }
 }
 
-@keyframes latir {
+@keyframes av-latir {
   50% {
-    scale: 1.12;
+    scale: 1.03;
+  }
+}
+
+@keyframes av-rebote {
+  0%,
+  60%,
+  100% {
+    scale: 1;
+  }
+
+  30% {
+    scale: 1.05;
+  }
+}
+
+@keyframes av-alfa {
+  0%,
+  100% {
+    opacity: 0.82;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Radar: onda activa el 55.5 % del ciclo (5 s de 9 s, lenta) y luego 4 s de pausa. */
+@keyframes av-radar {
+  0% {
+    scale: 1;
+    opacity: 0.8;
+  }
+
+  55.5%,
+  100% {
+    scale: 1.6;
+    opacity: 0;
+  }
+}
+
+@keyframes av-onda {
+  0% {
+    scale: 0.95;
+    opacity: 0.45;
+  }
+
+  100% {
+    scale: 1.45;
+    opacity: 0;
   }
 }

@@ -1,0 +1,668 @@
+{
+  "$comentario": "Collages por retazos (ver collages.ts). recorte = [x, y, ancho, alto] del lienzo en px del original; cada pieza toma su posición de .fuentes/collages/<fuente>/posiciones.json. base + cortar: la pieza base pierde la silueta de las piezas que van encima (así el parallax no deja copias debajo). Las piezas de 2-marca salen del original por croma (extraer-por-color.ts): sus fragmentos del zip venían con fondo.",
+  "crecimiento": {
+    "fuente": "1-crecimiento",
+    "recorte": [
+      70,
+      150,
+      690,
+      570
+    ],
+    "piezas": [
+      {
+        "id": "persona-1",
+        "src": "sam/persona-1.png"
+      },
+      {
+        "id": "persona-2",
+        "src": "sam/persona-2.png"
+      },
+      {
+        "id": "persona-3",
+        "src": "sam/persona-3.png"
+      },
+      {
+        "id": "sello",
+        "src": "sam/sello.png"
+      },
+      {
+        "id": "engranaje",
+        "src": "sam/engranaje.png"
+      }
+    ]
+  },
+  "marca": {
+    "fuente": "2-marca",
+    "recorte": [
+      70,
+      120,
+      570,
+      520
+    ],
+    "piezas": [
+      {
+        "id": "a",
+        "src": "color/figura-1.png"
+      },
+      {
+        "id": "barra-1",
+        "src": "color/figura-5.png"
+      },
+      {
+        "id": "barra-2",
+        "src": "color/figura-4.png"
+      },
+      {
+        "id": "barra-3",
+        "src": "color/figura-2.png"
+      },
+      {
+        "id": "engranaje",
+        "src": "color/figura-3.png"
+      },
+      {
+        "id": "persona",
+        "src": "color/figura-6.png"
+      }
+    ]
+  },
+  "modulos": {
+    "fuente": "3-modulos",
+    "recorte": [
+      20,
+      30,
+      780,
+      790
+    ],
+    "piezas": [
+      {
+        "id": "tablero",
+        "src": "sam/tablero.png"
+      },
+      {
+        "id": "crecimiento",
+        "src": "sam/crecimiento.png"
+      },
+      {
+        "id": "logo",
+        "src": "sam/logo.png"
+      },
+      {
+        "id": "engranaje",
+        "src": "sam/engranaje.png"
+      },
+      {
+        "id": "play",
+        "src": "sam/play.png"
+      }
+    ]
+  },
+  "red": {
+    "fuente": "4-red",
+    "recorte": [
+      14,
+      60,
+      720,
+      600
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "mancha",
+          "logo",
+          "flecha",
+          "triangulo-1",
+          "triangulo-2",
+          "triangulo-3",
+          "circulo-1",
+          "circulo-2",
+          "circulo-3",
+          "torta",
+          "hoja",
+          "rombo"
+        ]
+      },
+      {
+        "id": "mancha",
+        "src": "sam/mancha.png"
+      },
+      {
+        "id": "hoja",
+        "src": "sam/hoja.png"
+      },
+      {
+        "id": "torta",
+        "src": "sam/torta.png"
+      },
+      {
+        "id": "flecha",
+        "src": "sam/flecha.png"
+      },
+      {
+        "id": "triangulo-1",
+        "src": "sam/triangulo-1.png"
+      },
+      {
+        "id": "triangulo-2",
+        "src": "sam/triangulo-2.png"
+      },
+      {
+        "id": "triangulo-3",
+        "src": "sam/triangulo-3.png"
+      },
+      {
+        "id": "circulo-1",
+        "src": "sam/circulo-1.png"
+      },
+      {
+        "id": "circulo-2",
+        "src": "sam/circulo-2.png"
+      },
+      {
+        "id": "circulo-3",
+        "src": "sam/circulo-3.png"
+      },
+      {
+        "id": "rombo",
+        "src": "sam/rombo.png"
+      },
+      {
+        "id": "logo",
+        "src": "sam/logo.png"
+      }
+    ]
+  },
+  "tablero-rombos": {
+    "fuente": "5-tablero-rombos",
+    "recorte": [
+      67,
+      91,
+      614,
+      619
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "triangulo-arriba",
+          "triangulo-abajo",
+          "triangulo-izq",
+          "triangulo-der",
+          "triangulo-sup",
+          "dona",
+          "barras",
+          "circulo-mas",
+          "bolita-teal",
+          "bolita-oscura"
+        ]
+      },
+      {
+        "id": "triangulo-arriba",
+        "src": "sam/triangulo-arriba.png"
+      },
+      {
+        "id": "triangulo-abajo",
+        "src": "sam/triangulo-abajo.png"
+      },
+      {
+        "id": "triangulo-izq",
+        "src": "sam/triangulo-izq.png"
+      },
+      {
+        "id": "triangulo-der",
+        "src": "sam/triangulo-der.png"
+      },
+      {
+        "id": "triangulo-sup",
+        "src": "sam/triangulo-sup.png"
+      },
+      {
+        "id": "dona",
+        "src": "sam/dona.png"
+      },
+      {
+        "id": "barras",
+        "src": "sam/barras.png"
+      },
+      {
+        "id": "circulo-mas",
+        "src": "sam/circulo-mas.png"
+      },
+      {
+        "id": "bolita-teal",
+        "src": "sam/bolita-teal.png"
+      },
+      {
+        "id": "bolita-oscura",
+        "src": "sam/bolita-oscura.png"
+      }
+    ]
+  },
+  "tablero-circulos": {
+    "fuente": "6-tablero-circulos",
+    "recorte": [
+      2,
+      42,
+      621,
+      568
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "circulo-grande",
+          "circulo-oscuro",
+          "circulito",
+          "rombo-izq",
+          "rombo-der",
+          "triangulo",
+          "diana",
+          "barras",
+          "montana"
+        ]
+      },
+      {
+        "id": "circulo-grande",
+        "src": "sam/circulo-grande.png"
+      },
+      {
+        "id": "circulo-oscuro",
+        "src": "sam/circulo-oscuro.png"
+      },
+      {
+        "id": "circulito",
+        "src": "sam/circulito.png"
+      },
+      {
+        "id": "rombo-izq",
+        "src": "sam/rombo-izq.png"
+      },
+      {
+        "id": "rombo-der",
+        "src": "sam/rombo-der.png"
+      },
+      {
+        "id": "triangulo",
+        "src": "sam/triangulo.png"
+      },
+      {
+        "id": "diana",
+        "src": "sam/diana.png"
+      },
+      {
+        "id": "barras",
+        "src": "sam/barras.png"
+      },
+      {
+        "id": "montana",
+        "src": "sam/montana.png"
+      }
+    ]
+  },
+  "empresa": {
+    "fuente": "7-empresa",
+    "recorte": [
+      17,
+      22,
+      750,
+      658
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "torta",
+          "check",
+          "grafica",
+          "mas-1",
+          "mas-2",
+          "mas-3"
+        ]
+      },
+      {
+        "id": "torta",
+        "src": "sam/torta.png"
+      },
+      {
+        "id": "check",
+        "src": "sam/check.png"
+      },
+      {
+        "id": "grafica",
+        "src": "sam/grafica.png"
+      },
+      {
+        "id": "mas-1",
+        "src": "sam/mas-1.png"
+      },
+      {
+        "id": "mas-2",
+        "src": "sam/mas-2.png"
+      },
+      {
+        "id": "mas-3",
+        "src": "sam/mas-3.png"
+      }
+    ]
+  },
+  "capas": {
+    "fuente": "8-capas",
+    "recorte": [
+      178,
+      185,
+      528,
+      486
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "tarjeta-fondo",
+          "tarjeta-media",
+          "tarjeta-frente",
+          "diana"
+        ]
+      },
+      {
+        "id": "tarjeta-fondo",
+        "src": "sam/tarjeta-fondo.png"
+      },
+      {
+        "id": "tarjeta-media",
+        "src": "sam/tarjeta-media.png"
+      },
+      {
+        "id": "tarjeta-frente",
+        "src": "sam/tarjeta-frente.png"
+      },
+      {
+        "id": "diana",
+        "src": "sam/diana.png"
+      }
+    ]
+  },
+  "rejilla": {
+    "fuente": "9-rejilla",
+    "recorte": [
+      79,
+      142,
+      739,
+      597
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "tarjeta-torta",
+          "tarjeta-barras",
+          "tarjeta-barras-2",
+          "tarjeta-area"
+        ]
+      },
+      {
+        "id": "tarjeta-torta",
+        "src": "sam/tarjeta-torta.png"
+      },
+      {
+        "id": "tarjeta-barras",
+        "src": "sam/tarjeta-barras.png"
+      },
+      {
+        "id": "tarjeta-barras-2",
+        "src": "sam/tarjeta-barras-2.png"
+      },
+      {
+        "id": "tarjeta-area",
+        "src": "sam/tarjeta-area.png"
+      }
+    ]
+  },
+  "reporte": {
+    "fuente": "10-reporte",
+    "recorte": [
+      96,
+      168,
+      674,
+      516
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "torta",
+          "flecha",
+          "documento",
+          "barras-der",
+          "barras-izq"
+        ]
+      },
+      {
+        "id": "torta",
+        "src": "sam/torta.png"
+      },
+      {
+        "id": "flecha",
+        "src": "sam/flecha.png"
+      },
+      {
+        "id": "documento",
+        "src": "sam/documento.png"
+      },
+      {
+        "id": "barras-der",
+        "src": "sam/barras-der.png"
+      },
+      {
+        "id": "barras-izq",
+        "src": "sam/barras-izq.png"
+      }
+    ]
+  },
+  "equipo-tablero": {
+    "fuente": "11-equipo-tablero",
+    "recorte": [
+      93,
+      92,
+      670,
+      685
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "persona-sentada",
+          "tablero-barras",
+          "torta",
+          "persona-izq",
+          "persona-agachada"
+        ]
+      },
+      {
+        "id": "persona-sentada",
+        "src": "sam/persona-sentada.png"
+      },
+      {
+        "id": "tablero-barras",
+        "src": "sam/tablero-barras.png"
+      },
+      {
+        "id": "torta",
+        "src": "sam/torta.png"
+      },
+      {
+        "id": "persona-izq",
+        "src": "sam/persona-izq.png"
+      },
+      {
+        "id": "persona-agachada",
+        "src": "sam/persona-agachada.png"
+      }
+    ]
+  },
+  "atencion": {
+    "fuente": "12-atencion",
+    "recorte": [
+      51,
+      112,
+      739,
+      641
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "documento",
+          "burbuja",
+          "persona-izq",
+          "persona-der"
+        ]
+      },
+      {
+        "id": "documento",
+        "src": "sam/documento.png"
+      },
+      {
+        "id": "burbuja",
+        "src": "sam/burbuja.png"
+      },
+      {
+        "id": "persona-izq",
+        "src": "sam/persona-izq.png"
+      },
+      {
+        "id": "persona-der",
+        "src": "sam/persona-der.png"
+      }
+    ]
+  },
+  "negocios": {
+    "fuente": "13-negocios",
+    "recorte": [
+      85,
+      122,
+      676,
+      613
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "ventana-clara",
+          "ventana-oscura",
+          "persona-arriba",
+          "grupo-izq",
+          "grupo-der",
+          "circulo-der",
+          "circulo-izq"
+        ]
+      },
+      {
+        "id": "ventana-clara",
+        "src": "sam/ventana-clara.png"
+      },
+      {
+        "id": "ventana-oscura",
+        "src": "sam/ventana-oscura.png"
+      },
+      {
+        "id": "persona-arriba",
+        "src": "sam/persona-arriba.png"
+      },
+      {
+        "id": "grupo-izq",
+        "src": "sam/grupo-izq.png"
+      },
+      {
+        "id": "grupo-der",
+        "src": "sam/grupo-der.png"
+      },
+      {
+        "id": "circulo-der",
+        "src": "sam/circulo-der.png"
+      },
+      {
+        "id": "circulo-izq",
+        "src": "sam/circulo-izq.png"
+      }
+    ]
+  },
+  "comunidad": {
+    "fuente": "14-comunidad",
+    "recorte": [
+      36,
+      40,
+      698,
+      651
+    ],
+    "piezas": [
+      {
+        "id": "base",
+        "src": "fondo.png",
+        "base": true,
+        "cortar": [
+          "persona-1",
+          "persona-2",
+          "persona-3",
+          "persona-4",
+          "persona-centro",
+          "persona-abajo",
+          "rombo-rosa",
+          "rombo-morado"
+        ]
+      },
+      {
+        "id": "persona-1",
+        "src": "sam/persona-1.png"
+      },
+      {
+        "id": "persona-2",
+        "src": "sam/persona-2.png"
+      },
+      {
+        "id": "persona-3",
+        "src": "sam/persona-3.png"
+      },
+      {
+        "id": "persona-4",
+        "src": "sam/persona-4.png"
+      },
+      {
+        "id": "persona-centro",
+        "src": "sam/persona-centro.png"
+      },
+      {
+        "id": "persona-abajo",
+        "src": "sam/persona-abajo.png"
+      },
+      {
+        "id": "rombo-rosa",
+        "src": "sam/rombo-rosa.png"
+      },
+      {
+        "id": "rombo-morado",
+        "src": "sam/rombo-morado.png"
+      }
+    ]
+  }
+}

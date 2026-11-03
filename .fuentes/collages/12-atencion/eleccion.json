@@ -1,0 +1,48 @@
+[
+ {
+  "id": "documento",
+  "src": "document-with-bar-chart.png"
+ },
+ {
+  "id": "burbuja",
+  "src": "chat-bubble-with-dots.png"
+ },
+ {
+  "id": "persona-izq",
+  "caja": [
+   78,
+   336,
+   262,
+   652
+  ],
+  "puntos": [
+   [
+    150,
+    420
+   ],
+   [
+    170,
+    590
+   ]
+  ]
+ },
+ {
+  "id": "persona-der",
+  "caja": [
+   578,
+   336,
+   762,
+   652
+  ],
+  "puntos": [
+   [
+    690,
+    420
+   ],
+   [
+    670,
+    590
+   ]
+  ]
+ }
+]

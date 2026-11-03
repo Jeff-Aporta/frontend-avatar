@@ -43,7 +43,7 @@ function hrefCss(moduleUrl: string, nombre: string): string {
 function descargarHoja(href: string): Promise<CSSStyleSheet | null> {
   const enCurso = CARGAS.get(href);
   if (enCurso) return enCurso;
-  const carga = fetch(href)
+  const carga = fetch(href, { signal: AbortSignal.timeout(15000) })
     .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`${r.status} ${href}`))))
     .then((texto) => {
       const hoja = new CSSStyleSheet();
