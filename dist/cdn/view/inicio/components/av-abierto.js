@@ -1,4 +1,4 @@
-import{crearComponente as t,define as c,html as e}from"../../../js/base/componente.js?v=ykdqqm";const o=t(import.meta.url,"av-abierto",{titulo:"",pilares:[]},(s,a)=>{s.append(e`
+import{crearComponente as t,define as c,html as e}from"../../../js/base/componente.js?v=3wyanc";const o=t(import.meta.url,"av-abierto",{titulo:"",pilares:[]},(s,a)=>{s.append(e`
     <section class="banda" part="banda" aria-labelledby="t">
       <div class="interior">
         <iswc-heading level="2" id="t" class="titulo">${a.titulo}</iswc-heading>

@@ -1,4 +1,4 @@
-import{crearComponente as n,define as s,emitir as t,html as i}from"../../base/componente.js?v=ykdqqm";const r=n(import.meta.url,"av-chat-reacciones",{ref:"",reacciones:[],propio:!1},(o,e,c)=>{e.reacciones.length&&o.append(i`
+import{crearComponente as n,define as s,emitir as t,html as i}from"../../base/componente.js?v=3wyanc";const r=n(import.meta.url,"av-chat-reacciones",{ref:"",reacciones:[],propio:!1},(o,e,c)=>{e.reacciones.length&&o.append(i`
     <div class="reacciones" part="reacciones" role="group" data-propio=${e.propio?"1":"0"}>
       ${e.reacciones.map(a=>i`
         <iswc-button class="reaccion" variant="row" color=${a.mia?"brand":"neutral"} shape="pill" data-mia=${a.mia?"1":"0"} aria-pressed=${a.mia?"true":"false"}

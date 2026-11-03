@@ -8,7 +8,7 @@
  *
  * Excepciones explícitas:
  *   - `js/boot.ts` → `dist/cdn/boot.js` (IIFE, síncrono en <head>).
- *   - `js/base/zod.ts` → empaquetado con zod (el navegador no resuelve `import "zod"`).
+ *   - `js/base/zod.ts` → `zod` queda externo: el import map de cada página lo apunta a la copia del kit (una sola en el navegador).
  *   - barriles `all.ts` → `all.min.js` (bundle de compatibilidad; app y cada vista). `@avatar/vendor` queda externo: lo resuelve el import map.
  *   - imports de vistas `../../../src/js/` → `../../../js/` en dist; y del shell hacia `view/`, un `../` menos.
  *
@@ -68,7 +68,7 @@ async function compilar(): Promise<number> {
     }
     const barril = basename(f) === 'all.ts';
     const r = await esbuild.build({
-      entryPoints: [f], bundle: barril || EMPAQUETADOS.has(f), write: false, format: 'esm', target: 'es2022', minify: true, define: DEFINE, ...(barril || EMPAQUETADOS.has(f) ? { external: ['@avatar/vendor'] } : {}),
+      entryPoints: [f], bundle: barril || EMPAQUETADOS.has(f), write: false, format: 'esm', target: 'es2022', minify: true, define: DEFINE, ...(barril || EMPAQUETADOS.has(f) ? { external: ['@avatar/vendor', 'zod'] } : {}),
     });
     // el barril de la app (components/<prefijo>/all.ts) es `all.min.js`; los de vistas y familias quedan junto a su carpeta
     const destino = barril && f === join(SRC_JS, 'components', PREFIJO, 'all.ts') ? join(OUT, 'all.min.js') : publicada(f, barril ? '.min.js' : '.js');

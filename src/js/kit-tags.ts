@@ -14,7 +14,8 @@
  */
 /**
  * Carga perezosa (estrategia del ecosistema):
- *   1. Arranque: SHELL_KIT_TAGS + APP_TAGS + la vista de la ruta actual (VIEW_KIT_TAGS[v] + VIEW_TAGS[v]).
+ *   1. Arranque: `shellInicial(v)` + APP_TAGS + la vista de la ruta actual (VIEW_KIT_TAGS[v] + VIEW_TAGS[v]); SHELL_DIFERIDO y lo
+ *      que falte del armazón se piden en reposo, sin bloquear el primer pintado.
  *   2. Al navegar: `<av-app>` pide la vista destino (y muestra un esqueleto hasta que su shell esté definido).
  *   3. En reposo (`requestIdleCallback`): precarga las vistas probables según haya o no sesión.
  * Un guardián (`tests/vistas/registro.test.ts`) verifica que cada `iswc-*` usado en una vista esté declarado en su
@@ -60,6 +61,20 @@ export const SHELL_KIT_TAGS = [
   'iswc-tenant-selector',
   'iswc-semantic-search',
 ] as const;
+
+/** Del armazón, nunca bloquean el primer pintado: se piden en reposo (paleta de comandos, búsqueda, selectores, panel lateral). */
+export const SHELL_DIFERIDO = ['iswc-command-palette', 'iswc-palette-selector', 'iswc-semantic-search', 'iswc-tenant-selector', 'iswc-drawer'] as const;
+/** Lo mínimo para pintar una vista pública ligera (la portada): barra, tema y piezas de la propia vista. */
+const SHELL_CRITICO = ['iswc-app-shell', 'iswc-doc-layout', 'iswc-doc-index', 'iswc-theme-toggle', 'iswc-icon', 'iswc-button', 'iswc-heading', 'iswc-spinner', 'iswc-skeleton', 'iswc-toast', 'iswc-avatar', 'iswc-tag', 'iswc-badge', 'iswc-card', 'iswc-dropdown', 'iswc-dropdown-item', 'iswc-session-menu'] as const;
+/** Vistas que arrancan solo con lo crítico. */
+const VISTAS_LIGERAS: readonly string[] = ['inicio'];
+
+/** Tags del armazón que bloquean el arranque de `vista`: las ligeras solo lo crítico; `'resto'` es lo que les falta (se pide en reposo). */
+export function shellInicial(vista: string): readonly string[] {
+  const sinDiferir = SHELL_KIT_TAGS.filter((t) => !(SHELL_DIFERIDO as readonly string[]).includes(t));
+  if (vista === 'resto') return sinDiferir;
+  return VISTAS_LIGERAS.includes(vista) ? SHELL_CRITICO : sinDiferir;
+}
 
 /** Hijos que registra su padre: nunca se piden al loader (lo rechaza y tumba la carga). */
 export const HIJOS_KIT = ['iswc-tab', 'iswc-tab-panel', 'iswc-kanban-column', 'iswc-kanban-card'] as const;

@@ -1,4 +1,4 @@
-import{crearComponente as p,define as n,html as r}from"../../base/componente.js?v=ykdqqm";const l=p(import.meta.url,"av-logo",{wordmark:!1,animado:!1},(t,a,o)=>{const s=a.wordmark||o.hasAttribute("wordmark"),e=a.animado||o.hasAttribute("animado");t.append(r`
+import{crearComponente as p,define as n,html as r}from"../../base/componente.js?v=3wyanc";const l=p(import.meta.url,"av-logo",{wordmark:!1,animado:!1},(t,a,o)=>{const s=a.wordmark||o.hasAttribute("wordmark"),e=a.animado||o.hasAttribute("animado");t.append(r`
     <span class="logo" part="logo" data-animado=${e?"1":"0"} role="img" aria-label="Avatar">
       <svg class="marca" part="marca" viewBox="0 0 64 64" aria-hidden="true">
         <defs>

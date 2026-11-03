@@ -1,4 +1,4 @@
-import{crearComponente as m,define as u,emitir as d,html as r}from"../../base/componente.js?v=ykdqqm";import{coloresDe as v,degradado as h,TEMAS as s}from"../../chat/temas.js?v=w8y4js";const w=m(import.meta.url,"av-chat-tema",{tema:null},(t,o,n)=>{const c=o.tema?.id??"",e=v(o.tema)??s[0],l=a=>d(n,"av-chat-tema",{tema:a}),i=a=>t.querySelector(`#${a}`).value,p=()=>l({id:"propio",color1:i("color1"),color2:i("color2"),angulo:Number(i("angulo"))||135});t.append(r`
+import{crearComponente as m,define as u,emitir as d,html as r}from"../../base/componente.js?v=3wyanc";import{coloresDe as v,degradado as h,TEMAS as s}from"../../chat/temas.js?v=w8y4js";const w=m(import.meta.url,"av-chat-tema",{tema:null},(t,o,n)=>{const c=o.tema?.id??"",e=v(o.tema)??s[0],l=a=>d(n,"av-chat-tema",{tema:a}),i=a=>t.querySelector(`#${a}`).value,p=()=>l({id:"propio",color1:i("color1"),color2:i("color2"),angulo:Number(i("angulo"))||135});t.append(r`
     <section class="tema" part="tema">
       <iswc-heading class="titulo" level="4">Tema del chat</iswc-heading>
       <div class="muestras" role="group" aria-label="Tema del chat">

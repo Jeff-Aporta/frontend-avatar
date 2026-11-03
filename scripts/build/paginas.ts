@@ -24,6 +24,13 @@ const hashes = (JSON.parse(readFileSync(join(ROOT, 'dist', 'cdn', 'asset-hashes.
 const SHA = /is-webcomponents\/([0-9a-f]{40})\//.exec(deno.imports['@iswc/component-schemas'] ?? '')?.[1];
 if (!SHA) throw new Error('paginas: no encuentro el SHA del kit en deno.json');
 const KIT = `https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@${SHA}/dist/cdn/core/loader.min.js`;
+// La copia de zod del kit con el MISMO ?v= que le pone su loader: misma URL = un solo módulo en el navegador.
+const HASHES_KIT = await (await fetch(KIT.replace('core/loader.min.js', 'asset-hashes.json'), { signal: AbortSignal.timeout(30000) })).json() as { files: Record<string, string> };
+const VERSION_ZOD = HASHES_KIT.files['lib/zod.min.js'];
+if (!VERSION_ZOD) throw new Error('paginas: el kit no publica lib/zod.min.js');
+const ZOD_KIT = KIT.replace('core/loader.min.js', `lib/zod.min.js?v=${VERSION_ZOD}`);
+// Primer pintado sin esperar al JS: el body sigue oculto hasta `data-app-ready`, pero se ve un armazón en CSS puro (barra y bloques).
+const ESQUELETO = `<style>html{background:#f2fbfa}html[data-theme=dark]{background:#0d1a1c}html:not([data-app-ready]) body::before{content:"";visibility:visible;position:fixed;inset:0;background:linear-gradient(#14b8a61f,#14b8a61f) 0 0/100% 3.5em no-repeat,linear-gradient(#94a3b83d,#94a3b83d) 1em 6em/min(70%,32em) 2.5em no-repeat,linear-gradient(#94a3b82e,#94a3b82e) 1em 9.5em/min(90%,44em) 1em no-repeat,linear-gradient(#94a3b82e,#94a3b82e) 1em 11.5em/min(80%,38em) 1em no-repeat,linear-gradient(#94a3b82e,#94a3b82e) 1em 14.5em/calc(100% - 2em) 16em no-repeat;animation:av-latido 1.4s ease-in-out infinite alternate}@keyframes av-latido{from{opacity:.55}to{opacity:1}}@media (prefers-reduced-motion:reduce){html:not([data-app-ready]) body::before{animation:none}}</style>`;
 // Fuentes propias (`deno task fuentes`): @font-face en línea (sin hoja que bloquee ni orígenes ajenos) y precarga del texto base.
 const CARAS = JSON.parse(readFileSync(join(ROOT, 'assets', 'fonts', 'fuentes.json'), 'utf8')) as { familia: string; peso: string; estilo: string; rango: string; archivo: string }[];
 const FUENTES = [
@@ -77,7 +84,8 @@ function documento(o: Opciones): string {
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://api-avatar.jeffaporta.workers.dev" crossorigin>
 ${FUENTES}
-<script type="importmap">{ "imports": { "@avatar/vendor": "${deno.avatar.vendor}" } }</script>
+${o.explorador ? '' : ESQUELETO}${o.vista === 'inicio' ? '<link rel="preload" href="assets/img/bgbanner.svg" as="image" fetchpriority="high">' : ''}
+<script type="importmap">{ "imports": { "@avatar/vendor": "${deno.avatar.vendor}", "zod": "${ZOD_KIT}" } }</script>
 <script src="${recurso('boot.js')}"></script>${o.explorador ? '' : `
 <link rel="stylesheet" href="${recurso('styles/app.css')}">`}
 <script type="module" src="${KIT}"></script>
