@@ -41,6 +41,22 @@ deno task sync:entregable    # solo si existe el par _entregable: gate en verde 
    API). Un id armado en ejecución va en `extra` de `assets/dl.js`. Detalle: `10-iconos.md` del estándar.
 10. Hecho = `deno task test:all` en verde.
 
+## Carga inicial (no romper)
+
+- **Primer pintado:** `scripts/build/paginas.ts` pone en línea el armazón CSS (`ESQUELETO`), los `@font-face` y el preload del banner. El `body` se revela con `data-app-ready`.
+- **Zod único:** `zod` es externo en el build y en el vendor; el import map de cada página lo apunta a `lib/zod.min.js` del kit con su mismo `?v=`. No lo empaquetes.
+- **Armazón en dos fases:** en `src/js/kit-tags.ts`, `shellInicial(vista)` bloquea el arranque y `SHELL_DIFERIDO` llega en reposo. Un tag nuevo del shell va en `SHELL_KIT_TAGS`; si no hace falta para pintar, también en `SHELL_DIFERIDO`. Solo `VISTAS_LIGERAS` usan `SHELL_CRITICO`.
+- **Precarga:** `precargas(vista)` en `paginas.ts` recorre las importaciones de `dist/cdn` y genera `modulepreload`; es automático.
+- **Fuentes propias:** `assets/fonts/`, con `deno task fuentes`. Nada de Google Fonts.
+
+Medir: recursos y tiempos con `performance.getEntriesByType` en el sitio publicado, en una primera visita sin caché.
+
+## Reportes de error
+
+`<av-reporte>` (`src/js/components/av/av-reporte.*`) lo monta `arranque.ts` fuera de `<av-app>`. Lo que lleva cada reporte está en `src/js/core/reporte.ts`, los errores del navegador en `core/bitacora.ts`. Mapa de todo el sistema y qué tocar para cada ajuste: [atencion-reportes.md](https://github.com/Jeff-Aporta/dsh-dev-vps/blob/main/docs/atencion-reportes.md).
+
+**Tipos del API:** `deno task check` (`scripts/gate/check.mjs`) agrega en una config temporal los alias `@Jeff-Aporta/wc-*` que usa el código remoto de DER. Parecen sin uso, pero sin caché hacen falta; no van en `deno.json` porque `deno task pin` exige un solo SHA del kit.
+
 ## Layout
 
 ```
