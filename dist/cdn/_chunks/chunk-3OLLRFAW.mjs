@@ -1,0 +1,1 @@
+var e="https://api-avatar.jeffaporta.workers.dev/api",a="avatar:api";function r(){if(typeof location>"u")return e;try{let t=new URLSearchParams(location.search).get("api");return t!==null&&(t?localStorage.setItem(a,t):localStorage.removeItem(a)),localStorage.getItem(a)||e}catch{return e}}export{r as a};

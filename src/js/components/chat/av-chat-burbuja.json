@@ -102,7 +102,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Burbuja de chat genérica con formato ligero.",
     "propuesta": "iswc-chat-bubble"
   }

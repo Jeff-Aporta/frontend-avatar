@@ -2,9 +2,9 @@
 //
 //   W-ORG-03  validación de empresa      W-ORG-05  orden de miembros por rol
 //   W-ORG-06  validación de invitación   W-ORG-07  integrantes agrupados (líder primero) y candidatos
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const o = await import('../../dist/cdn/view/organizacion/utils/organizacion.js');
+const o = await import('../../dist/cdn/view/organizacion/utils/organizacion.min.mjs');
 
 export default definirPruebas([
   {

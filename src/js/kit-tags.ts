@@ -66,7 +66,7 @@ export const SHELL_KIT_TAGS = [
 /** Del armazón, nunca bloquean el primer pintado: se piden en reposo (paleta de comandos, búsqueda, selectores, panel lateral). */
 export const SHELL_DIFERIDO = ['iswc-command-palette', 'iswc-palette-selector', 'iswc-semantic-search', 'iswc-tenant-selector', 'iswc-drawer', 'iswc-textarea'] as const;
 /** Lo mínimo para pintar una vista pública ligera (la portada): barra, tema y piezas de la propia vista. */
-const SHELL_CRITICO = ['iswc-app-shell', 'iswc-doc-layout', 'iswc-doc-index', 'iswc-theme-toggle', 'iswc-icon', 'iswc-button', 'iswc-heading', 'iswc-spinner', 'iswc-skeleton', 'iswc-toast', 'iswc-avatar', 'iswc-tag', 'iswc-badge', 'iswc-card', 'iswc-dropdown', 'iswc-dropdown-item', 'iswc-session-menu'] as const;
+export const SHELL_CRITICO = ['iswc-app-shell', 'iswc-doc-layout', 'iswc-doc-index', 'iswc-theme-toggle', 'iswc-icon', 'iswc-button', 'iswc-heading', 'iswc-spinner', 'iswc-skeleton', 'iswc-toast', 'iswc-avatar', 'iswc-tag', 'iswc-badge', 'iswc-card', 'iswc-dropdown', 'iswc-dropdown-item', 'iswc-session-menu'] as const;
 /** Vistas que arrancan solo con lo crítico. */
 const VISTAS_LIGERAS: readonly string[] = ['inicio'];
 

@@ -1,6 +1,6 @@
 // demos.test.ts — guardián del explorador de demos: todo componente registrado tiene su playground `iswc-preview/v1`
 // válido y su línea en `view/demo/manifest.json`. Un JSON que no cumple dejaba la galería vacía sin avisar.
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 import { DefinicionDemoSchema, ManifestDemoSchema } from '../../src/js/consts/schemas/demo.schemas.ts';
 import { APP_TAGS, FAMILIA_TAGS, VIEW_TAGS } from '../../src/js/kit-tags.ts';
 

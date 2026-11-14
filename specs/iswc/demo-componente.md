@@ -57,7 +57,7 @@ lleva en el escenario un `iswc-callout` que dice cómo abrirlo.
 - Todo componente tiene su línea en `view/demo/manifest.json` y viceversa (`{ "tag", "file" }`, `file`
   relativo a `view/demo/`).
 - **Todo componente tiene demo con playground** (≥1 bloque `demo` con `controls`); sin excepción por tamaño.
-- Componente general (sin dominio de la app): `"reuso": { "candidato": "iswc-root", "motivo": "…", "propuesta": "iswc-…" }`
+- Componente general (sin dominio de la app): `"reuso": { "candidato": "iswc-base", "motivo": "…", "propuesta": "iswc-…" }`
   en la raíz del `.json` (`ReusoDemoSchema`); se revisan periódicamente para subirlos al kit.
 - La ficha `.md` y el `.json` cuentan lo mismo: si cambias la API pública, cambian los dos.
 - Cada vista tiene además su `demo/index.html` con las sub-piezas aisladas y datos de muestra.

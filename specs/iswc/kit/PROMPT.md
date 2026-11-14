@@ -1,8 +1,8 @@
-<!-- Copia de skills/iswc-root/PROMPT.md del kit Jeff-Aporta/is-webcomponents@94b6f8c00482e997c725521701c4bd14edfc64dd. No editar: se refresca con `deno task vendor:iswc`. -->
-<!-- @vendor 2026-10-14T16:13:19.844Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/PROMPT.md -->
+<!-- Copia de skills/iswc-base/PROMPT.md del kit Jeff-Aporta/is-webcomponents@a5285b4c005fb8196a823554f2ff358216a7280a. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- @vendor 2026-10-14T16:13:19.844Z Jeff-Aporta/is-webcomponents@main skills/iswc-base/PROMPT.md -->
 # ISWC (Instrucciones para LLM)
 
-Utiliza **ISWC** exclusivamente mediante **CDN** (o copia local vía `/iswc-root:local`).
+Utiliza **ISWC** exclusivamente mediante **CDN** (o copia local vía `/iswc-base:local`).
 
 **Nunca** utilices:
 
@@ -48,14 +48,14 @@ Cuando el usuario pida una de estas intenciones, sigue la skill de la herramient
 
 | Comando | Skill | Uso |
 | --- | --- | --- |
-| `/iswc-root:build` | [tools/build.md](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/skills/iswc-root/tools/build.md) | Fundar o extender apps con `is-*` |
-| `/iswc-root:migrate` | [tools/migrate.md](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/skills/iswc-root/tools/migrate.md) | Migrar un front (React/MUI/Svelte/…) a vanilla + `is-*` |
-| `/iswc-root:local` | [tools/local.md](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/skills/iswc-root/tools/local.md) | Vendorizar JS/CSS locales (preferido) y actualizar SHA |
+| `/iswc-base:build` | [tools/build.md](https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/skills/iswc-base/tools/build.md) | Fundar o extender apps con `is-*` |
+| `/iswc-base:migrate` | [tools/migrate.md](https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/skills/iswc-base/tools/migrate.md) | Migrar un front (React/MUI/Svelte/…) a vanilla + `is-*` |
+| `/iswc-base:local` | [tools/local.md](https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/skills/iswc-base/tools/local.md) | Vendorizar JS/CSS locales (preferido) y actualizar SHA |
 
 Instalación de skills (preferir repo GitHub):
 
 ```
-npx skills add Jeff-Aporta/is-webcomponents -s iswc-root
+npx skills add Jeff-Aporta/is-webcomponents -s iswc-base
 npx skills add Jeff-Aporta/is-webcomponents -s is-cdn-install
 ```
 
@@ -123,7 +123,7 @@ Utiliza siempre **jsDelivr** con un SHA fijo (pinned commit) para garantizar ver
 Sustituye `{{SHA}}` por el tip de `main` (referencia: `ca31ad04be5bba79c8ef4652b7540058169ca891`).
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@{{SHA}}/dist/cdn/core/loader.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@{{SHA}}/dist/cdn/core/loader.min.mjs"></script>
 <script type="module">
   const L = globalThis.iswcLoader;
   await L.loadCSSBase();
@@ -134,7 +134,7 @@ Sustituye `{{SHA}}` por el tip de `main` (referencia: `ca31ad04be5bba79c8ef4652b
 
 Utiliza un único origen CDN durante toda la aplicación.
 
-Si la app usa copia local, ver `/iswc-root:local` (local primero en el fallback).
+Si la app usa copia local, ver `/iswc-base:local` (local primero en el fallback).
 
 ---
 
@@ -147,7 +147,7 @@ Si deseas tolerancia a fallos del CDN puedes utilizar un cargador similar al sig
 const MIRRORS=[
 "https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@{{SHA}}/dist/cdn",
 "https://cdn.statically.io/gh/Jeff-Aporta/is-webcomponents/{{SHA}}/dist/cdn",
-"https://jeff-aporta.github.io/iswc-root/dist/cdn"
+"https://jeff-aporta.github.io/is-webcomponents/dist/cdn"
 ];
 
 const css=u=>new Promise((ok,err)=>{
@@ -161,7 +161,7 @@ const css=u=>new Promise((ok,err)=>{
 
 for(const base of MIRRORS){
  try{
-  await import(`${base}/core/loader.min.js`);
+  await import(`${base}/core/loader.min.mjs`);
   const L = globalThis.iswcLoader;
   await L.loadCSSBase();
   await L.loadCSSPalettesDefault();
@@ -172,7 +172,7 @@ for(const base of MIRRORS){
 </script>
 ```
 
-Los snippets CDN únicamente deben usar `loader.min.js` + `L.load(tags…)`.
+Los snippets CDN únicamente deben usar `loader.min.mjs` + `L.load(tags…)`.
 No hay `all.min.js` ni `category.*.min.js` publicados.
 
 No cargues manualmente los CSS individuales de cada componente; estos se resuelven automáticamente mediante `import.meta.url`.
@@ -205,15 +205,15 @@ Preferir enlaces **GitHub** (mejor instalación de skills). Raw como secundario 
 
 ## 1. Instalación CDN
 
-https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/skills/is-cdn-install/SKILL.md
+https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/skills/is-cdn-install/SKILL.md
 
 ## 2. Guía general
 
-https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/skills/iswc-root/SKILL.md
+https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/skills/iswc-base/SKILL.md
 
 ## 3. Prompt completo (este archivo)
 
-https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/skills/iswc-root/PROMPT.md
+https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/skills/iswc-base/PROMPT.md
 
 ## 4. Guía CDN publicada (jsDelivr)
 
@@ -221,7 +221,7 @@ https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@main/dist/cdn/skills/is
 
 ## 5. índice global
 
-https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/94b6f8c00482e997c725521701c4bd14edfc64dd/specs/componentes.md
+https://raw.githubusercontent.com/Jeff-Aporta/is-webcomponents/a5285b4c005fb8196a823554f2ff358216a7280a/specs/componentes.md
 
 ## 6. LLM.md de la categoría correspondiente
 
@@ -233,7 +233,7 @@ Leer siempre el archivo `.md` del componente antes de utilizarlo.
 
 ## 8. Herramientas
 
-- https://github.com/Jeff-Aporta/is-webcomponents/tree/94b6f8c00482e997c725521701c4bd14edfc64dd/skills/iswc-root/tools
+- https://github.com/Jeff-Aporta/is-webcomponents/tree/a5285b4c005fb8196a823554f2ff358216a7280a/skills/iswc-base/tools
 
 ---
 

@@ -7,8 +7,13 @@ import { z } from '../../base/zod.js';
 
 const fn = <T>() => z.custom<T>((v) => typeof v === 'function');
 
+/** Entrada del registrador: los `av-*` son módulos ES `.js`, así que van con `type: 'module'` (el loader infiere por extensión). */
+export const EntradaAppSchema = z.object({ href: z.string(), type: z.enum(['module', 'classic']).optional(), css: z.string().optional() });
+export type EntradaApp = z.infer<typeof EntradaAppSchema>;
+
 export const LoaderAppSchema = z.object({
-  registerApp: fn<(mapa: Record<string, string>, opts?: { installSheets?: boolean }) => unknown>(),
+  registerApp: fn<(mapa: Record<string, string | EntradaApp>, opts?: { installSheets?: boolean }) => unknown>(),
   load: fn<(...tags: string[]) => Promise<unknown>>(),
+  ensure: fn<(tag: string) => Promise<unknown>>(),
 }).passthrough();
 export type LoaderApp = z.infer<typeof LoaderAppSchema>;

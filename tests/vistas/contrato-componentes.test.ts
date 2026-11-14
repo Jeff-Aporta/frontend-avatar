@@ -4,7 +4,7 @@
 //   W-COMP-20  cada tag registrado tiene .ts, .scss, .md y .json con su mismo nombre en la misma carpeta
 //   W-COMP-21  cada .md lleva front matter (name, description) y los H2 de la ficha; la Anatomía nunca se excluye
 //   W-COMP-22  ningún componente usa atributos que el kit no tiene: tone en iswc-callout, size en iswc-button
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 import { APP_TAGS, FAMILIA_TAGS, PREFIJO, VIEW_TAGS } from '../../src/js/kit-tags.ts';
 
 const raiz = new URL('../../', import.meta.url);

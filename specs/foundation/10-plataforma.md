@@ -6,7 +6,7 @@
 ## 1. Propósito (WHAT)
 
 Avatar es una aplicación estática (HTML + módulos ES servidos tal cual, sin framework) construida
-con el kit iswc-root (`iswc-*`) y componentes propios `av-*`.
+con el kit iswc-base (`iswc-*`) y componentes propios `av-*`.
 
 ## 2. Requisitos WHAT
 
@@ -32,7 +32,7 @@ con el kit iswc-root (`iswc-*`) y componentes propios `av-*`.
 - [HS-PLAT-02] Tareas: `build:scss`, `build`, `paginas`, `embeddings`, `bench:embeddings` (ver `15-busqueda-semantica.md`), `dev`, `serve`, `check`, `pin`, `vendor:iswc`, `test`, `test:health`, `test:e2e`, `test:all`, `test:all:halt`, `sync:entregable`.
 - [HS-PLAT-03] Build: `src/js/<x>.ts` → `dist/cdn/js/<x>.js`, `view/<v>/<x>.ts` → `dist/cdn/view/<v>/<x>.js` (sin bundle); bundles solo para `js/base/zod.ts` y los barriles `all.ts`; `js/boot.ts` → `dist/cdn/boot.js` (IIFE). Hojas `.scss` → `.css` hermana del módulo.
 - [HS-PLAT-04] Cache busting `?v=<6 caracteres del hash de contenido>` con `stampDirectory` del kit; `dist/cdn/asset-hashes.json`; `dist/cdn/avLoader.min.js` llama `L.registerApp({tag: url?v=…}, { installSheets: false })`; `dist/cdn/build-stamp.json`.
-- [HS-PLAT-05] Pin único: `https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@<sha40>/dist/cdn/core/loader.min.js` (`src/js/iswc.ts`). Prohibido `@main`, `@latest`, SHA corto, GitHub Pages o ramas en raw. `deno task pin` audita; `--nuevo=<sha40|ultimo>` actualiza tras verificar en jsDelivr; luego `deno task vendor:iswc` al mismo SHA.
+- [HS-PLAT-05] Pin único: `https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@<sha40>/dist/cdn/core/loader.min.mjs` (`src/js/iswc.ts`). Prohibido `@main`, `@latest`, SHA corto, GitHub Pages o ramas en raw. `deno task pin` audita; `--nuevo=<sha40|ultimo>` actualiza tras verificar en jsDelivr; luego `deno task vendor:iswc` al mismo SHA.
 - [HS-PLAT-06] Páginas: la tabla única `src/js/consts/paginas.ts` (vista, ruta, shell, título, descripción, privada, indexable) genera con `scripts/build/paginas.ts` (al final de `deno task build`, o `deno task paginas`) cada `<ruta>/index.html`, `404.html` (base absoluta), `view/<v>/index.html` (aislada, `data-aislada`), `view/<v>/demo/index.html` y `sitemap.xml`. Cabecera común: `<base href>` a la raíz del sitio, metadatos, fuentes de Google, import map del vendor del API, `boot.js` → `styles/app.css` → loader del kit → `avLoader.min.js` → `js/arranque.js` (lee `<html data-vista>`, carga `SHELL_KIT_TAGS + APP_TAGS + tagsDeVista(vista)`, inyecta Speculation Rules de prefetch y marca `data-app-ready`). `@view-transition { navigation: auto }` en `app.scss`.
 - [HS-PLAT-07] Router (`src/js/core/router.ts`): `rutaActual()` (vista de `<av-app vista>`/ruta; id de `history.state`), `ir(vista, id?, intencion?)` (otra vista → `location.assign` a su página con el id por `sessionStorage`; misma vista → `pushState` + evento `av-ruta`), `tomarIntencion(vista)`, `recordarDestino`/`destinoTrasAcceso`, `urlDe`/`vistaDeUrl` puras.
 - [HS-PLAT-08] Búsqueda semántica (`src/js/core/semantica.ts`): vectores BAAI bge-m3 horneados en el build con transformers.js (`deno task embeddings` → `assets/ia/<corpus>.json`, int8 + escala), consulta vectorizada por el API (`usarVectorizador`), puntaje 0,85·coseno + 0,15·léxico con umbral 0,55; sin vectorizador, léxico. Corpus `comandos` = `src/js/consts/comandos.ts`; la paleta es `<iswc-semantic-search>` sobre `<iswc-command-palette>`.

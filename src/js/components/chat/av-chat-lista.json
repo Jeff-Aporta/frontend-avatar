@@ -119,7 +119,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Lista de conversaciones genérica con reconciliación por clave.",
     "propuesta": "iswc-chat-list"
   }

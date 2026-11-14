@@ -56,7 +56,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Búsqueda de mensajes por texto o significado.",
     "propuesta": "iswc-chat-search"
   }

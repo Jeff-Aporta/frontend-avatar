@@ -1,6 +1,6 @@
-# specs/iswc — skills del kit iswc-root para esta app
+# specs/iswc — skills del kit iswc-base para esta app
 
-Copias sembradas por `create-iswc-app` desde el kit (`iswc-root/skills/iswc-foundation`). Son el
+Copias sembradas por `create-iswc-app` desde el kit (`iswc-base/skills/iswc-foundation`). Son el
 estándar común de TODAS las apps iswc: si una regla cambia, cambia en el kit y se vuelve a sembrar.
 
 | Skill | Cuándo |

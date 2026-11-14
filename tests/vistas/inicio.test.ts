@@ -2,10 +2,10 @@
 //
 //   W-PUB-02   la landing presenta 4 características (icono, título, texto) y 3 planes con el anual destacado
 //   W-PUB-05   las cuentas de prueba son las sembradas por el API y los errores del login se traducen
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const { caracteristicas, planes, LEMA } = await import('../../dist/cdn/view/inicio/utils/landing.js');
-const { mensajeAcceso } = await import('../../dist/cdn/view/acceso/utils/demo.js');
+const { caracteristicas, planes, LEMA } = await import('../../dist/cdn/view/inicio/utils/landing.min.mjs');
+const { mensajeAcceso } = await import('../../dist/cdn/view/acceso/utils/demo.min.mjs');
 
 export default definirPruebas([
   {

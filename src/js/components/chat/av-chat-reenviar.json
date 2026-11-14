@@ -82,7 +82,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Diálogo de reenvío genérico.",
     "propuesta": "iswc-forward-dialog"
   }

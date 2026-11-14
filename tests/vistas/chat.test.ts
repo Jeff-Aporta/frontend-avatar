@@ -11,15 +11,15 @@
 //   W-CHAT-33  búsqueda por texto y por significado          W-CHAT-38  texto del mensaje de llamada
 //   W-CHAT-42  idempotencia por clave y mensajes fuera de orden
 //   W-CHAT-43  archivo grande o bloqueado se rechaza antes   W-CHAT-45  quien no es integrante no recibe eventos
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const E = await import('../../dist/cdn/js/chat/estado.js');
-const F = await import('../../dist/cdn/js/chat/formato.js');
-const { TEXTOS_ES } = await import('../../dist/cdn/js/chat/textos.js');
-const { crearCola } = await import('../../dist/cdn/js/chat/cola.js');
-const { TEMAS, coloresDe, varsDeTema } = await import('../../dist/cdn/js/chat/temas.js');
-const { Sala, retardo } = await import('../../dist/cdn/js/chat/sala.js');
-const { crearBackendDemo, semilla, similitudLexica } = await import('../../dist/cdn/js/chat/backend-demo.js');
+const E = await import('../../dist/cdn/js/chat/estado.min.mjs');
+const F = await import('../../dist/cdn/js/chat/formato.min.mjs');
+const { TEXTOS_ES } = await import('../../dist/cdn/js/chat/textos.min.mjs');
+const { crearCola } = await import('../../dist/cdn/js/chat/cola.min.mjs');
+const { TEMAS, coloresDe, varsDeTema } = await import('../../dist/cdn/js/chat/temas.min.mjs');
+const { Sala, retardo } = await import('../../dist/cdn/js/chat/sala.min.mjs');
+const { crearBackendDemo, semilla, similitudLexica } = await import('../../dist/cdn/js/chat/backend-demo.min.mjs');
 
 type M = Record<string, unknown> & { clave: string; ts: string; autor: string };
 const AHORA = Date.parse('2026-10-30T15:00:00Z');

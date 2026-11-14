@@ -80,7 +80,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Panel de info de conversación genérico.",
     "propuesta": "iswc-chat-info"
   }

@@ -1,9 +1,9 @@
-<!-- Copia de skills/iswc-root/tools/migrate.md del kit Jeff-Aporta/is-webcomponents@94b6f8c00482e997c725521701c4bd14edfc64dd. No editar: se refresca con `deno task vendor:iswc`. -->
-<!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/tools/migrate.md -->
-# `/iswc-root:migrate`
+<!-- Copia de skills/iswc-base/tools/migrate.md del kit Jeff-Aporta/is-webcomponents@a5285b4c005fb8196a823554f2ff358216a7280a. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-base/tools/migrate.md -->
+# `/iswc-base:migrate`
 
 Convertir un frontend con framework (React, MUI, Svelte, Vue, Angular, etc.)
-a vanilla JS + `iswc-root`, eliminando la dependencia del framework.
+a vanilla JS + `iswc-base`, eliminando la dependencia del framework.
 
 ## Cuándo usarlo
 
@@ -14,7 +14,7 @@ a vanilla JS + `iswc-root`, eliminando la dependencia del framework.
 ## Patrón de referencia
 
 `Personal/apps/iswc-swagger` (React + MUI) → `iswc-swagger2` (vanilla +
-`iswc-root`, sin dependencias de framework en runtime). Usar esa
+`iswc-base`, sin dependencias de framework en runtime). Usar esa
 migración como plantilla de alcance y de decisiones (qué componentes MUI
 mapean a qué tag `is-*`, cómo quedó el bootstrap, qué se eliminó del
 `package.json`).

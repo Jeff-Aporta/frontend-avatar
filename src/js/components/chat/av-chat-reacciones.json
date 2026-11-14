@@ -62,7 +62,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Reacciones con emoji genéricas.",
     "propuesta": "iswc-reactions"
   }

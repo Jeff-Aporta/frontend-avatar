@@ -3,13 +3,13 @@
 //   W-PLAT-10  cada vista es una ruta real (/canales/); una URL se traduce a su vista y de vuelta; desconocida → inicio;
 //              una vista privada sin sesión → acceso; ninguna URL lleva # ni parámetros
 //   W-PLAT-11  el vector de permisos de DER decide por acción y verbo: true, false, partido por verbo y comodín "*"
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const { rutaDeUrl, urlDe, vistaDeUrl, resolver, VISTAS_PRIVADAS } = await import('../../dist/cdn/js/core/router.js');
-const { columnasPie, PAGINAS } = await import('../../dist/cdn/js/consts/paginas.js');
+const { rutaDeUrl, urlDe, vistaDeUrl, resolver, VISTAS_PRIVADAS } = await import('../../dist/cdn/js/core/router.min.mjs');
+const { columnasPie, PAGINAS } = await import('../../dist/cdn/js/consts/paginas.min.mjs');
 
 const RAIZ = 'https://jeff-aporta.github.io/frontend-avatar/';
-const { puede, rolDe, ACCION } = await import('../../dist/cdn/js/core/permisos.js');
+const { puede, rolDe, ACCION } = await import('../../dist/cdn/js/core/permisos.min.mjs');
 
 const perfil = (perms: Record<string, unknown>, roles: string[] = []) => ({ usuario: 'u', irol: roles[0] ?? 'USR', igrupo: 'AVATAR', roles, perms });
 

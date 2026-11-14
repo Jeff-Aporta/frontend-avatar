@@ -1,6 +1,6 @@
 # AGENTS.md — Avatar
 
-Punto de entrada para cualquier agente. App de web components sobre el kit **iswc-root**, creada con
+Punto de entrada para cualquier agente. App de web components sobre el kit **iswc-base**, creada con
 `create-iswc-app` (estándar **iswc-foundation**): misma estructura, mismas tareas y mismas reglas que
 todas las apps iswc.
 
@@ -44,7 +44,8 @@ deno task sync:entregable    # solo si existe el par _entregable: gate en verde 
 ## Carga inicial (no romper)
 
 - **Primer pintado:** `scripts/build/paginas.ts` pone en línea el armazón CSS (`ESQUELETO`), los `@font-face` y el preload del banner. El `body` se revela con `data-app-ready`.
-- **Zod único:** `zod` es externo en el build y en el vendor; el import map de cada página lo apunta a `lib/zod.min.js` del kit con su mismo `?v=`. No lo empaquetes.
+- **Zod único:** `zod` es externo en el build y en el vendor; el import map de cada página lo apunta a `lib/zod.min.mjs` del kit con el mismo `?v=` con que lo importan sus chunks (y lo precarga con `modulepreload`). No lo empaquetes.
+- **Bootstrap del kit (F4):** `scripts/build/paginas.ts` emite en cada HTML el import map con el alias `@jeff-aporta/iswc-base/`, `modulepreload` del loader y del cierre de los `iswc-*` del arranque de la vista (`src/vendor/iswc-base/deps.json`, sin `?v=` sobre el pin), `<link>` de `is-base` y paletas, y el loader `core/loader.min.mjs`. El registrador registra los `av-*` como `{ href, type: 'module' }`.
 - **Armazón en dos fases:** en `src/js/kit-tags.ts`, `shellInicial(vista)` bloquea el arranque y `SHELL_DIFERIDO` llega en reposo. Un tag nuevo del shell va en `SHELL_KIT_TAGS`; si no hace falta para pintar, también en `SHELL_DIFERIDO`. Solo `VISTAS_LIGERAS` usan `SHELL_CRITICO`.
 - **Precarga:** `precargas(vista)` en `paginas.ts` recorre las importaciones de `dist/cdn` y genera `modulepreload`; es automático.
 - **Fuentes propias:** `assets/fonts/`, con `deno task fuentes`. Nada de Google Fonts.
@@ -75,7 +76,7 @@ av-tmp/
 │   │   └── components/av/    ← componentes transversales + all.ts
 │   ├── styles/                 ← _tokens.scss, _mixins.scss, app.scss
 │   ├── utils/build.ts          ← build
-│   └── vendor/iswc-root/       ← tools del kit (no editar)
+│   └── vendor/iswc-base/       ← tools del kit (no editar)
 ├── view/<vista>/               ← index.html, README.md, demo/, components/, utils/
 ├── view/demo/                  ← galería de componentes (manifest.json)
 ├── scripts/{build,gate,vendor}/

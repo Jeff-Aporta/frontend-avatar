@@ -200,7 +200,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Hilo de mensajes genérico con reconciliación por clave.",
     "propuesta": "iswc-chat-thread"
   }

@@ -35,5 +35,5 @@ if (!L) throw new Error('galería: falta iswcLoader');
 // Un tag que el kit fijado aún no publica se omite: rechazarlo dejaría toda la galería en blanco.
 const disponibles = [...KIT_TAGS, ...tagsArranque()].filter((tag) => !tag.startsWith('iswc-') || L.catalog?.tags?.[tag]);
 await L.load(...disponibles);
-const { montarGaleria } = await import(new URL('../preview/doc-demo-galeria.min.js', L.selfBase).href);
+const { montarGaleria } = await import(new URL('../preview/doc-demo-galeria.min.mjs', L.selfBase).href);
 await montarGaleria({ manifest: new URL('manifest.json', location.href), categorias: CATEGORIAS });

@@ -5,13 +5,13 @@
 //   W-TAB-03   el grid se nombra en un solo lugar: ningún componente de tabla lleva el tag literal
 //   W-EST-01   los presets «sin empresa» y «sin permiso» salen de `consts/estados`
 //   W-EST-02   ninguna vista repite a mano los presets
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const rrhh = await import('../../dist/cdn/view/rrhh/utils/rrhh.js');
-const finanzas = await import('../../dist/cdn/view/finanzas/utils/finanzas.js');
-const inventario = await import('../../dist/cdn/view/inventario/utils/inventario.js');
-const crm = await import('../../dist/cdn/view/crm/utils/crm.js');
-const estados = await import('../../dist/cdn/js/consts/estados.js');
+const rrhh = await import('../../dist/cdn/view/rrhh/utils/rrhh.min.mjs');
+const finanzas = await import('../../dist/cdn/view/finanzas/utils/finanzas.min.mjs');
+const inventario = await import('../../dist/cdn/view/inventario/utils/inventario.min.mjs');
+const crm = await import('../../dist/cdn/view/crm/utils/crm.min.mjs');
+const estados = await import('../../dist/cdn/js/consts/estados.min.mjs');
 
 const raiz = new URL('../../', import.meta.url);
 const VISTAS = ['rrhh', 'finanzas', 'inventario', 'crm', 'correos', 'proyectos', 'canales', 'panel', 'organizacion', 'admin'];

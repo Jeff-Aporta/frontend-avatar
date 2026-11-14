@@ -1,0 +1,1 @@
+import{m as r}from"./chunk-RTQWBEUQ.mjs";var c=new WeakMap;function E(n,e,o){let s=c.get(n);s&&removeEventListener("av-ruta",s);let t=v=>{if(!n.isConnected){removeEventListener("av-ruta",t);return}let i=v.detail;i?.vista!==e||!i.intencion||(r(e),o(i.intencion))};c.set(n,t),addEventListener("av-ruta",t);let a=r(e);a&&queueMicrotask(()=>o(a))}export{E as a};

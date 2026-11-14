@@ -70,7 +70,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Selector de personas en diálogo.",
     "propuesta": "iswc-people-picker"
   }

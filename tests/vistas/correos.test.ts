@@ -6,11 +6,11 @@
 //   W-CORREO-06  borradores de respuesta / a todos / reenvío y movimientos por carpeta
 //   W-CORREO-07  etiquetas normalizadas y validación del borrador
 //   W-CORREO-08  relacionados por conversación
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const u = await import('../../dist/cdn/view/correos/utils/correos.js');
-const { filtrarTexto } = await import('../../dist/cdn/js/core/datos.js');
-const { CorreoDatosSchema } = await import('../../dist/cdn/js/consts/schemas/correos.schemas.js');
+const u = await import('../../dist/cdn/view/correos/utils/correos.min.mjs');
+const { filtrarTexto } = await import('../../dist/cdn/js/core/datos.min.mjs');
+const { CorreoDatosSchema } = await import('../../dist/cdn/js/consts/schemas/correos.schemas.min.mjs');
 
 const base = { carpeta: 'entrada', leido: true, destacado: false, cc: [], etiquetas: [], respuesta_a: null, creado: '2026-10-30T10:00:00.000Z' };
 const C1 = { ...base, ibuzon: 1, icorreo: 10, remitente: 'carla', destinatarios: ['ana', 'beto'], cc: ['dario'], asunto: 'Propuesta Global Finance', cuerpo: 'Necesito tu visto bueno.\nGracias', etiquetas: ['crm', 'urgente'], leido: false };

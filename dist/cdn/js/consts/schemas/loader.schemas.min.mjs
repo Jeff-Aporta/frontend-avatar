@@ -1,0 +1,1 @@
+import{z as t}from"zod";var e=()=>t.custom(o=>typeof o=="function"),a=t.object({href:t.string(),type:t.enum(["module","classic"]).optional(),css:t.string().optional()}),i=t.object({registerApp:e(),load:e(),ensure:e()}).passthrough();export{a as EntradaAppSchema,i as LoaderAppSchema};

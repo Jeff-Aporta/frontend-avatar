@@ -1,0 +1,1 @@
+function u(n){let e={};for(let t of n.querySelectorAll("[name]")){let r=t.getAttribute("name");r&&(e[r]=t.value==null?"":String(t.value))}return e}var o=n=>n&&n.trim()?n.trim():null;function i(n){if(!n||!n.trim())return null;let e=Number(n);return Number.isFinite(e)?e:null}export{u as leerCampos,o as oNulo,i as oNumero};

@@ -43,7 +43,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Visor de galería sobre iswc-lightbox.",
     "propuesta": "iswc-media-viewer"
   }

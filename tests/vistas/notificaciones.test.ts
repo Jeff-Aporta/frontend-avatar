@@ -5,12 +5,12 @@
 //   W-NOTI-03  no se avisa lo propio, lo callado ni lo abierto  W-NOTI-04  la mención no se repite como mensaje
 //   W-NOTI-05  sin respuesta al latido, reconecta               W-NOTI-06  demo entre navegadores: mensaje, reacción, aviso
 //   W-NOTI-07  demo tras recargar: repone lo que faltó          W-NOTI-08  sin conexión queda pendiente y sale al volver
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const A = await import('../../dist/cdn/js/notificaciones/avisos.js');
-const E = await import('../../dist/cdn/js/chat/estado.js');
-const { Sala } = await import('../../dist/cdn/js/chat/sala.js');
-const { crearBackendDemo } = await import('../../dist/cdn/js/chat/backend-demo.js');
+const A = await import('../../dist/cdn/js/notificaciones/avisos.min.mjs');
+const E = await import('../../dist/cdn/js/chat/estado.min.mjs');
+const { Sala } = await import('../../dist/cdn/js/chat/sala.min.mjs');
+const { crearBackendDemo } = await import('../../dist/cdn/js/chat/backend-demo.min.mjs');
 
 const esperar = (ms = 20) => new Promise((r) => setTimeout(r, ms));
 /** Almacén local de «un navegador». */

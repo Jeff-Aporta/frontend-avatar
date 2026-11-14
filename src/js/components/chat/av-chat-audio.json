@@ -58,7 +58,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Reproductor de notas de voz genérico.",
     "propuesta": "iswc-voice-note"
   }

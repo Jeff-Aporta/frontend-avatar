@@ -1,6 +1,6 @@
-<!-- Copia de skills/iswc-root/tools/runtime.md del kit Jeff-Aporta/is-webcomponents@94b6f8c00482e997c725521701c4bd14edfc64dd. No editar: se refresca con `deno task vendor:iswc`. -->
-<!-- @vendor 2026-10-14T16:13:19.844Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/tools/runtime.md -->
-# `/iswc-root:runtime` — APIs sin custom element
+<!-- Copia de skills/iswc-base/tools/runtime.md del kit Jeff-Aporta/is-webcomponents@a5285b4c005fb8196a823554f2ff358216a7280a. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- @vendor 2026-10-14T16:13:19.844Z Jeff-Aporta/is-webcomponents@main skills/iswc-base/tools/runtime.md -->
+# `/iswc-base:runtime` — APIs sin custom element
 
 Herramientas del kit que **no** son tags `iswc-*`. Los agentes deben conocerlas
 igual que el catálogo de componentes: no reinventar loader, hydrate MD, caché ni `IswcUi`.
@@ -10,9 +10,9 @@ Inventario: [`../catalog.md`](../catalog.md) § Módulos API.
 
 ---
 
-## 1. `iswcLoader` — `core/loader.min.js`
+## 1. `iswcLoader` — `core/loader.min.mjs`
 
-Guía larga: [`cdn/loader.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/src/cdn/loader.md).
+Guía larga: [`cdn/loader.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/src/cdn/loader.md).
 
 | API | Efecto |
 | --- | --- |
@@ -36,19 +36,19 @@ Pines de apps consumidoras: `deno task sync:pins` (`scripts/sync-pins.mjs`).
 
 ---
 
-## 2. `IswcUi` / `Ui` — `helpers/ui.min.js`
+## 2. `IswcUi` / `Ui` — `helpers/ui.min.mjs`
 
-Guía: [`helpers/ui.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/src/components/helpers/ui.md).
+Guía: [`helpers/ui.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/src/components/helpers/ui.md).
 
 | Export | Uso |
 | --- | --- |
 | `html` | Template → `DocumentFragment` |
-| `adoptCss(shadow, import.meta.url)` | CSS hermano (preferido) |
+| `adoptCss(shadow, import.meta.url)` | CSS hermano (compat para código externo al kit; el kit usa `static css` de `IswcElement`) |
 | `define(tag, class)` | `customElements.define` idempotente |
 | `css` / `el` / `raw` / `esc` | Prototipos / DOM |
 | `crearComponente` / `jsonScript` / `fecha` / `rec` | Fábrica y utils |
 
-**No** sustituye tags del kit. Patrón dominio: `tk-*` + `.css` hermano + `adoptCss`.
+**No** sustituye tags del kit. Patrón dominio externo: `tk-*` + `.css` hermano + `adoptCss`. Componentes del propio kit: molde `IswcElement` (`static tag/css/observed/deps` + `define(Clase)`, ver `specs/componentes.md`).
 
 ---
 
@@ -56,20 +56,20 @@ Guía: [`helpers/ui.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94
 
 | Módulo | CDN | Rol |
 | --- | --- | --- |
-| `md-lite` | `helpers/md-lite.min.js` | MD → HTML |
-| `md-iswc-fences` | `helpers/md-iswc-fences.min.js` | ` ```iswc-* ` → diagrama |
-| `md-hydrate` | `helpers/md-hydrate.min.js` | ensure tags + `<iswc-code>` |
-| `md-editor-api` | `helpers/md-editor-api.min.js` | CRUD del editor |
+| `md-lite` | `helpers/md-lite.min.mjs` | MD → HTML |
+| `md-iswc-fences` | `helpers/md-iswc-fences.min.mjs` | ` ```iswc-* ` → diagrama |
+| `md-hydrate` | `helpers/md-hydrate.min.mjs` | ensure tags + `<iswc-code>` |
+| `md-editor-api` | `helpers/md-editor-api.min.mjs` | CRUD del editor |
 
 Tags de producto: `<iswc-md-render>`, `<iswc-md-editor>`.  
 Guías: `helpers/utils/md-lite.md`, `md-iswc-fences.md`, `md-hydrate.md`, `md-editor-api.md`.
 
 ---
 
-## 4. `response-cache` — `helpers/response-cache.min.js`
+## 4. `response-cache` — `helpers/response-cache.min.mjs`
 
 SWR en IndexedDB (`createResponseCache`, `IswcResponseCache`, `canonico`).  
-Guía: [`helpers/utils/response-cache.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/src/components/helpers/utils/response-cache.md).
+Guía: [`helpers/utils/response-cache.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/src/components/helpers/utils/response-cache.md).
 
 ---
 
@@ -77,9 +77,9 @@ Guía: [`helpers/utils/response-cache.md`](https://github.com/Jeff-Aporta/is-web
 
 | Módulo CDN | Rol |
 | --- | --- |
-| `core/element-base.min.js` | Base CE del kit |
-| `core/attrs.min.js` | Observación / coerce de atributos |
-| `core/base-sheets.min.js` | Hojas base compartidas |
+| `core/element-base.min.mjs` | Base CE del kit |
+| `core/attrs.min.mjs` | Observación / coerce de atributos |
+| `core/iswc-element.min.mjs` | Hojas base compartidas |
 
 Apps consumidoras **no** reimplementan esta capa; extienden vía `IswcUi.define` + tags.
 
@@ -94,22 +94,22 @@ en el vendor de build del kit (Paty ya lo importa). El loader pega `?h=` con `L.
 
 ## 7. IA en el navegador — `lib/ai/`
 
-Guía: [`src/ai/ai.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/94b6f8c00482e997c725521701c4bd14edfc64dd/src/ai/ai.md). Tag con UI: `<iswc-ai-tool>`.
+Guía: [`src/ai/ai.md`](https://github.com/Jeff-Aporta/is-webcomponents/blob/a5285b4c005fb8196a823554f2ff358216a7280a/src/ai/ai.md). Tag con UI: `<iswc-ai-tool>`.
 
 | Módulo CDN | Exports |
 | --- | --- |
-| `lib/ai/motores.min.js` | `ejecutar(herramienta, entrada, opciones, parcial)`, `motor` |
-| `lib/ai/descarga.min.js` | `conDescarga`, `pospuesta`, `medidor`, `LIMITE_MB` |
-| `lib/ai/vector-local.min.js` | `vectorLocal`, `cargarCorpus`, `ordenarPorSentido` |
-| `lib/ai/orden.min.js` | `ordenarAplanado`, `ORDEN_DEFECTO`, `coseno`, `normalizar`, `lexicoTolerante` |
-| `lib/ai/aplanado.min.js` · `aplanado-ajuste.min.js` | `aplanar`, `abrirCorpus`, `empacar`; `ajustar` (build) |
-| `lib/ai/herramientas.min.js` | `HERRAMIENTAS`, `herramienta`, `mbDe`, `pesoDe`, `MODELO_LOCAL` |
+| `lib/ai/motores.min.mjs` | `ejecutar(herramienta, entrada, opciones, parcial)`, `motor` |
+| `lib/ai/descarga.min.mjs` | `conDescarga`, `pospuesta`, `medidor`, `LIMITE_MB` |
+| `lib/ai/vector-local.min.mjs` | `vectorLocal`, `cargarCorpus`, `ordenarPorSentido` |
+| `lib/ai/orden.min.mjs` | `ordenarAplanado`, `ORDEN_DEFECTO`, `coseno`, `normalizar`, `lexicoTolerante` |
+| `lib/ai/aplanado.min.mjs` · `aplanado-ajuste.min.mjs` | `aplanar`, `abrirCorpus`, `empacar`; `ajustar` (build) |
+| `lib/ai/herramientas.min.mjs` | `HERRAMIENTAS`, `herramienta`, `mbDe`, `pesoDe`, `MODELO_LOCAL` |
 
 Se importan con la URL sellada del loader, para compartir estado con `<iswc-ai-tool>`:
 
 ```js
 const L = globalThis.iswcLoader;
-const { ejecutar } = await import(L.assetUrl(new URL('../lib/ai/motores.min.js', L.selfBase).href));
+const { ejecutar } = await import(L.assetUrl(new URL('../lib/ai/motores.min.mjs', L.selfBase).href));
 ```
 
 Reglas: nada de `runonweb` directo en una app ni en un componente; toda descarga pasa por `conDescarga` (hasta 20 MB toast; más, modal); el modelo de embeddings es `MODELO_LOCAL`, multilingüe.
@@ -119,7 +119,7 @@ Reglas: nada de `runonweb` directo en una app ni en un componente; toda descarga
 ## Checklist agente
 
 - [ ] Arranque solo con loader + `loadCSS*` + `load` (no reinventar espejos).
-- [ ] Wrappers de dominio usan `IswcUi.adoptCss`, no CSS embebido gigante.
+- [ ] Wrappers de dominio usan `IswcUi.adoptCss` (compat externa), no CSS embebido gigante.
 - [ ] MD embebido: `md-lite` → `hydrateMdEmbeds`, no un markdown npm paralelo.
 - [ ] Lecturas remotas repetidas: `response-cache`, no un IndexedDB ad hoc.
 - [ ] IA en el navegador: `lib/ai/`, no `runonweb` directo ni descargas propias.

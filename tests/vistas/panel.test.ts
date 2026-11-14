@@ -2,9 +2,9 @@
 //
 //   W-PAN-02   seis KPIs en orden a partir del resumen; vencidas en rojo solo si hay
 //   W-PAN-03   series de la dona (por estado) y del embudo (por etapa, con ceros)
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const { kpis, serieTareas, serieEmbudo, moneda } = await import('../../dist/cdn/view/panel/utils/panel.js');
+const { kpis, serieTareas, serieEmbudo, moneda } = await import('../../dist/cdn/view/panel/utils/panel.min.mjs');
 
 const resumen = {
   iempresa: 1, nombre: 'Demo', miembros: 4, equipos: 2, canales: 3, proyectos: 1,

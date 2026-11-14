@@ -1,0 +1,1 @@
+function u(n){let e={};for(let t of n.querySelectorAll("[name]")){let r=t.getAttribute("name");r&&(e[r]=t.value==null?"":String(t.value))}return e}var l=n=>n&&n.trim()?n.trim():null;function o(n){if(n==null||!String(n).trim())return null;let e=Number(n);return Number.isFinite(e)?e:null}export{u as a,l as b,o as c};

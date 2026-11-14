@@ -55,7 +55,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Redactor de chat genérico con adjuntos y voz.",
     "propuesta": "iswc-chat-composer"
   }

@@ -19,13 +19,115 @@
 <link rel="preload" href="assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>@font-face{font-family:'Exo 2';font-style:normal;font-weight:500 800;font-display:swap;src:url(assets/fonts/exo-2-500-800-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Exo 2';font-style:normal;font-weight:500 800;font-display:swap;src:url(assets/fonts/exo-2-500-800-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'Orbitron';font-style:normal;font-weight:400 900;font-display:swap;src:url(assets/fonts/orbitron-400-900-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/poppins-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/poppins-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/poppins-600-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/poppins-600-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/poppins-700-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/poppins-700-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}</style>
 <style>html{background:#f2fbfa}html[data-theme=dark]{background:#0d1a1c}html:not([data-app-ready]) body::before{content:"";visibility:visible;position:fixed;inset:0;background:linear-gradient(#14b8a61f,#14b8a61f) 0 0/100% 3.5em no-repeat,linear-gradient(#94a3b83d,#94a3b83d) 1em 6em/min(70%,32em) 2.5em no-repeat,linear-gradient(#94a3b82e,#94a3b82e) 1em 9.5em/min(90%,44em) 1em no-repeat,linear-gradient(#94a3b82e,#94a3b82e) 1em 11.5em/min(80%,38em) 1em no-repeat,linear-gradient(#94a3b82e,#94a3b82e) 1em 14.5em/calc(100% - 2em) 16em no-repeat;animation:av-latido 1.4s ease-in-out infinite alternate}@keyframes av-latido{from{opacity:.55}to{opacity:1}}@media (prefers-reduced-motion:reduce){html:not([data-app-ready]) body::before{animation:none}}</style>
-<script type="importmap">{ "imports": { "@avatar/vendor": "https://api-avatar.jeffaporta.workers.dev/avatar.js?v=3a8185c3", "zod": "https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@0674814b6b7bc983046a8fb7bea78cde721ca1e9/dist/cdn/lib/zod.min.js?v=pv97qs" } }</script>
-<script src="dist/cdn/boot.js?v=ozmmse"></script>
+<script src="dist/cdn/boot.js?v=ww0618"></script>
 <link rel="stylesheet" href="dist/cdn/styles/app.css?v=eh3eiw">
-<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@0674814b6b7bc983046a8fb7bea78cde721ca1e9/dist/cdn/core/loader.min.js"></script>
-<link rel="modulepreload" href="dist/cdn/js/components/av/av-reporte.js?v=ivfxj2"><link rel="modulepreload" href="dist/cdn/js/components/av/av-link.js?v=xqqq56"><link rel="modulepreload" href="dist/cdn/js/components/av/av-boton-enlace.js?v=bhqm3m"><link rel="modulepreload" href="dist/cdn/js/components/av/av-campana.js?v=txisl7"><link rel="modulepreload" href="dist/cdn/js/components/av/av-menu-lateral.js?v=9wxhu8"><link rel="modulepreload" href="dist/cdn/js/components/av/av-pestanas.js?v=tm22sx"><link rel="modulepreload" href="dist/cdn/js/components/av/av-migas.js?v=clahjn"><link rel="modulepreload" href="dist/cdn/js/components/av/av-outlet.js?v=ba39sk"><link rel="modulepreload" href="dist/cdn/js/components/av/av-logo.js?v=3llei6"><link rel="modulepreload" href="dist/cdn/js/components/av/av-escena.js?v=j0jr4w"><link rel="modulepreload" href="dist/cdn/js/components/av/av-grafica.js?v=4uks0s"><link rel="modulepreload" href="dist/cdn/js/components/av/av-perfil-selector.js?v=rt1hu2"><link rel="modulepreload" href="dist/cdn/js/components/av/av-perfiles-lista.js?v=9q8mwm"><link rel="modulepreload" href="dist/cdn/js/components/av/av-perfiles-tabla.js?v=75cw1y"><link rel="modulepreload" href="dist/cdn/js/components/av/av-tabla.js?v=aqjtfp"><link rel="modulepreload" href="dist/cdn/js/components/av/av-app.js?v=bxhao9"><link rel="modulepreload" href="dist/cdn/view/organizacion/components/av-empresa-form.js?v=mjqa82"><link rel="modulepreload" href="dist/cdn/view/organizacion/components/av-invitar-form.js?v=sninhw"><link rel="modulepreload" href="dist/cdn/view/organizacion/components/av-miembros.js?v=ghg4k9"><link rel="modulepreload" href="dist/cdn/view/organizacion/components/av-equipos.js?v=wrrci1"><link rel="modulepreload" href="dist/cdn/view/organizacion/components/av-organizacion.js?v=amxeeb"><link rel="modulepreload" href="dist/cdn/js/consts/paginas.js?v=a58rp0"><link rel="modulepreload" href="dist/cdn/js/kit-tags.js?v=gyccnp"><link rel="modulepreload" href="dist/cdn/js/core/bitacora.js?v=yd6pvo"><link rel="modulepreload" href="dist/cdn/js/base/componente.js?v=uz3s44"><link rel="modulepreload" href="dist/cdn/js/core/api.js?v=45sjif"><link rel="modulepreload" href="dist/cdn/js/core/estado.js?v=w7n12d"><link rel="modulepreload" href="dist/cdn/js/core/router.js?v=3h9wag"><link rel="modulepreload" href="dist/cdn/js/notificaciones/centro.js?v=sbg4u8"><link rel="modulepreload" href="dist/cdn/js/notificaciones/arranque.js?v=nlnox4"><link rel="modulepreload" href="dist/cdn/js/notificaciones/avisos.js?v=nkmjbz"><link rel="modulepreload" href="dist/cdn/js/consts/collages.js?v=f4kcbl"><link rel="modulepreload" href="dist/cdn/js/core/escenas.js?v=iha73i"><link rel="modulepreload" href="dist/cdn/js/core/cuentas.js?v=dvs2ou"><link rel="modulepreload" href="dist/cdn/js/core/datos.js?v=2tahwq"><link rel="modulepreload" href="dist/cdn/js/core/buscador.js?v=qxv1w5"><link rel="modulepreload" href="dist/cdn/js/core/permisos.js?v=h0y97j"><link rel="modulepreload" href="dist/cdn/js/consts/comandos.js?v=of1zgp"><link rel="modulepreload" href="dist/cdn/view/organizacion/utils/organizacion.js?v=rvg7bg"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/organizacion.schemas.js?v=qwngf3"><link rel="modulepreload" href="dist/cdn/js/base/zod.js?v=ws96vc"><link rel="modulepreload" href="dist/cdn/js/consts/estados.js?v=pvk918"><link rel="modulepreload" href="dist/cdn/js/base/props-registro.js?v=7wfxxn"><link rel="modulepreload" href="dist/cdn/js/consts/config.js?v=8235xi"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/api.schemas.js?v=ypba1a"><link rel="modulepreload" href="dist/cdn/js/core/semantica.js?v=2khurd"><link rel="modulepreload" href="dist/cdn/js/chat/estado.js?v=n0k14w"><link rel="modulepreload" href="dist/cdn/js/chat/formato.js?v=xzgyvo"><link rel="modulepreload" href="dist/cdn/js/chat/textos.js?v=iqk9yi"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/componentes.schemas.js?v=srf2ut"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/inicio.schemas.js?v=8lsaas"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/acceso.schemas.js?v=45jj3w"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/panel.schemas.js?v=5dgvhi"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/canales.schemas.js?v=jbs7ra"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/chat.schemas.js?v=y3mpkb"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/proyectos.schemas.js?v=ooc5n3"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/crm.schemas.js?v=kda6v9"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/asistente.schemas.js?v=cfntde"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/admin.schemas.js?v=5jf50f"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/correos.schemas.js?v=9wrv5v"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/finanzas.schemas.js?v=83st1w"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/inventario.schemas.js?v=55ts8c"><link rel="modulepreload" href="dist/cdn/js/consts/schemas/rrhh.schemas.js?v=9ki7im"><link rel="modulepreload" href="dist/cdn/js/core/aplanado.js?v=0lww52"><link rel="modulepreload" href="dist/cdn/js/chat/tipos.js?v=kp43yz"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-reporte.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-link.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-boton-enlace.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-campana.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-menu-lateral.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-pestanas.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-migas.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-outlet.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-logo.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-escena.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-grafica.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-perfil-selector.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-perfiles-lista.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-perfiles-tabla.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-tabla.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/js/components/av/av-app.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/view/organizacion/components/av-empresa-form.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/view/organizacion/components/av-invitar-form.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/view/organizacion/components/av-miembros.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/view/organizacion/components/av-equipos.css"><link rel="preload" as="fetch" crossorigin href="dist/cdn/view/organizacion/components/av-organizacion.css">
-<script type="module" src="dist/cdn/avLoader.min.js?v=l4rb0j"></script>
-<script type="module" src="dist/cdn/js/arranque.js?v=r8rvfx"></script>
+<!-- iswc:precarga:inicio -->
+<script type="importmap">{"imports":{"@jeff-aporta/iswc-base/":"https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/","zod":"https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/lib/zod.min.mjs","@avatar/vendor":"https://api-avatar.jeffaporta.workers.dev/avatar.js?v=3a8185c3"}}</script>
+<meta name="iswc-precargado" content="904b3a574fc7c05f4297b0d991cdd93c5afdce40">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-7IBSWVMF.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-CMZVHIC2.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-DKYDCFSD.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-FZCPQKWI.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-IMDXNU6R.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-IWE2M5AU.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-MNP72QJS.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-PVUKYFEI.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-TPHMQPBF.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-UFMSFUKG.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/_chunks/chunk-ZVCVBQWN.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/core/loader.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/feedback/popconfirm.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/navigation/tab-group.min.mjs">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/lib/zod.min.mjs">
+<link rel="modulepreload" href="https://api-avatar.jeffaporta.workers.dev/avatar.js?v=3a8185c3">
+<link rel="modulepreload" href="./dist/cdn/kit-lote.min.mjs?v=bhle1c">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-22HCQII4.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-2XJIRYNX.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-3MQ37A3F.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-3OLLRFAW.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-BY7FRINU.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-CFDZHRFC.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-DFCKHHIP.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-DJIGVK5X.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-DSFXORMY.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-E4FTJ22Z.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-EYJKOFS6.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-FBHDKMTW.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-FVCCO2IW.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-FWBWSRYW.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-GPXXZWZ7.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-I5BC3TWM.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-IL3DC5UM.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-ITLV3JVS.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-JOUQNVKA.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-JYCE4ZHM.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-KXZCSFJG.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-LZ55ICHD.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-MBJSGEKC.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-MVBK4NDO.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-MZCXCTZR.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-OVD4TM5J.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-R4OF6U4M.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-RTQWBEUQ.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-S24WVIZS.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-SDQIKR5O.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-SQVRVHQY.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-UA3NXNUA.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-VC7IUYRT.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-W5FUVHHZ.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-YDU3QAVP.mjs">
+<link rel="modulepreload" href="./dist/cdn/_chunks/chunk-ZQI42E6M.mjs">
+<link rel="modulepreload" href="./dist/cdn/js/arranque.min.mjs?v=56126o">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-app.min.mjs?v=ruy9bu">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-boton-enlace.min.mjs?v=1p7via">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-campana.min.mjs?v=grxgts">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-escena.min.mjs?v=8sjkpj">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-grafica.min.mjs?v=if4krs">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-link.min.mjs?v=u6hdjj">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-logo.min.mjs?v=95jt5i">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-menu-lateral.min.mjs?v=b7q1r6">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-migas.min.mjs?v=edij14">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-outlet.min.mjs?v=v84sdh">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-perfil-selector.min.mjs?v=a8pmm8">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-perfiles-lista.min.mjs?v=e8xq7p">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-perfiles-tabla.min.mjs?v=lyn3jg">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-pestanas.min.mjs?v=wozzff">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-reporte.min.mjs?v=ylgl4r">
+<link rel="modulepreload" href="./dist/cdn/js/components/av/av-tabla.min.mjs?v=1wxz4p">
+<link rel="modulepreload" href="./dist/cdn/view/organizacion/components/av-empresa-form.min.mjs?v=kk4ksd">
+<link rel="modulepreload" href="./dist/cdn/view/organizacion/components/av-equipos.min.mjs?v=mmvbd4">
+<link rel="modulepreload" href="./dist/cdn/view/organizacion/components/av-invitar-form.min.mjs?v=fnnz14">
+<link rel="modulepreload" href="./dist/cdn/view/organizacion/components/av-miembros.min.mjs?v=8okyjy">
+<link rel="modulepreload" href="./dist/cdn/view/organizacion/components/av-organizacion.min.mjs?v=zz2jyo">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-app.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-boton-enlace.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-campana.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-escena.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-grafica.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-link.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-logo.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-menu-lateral.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-migas.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-outlet.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-perfil-selector.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-perfiles-lista.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-perfiles-tabla.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-pestanas.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-reporte.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/js/components/av/av-tabla.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/view/organizacion/components/av-empresa-form.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/view/organizacion/components/av-equipos.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/view/organizacion/components/av-invitar-form.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/view/organizacion/components/av-miembros.css">
+<link rel="preload" as="fetch" crossorigin href="./dist/cdn/view/organizacion/components/av-organizacion.css">
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/is-base.min.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/is-base.min.css"></noscript>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/palettes.min.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/palettes.min.css"></noscript>
+<script type="module" src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@904b3a574fc7c05f4297b0d991cdd93c5afdce40/dist/cdn/core/loader.min.mjs"></script>
+<script type="module" src="./dist/cdn/avLoader.min.mjs?v=4iz7ab"></script>
+<!-- iswc:precarga:fin -->
+<script type="module" src="dist/cdn/js/arranque.min.mjs?v=56126o"></script>
 </head>
 <body>
 <iswc-toast placement="bottom-end"></iswc-toast>

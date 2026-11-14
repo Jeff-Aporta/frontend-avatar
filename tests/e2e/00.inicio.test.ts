@@ -5,7 +5,7 @@
 //   W-PLAT-12  la app arranca lista, con el shell del kit y sin errores de consola
 //   W-PUB-02   la landing presenta el lema, 4 características y 3 planes
 //   W-PLAT-10  una vista privada sin sesión muestra el acceso con el login del kit
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 import { abrir, esperar } from '../../scripts/gate/e2e/harness.ts';
 
 let s: Awaited<ReturnType<typeof abrir>>;

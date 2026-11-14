@@ -1,0 +1,1 @@
+var t="Xenova/paraphrase-multilingual-MiniLM-L12-v2",e=null;function o(){let r=globalThis.iswcLoader;return r?import(r.assetUrl(new URL("../lib/ai/vector-local.min.mjs",r.selfBase).href)):Promise.reject(new Error("sin iswcLoader"))}async function s(r){return e??=o(),e.then(a=>a.vectorLocal(r)).catch(()=>null)}export{t as MODELO_LOCAL,s as vectorLocal};

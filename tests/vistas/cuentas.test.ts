@@ -1,5 +1,5 @@
 // cuentas.test.ts — bóveda de sesiones (W-PERF-02/03): varias cuentas en el navegador y un perfil activo por pestaña.
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
 const almacen = (): Storage => {
   const m = new Map<string, string>();
@@ -11,7 +11,7 @@ const futuro = Math.floor(Date.now() / 1000) + 3600;
 const fijarGlobal = (nombre: string, valor: Storage) => Object.defineProperty(globalThis, nombre, { value: valor, configurable: true, writable: true });
 fijarGlobal('localStorage', almacen());
 fijarGlobal('sessionStorage', almacen());
-const C = await import('../../dist/cdn/js/core/cuentas.js');
+const C = await import('../../dist/cdn/js/core/cuentas.min.mjs');
 
 export default definirPruebas([
   {

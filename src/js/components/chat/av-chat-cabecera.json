@@ -53,7 +53,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Cabecera genérica con presencia.",
     "propuesta": "iswc-chat-header"
   }

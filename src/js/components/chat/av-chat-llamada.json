@@ -53,7 +53,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Interfaz de llamada WebRTC genérica.",
     "propuesta": "iswc-call"
   }

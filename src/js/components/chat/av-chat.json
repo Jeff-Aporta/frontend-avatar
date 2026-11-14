@@ -51,7 +51,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Chat genérico: textos en diccionario y backend por interfaz, sin dominio de Avatar.",
     "propuesta": "iswc-chat"
   }

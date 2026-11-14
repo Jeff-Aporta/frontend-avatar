@@ -5,10 +5,10 @@
 //   W-CHAT-41  sin permiso `avatar.chat` lo explica y no consulta
 //   W-CAN-19   un error de «ruta inexistente» del API significa que el chat aún no está publicado (cae al demo local)
 //   W-CAN-17   el id de la ruta abre ese chat (vacío → ninguno)
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const { estadoCanales, apiChatPendiente, chatDeRuta } = await import('../../dist/cdn/view/canales/utils/canales.js');
-const { ACCION } = await import('../../dist/cdn/js/core/permisos.js');
+const { estadoCanales, apiChatPendiente, chatDeRuta } = await import('../../dist/cdn/view/canales/utils/canales.min.mjs');
+const { ACCION } = await import('../../dist/cdn/js/core/permisos.min.mjs');
 
 const perfil = (perms: Record<string, unknown>) => ({ usuario: 'u', irol: 'USR', igrupo: 'AVATAR', roles: ['USR'], perms });
 

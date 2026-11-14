@@ -4,9 +4,9 @@
 //   W-SEM-02  con el vector de la consulta (horneado con bge-m3), el comando esperado sale primero
 //   W-SEM-03  sin vector la búsqueda es léxica (sin acentos ni mayúsculas) y no inventa resultados
 import { readFileSync } from 'node:fs';
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const s = await import('../../dist/cdn/js/core/semantica.js');
+const s = await import('../../dist/cdn/js/core/semantica.min.mjs');
 const horneado = JSON.parse(readFileSync(new URL('../../assets/ia/comandos.json', import.meta.url), 'utf8'));
 const consultas = JSON.parse(readFileSync(new URL('./fixtures/consultas-comandos.json', import.meta.url), 'utf8')) as { texto: string; espera: string; vector: number[] }[];
 const corpus = s.decodificar(horneado);

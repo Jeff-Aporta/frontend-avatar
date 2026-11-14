@@ -45,7 +45,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "propuesta": "iswc-chart-card",
     "motivo": "Tarjeta con gráfica y estados de carga y vacío, sin dominio de la app."
   }

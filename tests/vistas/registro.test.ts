@@ -6,9 +6,9 @@
 //   W-PLAT-15  toda vista que pinta `av-tabla` declara `GRID_TAG`: el transversal no lleva el tag literal en su plantilla.
 //   W-COMP-11  cada familia (`src/js/components/<familia>/`, p. ej. el chat) solo usa tags del kit declarados para TODAS las
 //              vistas que la cargan (VIEW_FAMILIAS), y sus tags tienen carpeta publicada.
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const { GRID_TAG, SHELL_KIT_TAGS, VIEW_KIT_TAGS, HIJOS_KIT, VIEW_TAGS, FAMILIA_TAGS, VIEW_FAMILIAS, rutaComponente } = await import('../../dist/cdn/js/kit-tags.js');
+const { GRID_TAG, SHELL_KIT_TAGS, VIEW_KIT_TAGS, HIJOS_KIT, VIEW_TAGS, FAMILIA_TAGS, VIEW_FAMILIAS, rutaComponente } = await import('../../dist/cdn/js/kit-tags.min.mjs');
 
 const raiz = new URL('../../', import.meta.url);
 

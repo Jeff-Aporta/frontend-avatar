@@ -1,13 +1,13 @@
-<!-- Copia de skills/iswc-root/tools/local.md del kit Jeff-Aporta/is-webcomponents@94b6f8c00482e997c725521701c4bd14edfc64dd. No editar: se refresca con `deno task vendor:iswc`. -->
-<!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/tools/local.md -->
-# `/iswc-root:local`
+<!-- Copia de skills/iswc-base/tools/local.md del kit Jeff-Aporta/is-webcomponents@a5285b4c005fb8196a823554f2ff358216a7280a. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-base/tools/local.md -->
+# `/iswc-base:local`
 
 Preferir copias **locales** del kit (JS + CSS) sobre CDN para una app
 consumidora, con CDN solo como fallback.
 
 ## Cuándo usarlo
 
-- El usuario pide "instala iswc-root localmente" / "sin depender de internet" / "vendorizar el kit".
+- El usuario pide "instala iswc-base localmente" / "sin depender de internet" / "vendorizar el kit".
 - El usuario pide actualizar el SHA fijado y refrescar los archivos descargados.
 - Hay que preparar una app para funcionar sin acceso a jsDelivr/Pages (offline, air-gapped, CI sin red).
 
@@ -26,25 +26,27 @@ Desde `dist/cdn/` del repo del kit (SHA fijado o `main`), descargar:
 - Siempre `is-base.min.css` + `palettes.min.css`.
 - **Para componentes individuales:** el CSS vive como hermano del `.min.js`
   bajo la misma estructura de carpetas que `dist/cdn/` (p. ej.
-  `actions/button.min.js` + `actions/button.min.css`). El JS del componente
-  carga ese CSS vía `adoptCss`/`siblingCssHref` resolviendo la ruta con
-  `import.meta.url` — por eso hay que **preservar las rutas relativas**
+  `actions/button.min.mjs` + `actions/button.min.css`). Los componentes del kit
+  (molde `IswcElement`) traen su CSS incrustado por el build (`import css from 'iswc:css'`);
+  el `.min.css` hermano se sigue publicando y lo cargan `adoptCss`/`siblingCssHref`
+  (compat para código externo, o `static cssHref` si hay `url()` relativos)
+  resolviendo la ruta con `import.meta.url` — por eso hay que **preservar las rutas relativas**
   entre el `.js` y su `.css` al copiarlos a `vendor/`. No aplanar ni renombrar
   sin ajustar también la ruta que el JS espera resolver.
 
 ## Dónde guardarlos y cómo nombrarlos
 
 Recomendado: mirrorear la estructura de `dist/cdn/` bajo
-`vendor/iswc-root/<sha>/`, manteniendo subcarpetas por categoría:
+`vendor/iswc-base/<sha>/`, manteniendo subcarpetas por categoría:
 
 ```
-vendor/iswc-root/<sha>/
+vendor/iswc-base/<sha>/
   is-base.min.css
   palettes.min.css
   all.min.js
   all.min.css              (si existe)
   actions/
-    button.min.js
+    button.min.mjs
     button.min.css
     category.actions.min.js
     category.actions.min.css
@@ -71,11 +73,11 @@ el proyecto imponga un directorio de assets plano.
 
 ```html
 <script type="module">
-const LOCAL_BASE = "/vendor/iswc-root/{{SHA}}";
+const LOCAL_BASE = "/vendor/iswc-base/{{SHA}}";
 const MIRRORS = [
   LOCAL_BASE,
   "https://cdn.jsdelivr.net/gh/Jeff-Aporta/is-webcomponents@{{SHA}}/dist/cdn",
-  "https://jeff-aporta.github.io/iswc-root/dist/cdn",
+  "https://jeff-aporta.github.io/is-webcomponents/dist/cdn",
 ];
 async function boot(files) {
   for (const base of MIRRORS) {
@@ -112,7 +114,7 @@ Cuando el usuario pida "actualiza a la última versión" / "trae el último SHA"
    header `Accept: application/vnd.github.sha`; o `git ls-remote`).
 2. Descargar de nuevo los mismos JS + CSS que ya tenía la app, desde `dist/cdn/`
    pinneado a ese SHA nuevo.
-3. Colocarlos en `vendor/iswc-root/<sha-nuevo>/` (o renombrar los
+3. Colocarlos en `vendor/iswc-base/<sha-nuevo>/` (o renombrar los
    archivos flat con el nuevo SHA si se usa esa convención).
 4. Actualizar todas las rutas en el HTML/JS de arranque (`{{SHA}}` → SHA nuevo,
    o la carpeta `vendor/.../<sha>/` referenciada).

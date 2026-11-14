@@ -1,6 +1,6 @@
 /**
  * zod.ts — el ÚNICO módulo que importa el paquete `zod`. Los schemas importan `z` de aquí.
- * `zod` es externo en el build: el import map de cada página lo resuelve a `lib/zod.min.js` del kit, la misma copia que usan sus componentes.
+ * `zod` es externo en el build: el import map de cada página lo resuelve a `lib/zod.min.mjs` del kit, la misma copia que usan sus componentes.
  */
 import { z } from 'zod';
 

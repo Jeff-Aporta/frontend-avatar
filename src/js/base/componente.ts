@@ -80,11 +80,12 @@ export function adoptCss(shadow: ShadowRoot, moduleUrl: string, nombre: string):
   }
   const hoja = HOJAS.get(href);
   if (hoja) return adoptar(hoja);
-  const link = enlazar();
+  // Descarga ya en curso (la empezó `precargarCss` al importar el módulo, sobre el `preload as=fetch` del HTML): se
+  // espera y se adopta. Un `<link>` de respaldo aquí pediría la misma hoja otra vez (el fetch en vuelo no se comparte con
+  // un stylesheet); el `<link>` queda solo para cuando la descarga falla.
   void descargarHoja(href).then((h) => {
-    if (!h) return;
-    adoptar(h);
-    link.remove();
+    if (h) adoptar(h);
+    else if (!shadow.querySelector('link[rel="stylesheet"]')) enlazar();
   });
 }
 

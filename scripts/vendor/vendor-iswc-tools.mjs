@@ -1,4 +1,4 @@
-// vendor-iswc-tools.mjs — copia las herramientas del kit iswc-root al MISMO SHA del pin de la app.
+// vendor-iswc-tools.mjs — copia las herramientas del kit iswc-base al MISMO SHA del pin de la app.
 //
 //   deno task vendor:iswc            # al SHA de src/js/iswc.ts (pin canonico): raw por SHA, jsDelivr de respaldo
 //
@@ -6,7 +6,7 @@
 // para probar un cambio del kit, se publica (push) y se sube el pin.
 //
 // Protocolo: `deno task pin --nuevo=<sha40|ultimo>` sube el pin; despues `deno task vendor:iswc`,
-// build y tests. La copia lleva cabecera `@vendor iswc-root@<sha> <origen>` y NO se edita: se cambia
+// build y tests. La copia lleva cabecera `@vendor is-webcomponents@<sha> <origen>` y NO se edita: se cambia
 // en el kit y se vuelve a descargar. Un guardian exige vendor == pin.
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -21,9 +21,9 @@ if (!pin) {
 }
 
 /**
- * Herramientas comunes de las apps del kit (pruebas, cooldown, sync, pines) y del build (hashes):
- * `[destino en src/vendor/iswc-root/, ruta en el kit]`. En el kit, `vendor-distributions/…` vive en `src/` y
- * `build/…` en `src/cdn/`; publicadas, las dos bajo `dist/cdn/`.
+ * Herramientas comunes de las apps del kit (pruebas, cooldown, sync, pines): `[destino en src/vendor/iswc-base/, ruta
+ * en el kit]`; en el kit viven en `src/vendor-distributions/…` y publicadas en `dist/cdn/vendor-distributions/…`.
+ * El build NO se copia: `src/utils/build.ts` ejecuta `construirApp` desde la URL del pin (`dist/cdn/build/`, F10).
  */
 export const ARCHIVOS = [
   ['tools/schemas.ts', 'vendor-distributions/shared/schemas.ts'],
@@ -31,10 +31,8 @@ export const ARCHIVOS = [
   ['tools/pruebas.ts', 'vendor-distributions/shared/testing/pruebas.ts'],
   ['tools/sync-entregable.ts', 'vendor-distributions/shared/tools/sync-entregable.ts'],
   ['tools/pin-update.mjs', 'vendor-distributions/shared/tools/pin-update.mjs'],
-  ...['hash.ts', 'asset-url.ts', 'asset-url.schemas.ts', 'stamp-hashes.ts', 'bundle-min.ts', 'bundle-min.schemas.ts']
-    .map((f) => [`build/${f}`, `build/${f}`]),
 ];
-const fuenteEnKit = (kit) => (kit.startsWith('vendor-distributions/') ? `src/${kit}` : `src/cdn/${kit}`);
+const fuenteEnKit = (kit) => `src/${kit}`;
 /** `tools/*` queda plano junto a `schemas.ts`: el `../schemas.ts` de testing/ o tools/ del kit pasa a `./schemas.ts`. */
 const aplanar = (dest, texto) => (dest.startsWith('tools/') ? texto.replace(/(['"])\.\.\/schemas\.(ts|js)\1/g, '$1./schemas.$2$1') : texto);
 
@@ -50,25 +48,54 @@ for (const [rel, kit] of ARCHIVOS) {
   if (texto === undefined) throw new Error(`vendor-iswc: ${rel} no responde en ${urls.join(' ni en ')}`);
   // Una cabecera @vendor previa (copia de otra copia) se reemplaza, no se apila.
   texto = aplanar(rel, texto.replace(/^\/\/ @vendor [^\n]*\n\/\/ No editar[^\n]*\n/, ''));
-  const destino = join(ROOT, 'src', 'vendor', 'iswc-root', rel);
+  const destino = join(ROOT, 'src', 'vendor', 'iswc-base', rel);
   mkdirSync(dirname(destino), { recursive: true });
-  writeFileSync(destino, `// @vendor iswc-root@${pin} dist/cdn/${kit}\n// No editar: se cambia en el kit y se descarga con \`deno task vendor:iswc\`.\n${texto}`);
+  writeFileSync(destino, `// @vendor is-webcomponents@${pin} dist/cdn/${kit}\n// No editar: se cambia en el kit y se descarga con \`deno task vendor:iswc\`.\n${texto}`);
+}
+// Grafo de módulos del kit al pin (`dist/cdn/deps.json`, F4): `construirApp` lee de aquí el cierre del kit y emite
+// los `<link rel="modulepreload">` sin red (si falta, lo baja del pin). `deno task pin --nuevo=…` también lo refresca (pin-update, salvo `--sin-deps`).
+// Desde F7 el `deps.json` publicado es un índice (`categorias`: tag → categoría) y el cierre va en `deps/<cat>.json`:
+// se bajan las partes y se escribe el grafo unido (`{ sha, tags, core, v }`), la forma que lee el build.
+{
+  const bajar = async (rel) => {
+    for (const url of [`https://cdn.jsdelivr.net/gh/${REPO}@${pin}/dist/cdn/${rel}`, `https://raw.githubusercontent.com/${REPO}/${pin}/dist/cdn/${rel}`]) {
+      const r = await fetch(url);
+      if (r.ok) return JSON.parse(await r.text());
+      await r.body?.cancel();
+    }
+    throw new Error(`vendor-iswc: ${rel} no responde para ${pin.slice(0, 12)} (¿SHA anterior a F3?)`);
+  };
+  let deps = await bajar('deps.json');
+  if (deps?.categorias && typeof deps.categorias === 'object') {
+    const unido = { sha: deps.sha, tags: {}, core: {}, v: {} };
+    for (const cat of [...new Set([...Object.values(deps.categorias), 'core'])].sort()) {
+      const parte = await bajar(`deps/${cat}.json`);
+      Object.assign(unido.tags, parte.tags ?? {});
+      Object.assign(unido.core, parte.core ?? {});
+      Object.assign(unido.v, parte.v ?? {});
+    }
+    deps = unido;
+  }
+  if (typeof deps?.tags !== 'object') throw new Error('vendor-iswc: deps.json sin `tags` ni `categorias`');
+  const destino = join(ROOT, 'src', 'vendor', 'iswc-base', 'deps.json');
+  mkdirSync(dirname(destino), { recursive: true });
+  writeFileSync(destino, `${JSON.stringify(deps)}\n`);
 }
 // Skill general del kit (índice de todos los componentes) en specs/iswc/kit/, fijada al pin.
 const SKILL_KIT = ['SKILL.md', 'catalog.md', 'reference.md', 'PROMPT.md', 'tools/build.md', 'tools/local.md', 'tools/migrate.md', 'tools/runtime.md'];
 const fijar = (md) => md
-  .replaceAll('Jeff-Aporta/iswc-root', REPO)
+  .replaceAll('Jeff-Aporta/is-webcomponents', REPO)
   .replace(new RegExp(`(github\.com/${REPO}/(?:blob|tree))/main/`, 'g'), `$1/${pin}/`)
   .replace(new RegExp(`(raw\.githubusercontent\.com/${REPO})/main/`, 'g'), `$1/${pin}/`)
   .replace(/\]\(\.\.\/((?!catalog\.md|reference\.md|SKILL\.md|PROMPT\.md)[a-z0-9-]+\/[^)]*)\)/g, `](https://raw.githubusercontent.com/${REPO}/${pin}/skills/$1)`);
 for (const rel of SKILL_KIT) {
   let texto;
-  const r = await fetch(`https://raw.githubusercontent.com/${REPO}/${pin}/skills/iswc-root/${rel}`);
-  if (!r.ok) { console.warn(`[vendor:iswc] sin skills/iswc-root/${rel} en ${pin.slice(0, 12)} (${r.status})`); continue; }
+  const r = await fetch(`https://raw.githubusercontent.com/${REPO}/${pin}/skills/iswc-base/${rel}`);
+  if (!r.ok) { console.warn(`[vendor:iswc] sin skills/iswc-base/${rel} en ${pin.slice(0, 12)} (${r.status})`); continue; }
   texto = await r.text();
   const destino = join(ROOT, 'specs', 'iswc', 'kit', rel);
   mkdirSync(dirname(destino), { recursive: true });
-  writeFileSync(destino, `<!-- Copia de skills/iswc-root/${rel} del kit ${REPO}@${pin}. No editar: se refresca con \`deno task vendor:iswc\`. -->\n${fijar(texto)}`);
+  writeFileSync(destino, `<!-- Copia de skills/iswc-base/${rel} del kit ${REPO}@${pin}. No editar: se refresca con \`deno task vendor:iswc\`. -->\n${fijar(texto)}`);
 }
 
-console.log(`[vendor:iswc] ${ARCHIVOS.length} archivos <- iswc-root@${pin.slice(0, 12)}`);
+console.log(`[vendor:iswc] ${ARCHIVOS.length} archivos + deps.json <- is-webcomponents@${pin.slice(0, 12)}`);

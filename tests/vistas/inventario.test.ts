@@ -8,11 +8,11 @@
 //   W-INV-07  total y validación de pedido
 //   W-INV-08  validación de proveedor y productos que surte
 //   W-INV-09  búsqueda por texto
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const v = await import('../../dist/cdn/view/inventario/utils/inventario.js');
-const { filtrarTexto } = await import('../../dist/cdn/js/core/datos.js');
-const { MovimientoDatosSchema, PedidoDatosSchema, ProveedorDatosSchema } = await import('../../dist/cdn/js/consts/schemas/inventario.schemas.js');
+const v = await import('../../dist/cdn/view/inventario/utils/inventario.min.mjs');
+const { filtrarTexto } = await import('../../dist/cdn/js/core/datos.min.mjs');
+const { MovimientoDatosSchema, PedidoDatosSchema, ProveedorDatosSchema } = await import('../../dist/cdn/js/consts/schemas/inventario.schemas.min.mjs');
 
 const PROV = [{ iproveedor: 1, iempresa: 1, nombre: 'TecnoSuministros' }, { iproveedor: 2, iempresa: 1, nombre: 'ElectroParts' }];
 const P = [

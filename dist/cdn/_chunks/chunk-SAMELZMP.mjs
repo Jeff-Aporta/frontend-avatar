@@ -1,0 +1,12 @@
+import{d,e as g}from"./chunk-SQVRVHQY.mjs";import{b as C}from"./chunk-DJIGVK5X.mjs";import{ra as p,ta as h,ua as u,wa as w}from"./chunk-22HCQII4.mjs";function $(a,e=null){return p`
+    <span class="foto" data-color=${String(a.color)}><iswc-avatar initials=${g(a.nombre)} image=${a.foto??""} label=${a.nombre}></iswc-avatar>${a.enLinea?p`<span class="presencia"></span>`:null}</span>
+    <span class="datos"><strong>${a.nombre}</strong><span>${a.detalle}</span></span>
+    ${e}`}function L(a,e,t){let o=C(),i=e;a.append(p`
+    <iswc-dialog class="dialogo" label=${o.nuevoChat} backdrop-variant="basic">
+      <div class="contenido">
+        <iswc-input class="q" type="search" clearable placeholder=${o.buscarPersonas} aria-label=${o.buscarPersonas}><iswc-icon slot="start" icon="mdi:magnify"></iswc-icon></iswc-input>
+        <iswc-button class="fila grupo" variant="row" color="neutral"><span class="foto icono"><iswc-icon icon="mdi:account-multiple-plus"></iswc-icon></span><span class="datos"><strong>${o.nuevoGrupo}</strong></span></iswc-button>
+        <div class="personas" role="list"></div>
+      </div>
+    </iswc-dialog>
+  `);let m=a.querySelector(".dialogo"),c=a.querySelector(".q"),f=a.querySelector(".personas"),v=()=>{let n=d((c.value??"").trim()),r=i.personas.filter(l=>!n||d(`${l.nombre} ${l.detalle}`).includes(n));f.replaceChildren(...r.map(l=>{let s=document.createElement("iswc-button");return s.className="fila",s.setAttribute("variant","row"),s.setAttribute("color","neutral"),s.setAttribute("role","listitem"),s.append($(l)),s.addEventListener("click",()=>u(t,"av-chat-directo",{iusuario:l.id})),s})),r.length||f.append(Object.assign(document.createElement("p"),{className:"vacio",textContent:o.sinResultados}))};c.addEventListener("iswc-input",v),a.querySelector(".grupo")?.addEventListener("click",()=>u(t,"av-chat-panel",{panel:"grupo"})),m.addEventListener("iswc-hide",()=>u(t,"av-chat-panel-cerrar",{panel:"nuevo"}));let b=(n,r)=>{i=n,(!r||JSON.stringify(r.personas)!==JSON.stringify(n.personas))&&v(),n.abierto!==m.open&&(m.open=n.abierto),n.abierto&&!r?.abierto&&(c.value="",v(),requestAnimationFrame(()=>c.focus()))};return b(e,null),b}var N=w(new URL("js/components/chat/av-chat-nuevo.min.mjs",new URL("../",import.meta.url)).href,"av-chat-nuevo",{abierto:!1,personas:[]},(a,e,t)=>{t.__aplicar=L(a,e,t)},(a,e,t,o)=>{let i=o.__aplicar;return i?(i(e,t),!0):!1});h("av-chat-nuevo",N);export{$ as a};

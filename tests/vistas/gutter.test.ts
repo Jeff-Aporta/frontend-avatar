@@ -2,7 +2,7 @@
 //
 //   W-PLAT-30  ningún contenedor de página se limita ni se centra con un `max-width` de página: el hueco lateral es `--av-gutter`.
 //              Se permite limitar el largo de línea de un párrafo (menos de 50em), que no es un contenedor.
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
 const raiz = new URL('../../', import.meta.url);
 const hojas = [...Deno.readDirSync(new URL('view/', raiz))].flatMap((d) => {

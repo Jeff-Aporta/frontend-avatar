@@ -7,7 +7,7 @@
 //
 // Solo lee `dist/`, `assets/` y fixtures: sin modelo, sin red y sin paquetes npm.
 import { readFileSync, statSync } from 'node:fs';
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 import { medir, promedio } from '../../scripts/bench/metricas.ts';
 
 /** Bajo esto la prueba falla. Medido con 1923 emojis: 0,610 / 0,791 / 0,665; el margen absorbe ruido, no retrocesos. */
@@ -19,9 +19,9 @@ const MINIMO_EMOJIS = 1900;
 
 type Marcada = { q: string; idioma: 'es' | 'en'; tipo: string; parte: 'ajuste' | 'prueba'; muy: string; algo: string };
 const leer = (ruta: string): string => readFileSync(new URL(ruta, import.meta.url), 'utf8');
-const a = await import('../../dist/cdn/js/core/aplanado.js');
-const s = await import('../../dist/cdn/js/core/semantica.js');
-const c = await import('../../dist/cdn/js/core/calibracion.js');
+const a = await import('../../dist/cdn/js/core/aplanado.min.mjs');
+const s = await import('../../dist/cdn/js/core/semantica.min.mjs');
+const c = await import('../../dist/cdn/js/core/calibracion.min.mjs');
 const corpus = a.abrirCorpus(JSON.parse(leer('../../assets/ia/emojis.json')));
 const marcadas = JSON.parse(leer('./fixtures/emojis-evaluacion.json')) as Marcada[];
 const fijos = JSON.parse(leer('./fixtures/emojis-vectores.json'));

@@ -13,7 +13,7 @@ let kit: Promise<IaKit> | null = null;
 function cargar(): Promise<IaKit> {
   const L = (globalThis as { iswcLoader?: LoaderIa }).iswcLoader;
   if (!L) return Promise.reject(new Error('sin iswcLoader'));
-  return import(L.assetUrl(new URL('../lib/ai/vector-local.min.js', L.selfBase).href));
+  return import(L.assetUrl(new URL('../lib/ai/vector-local.min.mjs', L.selfBase).href));
 }
 
 /** Vector normalizado de una consulta; null si el modelo no está. */

@@ -1,9 +1,9 @@
-<!-- Copia de skills/iswc-root/tools/build.md del kit Jeff-Aporta/is-webcomponents@94b6f8c00482e997c725521701c4bd14edfc64dd. No editar: se refresca con `deno task vendor:iswc`. -->
-<!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-root/tools/build.md -->
-# `/iswc-root:build`
+<!-- Copia de skills/iswc-base/tools/build.md del kit Jeff-Aporta/is-webcomponents@a5285b4c005fb8196a823554f2ff358216a7280a. No editar: se refresca con `deno task vendor:iswc`. -->
+<!-- @vendor 2026-10-13T14:13:48.240Z Jeff-Aporta/is-webcomponents@main skills/iswc-base/tools/build.md -->
+# `/iswc-base:build`
 
 Fundar una app nueva o extender una existente reusando el kit `is-*` por
-CDN (o por copia local si la app ya corrió [`/iswc-root:local`](local.md)).
+CDN (o por copia local si la app ya corrió [`/iswc-base:local`](local.md)).
 
 ## Cuándo usarlo
 
@@ -33,7 +33,7 @@ CDN (o por copia local si la app ya corrió [`/iswc-root:local`](local.md)).
    ```
 
    Si la app ya usa copia local (ver [`local.md`](local.md)), apunta los `<link>`/`<script>`
-   a `vendor/iswc-root/...` en vez de jsDelivr.
+   a `vendor/iswc-base/...` en vez de jsDelivr.
 3. **Reusar tags existentes.** Para cada control visual: clasificar intención —
    abrir [`../catalog.md`](../catalog.md) o [`../reference.md`](../reference.md) — confirmar API en el MD del módulo
    (`src/components/<cat>/<modulo>.md`) — usar el tag. No inventar props/eventos.
@@ -49,7 +49,7 @@ CDN (o por copia local si la app ya corrió [`/iswc-root:local`](local.md)).
    y el componente encapsula lógica de negocio (mapear JSON — varios `is-*`).
 5. **Feedback global:** un único `<iswc-toast placement="bottom-end">` en el shell.
 6. **CSS de dominio** igual que el kit: archivo hermano (`app-files.css`) +
-   `IswcUi.adoptCss(shadow, import.meta.url)` en runtime. Nunca `const CSS = \`—\`` embebido en el JS.
+   `IswcUi.adoptCss(shadow, import.meta.url)` en runtime (compat para apps externas; un componente que se sube al kit pasa a `IswcElement` con `static css`). Nunca `const CSS = \`—\`` embebido en el JS.
 7. **Tema:** `data-theme` / `data-palette` en `<html>`; tokens `--iswc-text`,
    `--iswc-bg`, `--iswc-border`, `--iswc-accent`, etc. en el CSS propio.
 
@@ -62,7 +62,7 @@ CDN (o por copia local si la app ya corrió [`/iswc-root:local`](local.md)).
 - [ ] Wrappers de dominio (`tk-*`/`app-*`) solo traducen datos — kit.
 - [ ] Sin `iswc-popup` (usar `iswc-popover`/`iswc-tooltip`).
 - [ ] CDN: pin `@<sha>` o `@main` justificado (o local-first si aplica).
-- [ ] CSS de dominio en archivo hermano + `adoptCss`, no string embebido.
+- [ ] CSS de dominio en archivo hermano + `adoptCss` (app externa) o `static css` del molde (kit), no string embebido.
 
 ## Ver también
 

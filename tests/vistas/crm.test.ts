@@ -4,9 +4,9 @@
 //   W-CRM-03   filtro por etapa (null = todos)
 //   W-CRM-04   pipeline = todo menos lo perdido
 //   W-CRM-01   columnas y filas del grid
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const c = await import('../../dist/cdn/view/crm/utils/crm.js');
+const c = await import('../../dist/cdn/view/crm/utils/crm.min.mjs');
 
 const CLIENTES = [
   { icliente: 1, iempresa: 1, nombre: 'A', etapa: 'contacto', valor: 100 },

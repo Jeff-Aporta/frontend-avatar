@@ -60,7 +60,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Fila genérica de conversación.",
     "propuesta": "iswc-chat-list"
   }

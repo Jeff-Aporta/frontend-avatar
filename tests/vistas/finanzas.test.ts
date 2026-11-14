@@ -8,11 +8,11 @@
 //   W-FIN-06  estado efectivo (vencida) y filas de facturas
 //   W-FIN-07  totales y validación de factura
 //   W-FIN-08  búsqueda por texto
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const f = await import('../../dist/cdn/view/finanzas/utils/finanzas.js');
-const { filtrarTexto, tendencia } = await import('../../dist/cdn/js/core/datos.js');
-const { FacturaDatosSchema, TransaccionDatosSchema } = await import('../../dist/cdn/js/consts/schemas/finanzas.schemas.js');
+const f = await import('../../dist/cdn/view/finanzas/utils/finanzas.min.mjs');
+const { filtrarTexto, tendencia } = await import('../../dist/cdn/js/core/datos.min.mjs');
+const { FacturaDatosSchema, TransaccionDatosSchema } = await import('../../dist/cdn/js/consts/schemas/finanzas.schemas.min.mjs');
 
 const RESUMEN = {
   iempresa: 1, mes: '2026-10', moneda: 'COP',

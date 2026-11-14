@@ -81,7 +81,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Formulario de grupo genérico.",
     "propuesta": "iswc-group-form"
   }

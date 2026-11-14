@@ -3,9 +3,9 @@
 //   W-AVO-01   historial (más reciente primero) → turnos cronológicos pregunta/respuesta
 //   W-AVO-03   pregunta vacía o > 2000 no se envía; se recorta
 //   W-AVO-06   hay sugerencias iniciales
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const { turnosDe, preguntaValida, SUGERENCIAS_INICIALES, idLocal } = await import('../../dist/cdn/view/asistente/utils/avo.js');
+const { turnosDe, preguntaValida, SUGERENCIAS_INICIALES, idLocal } = await import('../../dist/cdn/view/asistente/utils/avo.min.mjs');
 
 export default definirPruebas([
   {

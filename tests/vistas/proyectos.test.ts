@@ -5,9 +5,9 @@
 //   W-PRY-08   columnas por defecto de un proyecto nuevo
 //   W-PRY-06   etiquetas separadas por comas; columna inicial de una tarea nueva
 //   W-PRY-05   posición de una tarjeta tras moverla
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const t = await import('../../dist/cdn/view/proyectos/utils/tareas.js');
+const t = await import('../../dist/cdn/view/proyectos/utils/tareas.min.mjs');
 
 export default definirPruebas([
   {

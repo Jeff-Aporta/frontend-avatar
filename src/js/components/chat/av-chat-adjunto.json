@@ -62,7 +62,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Tarjeta de adjunto con miniatura, video, documento y subida. Consolida paty-adjunto, atado al almacenamiento de Paty.",
     "propuesta": "iswc-attachment"
   }

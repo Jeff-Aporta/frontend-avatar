@@ -42,7 +42,7 @@
     }
   ],
   "reuso": {
-    "candidato": "iswc-root",
+    "candidato": "iswc-base",
     "motivo": "Selector de emojis sin dependencias.",
     "propuesta": "iswc-emoji-picker"
   }

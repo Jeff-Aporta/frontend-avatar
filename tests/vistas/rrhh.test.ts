@@ -7,11 +7,11 @@
 //   W-RRHH-05  filas del historial de asistencias
 //   W-RRHH-06  solicitudes con nombre, orden, filtro, conteo y días
 //   W-RRHH-07  validación de solicitud
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const r = await import('../../dist/cdn/view/rrhh/utils/rrhh.js');
-const { filtrarTexto } = await import('../../dist/cdn/js/core/datos.js');
-const { SolicitudDatosSchema } = await import('../../dist/cdn/js/consts/schemas/rrhh.schemas.js');
+const r = await import('../../dist/cdn/view/rrhh/utils/rrhh.min.mjs');
+const { filtrarTexto } = await import('../../dist/cdn/js/core/datos.min.mjs');
+const { SolicitudDatosSchema } = await import('../../dist/cdn/js/consts/schemas/rrhh.schemas.min.mjs');
 
 const E = [
   { iempleado: 1, iempresa: 1, nombre: 'María Aguirre', email: 'maria@x.test', departamento: 'Diseño', cargo: 'Diseñadora', salario: 6500000, estado: 'activo', fingreso: '2022-03-14' },

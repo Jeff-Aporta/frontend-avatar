@@ -5,7 +5,7 @@
 //   W-ICO-03  el registrador publicado declara <html data-icons> = iswc.host + assets/iconify/
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 import { PREFIJO } from '../../src/js/kit-tags.ts';
 
 const RAIZ = Deno.cwd();
@@ -65,7 +65,7 @@ export default definirPruebas([
     categoria: 'what',
     correr({ expect }) {
       // Se lee el registrador publicado (no se importa: un import queda en caché del proceso y no se re-ejecuta).
-      const loader = leer(join('dist', 'cdn', `${PREFIJO}Loader.min.js`));
+      const loader = leer(join('dist', 'cdn', `${PREFIJO}Loader.min.mjs`));
       const h = host() ?? '';
       const base = new URL('assets/iconify/', h.endsWith('/') ? h : `${h}/`).href;
       expect('declara dataset.icons', /\.dataset\.icons/.test(loader), loader.slice(-300));

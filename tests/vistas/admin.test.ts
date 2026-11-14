@@ -2,9 +2,9 @@
 //
 //   W-ADM-03  validación y cuerpo del usuario   W-ADM-05  id de rol, acciones por rol y valor legible
 //   W-ADM-02  rol principal de un usuario
-import { definirPruebas } from '../../src/vendor/iswc-root/tools/pruebas.ts';
+import { definirPruebas } from '../../src/vendor/iswc-base/tools/pruebas.ts';
 
-const a = await import('../../dist/cdn/view/admin/utils/admin.js');
+const a = await import('../../dist/cdn/view/admin/utils/admin.min.mjs');
 
 export default definirPruebas([
   {
